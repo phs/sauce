@@ -2,6 +2,6 @@
 #define SAUCE_SAUCE_H_
 
 namespace sauce {
-}
+} // namespace sauce
 
 #endif
