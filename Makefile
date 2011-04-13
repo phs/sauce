@@ -13,7 +13,7 @@ TEST_OBJECTS = \
 	$(GMOCK)/src/gmock_main.o                       \
 	$(GTEST)/src/gtest-all.o
 
-all: build/sauce/worker.node
+all: test
 
 build/sauce:
 	mkdir -p build/sauce
