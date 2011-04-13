@@ -1,5 +1,5 @@
-GMOCK = test/gmock-1.5.0
-GTEST = test/gmock-1.5.0/gtest
+GMOCK = vendor/gmock-1.5.0
+GTEST = vendor/gmock-1.5.0/gtest
 
 HEADERS      = $(shell find include -type f -name "*.h")
 SOURCES      = $(shell find src     -type f -name "*.cc")
