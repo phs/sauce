@@ -15,20 +15,18 @@ TEST_OBJECTS = \
 
 all: test
 
-build/sauce:
-	mkdir -p build/sauce
-
-build/%.o: src/%.cc $(HEADERS) build/sauce
-	$(CXX) $(CPPFLAGS) $< -c -o $@
+build/%.o: src/%.cc $(HEADERS)
+	mkdir -p build/sauce && $(CXX) $(CPPFLAGS) $< -c -o $@
 
 $(GMOCK)/src/gmock-all.o $(GMOCK)/src/gmock_main.o $(GTEST)/src/gtest-all.o:
 	cd $(GMOCK) && ./configure && make
 
-build/%.o: test/%.cc $(HEADERS) build/sauce
+build/%.o: test/%.cc $(HEADERS)
+	mkdir -p build/sauce && \
 	$(CXX) $(CPPFLAGS) -I$(GMOCK)/include -I$(GTEST)/include $< -c -o $@
 
 build/tests: $(TEST_OBJECTS)
-	$(CXX) $(CPPFLAGS) $+ -o $@ -shared
+	mkdir -p build/sauce && $(CXX) $(CPPFLAGS) $+ -o $@
 
 clean:
 	rm -rf build/*
