@@ -14,14 +14,24 @@ Design is loosely inspired by Google's excellent guice framework.
 
     // Sample types to inject
 
-    class IDependency {};
-    class Dependency: public IDependency {};
+    class IDependency {
+    public:
+      virtual string name() = 0;
+    };
+    class Dependency: public IDependency {
+    public:
+      string name() { return "Impl!"; }
+    };
 
-    class IDependent {};
+    class IDependent {
+    public:
+      virtual IDependency & getDependency() = 0;
+    };
     class Dependent: public IDependent {
       IDependency & dependency;
     public:
       explicit Dependent(IDependency & dependency): dependency(dependency) {}
+      IDependency & getDependency() { return dependency; }
     };
 
     // Some hoohah
@@ -55,16 +65,16 @@ Design is loosely inspired by Google's excellent guice framework.
 
     // Application bindings
 
-    struct OneModule: virtual public Module {};
-
-    template<typename I> struct OneModule::Binding<I, IDependency> {
-      typedef NewNoArgProvider<I, Dependency> Provider;
+    struct OneModule: virtual public Module {
+      template<typename I> struct Binding<I, IDependency> {
+        typedef NewNoArgProvider<I, Dependency> Provider;
+      };
     };
 
-    struct AnotherModule: virtual public Module {};
-
-    template<typename I> struct AnotherModule::Binding<I, IDependent> {
-      typedef New1ArgProvider<I, Dependent, IDependency> Provider;
+    struct AnotherModule: virtual public Module {
+      template<typename I> struct Binding<I, IDependent> {
+        typedef New1ArgProvider<I, Dependent, IDependency> Provider;
+      };
     };
 
     struct MyModule: public OneModule, public AnotherModule {};
@@ -79,7 +89,7 @@ Design is loosely inspired by Google's excellent guice framework.
       IDependency & d1 = injector.get<IDependency>();
       IDependent & d2 = injector.get<IDependent>();
 
-      cout << "Hooray!" << endl;
+      cout << "Hooray, " << d2.getDependency().name() << endl;
 
       return 0;
     }
