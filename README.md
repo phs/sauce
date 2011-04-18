@@ -94,6 +94,14 @@ Design is loosely inspired by Google's excellent guice framework.
       return 0;
     }
 
+## Wishlist ##
+
+* Setter injection and injection into provided instances
+* Named, overloaded bindings and dependencies
+* Eager-loaded bindings
+* Injectable Providers for lazy resolution
+* Implicit bindings implied by bound interfaces or implementations
+
 ## Copyright ##
 
 Copyright (c) 2011 Phil Smith. See LICENSE for details.
