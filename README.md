@@ -96,11 +96,14 @@ Design is loosely inspired by Google's excellent guice framework.
 
 ## Wishlist ##
 
-* Setter injection and injection into provided instances
+* Setter injection
 * Named, overloaded bindings and dependencies
-* Eager-loaded bindings
+* Eager-loaded singletons
 * Injectable Providers for lazy resolution
 * Implicit bindings implied by bound interfaces or implementations
+* On-demand injection for provided instances
+* Member field injection (eh)
+* Static injection (eh)
 
 ## Copyright ##
 
