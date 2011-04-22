@@ -3,41 +3,85 @@
 
 #include <sauce/sauce.h>
 
-using namespace std;
-
 namespace sauce {
 
-  struct IChasis {};
-  struct CoupChasis: public IChasis {};
-  struct TruckChasis: public IChasis {};
-
-  struct IEngine {};
-  struct HybridEngine: public IEngine {};
-  struct DieselEngine: public IEngine {};
-
-  struct IVehicle {
-    virtual IChasis & getChasis() = 0;
-    virtual IEngine & getEngine() = 0;
+  struct Chasis {
+    virtual const char * name() = 0;
   };
 
-  struct Herbie: public IVehicle {
-    IChasis & chasis;
-    IEngine & engine;
+  struct CoupChasis: public Chasis {
+    virtual const char * name() { return "coup"; }
+  };
 
-    Herbie(IChasis & chasis, IEngine & engine):
+  struct TruckChasis: public Chasis {
+    virtual const char * name() { return "truck"; }
+  };
+
+  struct Engine {
+    virtual const char * name() = 0;
+  };
+
+  struct HybridEngine: public Engine {
+    virtual const char * name() { return "hybrid"; }
+  };
+
+  struct DieselEngine: public Engine {
+    virtual const char * name() { return "diesel"; }
+  };
+
+  struct Vehicle {
+    virtual const char * name() = 0;
+
+    virtual Chasis & getChasis() = 0;
+    virtual Engine & getEngine() = 0;
+  };
+
+  struct Herbie: public Vehicle {
+    Chasis & chasis;
+    Engine & engine;
+
+    Herbie(Chasis & chasis, Engine & engine):
       chasis(chasis),
       engine(engine) {}
+
+    virtual const char * name() { return "herbie"; }
   };
 
-  struct CementMixer: public IVehicle {
-    IChasis * chasis;
-    IEngine * engine;
+  // struct CementMixer: public Vehicle {
+  //   Chasis * chasis;
+  //   Engine * engine;
+  //
+  //   void setChasis(Chasis & chasis) { this->chasis = &chasis; }
+  //   void setEngine(Engine & engine) { this->engine = &engine; }
+  //
+  //   virtual const char * name() { return "cement mixer"; }
+  // };
 
-    void setChasis(IChasis & chasis) { this->chasis = &chasis; }
-    void setEngine(IEngine & engine) { this->engine = &engine; }
+  class LoveBugModule {
+  public:
+
+    template<typename Injector>
+    static sauce::NewNoArgProvider<Injector, CoupChasis> * binding(Chasis *) {
+      return 0;
+    }
+
+    template<typename Injector>
+    static sauce::NewNoArgProvider<Injector, HybridEngine> * binding(Engine *) {
+      return 0;
+    }
+
+    template<typename Injector>
+    static sauce::New2ArgProvider<Injector, Herbie, Chasis, Engine> * binding(Vehicle *) {
+      return 0;
+    }
+
   };
 
-  TEST(SauceTest, should_derp) {
+  TEST(SauceTest, should_inject_some_dependencies) {
+    sauce::Injector<LoveBugModule> injector;
+    Chasis & chasis = injector.get<Chasis>();
+
+    ASSERT_STREQ("coup", chasis.name());
   }
 
 } // namespace sauce
