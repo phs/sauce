@@ -7,6 +7,8 @@ Design is loosely inspired by Google's excellent guice framework.
 
 ## The Jist ##
 
+Here's dependency resolution:
+
     #include <iostream>
     #include <vector>
 
@@ -38,48 +40,53 @@ Design is loosely inspired by Google's excellent guice framework.
 
     // Some hoohah
 
-    template<typename I, typename T>
-    struct NewNoArgProvider {
-      static T & get(I & injector) {
-        return *new T();
+    namespace hoohah {
+
+      template<typename I, typename Iface, typename Impl>
+      struct NewNoArgProvider {
+        static Iface & get(I & injector) {
+          return *new Impl();
+        };
       };
-    };
 
-    template<typename I, typename T, typename A1>
-    struct New1ArgProvider {
-      static T & get(I & injector) {
-        return *new T(injector.template get<A1>());
+      template<typename I, typename Iface, typename Impl, typename A1>
+      struct New1ArgProvider {
+        static Iface & get(I & injector) {
+          return *new Impl(injector.template get<A1>());
+        };
       };
-    };
 
-    struct Module {
-      template<typename I, typename T> struct Binding {};
-    };
+      template<typename M>
+      struct Injector {
+        template<typename T>
+        T & get() {
+          T & (*binding)(Injector<M> &) = M::template binding<Injector<M> >((T *)NULL);
+          return binding(*this);
+        }
+      };
 
-    template<typename M>
-    struct Injector {
-      template<typename T>
-      T & get() {
-        typedef typename M::template Binding<Injector<M>, T>::Provider _Provider;
-        return _Provider::get(*this);
-      }
-    };
+    }
 
     // Application bindings
 
-    struct OneModule: virtual public Module {
-      template<typename I> struct Binding<I, IFoo> {
-        typedef NewNoArgProvider<I, Foo> Provider;
-      };
+    struct OneModule {
+      template<typename I>
+      static IFoo & (*binding(IFoo *))(I &) {
+        return &hoohah::NewNoArgProvider<I, IFoo, Foo>::get;
+      }
     };
 
-    struct AnotherModule: virtual public Module {
-      template<typename I> struct Binding<I, IBar> {
-        typedef New1ArgProvider<I, Bar, IFoo> Provider;
-      };
+    struct AnotherModule {
+      template<typename I>
+      static IBar & (*binding(IBar *))(I &) {
+        return &hoohah::New1ArgProvider<I, IBar, Bar, IFoo>::get;
+      }
     };
 
-    struct MyModule: public OneModule, public AnotherModule {};
+    struct MyModule: public OneModule, public AnotherModule {
+      using OneModule::binding;
+      using AnotherModule::binding;
+    };
 
     // And main
 
@@ -87,7 +94,7 @@ Design is loosely inspired by Google's excellent guice framework.
       typedef vector<string> V;
       V params = V(argv, argv + argc);
 
-      Injector<MyModule> injector;
+      hoohah::Injector<MyModule> injector;
       IFoo & d1 = injector.get<IFoo>();
       IBar & d2 = injector.get<IBar>();
 
@@ -95,6 +102,8 @@ Design is loosely inspired by Google's excellent guice framework.
 
       return 0;
     }
+
+The idea is co-opt C++'s overload resolution to create a set of type bindings that can be wrapped in a class, inherited, and passed around in templates.  Partial or complete class template specialization would be more intuitive, but this unfortunately precludes the possibility of spreading the bindings over multiple namespaces (such as Module subtypes.)
 
 ## Wishlist ##
 
