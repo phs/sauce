@@ -42,17 +42,17 @@ Here's dependency resolution:
 
     namespace hoohah {
 
-      template<typename I, typename Iface, typename Impl>
+      template<typename I, typename T>
       struct NewNoArgProvider {
-        static Iface & get(I & injector) {
-          return *new Impl();
+        static T & get(I & injector) {
+          return *new T();
         };
       };
 
-      template<typename I, typename Iface, typename Impl, typename A1>
+      template<typename I, typename T, typename A1>
       struct New1ArgProvider {
-        static Iface & get(I & injector) {
-          return *new Impl(injector.template get<A1>());
+        static T & get(I & injector) {
+          return *new T(injector.template get<A1>());
         };
       };
 
@@ -60,9 +60,16 @@ Here's dependency resolution:
       struct Injector {
         template<typename T>
         T & get() {
-          T & (*binding)(Injector<M> &) = M::template binding<Injector<M> >((T *)NULL);
-          return binding(*this);
+          return provide<T>(M::template binding<Injector<M> >);
         }
+
+      private:
+
+        template<typename T, typename P>
+        T & provide(P * (T *)) {
+          return P::get(*this);
+        }
+
       };
 
     }
@@ -71,15 +78,15 @@ Here's dependency resolution:
 
     struct OneModule {
       template<typename I>
-      static IFoo & (*binding(IFoo *))(I &) {
-        return &hoohah::NewNoArgProvider<I, IFoo, Foo>::get;
+      static hoohah::NewNoArgProvider<I, Foo> * binding(IFoo *) {
+        return 0;
       }
     };
 
     struct AnotherModule {
       template<typename I>
-      static IBar & (*binding(IBar *))(I &) {
-        return &hoohah::New1ArgProvider<I, IBar, Bar, IFoo>::get;
+      static hoohah::New1ArgProvider<I, Bar, IFoo> * binding(IBar *) {
+        return 0;
       }
     };
 
@@ -95,10 +102,10 @@ Here's dependency resolution:
       V params = V(argv, argv + argc);
 
       hoohah::Injector<MyModule> injector;
-      IFoo & d1 = injector.get<IFoo>();
-      IBar & d2 = injector.get<IBar>();
+      IFoo & foo = injector.get<IFoo>();
+      IBar & bar = injector.get<IBar>();
 
-      cout << "Hooray, " << d2.getFoo().name() << endl;
+      cout << "Hooray, " << bar.getFoo().name() << endl;
 
       return 0;
     }
