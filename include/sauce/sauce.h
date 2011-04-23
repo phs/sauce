@@ -6,7 +6,7 @@ namespace sauce {
   template<typename Module>
   struct Injector {
     template<typename Dependency>
-    Dependency & get() {
+    Dependency & provide() {
       return provide<Dependency>(Module::template bindings<Injector<Module> >);
     }
 
@@ -14,7 +14,7 @@ namespace sauce {
 
     template<typename Dependency, typename Provider>
     Dependency & provide(Provider *binding (Dependency *)) {
-      return Provider::get(*this);
+      return Provider::provide(*this);
     }
 
   };
@@ -23,26 +23,26 @@ namespace sauce {
 
     template<typename Injector, typename Dependency>
     struct NewNoArgProvider {
-      static Dependency & get(Injector & injector) {
+      static Dependency & provide(Injector & injector) {
         return *new Dependency();
       };
     };
 
     template<typename Injector, typename Dependency, typename A1>
     struct New1ArgProvider {
-      static Dependency & get(Injector & injector) {
+      static Dependency & provide(Injector & injector) {
         return *new Dependency(
-          injector.template get<A1>()
+          injector.template provide<A1>()
         );
       };
     };
 
     template<typename Injector, typename Dependency, typename A1, typename A2>
     struct New2ArgProvider {
-      static Dependency & get(Injector & injector) {
+      static Dependency & provide(Injector & injector) {
         return *new Dependency(
-          injector.template get<A1>(),
-          injector.template get<A2>()
+          injector.template provide<A1>(),
+          injector.template provide<A2>()
         );
       };
     };

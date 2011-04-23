@@ -79,7 +79,7 @@ namespace sauce {
 
   TEST(SauceTest, should_inject_some_dependencies) {
     sauce::Injector<LoveBugModule> injector;
-    Chasis & chasis = injector.get<Chasis>();
+    Chasis & chasis = injector.provide<Chasis>();
 
     ASSERT_STREQ("coup", chasis.name());
   }
