@@ -13,7 +13,7 @@ namespace sauce {
   private:
 
     template<typename Dependency, typename Provider>
-    Dependency & provide(Provider * (Dependency *)) {
+    Dependency & provide(Provider *binding (Dependency *)) {
       return Provider::get(*this);
     }
 
