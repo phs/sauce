@@ -3,32 +3,6 @@
 
 namespace sauce {
 
-  template<typename Injector, typename Dependency>
-  struct NewNoArgProvider {
-    static Dependency & get(Injector & injector) {
-      return *new Dependency();
-    };
-  };
-
-  template<typename Injector, typename Dependency, typename A1>
-  struct New1ArgProvider {
-    static Dependency & get(Injector & injector) {
-      return *new Dependency(
-        injector.template get<A1>()
-      );
-    };
-  };
-
-  template<typename Injector, typename Dependency, typename A1, typename A2>
-  struct New2ArgProvider {
-    static Dependency & get(Injector & injector) {
-      return *new Dependency(
-        injector.template get<A1>(),
-        injector.template get<A2>()
-      );
-    };
-  };
-
   template<typename Module>
   struct Injector {
     template<typename Dependency>
@@ -45,6 +19,35 @@ namespace sauce {
 
   };
 
+  namespace internal {
+
+    template<typename Injector, typename Dependency>
+    struct NewNoArgProvider {
+      static Dependency & get(Injector & injector) {
+        return *new Dependency();
+      };
+    };
+
+    template<typename Injector, typename Dependency, typename A1>
+    struct New1ArgProvider {
+      static Dependency & get(Injector & injector) {
+        return *new Dependency(
+          injector.template get<A1>()
+        );
+      };
+    };
+
+    template<typename Injector, typename Dependency, typename A1, typename A2>
+    struct New2ArgProvider {
+      static Dependency & get(Injector & injector) {
+        return *new Dependency(
+          injector.template get<A1>(),
+          injector.template get<A2>()
+        );
+      };
+    };
+
+  } // namespace internal
 } // namespace sauce
 
 #endif
