@@ -3,7 +3,7 @@
 
 #include <sauce/sauce.h>
 
-namespace sauce {
+namespace sauce { namespace testing {
 
   struct Chasis {
     virtual const char * name() = 0;
@@ -84,4 +84,4 @@ namespace sauce {
     ASSERT_STREQ("coup", chasis.name());
   }
 
-} // namespace sauce
+} } // namespace testing, namespace sauce
