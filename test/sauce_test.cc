@@ -61,12 +61,12 @@ namespace sauce { namespace testing {
   public:
 
     template<typename Injector>
-    static sauce::internal::NewNoArgBinding<Injector, CoupChasis> * bindings(Chasis *) {
+    static sauce::internal::New0ArgBinding<Injector, CoupChasis> * bindings(Chasis *) {
       return 0;
     }
 
     template<typename Injector>
-    static sauce::internal::NewNoArgBinding<Injector, HybridEngine> * bindings(Engine *) {
+    static sauce::internal::New0ArgBinding<Injector, HybridEngine> * bindings(Engine *) {
       return 0;
     }
 

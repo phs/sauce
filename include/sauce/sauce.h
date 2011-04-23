@@ -22,7 +22,7 @@ namespace sauce {
   namespace internal {
 
     template<typename Injector, typename Dependency>
-    struct NewNoArgBinding {
+    struct New0ArgBinding {
       static Dependency & provide(Injector & injector) {
         return *new Dependency();
       };
