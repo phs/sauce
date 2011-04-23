@@ -61,17 +61,17 @@ namespace sauce {
   public:
 
     template<typename Injector>
-    static sauce::internal::NewNoArgProvider<Injector, CoupChasis> * bindings(Chasis *) {
+    static sauce::internal::NewNoArgBinding<Injector, CoupChasis> * bindings(Chasis *) {
       return 0;
     }
 
     template<typename Injector>
-    static sauce::internal::NewNoArgProvider<Injector, HybridEngine> * bindings(Engine *) {
+    static sauce::internal::NewNoArgBinding<Injector, HybridEngine> * bindings(Engine *) {
       return 0;
     }
 
     template<typename Injector>
-    static sauce::internal::New2ArgProvider<Injector, Herbie, Chasis, Engine> * bindings(Vehicle *) {
+    static sauce::internal::New2ArgBinding<Injector, Herbie, Chasis, Engine> * bindings(Vehicle *) {
       return 0;
     }
 

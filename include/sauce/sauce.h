@@ -12,9 +12,9 @@ namespace sauce {
 
   private:
 
-    template<typename Dependency, typename Provider>
-    Dependency & provide(Provider *binding (Dependency *)) {
-      return Provider::provide(*this);
+    template<typename Dependency, typename Binding>
+    Dependency & provide(Binding *binding (Dependency *)) {
+      return Binding::provide(*this);
     }
 
   };
@@ -22,14 +22,14 @@ namespace sauce {
   namespace internal {
 
     template<typename Injector, typename Dependency>
-    struct NewNoArgProvider {
+    struct NewNoArgBinding {
       static Dependency & provide(Injector & injector) {
         return *new Dependency();
       };
     };
 
     template<typename Injector, typename Dependency, typename A1>
-    struct New1ArgProvider {
+    struct New1ArgBinding {
       static Dependency & provide(Injector & injector) {
         return *new Dependency(
           injector.template provide<A1>()
@@ -38,7 +38,7 @@ namespace sauce {
     };
 
     template<typename Injector, typename Dependency, typename A1, typename A2>
-    struct New2ArgProvider {
+    struct New2ArgBinding {
       static Dependency & provide(Injector & injector) {
         return *new Dependency(
           injector.template provide<A1>(),
