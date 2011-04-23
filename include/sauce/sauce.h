@@ -3,26 +3,26 @@
 
 namespace sauce {
 
-  template<typename Injector, typename Impl>
+  template<typename Injector, typename Dependency>
   struct NewNoArgProvider {
-    static Impl & get(Injector & injector) {
-      return *new Impl();
+    static Dependency & get(Injector & injector) {
+      return *new Dependency();
     };
   };
 
-  template<typename Injector, typename Impl, typename A1>
+  template<typename Injector, typename Dependency, typename A1>
   struct New1ArgProvider {
-    static Impl & get(Injector & injector) {
-      return *new Impl(
+    static Dependency & get(Injector & injector) {
+      return *new Dependency(
         injector.template get<A1>()
       );
     };
   };
 
-  template<typename Injector, typename Impl, typename A1, typename A2>
+  template<typename Injector, typename Dependency, typename A1, typename A2>
   struct New2ArgProvider {
-    static Impl & get(Injector & injector) {
-      return *new Impl(
+    static Dependency & get(Injector & injector) {
+      return *new Dependency(
         injector.template get<A1>(),
         injector.template get<A2>()
       );
@@ -31,15 +31,15 @@ namespace sauce {
 
   template<typename Module>
   struct Injector {
-    template<typename Impl>
-    Impl & get() {
-      return provide<Impl>(Module::template binding<Injector<Module> >);
+    template<typename Dependency>
+    Dependency & get() {
+      return provide<Dependency>(Module::template bindings<Injector<Module> >);
     }
 
   private:
 
-    template<typename Impl, typename Provider>
-    Impl & provide(Provider * (Impl *)) {
+    template<typename Dependency, typename Provider>
+    Dependency & provide(Provider * (Dependency *)) {
       return Provider::get(*this);
     }
 
