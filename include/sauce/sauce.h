@@ -22,14 +22,14 @@ namespace sauce {
   namespace internal {
 
     template<typename Injector, typename Dependency>
-    struct New0ArgBinding {
+    struct NewBinding0 {
       static Dependency & provide(Injector & injector) {
         return *new Dependency();
       };
     };
 
     template<typename Injector, typename Dependency, typename A1>
-    struct New1ArgBinding {
+    struct NewBinding1 {
       static Dependency & provide(Injector & injector) {
         return *new Dependency(
           injector.template provide<A1>()
@@ -38,7 +38,7 @@ namespace sauce {
     };
 
     template<typename Injector, typename Dependency, typename A1, typename A2>
-    struct New2ArgBinding {
+    struct NewBinding2 {
       static Dependency & provide(Injector & injector) {
         return *new Dependency(
           injector.template provide<A1>(),
