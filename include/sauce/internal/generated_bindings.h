@@ -7,6 +7,13 @@
 
 namespace sauce { namespace internal {
 
+  template<typename Injector, class Dependency>
+  struct DereferenceBinding {
+    static Dependency & provide(Injector & injector) {
+      return *injector.template provide<Dependency *>();
+    };
+  };
+
   template<typename Injector, typename F>
   struct NewBinding;
 

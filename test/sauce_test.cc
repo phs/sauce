@@ -66,6 +66,11 @@ namespace sauce { namespace testing {
     }
 
     template<typename Injector>
+    static sauce::internal::DereferenceBinding<Injector, Chasis> * bindings(Chasis &) {
+      return 0;
+    }
+
+    template<typename Injector>
     static sauce::internal::NewBinding<Injector, HybridEngine()> * bindings(Engine *) {
       return 0;
     }
@@ -82,6 +87,13 @@ namespace sauce { namespace testing {
     Chasis * chasis = injector.provide<Chasis *>();
     ASSERT_STREQ("coup", chasis->name());
     delete chasis;
+  }
+
+  TEST(SauceTest, should_dereference_addresses_with_dereference_bindings) {
+    sauce::Injector<LoveBugModule> injector;
+    Chasis & chasis = injector.provide<Chasis &>();
+    ASSERT_STREQ("coup", chasis.name());
+    delete &chasis;
   }
 
 } } // namespace testing, namespace sauce
