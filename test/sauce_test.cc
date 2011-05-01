@@ -61,17 +61,17 @@ namespace sauce { namespace testing {
   public:
 
     template<typename Injector>
-    static sauce::internal::NewBinding<Injector, CoupChasis()> * bindings(Chasis *) {
+    static sauce::internal::NewBinding<Injector, CoupChasis()> * bindings(Chasis **) {
       return 0;
     }
 
     template<typename Injector>
-    static sauce::internal::NewBinding<Injector, HybridEngine()> * bindings(Engine *) {
+    static sauce::internal::NewBinding<Injector, HybridEngine()> * bindings(Engine **) {
       return 0;
     }
 
     template<typename Injector>
-    static sauce::internal::NewBinding<Injector, Herbie(Chasis &, Engine &)> * bindings(Vehicle *) {
+    static sauce::internal::NewBinding<Injector, Herbie(Chasis &, Engine &)> * bindings(Vehicle **) {
       return 0;
     }
 
@@ -79,9 +79,9 @@ namespace sauce { namespace testing {
 
   TEST(SauceTest, should_inject_some_dependencies) {
     sauce::Injector<LoveBugModule> injector;
-    Chasis & chasis = injector.provide<Chasis>();
+    Chasis * chasis = injector.provide<Chasis *>();
 
-    ASSERT_STREQ("coup", chasis.name());
+    ASSERT_STREQ("coup", chasis->name());
   }
 
 } } // namespace testing, namespace sauce

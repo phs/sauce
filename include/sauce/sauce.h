@@ -8,14 +8,14 @@ namespace sauce {
   template<typename Module>
   struct Injector {
     template<typename Dependency>
-    Dependency & provide() {
+    Dependency provide() {
       return provide<Dependency>(Module::template bindings<Injector<Module> >);
     }
 
   private:
 
     template<typename Dependency, typename Binding>
-    Dependency & provide(Binding *binding (Dependency *)) {
+    Dependency provide(Binding *binding (Dependency *)) {
       return Binding::provide(*this);
     }
 
