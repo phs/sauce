@@ -5,7 +5,7 @@ $var n = 10  $$ The maximum arity we support.
 #ifndef SAUCE_SAUCE_INTERNAL_GENERATED_BINDINGS_H_
 #define SAUCE_SAUCE_INTERNAL_GENERATED_BINDINGS_H_
 
-namespace sauce { namespace internal {
+namespace sauce { namespace internal { namespace bindings {
 
   template<typename Injector, class Dependency>
   struct DereferenceBinding {
@@ -34,6 +34,6 @@ $var provide_As = [[$for j, [[injector.template provide<A$j>()]]]]
 
 ]]
 
-} } // namespace internal, namespace sauce
+} } } // namespace bindings, namespace internal, namespace sauce
 
 #endif

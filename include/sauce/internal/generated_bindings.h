@@ -5,7 +5,7 @@
 #ifndef SAUCE_SAUCE_INTERNAL_GENERATED_BINDINGS_H_
 #define SAUCE_SAUCE_INTERNAL_GENERATED_BINDINGS_H_
 
-namespace sauce { namespace internal {
+namespace sauce { namespace internal { namespace bindings {
 
   template<typename Injector, class Dependency>
   struct DereferenceBinding {
@@ -131,6 +131,6 @@ namespace sauce { namespace internal {
     };
   };
 
-} } // namespace internal, namespace sauce
+} } } // namespace bindings, namespace internal, namespace sauce
 
 #endif
