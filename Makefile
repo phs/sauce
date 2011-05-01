@@ -4,9 +4,10 @@ GTEST = vendor/gmock-1.5.0/gtest
 CPPFLAGS = -Iinclude
 
 HEADER_TEMPLATES = $(shell find include -type f -name "*.h.pump")
+GENERATED_HEADERS = $(patsubst %.h.pump,%.h,$(HEADER_TEMPLATES))
 HEADERS = \
 	$(shell find include -type f -name "*.h") \
-	$(patsubst %.h.pump,%.h,$(HEADER_TEMPLATES))
+	$(GENERATED_HEADERS)
 
 TEST_SOURCES = $(shell find test -type f -name "*.cc")
 TEST_OBJECTS = \
@@ -20,8 +21,12 @@ all: test
 $(GMOCK)/src/gmock-all.o $(GMOCK)/src/gmock_main.o $(GTEST)/src/gtest-all.o:
 	cd $(GMOCK) && ./configure && make
 
+# Do not delete generated headers, even though they are make intermediates
+.SECONDARY: $(GENERATED_HEADERS)
+
 include/%.h: include/%.h.pump
 	vendor/pump.py $+
+	echo derp
 
 build/%.o: test/%.cc $(HEADERS)
 	mkdir -p build/sauce
