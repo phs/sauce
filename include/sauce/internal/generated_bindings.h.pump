@@ -1,7 +1,7 @@
 $$ This is a Pump source file.  Please use Pump to convert it to
 $$ generated_bindings.h
 $$
-$var n = 10  $$ The maximum arity we support.
+$var n = 2  $$ The maximum arity we support.
 
 #ifndef SAUCE_SAUCE_INTERNAL_GENERATED_BINDINGS_H_
 #define SAUCE_SAUCE_INTERNAL_GENERATED_BINDINGS_H_
@@ -11,31 +11,22 @@ namespace sauce { namespace internal {
   template<typename Injector, typename F>
   struct NewBinding;
 
-  template<typename Injector, typename Dependency>
-  struct NewBinding<Injector, Dependency()> {
+$range i 0..n
+$for i [[
+$range j 1..i
+$var comma_typename_As = [[$for j [[, typename A$j]]]]
+$var typename_As = [[$for j, [[typename A$j]]]]
+$var As = [[$for j, [[A$j]]]]
+$var provide_As = [[$for j, [[injector.template provide<A$j>()]]]]
+
+  template<typename Injector, typename Dependency$comma_typename_As>
+  struct NewBinding<Injector, Dependency($As)> {
     static Dependency & provide(Injector & injector) {
-      return *new Dependency();
+      return *new Dependency($provide_As);
     };
   };
 
-  template<typename Injector, typename Dependency, typename A1>
-  struct NewBinding<Injector, Dependency(A1)> {
-    static Dependency & provide(Injector & injector) {
-      return *new Dependency(
-        injector.template provide<A1>()
-      );
-    };
-  };
-
-  template<typename Injector, typename Dependency, typename A1, typename A2>
-  struct NewBinding<Injector, Dependency(A1, A2)> {
-    static Dependency & provide(Injector & injector) {
-      return *new Dependency(
-        injector.template provide<A1>(),
-        injector.template provide<A2>()
-      );
-    };
-  };
+]]
 
 } } // namespace internal, namespace sauce
 

@@ -21,19 +21,15 @@ namespace sauce { namespace internal {
   template<typename Injector, typename Dependency, typename A1>
   struct NewBinding<Injector, Dependency(A1)> {
     static Dependency & provide(Injector & injector) {
-      return *new Dependency(
-        injector.template provide<A1>()
-      );
+      return *new Dependency(injector.template provide<A1>());
     };
   };
 
   template<typename Injector, typename Dependency, typename A1, typename A2>
   struct NewBinding<Injector, Dependency(A1, A2)> {
     static Dependency & provide(Injector & injector) {
-      return *new Dependency(
-        injector.template provide<A1>(),
-        injector.template provide<A2>()
-      );
+      return *new Dependency(injector.template provide<A1>(),
+          injector.template provide<A2>());
     };
   };
 
