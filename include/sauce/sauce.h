@@ -15,7 +15,7 @@ namespace sauce {
   private:
 
     template<typename Dependency, typename Binding>
-    Dependency provide(Binding *binding (Dependency *)) {
+    Dependency provide(Binding *binding (Dependency)) {
       return Binding::provide(*this);
     }
 
