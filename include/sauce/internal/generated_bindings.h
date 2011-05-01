@@ -7,7 +7,7 @@
 
 namespace sauce { namespace internal { namespace bindings {
 
-  template<typename Injector, class Iface, typename F>
+  template<typename Injector, class Iface, typename Constructor>
   struct New;
 
   template<typename Injector, class Iface, class Impl>

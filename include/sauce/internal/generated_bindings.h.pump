@@ -7,7 +7,7 @@ $var n = 10  $$ The maximum arity we support.
 
 namespace sauce { namespace internal { namespace bindings {
 
-  template<typename Injector, class Iface, typename F>
+  template<typename Injector, class Iface, typename Constructor>
   struct New;
 
 $range i 0..n
