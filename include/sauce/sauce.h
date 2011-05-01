@@ -1,7 +1,7 @@
 #ifndef SAUCE_SAUCE_H_
 #define SAUCE_SAUCE_H_
 
-#include <sauce/internal/generated_bindings.h>
+#include <sauce/internal/bindings.h>
 
 namespace sauce {
 
