@@ -3,9 +3,12 @@ GTEST = vendor/gmock-1.5.0/gtest
 
 CPPFLAGS = -Iinclude
 
-HEADERS      = $(shell find include -type f -name "*.h")
+HEADER_TEMPLATES = $(shell find include -type f -name "*.h.pump")
+HEADERS = \
+	$(shell find include -type f -name "*.h") \
+	$(patsubst %.h.pump,%.h,$(HEADER_TEMPLATES))
 
-TEST_SOURCES = $(shell find test    -type f -name "*.cc")
+TEST_SOURCES = $(shell find test -type f -name "*.cc")
 TEST_OBJECTS = \
 	$(patsubst test/%.cc,build/%.o,$(TEST_SOURCES)) \
 	$(GMOCK)/src/gmock-all.o                        \
@@ -16,6 +19,9 @@ all: test
 
 $(GMOCK)/src/gmock-all.o $(GMOCK)/src/gmock_main.o $(GTEST)/src/gtest-all.o:
 	cd $(GMOCK) && ./configure && make
+
+include/%.h: include/%.h.pump
+	vendor/pump.py $+
 
 build/%.o: test/%.cc $(HEADERS)
 	mkdir -p build/sauce
