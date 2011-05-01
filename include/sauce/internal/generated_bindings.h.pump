@@ -1,8 +1,7 @@
 $$ This is a Pump source file.  Please use Pump to convert it to
 $$ generated_bindings.h
 $$
-$var n = 2  $$ The maximum arity we support.
-
+$var n = 10  $$ The maximum arity we support.
 #ifndef SAUCE_SAUCE_INTERNAL_GENERATED_BINDINGS_H_
 #define SAUCE_SAUCE_INTERNAL_GENERATED_BINDINGS_H_
 

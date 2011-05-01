@@ -2,7 +2,6 @@
 //     pump.py generated_bindings.h.pump
 // DO NOT EDIT BY HAND!!!
 
-
 #ifndef SAUCE_SAUCE_INTERNAL_GENERATED_BINDINGS_H_
 #define SAUCE_SAUCE_INTERNAL_GENERATED_BINDINGS_H_
 
@@ -30,6 +29,98 @@ namespace sauce { namespace internal {
     static Dependency & provide(Injector & injector) {
       return *new Dependency(injector.template provide<A1>(),
           injector.template provide<A2>());
+    };
+  };
+
+  template<typename Injector, typename Dependency, typename A1, typename A2,
+      typename A3>
+  struct NewBinding<Injector, Dependency(A1, A2, A3)> {
+    static Dependency & provide(Injector & injector) {
+      return *new Dependency(injector.template provide<A1>(),
+          injector.template provide<A2>(), injector.template provide<A3>());
+    };
+  };
+
+  template<typename Injector, typename Dependency, typename A1, typename A2,
+      typename A3, typename A4>
+  struct NewBinding<Injector, Dependency(A1, A2, A3, A4)> {
+    static Dependency & provide(Injector & injector) {
+      return *new Dependency(injector.template provide<A1>(),
+          injector.template provide<A2>(), injector.template provide<A3>(),
+          injector.template provide<A4>());
+    };
+  };
+
+  template<typename Injector, typename Dependency, typename A1, typename A2,
+      typename A3, typename A4, typename A5>
+  struct NewBinding<Injector, Dependency(A1, A2, A3, A4, A5)> {
+    static Dependency & provide(Injector & injector) {
+      return *new Dependency(injector.template provide<A1>(),
+          injector.template provide<A2>(), injector.template provide<A3>(),
+          injector.template provide<A4>(), injector.template provide<A5>());
+    };
+  };
+
+  template<typename Injector, typename Dependency, typename A1, typename A2,
+      typename A3, typename A4, typename A5, typename A6>
+  struct NewBinding<Injector, Dependency(A1, A2, A3, A4, A5, A6)> {
+    static Dependency & provide(Injector & injector) {
+      return *new Dependency(injector.template provide<A1>(),
+          injector.template provide<A2>(), injector.template provide<A3>(),
+          injector.template provide<A4>(), injector.template provide<A5>(),
+          injector.template provide<A6>());
+    };
+  };
+
+  template<typename Injector, typename Dependency, typename A1, typename A2,
+      typename A3, typename A4, typename A5, typename A6, typename A7>
+  struct NewBinding<Injector, Dependency(A1, A2, A3, A4, A5, A6, A7)> {
+    static Dependency & provide(Injector & injector) {
+      return *new Dependency(injector.template provide<A1>(),
+          injector.template provide<A2>(), injector.template provide<A3>(),
+          injector.template provide<A4>(), injector.template provide<A5>(),
+          injector.template provide<A6>(), injector.template provide<A7>());
+    };
+  };
+
+  template<typename Injector, typename Dependency, typename A1, typename A2,
+      typename A3, typename A4, typename A5, typename A6, typename A7,
+      typename A8>
+  struct NewBinding<Injector, Dependency(A1, A2, A3, A4, A5, A6, A7, A8)> {
+    static Dependency & provide(Injector & injector) {
+      return *new Dependency(injector.template provide<A1>(),
+          injector.template provide<A2>(), injector.template provide<A3>(),
+          injector.template provide<A4>(), injector.template provide<A5>(),
+          injector.template provide<A6>(), injector.template provide<A7>(),
+          injector.template provide<A8>());
+    };
+  };
+
+  template<typename Injector, typename Dependency, typename A1, typename A2,
+      typename A3, typename A4, typename A5, typename A6, typename A7,
+      typename A8, typename A9>
+  struct NewBinding<Injector, Dependency(A1, A2, A3, A4, A5, A6, A7, A8, A9)> {
+    static Dependency & provide(Injector & injector) {
+      return *new Dependency(injector.template provide<A1>(),
+          injector.template provide<A2>(), injector.template provide<A3>(),
+          injector.template provide<A4>(), injector.template provide<A5>(),
+          injector.template provide<A6>(), injector.template provide<A7>(),
+          injector.template provide<A8>(), injector.template provide<A9>());
+    };
+  };
+
+  template<typename Injector, typename Dependency, typename A1, typename A2,
+      typename A3, typename A4, typename A5, typename A6, typename A7,
+      typename A8, typename A9, typename A10>
+  struct NewBinding<Injector, Dependency(A1, A2, A3, A4, A5, A6, A7, A8, A9,
+      A10)> {
+    static Dependency & provide(Injector & injector) {
+      return *new Dependency(injector.template provide<A1>(),
+          injector.template provide<A2>(), injector.template provide<A3>(),
+          injector.template provide<A4>(), injector.template provide<A5>(),
+          injector.template provide<A6>(), injector.template provide<A7>(),
+          injector.template provide<A8>(), injector.template provide<A9>(),
+          injector.template provide<A10>());
     };
   };
 
