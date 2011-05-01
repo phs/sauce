@@ -18,10 +18,10 @@ $var typename_As = [[$for j, [[typename A$j]]]]
 $var As = [[$for j, [[A$j]]]]
 $var provide_As = [[$for j, [[injector.template provide<A$j>()]]]]
 
-  template<typename Injector, class Dependency$comma_typename_As>
-  struct New<Injector, Dependency($As)> {
-    static Dependency * provide(Injector & injector) {
-      return new Dependency($provide_As);
+  template<typename Injector, class Impl$comma_typename_As>
+  struct New<Injector, Impl($As)> {
+    static Impl * provide(Injector & injector) {
+      return new Impl($provide_As);
     };
   };
 

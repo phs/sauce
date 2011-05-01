@@ -5,10 +5,10 @@
 
 namespace sauce { namespace internal { namespace bindings {
 
-  template<typename Injector, class Dependency>
+  template<typename Injector, class Iface>
   struct Dereference {
-    static Dependency & provide(Injector & injector) {
-      return *injector.template provide<Dependency *>();
+    static Iface & provide(Injector & injector) {
+      return *injector.template provide<Iface *>();
     };
   };
 

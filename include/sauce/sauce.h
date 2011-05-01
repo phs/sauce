@@ -7,15 +7,15 @@ namespace sauce {
 
   template<typename Module>
   struct Injector {
-    template<typename Dependency>
-    Dependency provide() {
-      return provide<Dependency>(Module::template bindings<Injector<Module> >);
+    template<typename Iface>
+    Iface provide() {
+      return provide<Iface>(Module::template bindings<Injector<Module> >);
     }
 
   private:
 
-    template<typename Dependency, typename Binding>
-    Dependency provide(Binding *binding (Dependency)) {
+    template<typename Iface, typename Binding>
+    Iface provide(Binding *binding (Iface)) {
       return Binding::provide(*this);
     }
 
