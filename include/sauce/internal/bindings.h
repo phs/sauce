@@ -6,7 +6,7 @@
 namespace sauce { namespace internal { namespace bindings {
 
   template<typename Injector, class Dependency>
-  struct DereferenceBinding {
+  struct Dereference {
     static Dependency & provide(Injector & injector) {
       return *injector.template provide<Dependency *>();
     };

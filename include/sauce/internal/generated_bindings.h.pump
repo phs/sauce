@@ -8,7 +8,7 @@ $var n = 10  $$ The maximum arity we support.
 namespace sauce { namespace internal { namespace bindings {
 
   template<typename Injector, typename F>
-  struct NewBinding;
+  struct New;
 
 $range i 0..n
 $for i [[
@@ -19,7 +19,7 @@ $var As = [[$for j, [[A$j]]]]
 $var provide_As = [[$for j, [[injector.template provide<A$j>()]]]]
 
   template<typename Injector, class Dependency$comma_typename_As>
-  struct NewBinding<Injector, Dependency($As)> {
+  struct New<Injector, Dependency($As)> {
     static Dependency * provide(Injector & injector) {
       return new Dependency($provide_As);
     };

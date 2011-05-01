@@ -8,24 +8,24 @@
 namespace sauce { namespace internal { namespace bindings {
 
   template<typename Injector, typename F>
-  struct NewBinding;
+  struct New;
 
   template<typename Injector, class Dependency>
-  struct NewBinding<Injector, Dependency()> {
+  struct New<Injector, Dependency()> {
     static Dependency * provide(Injector & injector) {
       return new Dependency();
     };
   };
 
   template<typename Injector, class Dependency, typename A1>
-  struct NewBinding<Injector, Dependency(A1)> {
+  struct New<Injector, Dependency(A1)> {
     static Dependency * provide(Injector & injector) {
       return new Dependency(injector.template provide<A1>());
     };
   };
 
   template<typename Injector, class Dependency, typename A1, typename A2>
-  struct NewBinding<Injector, Dependency(A1, A2)> {
+  struct New<Injector, Dependency(A1, A2)> {
     static Dependency * provide(Injector & injector) {
       return new Dependency(injector.template provide<A1>(),
           injector.template provide<A2>());
@@ -34,7 +34,7 @@ namespace sauce { namespace internal { namespace bindings {
 
   template<typename Injector, class Dependency, typename A1, typename A2,
       typename A3>
-  struct NewBinding<Injector, Dependency(A1, A2, A3)> {
+  struct New<Injector, Dependency(A1, A2, A3)> {
     static Dependency * provide(Injector & injector) {
       return new Dependency(injector.template provide<A1>(),
           injector.template provide<A2>(), injector.template provide<A3>());
@@ -43,7 +43,7 @@ namespace sauce { namespace internal { namespace bindings {
 
   template<typename Injector, class Dependency, typename A1, typename A2,
       typename A3, typename A4>
-  struct NewBinding<Injector, Dependency(A1, A2, A3, A4)> {
+  struct New<Injector, Dependency(A1, A2, A3, A4)> {
     static Dependency * provide(Injector & injector) {
       return new Dependency(injector.template provide<A1>(),
           injector.template provide<A2>(), injector.template provide<A3>(),
@@ -53,7 +53,7 @@ namespace sauce { namespace internal { namespace bindings {
 
   template<typename Injector, class Dependency, typename A1, typename A2,
       typename A3, typename A4, typename A5>
-  struct NewBinding<Injector, Dependency(A1, A2, A3, A4, A5)> {
+  struct New<Injector, Dependency(A1, A2, A3, A4, A5)> {
     static Dependency * provide(Injector & injector) {
       return new Dependency(injector.template provide<A1>(),
           injector.template provide<A2>(), injector.template provide<A3>(),
@@ -63,7 +63,7 @@ namespace sauce { namespace internal { namespace bindings {
 
   template<typename Injector, class Dependency, typename A1, typename A2,
       typename A3, typename A4, typename A5, typename A6>
-  struct NewBinding<Injector, Dependency(A1, A2, A3, A4, A5, A6)> {
+  struct New<Injector, Dependency(A1, A2, A3, A4, A5, A6)> {
     static Dependency * provide(Injector & injector) {
       return new Dependency(injector.template provide<A1>(),
           injector.template provide<A2>(), injector.template provide<A3>(),
@@ -74,7 +74,7 @@ namespace sauce { namespace internal { namespace bindings {
 
   template<typename Injector, class Dependency, typename A1, typename A2,
       typename A3, typename A4, typename A5, typename A6, typename A7>
-  struct NewBinding<Injector, Dependency(A1, A2, A3, A4, A5, A6, A7)> {
+  struct New<Injector, Dependency(A1, A2, A3, A4, A5, A6, A7)> {
     static Dependency * provide(Injector & injector) {
       return new Dependency(injector.template provide<A1>(),
           injector.template provide<A2>(), injector.template provide<A3>(),
@@ -86,7 +86,7 @@ namespace sauce { namespace internal { namespace bindings {
   template<typename Injector, class Dependency, typename A1, typename A2,
       typename A3, typename A4, typename A5, typename A6, typename A7,
       typename A8>
-  struct NewBinding<Injector, Dependency(A1, A2, A3, A4, A5, A6, A7, A8)> {
+  struct New<Injector, Dependency(A1, A2, A3, A4, A5, A6, A7, A8)> {
     static Dependency * provide(Injector & injector) {
       return new Dependency(injector.template provide<A1>(),
           injector.template provide<A2>(), injector.template provide<A3>(),
@@ -99,7 +99,7 @@ namespace sauce { namespace internal { namespace bindings {
   template<typename Injector, class Dependency, typename A1, typename A2,
       typename A3, typename A4, typename A5, typename A6, typename A7,
       typename A8, typename A9>
-  struct NewBinding<Injector, Dependency(A1, A2, A3, A4, A5, A6, A7, A8, A9)> {
+  struct New<Injector, Dependency(A1, A2, A3, A4, A5, A6, A7, A8, A9)> {
     static Dependency * provide(Injector & injector) {
       return new Dependency(injector.template provide<A1>(),
           injector.template provide<A2>(), injector.template provide<A3>(),
@@ -112,8 +112,7 @@ namespace sauce { namespace internal { namespace bindings {
   template<typename Injector, class Dependency, typename A1, typename A2,
       typename A3, typename A4, typename A5, typename A6, typename A7,
       typename A8, typename A9, typename A10>
-  struct NewBinding<Injector, Dependency(A1, A2, A3, A4, A5, A6, A7, A8, A9,
-      A10)> {
+  struct New<Injector, Dependency(A1, A2, A3, A4, A5, A6, A7, A8, A9, A10)> {
     static Dependency * provide(Injector & injector) {
       return new Dependency(injector.template provide<A1>(),
           injector.template provide<A2>(), injector.template provide<A3>(),
