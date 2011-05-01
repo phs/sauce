@@ -18,7 +18,7 @@ $var typename_As = [[$for j, [[typename A$j]]]]
 $var As = [[$for j, [[A$j]]]]
 $var provide_As = [[$for j, [[injector.template provide<A$j>()]]]]
 
-  template<typename Injector, typename Dependency$comma_typename_As>
+  template<typename Injector, class Dependency$comma_typename_As>
   struct NewBinding<Injector, Dependency($As)> {
     static Dependency & provide(Injector & injector) {
       return *new Dependency($provide_As);
