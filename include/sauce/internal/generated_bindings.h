@@ -15,12 +15,22 @@ namespace sauce { namespace internal { namespace bindings {
     static Impl * provide(Injector & injector) {
       return new Impl();
     };
+
+    static void dispose(Injector & injector, Iface * iface) {
+      // TODO: make test prove this delete is required..
+      // delete iface;
+    };
   };
 
   template<typename Injector, class Iface, class Impl, typename A1>
   struct New<Injector, Iface, Impl(A1)> {
     static Impl * provide(Injector & injector) {
       return new Impl(injector.template provide<A1>());
+    };
+
+    static void dispose(Injector & injector, Iface * iface) {
+      // TODO: make test prove this delete is required..
+      // delete iface;
     };
   };
 
@@ -30,6 +40,11 @@ namespace sauce { namespace internal { namespace bindings {
       return new Impl(injector.template provide<A1>(),
           injector.template provide<A2>());
     };
+
+    static void dispose(Injector & injector, Iface * iface) {
+      // TODO: make test prove this delete is required..
+      // delete iface;
+    };
   };
 
   template<typename Injector, class Iface, class Impl, typename A1,
@@ -38,6 +53,11 @@ namespace sauce { namespace internal { namespace bindings {
     static Impl * provide(Injector & injector) {
       return new Impl(injector.template provide<A1>(),
           injector.template provide<A2>(), injector.template provide<A3>());
+    };
+
+    static void dispose(Injector & injector, Iface * iface) {
+      // TODO: make test prove this delete is required..
+      // delete iface;
     };
   };
 
@@ -49,6 +69,11 @@ namespace sauce { namespace internal { namespace bindings {
           injector.template provide<A2>(), injector.template provide<A3>(),
           injector.template provide<A4>());
     };
+
+    static void dispose(Injector & injector, Iface * iface) {
+      // TODO: make test prove this delete is required..
+      // delete iface;
+    };
   };
 
   template<typename Injector, class Iface, class Impl, typename A1,
@@ -58,6 +83,11 @@ namespace sauce { namespace internal { namespace bindings {
       return new Impl(injector.template provide<A1>(),
           injector.template provide<A2>(), injector.template provide<A3>(),
           injector.template provide<A4>(), injector.template provide<A5>());
+    };
+
+    static void dispose(Injector & injector, Iface * iface) {
+      // TODO: make test prove this delete is required..
+      // delete iface;
     };
   };
 
@@ -70,6 +100,11 @@ namespace sauce { namespace internal { namespace bindings {
           injector.template provide<A4>(), injector.template provide<A5>(),
           injector.template provide<A6>());
     };
+
+    static void dispose(Injector & injector, Iface * iface) {
+      // TODO: make test prove this delete is required..
+      // delete iface;
+    };
   };
 
   template<typename Injector, class Iface, class Impl, typename A1,
@@ -81,6 +116,11 @@ namespace sauce { namespace internal { namespace bindings {
           injector.template provide<A2>(), injector.template provide<A3>(),
           injector.template provide<A4>(), injector.template provide<A5>(),
           injector.template provide<A6>(), injector.template provide<A7>());
+    };
+
+    static void dispose(Injector & injector, Iface * iface) {
+      // TODO: make test prove this delete is required..
+      // delete iface;
     };
   };
 
@@ -95,6 +135,11 @@ namespace sauce { namespace internal { namespace bindings {
           injector.template provide<A6>(), injector.template provide<A7>(),
           injector.template provide<A8>());
     };
+
+    static void dispose(Injector & injector, Iface * iface) {
+      // TODO: make test prove this delete is required..
+      // delete iface;
+    };
   };
 
   template<typename Injector, class Iface, class Impl, typename A1,
@@ -107,6 +152,11 @@ namespace sauce { namespace internal { namespace bindings {
           injector.template provide<A4>(), injector.template provide<A5>(),
           injector.template provide<A6>(), injector.template provide<A7>(),
           injector.template provide<A8>(), injector.template provide<A9>());
+    };
+
+    static void dispose(Injector & injector, Iface * iface) {
+      // TODO: make test prove this delete is required..
+      // delete iface;
     };
   };
 
@@ -121,6 +171,11 @@ namespace sauce { namespace internal { namespace bindings {
           injector.template provide<A6>(), injector.template provide<A7>(),
           injector.template provide<A8>(), injector.template provide<A9>(),
           injector.template provide<A10>());
+    };
+
+    static void dispose(Injector & injector, Iface * iface) {
+      // TODO: make test prove this delete is required..
+      // delete iface;
     };
   };
 

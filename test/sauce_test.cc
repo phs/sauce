@@ -89,6 +89,12 @@ namespace sauce { namespace testing {
     delete chasis;
   }
 
+  TEST(SauceTest, should_dispose_a_dependency) {
+    sauce::Injector<LoveBugModule> injector;
+    Chasis * chasis = injector.provide<Chasis *>();
+    injector.dispose<Chasis *>(chasis);
+  }
+
   TEST(SauceTest, should_dereference_addresses_with_dereference_bindings) {
     sauce::Injector<LoveBugModule> injector;
     Chasis & chasis = injector.provide<Chasis &>();
