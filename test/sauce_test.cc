@@ -99,7 +99,7 @@ namespace sauce { namespace testing {
     sauce::Injector<LoveBugModule> injector;
     Chasis & chasis = injector.provide<Chasis &>();
     ASSERT_STREQ("coup", chasis.name());
-    delete &chasis;
+    injector.dispose<Chasis &>(chasis);
   }
 
 } } // namespace testing, namespace sauce

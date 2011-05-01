@@ -10,6 +10,10 @@ namespace sauce { namespace internal { namespace bindings {
     static Iface & provide(Injector & injector) {
       return *injector.template provide<Iface *>();
     };
+
+    static void dispose(Injector & injector, Iface & iface) {
+      // TODO: make test prove anything is required here..
+    };
   };
 
 } } } // namespace bindings, namespace internal, namespace sauce
