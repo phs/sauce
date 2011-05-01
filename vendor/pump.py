@@ -29,6 +29,8 @@
 # (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
 # OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
+# This file was taken from gmock-1.5.0
+
 """pump v0.1 - Pretty Useful for Meta Programming.
 
 A tool for preprocessor meta programming.  Useful for generating
