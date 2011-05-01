@@ -26,7 +26,6 @@ $(GMOCK)/src/gmock-all.o $(GMOCK)/src/gmock_main.o $(GTEST)/src/gtest-all.o:
 
 include/%.h: include/%.h.pump
 	vendor/pump.py $+
-	echo derp
 
 build/%.o: test/%.cc $(HEADERS)
 	mkdir -p build/sauce
