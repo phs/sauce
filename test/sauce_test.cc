@@ -77,11 +77,11 @@ namespace sauce { namespace testing {
 
   };
 
-  TEST(SauceTest, should_inject_some_dependencies) {
+  TEST(SauceTest, should_provide_a_dependency) {
     sauce::Injector<LoveBugModule> injector;
     Chasis * chasis = injector.provide<Chasis *>();
-
     ASSERT_STREQ("coup", chasis->name());
+    delete chasis;
   }
 
 } } // namespace testing, namespace sauce
