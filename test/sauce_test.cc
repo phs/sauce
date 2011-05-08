@@ -82,12 +82,24 @@ namespace sauce { namespace test {
 
   };
 
+  class MockNewDelete {
+  public:
+
+    // MOCK_METHOD2(Delete, void (Derp * derp));
+
+  };
+
   class SauceTest : public ::testing::Test {
   public:
 
-    ::sauce::Injector<LoveBugModule> injector;
+    ::sauce::Injector<LoveBugModule, MockNewDelete> injector;
+    MockNewDelete & new_delete;
 
     // SauceTest is a friend of Injector
+    SauceTest():
+      injector(),
+      new_delete(injector.new_delete) {}
+
   };
 
   TEST_F(SauceTest, should_provide_a_dependency) {

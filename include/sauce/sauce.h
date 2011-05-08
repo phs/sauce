@@ -6,13 +6,19 @@
 
 namespace sauce {
 
+  namespace test {
+    class SauceTest;
+  }
+
   template<typename Module, typename NewDelete = ::sauce::internal::NewDelete>
   struct Injector {
 
-    friend class SauceTest;
+    friend class test::SauceTest;
 
     Injector():
       new_delete() {}
+
+    virtual ~Injector() {}
 
     template<typename Iface>
     Iface provide() {
@@ -28,7 +34,7 @@ namespace sauce {
 
     typedef Injector<Module, NewDelete> _Injector;
 
-    const NewDelete new_delete;
+    NewDelete new_delete;
 
     template<typename Iface, typename Binding>
     Iface provide(Binding *binding (Iface)) {
