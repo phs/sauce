@@ -3,7 +3,7 @@
 
 #include <sauce/sauce.h>
 
-namespace sauce { namespace testing {
+namespace sauce { namespace test {
 
   struct Chasis {
     virtual const char * name() = 0;
@@ -107,4 +107,4 @@ namespace sauce { namespace testing {
     injector.dispose<Chasis &>(chasis);
   }
 
-} } // namespace testing, namespace sauce
+} } // namespace test, namespace sauce
