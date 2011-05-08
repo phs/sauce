@@ -2,11 +2,18 @@
 #define SAUCE_SAUCE_H_
 
 #include <sauce/internal/bindings.h>
+#include <sauce/internal/generated_new_delete.h>
 
 namespace sauce {
 
-  template<typename Module>
+  template<typename Module, typename NewDelete = ::sauce::internal::NewDelete>
   struct Injector {
+
+    friend class SauceTest;
+
+    Injector():
+      newDelete() {}
+
     template<typename Iface>
     Iface provide() {
       return provide<Iface>(Module::template bindings<Injector<Module> >);
@@ -18,6 +25,8 @@ namespace sauce {
     }
 
   private:
+
+    const NewDelete newDelete;
 
     template<typename Iface, typename Binding>
     Iface provide(Binding *binding (Iface)) {
