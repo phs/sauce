@@ -12,7 +12,7 @@ namespace sauce {
     friend class SauceTest;
 
     Injector():
-      newDelete() {}
+      new_delete() {}
 
     template<typename Iface>
     Iface provide() {
@@ -26,7 +26,7 @@ namespace sauce {
 
   private:
 
-    const NewDelete newDelete;
+    const NewDelete new_delete;
 
     template<typename Iface, typename Binding>
     Iface provide(Binding *binding (Iface)) {
