@@ -8,7 +8,8 @@
 namespace sauce { namespace internal {
 
   // A mockable wrapper for the new, delete and related keywords.
-  struct NewDelete {
+  class NewDelete {
+  public:
     template<class C>
     inline C * New() {
       return new C();

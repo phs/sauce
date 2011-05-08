@@ -6,7 +6,8 @@
 namespace sauce { namespace internal { namespace bindings {
 
   template<typename Injector, class Iface>
-  struct Dereference {
+  class Dereference {
+  public:
     static Iface & provide(Injector & injector) {
       return *injector.template provide<Iface *>();
     };

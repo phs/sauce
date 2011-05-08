@@ -11,7 +11,8 @@ namespace sauce {
   }
 
   template<typename Module, typename NewDelete = ::sauce::internal::NewDelete>
-  struct Injector {
+  class Injector {
+  public:
 
     friend class test::SauceTest;
 

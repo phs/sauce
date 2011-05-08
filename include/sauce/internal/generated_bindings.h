@@ -8,10 +8,11 @@
 namespace sauce { namespace internal { namespace bindings {
 
   template<typename Injector, class Iface, typename Constructor>
-  struct New;
+  class New;
 
   template<typename Injector, class Iface, class Impl>
-  struct New<Injector, Iface, Impl()> {
+  class New<Injector, Iface, Impl()> {
+  public:
     static Impl * provide(Injector & injector) {
       return new Impl();
     };
@@ -23,7 +24,8 @@ namespace sauce { namespace internal { namespace bindings {
   };
 
   template<typename Injector, class Iface, class Impl, typename A1>
-  struct New<Injector, Iface, Impl(A1)> {
+  class New<Injector, Iface, Impl(A1)> {
+  public:
     static Impl * provide(Injector & injector) {
       return new Impl(injector.template provide<A1>());
     };
@@ -35,7 +37,8 @@ namespace sauce { namespace internal { namespace bindings {
   };
 
   template<typename Injector, class Iface, class Impl, typename A1, typename A2>
-  struct New<Injector, Iface, Impl(A1, A2)> {
+  class New<Injector, Iface, Impl(A1, A2)> {
+  public:
     static Impl * provide(Injector & injector) {
       return new Impl(injector.template provide<A1>(),
           injector.template provide<A2>());
@@ -49,7 +52,8 @@ namespace sauce { namespace internal { namespace bindings {
 
   template<typename Injector, class Iface, class Impl, typename A1,
       typename A2, typename A3>
-  struct New<Injector, Iface, Impl(A1, A2, A3)> {
+  class New<Injector, Iface, Impl(A1, A2, A3)> {
+  public:
     static Impl * provide(Injector & injector) {
       return new Impl(injector.template provide<A1>(),
           injector.template provide<A2>(), injector.template provide<A3>());
@@ -63,7 +67,8 @@ namespace sauce { namespace internal { namespace bindings {
 
   template<typename Injector, class Iface, class Impl, typename A1,
       typename A2, typename A3, typename A4>
-  struct New<Injector, Iface, Impl(A1, A2, A3, A4)> {
+  class New<Injector, Iface, Impl(A1, A2, A3, A4)> {
+  public:
     static Impl * provide(Injector & injector) {
       return new Impl(injector.template provide<A1>(),
           injector.template provide<A2>(), injector.template provide<A3>(),
@@ -78,7 +83,8 @@ namespace sauce { namespace internal { namespace bindings {
 
   template<typename Injector, class Iface, class Impl, typename A1,
       typename A2, typename A3, typename A4, typename A5>
-  struct New<Injector, Iface, Impl(A1, A2, A3, A4, A5)> {
+  class New<Injector, Iface, Impl(A1, A2, A3, A4, A5)> {
+  public:
     static Impl * provide(Injector & injector) {
       return new Impl(injector.template provide<A1>(),
           injector.template provide<A2>(), injector.template provide<A3>(),
@@ -93,7 +99,8 @@ namespace sauce { namespace internal { namespace bindings {
 
   template<typename Injector, class Iface, class Impl, typename A1,
       typename A2, typename A3, typename A4, typename A5, typename A6>
-  struct New<Injector, Iface, Impl(A1, A2, A3, A4, A5, A6)> {
+  class New<Injector, Iface, Impl(A1, A2, A3, A4, A5, A6)> {
+  public:
     static Impl * provide(Injector & injector) {
       return new Impl(injector.template provide<A1>(),
           injector.template provide<A2>(), injector.template provide<A3>(),
@@ -110,7 +117,8 @@ namespace sauce { namespace internal { namespace bindings {
   template<typename Injector, class Iface, class Impl, typename A1,
       typename A2, typename A3, typename A4, typename A5, typename A6,
       typename A7>
-  struct New<Injector, Iface, Impl(A1, A2, A3, A4, A5, A6, A7)> {
+  class New<Injector, Iface, Impl(A1, A2, A3, A4, A5, A6, A7)> {
+  public:
     static Impl * provide(Injector & injector) {
       return new Impl(injector.template provide<A1>(),
           injector.template provide<A2>(), injector.template provide<A3>(),
@@ -127,7 +135,8 @@ namespace sauce { namespace internal { namespace bindings {
   template<typename Injector, class Iface, class Impl, typename A1,
       typename A2, typename A3, typename A4, typename A5, typename A6,
       typename A7, typename A8>
-  struct New<Injector, Iface, Impl(A1, A2, A3, A4, A5, A6, A7, A8)> {
+  class New<Injector, Iface, Impl(A1, A2, A3, A4, A5, A6, A7, A8)> {
+  public:
     static Impl * provide(Injector & injector) {
       return new Impl(injector.template provide<A1>(),
           injector.template provide<A2>(), injector.template provide<A3>(),
@@ -145,7 +154,8 @@ namespace sauce { namespace internal { namespace bindings {
   template<typename Injector, class Iface, class Impl, typename A1,
       typename A2, typename A3, typename A4, typename A5, typename A6,
       typename A7, typename A8, typename A9>
-  struct New<Injector, Iface, Impl(A1, A2, A3, A4, A5, A6, A7, A8, A9)> {
+  class New<Injector, Iface, Impl(A1, A2, A3, A4, A5, A6, A7, A8, A9)> {
+  public:
     static Impl * provide(Injector & injector) {
       return new Impl(injector.template provide<A1>(),
           injector.template provide<A2>(), injector.template provide<A3>(),
@@ -163,7 +173,8 @@ namespace sauce { namespace internal { namespace bindings {
   template<typename Injector, class Iface, class Impl, typename A1,
       typename A2, typename A3, typename A4, typename A5, typename A6,
       typename A7, typename A8, typename A9, typename A10>
-  struct New<Injector, Iface, Impl(A1, A2, A3, A4, A5, A6, A7, A8, A9, A10)> {
+  class New<Injector, Iface, Impl(A1, A2, A3, A4, A5, A6, A7, A8, A9, A10)> {
+  public:
     static Impl * provide(Injector & injector) {
       return new Impl(injector.template provide<A1>(),
           injector.template provide<A2>(), injector.template provide<A3>(),
