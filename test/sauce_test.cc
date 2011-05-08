@@ -82,20 +82,26 @@ namespace sauce { namespace testing {
 
   };
 
-  TEST(SauceTest, should_provide_a_dependency) {
+  class SauceTest : public ::testing::Test {
+  public:
+
+    // Injector<LoveBugModule, > injector;
+  };
+
+  TEST_F(SauceTest, should_provide_a_dependency) {
     sauce::Injector<LoveBugModule> injector;
     Chasis * chasis = injector.provide<Chasis *>();
     ASSERT_STREQ("coup", chasis->name());
     delete chasis;
   }
 
-  TEST(SauceTest, should_dispose_a_dependency) {
+  TEST_F(SauceTest, should_dispose_a_dependency) {
     sauce::Injector<LoveBugModule> injector;
     Chasis * chasis = injector.provide<Chasis *>();
     injector.dispose<Chasis *>(chasis);
   }
 
-  TEST(SauceTest, should_dereference_addresses_with_dereference_bindings) {
+  TEST_F(SauceTest, should_dereference_addresses_with_dereference_bindings) {
     sauce::Injector<LoveBugModule> injector;
     Chasis & chasis = injector.provide<Chasis &>();
     ASSERT_STREQ("coup", chasis.name());
