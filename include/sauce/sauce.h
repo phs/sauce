@@ -16,15 +16,17 @@ namespace sauce {
 
     template<typename Iface>
     Iface provide() {
-      return provide<Iface>(Module::template bindings<Injector<Module> >);
+      return provide<Iface>(Module::template bindings<_Injector>);
     }
 
     template<typename Iface>
     void dispose(Iface iface) {
-      dispose<Iface>(Module::template bindings<Injector<Module> >, iface);
+      dispose<Iface>(Module::template bindings<_Injector>, iface);
     }
 
   private:
+
+    typedef Injector<Module, NewDelete> _Injector;
 
     const NewDelete new_delete;
 
