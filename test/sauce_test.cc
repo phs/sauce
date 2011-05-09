@@ -7,33 +7,15 @@ using ::testing::Return;
 
 namespace sauce { namespace test {
 
-  struct Chasis {
-    virtual const char * name() = 0;
-  };
+  struct Chasis {};
 
-  struct CoupChasis: public Chasis {
-    virtual const char * name() { return "coup"; }
-  };
+  struct CoupChasis: public Chasis {};
 
-  struct TruckChasis: public Chasis {
-    virtual const char * name() { return "truck"; }
-  };
+  struct Engine {};
 
-  struct Engine {
-    virtual const char * name() = 0;
-  };
-
-  struct HybridEngine: public Engine {
-    virtual const char * name() { return "hybrid"; }
-  };
-
-  struct DieselEngine: public Engine {
-    virtual const char * name() { return "diesel"; }
-  };
+  struct HybridEngine: public Engine {};
 
   struct Vehicle {
-    virtual const char * name() = 0;
-
     virtual Chasis & getChasis() = 0;
     virtual Engine & getEngine() = 0;
   };
@@ -45,19 +27,7 @@ namespace sauce { namespace test {
     Herbie(Chasis & chasis, Engine & engine):
       chasis(chasis),
       engine(engine) {}
-
-    virtual const char * name() { return "herbie"; }
   };
-
-  // struct CementMixer: public Vehicle {
-  //   Chasis * chasis;
-  //   Engine * engine;
-  //
-  //   void setChasis(Chasis & chasis) { this->chasis = &chasis; }
-  //   void setEngine(Engine & engine) { this->engine = &engine; }
-  //
-  //   virtual const char * name() { return "cement mixer"; }
-  // };
 
   class LoveBugModule {
   public:
@@ -100,13 +70,11 @@ namespace sauce { namespace test {
 
   };
 
-  template<>
-  CoupChasis * MockNewDelete::_new<CoupChasis>() {
+  template<> CoupChasis * MockNewDelete::_new<CoupChasis>() {
     return new_coup_chasis();
   }
 
-  template<>
-  void MockNewDelete::_delete<Chasis>(Chasis * chasis) {
+  template<> void MockNewDelete::_delete<Chasis>(Chasis * chasis) {
     delete_chasis(chasis);
   }
 
