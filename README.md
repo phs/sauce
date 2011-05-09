@@ -7,110 +7,15 @@ Design is loosely inspired by Google's excellent guice framework.
 
 ## The Jist ##
 
-Here's dependency resolution:
+I refer the reader to [guice's documentation](http://code.google.com/docreader/#p=google-guice&s=google-guice&t=Motivation) for an introduction to dependency injection as a concept, and why they might be interested in using it.
 
-    #include <iostream>
-    #include <vector>
+In sauce, one defines _bindings_ that map interface types to implementation types.  Each binding is declared in the context of a _module_ which is used to organize and refer to collections of bindings at a time.  Modules may be as simple as a struct.  They may be composed with inheritance, to avoid redundant bindings.
 
-    using namespace std;
+At runtime, one creates an _injector_, which is a class template taking a single module.  One can then ask the injector to _provide_ a value of a desired type (again supplied as a template parameter) or to _dispose_ of that value when it is no longer needed.  When providing a value, implicit transitive dependencies are provided as well.
 
-    // Sample types to inject
+Requesting the injector for an unbound type results in a compile error.
 
-    class IFoo {
-    public:
-      virtual string name() = 0;
-    };
-
-    class Foo: public IFoo {
-    public:
-      string name() { return "Impl!"; }
-    };
-
-    class IBar {
-    public:
-      virtual IFoo & getFoo() = 0;
-    };
-
-    class Bar: public IBar {
-      IFoo & dependency;
-    public:
-      explicit Bar(IFoo & dependency): dependency(dependency) {}
-      IFoo & getFoo() { return dependency; }
-    };
-
-    // Some hoohah
-
-    namespace hoohah {
-
-      template<typename I, typename T>
-      struct NewNoArgProvider {
-        static T & get(I & injector) {
-          return *new T();
-        };
-      };
-
-      template<typename I, typename T, typename A1>
-      struct New1ArgProvider {
-        static T & get(I & injector) {
-          return *new T(injector.template get<A1>());
-        };
-      };
-
-      template<typename M>
-      struct Injector {
-        template<typename T>
-        T & get() {
-          return provide<T>(M::template binding<Injector<M> >);
-        }
-
-      private:
-
-        template<typename T, typename P>
-        T & provide(P * (T *)) {
-          return P::get(*this);
-        }
-
-      };
-
-    }
-
-    // Application bindings
-
-    struct OneModule {
-      template<typename I>
-      static hoohah::NewNoArgProvider<I, Foo> * binding(IFoo *) {
-        return 0;
-      }
-    };
-
-    struct AnotherModule {
-      template<typename I>
-      static hoohah::New1ArgProvider<I, Bar, IFoo> * binding(IBar *) {
-        return 0;
-      }
-    };
-
-    struct MyModule: public OneModule, public AnotherModule {
-      using OneModule::binding;
-      using AnotherModule::binding;
-    };
-
-    // And main
-
-    int main(int argc, char **argv) {
-      typedef vector<string> V;
-      V params = V(argv, argv + argc);
-
-      hoohah::Injector<MyModule> injector;
-      IFoo & foo = injector.get<IFoo>();
-      IBar & bar = injector.get<IBar>();
-
-      cout << "Hooray, " << bar.getFoo().name() << endl;
-
-      return 0;
-    }
-
-The idea is co-opt C++'s overload resolution to create a set of type bindings that can be wrapped in a class, inherited, and passed around in templates.  Partial or complete class template specialization would be more intuitive, but this unfortunately precludes the possibility of spreading the bindings over multiple namespaces (such as Module subtypes.)
+Bindings are resolved at compile time to avoid the need for runtime reflection.  Concretely, they are stubbed static member functions with signatures meant to leverage overload resolution rules: thus we trade runtime reflection magic for compile-time template magic.
 
 ## Wishlist ##
 
