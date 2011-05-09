@@ -3,6 +3,8 @@
 
 #include <sauce/sauce.h>
 
+using ::testing::Return;
+
 namespace sauce { namespace test {
 
   struct Chasis {
@@ -82,41 +84,65 @@ namespace sauce { namespace test {
 
   };
 
+  // Our mock for the new and delete operations.
+  //
+  // Gmock is unable to provide a general mock, so we roll one for our fixure
+  // types.  Our mocked methods are actually arbitrary non-templated methods,
+  // delegated to by template specializations for our types.
   class MockNewDelete {
   public:
 
-    // MOCK_METHOD2(Delete, void (Derp * derp));
+    template<class C> C * _new();
+    template<class C> void _delete(C *);
+
+    MOCK_METHOD0(new_coup_chasis, CoupChasis * ());
+    MOCK_METHOD1(delete_coup_chasis, void (CoupChasis *));
 
   };
+
+  template<>
+  CoupChasis * MockNewDelete::_new<CoupChasis>() {
+    return new_coup_chasis();
+  }
+
+  template<>
+  void MockNewDelete::_delete<CoupChasis>(CoupChasis * chasis) {
+    delete_coup_chasis(chasis);
+  }
 
   class SauceTest : public ::testing::Test {
   public:
 
-    // ::sauce::Injector<LoveBugModule, MockNewDelete> injector;
-    // MockNewDelete & new_delete;
-    ::sauce::Injector<LoveBugModule> injector;
+    ::sauce::Injector<LoveBugModule, MockNewDelete> injector;
+    MockNewDelete & new_delete;
 
     // SauceTest is a friend of Injector
-    // SauceTest():
-    //   injector(),
-    //   new_delete(injector.new_delete) {}
+    SauceTest():
+      injector(),
+      new_delete(injector.new_delete) {}
 
   };
 
   TEST_F(SauceTest, should_provide_a_dependency) {
-    Chasis * chasis = injector.provide<Chasis *>();
-    ASSERT_STREQ("coup", chasis->name());
-    delete chasis;
+    CoupChasis chasis;
+    EXPECT_CALL(new_delete, new_coup_chasis()).WillOnce(Return(&chasis));
+    Chasis * actual = injector.provide<Chasis *>();
+    ASSERT_EQ(&chasis, actual);
   }
 
   TEST_F(SauceTest, should_dispose_a_dependency) {
-    Chasis * chasis = injector.provide<Chasis *>();
-    injector.dispose<Chasis *>(chasis);
+    CoupChasis chasis;
+    // EXPECT_CALL(new_delete, delete_coup_chasis(&chasis));
+    injector.dispose<Chasis *>(&chasis);
   }
 
   TEST_F(SauceTest, should_dereference_addresses_with_dereference_bindings) {
-    Chasis & chasis = injector.provide<Chasis &>();
-    ASSERT_STREQ("coup", chasis.name());
+    CoupChasis chasis;
+    EXPECT_CALL(new_delete, new_coup_chasis()).WillOnce(Return(&chasis));
+    // EXPECT_CALL(new_delete, delete_coup_chasis(&chasis));
+
+    Chasis & actual = injector.provide<Chasis &>();
+    ASSERT_EQ(&chasis, &actual);
     injector.dispose<Chasis &>(chasis);
   }
 
