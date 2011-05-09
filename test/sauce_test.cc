@@ -96,7 +96,7 @@ namespace sauce { namespace test {
     template<class C> void _delete(C *);
 
     MOCK_METHOD0(new_coup_chasis, CoupChasis * ());
-    MOCK_METHOD1(delete_coup_chasis, void (CoupChasis *));
+    MOCK_METHOD1(delete_chasis, void (Chasis *));
 
   };
 
@@ -106,8 +106,8 @@ namespace sauce { namespace test {
   }
 
   template<>
-  void MockNewDelete::_delete<CoupChasis>(CoupChasis * chasis) {
-    delete_coup_chasis(chasis);
+  void MockNewDelete::_delete<Chasis>(Chasis * chasis) {
+    delete_chasis(chasis);
   }
 
   class SauceTest : public ::testing::Test {
@@ -132,14 +132,14 @@ namespace sauce { namespace test {
 
   TEST_F(SauceTest, should_dispose_a_dependency) {
     CoupChasis chasis;
-    // EXPECT_CALL(new_delete, delete_coup_chasis(&chasis));
+    EXPECT_CALL(new_delete, delete_chasis(&chasis));
     injector.dispose<Chasis *>(&chasis);
   }
 
   TEST_F(SauceTest, should_dereference_addresses_with_dereference_bindings) {
     CoupChasis chasis;
     EXPECT_CALL(new_delete, new_coup_chasis()).WillOnce(Return(&chasis));
-    // EXPECT_CALL(new_delete, delete_coup_chasis(&chasis));
+    // EXPECT_CALL(new_delete, delete_chasis(&chasis));
 
     Chasis & actual = injector.provide<Chasis &>();
     ASSERT_EQ(&chasis, &actual);

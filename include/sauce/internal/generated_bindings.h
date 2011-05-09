@@ -21,8 +21,7 @@ namespace sauce { namespace internal { namespace bindings {
     };
 
     static void dispose(Injector & injector, Iface * iface) {
-      // TODO: make test prove this delete is required..
-      // delete iface;
+      new_delete(injector).template _delete<Iface>(iface);
     };
   };
 
@@ -35,8 +34,7 @@ namespace sauce { namespace internal { namespace bindings {
     };
 
     static void dispose(Injector & injector, Iface * iface) {
-      // TODO: make test prove this delete is required..
-      // delete iface;
+      new_delete(injector).template _delete<Iface>(iface);
     };
   };
 
@@ -50,8 +48,7 @@ namespace sauce { namespace internal { namespace bindings {
     };
 
     static void dispose(Injector & injector, Iface * iface) {
-      // TODO: make test prove this delete is required..
-      // delete iface;
+      new_delete(injector).template _delete<Iface>(iface);
     };
   };
 
@@ -66,8 +63,7 @@ namespace sauce { namespace internal { namespace bindings {
     };
 
     static void dispose(Injector & injector, Iface * iface) {
-      // TODO: make test prove this delete is required..
-      // delete iface;
+      new_delete(injector).template _delete<Iface>(iface);
     };
   };
 
@@ -82,8 +78,7 @@ namespace sauce { namespace internal { namespace bindings {
     };
 
     static void dispose(Injector & injector, Iface * iface) {
-      // TODO: make test prove this delete is required..
-      // delete iface;
+      new_delete(injector).template _delete<Iface>(iface);
     };
   };
 
@@ -100,8 +95,7 @@ namespace sauce { namespace internal { namespace bindings {
     };
 
     static void dispose(Injector & injector, Iface * iface) {
-      // TODO: make test prove this delete is required..
-      // delete iface;
+      new_delete(injector).template _delete<Iface>(iface);
     };
   };
 
@@ -118,8 +112,7 @@ namespace sauce { namespace internal { namespace bindings {
     };
 
     static void dispose(Injector & injector, Iface * iface) {
-      // TODO: make test prove this delete is required..
-      // delete iface;
+      new_delete(injector).template _delete<Iface>(iface);
     };
   };
 
@@ -138,8 +131,7 @@ namespace sauce { namespace internal { namespace bindings {
     };
 
     static void dispose(Injector & injector, Iface * iface) {
-      // TODO: make test prove this delete is required..
-      // delete iface;
+      new_delete(injector).template _delete<Iface>(iface);
     };
   };
 
@@ -159,8 +151,7 @@ namespace sauce { namespace internal { namespace bindings {
     };
 
     static void dispose(Injector & injector, Iface * iface) {
-      // TODO: make test prove this delete is required..
-      // delete iface;
+      new_delete(injector).template _delete<Iface>(iface);
     };
   };
 
@@ -180,8 +171,7 @@ namespace sauce { namespace internal { namespace bindings {
     };
 
     static void dispose(Injector & injector, Iface * iface) {
-      // TODO: make test prove this delete is required..
-      // delete iface;
+      new_delete(injector).template _delete<Iface>(iface);
     };
   };
 
@@ -202,8 +192,7 @@ namespace sauce { namespace internal { namespace bindings {
     };
 
     static void dispose(Injector & injector, Iface * iface) {
-      // TODO: make test prove this delete is required..
-      // delete iface;
+      new_delete(injector).template _delete<Iface>(iface);
     };
   };
 
