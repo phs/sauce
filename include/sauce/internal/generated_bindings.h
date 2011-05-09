@@ -21,7 +21,7 @@ namespace sauce { namespace internal { namespace bindings {
     };
 
     static void dispose(Injector & injector, Iface * iface) {
-      new_delete(injector).template _delete<Iface>(iface);
+      new_delete(injector)._delete(iface);
     };
   };
 
@@ -34,7 +34,7 @@ namespace sauce { namespace internal { namespace bindings {
     };
 
     static void dispose(Injector & injector, Iface * iface) {
-      new_delete(injector).template _delete<Iface>(iface);
+      new_delete(injector)._delete(iface);
     };
   };
 
@@ -48,7 +48,7 @@ namespace sauce { namespace internal { namespace bindings {
     };
 
     static void dispose(Injector & injector, Iface * iface) {
-      new_delete(injector).template _delete<Iface>(iface);
+      new_delete(injector)._delete(iface);
     };
   };
 
@@ -63,7 +63,7 @@ namespace sauce { namespace internal { namespace bindings {
     };
 
     static void dispose(Injector & injector, Iface * iface) {
-      new_delete(injector).template _delete<Iface>(iface);
+      new_delete(injector)._delete(iface);
     };
   };
 
@@ -78,7 +78,7 @@ namespace sauce { namespace internal { namespace bindings {
     };
 
     static void dispose(Injector & injector, Iface * iface) {
-      new_delete(injector).template _delete<Iface>(iface);
+      new_delete(injector)._delete(iface);
     };
   };
 
@@ -95,7 +95,7 @@ namespace sauce { namespace internal { namespace bindings {
     };
 
     static void dispose(Injector & injector, Iface * iface) {
-      new_delete(injector).template _delete<Iface>(iface);
+      new_delete(injector)._delete(iface);
     };
   };
 
@@ -112,7 +112,7 @@ namespace sauce { namespace internal { namespace bindings {
     };
 
     static void dispose(Injector & injector, Iface * iface) {
-      new_delete(injector).template _delete<Iface>(iface);
+      new_delete(injector)._delete(iface);
     };
   };
 
@@ -131,7 +131,7 @@ namespace sauce { namespace internal { namespace bindings {
     };
 
     static void dispose(Injector & injector, Iface * iface) {
-      new_delete(injector).template _delete<Iface>(iface);
+      new_delete(injector)._delete(iface);
     };
   };
 
@@ -151,7 +151,7 @@ namespace sauce { namespace internal { namespace bindings {
     };
 
     static void dispose(Injector & injector, Iface * iface) {
-      new_delete(injector).template _delete<Iface>(iface);
+      new_delete(injector)._delete(iface);
     };
   };
 
@@ -171,7 +171,7 @@ namespace sauce { namespace internal { namespace bindings {
     };
 
     static void dispose(Injector & injector, Iface * iface) {
-      new_delete(injector).template _delete<Iface>(iface);
+      new_delete(injector)._delete(iface);
     };
   };
 
@@ -192,7 +192,7 @@ namespace sauce { namespace internal { namespace bindings {
     };
 
     static void dispose(Injector & injector, Iface * iface) {
-      new_delete(injector).template _delete<Iface>(iface);
+      new_delete(injector)._delete(iface);
     };
   };
 

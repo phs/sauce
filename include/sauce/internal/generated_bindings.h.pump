@@ -30,7 +30,7 @@ $var provide_As = [[$for j, [[injector.template provide<A$j>()]]]]
     };
 
     static void dispose(Injector & injector, Iface * iface) {
-      new_delete(injector).template _delete<Iface>(iface);
+      new_delete(injector)._delete(iface);
     };
   };
 
