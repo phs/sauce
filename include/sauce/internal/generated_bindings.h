@@ -7,8 +7,11 @@
 
 namespace sauce { namespace internal { namespace bindings {
 
+  template<typename Injector>
+  class Binding;
+
   template<typename Injector, class Iface, typename Constructor>
-  class New;
+  class New: public Binding<Injector> {};
 
   template<typename Injector, class Iface, class Impl>
   class New<Injector, Iface, Impl()> {

@@ -12,9 +12,15 @@ namespace sauce {
 
   template<typename Module, typename NewDelete = ::sauce::internal::NewDelete>
   class Injector {
+  private:
+
+    typedef NewDelete _NewDelete;
+    typedef Injector<Module, NewDelete> _Injector;
+
   public:
 
-    friend class test::SauceTest;
+    friend class ::sauce::test::SauceTest;
+    friend class ::sauce::internal::bindings::Binding<_Injector>;
 
     Injector():
       new_delete() {}
@@ -32,8 +38,6 @@ namespace sauce {
     }
 
   private:
-
-    typedef Injector<Module, NewDelete> _Injector;
 
     NewDelete new_delete;
 

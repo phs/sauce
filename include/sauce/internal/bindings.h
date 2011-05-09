@@ -5,8 +5,19 @@
 
 namespace sauce { namespace internal { namespace bindings {
 
+  template<typename Injector>
+  class Binding {
+    typedef Injector _Injector;
+    typedef typename Injector::_NewDelete _NewDelete;
+
+  protected:
+    _NewDelete & new_delete(_Injector & injector) {
+      return injector.new_delete;
+    }
+  };
+
   template<typename Injector, class Iface>
-  class Dereference {
+  class Dereference: public Binding<Injector> {
   public:
     static Iface & provide(Injector & injector) {
       return *injector.template provide<Iface *>();
