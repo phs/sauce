@@ -11,57 +11,57 @@ namespace sauce { namespace internal {
   class NewDelete {
   public:
     template<class C>
-    inline C * New() {
+    inline C * _new() {
       return new C();
     }
 
     template<class C, typename A1>
-    inline C * New(A1 a1) {
+    inline C * _new(A1 a1) {
       return new C(a1);
     }
 
     template<class C, typename A1, typename A2>
-    inline C * New(A1 a1, A2 a2) {
+    inline C * _new(A1 a1, A2 a2) {
       return new C(a1, a2);
     }
 
     template<class C, typename A1, typename A2, typename A3>
-    inline C * New(A1 a1, A2 a2, A3 a3) {
+    inline C * _new(A1 a1, A2 a2, A3 a3) {
       return new C(a1, a2, a3);
     }
 
     template<class C, typename A1, typename A2, typename A3, typename A4>
-    inline C * New(A1 a1, A2 a2, A3 a3, A4 a4) {
+    inline C * _new(A1 a1, A2 a2, A3 a3, A4 a4) {
       return new C(a1, a2, a3, a4);
     }
 
     template<class C, typename A1, typename A2, typename A3, typename A4,
         typename A5>
-    inline C * New(A1 a1, A2 a2, A3 a3, A4 a4, A5 a5) {
+    inline C * _new(A1 a1, A2 a2, A3 a3, A4 a4, A5 a5) {
       return new C(a1, a2, a3, a4, a5);
     }
 
     template<class C, typename A1, typename A2, typename A3, typename A4,
         typename A5, typename A6>
-    inline C * New(A1 a1, A2 a2, A3 a3, A4 a4, A5 a5, A6 a6) {
+    inline C * _new(A1 a1, A2 a2, A3 a3, A4 a4, A5 a5, A6 a6) {
       return new C(a1, a2, a3, a4, a5, a6);
     }
 
     template<class C, typename A1, typename A2, typename A3, typename A4,
         typename A5, typename A6, typename A7>
-    inline C * New(A1 a1, A2 a2, A3 a3, A4 a4, A5 a5, A6 a6, A7 a7) {
+    inline C * _new(A1 a1, A2 a2, A3 a3, A4 a4, A5 a5, A6 a6, A7 a7) {
       return new C(a1, a2, a3, a4, a5, a6, a7);
     }
 
     template<class C, typename A1, typename A2, typename A3, typename A4,
         typename A5, typename A6, typename A7, typename A8>
-    inline C * New(A1 a1, A2 a2, A3 a3, A4 a4, A5 a5, A6 a6, A7 a7, A8 a8) {
+    inline C * _new(A1 a1, A2 a2, A3 a3, A4 a4, A5 a5, A6 a6, A7 a7, A8 a8) {
       return new C(a1, a2, a3, a4, a5, a6, a7, a8);
     }
 
     template<class C, typename A1, typename A2, typename A3, typename A4,
         typename A5, typename A6, typename A7, typename A8, typename A9>
-    inline C * New(A1 a1, A2 a2, A3 a3, A4 a4, A5 a5, A6 a6, A7 a7, A8 a8,
+    inline C * _new(A1 a1, A2 a2, A3 a3, A4 a4, A5 a5, A6 a6, A7 a7, A8 a8,
         A9 a9) {
       return new C(a1, a2, a3, a4, a5, a6, a7, a8, a9);
     }
@@ -69,13 +69,13 @@ namespace sauce { namespace internal {
     template<class C, typename A1, typename A2, typename A3, typename A4,
         typename A5, typename A6, typename A7, typename A8, typename A9,
         typename A10>
-    inline C * New(A1 a1, A2 a2, A3 a3, A4 a4, A5 a5, A6 a6, A7 a7, A8 a8,
+    inline C * _new(A1 a1, A2 a2, A3 a3, A4 a4, A5 a5, A6 a6, A7 a7, A8 a8,
         A9 a9, A10 a10) {
       return new C(a1, a2, a3, a4, a5, a6, a7, a8, a9, a10);
     }
 
     template<class C>
-    inline void Delete(C * c) {
+    inline void _delete(C * c) {
       delete c;
     }
   };
