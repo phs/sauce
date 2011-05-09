@@ -8,11 +8,9 @@ using ::testing::Return;
 namespace sauce { namespace test {
 
   struct Chasis {};
-
   struct CoupChasis: public Chasis {};
 
   struct Engine {};
-
   struct HybridEngine: public Engine {};
 
   struct Vehicle {
@@ -78,7 +76,7 @@ namespace sauce { namespace test {
     delete_chasis(chasis);
   }
 
-  class SauceTest : public ::testing::Test {
+  class SauceTest: public ::testing::Test {
   public:
 
     ::sauce::Injector<LoveBugModule, MockNewDelete> injector;
