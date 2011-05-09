@@ -24,7 +24,7 @@ namespace sauce { namespace internal { namespace bindings {
     };
 
     static void dispose(Injector & injector, Iface & iface) {
-      // TODO: make test prove anything is required here..
+      injector.template dispose<Iface *>(&iface);
     };
   };
 

@@ -139,7 +139,7 @@ namespace sauce { namespace test {
   TEST_F(SauceTest, should_dereference_addresses_with_dereference_bindings) {
     CoupChasis chasis;
     EXPECT_CALL(new_delete, new_coup_chasis()).WillOnce(Return(&chasis));
-    // EXPECT_CALL(new_delete, delete_chasis(&chasis));
+    EXPECT_CALL(new_delete, delete_chasis(&chasis));
 
     Chasis & actual = injector.provide<Chasis &>();
     ASSERT_EQ(&chasis, &actual);
