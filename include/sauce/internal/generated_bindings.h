@@ -29,8 +29,8 @@ namespace sauce { namespace internal { namespace bindings {
   class New<Injector, Iface, Impl(A1)>: public Binding<Injector> {
   public:
     static Impl * provide(Injector & injector) {
-      return new_delete(injector).template _new<Impl,
-          A1>(injector.template provide<A1>());
+      return new_delete(injector).template _new<Impl>(injector.template
+          provide<A1>());
     };
 
     static void dispose(Injector & injector, Iface * iface) {
@@ -42,9 +42,8 @@ namespace sauce { namespace internal { namespace bindings {
   class New<Injector, Iface, Impl(A1, A2)>: public Binding<Injector> {
   public:
     static Impl * provide(Injector & injector) {
-      return new_delete(injector).template _new<Impl, A1,
-          A2>(injector.template provide<A1>(),
-          injector.template provide<A2>());
+      return new_delete(injector).template _new<Impl>(injector.template
+          provide<A1>(), injector.template provide<A2>());
     };
 
     static void dispose(Injector & injector, Iface * iface) {
@@ -57,8 +56,8 @@ namespace sauce { namespace internal { namespace bindings {
   class New<Injector, Iface, Impl(A1, A2, A3)>: public Binding<Injector> {
   public:
     static Impl * provide(Injector & injector) {
-      return new_delete(injector).template _new<Impl, A1, A2,
-          A3>(injector.template provide<A1>(), injector.template provide<A2>(),
+      return new_delete(injector).template _new<Impl>(injector.template
+          provide<A1>(), injector.template provide<A2>(),
           injector.template provide<A3>());
     };
 
@@ -72,8 +71,8 @@ namespace sauce { namespace internal { namespace bindings {
   class New<Injector, Iface, Impl(A1, A2, A3, A4)>: public Binding<Injector> {
   public:
     static Impl * provide(Injector & injector) {
-      return new_delete(injector).template _new<Impl, A1, A2, A3,
-          A4>(injector.template provide<A1>(), injector.template provide<A2>(),
+      return new_delete(injector).template _new<Impl>(injector.template
+          provide<A1>(), injector.template provide<A2>(),
           injector.template provide<A3>(), injector.template provide<A4>());
     };
 
@@ -88,8 +87,8 @@ namespace sauce { namespace internal { namespace bindings {
       A5)>: public Binding<Injector> {
   public:
     static Impl * provide(Injector & injector) {
-      return new_delete(injector).template _new<Impl, A1, A2, A3, A4,
-          A5>(injector.template provide<A1>(), injector.template provide<A2>(),
+      return new_delete(injector).template _new<Impl>(injector.template
+          provide<A1>(), injector.template provide<A2>(),
           injector.template provide<A3>(), injector.template provide<A4>(),
           injector.template provide<A5>());
     };
@@ -105,8 +104,8 @@ namespace sauce { namespace internal { namespace bindings {
       A6)>: public Binding<Injector> {
   public:
     static Impl * provide(Injector & injector) {
-      return new_delete(injector).template _new<Impl, A1, A2, A3, A4, A5,
-          A6>(injector.template provide<A1>(), injector.template provide<A2>(),
+      return new_delete(injector).template _new<Impl>(injector.template
+          provide<A1>(), injector.template provide<A2>(),
           injector.template provide<A3>(), injector.template provide<A4>(),
           injector.template provide<A5>(), injector.template provide<A6>());
     };
@@ -123,8 +122,8 @@ namespace sauce { namespace internal { namespace bindings {
       A7)>: public Binding<Injector> {
   public:
     static Impl * provide(Injector & injector) {
-      return new_delete(injector).template _new<Impl, A1, A2, A3, A4, A5, A6,
-          A7>(injector.template provide<A1>(), injector.template provide<A2>(),
+      return new_delete(injector).template _new<Impl>(injector.template
+          provide<A1>(), injector.template provide<A2>(),
           injector.template provide<A3>(), injector.template provide<A4>(),
           injector.template provide<A5>(), injector.template provide<A6>(),
           injector.template provide<A7>());
@@ -142,12 +141,11 @@ namespace sauce { namespace internal { namespace bindings {
       A8)>: public Binding<Injector> {
   public:
     static Impl * provide(Injector & injector) {
-      return new_delete(injector).template _new<Impl, A1, A2, A3, A4, A5, A6,
-          A7, A8>(injector.template provide<A1>(),
-          injector.template provide<A2>(), injector.template provide<A3>(),
-          injector.template provide<A4>(), injector.template provide<A5>(),
-          injector.template provide<A6>(), injector.template provide<A7>(),
-          injector.template provide<A8>());
+      return new_delete(injector).template _new<Impl>(injector.template
+          provide<A1>(), injector.template provide<A2>(),
+          injector.template provide<A3>(), injector.template provide<A4>(),
+          injector.template provide<A5>(), injector.template provide<A6>(),
+          injector.template provide<A7>(), injector.template provide<A8>());
     };
 
     static void dispose(Injector & injector, Iface * iface) {
@@ -162,12 +160,12 @@ namespace sauce { namespace internal { namespace bindings {
       A9)>: public Binding<Injector> {
   public:
     static Impl * provide(Injector & injector) {
-      return new_delete(injector).template _new<Impl, A1, A2, A3, A4, A5, A6,
-          A7, A8, A9>(injector.template provide<A1>(),
-          injector.template provide<A2>(), injector.template provide<A3>(),
-          injector.template provide<A4>(), injector.template provide<A5>(),
-          injector.template provide<A6>(), injector.template provide<A7>(),
-          injector.template provide<A8>(), injector.template provide<A9>());
+      return new_delete(injector).template _new<Impl>(injector.template
+          provide<A1>(), injector.template provide<A2>(),
+          injector.template provide<A3>(), injector.template provide<A4>(),
+          injector.template provide<A5>(), injector.template provide<A6>(),
+          injector.template provide<A7>(), injector.template provide<A8>(),
+          injector.template provide<A9>());
     };
 
     static void dispose(Injector & injector, Iface * iface) {
@@ -182,13 +180,12 @@ namespace sauce { namespace internal { namespace bindings {
       A10)>: public Binding<Injector> {
   public:
     static Impl * provide(Injector & injector) {
-      return new_delete(injector).template _new<Impl, A1, A2, A3, A4, A5, A6,
-          A7, A8, A9, A10>(injector.template provide<A1>(),
-          injector.template provide<A2>(), injector.template provide<A3>(),
-          injector.template provide<A4>(), injector.template provide<A5>(),
-          injector.template provide<A6>(), injector.template provide<A7>(),
-          injector.template provide<A8>(), injector.template provide<A9>(),
-          injector.template provide<A10>());
+      return new_delete(injector).template _new<Impl>(injector.template
+          provide<A1>(), injector.template provide<A2>(),
+          injector.template provide<A3>(), injector.template provide<A4>(),
+          injector.template provide<A5>(), injector.template provide<A6>(),
+          injector.template provide<A7>(), injector.template provide<A8>(),
+          injector.template provide<A9>(), injector.template provide<A10>());
     };
 
     static void dispose(Injector & injector, Iface * iface) {

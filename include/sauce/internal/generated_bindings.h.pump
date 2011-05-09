@@ -17,7 +17,6 @@ $range i 0..n
 $for i [[
 $range j 1..i
 $var comma_typename_As = [[$for j [[, typename A$j]]]]
-$var comma_As = [[$for j [[, A$j]]]]
 $var typename_As = [[$for j, [[typename A$j]]]]
 $var As = [[$for j, [[A$j]]]]
 $var provide_As = [[$for j, [[injector.template provide<A$j>()]]]]
@@ -26,7 +25,7 @@ $var provide_As = [[$for j, [[injector.template provide<A$j>()]]]]
   class New<Injector, Iface, Impl($As)>: public Binding<Injector> {
   public:
     static Impl * provide(Injector & injector) {
-      return new_delete(injector).template _new<Impl$comma_As>($provide_As);
+      return new_delete(injector).template _new<Impl>($provide_As);
     };
 
     static void dispose(Injector & injector, Iface * iface) {
