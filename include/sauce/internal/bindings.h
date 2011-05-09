@@ -11,7 +11,7 @@ namespace sauce { namespace internal { namespace bindings {
     typedef typename Injector::_NewDelete _NewDelete;
 
   protected:
-    _NewDelete & new_delete(_Injector & injector) {
+    static _NewDelete & new_delete(_Injector & injector) {
       return injector.new_delete;
     }
   };

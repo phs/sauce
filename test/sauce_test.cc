@@ -92,13 +92,14 @@ namespace sauce { namespace test {
   class SauceTest : public ::testing::Test {
   public:
 
-    ::sauce::Injector<LoveBugModule, MockNewDelete> injector;
-    MockNewDelete & new_delete;
+    // ::sauce::Injector<LoveBugModule, MockNewDelete> injector;
+    // MockNewDelete & new_delete;
+    ::sauce::Injector<LoveBugModule> injector;
 
     // SauceTest is a friend of Injector
-    SauceTest():
-      injector(),
-      new_delete(injector.new_delete) {}
+    // SauceTest():
+    //   injector(),
+    //   new_delete(injector.new_delete) {}
 
   };
 
