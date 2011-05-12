@@ -31,6 +31,8 @@ Obviously, in C++ this isn't good enough.  The obvious thing to do is have scope
 
 Keeping scopes in a stack can address the danger.  First, the instance cache within a scope is ordered: when the scope exits, instances are disposed of in reverse cache order.  Secondly, when a scope is entered, it is pushed onto the scope stack, and popped on exit.  Exiting a scope that is not on top generates a runtime error.  This way, all disposals are made in reverse order of the initial provisions, making it impossible to dispose of a dependency of a dependent that is not itself already disposed.
 
+PROBLEM: This scope stack idea also constrains binding participation.  In addition to maintaining this stack, to address the danger we must ensure that bindings for dependents consuming a scoped dependency are themselves scoped higher on the stack.
+
 While we're at it, scope re-entrance is a runtime error unless the entering scope happens to already be on top, in which case a counter is bumped.  The counter is decremented on exit, and disposal only occurs when it hits zero and the scope actually comes off the stack.  Thus legal re-entrance is a no-op, except that entrances and exits must be balanced.
 
 In the very likely event that scope names physically manifest as values of some specially named enum in the binding module, it may be possible to spell out the (finite) possible scope stacks _at compile time_.  In that wild free country, illegal scope transitions become compile errors.
