@@ -17,21 +17,25 @@ Requesting the injector for an unbound type results in a compile error.
 
 Bindings are resolved at compile time to avoid the need for runtime reflection.  Concretely, they are stubbed static member functions with signatures meant to leverage overload resolution rules: thus we trade runtime reflection magic for compile-time template magic.
 
-## Scopes ##
-
-Beware: vaporware.
+## Scopes (Warning: Vaporware) ##
 
 A side-effect of using an injector to hide implementation choices from dependents is the discouraged use of stack allocation and the `new` operator for dependencies.  The `new` operator (et. al.) has an additional guarantee past the one ensuring your instance's concrete type: you know the instance you get back is unique, and entirely yours.  This raises the question: will the injector always provide new, successive instances, or will it ever reuse some?
 
 It turns out the most useful answer is "both".  Depending on the context, it may be appropriate to always create new instances upon request, to always share a solitary instance with everyone (such as in the _Singleton_ pattern), or something in between.
 
-Sauce supports (note: lies) _scopes_ to answer this need.  A scope is a logical region of code, similar to a block or critical region.  While within a scope, a participating binding will only ever create a single instance of its bound type: if the dependency is provided more than once, the same instance is reused.  Instances provided during different visits (i.e. leaving and re-entering) to the same scope are ensured to be _different_.
+Sauce supports _scopes_ to answer this need.  A scope is a logical region of code, similar to a block or critical region.  While within a scope, a participating binding will only ever create a single instance of its bound type: if the dependency is provided more than once, the same instance is reused.  Instances provided during different visits (i.e. leaving and re-entering) to the same scope are ensured to be _different_.
 
 In garbage-collected environments, where dependency injection first gained traction, this kind of scoping was all the life-cycle management that was needed.  Upon exiting a scope the references to its cached instances would be dropped, and the instances themselves would be cleaned up once no dependents were using them.
 
-Obviously, in C++ doing nothing would leak such instances.
+Obviously, in C++ this isn't good enough.  The obvious thing to do is have scopes own their cached instances, and dispose of them on exit.  The _danger_ is that if we aren't careful we'll dispose of dependencies that other dependents are still holding.  The _annoyance_ is that assuming ownership is draconian: legacy code or 3rd party garbage collectors will want it back.
 
-TODO: So what does sauce do, mr. big mouth?
+Keeping scopes in a stack can address the danger.  First, the instance cache within a scope is ordered: when the scope exits, instances are disposed of in reverse cache order.  Secondly, when a scope is entered, it is pushed onto the scope stack, and popped on exit.  Exiting a scope that is not on top generates a runtime error.  This way, all disposals are made in reverse order of the initial provisions, making it impossible to dispose of a dependency of a dependent that is not itself already disposed.
+
+While we're at it, scope re-entrance is a runtime error unless the entering scope happens to already be on top, in which case a counter is bumped.  The counter is decremented on exit, and disposal only occurs when it hits zero and the scope actually comes off the stack.  Thus legal re-entrance is a no-op, except that entrances and exits must be balanced.
+
+In the very likely event that scope names physically manifest as values of some specially named enum in the binding module, it may be possible to spell out the (finite) possible scope stacks _at compile time_.  In that wild free country, illegal scope transitions become compile errors.
+
+TODO: how about giving ownership back to the user for some dependencies?
 
 ## Wishlist ##
 
