@@ -53,8 +53,8 @@ namespace sauce { namespace internal { namespace bindings {
 
     static void dispose(Injector & injector, Iface * iface) {
       new_delete(injector)._delete(iface);
-      // injector.template dispose<A1>(DERP); How do we find DERP again?
       // injector.template dispose<A2>(DERP); How do we find DERP again?
+      // injector.template dispose<A1>(DERP); How do we find DERP again?
     };
   };
 
@@ -72,9 +72,9 @@ namespace sauce { namespace internal { namespace bindings {
 
     static void dispose(Injector & injector, Iface * iface) {
       new_delete(injector)._delete(iface);
-      // injector.template dispose<A1>(DERP); How do we find DERP again?
-      // injector.template dispose<A2>(DERP); How do we find DERP again?
       // injector.template dispose<A3>(DERP); How do we find DERP again?
+      // injector.template dispose<A2>(DERP); How do we find DERP again?
+      // injector.template dispose<A1>(DERP); How do we find DERP again?
     };
   };
 
@@ -93,10 +93,10 @@ namespace sauce { namespace internal { namespace bindings {
 
     static void dispose(Injector & injector, Iface * iface) {
       new_delete(injector)._delete(iface);
-      // injector.template dispose<A1>(DERP); How do we find DERP again?
-      // injector.template dispose<A2>(DERP); How do we find DERP again?
-      // injector.template dispose<A3>(DERP); How do we find DERP again?
       // injector.template dispose<A4>(DERP); How do we find DERP again?
+      // injector.template dispose<A3>(DERP); How do we find DERP again?
+      // injector.template dispose<A2>(DERP); How do we find DERP again?
+      // injector.template dispose<A1>(DERP); How do we find DERP again?
     };
   };
 
@@ -117,11 +117,11 @@ namespace sauce { namespace internal { namespace bindings {
 
     static void dispose(Injector & injector, Iface * iface) {
       new_delete(injector)._delete(iface);
-      // injector.template dispose<A1>(DERP); How do we find DERP again?
-      // injector.template dispose<A2>(DERP); How do we find DERP again?
-      // injector.template dispose<A3>(DERP); How do we find DERP again?
-      // injector.template dispose<A4>(DERP); How do we find DERP again?
       // injector.template dispose<A5>(DERP); How do we find DERP again?
+      // injector.template dispose<A4>(DERP); How do we find DERP again?
+      // injector.template dispose<A3>(DERP); How do we find DERP again?
+      // injector.template dispose<A2>(DERP); How do we find DERP again?
+      // injector.template dispose<A1>(DERP); How do we find DERP again?
     };
   };
 
@@ -143,12 +143,12 @@ namespace sauce { namespace internal { namespace bindings {
 
     static void dispose(Injector & injector, Iface * iface) {
       new_delete(injector)._delete(iface);
-      // injector.template dispose<A1>(DERP); How do we find DERP again?
-      // injector.template dispose<A2>(DERP); How do we find DERP again?
-      // injector.template dispose<A3>(DERP); How do we find DERP again?
-      // injector.template dispose<A4>(DERP); How do we find DERP again?
-      // injector.template dispose<A5>(DERP); How do we find DERP again?
       // injector.template dispose<A6>(DERP); How do we find DERP again?
+      // injector.template dispose<A5>(DERP); How do we find DERP again?
+      // injector.template dispose<A4>(DERP); How do we find DERP again?
+      // injector.template dispose<A3>(DERP); How do we find DERP again?
+      // injector.template dispose<A2>(DERP); How do we find DERP again?
+      // injector.template dispose<A1>(DERP); How do we find DERP again?
     };
   };
 
@@ -172,13 +172,13 @@ namespace sauce { namespace internal { namespace bindings {
 
     static void dispose(Injector & injector, Iface * iface) {
       new_delete(injector)._delete(iface);
-      // injector.template dispose<A1>(DERP); How do we find DERP again?
-      // injector.template dispose<A2>(DERP); How do we find DERP again?
-      // injector.template dispose<A3>(DERP); How do we find DERP again?
-      // injector.template dispose<A4>(DERP); How do we find DERP again?
-      // injector.template dispose<A5>(DERP); How do we find DERP again?
-      // injector.template dispose<A6>(DERP); How do we find DERP again?
       // injector.template dispose<A7>(DERP); How do we find DERP again?
+      // injector.template dispose<A6>(DERP); How do we find DERP again?
+      // injector.template dispose<A5>(DERP); How do we find DERP again?
+      // injector.template dispose<A4>(DERP); How do we find DERP again?
+      // injector.template dispose<A3>(DERP); How do we find DERP again?
+      // injector.template dispose<A2>(DERP); How do we find DERP again?
+      // injector.template dispose<A1>(DERP); How do we find DERP again?
     };
   };
 
@@ -203,14 +203,14 @@ namespace sauce { namespace internal { namespace bindings {
 
     static void dispose(Injector & injector, Iface * iface) {
       new_delete(injector)._delete(iface);
-      // injector.template dispose<A1>(DERP); How do we find DERP again?
-      // injector.template dispose<A2>(DERP); How do we find DERP again?
-      // injector.template dispose<A3>(DERP); How do we find DERP again?
-      // injector.template dispose<A4>(DERP); How do we find DERP again?
-      // injector.template dispose<A5>(DERP); How do we find DERP again?
-      // injector.template dispose<A6>(DERP); How do we find DERP again?
-      // injector.template dispose<A7>(DERP); How do we find DERP again?
       // injector.template dispose<A8>(DERP); How do we find DERP again?
+      // injector.template dispose<A7>(DERP); How do we find DERP again?
+      // injector.template dispose<A6>(DERP); How do we find DERP again?
+      // injector.template dispose<A5>(DERP); How do we find DERP again?
+      // injector.template dispose<A4>(DERP); How do we find DERP again?
+      // injector.template dispose<A3>(DERP); How do we find DERP again?
+      // injector.template dispose<A2>(DERP); How do we find DERP again?
+      // injector.template dispose<A1>(DERP); How do we find DERP again?
     };
   };
 
@@ -236,15 +236,15 @@ namespace sauce { namespace internal { namespace bindings {
 
     static void dispose(Injector & injector, Iface * iface) {
       new_delete(injector)._delete(iface);
-      // injector.template dispose<A1>(DERP); How do we find DERP again?
-      // injector.template dispose<A2>(DERP); How do we find DERP again?
-      // injector.template dispose<A3>(DERP); How do we find DERP again?
-      // injector.template dispose<A4>(DERP); How do we find DERP again?
-      // injector.template dispose<A5>(DERP); How do we find DERP again?
-      // injector.template dispose<A6>(DERP); How do we find DERP again?
-      // injector.template dispose<A7>(DERP); How do we find DERP again?
-      // injector.template dispose<A8>(DERP); How do we find DERP again?
       // injector.template dispose<A9>(DERP); How do we find DERP again?
+      // injector.template dispose<A8>(DERP); How do we find DERP again?
+      // injector.template dispose<A7>(DERP); How do we find DERP again?
+      // injector.template dispose<A6>(DERP); How do we find DERP again?
+      // injector.template dispose<A5>(DERP); How do we find DERP again?
+      // injector.template dispose<A4>(DERP); How do we find DERP again?
+      // injector.template dispose<A3>(DERP); How do we find DERP again?
+      // injector.template dispose<A2>(DERP); How do we find DERP again?
+      // injector.template dispose<A1>(DERP); How do we find DERP again?
     };
   };
 
@@ -271,16 +271,16 @@ namespace sauce { namespace internal { namespace bindings {
 
     static void dispose(Injector & injector, Iface * iface) {
       new_delete(injector)._delete(iface);
-      // injector.template dispose<A1>(DERP); How do we find DERP again?
-      // injector.template dispose<A2>(DERP); How do we find DERP again?
-      // injector.template dispose<A3>(DERP); How do we find DERP again?
-      // injector.template dispose<A4>(DERP); How do we find DERP again?
-      // injector.template dispose<A5>(DERP); How do we find DERP again?
-      // injector.template dispose<A6>(DERP); How do we find DERP again?
-      // injector.template dispose<A7>(DERP); How do we find DERP again?
-      // injector.template dispose<A8>(DERP); How do we find DERP again?
-      // injector.template dispose<A9>(DERP); How do we find DERP again?
       // injector.template dispose<A10>(DERP); How do we find DERP again?
+      // injector.template dispose<A9>(DERP); How do we find DERP again?
+      // injector.template dispose<A8>(DERP); How do we find DERP again?
+      // injector.template dispose<A7>(DERP); How do we find DERP again?
+      // injector.template dispose<A6>(DERP); How do we find DERP again?
+      // injector.template dispose<A5>(DERP); How do we find DERP again?
+      // injector.template dispose<A4>(DERP); How do we find DERP again?
+      // injector.template dispose<A3>(DERP); How do we find DERP again?
+      // injector.template dispose<A2>(DERP); How do we find DERP again?
+      // injector.template dispose<A1>(DERP); How do we find DERP again?
     };
   };
 

@@ -35,7 +35,7 @@ $var As = [[$for j, [[A$j]]]]
     static void dispose(Injector & injector, Iface * iface) {
       new_delete(injector)._delete(iface);
 [[$for j [[
-      // injector.template dispose<A$j>(DERP); How do we find DERP again?
+      // injector.template dispose<A$(i-j+1)>(DERP); How do we find DERP again?
 
 ]]]]
     };
