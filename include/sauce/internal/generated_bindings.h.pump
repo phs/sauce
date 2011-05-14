@@ -30,6 +30,10 @@ $var provide_As = [[$for j, [[injector.template provide<A$j>()]]]]
 
     static void dispose(Injector & injector, Iface * iface) {
       new_delete(injector)._delete(iface);
+[[$for j [[
+      // injector.template dispose<A$j>(DERP); How do we find DERP again?
+
+]]]]
     };
   };
 
