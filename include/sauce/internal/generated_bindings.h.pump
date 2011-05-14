@@ -19,13 +19,17 @@ $range j 1..i
 $var comma_typename_As = [[$for j [[, typename A$j]]]]
 $var typename_As = [[$for j, [[typename A$j]]]]
 $var As = [[$for j, [[A$j]]]]
-$var provide_As = [[$for j, [[injector.template provide<A$j>()]]]]
 
   template<typename Injector, class Iface, class Impl$comma_typename_As>
   class New<Injector, Iface, Impl($As)>: public Binding<Injector> {
   public:
     static Impl * provide(Injector & injector) {
-      return new_delete(injector).template _new<Impl>($provide_As);
+      return new_delete(injector).template _new<Impl>([[$for j, [[
+
+        injector.template provide<A$j>()
+]]]]
+
+      );
     };
 
     static void dispose(Injector & injector, Iface * iface) {
