@@ -43,17 +43,7 @@ namespace sauce { namespace test {
     }
 
     template<typename Injector>
-    static ::sauce::internal::bindings::Dereference<Injector, Engine> * bindings(Engine &) {
-      return 0;
-    }
-
-    template<typename Injector>
     static ::sauce::internal::bindings::New<Injector, Vehicle, Herbie(Chasis *, Engine *)> * bindings(Vehicle *) {
-      return 0;
-    }
-
-    template<typename Injector>
-    static ::sauce::internal::bindings::Dereference<Injector, Vehicle> * bindings(Vehicle &) {
       return 0;
     }
 
