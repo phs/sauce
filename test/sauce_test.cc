@@ -24,7 +24,7 @@ namespace sauce { namespace test {
       engine(engine) {}
   };
 
-  class LoveBugModule {
+  class MyModule {
   public:
 
     template<typename Injector>
@@ -98,7 +98,7 @@ namespace sauce { namespace test {
   class SauceTest: public ::testing::Test {
   public:
 
-    ::sauce::Injector<LoveBugModule, MockNewDelete> injector;
+    ::sauce::Injector<MyModule, MockNewDelete> injector;
     MockNewDelete & new_delete;
 
     // SauceTest is a friend of Injector
