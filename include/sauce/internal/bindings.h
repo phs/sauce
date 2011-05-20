@@ -16,7 +16,7 @@ namespace sauce { namespace internal { namespace bindings {
     }
   };
 
-  template<typename Injector, class Iface>
+  template<typename Injector, typename Iface>
   class Dereference: public Binding<Injector> {
   public:
     static Iface & provide(Injector & injector) {

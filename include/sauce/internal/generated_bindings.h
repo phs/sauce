@@ -10,10 +10,10 @@ namespace sauce { namespace internal { namespace bindings {
   template<typename Injector>
   class Binding;
 
-  template<typename Injector, class Iface, typename Constructor>
+  template<typename Injector, typename Iface, typename Constructor>
   class New;
 
-  template<typename Injector, class Iface, class Impl>
+  template<typename Injector, typename Iface, typename Impl>
   class New<Injector, Iface, Impl()>: public Binding<Injector> {
   public:
     static Impl * provide(Injector & injector) {
@@ -26,7 +26,7 @@ namespace sauce { namespace internal { namespace bindings {
     };
   };
 
-  template<typename Injector, class Iface, class Impl, typename A1>
+  template<typename Injector, typename Iface, typename Impl, typename A1>
   class New<Injector, Iface, Impl(A1)>: public Binding<Injector> {
   public:
     static Impl * provide(Injector & injector) {
@@ -41,7 +41,8 @@ namespace sauce { namespace internal { namespace bindings {
     };
   };
 
-  template<typename Injector, class Iface, class Impl, typename A1, typename A2>
+  template<typename Injector, typename Iface, typename Impl, typename A1,
+      typename A2>
   class New<Injector, Iface, Impl(A1, A2)>: public Binding<Injector> {
   public:
     static Impl * provide(Injector & injector) {
@@ -58,7 +59,7 @@ namespace sauce { namespace internal { namespace bindings {
     };
   };
 
-  template<typename Injector, class Iface, class Impl, typename A1,
+  template<typename Injector, typename Iface, typename Impl, typename A1,
       typename A2, typename A3>
   class New<Injector, Iface, Impl(A1, A2, A3)>: public Binding<Injector> {
   public:
@@ -78,7 +79,7 @@ namespace sauce { namespace internal { namespace bindings {
     };
   };
 
-  template<typename Injector, class Iface, class Impl, typename A1,
+  template<typename Injector, typename Iface, typename Impl, typename A1,
       typename A2, typename A3, typename A4>
   class New<Injector, Iface, Impl(A1, A2, A3, A4)>: public Binding<Injector> {
   public:
@@ -100,7 +101,7 @@ namespace sauce { namespace internal { namespace bindings {
     };
   };
 
-  template<typename Injector, class Iface, class Impl, typename A1,
+  template<typename Injector, typename Iface, typename Impl, typename A1,
       typename A2, typename A3, typename A4, typename A5>
   class New<Injector, Iface, Impl(A1, A2, A3, A4,
       A5)>: public Binding<Injector> {
@@ -125,7 +126,7 @@ namespace sauce { namespace internal { namespace bindings {
     };
   };
 
-  template<typename Injector, class Iface, class Impl, typename A1,
+  template<typename Injector, typename Iface, typename Impl, typename A1,
       typename A2, typename A3, typename A4, typename A5, typename A6>
   class New<Injector, Iface, Impl(A1, A2, A3, A4, A5,
       A6)>: public Binding<Injector> {
@@ -152,7 +153,7 @@ namespace sauce { namespace internal { namespace bindings {
     };
   };
 
-  template<typename Injector, class Iface, class Impl, typename A1,
+  template<typename Injector, typename Iface, typename Impl, typename A1,
       typename A2, typename A3, typename A4, typename A5, typename A6,
       typename A7>
   class New<Injector, Iface, Impl(A1, A2, A3, A4, A5, A6,
@@ -182,7 +183,7 @@ namespace sauce { namespace internal { namespace bindings {
     };
   };
 
-  template<typename Injector, class Iface, class Impl, typename A1,
+  template<typename Injector, typename Iface, typename Impl, typename A1,
       typename A2, typename A3, typename A4, typename A5, typename A6,
       typename A7, typename A8>
   class New<Injector, Iface, Impl(A1, A2, A3, A4, A5, A6, A7,
@@ -214,7 +215,7 @@ namespace sauce { namespace internal { namespace bindings {
     };
   };
 
-  template<typename Injector, class Iface, class Impl, typename A1,
+  template<typename Injector, typename Iface, typename Impl, typename A1,
       typename A2, typename A3, typename A4, typename A5, typename A6,
       typename A7, typename A8, typename A9>
   class New<Injector, Iface, Impl(A1, A2, A3, A4, A5, A6, A7, A8,
@@ -248,7 +249,7 @@ namespace sauce { namespace internal { namespace bindings {
     };
   };
 
-  template<typename Injector, class Iface, class Impl, typename A1,
+  template<typename Injector, typename Iface, typename Impl, typename A1,
       typename A2, typename A3, typename A4, typename A5, typename A6,
       typename A7, typename A8, typename A9, typename A10>
   class New<Injector, Iface, Impl(A1, A2, A3, A4, A5, A6, A7, A8, A9,
