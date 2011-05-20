@@ -25,7 +25,13 @@ In non-managed environments such as C++ this is obviously not true: we need to t
 
 In C++ tradition these answers are provided by designating the _ownership_ of the dependency.  A dependency has a single owner who has the (possibly not exclusive) privilege of using the dependency, and the responsibility of disposing of it at a time of its choosing.
 
-Just as dependencies are provided transitively, they are disposed of transitively (in reverse order.)  Thus ownership is also transitive: when the owner of a dependent disposes of it, it also implicitly disposes of its dependencies.  The original owner therefore determines when these dependencies are disposed of: it is their owner as well.
+There are occasions where it would be useful to let the dependent own its dependencies (such as unalterable legacy code.)  However, the majority of the time it is more convenient to let the injector transparently dispose of dependencies, just as it transparently provided them.  In this sense the dependent usually does _not_ own its dependencies.
+
+Dependencies are provided transitively, and they are disposed of transitively (in reverse order) as well.  Thus ownership is also transitive: when the owner of a dependent disposes of it, it also implicitly disposes of its dependencies.  The original owner therefore determines when these dependencies are disposed of: it is their owner as well.
+
+Readers who have been paying attention may notice this requires either client code co-operation, or some hidden state.  How shall the disposal logic recall what dependencies were initially injected?  It cannot ask the injector, which may provide new instances (but see scopes below.)  It must either ask the disposed dependent or recall them from their initial injection.
+
+TODO: So which is it?
 
 ## Scopes (Warning: Vaporware) ##
 
