@@ -128,7 +128,7 @@ namespace sauce { namespace test {
 
     Chasis & actual = injector.provide<Chasis &>();
     ASSERT_EQ(&chasis, &actual);
-    injector.dispose<Chasis &>(chasis);
+    injector.dispose<Chasis &>(actual);
   }
 
   // TEST_F(SauceTest, should_provide_and_dispose_of_dependencies_transitively) {
