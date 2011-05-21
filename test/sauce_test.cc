@@ -161,9 +161,9 @@ namespace sauce { namespace test {
   //   EXPECT_CALL(new_delete, delete_chasis(&chasis)).
   //     InSequence(injected_chasis);
   // 
-  //   Vehicle & actual = injector.provide<Vehicle &>();
-  //   ASSERT_EQ(&vehicle, &actual);
-  //   injector.dispose<Vehicle &>(vehicle);
+  //   Vehicle * actual = injector.provide<Vehicle *>();
+  //   ASSERT_EQ(&vehicle, actual);
+  //   injector.dispose<Vehicle *>(actual);
   // }
 
 } } // namespace test, namespace sauce
