@@ -43,6 +43,20 @@ Sauce supports _scopes_ to answer this need.  A scope is a logical region of cod
 
 TODO: More thinking, sort out after ownership is sorted.
 
+## Skull leavings ##
+
+Requiring client code cooperation to implicitly dispose dependencies is basically not acceptable (but _allowing_ it to reduce space overhead is a feature.)  A suitable cache can be made with static maps keyed by pointers to templated type values.  To allow many injectors to exist simultaneously, the injector identity must also be used in the keys.
+
+There are some potential interactions with scoping and detecting dependency cycles that confuse the issue.  How would these three features interact when providing a value?
+
+In `Injector<Module>::provide<T>()`:
+
+1. Locate the binding
+1. From the binding, find and probe the scope.  On a hit, we're done.
+1. Otherwise, we need to provide from the binding.
+1. Start looking for cycles by using a hidden argument to detect duplicate stack frames.
+1. As new dependencies are provided, they are collected by reference or pointer in structs we might as well call _disposal caches_ or perhaps _garbage bags_.  These are also kept in caches like the static injector-and-instance-keyed maps.
+
 ## Wishlist ##
 
 * Circular dependency detection
