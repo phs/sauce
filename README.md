@@ -45,6 +45,7 @@ TODO: More thinking, sort out after ownership is sorted.
 
 ## Wishlist ##
 
+* Circular dependency detection
 * Setter injection
 * Named, overloaded bindings and dependencies
 * Eager-loaded singletons
