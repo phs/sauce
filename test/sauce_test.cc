@@ -92,7 +92,8 @@ namespace sauce { namespace test {
 
   template<> Herbie * MockNewDelete::_new<Herbie>(Chasis & chasis, Engine & engine) {
     // Use addresses here only because googletest doesn't know how to
-    // deal with references aside from copying them.
+    // deal with references aside from copying them (and thus breaking my
+    // object-identity comparators)
     return new_herbie(&chasis, &engine);
   }
 
