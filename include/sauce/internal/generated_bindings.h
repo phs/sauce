@@ -37,7 +37,7 @@ namespace sauce { namespace internal { namespace bindings {
     static Impl * provide(Injector & injector) {
       A1 a1(injector.template provide<A1>());
 
-      Impl * provided = new_delete(injector).template _new<Impl>(a1);
+      Impl * provided = new_delete(injector).template _new<Impl, A1>(a1);
       InjectionCache<Injector, Iface *(A1)>::insert(injector, provided, a1);
       return provided;
     }
@@ -56,7 +56,8 @@ namespace sauce { namespace internal { namespace bindings {
       A1 a1(injector.template provide<A1>());
       A2 a2(injector.template provide<A2>());
 
-      Impl * provided = new_delete(injector).template _new<Impl>(a1, a2);
+      Impl * provided = new_delete(injector).template _new<Impl, A1, A2>(a1,
+          a2);
       InjectionCache<Injector, Iface *(A1, A2)>::insert(injector, provided, a1,
           a2);
       return provided;
@@ -77,7 +78,8 @@ namespace sauce { namespace internal { namespace bindings {
       A2 a2(injector.template provide<A2>());
       A3 a3(injector.template provide<A3>());
 
-      Impl * provided = new_delete(injector).template _new<Impl>(a1, a2, a3);
+      Impl * provided = new_delete(injector).template _new<Impl, A1, A2,
+          A3>(a1, a2, a3);
       InjectionCache<Injector, Iface *(A1, A2, A3)>::insert(injector, provided,
           a1, a2, a3);
       return provided;
@@ -99,8 +101,8 @@ namespace sauce { namespace internal { namespace bindings {
       A3 a3(injector.template provide<A3>());
       A4 a4(injector.template provide<A4>());
 
-      Impl * provided = new_delete(injector).template _new<Impl>(a1, a2, a3,
-          a4);
+      Impl * provided = new_delete(injector).template _new<Impl, A1, A2, A3,
+          A4>(a1, a2, a3, a4);
       InjectionCache<Injector, Iface *(A1, A2, A3, A4)>::insert(injector,
           provided, a1, a2, a3, a4);
       return provided;
@@ -125,8 +127,8 @@ namespace sauce { namespace internal { namespace bindings {
       A4 a4(injector.template provide<A4>());
       A5 a5(injector.template provide<A5>());
 
-      Impl * provided = new_delete(injector).template _new<Impl>(a1, a2, a3,
-          a4, a5);
+      Impl * provided = new_delete(injector).template _new<Impl, A1, A2, A3,
+          A4, A5>(a1, a2, a3, a4, a5);
       InjectionCache<Injector, Iface *(A1, A2, A3, A4, A5)>::insert(injector,
           provided, a1, a2, a3, a4, a5);
       return provided;
@@ -152,8 +154,8 @@ namespace sauce { namespace internal { namespace bindings {
       A5 a5(injector.template provide<A5>());
       A6 a6(injector.template provide<A6>());
 
-      Impl * provided = new_delete(injector).template _new<Impl>(a1, a2, a3,
-          a4, a5, a6);
+      Impl * provided = new_delete(injector).template _new<Impl, A1, A2, A3,
+          A4, A5, A6>(a1, a2, a3, a4, a5, a6);
       InjectionCache<Injector, Iface *(A1, A2, A3, A4, A5,
           A6)>::insert(injector, provided, a1, a2, a3, a4, a5, a6);
       return provided;
@@ -181,8 +183,8 @@ namespace sauce { namespace internal { namespace bindings {
       A6 a6(injector.template provide<A6>());
       A7 a7(injector.template provide<A7>());
 
-      Impl * provided = new_delete(injector).template _new<Impl>(a1, a2, a3,
-          a4, a5, a6, a7);
+      Impl * provided = new_delete(injector).template _new<Impl, A1, A2, A3,
+          A4, A5, A6, A7>(a1, a2, a3, a4, a5, a6, a7);
       InjectionCache<Injector, Iface *(A1, A2, A3, A4, A5, A6,
           A7)>::insert(injector, provided, a1, a2, a3, a4, a5, a6, a7);
       return provided;
@@ -211,8 +213,8 @@ namespace sauce { namespace internal { namespace bindings {
       A7 a7(injector.template provide<A7>());
       A8 a8(injector.template provide<A8>());
 
-      Impl * provided = new_delete(injector).template _new<Impl>(a1, a2, a3,
-          a4, a5, a6, a7, a8);
+      Impl * provided = new_delete(injector).template _new<Impl, A1, A2, A3,
+          A4, A5, A6, A7, A8>(a1, a2, a3, a4, a5, a6, a7, a8);
       InjectionCache<Injector, Iface *(A1, A2, A3, A4, A5, A6, A7,
           A8)>::insert(injector, provided, a1, a2, a3, a4, a5, a6, a7, a8);
       return provided;
@@ -242,8 +244,8 @@ namespace sauce { namespace internal { namespace bindings {
       A8 a8(injector.template provide<A8>());
       A9 a9(injector.template provide<A9>());
 
-      Impl * provided = new_delete(injector).template _new<Impl>(a1, a2, a3,
-          a4, a5, a6, a7, a8, a9);
+      Impl * provided = new_delete(injector).template _new<Impl, A1, A2, A3,
+          A4, A5, A6, A7, A8, A9>(a1, a2, a3, a4, a5, a6, a7, a8, a9);
       InjectionCache<Injector, Iface *(A1, A2, A3, A4, A5, A6, A7, A8,
           A9)>::insert(injector, provided, a1, a2, a3, a4, a5, a6, a7, a8, a9);
       return provided;
@@ -274,8 +276,9 @@ namespace sauce { namespace internal { namespace bindings {
       A9 a9(injector.template provide<A9>());
       A10 a10(injector.template provide<A10>());
 
-      Impl * provided = new_delete(injector).template _new<Impl>(a1, a2, a3,
-          a4, a5, a6, a7, a8, a9, a10);
+      Impl * provided = new_delete(injector).template _new<Impl, A1, A2, A3,
+          A4, A5, A6, A7, A8, A9, A10>(a1, a2, a3, a4, a5, a6, a7, a8, a9,
+          a10);
       InjectionCache<Injector, Iface *(A1, A2, A3, A4, A5, A6, A7, A8, A9,
           A10)>::insert(injector, provided, a1, a2, a3, a4, a5, a6, a7, a8, a9,
           a10);
