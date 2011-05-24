@@ -8,18 +8,22 @@ using ::testing::Return;
 
 namespace sauce { namespace test {
 
-  struct Chasis {};
+  struct Chasis {
+    bool operator==(const Chasis & other) const { this == &other; }
+  };
   struct CoupChasis: public Chasis {};
 
-  struct Engine {};
+  struct Engine {
+    bool operator==(const Engine & other) const { this == &other; }
+  };
   struct HybridEngine: public Engine {};
 
   struct Vehicle {};
   struct Herbie: public Vehicle {
-    Chasis * chasis;
-    Engine * engine;
+    Chasis & chasis;
+    Engine & engine;
 
-    Herbie(Chasis * chasis, Engine * engine):
+    Herbie(Chasis & chasis, Engine & engine):
       chasis(chasis),
       engine(engine) {}
   };
@@ -43,7 +47,12 @@ namespace sauce { namespace test {
     }
 
     template<typename Injector>
-    static ::sauce::internal::bindings::New<Injector, Vehicle, Herbie(Chasis *, Engine *)> * bindings(Vehicle *) {
+    static ::sauce::internal::bindings::Dereference<Injector, Engine> * bindings(Engine &) {
+      return 0;
+    }
+
+    template<typename Injector>
+    static ::sauce::internal::bindings::New<Injector, Vehicle, Herbie(Chasis &, Engine &)> * bindings(Vehicle *) {
       return 0;
     }
 
@@ -79,8 +88,12 @@ namespace sauce { namespace test {
     return new_hybrid_engine();
   }
 
-  template<> Herbie * MockNewDelete::_new<Herbie>(Chasis * chasis, Engine * engine) {
-    return new_herbie(chasis, engine);
+  #include <iostream>
+
+  template<> Herbie * MockNewDelete::_new<Herbie>(Chasis & chasis, Engine & engine) {
+    // Use addresses here only because googletest doesn't know how to
+    // deal with references aside from copying them.
+    return new_herbie(&chasis, &engine);
   }
 
   template<> void MockNewDelete::_delete<Chasis>(Chasis * chasis) {
@@ -134,7 +147,7 @@ namespace sauce { namespace test {
   TEST_F(SauceTest, should_provide_and_dispose_of_dependencies_transitively) {
     CoupChasis chasis;
     HybridEngine engine;
-    Herbie vehicle(&chasis, &engine);
+    Herbie vehicle(chasis, engine);
 
     // We don't care about the relative ordering between chasis and engine:
     // only about how they stand relative to the vehicle.
