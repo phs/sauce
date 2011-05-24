@@ -19,11 +19,11 @@ namespace sauce { namespace internal { namespace bindings {
     static Impl * provide(Injector & injector) {
       return new_delete(injector).template _new<Impl>(
       );
-    };
+    }
 
     static void dispose(Injector & injector, Iface * iface) {
       new_delete(injector)._delete(iface);
-    };
+    }
   };
 
   template<typename Injector, typename Iface, typename Impl, typename A1>
@@ -33,12 +33,12 @@ namespace sauce { namespace internal { namespace bindings {
       return new_delete(injector).template _new<Impl>(
         injector.template provide<A1>()
       );
-    };
+    }
 
     static void dispose(Injector & injector, Iface * iface) {
       new_delete(injector)._delete(iface);
       // injector.template dispose<A1>(DERP); How do we find DERP again?
-    };
+    }
   };
 
   template<typename Injector, typename Iface, typename Impl, typename A1,
@@ -50,13 +50,13 @@ namespace sauce { namespace internal { namespace bindings {
         injector.template provide<A1>(),
         injector.template provide<A2>()
       );
-    };
+    }
 
     static void dispose(Injector & injector, Iface * iface) {
       new_delete(injector)._delete(iface);
       // injector.template dispose<A2>(DERP); How do we find DERP again?
       // injector.template dispose<A1>(DERP); How do we find DERP again?
-    };
+    }
   };
 
   template<typename Injector, typename Iface, typename Impl, typename A1,
@@ -69,14 +69,14 @@ namespace sauce { namespace internal { namespace bindings {
         injector.template provide<A2>(),
         injector.template provide<A3>()
       );
-    };
+    }
 
     static void dispose(Injector & injector, Iface * iface) {
       new_delete(injector)._delete(iface);
       // injector.template dispose<A3>(DERP); How do we find DERP again?
       // injector.template dispose<A2>(DERP); How do we find DERP again?
       // injector.template dispose<A1>(DERP); How do we find DERP again?
-    };
+    }
   };
 
   template<typename Injector, typename Iface, typename Impl, typename A1,
@@ -90,7 +90,7 @@ namespace sauce { namespace internal { namespace bindings {
         injector.template provide<A3>(),
         injector.template provide<A4>()
       );
-    };
+    }
 
     static void dispose(Injector & injector, Iface * iface) {
       new_delete(injector)._delete(iface);
@@ -98,7 +98,7 @@ namespace sauce { namespace internal { namespace bindings {
       // injector.template dispose<A3>(DERP); How do we find DERP again?
       // injector.template dispose<A2>(DERP); How do we find DERP again?
       // injector.template dispose<A1>(DERP); How do we find DERP again?
-    };
+    }
   };
 
   template<typename Injector, typename Iface, typename Impl, typename A1,
@@ -114,7 +114,7 @@ namespace sauce { namespace internal { namespace bindings {
         injector.template provide<A4>(),
         injector.template provide<A5>()
       );
-    };
+    }
 
     static void dispose(Injector & injector, Iface * iface) {
       new_delete(injector)._delete(iface);
@@ -123,7 +123,7 @@ namespace sauce { namespace internal { namespace bindings {
       // injector.template dispose<A3>(DERP); How do we find DERP again?
       // injector.template dispose<A2>(DERP); How do we find DERP again?
       // injector.template dispose<A1>(DERP); How do we find DERP again?
-    };
+    }
   };
 
   template<typename Injector, typename Iface, typename Impl, typename A1,
@@ -140,7 +140,7 @@ namespace sauce { namespace internal { namespace bindings {
         injector.template provide<A5>(),
         injector.template provide<A6>()
       );
-    };
+    }
 
     static void dispose(Injector & injector, Iface * iface) {
       new_delete(injector)._delete(iface);
@@ -150,7 +150,7 @@ namespace sauce { namespace internal { namespace bindings {
       // injector.template dispose<A3>(DERP); How do we find DERP again?
       // injector.template dispose<A2>(DERP); How do we find DERP again?
       // injector.template dispose<A1>(DERP); How do we find DERP again?
-    };
+    }
   };
 
   template<typename Injector, typename Iface, typename Impl, typename A1,
@@ -169,7 +169,7 @@ namespace sauce { namespace internal { namespace bindings {
         injector.template provide<A6>(),
         injector.template provide<A7>()
       );
-    };
+    }
 
     static void dispose(Injector & injector, Iface * iface) {
       new_delete(injector)._delete(iface);
@@ -180,7 +180,7 @@ namespace sauce { namespace internal { namespace bindings {
       // injector.template dispose<A3>(DERP); How do we find DERP again?
       // injector.template dispose<A2>(DERP); How do we find DERP again?
       // injector.template dispose<A1>(DERP); How do we find DERP again?
-    };
+    }
   };
 
   template<typename Injector, typename Iface, typename Impl, typename A1,
@@ -200,7 +200,7 @@ namespace sauce { namespace internal { namespace bindings {
         injector.template provide<A7>(),
         injector.template provide<A8>()
       );
-    };
+    }
 
     static void dispose(Injector & injector, Iface * iface) {
       new_delete(injector)._delete(iface);
@@ -212,7 +212,7 @@ namespace sauce { namespace internal { namespace bindings {
       // injector.template dispose<A3>(DERP); How do we find DERP again?
       // injector.template dispose<A2>(DERP); How do we find DERP again?
       // injector.template dispose<A1>(DERP); How do we find DERP again?
-    };
+    }
   };
 
   template<typename Injector, typename Iface, typename Impl, typename A1,
@@ -233,7 +233,7 @@ namespace sauce { namespace internal { namespace bindings {
         injector.template provide<A8>(),
         injector.template provide<A9>()
       );
-    };
+    }
 
     static void dispose(Injector & injector, Iface * iface) {
       new_delete(injector)._delete(iface);
@@ -246,7 +246,7 @@ namespace sauce { namespace internal { namespace bindings {
       // injector.template dispose<A3>(DERP); How do we find DERP again?
       // injector.template dispose<A2>(DERP); How do we find DERP again?
       // injector.template dispose<A1>(DERP); How do we find DERP again?
-    };
+    }
   };
 
   template<typename Injector, typename Iface, typename Impl, typename A1,
@@ -268,7 +268,7 @@ namespace sauce { namespace internal { namespace bindings {
         injector.template provide<A9>(),
         injector.template provide<A10>()
       );
-    };
+    }
 
     static void dispose(Injector & injector, Iface * iface) {
       new_delete(injector)._delete(iface);
@@ -282,7 +282,7 @@ namespace sauce { namespace internal { namespace bindings {
       // injector.template dispose<A3>(DERP); How do we find DERP again?
       // injector.template dispose<A2>(DERP); How do we find DERP again?
       // injector.template dispose<A1>(DERP); How do we find DERP again?
-    };
+    }
   };
 
 } } } // namespace bindings, namespace internal, namespace sauce
