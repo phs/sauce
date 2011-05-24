@@ -5,6 +5,8 @@ $var n = 10  $$ The maximum arity we support.
 #ifndef SAUCE_SAUCE_INTERNAL_GENERATED_BINDINGS_H_
 #define SAUCE_SAUCE_INTERNAL_GENERATED_BINDINGS_H_
 
+#include <sauce/internal/injection_cache.h>
+
 namespace sauce { namespace internal { namespace bindings {
 
   template<typename Injector>
@@ -17,27 +19,27 @@ $range i 0..n
 $for i [[
 $range j 1..i
 $var comma_typename_As = [[$for j [[, typename A$j]]]]
-$var typename_As = [[$for j, [[typename A$j]]]]
 $var As = [[$for j, [[A$j]]]]
+$var comma_as = [[$for j [[, a$j]]]]
+$var as = [[$for j, [[a$j]]]]
 
   template<typename Injector, typename Iface, typename Impl$comma_typename_As>
   class New<Injector, Iface, Impl($As)>: public Binding<Injector> {
   public:
     static Impl * provide(Injector & injector) {
-      return new_delete(injector).template _new<Impl>([[$for j, [[
+[[$for j [[
+      A$j a$j(injector.template provide<A$j>());
 
-        injector.template provide<A$j>()
 ]]]]
 
-      );
+      Impl * provided = new_delete(injector).template _new<Impl>($as);
+      InjectionCache<Injector, Iface *($As)>::insert(injector, provided$comma_as);
+      return provided;
     }
 
     static void dispose(Injector & injector, Iface * iface) {
       new_delete(injector)._delete(iface);
-[[$for j [[
-      // injector.template dispose<A$(i-j+1)>(DERP); How do we find DERP again?
-
-]]]]
+      InjectionCache<Injector, Iface *($As)>::dispose(injector, iface);
     }
   };
 

@@ -131,39 +131,39 @@ namespace sauce { namespace test {
     injector.dispose<Chasis &>(actual);
   }
 
-  // TEST_F(SauceTest, should_provide_and_dispose_of_dependencies_transitively) {
-  //   CoupChasis chasis;
-  //   HybridEngine engine;
-  //   Herbie vehicle(&chasis, &engine);
-  // 
-  //   // We don't care about the relative ordering between chasis and engine:
-  //   // only about how they stand relative to the vehicle.
-  //   Sequence injected_chasis, injected_engine;
-  // 
-  //   EXPECT_CALL(new_delete, new_coup_chasis()).
-  //     InSequence(injected_chasis).
-  //     WillOnce(Return(&chasis));
-  // 
-  //   EXPECT_CALL(new_delete, new_hybrid_engine()).
-  //     InSequence(injected_engine).
-  //     WillOnce(Return(&engine));
-  // 
-  //   EXPECT_CALL(new_delete, new_herbie(&chasis, &engine)).
-  //     InSequence(injected_chasis, injected_engine).
-  //     WillOnce(Return(&vehicle));
-  // 
-  //   EXPECT_CALL(new_delete, delete_vehicle(&vehicle)).
-  //     InSequence(injected_chasis, injected_engine);
-  // 
-  //   EXPECT_CALL(new_delete, delete_engine(&engine)).
-  //     InSequence(injected_engine);
-  // 
-  //   EXPECT_CALL(new_delete, delete_chasis(&chasis)).
-  //     InSequence(injected_chasis);
-  // 
-  //   Vehicle * actual = injector.provide<Vehicle *>();
-  //   ASSERT_EQ(&vehicle, actual);
-  //   injector.dispose<Vehicle *>(actual);
-  // }
+  TEST_F(SauceTest, should_provide_and_dispose_of_dependencies_transitively) {
+    CoupChasis chasis;
+    HybridEngine engine;
+    Herbie vehicle(&chasis, &engine);
+
+    // We don't care about the relative ordering between chasis and engine:
+    // only about how they stand relative to the vehicle.
+    Sequence injected_chasis, injected_engine;
+
+    EXPECT_CALL(new_delete, new_coup_chasis()).
+      InSequence(injected_chasis).
+      WillOnce(Return(&chasis));
+
+    EXPECT_CALL(new_delete, new_hybrid_engine()).
+      InSequence(injected_engine).
+      WillOnce(Return(&engine));
+
+    EXPECT_CALL(new_delete, new_herbie(&chasis, &engine)).
+      InSequence(injected_chasis, injected_engine).
+      WillOnce(Return(&vehicle));
+
+    EXPECT_CALL(new_delete, delete_vehicle(&vehicle)).
+      InSequence(injected_chasis, injected_engine);
+
+    EXPECT_CALL(new_delete, delete_engine(&engine)).
+      InSequence(injected_engine);
+
+    EXPECT_CALL(new_delete, delete_chasis(&chasis)).
+      InSequence(injected_chasis);
+
+    Vehicle * actual = injector.provide<Vehicle *>();
+    ASSERT_EQ(&vehicle, actual);
+    injector.dispose<Vehicle *>(actual);
+  }
 
 } } // namespace test, namespace sauce

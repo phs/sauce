@@ -1,0 +1,87 @@
+$$ This is a Pump source file.  Please use Pump to convert it to
+$$ generated_bindings.h
+$$
+$var n = 10  $$ The maximum arity we support.
+#ifndef SAUCE_SAUCE_INTERNAL_DISPOSAL_CACHE_H_
+#define SAUCE_SAUCE_INTERNAL_DISPOSAL_CACHE_H_
+
+#include <map>
+#include <utility>
+
+#include <sauce/internal/handle.h>
+
+namespace sauce { namespace internal {
+
+  template<typename Injector, typename Factory>
+  class InjectionCache;
+
+  template<typename Injector, typename Iface>
+  class InjectionCache<Injector, Iface()> {
+  public:
+    inline static void insert(Injector & injector, Iface iface) {}
+    inline static void dispose(Injector & injector, Iface iface) {}
+  };
+
+$range i 1..n
+$for i [[
+$range j 1..i
+$var comma_typename_As = [[$for j [[, typename A$j]]]]
+$var As = [[$for j, [[A$j]]]]
+$var comma_A_as = [[$for j [[, A$j a$j]]]]
+$var A_as = [[$for j, [[A$j a$j]]]]
+$var a_as = [[$if i>0 [[: [[$for j, [[a$j(a$j)]]]]]]]]
+$var as = [[$for j, [[a$j]]]]
+
+  template<typename Injector, typename Iface$comma_typename_As>
+  class InjectionCache<Injector, Iface($As)> {
+[[$for j [[
+    Handle<A$j> a$j;
+
+]]]]
+
+    typedef ::std::pair<Injector *, Handle<Iface> > Key;
+    typedef InjectionCache<Injector, Iface($As)> Value;
+    typedef ::std::map<Key, Value> Cache;
+    typedef typename Cache::value_type Entry;
+    typedef typename Cache::iterator Iterator;
+
+    static Cache cache;
+
+    InjectionCache($A_as)$a_as {}
+
+  public:
+
+    static void insert(Injector & injector, Iface iface$comma_A_as) {
+      Key key(&injector, iface);
+      Value value($as);
+      cache.insert(Entry(key, value));
+    }
+
+    static void dispose(Injector & injector, Iface iface) {
+      Key key(&injector, iface);
+
+      Iterator i = cache.find(key);
+      if (i == cache.end()) {
+        return; // TODO exception?
+      }
+
+      Value value = i->second;
+      cache.erase(i);
+
+[[$for j [[
+      injector.template dispose<A$(i-j+1)>(value.a$(i-j+1));
+
+]]]]
+    }
+
+  };
+
+  template<typename Injector, typename Iface$comma_typename_As>
+  typename InjectionCache<Injector, Iface($As)>::Cache
+    InjectionCache<Injector, Iface($As)>::cache;
+
+]]
+
+} } // namespace internal, namespace sauce
+
+#endif

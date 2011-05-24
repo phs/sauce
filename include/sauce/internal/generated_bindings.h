@@ -5,6 +5,8 @@
 #ifndef SAUCE_SAUCE_INTERNAL_GENERATED_BINDINGS_H_
 #define SAUCE_SAUCE_INTERNAL_GENERATED_BINDINGS_H_
 
+#include <sauce/internal/injection_cache.h>
+
 namespace sauce { namespace internal { namespace bindings {
 
   template<typename Injector>
@@ -17,12 +19,15 @@ namespace sauce { namespace internal { namespace bindings {
   class New<Injector, Iface, Impl()>: public Binding<Injector> {
   public:
     static Impl * provide(Injector & injector) {
-      return new_delete(injector).template _new<Impl>(
-      );
+
+      Impl * provided = new_delete(injector).template _new<Impl>();
+      InjectionCache<Injector, Iface *()>::insert(injector, provided);
+      return provided;
     }
 
     static void dispose(Injector & injector, Iface * iface) {
       new_delete(injector)._delete(iface);
+      InjectionCache<Injector, Iface *()>::dispose(injector, iface);
     }
   };
 
@@ -30,14 +35,16 @@ namespace sauce { namespace internal { namespace bindings {
   class New<Injector, Iface, Impl(A1)>: public Binding<Injector> {
   public:
     static Impl * provide(Injector & injector) {
-      return new_delete(injector).template _new<Impl>(
-        injector.template provide<A1>()
-      );
+      A1 a1(injector.template provide<A1>());
+
+      Impl * provided = new_delete(injector).template _new<Impl>(a1);
+      InjectionCache<Injector, Iface *(A1)>::insert(injector, provided, a1);
+      return provided;
     }
 
     static void dispose(Injector & injector, Iface * iface) {
       new_delete(injector)._delete(iface);
-      // injector.template dispose<A1>(DERP); How do we find DERP again?
+      InjectionCache<Injector, Iface *(A1)>::dispose(injector, iface);
     }
   };
 
@@ -46,16 +53,18 @@ namespace sauce { namespace internal { namespace bindings {
   class New<Injector, Iface, Impl(A1, A2)>: public Binding<Injector> {
   public:
     static Impl * provide(Injector & injector) {
-      return new_delete(injector).template _new<Impl>(
-        injector.template provide<A1>(),
-        injector.template provide<A2>()
-      );
+      A1 a1(injector.template provide<A1>());
+      A2 a2(injector.template provide<A2>());
+
+      Impl * provided = new_delete(injector).template _new<Impl>(a1, a2);
+      InjectionCache<Injector, Iface *(A1, A2)>::insert(injector, provided, a1,
+          a2);
+      return provided;
     }
 
     static void dispose(Injector & injector, Iface * iface) {
       new_delete(injector)._delete(iface);
-      // injector.template dispose<A2>(DERP); How do we find DERP again?
-      // injector.template dispose<A1>(DERP); How do we find DERP again?
+      InjectionCache<Injector, Iface *(A1, A2)>::dispose(injector, iface);
     }
   };
 
@@ -64,18 +73,19 @@ namespace sauce { namespace internal { namespace bindings {
   class New<Injector, Iface, Impl(A1, A2, A3)>: public Binding<Injector> {
   public:
     static Impl * provide(Injector & injector) {
-      return new_delete(injector).template _new<Impl>(
-        injector.template provide<A1>(),
-        injector.template provide<A2>(),
-        injector.template provide<A3>()
-      );
+      A1 a1(injector.template provide<A1>());
+      A2 a2(injector.template provide<A2>());
+      A3 a3(injector.template provide<A3>());
+
+      Impl * provided = new_delete(injector).template _new<Impl>(a1, a2, a3);
+      InjectionCache<Injector, Iface *(A1, A2, A3)>::insert(injector, provided,
+          a1, a2, a3);
+      return provided;
     }
 
     static void dispose(Injector & injector, Iface * iface) {
       new_delete(injector)._delete(iface);
-      // injector.template dispose<A3>(DERP); How do we find DERP again?
-      // injector.template dispose<A2>(DERP); How do we find DERP again?
-      // injector.template dispose<A1>(DERP); How do we find DERP again?
+      InjectionCache<Injector, Iface *(A1, A2, A3)>::dispose(injector, iface);
     }
   };
 
@@ -84,20 +94,22 @@ namespace sauce { namespace internal { namespace bindings {
   class New<Injector, Iface, Impl(A1, A2, A3, A4)>: public Binding<Injector> {
   public:
     static Impl * provide(Injector & injector) {
-      return new_delete(injector).template _new<Impl>(
-        injector.template provide<A1>(),
-        injector.template provide<A2>(),
-        injector.template provide<A3>(),
-        injector.template provide<A4>()
-      );
+      A1 a1(injector.template provide<A1>());
+      A2 a2(injector.template provide<A2>());
+      A3 a3(injector.template provide<A3>());
+      A4 a4(injector.template provide<A4>());
+
+      Impl * provided = new_delete(injector).template _new<Impl>(a1, a2, a3,
+          a4);
+      InjectionCache<Injector, Iface *(A1, A2, A3, A4)>::insert(injector,
+          provided, a1, a2, a3, a4);
+      return provided;
     }
 
     static void dispose(Injector & injector, Iface * iface) {
       new_delete(injector)._delete(iface);
-      // injector.template dispose<A4>(DERP); How do we find DERP again?
-      // injector.template dispose<A3>(DERP); How do we find DERP again?
-      // injector.template dispose<A2>(DERP); How do we find DERP again?
-      // injector.template dispose<A1>(DERP); How do we find DERP again?
+      InjectionCache<Injector, Iface *(A1, A2, A3, A4)>::dispose(injector,
+          iface);
     }
   };
 
@@ -107,22 +119,23 @@ namespace sauce { namespace internal { namespace bindings {
       A5)>: public Binding<Injector> {
   public:
     static Impl * provide(Injector & injector) {
-      return new_delete(injector).template _new<Impl>(
-        injector.template provide<A1>(),
-        injector.template provide<A2>(),
-        injector.template provide<A3>(),
-        injector.template provide<A4>(),
-        injector.template provide<A5>()
-      );
+      A1 a1(injector.template provide<A1>());
+      A2 a2(injector.template provide<A2>());
+      A3 a3(injector.template provide<A3>());
+      A4 a4(injector.template provide<A4>());
+      A5 a5(injector.template provide<A5>());
+
+      Impl * provided = new_delete(injector).template _new<Impl>(a1, a2, a3,
+          a4, a5);
+      InjectionCache<Injector, Iface *(A1, A2, A3, A4, A5)>::insert(injector,
+          provided, a1, a2, a3, a4, a5);
+      return provided;
     }
 
     static void dispose(Injector & injector, Iface * iface) {
       new_delete(injector)._delete(iface);
-      // injector.template dispose<A5>(DERP); How do we find DERP again?
-      // injector.template dispose<A4>(DERP); How do we find DERP again?
-      // injector.template dispose<A3>(DERP); How do we find DERP again?
-      // injector.template dispose<A2>(DERP); How do we find DERP again?
-      // injector.template dispose<A1>(DERP); How do we find DERP again?
+      InjectionCache<Injector, Iface *(A1, A2, A3, A4, A5)>::dispose(injector,
+          iface);
     }
   };
 
@@ -132,24 +145,24 @@ namespace sauce { namespace internal { namespace bindings {
       A6)>: public Binding<Injector> {
   public:
     static Impl * provide(Injector & injector) {
-      return new_delete(injector).template _new<Impl>(
-        injector.template provide<A1>(),
-        injector.template provide<A2>(),
-        injector.template provide<A3>(),
-        injector.template provide<A4>(),
-        injector.template provide<A5>(),
-        injector.template provide<A6>()
-      );
+      A1 a1(injector.template provide<A1>());
+      A2 a2(injector.template provide<A2>());
+      A3 a3(injector.template provide<A3>());
+      A4 a4(injector.template provide<A4>());
+      A5 a5(injector.template provide<A5>());
+      A6 a6(injector.template provide<A6>());
+
+      Impl * provided = new_delete(injector).template _new<Impl>(a1, a2, a3,
+          a4, a5, a6);
+      InjectionCache<Injector, Iface *(A1, A2, A3, A4, A5,
+          A6)>::insert(injector, provided, a1, a2, a3, a4, a5, a6);
+      return provided;
     }
 
     static void dispose(Injector & injector, Iface * iface) {
       new_delete(injector)._delete(iface);
-      // injector.template dispose<A6>(DERP); How do we find DERP again?
-      // injector.template dispose<A5>(DERP); How do we find DERP again?
-      // injector.template dispose<A4>(DERP); How do we find DERP again?
-      // injector.template dispose<A3>(DERP); How do we find DERP again?
-      // injector.template dispose<A2>(DERP); How do we find DERP again?
-      // injector.template dispose<A1>(DERP); How do we find DERP again?
+      InjectionCache<Injector, Iface *(A1, A2, A3, A4, A5,
+          A6)>::dispose(injector, iface);
     }
   };
 
@@ -160,26 +173,25 @@ namespace sauce { namespace internal { namespace bindings {
       A7)>: public Binding<Injector> {
   public:
     static Impl * provide(Injector & injector) {
-      return new_delete(injector).template _new<Impl>(
-        injector.template provide<A1>(),
-        injector.template provide<A2>(),
-        injector.template provide<A3>(),
-        injector.template provide<A4>(),
-        injector.template provide<A5>(),
-        injector.template provide<A6>(),
-        injector.template provide<A7>()
-      );
+      A1 a1(injector.template provide<A1>());
+      A2 a2(injector.template provide<A2>());
+      A3 a3(injector.template provide<A3>());
+      A4 a4(injector.template provide<A4>());
+      A5 a5(injector.template provide<A5>());
+      A6 a6(injector.template provide<A6>());
+      A7 a7(injector.template provide<A7>());
+
+      Impl * provided = new_delete(injector).template _new<Impl>(a1, a2, a3,
+          a4, a5, a6, a7);
+      InjectionCache<Injector, Iface *(A1, A2, A3, A4, A5, A6,
+          A7)>::insert(injector, provided, a1, a2, a3, a4, a5, a6, a7);
+      return provided;
     }
 
     static void dispose(Injector & injector, Iface * iface) {
       new_delete(injector)._delete(iface);
-      // injector.template dispose<A7>(DERP); How do we find DERP again?
-      // injector.template dispose<A6>(DERP); How do we find DERP again?
-      // injector.template dispose<A5>(DERP); How do we find DERP again?
-      // injector.template dispose<A4>(DERP); How do we find DERP again?
-      // injector.template dispose<A3>(DERP); How do we find DERP again?
-      // injector.template dispose<A2>(DERP); How do we find DERP again?
-      // injector.template dispose<A1>(DERP); How do we find DERP again?
+      InjectionCache<Injector, Iface *(A1, A2, A3, A4, A5, A6,
+          A7)>::dispose(injector, iface);
     }
   };
 
@@ -190,28 +202,26 @@ namespace sauce { namespace internal { namespace bindings {
       A8)>: public Binding<Injector> {
   public:
     static Impl * provide(Injector & injector) {
-      return new_delete(injector).template _new<Impl>(
-        injector.template provide<A1>(),
-        injector.template provide<A2>(),
-        injector.template provide<A3>(),
-        injector.template provide<A4>(),
-        injector.template provide<A5>(),
-        injector.template provide<A6>(),
-        injector.template provide<A7>(),
-        injector.template provide<A8>()
-      );
+      A1 a1(injector.template provide<A1>());
+      A2 a2(injector.template provide<A2>());
+      A3 a3(injector.template provide<A3>());
+      A4 a4(injector.template provide<A4>());
+      A5 a5(injector.template provide<A5>());
+      A6 a6(injector.template provide<A6>());
+      A7 a7(injector.template provide<A7>());
+      A8 a8(injector.template provide<A8>());
+
+      Impl * provided = new_delete(injector).template _new<Impl>(a1, a2, a3,
+          a4, a5, a6, a7, a8);
+      InjectionCache<Injector, Iface *(A1, A2, A3, A4, A5, A6, A7,
+          A8)>::insert(injector, provided, a1, a2, a3, a4, a5, a6, a7, a8);
+      return provided;
     }
 
     static void dispose(Injector & injector, Iface * iface) {
       new_delete(injector)._delete(iface);
-      // injector.template dispose<A8>(DERP); How do we find DERP again?
-      // injector.template dispose<A7>(DERP); How do we find DERP again?
-      // injector.template dispose<A6>(DERP); How do we find DERP again?
-      // injector.template dispose<A5>(DERP); How do we find DERP again?
-      // injector.template dispose<A4>(DERP); How do we find DERP again?
-      // injector.template dispose<A3>(DERP); How do we find DERP again?
-      // injector.template dispose<A2>(DERP); How do we find DERP again?
-      // injector.template dispose<A1>(DERP); How do we find DERP again?
+      InjectionCache<Injector, Iface *(A1, A2, A3, A4, A5, A6, A7,
+          A8)>::dispose(injector, iface);
     }
   };
 
@@ -222,30 +232,27 @@ namespace sauce { namespace internal { namespace bindings {
       A9)>: public Binding<Injector> {
   public:
     static Impl * provide(Injector & injector) {
-      return new_delete(injector).template _new<Impl>(
-        injector.template provide<A1>(),
-        injector.template provide<A2>(),
-        injector.template provide<A3>(),
-        injector.template provide<A4>(),
-        injector.template provide<A5>(),
-        injector.template provide<A6>(),
-        injector.template provide<A7>(),
-        injector.template provide<A8>(),
-        injector.template provide<A9>()
-      );
+      A1 a1(injector.template provide<A1>());
+      A2 a2(injector.template provide<A2>());
+      A3 a3(injector.template provide<A3>());
+      A4 a4(injector.template provide<A4>());
+      A5 a5(injector.template provide<A5>());
+      A6 a6(injector.template provide<A6>());
+      A7 a7(injector.template provide<A7>());
+      A8 a8(injector.template provide<A8>());
+      A9 a9(injector.template provide<A9>());
+
+      Impl * provided = new_delete(injector).template _new<Impl>(a1, a2, a3,
+          a4, a5, a6, a7, a8, a9);
+      InjectionCache<Injector, Iface *(A1, A2, A3, A4, A5, A6, A7, A8,
+          A9)>::insert(injector, provided, a1, a2, a3, a4, a5, a6, a7, a8, a9);
+      return provided;
     }
 
     static void dispose(Injector & injector, Iface * iface) {
       new_delete(injector)._delete(iface);
-      // injector.template dispose<A9>(DERP); How do we find DERP again?
-      // injector.template dispose<A8>(DERP); How do we find DERP again?
-      // injector.template dispose<A7>(DERP); How do we find DERP again?
-      // injector.template dispose<A6>(DERP); How do we find DERP again?
-      // injector.template dispose<A5>(DERP); How do we find DERP again?
-      // injector.template dispose<A4>(DERP); How do we find DERP again?
-      // injector.template dispose<A3>(DERP); How do we find DERP again?
-      // injector.template dispose<A2>(DERP); How do we find DERP again?
-      // injector.template dispose<A1>(DERP); How do we find DERP again?
+      InjectionCache<Injector, Iface *(A1, A2, A3, A4, A5, A6, A7, A8,
+          A9)>::dispose(injector, iface);
     }
   };
 
@@ -256,32 +263,29 @@ namespace sauce { namespace internal { namespace bindings {
       A10)>: public Binding<Injector> {
   public:
     static Impl * provide(Injector & injector) {
-      return new_delete(injector).template _new<Impl>(
-        injector.template provide<A1>(),
-        injector.template provide<A2>(),
-        injector.template provide<A3>(),
-        injector.template provide<A4>(),
-        injector.template provide<A5>(),
-        injector.template provide<A6>(),
-        injector.template provide<A7>(),
-        injector.template provide<A8>(),
-        injector.template provide<A9>(),
-        injector.template provide<A10>()
-      );
+      A1 a1(injector.template provide<A1>());
+      A2 a2(injector.template provide<A2>());
+      A3 a3(injector.template provide<A3>());
+      A4 a4(injector.template provide<A4>());
+      A5 a5(injector.template provide<A5>());
+      A6 a6(injector.template provide<A6>());
+      A7 a7(injector.template provide<A7>());
+      A8 a8(injector.template provide<A8>());
+      A9 a9(injector.template provide<A9>());
+      A10 a10(injector.template provide<A10>());
+
+      Impl * provided = new_delete(injector).template _new<Impl>(a1, a2, a3,
+          a4, a5, a6, a7, a8, a9, a10);
+      InjectionCache<Injector, Iface *(A1, A2, A3, A4, A5, A6, A7, A8, A9,
+          A10)>::insert(injector, provided, a1, a2, a3, a4, a5, a6, a7, a8, a9,
+          a10);
+      return provided;
     }
 
     static void dispose(Injector & injector, Iface * iface) {
       new_delete(injector)._delete(iface);
-      // injector.template dispose<A10>(DERP); How do we find DERP again?
-      // injector.template dispose<A9>(DERP); How do we find DERP again?
-      // injector.template dispose<A8>(DERP); How do we find DERP again?
-      // injector.template dispose<A7>(DERP); How do we find DERP again?
-      // injector.template dispose<A6>(DERP); How do we find DERP again?
-      // injector.template dispose<A5>(DERP); How do we find DERP again?
-      // injector.template dispose<A4>(DERP); How do we find DERP again?
-      // injector.template dispose<A3>(DERP); How do we find DERP again?
-      // injector.template dispose<A2>(DERP); How do we find DERP again?
-      // injector.template dispose<A1>(DERP); How do we find DERP again?
+      InjectionCache<Injector, Iface *(A1, A2, A3, A4, A5, A6, A7, A8, A9,
+          A10)>::dispose(injector, iface);
     }
   };
 
