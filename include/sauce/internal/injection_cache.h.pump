@@ -68,8 +68,12 @@ $var as = [[$for j, [[a$j]]]]
       Value value = i->second;
       cache.erase(i);
 
+      value.dispose(injector);
+    }
+
+    void dispose(Injector & injector) {
 [[$for j [[
-      injector.template dispose<A$(i-j+1)>(value.a$(i-j+1));
+      injector.template dispose<A$(i-j+1)>(a$(i-j+1));
 
 ]]]]
     }

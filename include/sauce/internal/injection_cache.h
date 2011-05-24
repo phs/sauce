@@ -55,7 +55,11 @@ namespace sauce { namespace internal {
       Value value = i->second;
       cache.erase(i);
 
-      injector.template dispose<A1>(value.a1);
+      value.dispose(injector);
+    }
+
+    void dispose(Injector & injector) {
+      injector.template dispose<A1>(a1);
     }
 
   };
@@ -98,8 +102,12 @@ namespace sauce { namespace internal {
       Value value = i->second;
       cache.erase(i);
 
-      injector.template dispose<A2>(value.a2);
-      injector.template dispose<A1>(value.a1);
+      value.dispose(injector);
+    }
+
+    void dispose(Injector & injector) {
+      injector.template dispose<A2>(a2);
+      injector.template dispose<A1>(a1);
     }
 
   };
@@ -144,9 +152,13 @@ namespace sauce { namespace internal {
       Value value = i->second;
       cache.erase(i);
 
-      injector.template dispose<A3>(value.a3);
-      injector.template dispose<A2>(value.a2);
-      injector.template dispose<A1>(value.a1);
+      value.dispose(injector);
+    }
+
+    void dispose(Injector & injector) {
+      injector.template dispose<A3>(a3);
+      injector.template dispose<A2>(a2);
+      injector.template dispose<A1>(a1);
     }
 
   };
@@ -195,10 +207,14 @@ namespace sauce { namespace internal {
       Value value = i->second;
       cache.erase(i);
 
-      injector.template dispose<A4>(value.a4);
-      injector.template dispose<A3>(value.a3);
-      injector.template dispose<A2>(value.a2);
-      injector.template dispose<A1>(value.a1);
+      value.dispose(injector);
+    }
+
+    void dispose(Injector & injector) {
+      injector.template dispose<A4>(a4);
+      injector.template dispose<A3>(a3);
+      injector.template dispose<A2>(a2);
+      injector.template dispose<A1>(a1);
     }
 
   };
@@ -248,11 +264,15 @@ namespace sauce { namespace internal {
       Value value = i->second;
       cache.erase(i);
 
-      injector.template dispose<A5>(value.a5);
-      injector.template dispose<A4>(value.a4);
-      injector.template dispose<A3>(value.a3);
-      injector.template dispose<A2>(value.a2);
-      injector.template dispose<A1>(value.a1);
+      value.dispose(injector);
+    }
+
+    void dispose(Injector & injector) {
+      injector.template dispose<A5>(a5);
+      injector.template dispose<A4>(a4);
+      injector.template dispose<A3>(a3);
+      injector.template dispose<A2>(a2);
+      injector.template dispose<A1>(a1);
     }
 
   };
@@ -303,12 +323,16 @@ namespace sauce { namespace internal {
       Value value = i->second;
       cache.erase(i);
 
-      injector.template dispose<A6>(value.a6);
-      injector.template dispose<A5>(value.a5);
-      injector.template dispose<A4>(value.a4);
-      injector.template dispose<A3>(value.a3);
-      injector.template dispose<A2>(value.a2);
-      injector.template dispose<A1>(value.a1);
+      value.dispose(injector);
+    }
+
+    void dispose(Injector & injector) {
+      injector.template dispose<A6>(a6);
+      injector.template dispose<A5>(a5);
+      injector.template dispose<A4>(a4);
+      injector.template dispose<A3>(a3);
+      injector.template dispose<A2>(a2);
+      injector.template dispose<A1>(a1);
     }
 
   };
@@ -360,13 +384,17 @@ namespace sauce { namespace internal {
       Value value = i->second;
       cache.erase(i);
 
-      injector.template dispose<A7>(value.a7);
-      injector.template dispose<A6>(value.a6);
-      injector.template dispose<A5>(value.a5);
-      injector.template dispose<A4>(value.a4);
-      injector.template dispose<A3>(value.a3);
-      injector.template dispose<A2>(value.a2);
-      injector.template dispose<A1>(value.a1);
+      value.dispose(injector);
+    }
+
+    void dispose(Injector & injector) {
+      injector.template dispose<A7>(a7);
+      injector.template dispose<A6>(a6);
+      injector.template dispose<A5>(a5);
+      injector.template dispose<A4>(a4);
+      injector.template dispose<A3>(a3);
+      injector.template dispose<A2>(a2);
+      injector.template dispose<A1>(a1);
     }
 
   };
@@ -422,14 +450,18 @@ namespace sauce { namespace internal {
       Value value = i->second;
       cache.erase(i);
 
-      injector.template dispose<A8>(value.a8);
-      injector.template dispose<A7>(value.a7);
-      injector.template dispose<A6>(value.a6);
-      injector.template dispose<A5>(value.a5);
-      injector.template dispose<A4>(value.a4);
-      injector.template dispose<A3>(value.a3);
-      injector.template dispose<A2>(value.a2);
-      injector.template dispose<A1>(value.a1);
+      value.dispose(injector);
+    }
+
+    void dispose(Injector & injector) {
+      injector.template dispose<A8>(a8);
+      injector.template dispose<A7>(a7);
+      injector.template dispose<A6>(a6);
+      injector.template dispose<A5>(a5);
+      injector.template dispose<A4>(a4);
+      injector.template dispose<A3>(a3);
+      injector.template dispose<A2>(a2);
+      injector.template dispose<A1>(a1);
     }
 
   };
@@ -488,15 +520,19 @@ namespace sauce { namespace internal {
       Value value = i->second;
       cache.erase(i);
 
-      injector.template dispose<A9>(value.a9);
-      injector.template dispose<A8>(value.a8);
-      injector.template dispose<A7>(value.a7);
-      injector.template dispose<A6>(value.a6);
-      injector.template dispose<A5>(value.a5);
-      injector.template dispose<A4>(value.a4);
-      injector.template dispose<A3>(value.a3);
-      injector.template dispose<A2>(value.a2);
-      injector.template dispose<A1>(value.a1);
+      value.dispose(injector);
+    }
+
+    void dispose(Injector & injector) {
+      injector.template dispose<A9>(a9);
+      injector.template dispose<A8>(a8);
+      injector.template dispose<A7>(a7);
+      injector.template dispose<A6>(a6);
+      injector.template dispose<A5>(a5);
+      injector.template dispose<A4>(a4);
+      injector.template dispose<A3>(a3);
+      injector.template dispose<A2>(a2);
+      injector.template dispose<A1>(a1);
     }
 
   };
@@ -557,16 +593,20 @@ namespace sauce { namespace internal {
       Value value = i->second;
       cache.erase(i);
 
-      injector.template dispose<A10>(value.a10);
-      injector.template dispose<A9>(value.a9);
-      injector.template dispose<A8>(value.a8);
-      injector.template dispose<A7>(value.a7);
-      injector.template dispose<A6>(value.a6);
-      injector.template dispose<A5>(value.a5);
-      injector.template dispose<A4>(value.a4);
-      injector.template dispose<A3>(value.a3);
-      injector.template dispose<A2>(value.a2);
-      injector.template dispose<A1>(value.a1);
+      value.dispose(injector);
+    }
+
+    void dispose(Injector & injector) {
+      injector.template dispose<A10>(a10);
+      injector.template dispose<A9>(a9);
+      injector.template dispose<A8>(a8);
+      injector.template dispose<A7>(a7);
+      injector.template dispose<A6>(a6);
+      injector.template dispose<A5>(a5);
+      injector.template dispose<A4>(a4);
+      injector.template dispose<A3>(a3);
+      injector.template dispose<A2>(a2);
+      injector.template dispose<A1>(a1);
     }
 
   };

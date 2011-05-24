@@ -40,6 +40,11 @@ $var as = [[$for j, [[a$j]]]]
 
     static void dispose(Injector & injector, Iface * iface) {
       new_delete(injector)._delete(iface);
+      // TODO: thread safety would require us to first fetch the injection
+      // cache entry, then dispose the dependent, then dispose the injected
+      // dependencies.  The issue is that our deleted pointer is eligible for
+      // reuse, and may potentially be reinserted into our cache before we
+      // remove the old entry.
       InjectionCache<Injector, Iface *($As)>::dispose(injector, iface);
     }
   };

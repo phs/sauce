@@ -27,6 +27,11 @@ namespace sauce { namespace internal { namespace bindings {
 
     static void dispose(Injector & injector, Iface * iface) {
       new_delete(injector)._delete(iface);
+      // TODO: thread safety would require us to first fetch the injection
+      // cache entry, then dispose the dependent, then dispose the injected
+      // dependencies.  The issue is that our deleted pointer is eligible for
+      // reuse, and may potentially be reinserted into our cache before we
+      // remove the old entry.
       InjectionCache<Injector, Iface *()>::dispose(injector, iface);
     }
   };
@@ -44,6 +49,11 @@ namespace sauce { namespace internal { namespace bindings {
 
     static void dispose(Injector & injector, Iface * iface) {
       new_delete(injector)._delete(iface);
+      // TODO: thread safety would require us to first fetch the injection
+      // cache entry, then dispose the dependent, then dispose the injected
+      // dependencies.  The issue is that our deleted pointer is eligible for
+      // reuse, and may potentially be reinserted into our cache before we
+      // remove the old entry.
       InjectionCache<Injector, Iface *(A1)>::dispose(injector, iface);
     }
   };
@@ -65,6 +75,11 @@ namespace sauce { namespace internal { namespace bindings {
 
     static void dispose(Injector & injector, Iface * iface) {
       new_delete(injector)._delete(iface);
+      // TODO: thread safety would require us to first fetch the injection
+      // cache entry, then dispose the dependent, then dispose the injected
+      // dependencies.  The issue is that our deleted pointer is eligible for
+      // reuse, and may potentially be reinserted into our cache before we
+      // remove the old entry.
       InjectionCache<Injector, Iface *(A1, A2)>::dispose(injector, iface);
     }
   };
@@ -87,6 +102,11 @@ namespace sauce { namespace internal { namespace bindings {
 
     static void dispose(Injector & injector, Iface * iface) {
       new_delete(injector)._delete(iface);
+      // TODO: thread safety would require us to first fetch the injection
+      // cache entry, then dispose the dependent, then dispose the injected
+      // dependencies.  The issue is that our deleted pointer is eligible for
+      // reuse, and may potentially be reinserted into our cache before we
+      // remove the old entry.
       InjectionCache<Injector, Iface *(A1, A2, A3)>::dispose(injector, iface);
     }
   };
@@ -110,6 +130,11 @@ namespace sauce { namespace internal { namespace bindings {
 
     static void dispose(Injector & injector, Iface * iface) {
       new_delete(injector)._delete(iface);
+      // TODO: thread safety would require us to first fetch the injection
+      // cache entry, then dispose the dependent, then dispose the injected
+      // dependencies.  The issue is that our deleted pointer is eligible for
+      // reuse, and may potentially be reinserted into our cache before we
+      // remove the old entry.
       InjectionCache<Injector, Iface *(A1, A2, A3, A4)>::dispose(injector,
           iface);
     }
@@ -136,6 +161,11 @@ namespace sauce { namespace internal { namespace bindings {
 
     static void dispose(Injector & injector, Iface * iface) {
       new_delete(injector)._delete(iface);
+      // TODO: thread safety would require us to first fetch the injection
+      // cache entry, then dispose the dependent, then dispose the injected
+      // dependencies.  The issue is that our deleted pointer is eligible for
+      // reuse, and may potentially be reinserted into our cache before we
+      // remove the old entry.
       InjectionCache<Injector, Iface *(A1, A2, A3, A4, A5)>::dispose(injector,
           iface);
     }
@@ -163,6 +193,11 @@ namespace sauce { namespace internal { namespace bindings {
 
     static void dispose(Injector & injector, Iface * iface) {
       new_delete(injector)._delete(iface);
+      // TODO: thread safety would require us to first fetch the injection
+      // cache entry, then dispose the dependent, then dispose the injected
+      // dependencies.  The issue is that our deleted pointer is eligible for
+      // reuse, and may potentially be reinserted into our cache before we
+      // remove the old entry.
       InjectionCache<Injector, Iface *(A1, A2, A3, A4, A5,
           A6)>::dispose(injector, iface);
     }
@@ -192,6 +227,11 @@ namespace sauce { namespace internal { namespace bindings {
 
     static void dispose(Injector & injector, Iface * iface) {
       new_delete(injector)._delete(iface);
+      // TODO: thread safety would require us to first fetch the injection
+      // cache entry, then dispose the dependent, then dispose the injected
+      // dependencies.  The issue is that our deleted pointer is eligible for
+      // reuse, and may potentially be reinserted into our cache before we
+      // remove the old entry.
       InjectionCache<Injector, Iface *(A1, A2, A3, A4, A5, A6,
           A7)>::dispose(injector, iface);
     }
@@ -222,6 +262,11 @@ namespace sauce { namespace internal { namespace bindings {
 
     static void dispose(Injector & injector, Iface * iface) {
       new_delete(injector)._delete(iface);
+      // TODO: thread safety would require us to first fetch the injection
+      // cache entry, then dispose the dependent, then dispose the injected
+      // dependencies.  The issue is that our deleted pointer is eligible for
+      // reuse, and may potentially be reinserted into our cache before we
+      // remove the old entry.
       InjectionCache<Injector, Iface *(A1, A2, A3, A4, A5, A6, A7,
           A8)>::dispose(injector, iface);
     }
@@ -253,6 +298,11 @@ namespace sauce { namespace internal { namespace bindings {
 
     static void dispose(Injector & injector, Iface * iface) {
       new_delete(injector)._delete(iface);
+      // TODO: thread safety would require us to first fetch the injection
+      // cache entry, then dispose the dependent, then dispose the injected
+      // dependencies.  The issue is that our deleted pointer is eligible for
+      // reuse, and may potentially be reinserted into our cache before we
+      // remove the old entry.
       InjectionCache<Injector, Iface *(A1, A2, A3, A4, A5, A6, A7, A8,
           A9)>::dispose(injector, iface);
     }
@@ -287,6 +337,11 @@ namespace sauce { namespace internal { namespace bindings {
 
     static void dispose(Injector & injector, Iface * iface) {
       new_delete(injector)._delete(iface);
+      // TODO: thread safety would require us to first fetch the injection
+      // cache entry, then dispose the dependent, then dispose the injected
+      // dependencies.  The issue is that our deleted pointer is eligible for
+      // reuse, and may potentially be reinserted into our cache before we
+      // remove the old entry.
       InjectionCache<Injector, Iface *(A1, A2, A3, A4, A5, A6, A7, A8, A9,
           A10)>::dispose(injector, iface);
     }
