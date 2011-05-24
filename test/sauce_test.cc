@@ -8,14 +8,10 @@ using ::testing::Return;
 
 namespace sauce { namespace test {
 
-  struct Chasis {
-    bool operator==(const Chasis & other) const { this == &other; }
-  };
+  struct Chasis {};
   struct CoupChasis: public Chasis {};
 
-  struct Engine {
-    bool operator==(const Engine & other) const { this == &other; }
-  };
+  struct Engine {};
   struct HybridEngine: public Engine {};
 
   struct Vehicle {};
