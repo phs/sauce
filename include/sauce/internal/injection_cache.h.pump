@@ -6,8 +6,10 @@ $var n = 10  $$ The maximum arity we support.
 #define SAUCE_SAUCE_INTERNAL_DISPOSAL_CACHE_H_
 
 #include <map>
+#include <stdexcept>
 #include <utility>
 
+#include <sauce/exceptions.h>
 #include <sauce/internal/handle.h>
 
 namespace sauce { namespace internal {
@@ -62,7 +64,8 @@ $var as = [[$for j, [[a$j]]]]
 
       Iterator i = cache.find(key);
       if (i == cache.end()) {
-        return; // TODO exception?
+        // throw ::sauce::UnknownDisposal();
+        return;
       }
 
       Value value = i->second;

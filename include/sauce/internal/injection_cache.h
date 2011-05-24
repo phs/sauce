@@ -6,8 +6,10 @@
 #define SAUCE_SAUCE_INTERNAL_DISPOSAL_CACHE_H_
 
 #include <map>
+#include <stdexcept>
 #include <utility>
 
+#include <sauce/exceptions.h>
 #include <sauce/internal/handle.h>
 
 namespace sauce { namespace internal {
@@ -49,7 +51,8 @@ namespace sauce { namespace internal {
 
       Iterator i = cache.find(key);
       if (i == cache.end()) {
-        return; // TODO exception?
+        // throw ::sauce::UnknownDisposal();
+        return;
       }
 
       Value value = i->second;
@@ -96,7 +99,8 @@ namespace sauce { namespace internal {
 
       Iterator i = cache.find(key);
       if (i == cache.end()) {
-        return; // TODO exception?
+        // throw ::sauce::UnknownDisposal();
+        return;
       }
 
       Value value = i->second;
@@ -146,7 +150,8 @@ namespace sauce { namespace internal {
 
       Iterator i = cache.find(key);
       if (i == cache.end()) {
-        return; // TODO exception?
+        // throw ::sauce::UnknownDisposal();
+        return;
       }
 
       Value value = i->second;
@@ -201,7 +206,8 @@ namespace sauce { namespace internal {
 
       Iterator i = cache.find(key);
       if (i == cache.end()) {
-        return; // TODO exception?
+        // throw ::sauce::UnknownDisposal();
+        return;
       }
 
       Value value = i->second;
@@ -258,7 +264,8 @@ namespace sauce { namespace internal {
 
       Iterator i = cache.find(key);
       if (i == cache.end()) {
-        return; // TODO exception?
+        // throw ::sauce::UnknownDisposal();
+        return;
       }
 
       Value value = i->second;
@@ -317,7 +324,8 @@ namespace sauce { namespace internal {
 
       Iterator i = cache.find(key);
       if (i == cache.end()) {
-        return; // TODO exception?
+        // throw ::sauce::UnknownDisposal();
+        return;
       }
 
       Value value = i->second;
@@ -378,7 +386,8 @@ namespace sauce { namespace internal {
 
       Iterator i = cache.find(key);
       if (i == cache.end()) {
-        return; // TODO exception?
+        // throw ::sauce::UnknownDisposal();
+        return;
       }
 
       Value value = i->second;
@@ -444,7 +453,8 @@ namespace sauce { namespace internal {
 
       Iterator i = cache.find(key);
       if (i == cache.end()) {
-        return; // TODO exception?
+        // throw ::sauce::UnknownDisposal();
+        return;
       }
 
       Value value = i->second;
@@ -514,7 +524,8 @@ namespace sauce { namespace internal {
 
       Iterator i = cache.find(key);
       if (i == cache.end()) {
-        return; // TODO exception?
+        // throw ::sauce::UnknownDisposal();
+        return;
       }
 
       Value value = i->second;
@@ -587,7 +598,8 @@ namespace sauce { namespace internal {
 
       Iterator i = cache.find(key);
       if (i == cache.end()) {
-        return; // TODO exception?
+        // throw ::sauce::UnknownDisposal();
+        return;
       }
 
       Value value = i->second;
