@@ -17,14 +17,7 @@ namespace sauce { namespace internal {
   template<typename Injector, typename Factory>
   class InjectionCache;
 
-  template<typename Injector, typename Iface>
-  class InjectionCache<Injector, Iface()> {
-  public:
-    inline static void insert(Injector & injector, Iface iface) {}
-    inline static void dispose(Injector & injector, Iface iface) {}
-  };
-
-$range i 1..n
+$range i 0..n
 $for i [[
 $range j 1..i
 $var comma_typename_As = [[$for j [[, typename A$j]]]]
@@ -55,7 +48,12 @@ $var as = [[$for j, [[a$j]]]]
 
     static void insert(Injector & injector, Iface iface$comma_A_as) {
       Key key(&injector, iface);
+[[$if i == 0 [[
+      Value value;
+]]$else [[
       Value value($as);
+]]]]
+
       cache.insert(Entry(key, value));
     }
 

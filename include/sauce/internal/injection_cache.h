@@ -19,10 +19,48 @@ namespace sauce { namespace internal {
 
   template<typename Injector, typename Iface>
   class InjectionCache<Injector, Iface()> {
+
+    typedef ::std::pair<Injector *, Handle<Iface> > Key;
+    typedef InjectionCache<Injector, Iface()> Value;
+    typedef ::std::map<Key, Value> Cache;
+    typedef typename Cache::value_type Entry;
+    typedef typename Cache::iterator Iterator;
+
+    static Cache cache;
+
+    InjectionCache() {}
+
   public:
-    inline static void insert(Injector & injector, Iface iface) {}
-    inline static void dispose(Injector & injector, Iface iface) {}
+
+    static void insert(Injector & injector, Iface iface) {
+      Key key(&injector, iface);
+      Value value;
+      cache.insert(Entry(key, value));
+    }
+
+    static void dispose(Injector & injector, Iface iface) {
+      Key key(&injector, iface);
+
+      Iterator i = cache.find(key);
+      if (i == cache.end()) {
+        // throw ::sauce::UnknownDisposal();
+        return;
+      }
+
+      Value value = i->second;
+      cache.erase(i);
+
+      value.dispose(injector);
+    }
+
+    void dispose(Injector & injector) {
+    }
+
   };
+
+  template<typename Injector, typename Iface>
+  typename InjectionCache<Injector, Iface()>::Cache
+    InjectionCache<Injector, Iface()>::cache;
 
   template<typename Injector, typename Iface, typename A1>
   class InjectionCache<Injector, Iface(A1)> {
