@@ -50,10 +50,11 @@ $var as = [[$for j, [[a$j]]]]
       Key key(&injector, iface);
 [[$if i == 0 [[
       Value value;
+
 ]]$else [[
       Value value($as);
-]]]]
 
+]]]]
       cache.insert(Entry(key, value));
     }
 
