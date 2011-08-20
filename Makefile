@@ -19,7 +19,9 @@ TEST_OBJECTS = \
 	$(GMOCK)/src/gmock_main.o                       \
 	$(GTEST)/src/gtest-all.o
 
-all: test
+all: precommit
+
+precommit: test
 
 $(GMOCK)/src/gmock-all.o $(GMOCK)/src/gmock_main.o $(GTEST)/src/gtest-all.o:
 	cd $(GMOCK) && ./configure && make
