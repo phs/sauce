@@ -9,6 +9,9 @@ HEADERS = \
 	$(shell find include -type f -name "*.h") \
 	$(GENERATED_HEADERS)
 
+# Do not delete generated headers, even though they are make intermediates
+.SECONDARY: $(GENERATED_HEADERS)
+
 TEST_SOURCES = $(shell find test -type f -name "*.cc")
 TEST_OBJECTS = \
 	$(patsubst test/%.cc,build/%.o,$(TEST_SOURCES)) \
@@ -20,9 +23,6 @@ all: test
 
 $(GMOCK)/src/gmock-all.o $(GMOCK)/src/gmock_main.o $(GTEST)/src/gtest-all.o:
 	cd $(GMOCK) && ./configure && make
-
-# Do not delete generated headers, even though they are make intermediates
-.SECONDARY: $(GENERATED_HEADERS)
 
 include/%.h: include/%.h.pump
 	vendor/pump.py $+
@@ -36,6 +36,9 @@ build/tests: $(TEST_OBJECTS)
 
 clean:
 	rm -rf build/*
+
+distclean:
+	cd $(GMOCK) && make distclean
 
 test: build/tests
 	cd build && ./tests
