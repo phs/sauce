@@ -1,7 +1,7 @@
 GMOCK = vendor/gmock-1.5.0
 GTEST = vendor/gmock-1.5.0/gtest
 
-CPPFLAGS = -Iinclude
+CPPFLAGS = -Iinclude -Werror
 
 HEADER_TEMPLATES = $(shell find include -type f -name "*.h.pump")
 GENERATED_HEADERS = $(patsubst %.h.pump,%.h,$(HEADER_TEMPLATES))
