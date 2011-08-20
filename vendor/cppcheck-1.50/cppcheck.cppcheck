@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="1">
+    <root name="."/>
+    <includedir>
+        <dir name="lib/"/>
+        <dir name="cli/"/>
+        <dir name="externals/"/>
+        <dir name="gui/temp/"/>
+    </includedir>
+    <paths>
+        <dir name="lib/"/>
+        <dir name="cli/"/>
+        <dir name="gui/"/>
+        <dir name="test/"/>
+    </paths>
+    <ignore>
+        <path name="gui/temp/"/>
+        <path name="test/test.cxx"/>
+    </ignore>
+</project>

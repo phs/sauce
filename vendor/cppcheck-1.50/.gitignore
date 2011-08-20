@@ -1,0 +1,47 @@
+cppcheck
+cppcheck.exe
+testrunner
+testrunner.exe
+*.o
+*.bak
+*.gcno
+tools/dmake
+dmake
+tools/errmsg
+# VS generated files
+*.obj
+*.ncb
+*.suo
+*.user
+*.idb
+*.pdb
+# VS build folders
+Build/
+BuildTmp/
+# XCode build folders and files
+build/
+*.pbxuser
+*.mode[0-9]v[0-9]
+# GUI build folders
+gui/debug/
+gui/release/
+gui/temp/
+# Other (generated) GUI files
+gui/Makefile
+gui/Makefile.debug
+gui/Makefile.release
+gui/gui.sln
+gui/gui.vcproj
+gui/cppcheck-gui
+gui/qrc_gui.cpp
+gui/*.qm
+# Doxygen output folder
+doxyoutput/
+# qmake generated
+
+*.sdf
+ipch
+*.opensdf
+*.orig
+
+tags

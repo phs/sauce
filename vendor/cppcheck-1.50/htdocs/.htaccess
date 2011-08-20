@@ -1,0 +1,30 @@
+#Add mime type for *.ico files...
+AddType image/vnd.microsoft.icon .ico
+
+#Compression...
+<IfModule mod_deflate.c>
+  AddOutputFilterByType DEFLATE text/plain text/html text/css application/javascript application/x-javascript
+
+  # Netscape 4.x has some problems...
+  BrowserMatch ^Mozilla/4 gzip-only-text/html
+
+  # Netscape 4.06-4.08 have some more problems
+  BrowserMatch ^Mozilla/4\.0[678] no-gzip
+
+  # MSIE masquerades as Netscape, but it is fine
+  # BrowserMatch \bMSIE !no-gzip !gzip-only-text/html
+
+  # NOTE: Due to a bug in mod_setenvif up to Apache 2.0.48
+  # the above regex won't work. You can use the following
+  # workaround to get the desired effect:
+  BrowserMatch \bMSI[E] !no-gzip !gzip-only-text/html
+</IfModule>
+
+#Redirect "devinfo.html" to the new place...
+Redirect permanent /devinfo.html http://cppcheck.sourceforge.net/devinfo/
+
+#Redirect doxyoutput, coverage- and cpd report to the new place...
+Redirect permanent /doxyoutput/ http://cppcheck.sourceforge.net/devinfo/doxyoutput/
+Redirect permanent /doxygen-errors.txt http://cppcheck.sourceforge.net/devinfo/doxygen-errors.txt
+Redirect permanent /coverage_report/ http://cppcheck.sourceforge.net/devinfo/coverage_report/
+Redirect permanent /cpd.txt http://cppcheck.sourceforge.net/devinfo/cpd.txt
