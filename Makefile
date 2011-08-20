@@ -21,10 +21,15 @@ TEST_OBJECTS = \
 
 all: precommit
 
-precommit: test
+precommit: run-cppcheck test
 
 $(GMOCK)/src/gmock-all.o $(GMOCK)/src/gmock_main.o $(GTEST)/src/gtest-all.o:
 	cd $(GMOCK) && ./configure && make
+
+run-cppcheck:
+	which cppcheck >/dev/null || \
+	( echo "\ncppcheck is required on your PATH for development" && false )
+	cppcheck include test
 
 include/%.h: include/%.h.pump
 	vendor/pump.py $+
