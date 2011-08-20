@@ -21,10 +21,13 @@ TEST_OBJECTS = \
 
 all: precommit
 
-precommit: run-cppcheck test
+precommit: run-uncrustify run-cppcheck test
 
 $(GMOCK)/src/gmock-all.o $(GMOCK)/src/gmock_main.o $(GTEST)/src/gtest-all.o:
 	cd $(GMOCK) && ./configure && make
+
+run-uncrustify:
+	uncrustify --version # just prove it is there for now
 
 run-cppcheck:
 	cppcheck -q --enable=all --error-exitcode=1 include test
