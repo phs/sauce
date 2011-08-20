@@ -37,7 +37,7 @@ build/tests: $(TEST_OBJECTS)
 clean:
 	rm -rf build/*
 
-distclean:
+distclean: clean
 	cd $(GMOCK) && make distclean
 
 test: build/tests
