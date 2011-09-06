@@ -5,7 +5,7 @@
 #ifndef SAUCE_SAUCE_INTERNAL_GENERATED_BINDINGS_H_
 #define SAUCE_SAUCE_INTERNAL_GENERATED_BINDINGS_H_
 
-#include <sauce/internal/injection_cache.h>
+#include <sauce/internal/generated/injection_cache.h>
 
 namespace sauce { namespace internal { namespace bindings {
 

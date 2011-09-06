@@ -2,7 +2,7 @@
 #define SAUCE_SAUCE_INJECTOR_H_
 
 #include <sauce/internal/bindings.h>
-#include <sauce/internal/new_delete.h>
+#include <sauce/internal/generated/new_delete.h>
 
 namespace sauce {
 
