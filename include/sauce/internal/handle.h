@@ -4,40 +4,46 @@
 namespace sauce {
 namespace internal {
 
-  template<typename T>
-  class Handle;
+template<typename T>
+class Handle;
 
-  template<typename T>
-  class Handle<T &> {
+template<typename T>
+class Handle<T &> {
 
-    T * t;
+  T * t;
 
-  public:
+public:
 
-    Handle(T & t): t(&t) {}
-    operator T &() { return *t; }
+  Handle(T & t):
+    t(&t) {}
+  operator T &() {
+    return *t;
+  }
 
-    bool operator< (const Handle<T &> other) const { return t <  other.t; }
-    bool operator==(const Handle<T &> other) const { return t == other.t; }
+  bool operator<(const Handle<T &> other) const { return t <  other.t; }
+  bool operator==(const Handle<T &> other) const { return t == other.t; }
 
-  };
+};
 
-  template<typename T>
-  class Handle<T *> {
+template<typename T>
+class Handle<T *> {
 
-    T * t;
+  T * t;
 
-  public:
+public:
 
-    Handle(T * t): t(t) {}
-    operator T *() { return t; }
+  Handle(T * t):
+    t(t) {}
+  operator T *() {
+    return t;
+  }
 
-    bool operator< (const Handle<T *> other) const { return t <  other.t; }
-    bool operator==(const Handle<T *> other) const { return t == other.t; }
+  bool operator<(const Handle<T *> other) const { return t <  other.t; }
+  bool operator==(const Handle<T *> other) const { return t == other.t; }
 
-  };
+};
 
 }
 }
 
-#endif
+#endif // ifndef SAUCE_SAUCE_HANDLE_H_

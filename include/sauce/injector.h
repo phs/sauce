@@ -6,53 +6,53 @@
 
 namespace sauce {
 
-  namespace test {
-    class SauceTest;
+namespace test {
+class SauceTest;
+}
+
+template<typename Module, typename NewDelete = ::sauce::internal::NewDelete>
+class Injector {
+private:
+
+  typedef NewDelete _NewDelete;
+  typedef Injector<Module, NewDelete> _Injector;
+
+public:
+
+  friend class ::sauce::test::SauceTest;
+  friend class ::sauce::internal::bindings::Binding<_Injector>;
+
+  Injector():
+    new_delete() {}
+
+  virtual ~Injector() {}
+
+  template<typename Iface>
+  Iface provide() {
+    return provide<Iface>(Module::template bindings<_Injector> );
   }
 
-  template<typename Module, typename NewDelete = ::sauce::internal::NewDelete>
-  class Injector {
-  private:
+  template<typename Iface>
+  void dispose(Iface iface) {
+    dispose<Iface>(Module::template bindings<_Injector>, iface);
+  }
 
-    typedef NewDelete _NewDelete;
-    typedef Injector<Module, NewDelete> _Injector;
+private:
 
-  public:
+  NewDelete new_delete;
 
-    friend class ::sauce::test::SauceTest;
-    friend class ::sauce::internal::bindings::Binding<_Injector>;
+  template<typename Iface, typename Binding>
+  Iface provide(Binding * binding(Iface)) {
+    return Binding::provide(*this);
+  }
 
-    Injector():
-      new_delete() {}
+  template<typename Iface, typename Binding>
+  void dispose(Binding * binding(Iface), Iface iface) {
+    Binding::dispose(*this, iface);
+  }
 
-    virtual ~Injector() {}
-
-    template<typename Iface>
-    Iface provide() {
-      return provide<Iface>(Module::template bindings<_Injector>);
-    }
-
-    template<typename Iface>
-    void dispose(Iface iface) {
-      dispose<Iface>(Module::template bindings<_Injector>, iface);
-    }
-
-  private:
-
-    NewDelete new_delete;
-
-    template<typename Iface, typename Binding>
-    Iface provide(Binding *binding (Iface)) {
-      return Binding::provide(*this);
-    }
-
-    template<typename Iface, typename Binding>
-    void dispose(Binding *binding (Iface), Iface iface) {
-      Binding::dispose(*this, iface);
-    }
-
-  };
+};
 
 } // namespace sauce
 
-#endif
+#endif // ifndef SAUCE_SAUCE_INJECTOR_H_

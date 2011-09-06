@@ -3,13 +3,15 @@
 
 namespace sauce {
 
-  /*
-    Thrown when disposing a value that was not provided by the injector.
-  */
-  class UnknownDisposal: public std::runtime_error {
-  public:
-    UnknownDisposal(): std::runtime_error("UnknownDisposal") {}
-  };
+/*
+ * Thrown when disposing a value that was not provided by the injector.
+ */
+class UnknownDisposal:
+  public std::runtime_error {
+public:
+  UnknownDisposal():
+    std::runtime_error("UnknownDisposal") {}
+};
 
 } // namespace sauce
 

@@ -7,31 +7,32 @@ namespace sauce {
 namespace internal {
 namespace bindings {
 
-  template<typename Injector>
-  class Binding {
-    typedef Injector _Injector;
-    typedef typename Injector::_NewDelete _NewDelete;
+template<typename Injector>
+class Binding {
+  typedef Injector _Injector;
+  typedef typename Injector::_NewDelete _NewDelete;
 
-  protected:
-    static _NewDelete & new_delete(_Injector & injector) {
-      return injector.new_delete;
-    }
-  };
+protected:
+  static _NewDelete & new_delete(_Injector & injector) {
+    return injector.new_delete;
+  }
+};
 
-  template<typename Injector, typename Iface>
-  class Dereference: public Binding<Injector> {
-  public:
-    static Iface & provide(Injector & injector) {
-      return *injector.template provide<Iface *>();
-    };
+template<typename Injector, typename Iface>
+class Dereference:
+  public Binding<Injector> {
+public:
+  static Iface & provide(Injector & injector) {
+    return *injector.template provide<Iface *>();
+  }
 
-    static void dispose(Injector & injector, Iface & iface) {
-      injector.template dispose<Iface *>(&iface);
-    };
-  };
+  static void dispose(Injector & injector, Iface & iface) {
+    injector.template dispose<Iface *>(&iface);
+  }
+};
 
 }
 }
 }
 
-#endif
+#endif // ifndef SAUCE_SAUCE_INTERNAL_BINDINGS_H_
