@@ -3,7 +3,9 @@
 
 #include <sauce/internal/generated_bindings.h>
 
-namespace sauce { namespace internal { namespace bindings {
+namespace sauce {
+namespace internal {
+namespace bindings {
 
   template<typename Injector>
   class Binding {
@@ -28,6 +30,8 @@ namespace sauce { namespace internal { namespace bindings {
     };
   };
 
-} } } // namespace bindings, namespace internal, namespace sauce
+}
+}
+}
 
 #endif

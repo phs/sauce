@@ -6,7 +6,8 @@
 using ::testing::Sequence;
 using ::testing::Return;
 
-namespace sauce { namespace test {
+namespace sauce {
+namespace test {
 
   struct Chasis {};
   struct CoupChasis: public Chasis {};
@@ -182,4 +183,5 @@ namespace sauce { namespace test {
   //   ASSERT_THROW(injector.dispose<Chasis *>(&chasis), UnknownDisposal);
   // }
 
-} } // namespace test, namespace sauce
+}
+}

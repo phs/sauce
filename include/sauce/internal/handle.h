@@ -1,7 +1,8 @@
 #ifndef SAUCE_SAUCE_HANDLE_H_
 #define SAUCE_SAUCE_HANDLE_H_
 
-namespace sauce { namespace internal {
+namespace sauce {
+namespace internal {
 
   template<typename T>
   class Handle;
@@ -36,6 +37,7 @@ namespace sauce { namespace internal {
 
   };
 
-} } // namespace internal, namespace sauce
+}
+}
 
 #endif
