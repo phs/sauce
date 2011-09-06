@@ -5,8 +5,10 @@ CPPFLAGS = -Iinclude -Werror
 
 HEADER_TEMPLATES = $(shell find include -type f -name "*.h.pump")
 GENERATED_HEADERS = $(patsubst %.h.pump,%.h,$(HEADER_TEMPLATES))
+HANDMADE_HEADERS = $(shell find include -type f -name "*.h" | \
+	grep -v -E "`echo $(GENERATED_HEADERS) | tr ' ' '|'`")
 HEADERS = \
-	$(shell find include -type f -name "*.h") \
+	$(HANDMADE_HEADERS) \
 	$(GENERATED_HEADERS)
 
 # Do not delete generated headers, even though they are make intermediates
@@ -27,7 +29,9 @@ $(GMOCK)/src/gmock-all.o $(GMOCK)/src/gmock_main.o $(GTEST)/src/gtest-all.o:
 	cd $(GMOCK) && ./configure && make
 
 run-uncrustify:
-	uncrustify --version # just prove it is there for now
+	mkdir -p build/uncrustify
+	uncrustify -c uncrustify.cfg --prefix build/uncrustify --suffix '' -l CPP \
+		$(HANDMADE_HEADERS) $(TEST_SOURCES)
 
 run-cppcheck:
 	cppcheck -q --enable=all --error-exitcode=1 include test
