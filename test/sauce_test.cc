@@ -9,14 +9,15 @@ using ::testing::Return;
 namespace sauce {
 namespace test {
 
-  struct Chasis {};
-  struct CoupChasis: public Chasis {};
+  class Chasis {};
+  class CoupChasis: public Chasis {};
 
-  struct Engine {};
-  struct HybridEngine: public Engine {};
+  class Engine {};
+  class HybridEngine: public Engine {};
 
-  struct Vehicle {};
-  struct Herbie: public Vehicle {
+  class Vehicle {};
+  class Herbie: public Vehicle {
+  public:
     Chasis & chasis;
     Engine & engine;
 
