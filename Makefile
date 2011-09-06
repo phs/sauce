@@ -54,7 +54,7 @@ diff-style: run-uncrustify
 	xargs -n 2 git --no-pager diff --color --no-index | less -FRSX
 
 accept-style: run-uncrustify
-	cp -r build/uncrustify .
+	cp -r build/uncrustify/ .
 
 run-cppcheck:
 	cppcheck -q --enable=all --error-exitcode=1 include test
