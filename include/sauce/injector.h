@@ -53,6 +53,6 @@ private:
 
 };
 
-} // namespace sauce
+}
 
 #endif // ifndef SAUCE_SAUCE_INJECTOR_H_

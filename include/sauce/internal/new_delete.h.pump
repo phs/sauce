@@ -5,11 +5,12 @@ $var n = 10  $$ The maximum arity we support.
 #ifndef SAUCE_SAUCE_INTERNAL_NEW_DELETE_H_
 #define SAUCE_SAUCE_INTERNAL_NEW_DELETE_H_
 
-namespace sauce { namespace internal {
+namespace sauce {
+namespace internal {
 
-  // A mockable wrapper for the new, delete and related keywords.
-  class NewDelete {
-  public:
+// A mockable wrapper for the new, delete and related keywords.
+class NewDelete {
+public:
 $range i 0..n
 $for i [[
 $range j 1..i
@@ -18,19 +19,20 @@ $var As = [[$for j, [[A$j]]]]
 $var A_as = [[$for j, [[A$j a$j]]]]
 $var as = [[$for j, [[a$j]]]]
 
-    template<typename C$comma_typename_As>
-    inline C * _new($A_as) {
-      return new C($as);
-    }
+  template<typename C$comma_typename_As>
+  inline C * _new($A_as) {
+    return new C($as);
+  }
 
 ]]
 
-    template<typename C>
-    inline void _delete(C * c) {
-      delete c;
-    }
-  };
+  template<typename C>
+  inline void _delete(C * c) {
+    delete c;
+  }
+};
 
-} } // namespace internal, namespace sauce
+}
+}
 
 #endif

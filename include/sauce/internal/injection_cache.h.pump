@@ -12,10 +12,11 @@ $var n = 10  $$ The maximum arity we support.
 #include <sauce/exceptions.h>
 #include <sauce/internal/handle.h>
 
-namespace sauce { namespace internal {
+namespace sauce {
+namespace internal {
 
-  template<typename Injector, typename Factory>
-  class InjectionCache;
+template<typename Injector, typename Factory>
+class InjectionCache;
 
 $range i 0..n
 $for i [[
@@ -27,67 +28,68 @@ $var A_as = [[$for j, [[A$j a$j]]]]
 $var a_as = [[$if i>0 [[: [[$for j, [[a$j(a$j)]]]]]]]]
 $var as = [[$for j, [[a$j]]]]
 
-  template<typename Injector, typename Iface$comma_typename_As>
-  class InjectionCache<Injector, Iface($As)> {
+template<typename Injector, typename Iface$comma_typename_As>
+class InjectionCache<Injector, Iface($As)> {
 [[$for j [[
-    Handle<A$j> a$j;
+  Handle<A$j> a$j;
 
 ]]]]
 
-    typedef ::std::pair<Injector *, Handle<Iface> > Key;
-    typedef InjectionCache<Injector, Iface($As)> Value;
-    typedef ::std::map<Key, Value> Cache;
-    typedef typename Cache::value_type Entry;
-    typedef typename Cache::iterator Iterator;
+  typedef ::std::pair<Injector *, Handle<Iface> > Key;
+  typedef InjectionCache<Injector, Iface($As)> Value;
+  typedef ::std::map<Key, Value> Cache;
+  typedef typename Cache::value_type Entry;
+  typedef typename Cache::iterator Iterator;
 
-    static Cache cache;
+  static Cache cache;
 
-    InjectionCache($A_as)$a_as {}
+  InjectionCache($A_as)$a_as {}
 
-  public:
+public:
 
-    static void insert(Injector & injector, Iface iface$comma_A_as) {
-      Key key(&injector, iface);
+  static void insert(Injector & injector, Iface iface$comma_A_as) {
+    Key key(&injector, iface);
 [[$if i == 0 [[
-      Value value;
+    Value value;
 
 ]]$else [[
-      Value value($as);
+    Value value($as);
 
 ]]]]
-      cache.insert(Entry(key, value));
+    cache.insert(Entry(key, value));
+  }
+
+  static void dispose(Injector & injector, Iface iface) {
+    Key key(&injector, iface);
+
+    Iterator i = cache.find(key);
+    if (i == cache.end()) {
+      // throw ::sauce::UnknownDisposal();
+      return;
     }
 
-    static void dispose(Injector & injector, Iface iface) {
-      Key key(&injector, iface);
+    Value value = i->second;
+    cache.erase(i);
 
-      Iterator i = cache.find(key);
-      if (i == cache.end()) {
-        // throw ::sauce::UnknownDisposal();
-        return;
-      }
+    value.dispose(injector);
+  }
 
-      Value value = i->second;
-      cache.erase(i);
-
-      value.dispose(injector);
-    }
-
-    void dispose(Injector & injector) {
+  void dispose(Injector & injector) {
 [[$for j [[
-      injector.template dispose<A$(i-j+1)>(a$(i-j+1));
+    injector.template dispose<A$(i-j+1)>(a$(i-j+1));
 
 ]]]]
-    }
+  }
 
-  };
+};
 
-  template<typename Injector, typename Iface$comma_typename_As>
-  typename InjectionCache<Injector, Iface($As)>::Cache
-    InjectionCache<Injector, Iface($As)>::cache;
+template<typename Injector, typename Iface$comma_typename_As>
+typename InjectionCache<Injector, Iface($As)>::Cache
+  InjectionCache<Injector, Iface($As)>::cache;
 
 ]]
 
-} } // namespace internal, namespace sauce
+}
+}
 
 #endif

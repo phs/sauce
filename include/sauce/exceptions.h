@@ -13,6 +13,6 @@ public:
     std::runtime_error("UnknownDisposal") {}
 };
 
-} // namespace sauce
+}
 
 #endif
