@@ -193,11 +193,5 @@ TEST_F(SauceTest, should_provide_and_dispose_of_dependencies_transitively) {
   injector.dispose<Vehicle *>(actual);
 }
 
-// TEST_F(SauceTest, should_throw_when_disposing_unknown_values) {
-//   CoupChasis chasis;
-//   EXPECT_CALL(new_delete, delete_chasis(&chasis)).Times(0);
-//   ASSERT_THROW(injector.dispose<Chasis *>(&chasis), UnknownDisposal);
-// }
-
 }
 }
