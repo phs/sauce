@@ -3,9 +3,9 @@ GTEST = vendor/gmock-1.5.0/gtest
 
 CPPFLAGS = -Iinclude -Werror -DSAUCE_STD_TR1_SMART_PTR
 
-HEADER_TEMPLATES = $(shell find include -type f -name "*.h.pump")
-GENERATED_HEADERS = $(patsubst %.h.pump,%.h,$(HEADER_TEMPLATES))
-HANDMADE_HEADERS = $(shell find include -type f -name "*.h" | \
+HEADER_TEMPLATES = $(shell find include -type f -name "*.pump")
+GENERATED_HEADERS = $(patsubst %.pump,%,$(HEADER_TEMPLATES))
+HANDMADE_HEADERS = $(shell find include -type f | \
 	grep -v -E "`echo $(GENERATED_HEADERS) | tr ' ' '|'`")
 HEADERS = \
 	$(HANDMADE_HEADERS) \
@@ -59,7 +59,7 @@ accept-style: run-uncrustify
 run-cppcheck:
 	cppcheck -q --enable=all --error-exitcode=1 include test
 
-include/%.h: include/%.h.pump
+include/%: include/%.pump
 	vendor/pump.py $+
 
 build/%.o: test/%.cc $(HEADERS)

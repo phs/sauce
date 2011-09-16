@@ -1,6 +1,6 @@
 build
-include/sauce/internal/generated_bindings.h
-include/sauce/internal/new_delete.h
+include/sauce/internal/generated_bindings
+include/sauce/internal/new_delete
 vendor/gmock-1.5.0/Makefile
 vendor/gmock-1.5.0/build-aux/config.h
 vendor/gmock-1.5.0/build-aux/stamp-h1

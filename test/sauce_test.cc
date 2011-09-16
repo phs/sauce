@@ -1,7 +1,7 @@
 #include <gmock/gmock.h>
 #include <gtest/gtest.h>
 
-#include <sauce/sauce.h>
+#include <sauce/sauce>
 
 using ::testing::Sequence;
 using ::testing::Return;
