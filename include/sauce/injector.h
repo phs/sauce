@@ -10,17 +10,17 @@ namespace test {
 class SauceTest;
 }
 
-template<typename Module, typename NewDelete = ::sauce::internal::NewDelete>
+template<typename Module, typename NewDelete_ = ::sauce::internal::NewDelete>
 class Injector {
 private:
 
-  typedef NewDelete _NewDelete;
-  typedef Injector<Module, NewDelete> _Injector;
+  typedef NewDelete_ NewDelete;
+  typedef Injector<Module, NewDelete> Injector_;
 
 public:
 
   friend class ::sauce::test::SauceTest;
-  friend class ::sauce::internal::bindings::Binding<_Injector>;
+  friend class ::sauce::internal::bindings::Binding<Injector_>;
 
   Injector():
     new_delete() {}
@@ -29,12 +29,12 @@ public:
 
   template<typename Iface>
   Iface provide() {
-    return provide<Iface>(Module::template bindings<_Injector> );
+    return provide<Iface>(Module::template bindings<Injector_> );
   }
 
   template<typename Iface>
   void dispose(Iface iface) {
-    dispose<Iface>(Module::template bindings<_Injector>, iface);
+    dispose<Iface>(Module::template bindings<Injector_>, iface);
   }
 
 private:

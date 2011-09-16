@@ -9,11 +9,10 @@ namespace bindings {
 
 template<typename Injector>
 class Binding {
-  typedef Injector _Injector;
-  typedef typename Injector::_NewDelete _NewDelete;
+  typedef typename Injector::NewDelete NewDelete;
 
 protected:
-  static _NewDelete & new_delete(_Injector & injector) {
+  static NewDelete & new_delete(Injector & injector) {
     return injector.new_delete;
   }
 };
