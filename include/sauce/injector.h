@@ -1,6 +1,7 @@
 #ifndef SAUCE_SAUCE_INJECTOR_H_
 #define SAUCE_SAUCE_INJECTOR_H_
 
+#include <sauce/memory.h>
 #include <sauce/internal/bindings.h>
 #include <sauce/internal/new_delete.h>
 
