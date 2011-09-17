@@ -22,6 +22,7 @@ private:
   typedef ::sauce::internal::Deleter<Injector_> Deleter_;
 
   NewDelete mutable newDelete;
+  Deleter_ deleter;
 
 public:
 
@@ -30,7 +31,8 @@ public:
   friend class ::sauce::internal::bindings::Binding<Injector_>;
 
   Injector():
-    newDelete() {}
+    newDelete(),
+    deleter(*this) {}
 
   virtual ~Injector() {}
 
@@ -39,9 +41,6 @@ public:
     // Resolve the interface into a binding with EXTRA SUPER MAGIC
     Iface * provided = provideFromBinding<Iface>(
       Module::template bindings<Injector_> );
-
-    // Use a custom deleter for the shared_ptr
-    Deleter_ deleter(*this);
 
     // Wrap and return the provided implementation in the chosen shared_ptr
     SAUCE_SHARED_PTR<Iface> smartPointer;
