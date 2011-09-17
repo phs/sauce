@@ -6,6 +6,8 @@ $var n = 10  $$ The maximum arity we support.
 #ifndef SAUCE_SAUCE_INTERNAL_GENERATED_BINDINGS_H_
 #define SAUCE_SAUCE_INTERNAL_GENERATED_BINDINGS_H_
 
+#include <sauce/memory>
+
 namespace sauce {
 namespace internal {
 namespace bindings {
@@ -20,7 +22,7 @@ $range i 0..n
 $for i [[
 $range j 1..i
 $var comma_typename_As = [[$for j [[, typename A$j]]]]
-$var comma_As = [[$for j [[, A$j]]]]
+$var comma_shared_As = [[$for j [[, SAUCE_SHARED_PTR<A$j>]]]]
 $var As = [[$for j, [[A$j]]]]
 $var comma_as = [[$for j [[, a$j]]]]
 $var as = [[$for j, [[a$j]]]]
@@ -30,11 +32,11 @@ class New<Injector, Iface, Impl($As)>: public Binding<Injector> {
 public:
   static Impl * provide(Injector & injector) {
 [[$for j [[
-    A$j a$j(injector.template provide<A$j>());
+    SAUCE_SHARED_PTR<A$j> a$j(injector.template provide<A$j>());
 
 ]]]]
 
-    Impl * provided = newDelete(injector).template new_<Impl$comma_As>($as);
+    Impl * provided = newDelete(injector).template new_<Impl$comma_shared_As >($as);
     return provided;
   }
 
