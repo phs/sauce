@@ -5,7 +5,7 @@
 #include <sauce/memory>
 #include <sauce/internal/bindings>
 #include <sauce/internal/deleter>
-#include <sauce/internal/new_delete>
+#include <sauce/internal/initializer>
 
 namespace sauce {
 
@@ -13,15 +13,15 @@ namespace test {
 class SauceTest;
 }
 
-template<typename Module, typename NewDelete_ = ::sauce::internal::NewDelete>
+template<typename Module, typename Initializer_ = ::sauce::internal::Initializer>
 class Injector {
 private:
 
-  typedef NewDelete_ NewDelete;
-  typedef Injector<Module, NewDelete> Injector_;
+  typedef Initializer_ Initializer;
+  typedef Injector<Module, Initializer> Injector_;
   typedef ::sauce::internal::Deleter<Injector_> Deleter_;
 
-  NewDelete mutable newDelete;
+  Initializer mutable initializer;
   Deleter_ deleter;
 
 public:
@@ -31,7 +31,7 @@ public:
   friend class ::sauce::internal::bindings::Binding<Injector_>;
 
   Injector():
-    newDelete(),
+    initializer(),
     deleter(*this) {}
 
   virtual ~Injector() {}

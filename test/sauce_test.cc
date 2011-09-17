@@ -59,7 +59,7 @@ public:
 // Gmock is unable to provide a general mock, so we roll one for our fixure
 // types.  Our mocked methods are actually arbitrary non-templated methods,
 // delegated to by template specializations for our types.
-class MockNewDelete {
+class MockInitializer {
 public:
 
   template<class C>
@@ -82,33 +82,33 @@ public:
 };
 
 template<>
-CoupChasis * MockNewDelete::new_<CoupChasis>() {
+CoupChasis * MockInitializer::new_<CoupChasis>() {
   return newCoupChasis();
 }
 
 template<>
-HybridEngine * MockNewDelete::new_<HybridEngine>() {
+HybridEngine * MockInitializer::new_<HybridEngine>() {
   return newHybridEngine();
 }
 
 template<>
-Herbie * MockNewDelete::new_<Herbie>(SAUCE_SHARED_PTR<Chasis> chasis,
-                                     SAUCE_SHARED_PTR<Engine> engine) {
+Herbie * MockInitializer::new_<Herbie>(SAUCE_SHARED_PTR<Chasis> chasis,
+                                       SAUCE_SHARED_PTR<Engine> engine) {
   return newHerbie(chasis, engine);
 }
 
 template<>
-void MockNewDelete::delete_<Chasis>(Chasis * chasis) {
+void MockInitializer::delete_<Chasis>(Chasis * chasis) {
   deleteChasis(chasis);
 }
 
 template<>
-void MockNewDelete::delete_<Engine>(Engine * engine) {
+void MockInitializer::delete_<Engine>(Engine * engine) {
   deleteEngine(engine);
 }
 
 template<>
-void MockNewDelete::delete_<Vehicle>(Vehicle * vehicle) {
+void MockInitializer::delete_<Vehicle>(Vehicle * vehicle) {
   deleteVehicle(vehicle);
 }
 
@@ -116,20 +116,20 @@ class SauceTest:
   public ::testing::Test {
 public:
 
-  ::sauce::Injector<MyModule, MockNewDelete> injector;
-  MockNewDelete & newDelete;
+  ::sauce::Injector<MyModule, MockInitializer> injector;
+  MockInitializer & initializer;
 
   // SauceTest is a friend of Injector
   SauceTest():
     injector(),
-    newDelete(injector.newDelete) {}
+    initializer(injector.initializer) {}
 
 };
 
 TEST_F(SauceTest, shouldProvideAndDisposeADependency) {
   CoupChasis chasis;
-  EXPECT_CALL(newDelete, newCoupChasis()).WillOnce(Return(&chasis));
-  EXPECT_CALL(newDelete, deleteChasis(&chasis));
+  EXPECT_CALL(initializer, newCoupChasis()).WillOnce(Return(&chasis));
+  EXPECT_CALL(initializer, deleteChasis(&chasis));
 
   SAUCE_SHARED_PTR<Chasis> actual = injector.provide<Chasis>();
   ASSERT_EQ(&chasis, actual.get());
@@ -149,25 +149,25 @@ TEST_F(SauceTest, shouldProvideAndDisposeOfDependenciesTransitively) {
   // only about how they stand relative to the vehicle.
   Sequence injectedChasis, injectedEngine;
 
-  EXPECT_CALL(newDelete, newCoupChasis()).
+  EXPECT_CALL(initializer, newCoupChasis()).
   InSequence(injectedChasis).
   WillOnce(Return(&chasis));
 
-  EXPECT_CALL(newDelete, newHybridEngine()).
+  EXPECT_CALL(initializer, newHybridEngine()).
   InSequence(injectedEngine).
   WillOnce(Return(&engine));
 
-  EXPECT_CALL(newDelete, newHerbie(SmartPointerTo(&chasis), SmartPointerTo(&engine))).
+  EXPECT_CALL(initializer, newHerbie(SmartPointerTo(&chasis), SmartPointerTo(&engine))).
   InSequence(injectedChasis, injectedEngine).
   WillOnce(Return(&vehicle));
 
-  EXPECT_CALL(newDelete, deleteEngine(&engine)).
+  EXPECT_CALL(initializer, deleteEngine(&engine)).
   InSequence(injectedEngine);
 
-  EXPECT_CALL(newDelete, deleteChasis(&chasis)).
+  EXPECT_CALL(initializer, deleteChasis(&chasis)).
   InSequence(injectedChasis);
 
-  EXPECT_CALL(newDelete, deleteVehicle(&vehicle)).
+  EXPECT_CALL(initializer, deleteVehicle(&vehicle)).
   InSequence(injectedChasis, injectedEngine);
 
   SAUCE_SHARED_PTR<Vehicle> actual = injector.provide<Vehicle>();

@@ -9,8 +9,8 @@ $var n = 10  $$ The maximum arity we support.
 namespace sauce {
 namespace internal {
 
-// A mockable wrapper for the new, delete and related keywords.
-class NewDelete {
+// A mockable wrapper for calling variable-arity constructors and destructors.
+class Initializer {
 public:
 $range i 0..n
 $for i [[
