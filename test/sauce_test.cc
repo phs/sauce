@@ -96,8 +96,6 @@ HybridEngine * MockNewDelete::_new<HybridEngine>() {
   return new_hybrid_engine();
 }
 
-#include <iostream>
-
 template<>
 Herbie * MockNewDelete::_new<Herbie>(Chasis & chasis, Engine & engine) {
   // Use addresses here only because googletest doesn't know how to
