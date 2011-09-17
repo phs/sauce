@@ -18,19 +18,6 @@ protected:
   }
 };
 
-template<typename Injector, typename Iface>
-class Dereference:
-  public Binding<Injector> {
-public:
-  static Iface & provide(Injector & injector) {
-    return *injector.template provide<Iface *>();
-  }
-
-  static void dispose(Injector & injector, Iface & iface) {
-    injector.template dispose<Iface *>(&iface);
-  }
-};
-
 }
 }
 }

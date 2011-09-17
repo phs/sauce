@@ -38,17 +38,7 @@ public:
   }
 
   template<typename Injector>
-  static ::sauce::internal::bindings::Dereference<Injector, Chasis> * bindings(Chasis &) {
-    return 0;
-  }
-
-  template<typename Injector>
   static ::sauce::internal::bindings::New<Injector, Engine, HybridEngine()> * bindings(Engine *) {
-    return 0;
-  }
-
-  template<typename Injector>
-  static ::sauce::internal::bindings::Dereference<Injector, Engine> * bindings(Engine &) {
     return 0;
   }
 
@@ -133,63 +123,49 @@ public:
 
 };
 
-TEST_F(SauceTest, shouldProvideADependency) {
-  CoupChasis chasis;
-  EXPECT_CALL(newDelete, newCoupChasis()).WillOnce(Return(&chasis));
-  Chasis * actual = injector.provide<Chasis *>();
-  ASSERT_EQ(&chasis, actual);
-}
-
-TEST_F(SauceTest, shouldDisposeADependency) {
-  CoupChasis chasis;
-  EXPECT_CALL(newDelete, deleteChasis(&chasis));
-  injector.dispose<Chasis *>(&chasis);
-}
-
-TEST_F(SauceTest, shouldDereferenceAddressesWithDereferenceBindings) {
+TEST_F(SauceTest, shouldProvideAndDisposeADependency) {
   CoupChasis chasis;
   EXPECT_CALL(newDelete, newCoupChasis()).WillOnce(Return(&chasis));
   EXPECT_CALL(newDelete, deleteChasis(&chasis));
 
-  Chasis & actual = injector.provide<Chasis &>();
-  ASSERT_EQ(&chasis, &actual);
-  injector.dispose<Chasis &>(actual);
+  SAUCE_SHARED_PTR<Chasis> actual = injector.provide<Chasis>();
+  ASSERT_EQ(&chasis, actual.get());
 }
 
-TEST_F(SauceTest, shouldProvideAndDisposeOfDependenciesTransitively) {
-  CoupChasis chasis;
-  HybridEngine engine;
-  Herbie vehicle(chasis, engine);
-
-  // We don't care about the relative ordering between chasis and engine:
-  // only about how they stand relative to the vehicle.
-  Sequence injectedChasis, injectedEngine;
-
-  EXPECT_CALL(newDelete, newCoupChasis()).
-  InSequence(injectedChasis).
-  WillOnce(Return(&chasis));
-
-  EXPECT_CALL(newDelete, newHybridEngine()).
-  InSequence(injectedEngine).
-  WillOnce(Return(&engine));
-
-  EXPECT_CALL(newDelete, newHerbie(&chasis, &engine)).
-  InSequence(injectedChasis, injectedEngine).
-  WillOnce(Return(&vehicle));
-
-  EXPECT_CALL(newDelete, deleteVehicle(&vehicle)).
-  InSequence(injectedChasis, injectedEngine);
-
-  // EXPECT_CALL(newDelete, deleteEngine(&engine)).
-  // InSequence(injectedEngine);
-
-  // EXPECT_CALL(newDelete, deleteChasis(&chasis)).
-  // InSequence(injectedChasis);
-
-  Vehicle * actual = injector.provide<Vehicle *>();
-  ASSERT_EQ(&vehicle, actual);
-  injector.dispose<Vehicle *>(actual);
-}
+// TEST_F(SauceTest, shouldProvideAndDisposeOfDependenciesTransitively) {
+//   CoupChasis chasis;
+//   HybridEngine engine;
+//   Herbie vehicle(chasis, engine);
+//
+//   // We don't care about the relative ordering between chasis and engine:
+//   // only about how they stand relative to the vehicle.
+//   Sequence injectedChasis, injectedEngine;
+//
+//   EXPECT_CALL(newDelete, newCoupChasis()).
+//   InSequence(injectedChasis).
+//   WillOnce(Return(&chasis));
+//
+//   EXPECT_CALL(newDelete, newHybridEngine()).
+//   InSequence(injectedEngine).
+//   WillOnce(Return(&engine));
+//
+//   EXPECT_CALL(newDelete, newHerbie(&chasis, &engine)).
+//   InSequence(injectedChasis, injectedEngine).
+//   WillOnce(Return(&vehicle));
+//
+//   EXPECT_CALL(newDelete, deleteVehicle(&vehicle)).
+//   InSequence(injectedChasis, injectedEngine);
+//
+//   // EXPECT_CALL(newDelete, deleteEngine(&engine)).
+//   // InSequence(injectedEngine);
+//
+//   // EXPECT_CALL(newDelete, deleteChasis(&chasis)).
+//   // InSequence(injectedChasis);
+//
+//   Vehicle * actual = injector.provide<Vehicle *>();
+//   ASSERT_EQ(&vehicle, actual);
+//   injector.dispose<Vehicle *>(actual);
+// }
 
 }
 }

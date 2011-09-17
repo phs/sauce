@@ -4,6 +4,7 @@
 
 #include <sauce/memory>
 #include <sauce/internal/bindings>
+#include <sauce/internal/deleter>
 #include <sauce/internal/new_delete>
 
 namespace sauce {
@@ -22,6 +23,7 @@ private:
 public:
 
   friend class ::sauce::test::SauceTest;
+  friend class ::sauce::internal::Deleter<Injector_>;
   friend class ::sauce::internal::bindings::Binding<Injector_>;
 
   Injector():
@@ -30,26 +32,35 @@ public:
   virtual ~Injector() {}
 
   template<typename Iface>
-  Iface provide() {
-    return provide<Iface>(Module::template bindings<Injector_> );
-  }
+  SAUCE_SHARED_PTR<Iface> provide() {
+    // Resolve the interface into a binding with EXTRA SUPER MAGIC
+    Iface * provided = provide<Iface>(Module::template bindings<Injector_> );
 
-  template<typename Iface>
-  void dispose(Iface iface) {
-    dispose<Iface>(Module::template bindings<Injector_>, iface);
+    // Use a custom deleter for the shared_ptr
+    sauce::internal::Deleter<Injector_> deleter(*this);
+
+    // Wrap and return the provided implementation in the chosen shared_ptr
+    SAUCE_SHARED_PTR<Iface> smartPointer;
+    smartPointer.reset(provided, deleter);
+    return smartPointer;
   }
 
 private:
 
   NewDelete newDelete;
 
+  template<typename Iface>
+  void dispose(Iface * iface) {
+    dispose<Iface>(Module::template bindings<Injector_>, iface);
+  }
+
   template<typename Iface, typename Binding>
-  Iface provide(Binding * binding(Iface)) {
+  Iface * provide(Binding * binding(Iface *)) {
     return Binding::provide(*this);
   }
 
   template<typename Iface, typename Binding>
-  void dispose(Binding * binding(Iface), Iface iface) {
+  void dispose(Binding * binding(Iface *), Iface * iface) {
     Binding::dispose(*this, iface);
   }
 
