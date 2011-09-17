@@ -136,8 +136,8 @@ TEST_F(SauceTest, shouldProvideAndDisposeADependency) {
 }
 
 // Argument matcher for smart pointers based on backing address.
-MATCHER_P(SmartPointerTo, value, "") {
-  return arg.get() == value;
+MATCHER_P(SmartPointerTo, address, "") {
+  return arg.get() == address;
 }
 
 TEST_F(SauceTest, shouldProvideAndDisposeOfDependenciesTransitively) {
