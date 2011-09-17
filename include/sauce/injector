@@ -34,7 +34,8 @@ public:
   template<typename Iface>
   SAUCE_SHARED_PTR<Iface> provide() {
     // Resolve the interface into a binding with EXTRA SUPER MAGIC
-    Iface * provided = provide<Iface>(Module::template bindings<Injector_> );
+    Iface * provided = provideFromBinding<Iface>(
+      Module::template bindings<Injector_> );
 
     // Use a custom deleter for the shared_ptr
     sauce::internal::Deleter<Injector_> deleter(*this);
@@ -51,16 +52,17 @@ private:
 
   template<typename Iface>
   void dispose(Iface * iface) {
-    dispose<Iface>(Module::template bindings<Injector_>, iface);
+    disposeFromBinding<Iface>(
+      Module::template bindings<Injector_>, iface);
   }
 
   template<typename Iface, typename Binding>
-  Iface * provide(Binding * binding(Iface *)) {
+  Iface * provideFromBinding(Binding * binding(Iface *)) {
     return Binding::provide(*this);
   }
 
   template<typename Iface, typename Binding>
-  void dispose(Binding * binding(Iface *), Iface * iface) {
+  void disposeFromBinding(Binding * binding(Iface *), Iface * iface) {
     Binding::dispose(*this, iface);
   }
 
