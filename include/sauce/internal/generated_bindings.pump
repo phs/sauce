@@ -36,8 +36,7 @@ public:
 
 ]]]]
 
-    Impl * provided = newDelete(injector).template new_<Impl$comma_shared_As >($as);
-    return provided;
+    return newDelete(injector).template new_<Impl$comma_shared_As >($as);
   }
 
   static void dispose(Injector & injector, Iface * iface) {
