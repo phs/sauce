@@ -30,7 +30,7 @@ $var as = [[$for j, [[a$j]]]]
 template<typename Injector, typename Iface, typename Impl$comma_typename_As>
 class New<Injector, Iface, Impl($As)>: public Binding<Injector> {
 public:
-  static Impl * provide(Injector & injector) {
+  static Impl * provide(Injector const & injector) {
 [[$for j [[
     SAUCE_SHARED_PTR<A$j> a$j(injector.template provide<A$j>());
 
