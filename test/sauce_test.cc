@@ -69,12 +69,12 @@ class MockNewDelete {
 public:
 
   template<class C>
-  C * _new();
+  C * new_();
 
   template<class C, typename A1, typename A2>
-  C * _new(A1, A2);
+  C * new_(A1, A2);
   template<class C>
-  void _delete(C *);
+  void delete_(C *);
 
   MOCK_METHOD0(newCoupChasis, CoupChasis * ());
   MOCK_METHOD0(newHybridEngine, HybridEngine * ());
@@ -87,17 +87,17 @@ public:
 };
 
 template<>
-CoupChasis * MockNewDelete::_new<CoupChasis>() {
+CoupChasis * MockNewDelete::new_<CoupChasis>() {
   return newCoupChasis();
 }
 
 template<>
-HybridEngine * MockNewDelete::_new<HybridEngine>() {
+HybridEngine * MockNewDelete::new_<HybridEngine>() {
   return newHybridEngine();
 }
 
 template<>
-Herbie * MockNewDelete::_new<Herbie>(Chasis & chasis, Engine & engine) {
+Herbie * MockNewDelete::new_<Herbie>(Chasis & chasis, Engine & engine) {
   // Use addresses here only because googletest doesn't know how to
   // deal with references aside from copying them (and thus breaking my
   // object-identity comparators)
@@ -105,17 +105,17 @@ Herbie * MockNewDelete::_new<Herbie>(Chasis & chasis, Engine & engine) {
 }
 
 template<>
-void MockNewDelete::_delete<Chasis>(Chasis * chasis) {
+void MockNewDelete::delete_<Chasis>(Chasis * chasis) {
   deleteChasis(chasis);
 }
 
 template<>
-void MockNewDelete::_delete<Engine>(Engine * engine) {
+void MockNewDelete::delete_<Engine>(Engine * engine) {
   deleteEngine(engine);
 }
 
 template<>
-void MockNewDelete::_delete<Vehicle>(Vehicle * vehicle) {
+void MockNewDelete::delete_<Vehicle>(Vehicle * vehicle) {
   deleteVehicle(vehicle);
 }
 
