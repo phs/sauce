@@ -19,6 +19,7 @@ private:
 
   typedef NewDelete_ NewDelete;
   typedef Injector<Module, NewDelete> Injector_;
+  typedef ::sauce::internal::Deleter<Injector_> Deleter_;
 
   NewDelete mutable newDelete;
 
@@ -40,7 +41,7 @@ public:
       Module::template bindings<Injector_> );
 
     // Use a custom deleter for the shared_ptr
-    sauce::internal::Deleter<Injector_> deleter(*this);
+    Deleter_ deleter(*this);
 
     // Wrap and return the provided implementation in the chosen shared_ptr
     SAUCE_SHARED_PTR<Iface> smartPointer;
