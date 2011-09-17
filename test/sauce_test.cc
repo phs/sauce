@@ -63,13 +63,13 @@ class MockInitializer {
 public:
 
   template<class C>
-  C * new_();
+  C * construct();
 
   template<class C, typename A1, typename A2>
-  C * new_(A1, A2);
+  C * construct(A1, A2);
 
   template<class C>
-  void delete_(C *);
+  void destroy(C *);
 
   MOCK_METHOD0(newCoupChasis, CoupChasis * ());
   MOCK_METHOD0(newHybridEngine, HybridEngine * ());
@@ -82,33 +82,33 @@ public:
 };
 
 template<>
-CoupChasis * MockInitializer::new_<CoupChasis>() {
+CoupChasis * MockInitializer::construct<CoupChasis>() {
   return newCoupChasis();
 }
 
 template<>
-HybridEngine * MockInitializer::new_<HybridEngine>() {
+HybridEngine * MockInitializer::construct<HybridEngine>() {
   return newHybridEngine();
 }
 
 template<>
-Herbie * MockInitializer::new_<Herbie>(SAUCE_SHARED_PTR<Chasis> chasis,
-                                       SAUCE_SHARED_PTR<Engine> engine) {
+Herbie * MockInitializer::construct<Herbie>(SAUCE_SHARED_PTR<Chasis> chasis,
+                                            SAUCE_SHARED_PTR<Engine> engine) {
   return newHerbie(chasis, engine);
 }
 
 template<>
-void MockInitializer::delete_<Chasis>(Chasis * chasis) {
+void MockInitializer::destroy<Chasis>(Chasis * chasis) {
   deleteChasis(chasis);
 }
 
 template<>
-void MockInitializer::delete_<Engine>(Engine * engine) {
+void MockInitializer::destroy<Engine>(Engine * engine) {
   deleteEngine(engine);
 }
 
 template<>
-void MockInitializer::delete_<Vehicle>(Vehicle * vehicle) {
+void MockInitializer::destroy<Vehicle>(Vehicle * vehicle) {
   deleteVehicle(vehicle);
 }
 

@@ -21,14 +21,14 @@ $var A_as = [[$for j, [[A$j a$j]]]]
 $var as = [[$for j, [[a$j]]]]
 
   template<typename C$comma_typename_As>
-  inline C * new_($A_as) {
+  inline C * construct($A_as) {
     return new C($as);
   }
 
 ]]
 
   template<typename C>
-  inline void delete_(C * c) {
+  inline void destroy(C * c) {
     delete c;
   }
 };

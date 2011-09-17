@@ -36,11 +36,11 @@ public:
 
 ]]]]
 
-    return initializer(injector).template new_<Impl$comma_shared_As >($as);
+    return initializer(injector).template construct<Impl$comma_shared_As >($as);
   }
 
   static void dispose(Injector const & injector, Iface * iface) {
-    initializer(injector).delete_(iface);
+    initializer(injector).destroy(iface);
   }
 };
 
