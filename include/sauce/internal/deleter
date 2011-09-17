@@ -12,10 +12,10 @@ namespace internal {
  */
 template<typename Injector>
 class Deleter {
-  Injector & injector;
+  Injector const & injector;
 
 public:
-  Deleter(Injector & injector):
+  Deleter(Injector const & injector):
     injector(injector) {
   }
 

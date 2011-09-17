@@ -39,7 +39,7 @@ public:
     return newDelete(injector).template new_<Impl$comma_shared_As >($as);
   }
 
-  static void dispose(Injector & injector, Iface * iface) {
+  static void dispose(Injector const & injector, Iface * iface) {
     newDelete(injector).delete_(iface);
   }
 };

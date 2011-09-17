@@ -20,6 +20,8 @@ private:
   typedef NewDelete_ NewDelete;
   typedef Injector<Module, NewDelete> Injector_;
 
+  NewDelete mutable newDelete;
+
 public:
 
   friend class ::sauce::test::SauceTest;
@@ -48,10 +50,8 @@ public:
 
 private:
 
-  NewDelete newDelete;
-
   template<typename Iface>
-  void dispose(Iface * iface) {
+  void dispose(Iface * iface) const {
     disposeFromBinding<Iface>(
       Module::template bindings<Injector_>, iface);
   }
@@ -62,7 +62,7 @@ private:
   }
 
   template<typename Iface, typename Binding>
-  void disposeFromBinding(Binding * binding(Iface *), Iface * iface) {
+  void disposeFromBinding(Binding * binding(Iface *), Iface * iface) const {
     Binding::dispose(*this, iface);
   }
 
