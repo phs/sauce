@@ -3,8 +3,8 @@ $$ generated_bindings.h
 $$
 $var n = 10  $$ The maximum arity we support.
 // -*- C++ -*-
-#ifndef SAUCE_SAUCE_INTERNAL_NEW_DELETE_H_
-#define SAUCE_SAUCE_INTERNAL_NEW_DELETE_H_
+#ifndef SAUCE_SAUCE_INTERNAL_INITIALIZER_H_
+#define SAUCE_SAUCE_INTERNAL_INITIALIZER_H_
 
 namespace sauce {
 namespace internal {
