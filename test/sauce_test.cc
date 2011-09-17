@@ -133,20 +133,20 @@ public:
 
 };
 
-TEST_F(SauceTest, should_provide_a_dependency) {
+TEST_F(SauceTest, shouldProvideADependency) {
   CoupChasis chasis;
   EXPECT_CALL(newDelete, newCoupChasis()).WillOnce(Return(&chasis));
   Chasis * actual = injector.provide<Chasis *>();
   ASSERT_EQ(&chasis, actual);
 }
 
-TEST_F(SauceTest, should_dispose_a_dependency) {
+TEST_F(SauceTest, shouldDisposeADependency) {
   CoupChasis chasis;
   EXPECT_CALL(newDelete, deleteChasis(&chasis));
   injector.dispose<Chasis *>(&chasis);
 }
 
-TEST_F(SauceTest, should_dereference_addresses_with_dereference_bindings) {
+TEST_F(SauceTest, shouldDereferenceAddressesWithDereferenceBindings) {
   CoupChasis chasis;
   EXPECT_CALL(newDelete, newCoupChasis()).WillOnce(Return(&chasis));
   EXPECT_CALL(newDelete, deleteChasis(&chasis));
@@ -156,7 +156,7 @@ TEST_F(SauceTest, should_dereference_addresses_with_dereference_bindings) {
   injector.dispose<Chasis &>(actual);
 }
 
-TEST_F(SauceTest, should_provide_and_dispose_of_dependencies_transitively) {
+TEST_F(SauceTest, shouldProvideAndDisposeOfDependenciesTransitively) {
   CoupChasis chasis;
   HybridEngine engine;
   Herbie vehicle(chasis, engine);
