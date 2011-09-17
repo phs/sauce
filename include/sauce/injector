@@ -57,12 +57,12 @@ private:
   }
 
   template<typename Iface, typename Binding>
-  Iface * provideFromBinding(Binding * binding(Iface *)) const {
+  Iface * provideFromBinding(Binding * binding(Iface)) const {
     return Binding::provide(*this);
   }
 
   template<typename Iface, typename Binding>
-  void disposeFromBinding(Binding * binding(Iface *), Iface * iface) const {
+  void disposeFromBinding(Binding * binding(Iface), Iface * iface) const {
     Binding::dispose(*this, iface);
   }
 
