@@ -34,12 +34,12 @@ public:
 
 ]]]]
 
-    Impl * provided = new_delete(injector).template _new<Impl$comma_As>($as);
+    Impl * provided = newDelete(injector).template _new<Impl$comma_As>($as);
     return provided;
   }
 
   static void dispose(Injector & injector, Iface * iface) {
-    new_delete(injector)._delete(iface);
+    newDelete(injector)._delete(iface);
   }
 };
 

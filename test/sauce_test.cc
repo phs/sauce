@@ -124,32 +124,32 @@ class SauceTest:
 public:
 
   ::sauce::Injector<MyModule, MockNewDelete> injector;
-  MockNewDelete & new_delete;
+  MockNewDelete & newDelete;
 
   // SauceTest is a friend of Injector
   SauceTest():
     injector(),
-    new_delete(injector.new_delete) {}
+    newDelete(injector.newDelete) {}
 
 };
 
 TEST_F(SauceTest, should_provide_a_dependency) {
   CoupChasis chasis;
-  EXPECT_CALL(new_delete, new_coup_chasis()).WillOnce(Return(&chasis));
+  EXPECT_CALL(newDelete, new_coup_chasis()).WillOnce(Return(&chasis));
   Chasis * actual = injector.provide<Chasis *>();
   ASSERT_EQ(&chasis, actual);
 }
 
 TEST_F(SauceTest, should_dispose_a_dependency) {
   CoupChasis chasis;
-  EXPECT_CALL(new_delete, delete_chasis(&chasis));
+  EXPECT_CALL(newDelete, delete_chasis(&chasis));
   injector.dispose<Chasis *>(&chasis);
 }
 
 TEST_F(SauceTest, should_dereference_addresses_with_dereference_bindings) {
   CoupChasis chasis;
-  EXPECT_CALL(new_delete, new_coup_chasis()).WillOnce(Return(&chasis));
-  EXPECT_CALL(new_delete, delete_chasis(&chasis));
+  EXPECT_CALL(newDelete, new_coup_chasis()).WillOnce(Return(&chasis));
+  EXPECT_CALL(newDelete, delete_chasis(&chasis));
 
   Chasis & actual = injector.provide<Chasis &>();
   ASSERT_EQ(&chasis, &actual);
@@ -165,25 +165,25 @@ TEST_F(SauceTest, should_provide_and_dispose_of_dependencies_transitively) {
   // only about how they stand relative to the vehicle.
   Sequence injected_chasis, injected_engine;
 
-  EXPECT_CALL(new_delete, new_coup_chasis()).
+  EXPECT_CALL(newDelete, new_coup_chasis()).
   InSequence(injected_chasis).
   WillOnce(Return(&chasis));
 
-  EXPECT_CALL(new_delete, new_hybrid_engine()).
+  EXPECT_CALL(newDelete, new_hybrid_engine()).
   InSequence(injected_engine).
   WillOnce(Return(&engine));
 
-  EXPECT_CALL(new_delete, new_herbie(&chasis, &engine)).
+  EXPECT_CALL(newDelete, new_herbie(&chasis, &engine)).
   InSequence(injected_chasis, injected_engine).
   WillOnce(Return(&vehicle));
 
-  EXPECT_CALL(new_delete, delete_vehicle(&vehicle)).
+  EXPECT_CALL(newDelete, delete_vehicle(&vehicle)).
   InSequence(injected_chasis, injected_engine);
 
-  // EXPECT_CALL(new_delete, delete_engine(&engine)).
+  // EXPECT_CALL(newDelete, delete_engine(&engine)).
   // InSequence(injected_engine);
 
-  // EXPECT_CALL(new_delete, delete_chasis(&chasis)).
+  // EXPECT_CALL(newDelete, delete_chasis(&chasis)).
   // InSequence(injected_chasis);
 
   Vehicle * actual = injector.provide<Vehicle *>();

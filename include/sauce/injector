@@ -25,7 +25,7 @@ public:
   friend class ::sauce::internal::bindings::Binding<Injector_>;
 
   Injector():
-    new_delete() {}
+    newDelete() {}
 
   virtual ~Injector() {}
 
@@ -41,7 +41,7 @@ public:
 
 private:
 
-  NewDelete new_delete;
+  NewDelete newDelete;
 
   template<typename Iface, typename Binding>
   Iface provide(Binding * binding(Iface)) {

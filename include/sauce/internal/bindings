@@ -13,8 +13,8 @@ class Binding {
   typedef typename Injector::NewDelete NewDelete;
 
 protected:
-  static NewDelete & new_delete(Injector & injector) {
-    return injector.new_delete;
+  static NewDelete & newDelete(Injector & injector) {
+    return injector.newDelete;
   }
 };
 
