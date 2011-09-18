@@ -37,19 +37,21 @@ class MyModule {
 public:
 
   template<typename Injector>
-  static ::sauce::internal::bindings::New<Injector, Chasis, CoupChasis, CoupChasis()> * bindings(
+  static ::sauce::internal::bindings::New<Injector, Chasis, std::allocator<CoupChasis>, CoupChasis,
+                                          CoupChasis()> * bindings(
     Chasis) {
     return 0;
   }
 
   template<typename Injector>
-  static ::sauce::internal::bindings::New<Injector, Engine, HybridEngine,
+  static ::sauce::internal::bindings::New<Injector, Engine, std::allocator<HybridEngine>,
+                                          HybridEngine,
                                           HybridEngine()> * bindings(Engine) {
     return 0;
   }
 
   template<typename Injector>
-  static ::sauce::internal::bindings::New<Injector, Vehicle, Herbie,
+  static ::sauce::internal::bindings::New<Injector, Vehicle, std::allocator<Herbie>, Herbie,
                                           Herbie(Chasis, Engine)> * bindings(
     Vehicle) {
     return 0;
