@@ -34,7 +34,7 @@ public:
 ]]]]
 
     Allocator allocator;
-    Impl * impl = allocator.allocate(sizeof(Impl));
+    Impl * impl = allocator.allocate(1);
     initializer(injector).template construct<Impl$comma_shared_As >(impl$comma_as);
     return impl;
   }
@@ -43,7 +43,7 @@ public:
     Allocator allocator;
     Impl * impl = static_cast<Impl *>(iface);
     initializer(injector).destroy(impl);
-    allocator.deallocate(impl, sizeof(Impl));
+    allocator.deallocate(impl, 1);
   }
 };
 

@@ -249,12 +249,12 @@ TEST_F(SauceTest, shouldProvideAndDisposeADependency) {
   CoupChasis expected;
 
   // Allocate and construct.  Have the mock allocator return the coup chasis above.
-  EXPECT_CALL(allocator, allocateCoupChasis(sizeof(CoupChasis))).WillOnce(Return(&expected));
+  EXPECT_CALL(allocator, allocateCoupChasis(1)).WillOnce(Return(&expected));
   EXPECT_CALL(initializer, newCoupChasis(&expected));
 
   // Destroy and deallocate
   EXPECT_CALL(initializer, deleteCoupChasis(&expected));
-  EXPECT_CALL(allocator, deallocateCoupChasis(&expected, sizeof(CoupChasis)));
+  EXPECT_CALL(allocator, deallocateCoupChasis(&expected, 1));
 
   // Ask for a Chasis
   SAUCE_SHARED_PTR<Chasis> actual = injector.provide<Chasis>();
@@ -276,21 +276,21 @@ TEST_F(SauceTest, shouldProvideAndDisposeOfDependenciesTransitively) {
   Sequence injectedChasis, injectedEngine;
 
   // Allocate and construct the chasis
-  EXPECT_CALL(allocator, allocateCoupChasis(sizeof(CoupChasis))).
+  EXPECT_CALL(allocator, allocateCoupChasis(1)).
   InSequence(injectedChasis).
   WillOnce(Return(&chasis));
   EXPECT_CALL(initializer, newCoupChasis(&chasis)).
   InSequence(injectedChasis);
 
   // Allocate and construct the engine
-  EXPECT_CALL(allocator, allocateHybridEngine(sizeof(HybridEngine))).
+  EXPECT_CALL(allocator, allocateHybridEngine(1)).
   InSequence(injectedEngine).
   WillOnce(Return(&engine));
   EXPECT_CALL(initializer, newHybridEngine(&engine)).
   InSequence(injectedEngine);
 
   // Allocate and construct the vehicle itself, injecting the two dependencies
-  EXPECT_CALL(allocator, allocateHerbie(sizeof(Herbie))).
+  EXPECT_CALL(allocator, allocateHerbie(1)).
   InSequence(injectedChasis, injectedEngine).
   WillOnce(Return(&vehicle));
   EXPECT_CALL(initializer, newHerbie(&vehicle, SmartPointerTo(&chasis), SmartPointerTo(&engine))).
@@ -299,13 +299,13 @@ TEST_F(SauceTest, shouldProvideAndDisposeOfDependenciesTransitively) {
   // Destroy and deallocate the engine
   EXPECT_CALL(initializer, deleteHybridEngine(&engine)).
   InSequence(injectedEngine);
-  EXPECT_CALL(allocator, deallocateHybridEngine(&engine, sizeof(HybridEngine))).
+  EXPECT_CALL(allocator, deallocateHybridEngine(&engine, 1)).
   InSequence(injectedEngine);
 
   // Destroy and deallocate the chasis
   EXPECT_CALL(initializer, deleteCoupChasis(&chasis)).
   InSequence(injectedChasis);
-  EXPECT_CALL(allocator, deallocateCoupChasis(&chasis, sizeof(CoupChasis))).
+  EXPECT_CALL(allocator, deallocateCoupChasis(&chasis, 1)).
   InSequence(injectedChasis);
 
   // Destroy and deallocate the vehicle
@@ -313,7 +313,7 @@ TEST_F(SauceTest, shouldProvideAndDisposeOfDependenciesTransitively) {
   // is simply the order that falls out of smart pointer deletion..
   EXPECT_CALL(initializer, deleteHerbie(&vehicle)).
   InSequence(injectedChasis, injectedEngine);
-  EXPECT_CALL(allocator, deallocateHerbie(&vehicle, sizeof(Herbie))).
+  EXPECT_CALL(allocator, deallocateHerbie(&vehicle, 1)).
   InSequence(injectedChasis, injectedEngine);
 
   // And request a Vehicle, show it's our local, and let it fall out of scope
