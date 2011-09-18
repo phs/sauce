@@ -38,7 +38,8 @@ public:
   }
 
   static void dispose(Injector const & injector, Iface * iface) {
-    initializer(injector).destroy(iface);
+    Impl * impl = static_cast<Impl *>(iface);
+    initializer(injector).destroy(impl);
   }
 };
 

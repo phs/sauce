@@ -75,9 +75,9 @@ public:
   MOCK_METHOD0(newHybridEngine, HybridEngine * ());
   MOCK_METHOD2(newHerbie, Herbie * (SAUCE_SHARED_PTR<Chasis>, SAUCE_SHARED_PTR<Engine> ));
 
-  MOCK_METHOD1(deleteChasis, void(Chasis *));
-  MOCK_METHOD1(deleteEngine, void(Engine *));
-  MOCK_METHOD1(deleteVehicle, void(Vehicle *));
+  MOCK_METHOD1(deleteCoupChasis, void(CoupChasis *));
+  MOCK_METHOD1(deleteHybridEngine, void(HybridEngine *));
+  MOCK_METHOD1(deleteHerbie, void(Herbie *));
 
 };
 
@@ -98,18 +98,18 @@ Herbie * MockInitializer::construct<Herbie>(SAUCE_SHARED_PTR<Chasis> chasis,
 }
 
 template<>
-void MockInitializer::destroy<Chasis>(Chasis * chasis) {
-  deleteChasis(chasis);
+void MockInitializer::destroy<CoupChasis>(CoupChasis * coupChasis) {
+  deleteCoupChasis(coupChasis);
 }
 
 template<>
-void MockInitializer::destroy<Engine>(Engine * engine) {
-  deleteEngine(engine);
+void MockInitializer::destroy<HybridEngine>(HybridEngine * hybridEngine) {
+  deleteHybridEngine(hybridEngine);
 }
 
 template<>
-void MockInitializer::destroy<Vehicle>(Vehicle * vehicle) {
-  deleteVehicle(vehicle);
+void MockInitializer::destroy<Herbie>(Herbie * herbie) {
+  deleteHerbie(herbie);
 }
 
 class SauceTest:
@@ -129,7 +129,7 @@ public:
 TEST_F(SauceTest, shouldProvideAndDisposeADependency) {
   CoupChasis chasis;
   EXPECT_CALL(initializer, newCoupChasis()).WillOnce(Return(&chasis));
-  EXPECT_CALL(initializer, deleteChasis(&chasis));
+  EXPECT_CALL(initializer, deleteCoupChasis(&chasis));
 
   SAUCE_SHARED_PTR<Chasis> actual = injector.provide<Chasis>();
   ASSERT_EQ(&chasis, actual.get());
@@ -161,13 +161,13 @@ TEST_F(SauceTest, shouldProvideAndDisposeOfDependenciesTransitively) {
   InSequence(injectedChasis, injectedEngine).
   WillOnce(Return(&vehicle));
 
-  EXPECT_CALL(initializer, deleteEngine(&engine)).
+  EXPECT_CALL(initializer, deleteHybridEngine(&engine)).
   InSequence(injectedEngine);
 
-  EXPECT_CALL(initializer, deleteChasis(&chasis)).
+  EXPECT_CALL(initializer, deleteCoupChasis(&chasis)).
   InSequence(injectedChasis);
 
-  EXPECT_CALL(initializer, deleteVehicle(&vehicle)).
+  EXPECT_CALL(initializer, deleteHerbie(&vehicle)).
   InSequence(injectedChasis, injectedEngine);
 
   SAUCE_SHARED_PTR<Vehicle> actual = injector.provide<Vehicle>();
