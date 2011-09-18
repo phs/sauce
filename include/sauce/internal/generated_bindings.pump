@@ -13,7 +13,7 @@ namespace bindings {
 template<typename Injector>
 class Binding;
 
-template<typename Injector, typename Iface, typename Constructor>
+template<typename Injector, typename Iface, typename Impl, typename Constructor>
 class New;
 
 $range i 0..n
@@ -26,7 +26,7 @@ $var comma_as = [[$for j [[, a$j]]]]
 $var as = [[$for j, [[a$j]]]]
 
 template<typename Injector, typename Iface, typename Impl$comma_typename_As>
-class New<Injector, Iface, Impl($As)>: public Binding<Injector> {
+class New<Injector, Iface, Impl, Impl($As)>: public Binding<Injector> {
 public:
   static Impl * provide(Injector const & injector) {
 [[$for j [[
