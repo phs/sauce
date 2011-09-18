@@ -23,7 +23,6 @@ $var comma_typename_As = [[$for j [[, typename A$j]]]]
 $var comma_shared_As = [[$for j [[, SAUCE_SHARED_PTR<A$j>]]]]
 $var As = [[$for j, [[A$j]]]]
 $var comma_as = [[$for j [[, a$j]]]]
-$var as = [[$for j, [[a$j]]]]
 
 template<typename Injector, typename Iface, typename Allocator, typename Impl$comma_typename_As>
 class New<Injector, Iface, Allocator, Impl, Impl($As)>: public Binding<Injector> {
@@ -34,12 +33,17 @@ public:
 
 ]]]]
 
-    return initializer(injector).template construct<Impl$comma_shared_As >($as);
+    Allocator allocator;
+    Impl * impl = allocator.allocate(sizeof(Impl));
+    initializer(injector).template construct<Impl$comma_shared_As >(impl$comma_as);
+    return impl;
   }
 
   static void dispose(Injector const & injector, Iface * iface) {
+    Allocator allocator;
     Impl * impl = static_cast<Impl *>(iface);
     initializer(injector).destroy(impl);
+    allocator.deallocate(impl, sizeof(Impl));
   }
 };
 
