@@ -31,8 +31,7 @@ public:
   template<typename Iface>
   SAUCE_SHARED_PTR<Iface> get() const {
     // Resolve the interface into a binding with EXTRA SUPER MAGIC
-    Iface * provided = resolveAndProvide<Iface>(
-      &Module_::template bindings<Injector_> );
+    Iface * provided = resolveAndProvide<Iface>(&Module_::template bindings<Injector_> );
 
     // Wrap and return the provided implementation in the chosen shared_ptr
     SAUCE_SHARED_PTR<Iface> smartPointer;
@@ -44,8 +43,7 @@ private:
 
   template<typename Iface>
   void dispose(Iface * iface) const {
-    resolveAndDispose<Iface>(
-      &Module_::template bindings<Injector_>, iface);
+    resolveAndDispose<Iface>(&Module_::template bindings<Injector_>, iface);
   }
 
   template<typename Iface, typename Binding>
