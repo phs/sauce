@@ -3,6 +3,8 @@
 
 #include <sauce/sauce>
 
+#include "allocate_with"
+
 using ::testing::Sequence;
 using ::testing::Return;
 
@@ -165,66 +167,6 @@ template<>
 void MockAllocation::deallocate<Herbie>(Herbie * herbie, size_t size) {
   deallocateHerbie(herbie, size);
 }
-
-template<typename Backing>
-class AllocateWith {
-public:
-
-  typedef Backing Backing_;
-
-  /**
-   * The untemplated allocator base class.
-   *
-   * It holds the shared, static pointer to a backing instance.
-   */
-  class Base {
-  protected:
-    static Backing_ * backing;
-  public:
-    static void setBacking(Backing_ & b) {
-      backing = &b;
-    }
-  };
-
-  template<class C>
-  class Allocator:
-    public Base {
-  public:
-
-    typedef size_t    size_type;
-    typedef ptrdiff_t difference_type;
-    typedef C *       pointer;
-    typedef C const * const_pointer;
-    typedef C &       reference;
-    typedef C const & const_reference;
-    typedef C         value_type;
-
-    template<typename D>
-    class rebind {
-    public:
-      typedef Allocator<D> other;
-    };
-
-    Allocator() {
-    }
-
-    Allocator(Allocator const & a) {
-    }
-
-    template<typename D> Allocator(Allocator<D> const &) {
-    }
-
-    C * allocate(size_t size) {
-      return Base::backing->template allocate<C>(size);
-    }
-
-    void deallocate(C * c, size_t size) {
-      Base::backing->template deallocate<C>(c, size);
-    }
-
-  };
-
-};
 
 class HerbieModule:
   public ::sauce::New<Chasis, CoupChasis(),
