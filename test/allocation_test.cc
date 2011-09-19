@@ -108,11 +108,29 @@ int Herbie::destroyed = 0;
 class MockAllocation {
 public:
 
-  template<class C>
-  C * allocate(size_t);
+  CoupChasis * allocate(CoupChasis *, size_t size) {
+    return allocateCoupChasis(size);
+  }
 
-  template<class C>
-  void deallocate(C *, size_t);
+  HybridEngine * allocate(HybridEngine *, size_t size) {
+    return allocateHybridEngine(size);
+  }
+
+  Herbie * allocate(Herbie *, size_t size) {
+    return allocateHerbie(size);
+  }
+
+  void deallocate(CoupChasis * coupChasis, size_t size) {
+    deallocateCoupChasis(coupChasis, size);
+  }
+
+  void deallocate(HybridEngine * hybridEngine, size_t size) {
+    deallocateHybridEngine(hybridEngine, size);
+  }
+
+  void deallocate(Herbie * herbie, size_t size) {
+    deallocateHerbie(herbie, size);
+  }
 
   MOCK_METHOD1(allocateCoupChasis, CoupChasis * (size_t));
   MOCK_METHOD1(allocateHybridEngine, HybridEngine * (size_t));
@@ -123,36 +141,6 @@ public:
   MOCK_METHOD2(deallocateHerbie, void(Herbie *, size_t));
 
 };
-
-template<>
-CoupChasis * MockAllocation::allocate<CoupChasis>(size_t size) {
-  return allocateCoupChasis(size);
-}
-
-template<>
-HybridEngine * MockAllocation::allocate<HybridEngine>(size_t size) {
-  return allocateHybridEngine(size);
-}
-
-template<>
-Herbie * MockAllocation::allocate<Herbie>(size_t size) {
-  return allocateHerbie(size);
-}
-
-template<>
-void MockAllocation::deallocate<CoupChasis>(CoupChasis * coupChasis, size_t size) {
-  deallocateCoupChasis(coupChasis, size);
-}
-
-template<>
-void MockAllocation::deallocate<HybridEngine>(HybridEngine * hybridEngine, size_t size) {
-  deallocateHybridEngine(hybridEngine, size);
-}
-
-template<>
-void MockAllocation::deallocate<Herbie>(Herbie * herbie, size_t size) {
-  deallocateHerbie(herbie, size);
-}
 
 class HerbieModule:
   public ::sauce::New<Chasis, CoupChasis(),

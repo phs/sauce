@@ -64,11 +64,11 @@ public:
     }
 
     C * allocate(size_t size) {
-      return Base::backing->template allocate<C>(size);
+      return Base::backing->allocate(static_cast<C *>(NULL), size);
     }
 
     void deallocate(C * c, size_t size) {
-      Base::backing->template deallocate<C>(c, size);
+      Base::backing->deallocate(c, size);
     }
 
   };
