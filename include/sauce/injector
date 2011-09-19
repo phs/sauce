@@ -13,15 +13,15 @@ namespace test {
 class SauceTest;
 }
 
-template<typename Module, typename Initializer_ = ::sauce::internal::Initializer>
+template<typename Module, typename Initializer = ::sauce::internal::Initializer>
 class Injector {
 private:
 
-  typedef Initializer_ Initializer;
-  typedef Injector<Module, Initializer> Injector_;
+  typedef Initializer Initializer_;
+  typedef Injector<Module, Initializer_> Injector_;
   typedef ::sauce::internal::Deleter<Injector_> Deleter_;
 
-  Initializer mutable initializer;
+  Initializer_ mutable initializer;
   Deleter_ deleter;
 
 public:
