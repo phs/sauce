@@ -233,7 +233,7 @@ public:
 template<>
 MockAllocation * AllocateWith<MockAllocation>::Base::backing = NULL;
 
-class SauceTest:
+class AllocationTest:
   public ::testing::Test {
 public:
 
@@ -241,8 +241,8 @@ public:
   MockAllocation allocator;
   MockInitializer & initializer;
 
-  // SauceTest is a friend of Injector
-  SauceTest():
+  // AllocationTest is a friend of Injector
+  AllocationTest():
     injector(),
     allocator(),
     initializer(injector.initializer) {
@@ -251,7 +251,7 @@ public:
 
 };
 
-TEST_F(SauceTest, shouldProvideAndDisposeADependency) {
+TEST_F(AllocationTest, shouldProvideAndDisposeADependency) {
   CoupChasis expected;
 
   // Allocate and construct.  Have the mock allocator return the coup chasis above.
@@ -272,7 +272,7 @@ MATCHER_P(SmartPointerTo, address, "") {
   return arg.get() == address;
 }
 
-TEST_F(SauceTest, shouldProvideAndDisposeOfDependenciesTransitively) {
+TEST_F(AllocationTest, shouldProvideAndDisposeOfDependenciesTransitively) {
   CoupChasis chasis;
   HybridEngine engine;
   Herbie vehicle;

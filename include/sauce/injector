@@ -11,7 +11,7 @@
 namespace sauce {
 
 namespace test {
-class SauceTest;
+class AllocationTest;
 }
 
 template<typename Module, typename Initializer = ::sauce::internal::Initializer>
@@ -28,7 +28,7 @@ private:
 
 public:
 
-  friend class ::sauce::test::SauceTest;
+  friend class ::sauce::test::AllocationTest;
   friend class ::sauce::internal::Deleter<Injector_>;
   friend class ::sauce::internal::bindings::Binding<Injector_>;
 
