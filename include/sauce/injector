@@ -22,7 +22,6 @@ private:
 public:
 
   friend class ::sauce::internal::Deleter<Injector_>;
-  friend class ::sauce::internal::bindings::Binding<Injector_>;
 
   Injector():
     deleter(*this) {}

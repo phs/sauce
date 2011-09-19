@@ -3,17 +3,14 @@ $$ generated_bindings.h
 $$
 $var n = 10  $$ The maximum arity we support.
 // -*- C++ -*-
-#ifndef SAUCE_SAUCE_INTERNAL_GENERATED_BINDINGS_H_
-#define SAUCE_SAUCE_INTERNAL_GENERATED_BINDINGS_H_
+#ifndef SAUCE_SAUCE_INTERNAL_BINDINGS_H_
+#define SAUCE_SAUCE_INTERNAL_BINDINGS_H_
 
 #include <sauce/memory>
 
 namespace sauce {
 namespace internal {
 namespace bindings {
-
-template<typename Injector>
-class Binding;
 
 template<typename Injector, typename Iface, typename Allocator, typename Constructor>
 class New;
@@ -26,7 +23,7 @@ $var As = [[$for j, [[A$j]]]]
 $var as = [[$for j, [[a$j]]]]
 
 template<typename Injector, typename Iface, typename Allocator, typename Impl$comma_typename_As>
-class New<Injector, Iface, Allocator, Impl($As)>: public Binding<Injector> {
+class New<Injector, Iface, Allocator, Impl($As)> {
 public:
   static Impl * provide(Injector const & injector) {
 [[$for j [[
@@ -54,4 +51,4 @@ public:
 }
 }
 
-#endif
+#endif // SAUCE_SAUCE_INTERNAL_BINDINGS_H_
