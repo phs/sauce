@@ -45,9 +45,9 @@ public:
 // It also prevents us from using per-instance state, which is the way gmock
 // likes to do things.  To work around this, the mocked allocator state is
 // kept in a common, static field (whose type is this class.)  This is the
-// actual gmock, the MockAllocator (and MockAllocatorBase) below are just
+// actual gmock, the AllocateWith (and friends) below are just
 // helper types that exploit it.
-class MockAllocatorBacking {
+class MockAllocation {
 public:
 
   template<class C>
@@ -67,79 +67,94 @@ public:
 };
 
 template<>
-CoupChasis * MockAllocatorBacking::allocate<CoupChasis>(size_t size) {
+CoupChasis * MockAllocation::allocate<CoupChasis>(size_t size) {
   return allocateCoupChasis(size);
 }
 
 template<>
-HybridEngine * MockAllocatorBacking::allocate<HybridEngine>(size_t size) {
+HybridEngine * MockAllocation::allocate<HybridEngine>(size_t size) {
   return allocateHybridEngine(size);
 }
 
 template<>
-Herbie * MockAllocatorBacking::allocate<Herbie>(size_t size) {
+Herbie * MockAllocation::allocate<Herbie>(size_t size) {
   return allocateHerbie(size);
 }
 
 template<>
-void MockAllocatorBacking::deallocate<CoupChasis>(CoupChasis * coupChasis, size_t size) {
+void MockAllocation::deallocate<CoupChasis>(CoupChasis * coupChasis, size_t size) {
   deallocateCoupChasis(coupChasis, size);
 }
 
 template<>
-void MockAllocatorBacking::deallocate<HybridEngine>(HybridEngine * hybridEngine, size_t size) {
+void MockAllocation::deallocate<HybridEngine>(HybridEngine * hybridEngine, size_t size) {
   deallocateHybridEngine(hybridEngine, size);
 }
 
 template<>
-void MockAllocatorBacking::deallocate<Herbie>(Herbie * herbie, size_t size) {
+void MockAllocation::deallocate<Herbie>(Herbie * herbie, size_t size) {
   deallocateHerbie(herbie, size);
 }
 
-// The untemplated MockAllocator base class that statically points to a gmock.
-class MockAllocatorBase {
-protected:
-  static MockAllocatorBacking * backing;
-public:
-  static void setBacking(MockAllocatorBacking & b) {
-    backing = &b;
-  }
-};
-
-MockAllocatorBacking * MockAllocatorBase::backing = NULL;
-
-// The stateless allocator backed by a singleton MockAllocatorBacking gmock.
-template<class C>
-class MockAllocator:
-  public MockAllocatorBase {
+template<typename Derp>
+class AllocateWith {
 public:
 
-  typedef size_t    size_type;
-  typedef ptrdiff_t difference_type;
-  typedef C *       pointer;
-  typedef C const * const_pointer;
-  typedef C &       reference;
-  typedef C const & const_reference;
-  typedef C         value_type;
+  typedef MockAllocation Backing;
 
-  template<typename D>
-  class rebind {
+  /**
+   * The untemplated allocator base class.
+   *
+   * It holds the shared, static pointer to a backing instance.
+   */
+  class Base {
+  protected:
+    static Backing * backing;
   public:
-    typedef MockAllocator<D> other;
+    static void setBacking(Backing & b) {
+      backing = &b;
+    }
   };
 
-  MockAllocator() {}
-  MockAllocator(MockAllocator const & a) {}
+  template<class C>
+  class Allocator:
+    public Base {
+  public:
 
-  template<typename D> MockAllocator(MockAllocator<D> const &) {}
+    typedef size_t    size_type;
+    typedef ptrdiff_t difference_type;
+    typedef C *       pointer;
+    typedef C const * const_pointer;
+    typedef C &       reference;
+    typedef C const & const_reference;
+    typedef C         value_type;
 
-  C * allocate(size_t size) {
-    return backing->allocate<C>(size);
-  }
+    template<typename D>
+    class rebind {
+    public:
+      typedef Allocator<D> other;
+    };
 
-  void deallocate(C * c, size_t size) {
-    backing->deallocate<C>(c, size);
-  }
+    Allocator() {
+    }
+
+    Allocator(Allocator const & a) {
+    }
+
+    template<typename D> Allocator(Allocator<D> const &) {
+    }
+
+    C * allocate(size_t size) {
+      Backing * b = Base::backing;
+      return b->allocate<C>(size);
+    }
+
+    void deallocate(C * c, size_t size) {
+      Backing * b = Base::backing;
+      b->deallocate<C>(c, size);
+    }
+
+  };
 
 };
 
@@ -205,21 +220,25 @@ class MyModule {
 public:
 
   template<typename Injector>
-  static ::sauce::internal::bindings::New<Injector, Chasis, MockAllocator<CoupChasis>, CoupChasis,
+  static ::sauce::internal::bindings::New<Injector, Chasis,
+                                          AllocateWith<MockAllocation>::Allocator<CoupChasis>,
+                                          CoupChasis,
                                           CoupChasis()> * bindings(
     Chasis) {
     return 0;
   }
 
   template<typename Injector>
-  static ::sauce::internal::bindings::New<Injector, Engine, MockAllocator<HybridEngine>,
+  static ::sauce::internal::bindings::New<Injector, Engine,
+                                          AllocateWith<MockAllocation>::Allocator<HybridEngine>,
                                           HybridEngine,
                                           HybridEngine()> * bindings(Engine) {
     return 0;
   }
 
   template<typename Injector>
-  static ::sauce::internal::bindings::New<Injector, Vehicle, MockAllocator<Herbie>, Herbie,
+  static ::sauce::internal::bindings::New<Injector, Vehicle,
+                                          AllocateWith<MockAllocation>::Allocator<Herbie>, Herbie,
                                           Herbie(Chasis, Engine)> * bindings(
     Vehicle) {
     return 0;
@@ -227,12 +246,15 @@ public:
 
 };
 
+template<>
+MockAllocation * AllocateWith<MockAllocation>::Base::backing = NULL;
+
 class SauceTest:
   public ::testing::Test {
 public:
 
   ::sauce::Injector<MyModule, MockInitializer> injector;
-  MockAllocatorBacking allocator;
+  MockAllocation allocator;
   MockInitializer & initializer;
 
   // SauceTest is a friend of Injector
@@ -240,7 +262,7 @@ public:
     injector(),
     allocator(),
     initializer(injector.initializer) {
-    MockAllocatorBase::setBacking(allocator);
+    AllocateWith<MockAllocation>::Base::setBacking(allocator);
   }
 
 };
