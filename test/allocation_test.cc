@@ -77,10 +77,6 @@ public:
   SAUCE_SHARED_PTR<Chasis> chasis;
   SAUCE_SHARED_PTR<Engine> engine;
 
-  Herbie():
-    chasis(),
-    engine() {}
-
   Herbie(SAUCE_SHARED_PTR<Chasis> chasis, SAUCE_SHARED_PTR<Engine> engine):
     chasis(chasis),
     engine(engine) {
