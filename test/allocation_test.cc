@@ -100,46 +100,20 @@ int Herbie::constructed = 0;
 int Herbie::destroyed = 0;
 
 /**
- * Our mock for the new and delete operations.
+ * Our mock for the new and delete operations, for use with AllocateWith.
  *
- * Gmock doesn't create templated mocks, so we roll our own specializations
- * and delegate to mocked methods instead.
+ * The AllocateWith contract assumes allocate will be disambiguated with a
+ * leading tag parameter.  So, be sure to accept such parameters.
  */
 class MockAllocation {
 public:
+  MOCK_METHOD2(allocate, CoupChasis * (A<CoupChasis>, size_t));
+  MOCK_METHOD2(allocate, HybridEngine * (A<HybridEngine>, size_t));
+  MOCK_METHOD2(allocate, Herbie * (A<Herbie>, size_t));
 
-  CoupChasis * allocate(CoupChasis *, size_t size) {
-    return allocateCoupChasis(size);
-  }
-
-  HybridEngine * allocate(HybridEngine *, size_t size) {
-    return allocateHybridEngine(size);
-  }
-
-  Herbie * allocate(Herbie *, size_t size) {
-    return allocateHerbie(size);
-  }
-
-  void deallocate(CoupChasis * coupChasis, size_t size) {
-    deallocateCoupChasis(coupChasis, size);
-  }
-
-  void deallocate(HybridEngine * hybridEngine, size_t size) {
-    deallocateHybridEngine(hybridEngine, size);
-  }
-
-  void deallocate(Herbie * herbie, size_t size) {
-    deallocateHerbie(herbie, size);
-  }
-
-  MOCK_METHOD1(allocateCoupChasis, CoupChasis * (size_t));
-  MOCK_METHOD1(allocateHybridEngine, HybridEngine * (size_t));
-  MOCK_METHOD1(allocateHerbie, Herbie * (size_t));
-
-  MOCK_METHOD2(deallocateCoupChasis, void(CoupChasis *, size_t));
-  MOCK_METHOD2(deallocateHybridEngine, void(HybridEngine *, size_t));
-  MOCK_METHOD2(deallocateHerbie, void(Herbie *, size_t));
-
+  MOCK_METHOD2(deallocate, void(CoupChasis *, size_t));
+  MOCK_METHOD2(deallocate, void(HybridEngine *, size_t));
+  MOCK_METHOD2(deallocate, void(Herbie *, size_t));
 };
 
 class HerbieModule:
@@ -208,8 +182,8 @@ public:
 };
 
 TEST_F(AllocationTest, shouldProvideAndDisposeADependency) {
-  EXPECT_CALL(allocator, allocateCoupChasis(1)).WillOnce(Return(chasis));
-  EXPECT_CALL(allocator, deallocateCoupChasis(chasis, 1));
+  EXPECT_CALL(allocator, allocate(A<CoupChasis>(), 1)).WillOnce(Return(chasis));
+  EXPECT_CALL(allocator, deallocate(chasis, 1));
 
   {
     SAUCE_SHARED_PTR<Chasis> actual = injector.get<Chasis>();
@@ -225,25 +199,27 @@ TEST_F(AllocationTest, shouldProvideAndDisposeOfDependenciesTransitively) {
   Sequence injectedChasis, injectedEngine;
 
   // Construct the chasis
-  EXPECT_CALL(allocator, allocateCoupChasis(1)).InSequence(injectedChasis).WillOnce(Return(chasis));
+  EXPECT_CALL(allocator, allocate(A<CoupChasis>(), 1)).
+  InSequence(injectedChasis).WillOnce(Return(chasis));
 
   // Construct the engine
-  EXPECT_CALL(allocator, allocateHybridEngine(1)).InSequence(injectedEngine).WillOnce(Return(engine));
+  EXPECT_CALL(allocator, allocate(A<HybridEngine>(), 1)).
+  InSequence(injectedEngine).WillOnce(Return(engine));
 
   // Construct the vehicle itself, injecting the two dependencies
-  EXPECT_CALL(allocator, allocateHerbie(1)).InSequence(injectedChasis, injectedEngine).
-  WillOnce(Return(vehicle));
+  EXPECT_CALL(allocator, allocate(A<Herbie>(), 1)).
+  InSequence(injectedChasis, injectedEngine).WillOnce(Return(vehicle));
 
   // Destroy the engine
-  EXPECT_CALL(allocator, deallocateHybridEngine(engine, 1)).InSequence(injectedEngine);
+  EXPECT_CALL(allocator, deallocate(engine, 1)).InSequence(injectedEngine);
 
   // Destroy the chasis
-  EXPECT_CALL(allocator, deallocateCoupChasis(chasis, 1)).InSequence(injectedChasis);
+  EXPECT_CALL(allocator, deallocate(chasis, 1)).InSequence(injectedChasis);
 
   // Destroy the vehicle
   // Should destroying the vehicle after its dependencies be an issue?  This
   // is simply the order that falls out of smart pointer deletion..
-  EXPECT_CALL(allocator, deallocateHerbie(vehicle, 1)).InSequence(injectedChasis, injectedEngine);
+  EXPECT_CALL(allocator, deallocate(vehicle, 1)).InSequence(injectedChasis, injectedEngine);
 
   // And request a Vehicle, show it's our local, and let it fall out of scope
   {

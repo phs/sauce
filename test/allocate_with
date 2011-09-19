@@ -2,6 +2,20 @@
 #ifndef SAUCE_TEST_ALLOCATE_WITH_H_
 #define SAUCE_TEST_ALLOCATE_WITH_H_
 
+namespace sauce {
+namespace test {
+
+/**
+ * A template of tag types for mock allocators interacting with AllocateWith.
+ */
+template <typename C>
+class A {
+public:
+  bool operator==(A<C>) const {
+    return true;
+  }
+};
+
 /**
  * A helper to use mock allocators with bindings.
  *
@@ -64,7 +78,7 @@ public:
     }
 
     C * allocate(size_t size) {
-      return Base::backing->allocate(static_cast<C *>(NULL), size);
+      return Base::backing->allocate(A<C>(), size);
     }
 
     void deallocate(C * c, size_t size) {
@@ -74,5 +88,8 @@ public:
   };
 
 };
+
+}
+}
 
 #endif // SAUCE_TEST_ALLOCATE_WITH_H_
