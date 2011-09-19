@@ -214,7 +214,7 @@ void MockInitializer::destroy<Herbie>(Herbie * herbie) {
   deleteHerbie(herbie);
 }
 
-class MyModule:
+class HerbieModule:
   public ::sauce::New<Chasis, CoupChasis(),
                       AllocateWith<MockAllocation>::Allocator<CoupChasis> >,
   public ::sauce::New<Engine, HybridEngine(),
@@ -237,7 +237,7 @@ class SauceTest:
   public ::testing::Test {
 public:
 
-  ::sauce::Injector<MyModule, MockInitializer> injector;
+  ::sauce::Injector<HerbieModule, MockInitializer> injector;
   MockAllocation allocator;
   MockInitializer & initializer;
 
