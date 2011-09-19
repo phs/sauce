@@ -10,16 +10,14 @@
 
 namespace sauce {
 
-template<typename Module, typename Initializer = ::sauce::internal::Initializer>
+template<typename Module>
 class Injector {
 private:
 
   typedef Module Module_;
-  typedef Initializer Initializer_;
-  typedef Injector<Module_, Initializer_> Injector_;
+  typedef Injector<Module_> Injector_;
   typedef ::sauce::internal::Deleter<Injector_> Deleter_;
 
-  Initializer_ mutable initializer;
   Deleter_ deleter;
 
 public:
@@ -28,7 +26,6 @@ public:
   friend class ::sauce::internal::bindings::Binding<Injector_>;
 
   Injector():
-    initializer(),
     deleter(*this) {}
 
   virtual ~Injector() {}

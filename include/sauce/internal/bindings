@@ -10,12 +10,7 @@ namespace bindings {
 
 template<typename Injector>
 class Binding {
-  typedef typename Injector::Initializer_ Initializer_;
-
 protected:
-  static Initializer_ & initializer(Injector const & injector) {
-    return injector.initializer;
-  }
 };
 
 }
