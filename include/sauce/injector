@@ -17,8 +17,9 @@ template<typename Module, typename Initializer = ::sauce::internal::Initializer>
 class Injector {
 private:
 
+  typedef Module Module_;
   typedef Initializer Initializer_;
-  typedef Injector<Module, Initializer_> Injector_;
+  typedef Injector<Module_, Initializer_> Injector_;
   typedef ::sauce::internal::Deleter<Injector_> Deleter_;
 
   Initializer_ mutable initializer;
@@ -40,7 +41,7 @@ public:
   SAUCE_SHARED_PTR<Iface> provide() const {
     // Resolve the interface into a binding with EXTRA SUPER MAGIC
     Iface * provided = provideFromBinding<Iface>(
-      Module::template bindings<Injector_> );
+      Module_::template bindings<Injector_> );
 
     // Wrap and return the provided implementation in the chosen shared_ptr
     SAUCE_SHARED_PTR<Iface> smartPointer;
@@ -53,7 +54,7 @@ private:
   template<typename Iface>
   void dispose(Iface * iface) const {
     disposeFromBinding<Iface>(
-      Module::template bindings<Injector_>, iface);
+      Module_::template bindings<Injector_>, iface);
   }
 
   template<typename Iface, typename Binding>
