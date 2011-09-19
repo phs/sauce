@@ -1,7 +1,7 @@
 GMOCK = vendor/gmock-1.5.0
 GTEST = vendor/gmock-1.5.0/gtest
 
-CPPFLAGS = -Iinclude -Wall -Werror -DSAUCE_STD_TR1_SMART_PTR
+CPPFLAGS = -std=c++98 -Iinclude -Wall -Werror -DSAUCE_STD_TR1_SMART_PTR
 
 HEADER_TEMPLATES = $(shell find include -type f -name "*.pump")
 GENERATED_HEADERS = $(patsubst %.pump,%,$(HEADER_TEMPLATES))
