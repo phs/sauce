@@ -196,32 +196,25 @@ TEST_F(AllocationTest, shouldProvideAndDisposeADependency) {
 TEST_F(AllocationTest, shouldProvideAndDisposeOfDependenciesTransitively) {
   // We don't care about the relative ordering between chasis and engine:
   // only about how they stand relative to the vehicle.
-  Sequence injectedChasis, injectedEngine;
+  Sequence chasisSeq, engineSeq;
 
-  // Construct the chasis
+  // Allocate the chasis and engine before the vehicle
   EXPECT_CALL(allocator, allocate(A<CoupChasis>(), 1)).
-  InSequence(injectedChasis).WillOnce(Return(chasis));
+  InSequence(chasisSeq).WillOnce(Return(chasis));
 
-  // Construct the engine
   EXPECT_CALL(allocator, allocate(A<HybridEngine>(), 1)).
-  InSequence(injectedEngine).WillOnce(Return(engine));
+  InSequence(engineSeq).WillOnce(Return(engine));
 
-  // Construct the vehicle itself, injecting the two dependencies
   EXPECT_CALL(allocator, allocate(A<Herbie>(), 1)).
-  InSequence(injectedChasis, injectedEngine).WillOnce(Return(vehicle));
+  InSequence(chasisSeq, engineSeq).WillOnce(Return(vehicle));
 
-  // Destroy the engine
-  EXPECT_CALL(allocator, deallocate(engine, 1)).InSequence(injectedEngine);
-
-  // Destroy the chasis
-  EXPECT_CALL(allocator, deallocate(chasis, 1)).InSequence(injectedChasis);
-
-  // Destroy the vehicle
+  // Deallocate the chasis and engine *before* the vehicle
   // Should destroying the vehicle after its dependencies be an issue?  This
   // is simply the order that falls out of smart pointer deletion..
-  EXPECT_CALL(allocator, deallocate(vehicle, 1)).InSequence(injectedChasis, injectedEngine);
+  EXPECT_CALL(allocator, deallocate(engine, 1)).InSequence(engineSeq);
+  EXPECT_CALL(allocator, deallocate(chasis, 1)).InSequence(chasisSeq);
+  EXPECT_CALL(allocator, deallocate(vehicle, 1)).InSequence(chasisSeq, engineSeq);
 
-  // And request a Vehicle, show it's our local, and let it fall out of scope
   {
     SAUCE_SHARED_PTR<Vehicle> actual = injector.get<Vehicle>();
     ASSERT_EQ(1, CoupChasis::constructed);
