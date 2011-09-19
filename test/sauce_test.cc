@@ -218,26 +218,26 @@ class MyModule {
 public:
 
   template<typename Injector>
-  static ::sauce::internal::bindings::New<Injector, Chasis,
-                                          AllocateWith<MockAllocation>::Allocator<CoupChasis>,
-                                          CoupChasis,
-                                          CoupChasis()> * bindings(
+  ::sauce::internal::bindings::New<Injector, Chasis,
+                                   AllocateWith<MockAllocation>::Allocator<CoupChasis>,
+                                   CoupChasis,
+                                   CoupChasis()> * bindings(
     Chasis) {
     return 0;
   }
 
   template<typename Injector>
-  static ::sauce::internal::bindings::New<Injector, Engine,
-                                          AllocateWith<MockAllocation>::Allocator<HybridEngine>,
-                                          HybridEngine,
-                                          HybridEngine()> * bindings(Engine) {
+  ::sauce::internal::bindings::New<Injector, Engine,
+                                   AllocateWith<MockAllocation>::Allocator<HybridEngine>,
+                                   HybridEngine,
+                                   HybridEngine()> * bindings(Engine) {
     return 0;
   }
 
   template<typename Injector>
-  static ::sauce::internal::bindings::New<Injector, Vehicle,
-                                          AllocateWith<MockAllocation>::Allocator<Herbie>, Herbie,
-                                          Herbie(Chasis, Engine)> * bindings(
+  ::sauce::internal::bindings::New<Injector, Vehicle,
+                                   AllocateWith<MockAllocation>::Allocator<Herbie>, Herbie,
+                                   Herbie(Chasis, Engine)> * bindings(
     Vehicle) {
     return 0;
   }
