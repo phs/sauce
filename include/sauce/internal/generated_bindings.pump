@@ -6,6 +6,8 @@ $var n = 10  $$ The maximum arity we support.
 #ifndef SAUCE_SAUCE_INTERNAL_GENERATED_BINDINGS_H_
 #define SAUCE_SAUCE_INTERNAL_GENERATED_BINDINGS_H_
 
+#include <sauce/memory>
+
 namespace sauce {
 namespace internal {
 namespace bindings {
@@ -13,7 +15,7 @@ namespace bindings {
 template<typename Injector>
 class Binding;
 
-template<typename Injector, typename Iface, typename Allocator, typename Impl, typename Constructor>
+template<typename Injector, typename Iface, typename Allocator, typename Constructor>
 class New;
 
 $range i 0..n
@@ -25,7 +27,7 @@ $var As = [[$for j, [[A$j]]]]
 $var comma_as = [[$for j [[, a$j]]]]
 
 template<typename Injector, typename Iface, typename Allocator, typename Impl$comma_typename_As>
-class New<Injector, Iface, Allocator, Impl, Impl($As)>: public Binding<Injector> {
+class New<Injector, Iface, Allocator, Impl($As)>: public Binding<Injector> {
 public:
   static Impl * provide(Injector const & injector) {
 [[$for j [[
