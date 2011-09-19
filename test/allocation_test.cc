@@ -263,7 +263,7 @@ TEST_F(AllocationTest, shouldProvideAndDisposeADependency) {
   EXPECT_CALL(allocator, deallocateCoupChasis(&expected, 1));
 
   // Ask for a Chasis
-  SAUCE_SHARED_PTR<Chasis> actual = injector.provide<Chasis>();
+  SAUCE_SHARED_PTR<Chasis> actual = injector.get<Chasis>();
   ASSERT_EQ(&expected, actual.get());
 }
 
@@ -323,7 +323,7 @@ TEST_F(AllocationTest, shouldProvideAndDisposeOfDependenciesTransitively) {
   InSequence(injectedChasis, injectedEngine);
 
   // And request a Vehicle, show it's our local, and let it fall out of scope
-  SAUCE_SHARED_PTR<Vehicle> actual = injector.provide<Vehicle>();
+  SAUCE_SHARED_PTR<Vehicle> actual = injector.get<Vehicle>();
   ASSERT_EQ(&vehicle, actual.get());
 }
 

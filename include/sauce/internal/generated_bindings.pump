@@ -31,7 +31,7 @@ class New<Injector, Iface, Allocator, Impl($As)>: public Binding<Injector> {
 public:
   static Impl * provide(Injector const & injector) {
 [[$for j [[
-    SAUCE_SHARED_PTR<A$j> a$j(injector.template provide<A$j>());
+    SAUCE_SHARED_PTR<A$j> a$j(injector.template get<A$j>());
 
 ]]]]
 

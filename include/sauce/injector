@@ -39,7 +39,7 @@ public:
   virtual ~Injector() {}
 
   template<typename Iface>
-  SAUCE_SHARED_PTR<Iface> provide() const {
+  SAUCE_SHARED_PTR<Iface> get() const {
     // Resolve the interface into a binding with EXTRA SUPER MAGIC
     Iface * provided = resolveAndProvide<Iface>(
       &Module_::template bindings<Injector_> );
