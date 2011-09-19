@@ -100,8 +100,7 @@ template<typename Backing>
 class AllocateWith {
 public:
 
-  // typedef Backing Backing_;
-  typedef MockAllocation Backing_;
+  typedef Backing Backing_;
 
   /**
    * The untemplated allocator base class.
@@ -147,12 +146,12 @@ public:
 
     C * allocate(size_t size) {
       Backing_ * b = Base::backing;
-      return b->allocate<C>(size);
+      return b->template allocate<C>(size);
     }
 
     void deallocate(C * c, size_t size) {
       Backing_ * b = Base::backing;
-      b->deallocate<C>(c, size);
+      b->template deallocate<C>(c, size);
     }
 
   };
