@@ -2,6 +2,19 @@
 #ifndef SAUCE_TEST_ALLOCATE_WITH_H_
 #define SAUCE_TEST_ALLOCATE_WITH_H_
 
+/**
+ * A helper to use mock allocators with bindings.
+ *
+ * Usually an allocator is specified by type alone: an instance is not passed.
+ * This is explicitly protected in the standard (requiring allocator instances
+ * to be exchangable and so essentially stateless.)
+ *
+ * It also prevents us from using per-instance state, which is the way gmock
+ * likes to do things.  As a work-around, the mocked allocator state is kept
+ * in a common, static field (given by the template parameter.)  One can swap
+ * it out with AllocateWith<Backing>::Base::setBacking, and get an allocator
+ * delegating to it with AllocateWith<Backing>::Allocator.
+ */
 template<typename Backing>
 class AllocateWith {
 public:
