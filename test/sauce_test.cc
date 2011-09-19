@@ -96,11 +96,12 @@ void MockAllocation::deallocate<Herbie>(Herbie * herbie, size_t size) {
   deallocateHerbie(herbie, size);
 }
 
-template<typename Derp>
+template<typename Backing>
 class AllocateWith {
 public:
 
-  typedef MockAllocation Backing;
+  // typedef Backing Backing_;
+  typedef MockAllocation Backing_;
 
   /**
    * The untemplated allocator base class.
@@ -109,9 +110,9 @@ public:
    */
   class Base {
   protected:
-    static Backing * backing;
+    static Backing_ * backing;
   public:
-    static void setBacking(Backing & b) {
+    static void setBacking(Backing_ & b) {
       backing = &b;
     }
   };
@@ -145,12 +146,12 @@ public:
     }
 
     C * allocate(size_t size) {
-      Backing * b = Base::backing;
+      Backing_ * b = Base::backing;
       return b->allocate<C>(size);
     }
 
     void deallocate(C * c, size_t size) {
-      Backing * b = Base::backing;
+      Backing_ * b = Base::backing;
       b->deallocate<C>(c, size);
     }
 
