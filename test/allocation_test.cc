@@ -108,16 +108,6 @@ int Herbie::destroyed = 0;
  *
  * Gmock doesn't create templated mocks, so we roll our own specializations
  * and delegate to mocked methods instead.
- *
- * Usually an allocator is specified by type alone: an instance is not passed.
- * This is explicitly protected in the standard (requiring allocator instances
- * to be exchangable and so essentially stateless.)
- *
- * It also prevents us from using per-instance state, which is the way gmock
- * likes to do things.  To work around this, the mocked allocator state is
- * kept in a common, static field (whose type is this class.)  This is the
- * actual gmock, the AllocateWith (and friends) below are just
- * helper types that exploit it.
  */
 class MockAllocation {
 public:
@@ -243,11 +233,6 @@ TEST_F(AllocationTest, shouldProvideAndDisposeADependency) {
     ASSERT_EQ(chasis, actual.get());
   }
   ASSERT_EQ(1, CoupChasis::destroyed);
-}
-
-// Argument matcher for smart pointers based on backing address.
-MATCHER_P(SmartPointerTo, address, "") {
-  return arg.get() == address;
 }
 
 TEST_F(AllocationTest, shouldProvideAndDisposeOfDependenciesTransitively) {
