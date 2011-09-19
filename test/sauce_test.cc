@@ -214,32 +214,20 @@ void MockInitializer::destroy<Herbie>(Herbie * herbie) {
   deleteHerbie(herbie);
 }
 
-class MyModule {
+class MyModule:
+  public ::sauce::New<Chasis, CoupChasis(),
+                      AllocateWith<MockAllocation>::Allocator<CoupChasis> >,
+  public ::sauce::New<Engine, HybridEngine(),
+                      AllocateWith<MockAllocation>::Allocator<HybridEngine> >,
+  public ::sauce::New<Vehicle, Herbie(Chasis, Engine),
+                      AllocateWith<MockAllocation>::Allocator<Herbie> > {
 public:
-
-  template<typename Injector>
-  ::sauce::internal::bindings::New<Injector, Chasis,
-                                   AllocateWith<MockAllocation>::Allocator<CoupChasis>,
-                                   CoupChasis()> * bindings(
-    Chasis) {
-    return 0;
-  }
-
-  template<typename Injector>
-  ::sauce::internal::bindings::New<Injector, Engine,
-                                   AllocateWith<MockAllocation>::Allocator<HybridEngine>,
-                                   HybridEngine()> * bindings(Engine) {
-    return 0;
-  }
-
-  template<typename Injector>
-  ::sauce::internal::bindings::New<Injector, Vehicle,
-                                   AllocateWith<MockAllocation>::Allocator<Herbie>,
-                                   Herbie(Chasis, Engine)> * bindings(
-    Vehicle) {
-    return 0;
-  }
-
+  using ::sauce::New<Chasis, CoupChasis(),
+                     AllocateWith<MockAllocation>::Allocator<CoupChasis> >::bindings;
+  using ::sauce::New<Engine, HybridEngine(),
+                     AllocateWith<MockAllocation>::Allocator<HybridEngine> >::bindings;
+  using ::sauce::New<Vehicle, Herbie(Chasis, Engine),
+                     AllocateWith<MockAllocation>::Allocator<Herbie> >::bindings;
 };
 
 template<>

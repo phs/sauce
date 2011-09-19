@@ -2,6 +2,7 @@
 #ifndef SAUCE_SAUCE_INJECTOR_H_
 #define SAUCE_SAUCE_INJECTOR_H_
 
+#include <sauce/builder>
 #include <sauce/memory>
 #include <sauce/internal/bindings>
 #include <sauce/internal/deleter>
@@ -58,12 +59,12 @@ private:
   }
 
   template<typename Iface, typename Binding>
-  Iface * provideFromBinding(Binding * (Module::*)(Iface)) const {
+  Iface * provideFromBinding(Binding * (*)(Iface)) const {
     return Binding::provide(*this);
   }
 
   template<typename Iface, typename Binding>
-  void disposeFromBinding(Binding * (Module::*)(Iface), Iface * iface) const {
+  void disposeFromBinding(Binding * (*)(Iface), Iface * iface) const {
     Binding::dispose(*this, iface);
   }
 
