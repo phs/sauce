@@ -17,11 +17,10 @@ private:
   typedef Injector<Module_> Injector_;
   typedef ::sauce::internal::Deleter<Injector_> Deleter_;
 
+  friend class ::sauce::internal::Deleter<Injector_>;
   Deleter_ deleter;
 
 public:
-
-  friend class ::sauce::internal::Deleter<Injector_>;
 
   Injector():
     deleter(*this) {}
