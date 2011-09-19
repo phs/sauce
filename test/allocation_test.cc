@@ -101,20 +101,22 @@ public:
 int Herbie::constructed = 0;
 int Herbie::destroyed = 0;
 
-// Our mock for the new and delete operations.
-//
-// Gmock doesn't create templated mocks, so we roll our own specializations
-// and delegate to mocked methods instead.
-//
-// Usually an allocator is specified by type alone: an instance is not passed.
-// This is explicitly protected in the standard (requiring allocator instances
-// to be exchangable and so essentially stateless.)
-//
-// It also prevents us from using per-instance state, which is the way gmock
-// likes to do things.  To work around this, the mocked allocator state is
-// kept in a common, static field (whose type is this class.)  This is the
-// actual gmock, the AllocateWith (and friends) below are just
-// helper types that exploit it.
+/**
+ * Our mock for the new and delete operations.
+ *
+ * Gmock doesn't create templated mocks, so we roll our own specializations
+ * and delegate to mocked methods instead.
+ *
+ * Usually an allocator is specified by type alone: an instance is not passed.
+ * This is explicitly protected in the standard (requiring allocator instances
+ * to be exchangable and so essentially stateless.)
+ *
+ * It also prevents us from using per-instance state, which is the way gmock
+ * likes to do things.  To work around this, the mocked allocator state is
+ * kept in a common, static field (whose type is this class.)  This is the
+ * actual gmock, the AllocateWith (and friends) below are just
+ * helper types that exploit it.
+ */
 class MockAllocation {
 public:
 
@@ -311,30 +313,30 @@ TEST_F(AllocationTest, shouldProvideAndDisposeOfDependenciesTransitively) {
   // only about how they stand relative to the vehicle.
   Sequence injectedChasis, injectedEngine;
 
-  // Allocate and construct the chasis
+  // Construct the chasis
   EXPECT_CALL(allocator, allocateCoupChasis(1)).
   InSequence(injectedChasis).
   WillOnce(Return(chasis));
 
-  // Allocate and construct the engine
+  // Construct the engine
   EXPECT_CALL(allocator, allocateHybridEngine(1)).
   InSequence(injectedEngine).
   WillOnce(Return(engine));
 
-  // Allocate and construct the vehicle itself, injecting the two dependencies
+  // Construct the vehicle itself, injecting the two dependencies
   EXPECT_CALL(allocator, allocateHerbie(1)).
   InSequence(injectedChasis, injectedEngine).
   WillOnce(Return(vehicle));
 
-  // Destroy and deallocate the engine
+  // Destroy the engine
   EXPECT_CALL(allocator, deallocateHybridEngine(engine, 1)).
   InSequence(injectedEngine);
 
-  // Destroy and deallocate the chasis
+  // Destroy the chasis
   EXPECT_CALL(allocator, deallocateCoupChasis(chasis, 1)).
   InSequence(injectedChasis);
 
-  // Destroy and deallocate the vehicle
+  // Destroy the vehicle
   // Should destroying the vehicle after its dependencies be an issue?  This
   // is simply the order that falls out of smart pointer deletion..
   EXPECT_CALL(allocator, deallocateHerbie(vehicle, 1)).
