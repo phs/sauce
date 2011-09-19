@@ -9,18 +9,69 @@ using ::testing::Return;
 namespace sauce {
 namespace test {
 
-class Chasis {};
+class Chasis {
+public:
+  Chasis() {}
+  virtual ~Chasis() {}
+};
+
 class CoupChasis:
-  public Chasis {};
+  public Chasis {
+public:
+  static int constructed;
+  static int destroyed;
 
-class Engine {};
+  CoupChasis() {
+    constructed += 1;
+  }
+
+  ~CoupChasis() {
+    destroyed += 1;
+  }
+};
+
+int CoupChasis::constructed = 0;
+int CoupChasis::destroyed = 0;
+
+class Engine {
+public:
+  Engine() {}
+  virtual ~Engine() {}
+};
 class HybridEngine:
-  public Engine {};
+  public Engine {
+public:
+  static int constructed;
+  static int destroyed;
 
-class Vehicle {};
+  HybridEngine() {
+    constructed += 1;
+  }
+
+  ~HybridEngine() {
+    destroyed += 1;
+  }
+};
+
+int HybridEngine::constructed = 0;
+int HybridEngine::destroyed = 0;
+
+class Vehicle {
+public:
+  Vehicle() {}
+  virtual ~Vehicle() {}
+
+  virtual SAUCE_SHARED_PTR<Chasis> getChasis() const = 0;
+
+  virtual SAUCE_SHARED_PTR<Engine> getEngine() const = 0;
+
+};
 class Herbie:
   public Vehicle {
 public:
+  static int constructed;
+  static int destroyed;
+
   SAUCE_SHARED_PTR<Chasis> chasis;
   SAUCE_SHARED_PTR<Engine> engine;
 
@@ -30,8 +81,25 @@ public:
 
   Herbie(SAUCE_SHARED_PTR<Chasis> chasis, SAUCE_SHARED_PTR<Engine> engine):
     chasis(chasis),
-    engine(engine) {}
+    engine(engine) {
+    constructed += 1;
+  }
+
+  ~Herbie() {
+    destroyed += 1;
+  }
+
+  SAUCE_SHARED_PTR<Chasis> getChasis() const {
+    return chasis;
+  }
+
+  SAUCE_SHARED_PTR<Engine> getEngine() const {
+    return engine;
+  }
 };
+
+int Herbie::constructed = 0;
+int Herbie::destroyed = 0;
 
 // Our mock for the new and delete operations.
 //
@@ -156,64 +224,6 @@ public:
 
 };
 
-// Our mock for the construct and destroy operations.
-//
-// Gmock doesn't create templated mocks, so we roll our own specializations
-// and delegate to mocked methods instead.
-class MockInitializer {
-public:
-
-  template<class C>
-  void construct(C *);
-
-  template<class C, typename A1, typename A2>
-  void construct(C *, A1, A2);
-
-  template<class C>
-  void destroy(C *);
-
-  MOCK_METHOD1(newCoupChasis, void(CoupChasis *));
-  MOCK_METHOD1(newHybridEngine, void(HybridEngine *));
-  MOCK_METHOD3(newHerbie, void(Herbie *, SAUCE_SHARED_PTR<Chasis>, SAUCE_SHARED_PTR<Engine> ));
-
-  MOCK_METHOD1(deleteCoupChasis, void(CoupChasis *));
-  MOCK_METHOD1(deleteHybridEngine, void(HybridEngine *));
-  MOCK_METHOD1(deleteHerbie, void(Herbie *));
-
-};
-
-template<>
-void MockInitializer::construct<CoupChasis>(CoupChasis * coupChasis) {
-  newCoupChasis(coupChasis);
-}
-
-template<>
-void MockInitializer::construct<HybridEngine>(HybridEngine * hybridEngine) {
-  newHybridEngine(hybridEngine);
-}
-
-template<>
-void MockInitializer::construct<Herbie>(Herbie * herbie,
-                                        SAUCE_SHARED_PTR<Chasis> chasis,
-                                        SAUCE_SHARED_PTR<Engine> engine) {
-  newHerbie(herbie, chasis, engine);
-}
-
-template<>
-void MockInitializer::destroy<CoupChasis>(CoupChasis * coupChasis) {
-  deleteCoupChasis(coupChasis);
-}
-
-template<>
-void MockInitializer::destroy<HybridEngine>(HybridEngine * hybridEngine) {
-  deleteHybridEngine(hybridEngine);
-}
-
-template<>
-void MockInitializer::destroy<Herbie>(Herbie * herbie) {
-  deleteHerbie(herbie);
-}
-
 class HerbieModule:
   public ::sauce::New<Chasis, CoupChasis(),
                       AllocateWith<MockAllocation>::Allocator<CoupChasis> >,
@@ -237,34 +247,58 @@ class AllocationTest:
   public ::testing::Test {
 public:
 
-  ::sauce::Injector<HerbieModule, MockInitializer> injector;
+  ::sauce::Injector<HerbieModule> injector;
   MockAllocation allocator;
-  MockInitializer & initializer;
 
-  // AllocationTest is a friend of Injector
+  // These point to ALLOCATED but UNINITIALIZED memory
+  CoupChasis * chasis;
+  HybridEngine * engine;
+  Herbie * vehicle;
+
   AllocationTest():
     injector(),
     allocator(),
-    initializer(injector.initializer) {
+    chasis(NULL),
+    engine(NULL),
+    vehicle(NULL) {
+  }
+
+  virtual void SetUp() {
+    // Clear the static counters
+    CoupChasis::constructed = 0;
+    CoupChasis::destroyed = 0;
+    HybridEngine::constructed = 0;
+    HybridEngine::destroyed = 0;
+    Herbie::constructed = 0;
+    Herbie::destroyed = 0;
+
+    // Point our configured allocator at the mock
     AllocateWith<MockAllocation>::Base::setBacking(allocator);
+
+    // And now use a real one to get some raw memory
+    chasis = std::allocator<CoupChasis>().allocate(1);
+    engine = std::allocator<HybridEngine>().allocate(1);
+    vehicle = std::allocator<Herbie>().allocate(1);
+  }
+
+  virtual void TearDown() {
+    std::allocator<CoupChasis>().deallocate(chasis, 1);
+    std::allocator<HybridEngine>().deallocate(engine, 1);
+    std::allocator<Herbie>().deallocate(vehicle, 1);
   }
 
 };
 
 TEST_F(AllocationTest, shouldProvideAndDisposeADependency) {
-  CoupChasis expected;
+  EXPECT_CALL(allocator, allocateCoupChasis(1)).WillOnce(Return(chasis));
+  EXPECT_CALL(allocator, deallocateCoupChasis(chasis, 1));
 
-  // Allocate and construct.  Have the mock allocator return the coup chasis above.
-  EXPECT_CALL(allocator, allocateCoupChasis(1)).WillOnce(Return(&expected));
-  EXPECT_CALL(initializer, newCoupChasis(&expected));
-
-  // Destroy and deallocate
-  EXPECT_CALL(initializer, deleteCoupChasis(&expected));
-  EXPECT_CALL(allocator, deallocateCoupChasis(&expected, 1));
-
-  // Ask for a Chasis
-  SAUCE_SHARED_PTR<Chasis> actual = injector.get<Chasis>();
-  ASSERT_EQ(&expected, actual.get());
+  {
+    SAUCE_SHARED_PTR<Chasis> actual = injector.get<Chasis>();
+    ASSERT_EQ(1, CoupChasis::constructed);
+    ASSERT_EQ(chasis, actual.get());
+  }
+  ASSERT_EQ(1, CoupChasis::destroyed);
 }
 
 // Argument matcher for smart pointers based on backing address.
@@ -273,10 +307,6 @@ MATCHER_P(SmartPointerTo, address, "") {
 }
 
 TEST_F(AllocationTest, shouldProvideAndDisposeOfDependenciesTransitively) {
-  CoupChasis chasis;
-  HybridEngine engine;
-  Herbie vehicle;
-
   // We don't care about the relative ordering between chasis and engine:
   // only about how they stand relative to the vehicle.
   Sequence injectedChasis, injectedEngine;
@@ -284,47 +314,46 @@ TEST_F(AllocationTest, shouldProvideAndDisposeOfDependenciesTransitively) {
   // Allocate and construct the chasis
   EXPECT_CALL(allocator, allocateCoupChasis(1)).
   InSequence(injectedChasis).
-  WillOnce(Return(&chasis));
-  EXPECT_CALL(initializer, newCoupChasis(&chasis)).
-  InSequence(injectedChasis);
+  WillOnce(Return(chasis));
 
   // Allocate and construct the engine
   EXPECT_CALL(allocator, allocateHybridEngine(1)).
   InSequence(injectedEngine).
-  WillOnce(Return(&engine));
-  EXPECT_CALL(initializer, newHybridEngine(&engine)).
-  InSequence(injectedEngine);
+  WillOnce(Return(engine));
 
   // Allocate and construct the vehicle itself, injecting the two dependencies
   EXPECT_CALL(allocator, allocateHerbie(1)).
   InSequence(injectedChasis, injectedEngine).
-  WillOnce(Return(&vehicle));
-  EXPECT_CALL(initializer, newHerbie(&vehicle, SmartPointerTo(&chasis), SmartPointerTo(&engine))).
-  InSequence(injectedChasis, injectedEngine);
+  WillOnce(Return(vehicle));
 
   // Destroy and deallocate the engine
-  EXPECT_CALL(initializer, deleteHybridEngine(&engine)).
-  InSequence(injectedEngine);
-  EXPECT_CALL(allocator, deallocateHybridEngine(&engine, 1)).
+  EXPECT_CALL(allocator, deallocateHybridEngine(engine, 1)).
   InSequence(injectedEngine);
 
   // Destroy and deallocate the chasis
-  EXPECT_CALL(initializer, deleteCoupChasis(&chasis)).
-  InSequence(injectedChasis);
-  EXPECT_CALL(allocator, deallocateCoupChasis(&chasis, 1)).
+  EXPECT_CALL(allocator, deallocateCoupChasis(chasis, 1)).
   InSequence(injectedChasis);
 
   // Destroy and deallocate the vehicle
   // Should destroying the vehicle after its dependencies be an issue?  This
   // is simply the order that falls out of smart pointer deletion..
-  EXPECT_CALL(initializer, deleteHerbie(&vehicle)).
-  InSequence(injectedChasis, injectedEngine);
-  EXPECT_CALL(allocator, deallocateHerbie(&vehicle, 1)).
+  EXPECT_CALL(allocator, deallocateHerbie(vehicle, 1)).
   InSequence(injectedChasis, injectedEngine);
 
   // And request a Vehicle, show it's our local, and let it fall out of scope
-  SAUCE_SHARED_PTR<Vehicle> actual = injector.get<Vehicle>();
-  ASSERT_EQ(&vehicle, actual.get());
+  {
+    SAUCE_SHARED_PTR<Vehicle> actual = injector.get<Vehicle>();
+    ASSERT_EQ(1, CoupChasis::constructed);
+    ASSERT_EQ(1, HybridEngine::constructed);
+    ASSERT_EQ(1, Herbie::constructed);
+
+    ASSERT_EQ(chasis, actual->getChasis().get());
+    ASSERT_EQ(engine, actual->getEngine().get());
+    ASSERT_EQ(vehicle, actual.get());
+  }
+  ASSERT_EQ(1, CoupChasis::destroyed);
+  ASSERT_EQ(1, HybridEngine::destroyed);
+  ASSERT_EQ(1, Herbie::destroyed);
 }
 
 }
