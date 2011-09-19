@@ -6,7 +6,6 @@
 #include <sauce/memory>
 #include <sauce/internal/bindings>
 #include <sauce/internal/deleter>
-#include <sauce/internal/initializer>
 
 namespace sauce {
 
