@@ -145,13 +145,11 @@ public:
     }
 
     C * allocate(size_t size) {
-      Backing_ * b = Base::backing;
-      return b->template allocate<C>(size);
+      return Base::backing->template allocate<C>(size);
     }
 
     void deallocate(C * c, size_t size) {
-      Backing_ * b = Base::backing;
-      b->template deallocate<C>(c, size);
+      Base::backing->template deallocate<C>(c, size);
     }
 
   };
