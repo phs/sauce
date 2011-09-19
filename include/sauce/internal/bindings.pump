@@ -30,7 +30,6 @@ public:
     SAUCE_SHARED_PTR<A$j> a$j(injector.template get<A$j>());
 
 ]]]]
-
     Allocator allocator;
     Impl * impl = allocator.allocate(1);
     new(impl) Impl($as);
