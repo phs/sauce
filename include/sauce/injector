@@ -20,7 +20,6 @@ public:
 
   template<typename Iface>
   SAUCE_SHARED_PTR<Iface> get() const {
-    // Delegate after resolving the binding with EXTRA SUPER MAGIC
     return resolveAndProvide<Iface>(&Module::template bindings<Injector_> );
   }
 
@@ -28,15 +27,12 @@ private:
 
   template<typename Iface, typename Binding>
   SAUCE_SHARED_PTR<Iface> resolveAndProvide(Binding * (*)(Iface)) const {
-    typedef typename Binding::IfacePointer IfacePointer;
     typedef typename Binding::ImplPointer ImplPointer;
     typedef ::sauce::internal::Deleter<Injector_, Binding> Deleter_;
 
-    // Ask the binding to provide an implementation
     ImplPointer impl = Binding::provide(*this);
 
-    // Wrap in a smart pointer (do not inline this local!)
-    SAUCE_SHARED_PTR<Iface> smartPointer(impl, Deleter_(*this));
+    SAUCE_SHARED_PTR<Iface> smartPointer(impl, Deleter_(*this)); // Do not inline
     return smartPointer;
   }
 };
