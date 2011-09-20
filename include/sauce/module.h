@@ -1,5 +1,5 @@
-#ifndef SAUCE_SAUCE_BUILDER_H_
-#define SAUCE_SAUCE_BUILDER_H_
+#ifndef SAUCE_SAUCE_MODULE_H_
+#define SAUCE_SAUCE_MODULE_H_
 
 #include <memory>
 
@@ -21,4 +21,4 @@ public:
 
 }
 
-#endif // ifndef SAUCE_SAUCE_BUILDER_H_
+#endif // ifndef SAUCE_SAUCE_MODULE_H_
