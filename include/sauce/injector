@@ -17,12 +17,10 @@ class Injector {
   typedef ::sauce::internal::Deleter<Injector_> Deleter_;
 
   friend class ::sauce::internal::Deleter<Injector_>;
-  Deleter_ deleter;
 
 public:
 
-  Injector():
-    deleter(*this) {}
+  Injector() {}
 
   virtual ~Injector() {}
 
@@ -33,6 +31,7 @@ public:
 
     // Wrap and return the provided implementation in the chosen shared_ptr
     SAUCE_SHARED_PTR<Iface> smartPointer;
+    Deleter_ deleter(*this);
     smartPointer.reset(provided, deleter);
     return smartPointer;
   }
