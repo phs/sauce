@@ -22,6 +22,7 @@ public:
     impl(impl) {}
 
   void operator()(IfacePointer iface) const {
+    // Yes, that says impl.  The parameter is unused.
     Binding::dispose(injector, impl);
   }
 };
