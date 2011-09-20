@@ -118,14 +118,11 @@ public:
 
 using ::sauce::Bind;
 
-class HerbieModule:
-  public Bind<Chasis, CoupChasis(),
-              AllocateWith<MockAllocation>::Allocator<CoupChasis> >,
-  public Bind<Engine, HybridEngine(),
-              AllocateWith<MockAllocation>::Allocator<HybridEngine> >,
-  public Bind<Vehicle, Herbie(Chasis, Engine),
-              AllocateWith<MockAllocation>::Allocator<Herbie> > {
-public:
+struct HerbieModule:
+  Bind<Chasis, CoupChasis(), AllocateWith<MockAllocation>::Allocator<CoupChasis> >,
+    Bind<Engine, HybridEngine(), AllocateWith<MockAllocation>::Allocator<HybridEngine> >,
+    Bind<Vehicle, Herbie(Chasis, Engine), AllocateWith<MockAllocation>::Allocator<Herbie> > {
+
   using Bind<Chasis, CoupChasis(),
              AllocateWith<MockAllocation>::Allocator<CoupChasis> >::bindings;
   using Bind<Engine, HybridEngine(),
