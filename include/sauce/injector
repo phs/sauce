@@ -32,7 +32,7 @@ private:
 
     ImplPointer impl = Binding::provide(*this);
 
-    SAUCE_SHARED_PTR<Iface> smartPointer(impl, Deleter_(*this)); // Do not inline
+    SAUCE_SHARED_PTR<Iface> smartPointer(impl, Deleter_(*this, impl)); // Do not inline
     return smartPointer;
   }
 };

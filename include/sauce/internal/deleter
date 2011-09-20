@@ -14,10 +14,12 @@ class Deleter {
   typedef typename Binding::ImplPointer ImplPointer;
 
   Injector const & injector;
+  ImplPointer impl;
 
 public:
-  Deleter(Injector const & injector):
-    injector(injector) {}
+  Deleter(Injector const & injector, ImplPointer impl):
+    injector(injector),
+    impl(impl) {}
 
   void operator()(IfacePointer iface) const {
     Binding::dispose(injector, iface);
