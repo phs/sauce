@@ -9,49 +9,38 @@
 
 namespace sauce {
 
-template<typename Module>
+template<typename Module_>
 class Injector {
 
-  typedef Module Module_;
-  typedef Injector<Module_> Injector_;
-  typedef ::sauce::internal::Deleter<Injector_> Deleter_;
-
-  friend class ::sauce::internal::Deleter<Injector_>;
+  typedef Module_ Module;
+  typedef Injector<Module> Injector_;
 
 public:
 
   Injector() {}
-
   virtual ~Injector() {}
 
   template<typename Iface>
   SAUCE_SHARED_PTR<Iface> get() const {
     // Delegate after resolving the binding with EXTRA SUPER MAGIC
-    return resolveAndProvide<Iface>(&Module_::template bindings<Injector_> );
+    return resolveAndProvide<Iface>(&Module::template bindings<Injector_> );
   }
 
 private:
-
-  template<typename Iface>
-  void dispose(Iface * iface) const {
-    resolveAndDispose<Iface>(&Module_::template bindings<Injector_>, iface);
-  }
 
   template<typename Iface, typename Binding>
   SAUCE_SHARED_PTR<Iface> resolveAndProvide(Binding * (*)(Iface)) const {
     // Ask the binding to provide an implementation
     typename Binding::IfacePointer provided = Binding::provide(*this);
 
+    // Make a deleter
+    typedef ::sauce::internal::Deleter<Injector_, typename Binding::Disposer> Deleter_;
+    Deleter_ deleter(*this, &Binding::dispose);
+
     // Wrap in a smart pointer
-    Deleter_ deleter(*this);
     SAUCE_SHARED_PTR<Iface> smartPointer;
     smartPointer.reset(provided, deleter);
     return smartPointer;
-  }
-
-  template<typename Iface, typename Binding>
-  void resolveAndDispose(Binding * (*)(Iface), typename Binding::IfacePointer iface) const {
-    Binding::dispose(*this, iface);
   }
 
 };

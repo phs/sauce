@@ -10,18 +10,19 @@ namespace internal {
  *
  * It is an invariant that no Deleter survives its associated Injector.
  */
-template<typename Injector>
+template<typename Injector, typename Disposer>
 class Deleter {
   Injector const & injector;
+  Disposer disposer;
 
 public:
-  Deleter(Injector const & injector):
-    injector(injector) {
-  }
+  Deleter(Injector const & injector, Disposer disposer):
+    injector(injector),
+    disposer(disposer) {}
 
   template<typename Iface>
   void operator()(Iface * iface) const {
-    injector.dispose(iface);
+    disposer(injector, iface);
   }
 };
 
