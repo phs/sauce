@@ -31,7 +31,7 @@ public:
   typedef typename ImplAllocator::pointer ImplPointer;
   typedef typename Allocator_::template rebind<Iface>::other IfaceAllocator;
   typedef typename IfaceAllocator::pointer IfacePointer;
-  typedef void Disposer(Injector_ const &, IfacePointer);
+  typedef void (*Disposer)(Injector_ const &, IfacePointer);
 
   static ImplPointer provide(Injector_ const & injector) {
 [[$for j [[
