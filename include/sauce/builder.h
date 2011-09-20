@@ -4,7 +4,7 @@
 
 #include <memory>
 
-#include <sauce/internal/bindings>
+#include <sauce/internal/bindings.h>
 
 namespace sauce {
 

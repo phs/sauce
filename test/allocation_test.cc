@@ -1,9 +1,9 @@
 #include <gmock/gmock.h>
 #include <gtest/gtest.h>
 
-#include <sauce/sauce>
+#include <sauce/sauce.h>
 
-#include "allocate_with"
+#include "allocate_with.h"
 
 using ::testing::Sequence;
 using ::testing::Return;

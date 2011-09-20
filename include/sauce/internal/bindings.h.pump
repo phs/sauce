@@ -6,7 +6,7 @@ $var n = 10  $$ The maximum arity we support.
 #ifndef SAUCE_SAUCE_INTERNAL_BINDINGS_H_
 #define SAUCE_SAUCE_INTERNAL_BINDINGS_H_
 
-#include <sauce/memory>
+#include <sauce/memory.h>
 
 namespace sauce {
 namespace internal {
