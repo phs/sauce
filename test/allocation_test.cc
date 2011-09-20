@@ -154,8 +154,7 @@ public:
     allocator(),
     chasis(NULL),
     engine(NULL),
-    vehicle(NULL) {
-  }
+    vehicle(NULL) {}
 
   virtual void SetUp() {
     // Clear the static counters
