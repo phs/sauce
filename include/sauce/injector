@@ -40,7 +40,7 @@ private:
   template<typename Iface, typename Binding>
   SAUCE_SHARED_PTR<Iface> resolveAndProvide(Binding * (*)(Iface)) const {
     // Ask the binding to provide an implementation
-    Iface * provided = Binding::provide(*this);
+    typename Binding::IfacePointer provided = Binding::provide(*this);
 
     // Wrap in a smart pointer
     Deleter_ deleter(*this);
@@ -50,7 +50,7 @@ private:
   }
 
   template<typename Iface, typename Binding>
-  void resolveAndDispose(Binding * (*)(Iface), Iface * iface) const {
+  void resolveAndDispose(Binding * (*)(Iface), typename Binding::IfacePointer iface) const {
     Binding::dispose(*this, iface);
   }
 
