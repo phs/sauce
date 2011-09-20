@@ -10,14 +10,16 @@ namespace internal {
  */
 template<typename Injector, typename Binding>
 class Deleter {
+  typedef typename Binding::IfacePointer IfacePointer;
+  typedef typename Binding::ImplPointer ImplPointer;
+
   Injector const & injector;
 
 public:
   Deleter(Injector const & injector):
     injector(injector) {}
 
-  template<typename Iface>
-  void operator()(Iface * iface) const {
+  void operator()(IfacePointer iface) const {
     Binding::dispose(injector, iface);
   }
 };
