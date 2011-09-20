@@ -116,20 +116,22 @@ public:
   MOCK_METHOD2(deallocate, void(Herbie *, size_t));
 };
 
+using ::sauce::Bind;
+
 class HerbieModule:
-  public ::sauce::New<Chasis, CoupChasis(),
-                      AllocateWith<MockAllocation>::Allocator<CoupChasis> >,
-  public ::sauce::New<Engine, HybridEngine(),
-                      AllocateWith<MockAllocation>::Allocator<HybridEngine> >,
-  public ::sauce::New<Vehicle, Herbie(Chasis, Engine),
-                      AllocateWith<MockAllocation>::Allocator<Herbie> > {
+  public Bind<Chasis, CoupChasis(),
+              AllocateWith<MockAllocation>::Allocator<CoupChasis> >,
+  public Bind<Engine, HybridEngine(),
+              AllocateWith<MockAllocation>::Allocator<HybridEngine> >,
+  public Bind<Vehicle, Herbie(Chasis, Engine),
+              AllocateWith<MockAllocation>::Allocator<Herbie> > {
 public:
-  using ::sauce::New<Chasis, CoupChasis(),
-                     AllocateWith<MockAllocation>::Allocator<CoupChasis> >::bindings;
-  using ::sauce::New<Engine, HybridEngine(),
-                     AllocateWith<MockAllocation>::Allocator<HybridEngine> >::bindings;
-  using ::sauce::New<Vehicle, Herbie(Chasis, Engine),
-                     AllocateWith<MockAllocation>::Allocator<Herbie> >::bindings;
+  using Bind<Chasis, CoupChasis(),
+             AllocateWith<MockAllocation>::Allocator<CoupChasis> >::bindings;
+  using Bind<Engine, HybridEngine(),
+             AllocateWith<MockAllocation>::Allocator<HybridEngine> >::bindings;
+  using Bind<Vehicle, Herbie(Chasis, Engine),
+             AllocateWith<MockAllocation>::Allocator<Herbie> >::bindings;
 };
 
 template<>

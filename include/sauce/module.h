@@ -8,7 +8,7 @@
 namespace sauce {
 
 template<typename Iface, typename Constructor, typename Allocator = std::allocator<void> >
-class New {
+class Bind {
 public:
 
   template<typename Injector>
