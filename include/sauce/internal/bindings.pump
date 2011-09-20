@@ -22,14 +22,17 @@ $var comma_typename_As = [[$for j [[, typename A$j]]]]
 $var As = [[$for j, [[A$j]]]]
 $var as = [[$for j, [[a$j]]]]
 
-template<typename Injector, typename Iface, typename Allocator, typename Impl$comma_typename_As>
-class New<Injector, Iface, Allocator, Impl($As)> {
-  typedef Allocator ImplAllocator;
-  typedef typename ImplAllocator::pointer ImplPointer;
-  typedef typename Allocator::template rebind<Iface>::other IfaceAllocator;
-  typedef typename IfaceAllocator::pointer IfacePointer;
+template<typename Injector_, typename Iface_, typename Allocator_, typename Impl_$comma_typename_As>
+class New<Injector_, Iface_, Allocator_, Impl_($As)> {
 public:
-  static ImplPointer provide(Injector const & injector) {
+  typedef Iface_ Iface;
+  typedef Impl_ Impl;
+  typedef Allocator_ ImplAllocator;
+  typedef typename ImplAllocator::pointer ImplPointer;
+  typedef typename Allocator_::template rebind<Iface>::other IfaceAllocator;
+  typedef typename IfaceAllocator::pointer IfacePointer;
+
+  static ImplPointer provide(Injector_ const & injector) {
 [[$for j [[
     SAUCE_SHARED_PTR<A$j> a$j(injector.template get<A$j>());
 
@@ -40,7 +43,7 @@ public:
     return impl;
   }
 
-  static void dispose(Injector const & injector, IfacePointer iface) {
+  static void dispose(Injector_ const & injector, IfacePointer iface) {
     ImplAllocator allocator;
     ImplPointer impl = static_cast<ImplPointer>(iface);
     impl->~Impl();

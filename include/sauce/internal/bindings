@@ -16,21 +16,25 @@ template<typename Injector, typename Iface, typename Allocator,
     typename Constructor>
 class New;
 
-template<typename Injector, typename Iface, typename Allocator, typename Impl>
-class New<Injector, Iface, Allocator, Impl()> {
-  typedef Allocator ImplAllocator;
-  typedef typename ImplAllocator::pointer ImplPointer;
-  typedef typename Allocator::template rebind<Iface>::other IfaceAllocator;
-  typedef typename IfaceAllocator::pointer IfacePointer;
+template<typename Injector_, typename Iface_, typename Allocator_,
+    typename Impl_>
+class New<Injector_, Iface_, Allocator_, Impl_()> {
 public:
-  static ImplPointer provide(Injector const & injector) {
+  typedef Iface_ Iface;
+  typedef Impl_ Impl;
+  typedef Allocator_ ImplAllocator;
+  typedef typename ImplAllocator::pointer ImplPointer;
+  typedef typename Allocator_::template rebind<Iface>::other IfaceAllocator;
+  typedef typename IfaceAllocator::pointer IfacePointer;
+
+  static ImplPointer provide(Injector_ const & injector) {
     ImplAllocator allocator;
     ImplPointer impl = allocator.allocate(1);
     new(impl) Impl();
     return impl;
   }
 
-  static void dispose(Injector const & injector, IfacePointer iface) {
+  static void dispose(Injector_ const & injector, IfacePointer iface) {
     ImplAllocator allocator;
     ImplPointer impl = static_cast<ImplPointer>(iface);
     impl->~Impl();
@@ -38,15 +42,18 @@ public:
   }
 };
 
-template<typename Injector, typename Iface, typename Allocator, typename Impl,
-    typename A1>
-class New<Injector, Iface, Allocator, Impl(A1)> {
-  typedef Allocator ImplAllocator;
-  typedef typename ImplAllocator::pointer ImplPointer;
-  typedef typename Allocator::template rebind<Iface>::other IfaceAllocator;
-  typedef typename IfaceAllocator::pointer IfacePointer;
+template<typename Injector_, typename Iface_, typename Allocator_,
+    typename Impl_, typename A1>
+class New<Injector_, Iface_, Allocator_, Impl_(A1)> {
 public:
-  static ImplPointer provide(Injector const & injector) {
+  typedef Iface_ Iface;
+  typedef Impl_ Impl;
+  typedef Allocator_ ImplAllocator;
+  typedef typename ImplAllocator::pointer ImplPointer;
+  typedef typename Allocator_::template rebind<Iface>::other IfaceAllocator;
+  typedef typename IfaceAllocator::pointer IfacePointer;
+
+  static ImplPointer provide(Injector_ const & injector) {
     SAUCE_SHARED_PTR<A1> a1(injector.template get<A1>());
     ImplAllocator allocator;
     ImplPointer impl = allocator.allocate(1);
@@ -54,7 +61,7 @@ public:
     return impl;
   }
 
-  static void dispose(Injector const & injector, IfacePointer iface) {
+  static void dispose(Injector_ const & injector, IfacePointer iface) {
     ImplAllocator allocator;
     ImplPointer impl = static_cast<ImplPointer>(iface);
     impl->~Impl();
@@ -62,15 +69,18 @@ public:
   }
 };
 
-template<typename Injector, typename Iface, typename Allocator, typename Impl,
-    typename A1, typename A2>
-class New<Injector, Iface, Allocator, Impl(A1, A2)> {
-  typedef Allocator ImplAllocator;
-  typedef typename ImplAllocator::pointer ImplPointer;
-  typedef typename Allocator::template rebind<Iface>::other IfaceAllocator;
-  typedef typename IfaceAllocator::pointer IfacePointer;
+template<typename Injector_, typename Iface_, typename Allocator_,
+    typename Impl_, typename A1, typename A2>
+class New<Injector_, Iface_, Allocator_, Impl_(A1, A2)> {
 public:
-  static ImplPointer provide(Injector const & injector) {
+  typedef Iface_ Iface;
+  typedef Impl_ Impl;
+  typedef Allocator_ ImplAllocator;
+  typedef typename ImplAllocator::pointer ImplPointer;
+  typedef typename Allocator_::template rebind<Iface>::other IfaceAllocator;
+  typedef typename IfaceAllocator::pointer IfacePointer;
+
+  static ImplPointer provide(Injector_ const & injector) {
     SAUCE_SHARED_PTR<A1> a1(injector.template get<A1>());
     SAUCE_SHARED_PTR<A2> a2(injector.template get<A2>());
     ImplAllocator allocator;
@@ -79,7 +89,7 @@ public:
     return impl;
   }
 
-  static void dispose(Injector const & injector, IfacePointer iface) {
+  static void dispose(Injector_ const & injector, IfacePointer iface) {
     ImplAllocator allocator;
     ImplPointer impl = static_cast<ImplPointer>(iface);
     impl->~Impl();
@@ -87,15 +97,18 @@ public:
   }
 };
 
-template<typename Injector, typename Iface, typename Allocator, typename Impl,
-    typename A1, typename A2, typename A3>
-class New<Injector, Iface, Allocator, Impl(A1, A2, A3)> {
-  typedef Allocator ImplAllocator;
-  typedef typename ImplAllocator::pointer ImplPointer;
-  typedef typename Allocator::template rebind<Iface>::other IfaceAllocator;
-  typedef typename IfaceAllocator::pointer IfacePointer;
+template<typename Injector_, typename Iface_, typename Allocator_,
+    typename Impl_, typename A1, typename A2, typename A3>
+class New<Injector_, Iface_, Allocator_, Impl_(A1, A2, A3)> {
 public:
-  static ImplPointer provide(Injector const & injector) {
+  typedef Iface_ Iface;
+  typedef Impl_ Impl;
+  typedef Allocator_ ImplAllocator;
+  typedef typename ImplAllocator::pointer ImplPointer;
+  typedef typename Allocator_::template rebind<Iface>::other IfaceAllocator;
+  typedef typename IfaceAllocator::pointer IfacePointer;
+
+  static ImplPointer provide(Injector_ const & injector) {
     SAUCE_SHARED_PTR<A1> a1(injector.template get<A1>());
     SAUCE_SHARED_PTR<A2> a2(injector.template get<A2>());
     SAUCE_SHARED_PTR<A3> a3(injector.template get<A3>());
@@ -105,7 +118,7 @@ public:
     return impl;
   }
 
-  static void dispose(Injector const & injector, IfacePointer iface) {
+  static void dispose(Injector_ const & injector, IfacePointer iface) {
     ImplAllocator allocator;
     ImplPointer impl = static_cast<ImplPointer>(iface);
     impl->~Impl();
@@ -113,15 +126,18 @@ public:
   }
 };
 
-template<typename Injector, typename Iface, typename Allocator, typename Impl,
-    typename A1, typename A2, typename A3, typename A4>
-class New<Injector, Iface, Allocator, Impl(A1, A2, A3, A4)> {
-  typedef Allocator ImplAllocator;
-  typedef typename ImplAllocator::pointer ImplPointer;
-  typedef typename Allocator::template rebind<Iface>::other IfaceAllocator;
-  typedef typename IfaceAllocator::pointer IfacePointer;
+template<typename Injector_, typename Iface_, typename Allocator_,
+    typename Impl_, typename A1, typename A2, typename A3, typename A4>
+class New<Injector_, Iface_, Allocator_, Impl_(A1, A2, A3, A4)> {
 public:
-  static ImplPointer provide(Injector const & injector) {
+  typedef Iface_ Iface;
+  typedef Impl_ Impl;
+  typedef Allocator_ ImplAllocator;
+  typedef typename ImplAllocator::pointer ImplPointer;
+  typedef typename Allocator_::template rebind<Iface>::other IfaceAllocator;
+  typedef typename IfaceAllocator::pointer IfacePointer;
+
+  static ImplPointer provide(Injector_ const & injector) {
     SAUCE_SHARED_PTR<A1> a1(injector.template get<A1>());
     SAUCE_SHARED_PTR<A2> a2(injector.template get<A2>());
     SAUCE_SHARED_PTR<A3> a3(injector.template get<A3>());
@@ -132,7 +148,7 @@ public:
     return impl;
   }
 
-  static void dispose(Injector const & injector, IfacePointer iface) {
+  static void dispose(Injector_ const & injector, IfacePointer iface) {
     ImplAllocator allocator;
     ImplPointer impl = static_cast<ImplPointer>(iface);
     impl->~Impl();
@@ -140,15 +156,19 @@ public:
   }
 };
 
-template<typename Injector, typename Iface, typename Allocator, typename Impl,
-    typename A1, typename A2, typename A3, typename A4, typename A5>
-class New<Injector, Iface, Allocator, Impl(A1, A2, A3, A4, A5)> {
-  typedef Allocator ImplAllocator;
-  typedef typename ImplAllocator::pointer ImplPointer;
-  typedef typename Allocator::template rebind<Iface>::other IfaceAllocator;
-  typedef typename IfaceAllocator::pointer IfacePointer;
+template<typename Injector_, typename Iface_, typename Allocator_,
+    typename Impl_, typename A1, typename A2, typename A3, typename A4,
+    typename A5>
+class New<Injector_, Iface_, Allocator_, Impl_(A1, A2, A3, A4, A5)> {
 public:
-  static ImplPointer provide(Injector const & injector) {
+  typedef Iface_ Iface;
+  typedef Impl_ Impl;
+  typedef Allocator_ ImplAllocator;
+  typedef typename ImplAllocator::pointer ImplPointer;
+  typedef typename Allocator_::template rebind<Iface>::other IfaceAllocator;
+  typedef typename IfaceAllocator::pointer IfacePointer;
+
+  static ImplPointer provide(Injector_ const & injector) {
     SAUCE_SHARED_PTR<A1> a1(injector.template get<A1>());
     SAUCE_SHARED_PTR<A2> a2(injector.template get<A2>());
     SAUCE_SHARED_PTR<A3> a3(injector.template get<A3>());
@@ -160,7 +180,7 @@ public:
     return impl;
   }
 
-  static void dispose(Injector const & injector, IfacePointer iface) {
+  static void dispose(Injector_ const & injector, IfacePointer iface) {
     ImplAllocator allocator;
     ImplPointer impl = static_cast<ImplPointer>(iface);
     impl->~Impl();
@@ -168,16 +188,19 @@ public:
   }
 };
 
-template<typename Injector, typename Iface, typename Allocator, typename Impl,
-    typename A1, typename A2, typename A3, typename A4, typename A5,
-    typename A6>
-class New<Injector, Iface, Allocator, Impl(A1, A2, A3, A4, A5, A6)> {
-  typedef Allocator ImplAllocator;
-  typedef typename ImplAllocator::pointer ImplPointer;
-  typedef typename Allocator::template rebind<Iface>::other IfaceAllocator;
-  typedef typename IfaceAllocator::pointer IfacePointer;
+template<typename Injector_, typename Iface_, typename Allocator_,
+    typename Impl_, typename A1, typename A2, typename A3, typename A4,
+    typename A5, typename A6>
+class New<Injector_, Iface_, Allocator_, Impl_(A1, A2, A3, A4, A5, A6)> {
 public:
-  static ImplPointer provide(Injector const & injector) {
+  typedef Iface_ Iface;
+  typedef Impl_ Impl;
+  typedef Allocator_ ImplAllocator;
+  typedef typename ImplAllocator::pointer ImplPointer;
+  typedef typename Allocator_::template rebind<Iface>::other IfaceAllocator;
+  typedef typename IfaceAllocator::pointer IfacePointer;
+
+  static ImplPointer provide(Injector_ const & injector) {
     SAUCE_SHARED_PTR<A1> a1(injector.template get<A1>());
     SAUCE_SHARED_PTR<A2> a2(injector.template get<A2>());
     SAUCE_SHARED_PTR<A3> a3(injector.template get<A3>());
@@ -190,7 +213,7 @@ public:
     return impl;
   }
 
-  static void dispose(Injector const & injector, IfacePointer iface) {
+  static void dispose(Injector_ const & injector, IfacePointer iface) {
     ImplAllocator allocator;
     ImplPointer impl = static_cast<ImplPointer>(iface);
     impl->~Impl();
@@ -198,16 +221,19 @@ public:
   }
 };
 
-template<typename Injector, typename Iface, typename Allocator, typename Impl,
-    typename A1, typename A2, typename A3, typename A4, typename A5,
-    typename A6, typename A7>
-class New<Injector, Iface, Allocator, Impl(A1, A2, A3, A4, A5, A6, A7)> {
-  typedef Allocator ImplAllocator;
-  typedef typename ImplAllocator::pointer ImplPointer;
-  typedef typename Allocator::template rebind<Iface>::other IfaceAllocator;
-  typedef typename IfaceAllocator::pointer IfacePointer;
+template<typename Injector_, typename Iface_, typename Allocator_,
+    typename Impl_, typename A1, typename A2, typename A3, typename A4,
+    typename A5, typename A6, typename A7>
+class New<Injector_, Iface_, Allocator_, Impl_(A1, A2, A3, A4, A5, A6, A7)> {
 public:
-  static ImplPointer provide(Injector const & injector) {
+  typedef Iface_ Iface;
+  typedef Impl_ Impl;
+  typedef Allocator_ ImplAllocator;
+  typedef typename ImplAllocator::pointer ImplPointer;
+  typedef typename Allocator_::template rebind<Iface>::other IfaceAllocator;
+  typedef typename IfaceAllocator::pointer IfacePointer;
+
+  static ImplPointer provide(Injector_ const & injector) {
     SAUCE_SHARED_PTR<A1> a1(injector.template get<A1>());
     SAUCE_SHARED_PTR<A2> a2(injector.template get<A2>());
     SAUCE_SHARED_PTR<A3> a3(injector.template get<A3>());
@@ -221,7 +247,7 @@ public:
     return impl;
   }
 
-  static void dispose(Injector const & injector, IfacePointer iface) {
+  static void dispose(Injector_ const & injector, IfacePointer iface) {
     ImplAllocator allocator;
     ImplPointer impl = static_cast<ImplPointer>(iface);
     impl->~Impl();
@@ -229,16 +255,20 @@ public:
   }
 };
 
-template<typename Injector, typename Iface, typename Allocator, typename Impl,
-    typename A1, typename A2, typename A3, typename A4, typename A5,
-    typename A6, typename A7, typename A8>
-class New<Injector, Iface, Allocator, Impl(A1, A2, A3, A4, A5, A6, A7, A8)> {
-  typedef Allocator ImplAllocator;
-  typedef typename ImplAllocator::pointer ImplPointer;
-  typedef typename Allocator::template rebind<Iface>::other IfaceAllocator;
-  typedef typename IfaceAllocator::pointer IfacePointer;
+template<typename Injector_, typename Iface_, typename Allocator_,
+    typename Impl_, typename A1, typename A2, typename A3, typename A4,
+    typename A5, typename A6, typename A7, typename A8>
+class New<Injector_, Iface_, Allocator_, Impl_(A1, A2, A3, A4, A5, A6, A7,
+    A8)> {
 public:
-  static ImplPointer provide(Injector const & injector) {
+  typedef Iface_ Iface;
+  typedef Impl_ Impl;
+  typedef Allocator_ ImplAllocator;
+  typedef typename ImplAllocator::pointer ImplPointer;
+  typedef typename Allocator_::template rebind<Iface>::other IfaceAllocator;
+  typedef typename IfaceAllocator::pointer IfacePointer;
+
+  static ImplPointer provide(Injector_ const & injector) {
     SAUCE_SHARED_PTR<A1> a1(injector.template get<A1>());
     SAUCE_SHARED_PTR<A2> a2(injector.template get<A2>());
     SAUCE_SHARED_PTR<A3> a3(injector.template get<A3>());
@@ -253,7 +283,7 @@ public:
     return impl;
   }
 
-  static void dispose(Injector const & injector, IfacePointer iface) {
+  static void dispose(Injector_ const & injector, IfacePointer iface) {
     ImplAllocator allocator;
     ImplPointer impl = static_cast<ImplPointer>(iface);
     impl->~Impl();
@@ -261,17 +291,20 @@ public:
   }
 };
 
-template<typename Injector, typename Iface, typename Allocator, typename Impl,
-    typename A1, typename A2, typename A3, typename A4, typename A5,
-    typename A6, typename A7, typename A8, typename A9>
-class New<Injector, Iface, Allocator, Impl(A1, A2, A3, A4, A5, A6, A7, A8,
+template<typename Injector_, typename Iface_, typename Allocator_,
+    typename Impl_, typename A1, typename A2, typename A3, typename A4,
+    typename A5, typename A6, typename A7, typename A8, typename A9>
+class New<Injector_, Iface_, Allocator_, Impl_(A1, A2, A3, A4, A5, A6, A7, A8,
     A9)> {
-  typedef Allocator ImplAllocator;
-  typedef typename ImplAllocator::pointer ImplPointer;
-  typedef typename Allocator::template rebind<Iface>::other IfaceAllocator;
-  typedef typename IfaceAllocator::pointer IfacePointer;
 public:
-  static ImplPointer provide(Injector const & injector) {
+  typedef Iface_ Iface;
+  typedef Impl_ Impl;
+  typedef Allocator_ ImplAllocator;
+  typedef typename ImplAllocator::pointer ImplPointer;
+  typedef typename Allocator_::template rebind<Iface>::other IfaceAllocator;
+  typedef typename IfaceAllocator::pointer IfacePointer;
+
+  static ImplPointer provide(Injector_ const & injector) {
     SAUCE_SHARED_PTR<A1> a1(injector.template get<A1>());
     SAUCE_SHARED_PTR<A2> a2(injector.template get<A2>());
     SAUCE_SHARED_PTR<A3> a3(injector.template get<A3>());
@@ -287,7 +320,7 @@ public:
     return impl;
   }
 
-  static void dispose(Injector const & injector, IfacePointer iface) {
+  static void dispose(Injector_ const & injector, IfacePointer iface) {
     ImplAllocator allocator;
     ImplPointer impl = static_cast<ImplPointer>(iface);
     impl->~Impl();
@@ -295,17 +328,21 @@ public:
   }
 };
 
-template<typename Injector, typename Iface, typename Allocator, typename Impl,
-    typename A1, typename A2, typename A3, typename A4, typename A5,
-    typename A6, typename A7, typename A8, typename A9, typename A10>
-class New<Injector, Iface, Allocator, Impl(A1, A2, A3, A4, A5, A6, A7, A8, A9,
-    A10)> {
-  typedef Allocator ImplAllocator;
-  typedef typename ImplAllocator::pointer ImplPointer;
-  typedef typename Allocator::template rebind<Iface>::other IfaceAllocator;
-  typedef typename IfaceAllocator::pointer IfacePointer;
+template<typename Injector_, typename Iface_, typename Allocator_,
+    typename Impl_, typename A1, typename A2, typename A3, typename A4,
+    typename A5, typename A6, typename A7, typename A8, typename A9,
+    typename A10>
+class New<Injector_, Iface_, Allocator_, Impl_(A1, A2, A3, A4, A5, A6, A7, A8,
+    A9, A10)> {
 public:
-  static ImplPointer provide(Injector const & injector) {
+  typedef Iface_ Iface;
+  typedef Impl_ Impl;
+  typedef Allocator_ ImplAllocator;
+  typedef typename ImplAllocator::pointer ImplPointer;
+  typedef typename Allocator_::template rebind<Iface>::other IfaceAllocator;
+  typedef typename IfaceAllocator::pointer IfacePointer;
+
+  static ImplPointer provide(Injector_ const & injector) {
     SAUCE_SHARED_PTR<A1> a1(injector.template get<A1>());
     SAUCE_SHARED_PTR<A2> a2(injector.template get<A2>());
     SAUCE_SHARED_PTR<A3> a3(injector.template get<A3>());
@@ -322,7 +359,7 @@ public:
     return impl;
   }
 
-  static void dispose(Injector const & injector, IfacePointer iface) {
+  static void dispose(Injector_ const & injector, IfacePointer iface) {
     ImplAllocator allocator;
     ImplPointer impl = static_cast<ImplPointer>(iface);
     impl->~Impl();
