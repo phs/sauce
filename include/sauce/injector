@@ -28,11 +28,11 @@ private:
   template<typename Iface, typename Binding>
   SAUCE_SHARED_PTR<Iface> resolveAndProvide(Binding * (*)(Iface)) const {
     typedef typename Binding::ImplPointer ImplPointer;
-    typedef ::sauce::internal::Deleter<Injector_, Binding> Deleter_;
+    typedef ::sauce::internal::Deleter<Injector_, Binding> Deleter;
 
     ImplPointer impl = Binding::provide(*this);
 
-    SAUCE_SHARED_PTR<Iface> smartPointer(impl, Deleter_(*this, impl)); // Do not inline
+    SAUCE_SHARED_PTR<Iface> smartPointer(impl, Deleter(*this, impl)); // Do not inline
     return smartPointer;
   }
 };
