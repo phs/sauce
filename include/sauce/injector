@@ -2,7 +2,6 @@
 #ifndef SAUCE_SAUCE_INJECTOR_H_
 #define SAUCE_SAUCE_INJECTOR_H_
 
-#include <sauce/builder>
 #include <sauce/memory>
 #include <sauce/internal/bindings>
 #include <sauce/internal/deleter>
@@ -11,7 +10,6 @@ namespace sauce {
 
 template<typename Module_>
 class Injector {
-
   typedef Module_ Module;
   typedef Injector<Module> Injector_;
 
@@ -42,7 +40,6 @@ private:
     smartPointer.reset(provided, deleter);
     return smartPointer;
   }
-
 };
 
 }
