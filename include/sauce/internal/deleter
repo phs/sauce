@@ -7,8 +7,6 @@ namespace internal {
 
 /**
  * A smart pointer deleter that disposes of its pointer with a given Injector.
- *
- * It is an invariant that no Deleter survives its associated Injector.
  */
 template<typename Binding, typename Injector>
 class Deleter {
