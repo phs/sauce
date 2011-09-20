@@ -13,10 +13,10 @@ namespace internal {
 template<typename Injector, typename Disposer>
 class Deleter {
   Injector const & injector;
-  Disposer disposer;
+  Disposer const disposer;
 
 public:
-  Deleter(Injector const & injector, Disposer disposer):
+  Deleter(Injector const & injector, Disposer const disposer):
     injector(injector),
     disposer(disposer) {}
 
