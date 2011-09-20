@@ -24,21 +24,25 @@ $var as = [[$for j, [[a$j]]]]
 
 template<typename Injector, typename Iface, typename Allocator, typename Impl$comma_typename_As>
 class New<Injector, Iface, Allocator, Impl($As)> {
+  typedef Allocator ImplAllocator;
+  typedef typename ImplAllocator::pointer ImplPointer;
+  typedef typename Allocator::template rebind<Iface>::other IfaceAllocator;
+  typedef typename IfaceAllocator::pointer IfacePointer;
 public:
-  static Impl * provide(Injector const & injector) {
+  static ImplPointer provide(Injector const & injector) {
 [[$for j [[
     SAUCE_SHARED_PTR<A$j> a$j(injector.template get<A$j>());
 
 ]]]]
-    Allocator allocator;
-    Impl * impl = allocator.allocate(1);
+    ImplAllocator allocator;
+    ImplPointer impl = allocator.allocate(1);
     new(impl) Impl($as);
     return impl;
   }
 
-  static void dispose(Injector const & injector, Iface * iface) {
-    Allocator allocator;
-    Impl * impl = static_cast<Impl *>(iface);
+  static void dispose(Injector const & injector, IfacePointer iface) {
+    ImplAllocator allocator;
+    ImplPointer impl = static_cast<Impl *>(iface);
     impl->~Impl();
     allocator.deallocate(impl, 1);
   }
