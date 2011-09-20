@@ -22,7 +22,7 @@ public:
     impl(impl) {}
 
   void operator()(IfacePointer iface) const {
-    Binding::dispose(injector, iface);
+    Binding::dispose(injector, impl);
   }
 };
 

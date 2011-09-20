@@ -43,9 +43,8 @@ public:
     return impl;
   }
 
-  static void dispose(Injector_ const & injector, IfacePointer iface) {
+  static void dispose(Injector_ const & injector, ImplPointer impl) {
     ImplAllocator allocator;
-    ImplPointer impl = static_cast<ImplPointer>(iface);
     impl->~Impl();
     allocator.deallocate(impl, 1);
   }
