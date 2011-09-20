@@ -35,12 +35,9 @@ private:
     // Ask the binding to provide an implementation
     ImplPointer impl = Binding::provide(*this);
 
-    // Make a deleter
-    Deleter_ deleter(*this);
-
     // Wrap in a smart pointer
     SAUCE_SHARED_PTR<Iface> smartPointer;
-    smartPointer.reset(impl, deleter);
+    smartPointer.reset(impl, Deleter_(*this));
     return smartPointer;
   }
 };
