@@ -34,7 +34,7 @@ private:
     typename Binding::IfacePointer provided = Binding::provide(*this);
 
     // Make a deleter
-    typedef ::sauce::internal::Deleter<Binding, Injector_> Deleter_;
+    typedef ::sauce::internal::Deleter<Injector_, Binding> Deleter_;
     Deleter_ deleter(*this);
 
     // Wrap in a smart pointer
