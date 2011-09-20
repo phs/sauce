@@ -7,6 +7,12 @@
 
 namespace sauce {
 
+enum DefaultScopes {
+  SINGLETON_SCOPE,
+  SESSION_SCOPE,
+  REQUEST_SCOPE
+};
+
 template<typename Iface, typename Constructor, typename Allocator = std::allocator<void> >
 class Bind {
 public:
