@@ -32,7 +32,7 @@ public:
 
   static void dispose(Injector const & injector, IfacePointer iface) {
     ImplAllocator allocator;
-    ImplPointer impl = static_cast<Impl *>(iface);
+    ImplPointer impl = static_cast<ImplPointer>(iface);
     impl->~Impl();
     allocator.deallocate(impl, 1);
   }
@@ -56,7 +56,7 @@ public:
 
   static void dispose(Injector const & injector, IfacePointer iface) {
     ImplAllocator allocator;
-    ImplPointer impl = static_cast<Impl *>(iface);
+    ImplPointer impl = static_cast<ImplPointer>(iface);
     impl->~Impl();
     allocator.deallocate(impl, 1);
   }
@@ -81,7 +81,7 @@ public:
 
   static void dispose(Injector const & injector, IfacePointer iface) {
     ImplAllocator allocator;
-    ImplPointer impl = static_cast<Impl *>(iface);
+    ImplPointer impl = static_cast<ImplPointer>(iface);
     impl->~Impl();
     allocator.deallocate(impl, 1);
   }
@@ -107,7 +107,7 @@ public:
 
   static void dispose(Injector const & injector, IfacePointer iface) {
     ImplAllocator allocator;
-    ImplPointer impl = static_cast<Impl *>(iface);
+    ImplPointer impl = static_cast<ImplPointer>(iface);
     impl->~Impl();
     allocator.deallocate(impl, 1);
   }
@@ -134,7 +134,7 @@ public:
 
   static void dispose(Injector const & injector, IfacePointer iface) {
     ImplAllocator allocator;
-    ImplPointer impl = static_cast<Impl *>(iface);
+    ImplPointer impl = static_cast<ImplPointer>(iface);
     impl->~Impl();
     allocator.deallocate(impl, 1);
   }
@@ -162,7 +162,7 @@ public:
 
   static void dispose(Injector const & injector, IfacePointer iface) {
     ImplAllocator allocator;
-    ImplPointer impl = static_cast<Impl *>(iface);
+    ImplPointer impl = static_cast<ImplPointer>(iface);
     impl->~Impl();
     allocator.deallocate(impl, 1);
   }
@@ -192,7 +192,7 @@ public:
 
   static void dispose(Injector const & injector, IfacePointer iface) {
     ImplAllocator allocator;
-    ImplPointer impl = static_cast<Impl *>(iface);
+    ImplPointer impl = static_cast<ImplPointer>(iface);
     impl->~Impl();
     allocator.deallocate(impl, 1);
   }
@@ -223,7 +223,7 @@ public:
 
   static void dispose(Injector const & injector, IfacePointer iface) {
     ImplAllocator allocator;
-    ImplPointer impl = static_cast<Impl *>(iface);
+    ImplPointer impl = static_cast<ImplPointer>(iface);
     impl->~Impl();
     allocator.deallocate(impl, 1);
   }
@@ -255,7 +255,7 @@ public:
 
   static void dispose(Injector const & injector, IfacePointer iface) {
     ImplAllocator allocator;
-    ImplPointer impl = static_cast<Impl *>(iface);
+    ImplPointer impl = static_cast<ImplPointer>(iface);
     impl->~Impl();
     allocator.deallocate(impl, 1);
   }
@@ -289,7 +289,7 @@ public:
 
   static void dispose(Injector const & injector, IfacePointer iface) {
     ImplAllocator allocator;
-    ImplPointer impl = static_cast<Impl *>(iface);
+    ImplPointer impl = static_cast<ImplPointer>(iface);
     impl->~Impl();
     allocator.deallocate(impl, 1);
   }
@@ -324,7 +324,7 @@ public:
 
   static void dispose(Injector const & injector, IfacePointer iface) {
     ImplAllocator allocator;
-    ImplPointer impl = static_cast<Impl *>(iface);
+    ImplPointer impl = static_cast<ImplPointer>(iface);
     impl->~Impl();
     allocator.deallocate(impl, 1);
   }
