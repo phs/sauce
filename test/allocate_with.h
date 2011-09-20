@@ -1,4 +1,3 @@
-// -*- C++ -*-
 #ifndef SAUCE_TEST_ALLOCATE_WITH_H_
 #define SAUCE_TEST_ALLOCATE_WITH_H_
 

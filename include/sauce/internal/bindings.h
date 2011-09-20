@@ -2,7 +2,6 @@
 //     pump.py bindings.h.pump
 // DO NOT EDIT BY HAND!!!
 
-// -*- C++ -*-
 #ifndef SAUCE_SAUCE_INTERNAL_BINDINGS_H_
 #define SAUCE_SAUCE_INTERNAL_BINDINGS_H_
 

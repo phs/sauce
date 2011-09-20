@@ -1,4 +1,3 @@
-// -*- C++ -*-
 #ifndef SAUCE_SAUCE_BUILDER_H_
 #define SAUCE_SAUCE_BUILDER_H_
 

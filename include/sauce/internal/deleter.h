@@ -1,4 +1,3 @@
-// -*- C++ -*-
 #ifndef SAUCE_SAUCE_INTERNAL_DISPOSAL_H_
 #define SAUCE_SAUCE_INTERNAL_DISPOSAL_H_
 

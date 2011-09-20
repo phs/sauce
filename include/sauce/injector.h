@@ -1,4 +1,3 @@
-// -*- C++ -*-
 #ifndef SAUCE_SAUCE_INJECTOR_H_
 #define SAUCE_SAUCE_INJECTOR_H_
 

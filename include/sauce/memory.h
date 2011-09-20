@@ -1,4 +1,3 @@
-// -*- C++ -*-
 #ifndef SAUCE_SAUCE_MEMORY_H_
 #define SAUCE_SAUCE_MEMORY_H_
 
