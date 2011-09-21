@@ -20,7 +20,6 @@ MAIN_OBJECTS = $(patsubst src/%.cc,build/src/%.o,$(MAIN_SOURCES))
 TEST_SOURCES = $(shell find test -type f -name "*.cc")
 TEST_OBJECTS = \
 	$(patsubst test/%.cc,build/test/%.o,$(TEST_SOURCES)) \
-	$(MAIN_OBJECTS)                                      \
 	$(GMOCK)/src/gmock-all.o                             \
 	$(GMOCK)/src/gmock_main.o                            \
 	$(GTEST)/src/gtest-all.o
@@ -33,7 +32,7 @@ UNCRUSTIFY_OUTPUT = $(patsubst %,build/uncrustify/%,$(UNCRUSTIFY_INPUT))
 
 all: precommit
 
-precommit: test-style run-cppcheck test
+precommit: test-style run-cppcheck artifacts test
 
 $(GMOCK)/src/gmock-all.o $(GMOCK)/src/gmock_main.o $(GTEST)/src/gtest-all.o:
 	cd $(GMOCK) && ./configure && make
@@ -71,12 +70,19 @@ build/src/%.o: src/%.cc $(HEADERS)
 	mkdir -p build/src
 	$(CXX) $(CPPFLAGS) $< -c -o $@
 
+build/src/libsauce.so: $(MAIN_OBJECTS)
+	mkdir -p build/src
+	$(CXX) $(CPPFLAGS) -fPIC -shared $+ -o $@
+
 build/test/%.o: test/%.cc $(HEADERS)
 	mkdir -p build/test
 	$(CXX) $(CPPFLAGS) -I$(GMOCK)/include -I$(GTEST)/include $< -c -o $@
 
-build/tests: $(TEST_OBJECTS)
-	mkdir -p build/sauce && $(CXX) $(CPPFLAGS) $+ -o $@
+build/tests: build/src/libsauce.so $(TEST_OBJECTS)
+	mkdir -p build
+	$(CXX) $(CPPFLAGS) -Lbuild/src -lsauce $(TEST_OBJECTS) -o $@
+
+artifacts: build/src/libsauce.so
 
 clean:
 	rm -rf build/*
@@ -85,4 +91,4 @@ distclean: clean
 	cd $(GMOCK) && make distclean
 
 test: build/tests
-	cd build && ./tests
+	LD_LIBRARY_PATH=build/src DYLD_LIBRARY_PATH=build/src build/tests
