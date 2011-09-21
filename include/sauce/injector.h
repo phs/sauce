@@ -4,14 +4,12 @@
 #include <sauce/memory.h>
 #include <sauce/internal/bindings.h>
 #include <sauce/internal/deleter.h>
-#include <sauce/internal/scopes.h>
 
 namespace sauce {
 
 template<typename Module_>
 class Injector {
   typedef Module_ Module;
-  typedef typename ::sauce::internal::Scopes<Module>::Type Scopes;
   typedef Injector<Module> Injector_;
 
 public:
