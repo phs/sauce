@@ -14,17 +14,22 @@ HEADERS = \
 # Do not delete generated headers, even though they are make intermediates
 .SECONDARY: $(GENERATED_HEADERS)
 
-UNCRUSTIFY_INPUT = \
-	$(HANDMADE_HEADERS) \
-	$(TEST_SOURCES)
-UNCRUSTIFY_OUTPUT = $(patsubst %,build/uncrustify/%,$(UNCRUSTIFY_INPUT))
+MAIN_SOURCES = $(shell find src -type f -name "*.cc")
+MAIN_OBJECTS = $(patsubst src/%.cc,build/src/%.o,$(MAIN_SOURCES))
 
 TEST_SOURCES = $(shell find test -type f -name "*.cc")
 TEST_OBJECTS = \
-	$(patsubst test/%.cc,build/%.o,$(TEST_SOURCES)) \
-	$(GMOCK)/src/gmock-all.o                        \
-	$(GMOCK)/src/gmock_main.o                       \
+	$(patsubst test/%.cc,build/test/%.o,$(TEST_SOURCES)) \
+	$(MAIN_OBJECTS)                                      \
+	$(GMOCK)/src/gmock-all.o                             \
+	$(GMOCK)/src/gmock_main.o                            \
 	$(GTEST)/src/gtest-all.o
+
+UNCRUSTIFY_INPUT =    \
+	$(HANDMADE_HEADERS) \
+	$(MAIN_SOURCES)     \
+	$(TEST_SOURCES)
+UNCRUSTIFY_OUTPUT = $(patsubst %,build/uncrustify/%,$(UNCRUSTIFY_INPUT))
 
 all: precommit
 
@@ -62,8 +67,12 @@ run-cppcheck:
 include/%: include/%.pump
 	vendor/pump.py $+
 
-build/%.o: test/%.cc $(HEADERS)
-	mkdir -p build/sauce
+build/src/%.o: src/%.cc $(HEADERS)
+	mkdir -p build/src
+	$(CXX) $(CPPFLAGS) $< -c -o $@
+
+build/test/%.o: test/%.cc $(HEADERS)
+	mkdir -p build/test
 	$(CXX) $(CPPFLAGS) -I$(GMOCK)/include -I$(GTEST)/include $< -c -o $@
 
 build/tests: $(TEST_OBJECTS)
