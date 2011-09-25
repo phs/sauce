@@ -20,7 +20,8 @@ class New;
 template<typename Iface, typename Impl, typename Allocator>
 class New<Iface, Impl(), Allocator>: public TransparentBinding<Iface, Impl> {
 public:
-  Impl * provide(Injector &) {    Allocator allocator;
+  Impl * provide(Injector &) {
+    Allocator allocator;
     Impl * impl = allocator.allocate(1);
     new(impl) Impl();
     return impl;
@@ -36,8 +37,8 @@ public:
 template<typename Iface, typename Impl, typename Allocator, typename A1>
 class New<Iface, Impl(A1), Allocator>: public TransparentBinding<Iface, Impl> {
 public:
-  Impl * provide(Injector & injector) {    SAUCE_SHARED_PTR<A1>
-      a1(injector.template get<A1>());
+  Impl * provide(Injector & injector) {
+    SAUCE_SHARED_PTR<A1> a1(injector.template get<A1>());
     Allocator allocator;
     Impl * impl = allocator.allocate(1);
     new(impl) Impl(a1);
@@ -56,8 +57,8 @@ template<typename Iface, typename Impl, typename Allocator, typename A1,
 class New<Iface, Impl(A1, A2), Allocator>: public TransparentBinding<Iface,
     Impl> {
 public:
-  Impl * provide(Injector & injector) {    SAUCE_SHARED_PTR<A1>
-      a1(injector.template get<A1>());
+  Impl * provide(Injector & injector) {
+    SAUCE_SHARED_PTR<A1> a1(injector.template get<A1>());
     SAUCE_SHARED_PTR<A2> a2(injector.template get<A2>());
     Allocator allocator;
     Impl * impl = allocator.allocate(1);
@@ -77,8 +78,8 @@ template<typename Iface, typename Impl, typename Allocator, typename A1,
 class New<Iface, Impl(A1, A2, A3), Allocator>: public TransparentBinding<Iface,
     Impl> {
 public:
-  Impl * provide(Injector & injector) {    SAUCE_SHARED_PTR<A1>
-      a1(injector.template get<A1>());
+  Impl * provide(Injector & injector) {
+    SAUCE_SHARED_PTR<A1> a1(injector.template get<A1>());
     SAUCE_SHARED_PTR<A2> a2(injector.template get<A2>());
     SAUCE_SHARED_PTR<A3> a3(injector.template get<A3>());
     Allocator allocator;
@@ -99,8 +100,8 @@ template<typename Iface, typename Impl, typename Allocator, typename A1,
 class New<Iface, Impl(A1, A2, A3, A4),
     Allocator>: public TransparentBinding<Iface, Impl> {
 public:
-  Impl * provide(Injector & injector) {    SAUCE_SHARED_PTR<A1>
-      a1(injector.template get<A1>());
+  Impl * provide(Injector & injector) {
+    SAUCE_SHARED_PTR<A1> a1(injector.template get<A1>());
     SAUCE_SHARED_PTR<A2> a2(injector.template get<A2>());
     SAUCE_SHARED_PTR<A3> a3(injector.template get<A3>());
     SAUCE_SHARED_PTR<A4> a4(injector.template get<A4>());
@@ -122,8 +123,8 @@ template<typename Iface, typename Impl, typename Allocator, typename A1,
 class New<Iface, Impl(A1, A2, A3, A4, A5),
     Allocator>: public TransparentBinding<Iface, Impl> {
 public:
-  Impl * provide(Injector & injector) {    SAUCE_SHARED_PTR<A1>
-      a1(injector.template get<A1>());
+  Impl * provide(Injector & injector) {
+    SAUCE_SHARED_PTR<A1> a1(injector.template get<A1>());
     SAUCE_SHARED_PTR<A2> a2(injector.template get<A2>());
     SAUCE_SHARED_PTR<A3> a3(injector.template get<A3>());
     SAUCE_SHARED_PTR<A4> a4(injector.template get<A4>());
@@ -146,8 +147,8 @@ template<typename Iface, typename Impl, typename Allocator, typename A1,
 class New<Iface, Impl(A1, A2, A3, A4, A5, A6),
     Allocator>: public TransparentBinding<Iface, Impl> {
 public:
-  Impl * provide(Injector & injector) {    SAUCE_SHARED_PTR<A1>
-      a1(injector.template get<A1>());
+  Impl * provide(Injector & injector) {
+    SAUCE_SHARED_PTR<A1> a1(injector.template get<A1>());
     SAUCE_SHARED_PTR<A2> a2(injector.template get<A2>());
     SAUCE_SHARED_PTR<A3> a3(injector.template get<A3>());
     SAUCE_SHARED_PTR<A4> a4(injector.template get<A4>());
@@ -172,8 +173,8 @@ template<typename Iface, typename Impl, typename Allocator, typename A1,
 class New<Iface, Impl(A1, A2, A3, A4, A5, A6, A7),
     Allocator>: public TransparentBinding<Iface, Impl> {
 public:
-  Impl * provide(Injector & injector) {    SAUCE_SHARED_PTR<A1>
-      a1(injector.template get<A1>());
+  Impl * provide(Injector & injector) {
+    SAUCE_SHARED_PTR<A1> a1(injector.template get<A1>());
     SAUCE_SHARED_PTR<A2> a2(injector.template get<A2>());
     SAUCE_SHARED_PTR<A3> a3(injector.template get<A3>());
     SAUCE_SHARED_PTR<A4> a4(injector.template get<A4>());
@@ -199,8 +200,8 @@ template<typename Iface, typename Impl, typename Allocator, typename A1,
 class New<Iface, Impl(A1, A2, A3, A4, A5, A6, A7, A8),
     Allocator>: public TransparentBinding<Iface, Impl> {
 public:
-  Impl * provide(Injector & injector) {    SAUCE_SHARED_PTR<A1>
-      a1(injector.template get<A1>());
+  Impl * provide(Injector & injector) {
+    SAUCE_SHARED_PTR<A1> a1(injector.template get<A1>());
     SAUCE_SHARED_PTR<A2> a2(injector.template get<A2>());
     SAUCE_SHARED_PTR<A3> a3(injector.template get<A3>());
     SAUCE_SHARED_PTR<A4> a4(injector.template get<A4>());
@@ -227,8 +228,8 @@ template<typename Iface, typename Impl, typename Allocator, typename A1,
 class New<Iface, Impl(A1, A2, A3, A4, A5, A6, A7, A8, A9),
     Allocator>: public TransparentBinding<Iface, Impl> {
 public:
-  Impl * provide(Injector & injector) {    SAUCE_SHARED_PTR<A1>
-      a1(injector.template get<A1>());
+  Impl * provide(Injector & injector) {
+    SAUCE_SHARED_PTR<A1> a1(injector.template get<A1>());
     SAUCE_SHARED_PTR<A2> a2(injector.template get<A2>());
     SAUCE_SHARED_PTR<A3> a3(injector.template get<A3>());
     SAUCE_SHARED_PTR<A4> a4(injector.template get<A4>());
@@ -256,8 +257,8 @@ template<typename Iface, typename Impl, typename Allocator, typename A1,
 class New<Iface, Impl(A1, A2, A3, A4, A5, A6, A7, A8, A9, A10),
     Allocator>: public TransparentBinding<Iface, Impl> {
 public:
-  Impl * provide(Injector & injector) {    SAUCE_SHARED_PTR<A1>
-      a1(injector.template get<A1>());
+  Impl * provide(Injector & injector) {
+    SAUCE_SHARED_PTR<A1> a1(injector.template get<A1>());
     SAUCE_SHARED_PTR<A2> a2(injector.template get<A2>());
     SAUCE_SHARED_PTR<A3> a3(injector.template get<A3>());
     SAUCE_SHARED_PTR<A4> a4(injector.template get<A4>());
