@@ -27,7 +27,11 @@ $var as = [[$for j, [[a$j]]]]
 template<typename Iface, typename Impl, typename Allocator$comma_typename_As>
 class New<Iface, Impl($As), Allocator>: public TransparentBinding<Iface, Impl> {
 public:
+[[$if i==0 [[
+  Impl * provide(Injector &) {
+]] $else [[
   Impl * provide(Injector & injector) {
+]]]]
 [[$for j [[
     SAUCE_SHARED_PTR<A$j> a$j(injector.template get<A$j>());
 
