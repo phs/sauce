@@ -62,14 +62,6 @@ public:
 
 };
 
-/**
- * A Module is how client programs specify bindings.
- *
- * They are void functions that accept a Binder reference, which they use to create
- * bindings.
- */
-typedef void (*Module)(Binder &);
-
 }
 
 #endif // ifndef SAUCE_SAUCE_MODULE_H_

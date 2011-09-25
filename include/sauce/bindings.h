@@ -28,6 +28,7 @@ public:
    * An Injector created after adding a module will understand how to provide
    * dependencies specified by that module.
    */
+  template<typename Module>
   Bindings & add(Module module) {
     module(binder);
     return *this;
