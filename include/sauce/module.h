@@ -47,7 +47,8 @@ class Binder {
 
   friend class Bindings;
 
-  Binder(i::BindingMap & bindingMap);
+  Binder(i::BindingMap & bindingMap):
+    bindingMap(bindingMap) {}
 
 public:
 

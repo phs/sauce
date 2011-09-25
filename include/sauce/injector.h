@@ -27,8 +27,11 @@ class Injector {
 
   friend class Bindings;
 
-  Injector();
-  Injector(i::BindingMap & bindingMap);
+  Injector():
+    bindingMap() {}
+
+  Injector(i::BindingMap & bindingMap):
+    bindingMap(bindingMap) {}
 
 public:
 

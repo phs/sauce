@@ -18,7 +18,9 @@ public:
   /**
    * Create an empty Bindings.
    */
-  Bindings();
+  Bindings():
+    bindingMap(),
+    binder(bindingMap) {}
 
   /**
    * Add the bindings defined by the given Module.
@@ -26,14 +28,19 @@ public:
    * An Injector created after adding a module will understand how to provide
    * dependencies specified by that module.
    */
-  Bindings & add(Module);
+  Bindings & add(Module module) {
+    module(binder);
+    return *this;
+  }
 
   /**
    * Create an Injector that can provide dependencies specified by all added Modules.
    *
    * Any modules added after an Injector is created will have no effect on that Injector.
    */
-  Injector createInjector();
+  Injector createInjector() {
+    return Injector(bindingMap);
+  }
 
 };
 

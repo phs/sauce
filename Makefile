@@ -32,7 +32,7 @@ UNCRUSTIFY_OUTPUT = $(patsubst %,build/uncrustify/%,$(UNCRUSTIFY_INPUT))
 
 all: precommit
 
-precommit: test-style run-cppcheck artifacts test
+precommit: test-style run-cppcheck test
 
 $(GMOCK)/src/gmock-all.o $(GMOCK)/src/gmock_main.o $(GTEST)/src/gtest-all.o:
 	cd $(GMOCK) && ./configure && make
@@ -70,19 +70,13 @@ build/src/%.o: src/%.cc $(HEADERS)
 	mkdir -p build/src
 	$(CXX) $(CPPFLAGS) $< -c -o $@
 
-build/src/libsauce.so: $(MAIN_OBJECTS)
-	mkdir -p build/src
-	$(CXX) $(CPPFLAGS) -fPIC -shared $+ -o $@
-
 build/test/%.o: test/%.cc $(HEADERS)
 	mkdir -p build/test
 	$(CXX) $(CPPFLAGS) -I$(GMOCK)/include -I$(GTEST)/include $< -c -o $@
 
-build/tests: build/src/libsauce.so $(TEST_OBJECTS)
+build/tests: $(TEST_OBJECTS)
 	mkdir -p build
-	$(CXX) $(CPPFLAGS) -Lbuild/src -lsauce $(TEST_OBJECTS) -o $@
-
-artifacts: build/src/libsauce.so
+	$(CXX) $(CPPFLAGS) $(TEST_OBJECTS) -o $@
 
 clean:
 	rm -rf build/*
@@ -91,4 +85,4 @@ distclean: clean
 	cd $(GMOCK) && make distclean
 
 test: build/tests
-	LD_LIBRARY_PATH=build/src DYLD_LIBRARY_PATH=build/src build/tests
+	build/tests
