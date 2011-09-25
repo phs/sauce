@@ -1,7 +1,7 @@
 #ifndef SAUCE_SAUCE_BINDINGS_H_
 #define SAUCE_SAUCE_BINDINGS_H_
 
-#include <sauce/module.h>
+#include <sauce/binder.h>
 #include <sauce/injector.h>
 #include <sauce/internal/binding.h>
 
