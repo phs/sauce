@@ -116,42 +116,41 @@ public:
   MOCK_METHOD2(deallocate, void(Herbie *, size_t));
 };
 
-using ::sauce::Bind;
-
-struct HerbieModule:
-  Bind<Chasis, CoupChasis(), AllocateWith<MockAllocation>::Allocator<CoupChasis> >,
-    Bind<Engine, HybridEngine(), AllocateWith<MockAllocation>::Allocator<HybridEngine> >,
-    Bind<Vehicle, Herbie(Chasis, Engine), AllocateWith<MockAllocation>::Allocator<Herbie> > {
-
-  using Bind<Chasis, CoupChasis(),
-             AllocateWith<MockAllocation>::Allocator<CoupChasis> >::bindings;
-  using Bind<Engine, HybridEngine(),
-             AllocateWith<MockAllocation>::Allocator<HybridEngine> >::bindings;
-  using Bind<Vehicle, Herbie(Chasis, Engine),
-             AllocateWith<MockAllocation>::Allocator<Herbie> >::bindings;
-};
-
 template<>
 MockAllocation * AllocateWith<MockAllocation>::Base::backing = NULL;
+
+void HerbieModule(Binder & binder) {
+  binder.
+  bind<Chasis>().
+  to<CoupChasis(), AllocateWith<MockAllocation>::Allocator<CoupChasis> >();
+
+  binder.
+  bind<Engine>().
+  to<HybridEngine(), AllocateWith<MockAllocation>::Allocator<HybridEngine> >();
+
+  binder.
+  bind<Vehicle>().
+  to<Herbie(Chasis, Engine), AllocateWith<MockAllocation>::Allocator<Herbie> >();
+}
 
 class AllocationTest:
   public ::testing::Test {
 public:
-
-  ::sauce::Injector<HerbieModule> injector;
-  MockAllocation allocator;
 
   // These point to ALLOCATED but UNINITIALIZED memory
   CoupChasis * chasis;
   HybridEngine * engine;
   Herbie * vehicle;
 
+  MockAllocation allocator;
+  ::sauce::Injector injector;
+
   AllocationTest():
-    injector(),
-    allocator(),
     chasis(NULL),
     engine(NULL),
-    vehicle(NULL) {}
+    vehicle(NULL),
+    allocator(),
+    injector(::sauce::Bindings().add(&HerbieModule).createInjector()) {}
 
   virtual void SetUp() {
     // Clear the static counters

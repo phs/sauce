@@ -1,0 +1,58 @@
+$$ This is a Pump source file.  Please use Pump to convert it to
+$$ bindings.h
+$$
+$var n = 10  $$ The maximum arity we support.
+#ifndef SAUCE_SAUCE_INTERNAL_BINDINGS_NEW_H_
+#define SAUCE_SAUCE_INTERNAL_BINDINGS_NEW_H_
+
+#include <sauce/injector.h>
+#include <sauce/memory.h>
+#include <sauce/internal/binding.h>
+#include <sauce/internal/bindings/transparent.h>
+
+namespace sauce {
+namespace internal {
+namespace bindings {
+
+template<typename Iface, typename Constructor, typename Allocator>
+class New;
+
+$range i 0..n
+$for i [[
+$range j 1..i
+$var comma_typename_As = [[$for j [[, typename A$j]]]]
+$var As = [[$for j, [[A$j]]]]
+$var as = [[$for j, [[a$j]]]]
+
+template<typename Iface, typename Impl, typename Allocator$comma_typename_As>
+class New<Iface, Impl($As), Allocator>: public TransparentBinding<Iface, Impl> {
+public:
+  Impl * provide(Injector & injector) {
+[[$for j [[
+    SAUCE_SHARED_PTR<A$j> a$j(injector.template get<A$j>());
+
+]]]]
+    Allocator allocator;
+    Impl * impl = allocator.allocate(1);
+    new(impl) Impl($as);
+    return impl;
+  }
+
+  void dispose(Impl * impl) {
+    Allocator allocator;
+    impl->~Impl();
+    allocator.deallocate(impl, 1);
+  }
+};
+
+]]
+
+}
+}
+
+namespace i = ::sauce::internal;
+namespace b = ::sauce::internal::bindings;
+
+}
+
+#endif // SAUCE_SAUCE_INTERNAL_BINDINGS_NEW_H_

@@ -1,39 +1,46 @@
 #ifndef SAUCE_SAUCE_INJECTOR_H_
 #define SAUCE_SAUCE_INJECTOR_H_
 
+#include <stdexcept>
+
 #include <sauce/memory.h>
-#include <sauce/internal/bindings.h>
-#include <sauce/internal/deleter.h>
+#include <sauce/internal/binding.h>
 
 namespace sauce {
 
-template<typename Module_>
+/**
+ * Raised when no binding can be found for a given interface.
+ *
+ * TODO sure would be nice to know who..
+ */
+class UnboundException:
+  public std::runtime_error {
+public:
+  UnboundException():
+    std::runtime_error("Request for unbound interface.") {}
+};
+
+class Bindings;
+
 class Injector {
-  typedef Module_ Module;
-  typedef Injector<Module> Injector_;
+  i::BindingMap bindingMap;
+
+  friend class Bindings;
+
+  Injector();
+  Injector(i::BindingMap & bindingMap);
 
 public:
 
-  Injector() {}
-  virtual ~Injector() {}
-
   template<typename Iface>
-  SAUCE_SHARED_PTR<Iface> get() const {
-    return resolveAndProvide<Iface>(&Module::template bindings<Injector_> );
+  SAUCE_SHARED_PTR<Iface> get() {
+    i::BindingMap::iterator i = bindingMap.find(i::BindKeyOf<Iface>());
+    if (i == bindingMap.end()) { throw UnboundException();
+    }
+    i::Binding & binding = *(i->second.get());
+    return binding.resolve<Iface>().get(*this);
   }
 
-private:
-
-  template<typename Iface, typename Binding>
-  SAUCE_SHARED_PTR<Iface> resolveAndProvide(Binding * (*)(Iface)) const {
-    typedef typename Binding::ImplPointer ImplPointer;
-    typedef ::sauce::internal::Deleter<Injector_, Binding> Deleter;
-
-    ImplPointer impl = Binding::provide(*this);
-
-    SAUCE_SHARED_PTR<Iface> smartPointer(impl, Deleter(*this, impl)); // Do not inline
-    return smartPointer;
-  }
 };
 
 }
