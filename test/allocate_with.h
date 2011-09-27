@@ -67,14 +67,11 @@ public:
       typedef Allocator<D> other;
     };
 
-    Allocator() {
-    }
+    Allocator() {}
 
-    Allocator(Allocator const & a) {
-    }
+    Allocator(Allocator const & a) {}
 
-    template<typename D> Allocator(Allocator<D> const &) {
-    }
+    template<typename D> Allocator(Allocator<D> const &) {}
 
     C * allocate(size_t size) {
       return Base::backing->allocate(A<C>(), size);
