@@ -57,7 +57,7 @@ accept-style: run-uncrustify
 	cp -r build/uncrustify/ .
 
 run-cppcheck:
-	cppcheck -q --enable=all --error-exitcode=1 include test
+	cppcheck -q --error-exitcode=1 include test
 
 include/%: include/%.pump
 	vendor/pump.py $+
