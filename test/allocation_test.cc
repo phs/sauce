@@ -8,6 +8,9 @@
 using ::testing::Sequence;
 using ::testing::Return;
 
+using ::sauce::Injector;
+using ::sauce::Bindings;
+
 namespace sauce {
 namespace test {
 
@@ -144,14 +147,14 @@ public:
   Herbie * vehicle;
 
   MockAllocation allocator;
-  ::sauce::Injector injector;
+  Injector injector;
 
   AllocationTest():
     chasis(NULL),
     engine(NULL),
     vehicle(NULL),
     allocator(),
-    injector(::sauce::Bindings().add(&HerbieModule).createInjector()) {}
+    injector(Bindings().add(&HerbieModule).createInjector()) {}
 
   virtual void SetUp() {
     // Clear the static counters
