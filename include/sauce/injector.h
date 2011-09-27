@@ -41,6 +41,7 @@ public:
     if (i == bindingMap.end()) {
       throw UnboundException();
     }
+
     i::Binding & binding = *(i->second.get());
     return binding.resolve<Iface>().get(*this);
   }
