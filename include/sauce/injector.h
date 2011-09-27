@@ -38,7 +38,8 @@ public:
   template<typename Iface>
   SAUCE_SHARED_PTR<Iface> get() {
     i::BindingMap::iterator i = bindingMap.find(i::BindKeyOf<Iface>());
-    if (i == bindingMap.end()) { throw UnboundException();
+    if (i == bindingMap.end()) {
+      throw UnboundException();
     }
     i::Binding & binding = *(i->second.get());
     return binding.resolve<Iface>().get(*this);
