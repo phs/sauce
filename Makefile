@@ -4,20 +4,15 @@ HEADER_TEMPLATES = $(shell find include -type f -name "*.pump")
 GENERATED_HEADERS = $(patsubst %.pump,%,$(HEADER_TEMPLATES))
 HANDMADE_HEADERS = $(shell find include -type f | \
 	grep -v -E "`echo $(GENERATED_HEADERS) | tr ' ' '|'`")
-HEADERS = \
-	$(HANDMADE_HEADERS) \
-	$(GENERATED_HEADERS)
+HEADERS = $(HANDMADE_HEADERS) $(GENERATED_HEADERS)
 
 # Do not delete generated headers, even though they are make intermediates
 .SECONDARY: $(GENERATED_HEADERS)
 
 TEST_SOURCES = $(shell find test -type f -name "*.cc")
-TEST_OBJECTS = \
-	$(patsubst test/%.cc,build/test/%.o,$(TEST_SOURCES))
+TEST_OBJECTS = $(patsubst test/%.cc,build/test/%.o,$(TEST_SOURCES))
 
-UNCRUSTIFY_INPUT =    \
-	$(HANDMADE_HEADERS) \
-	$(TEST_SOURCES)
+UNCRUSTIFY_INPUT = $(HANDMADE_HEADERS) $(TEST_SOURCES)
 UNCRUSTIFY_OUTPUT = $(patsubst %,build/uncrustify/%,$(UNCRUSTIFY_INPUT))
 
 all: precommit
@@ -52,10 +47,6 @@ run-cppcheck:
 
 include/%: include/%.pump
 	vendor/pump.py $+
-
-build/src/%.o: src/%.cc $(HEADERS)
-	mkdir -p build/src
-	$(CXX) $(CPPFLAGS) $< -c -o $@
 
 build/test/%.o: test/%.cc $(HEADERS)
 	mkdir -p build/test
