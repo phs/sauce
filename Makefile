@@ -1,6 +1,3 @@
-GMOCK = vendor/gmock-1.5.0
-GTEST = vendor/gmock-1.5.0/gtest
-
 CPPFLAGS = -Wall -Wextra -Werror -ansi -Iinclude -DSAUCE_STD_TR1_SMART_PTR
 
 HEADER_TEMPLATES = $(shell find include -type f -name "*.pump")
@@ -16,10 +13,7 @@ HEADERS = \
 
 TEST_SOURCES = $(shell find test -type f -name "*.cc")
 TEST_OBJECTS = \
-	$(patsubst test/%.cc,build/test/%.o,$(TEST_SOURCES)) \
-	$(GMOCK)/src/gmock-all.o                             \
-	$(GMOCK)/src/gmock_main.o                            \
-	$(GTEST)/src/gtest-all.o
+	$(patsubst test/%.cc,build/test/%.o,$(TEST_SOURCES))
 
 UNCRUSTIFY_INPUT =    \
 	$(HANDMADE_HEADERS) \
@@ -29,9 +23,6 @@ UNCRUSTIFY_OUTPUT = $(patsubst %,build/uncrustify/%,$(UNCRUSTIFY_INPUT))
 all: precommit
 
 precommit: test-style run-cppcheck test
-
-$(GMOCK)/src/gmock-all.o $(GMOCK)/src/gmock_main.o $(GTEST)/src/gtest-all.o:
-	cd $(GMOCK) && ./configure && make
 
 run-uncrustify:
 	mkdir -p build/uncrustify
@@ -68,17 +59,16 @@ build/src/%.o: src/%.cc $(HEADERS)
 
 build/test/%.o: test/%.cc $(HEADERS)
 	mkdir -p build/test
-	$(CXX) $(CPPFLAGS) -I$(GMOCK)/include -I$(GTEST)/include $< -c -o $@
+	$(CXX) $(CPPFLAGS) $< -c -o $@
 
 build/tests: $(TEST_OBJECTS)
 	mkdir -p build
-	$(CXX) $(CPPFLAGS) $(TEST_OBJECTS) -o $@
+	$(CXX) $(CPPFLAGS) -lgtest -lgmock -lgmock_main $(TEST_OBJECTS) -o $@
 
 clean:
 	rm -rf build/*
 
 distclean: clean
-	cd $(GMOCK) && make distclean
 
 test: build/tests
 	build/tests
