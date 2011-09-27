@@ -40,7 +40,7 @@ public:
 class Bindings;
 
 /**
- * A pure interface passed to modules to create bindings.
+ * Passed to modules to create bindings.
  */
 class Binder {
   i::BindingMap & bindingMap;
