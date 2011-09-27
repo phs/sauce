@@ -14,9 +14,6 @@ HEADERS = \
 # Do not delete generated headers, even though they are make intermediates
 .SECONDARY: $(GENERATED_HEADERS)
 
-MAIN_SOURCES = $(shell find src -type f -name "*.cc")
-MAIN_OBJECTS = $(patsubst src/%.cc,build/src/%.o,$(MAIN_SOURCES))
-
 TEST_SOURCES = $(shell find test -type f -name "*.cc")
 TEST_OBJECTS = \
 	$(patsubst test/%.cc,build/test/%.o,$(TEST_SOURCES)) \
@@ -26,7 +23,6 @@ TEST_OBJECTS = \
 
 UNCRUSTIFY_INPUT =    \
 	$(HANDMADE_HEADERS) \
-	$(MAIN_SOURCES)     \
 	$(TEST_SOURCES)
 UNCRUSTIFY_OUTPUT = $(patsubst %,build/uncrustify/%,$(UNCRUSTIFY_INPUT))
 
