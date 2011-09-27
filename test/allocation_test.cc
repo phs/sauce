@@ -40,6 +40,7 @@ public:
   Engine() {}
   virtual ~Engine() {}
 };
+
 class HybridEngine:
   public Engine {
 public:
@@ -68,6 +69,7 @@ public:
   virtual SAUCE_SHARED_PTR<Engine> getEngine() const = 0;
 
 };
+
 class Herbie:
   public Vehicle {
 public:
