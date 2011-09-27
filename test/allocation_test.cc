@@ -67,7 +67,6 @@ public:
   virtual SAUCE_SHARED_PTR<Chasis> getChasis() const = 0;
 
   virtual SAUCE_SHARED_PTR<Engine> getEngine() const = 0;
-
 };
 
 class Herbie:
