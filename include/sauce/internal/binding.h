@@ -61,8 +61,7 @@ class ResolvedBinding;
  * extend TransparentBinding.  Their behavior is exposed to a Binding client
  * by (runtime) polymorphism.
  */
-class Binding {
-public:
+struct Binding {
 
   /**
    * The BindKey of this Binding's (hidden) interface type.
@@ -91,9 +90,8 @@ public:
  * A binding for a specific interface.
  */
 template<typename Iface>
-class ResolvedBinding:
+struct ResolvedBinding:
   public Binding {
-public:
 
   /**
    * Provide an instance of Iface, using the given injector to resolve dependencies.

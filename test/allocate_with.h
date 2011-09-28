@@ -8,8 +8,7 @@ namespace test {
  * A template of tag types for mock allocators interacting with AllocateWith.
  */
 template <typename C>
-class A {
-public:
+struct A {
   bool operator==(A<C>) const {
     return true;
   }
@@ -29,8 +28,7 @@ public:
  * delegating to it with AllocateWith<Backing>::Allocator.
  */
 template<typename Backing>
-class AllocateWith {
-public:
+struct AllocateWith {
 
   typedef Backing Backing_;
 

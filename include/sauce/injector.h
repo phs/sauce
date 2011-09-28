@@ -13,9 +13,8 @@ namespace sauce {
  *
  * TODO sure would be nice to know who..
  */
-class UnboundException:
+struct UnboundException:
   public std::runtime_error {
-public:
   UnboundException():
     std::runtime_error("Request for unbound interface.") {}
 };

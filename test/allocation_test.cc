@@ -14,15 +14,13 @@ using ::sauce::Bindings;
 namespace sauce {
 namespace test {
 
-class Chasis {
-public:
+struct Chasis {
   Chasis() {}
   virtual ~Chasis() {}
 };
 
-class CoupChasis:
+struct CoupChasis:
   public Chasis {
-public:
   static int constructed;
   static int destroyed;
 
@@ -38,15 +36,13 @@ public:
 int CoupChasis::constructed = 0;
 int CoupChasis::destroyed = 0;
 
-class Engine {
-public:
+struct Engine {
   Engine() {}
   virtual ~Engine() {}
 };
 
-class HybridEngine:
+struct HybridEngine:
   public Engine {
-public:
   static int constructed;
   static int destroyed;
 
@@ -62,8 +58,7 @@ public:
 int HybridEngine::constructed = 0;
 int HybridEngine::destroyed = 0;
 
-class Vehicle {
-public:
+struct Vehicle {
   Vehicle() {}
   virtual ~Vehicle() {}
 
@@ -72,9 +67,8 @@ public:
   virtual SAUCE_SHARED_PTR<Engine> getEngine() const = 0;
 };
 
-class Herbie:
+struct Herbie:
   public Vehicle {
-public:
   static int constructed;
   static int destroyed;
 
@@ -109,8 +103,7 @@ int Herbie::destroyed = 0;
  * The AllocateWith contract assumes allocate will be disambiguated with a
  * leading tag parameter.  So, be sure to accept such parameters.
  */
-class MockAllocation {
-public:
+struct MockAllocation {
   MOCK_METHOD2(allocate, CoupChasis * (A<CoupChasis>, size_t));
   MOCK_METHOD2(allocate, HybridEngine * (A<HybridEngine>, size_t));
   MOCK_METHOD2(allocate, Herbie * (A<Herbie>, size_t));
@@ -137,9 +130,8 @@ void HerbieModule(Binder & binder) {
   to<Herbie(Chasis, Engine), AllocateWith<MockAllocation>::Allocator<Herbie> >();
 }
 
-class AllocationTest:
+struct AllocationTest:
   public ::testing::Test {
-public:
 
   // These point to ALLOCATED but UNINITIALIZED memory
   CoupChasis * chasis;

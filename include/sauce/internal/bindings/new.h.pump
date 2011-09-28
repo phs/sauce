@@ -25,8 +25,7 @@ $var As = [[$for j, [[A$j]]]]
 $var as = [[$for j, [[a$j]]]]
 
 template<typename Iface, typename Impl, typename Allocator$comma_typename_As>
-class New<Iface, Impl($As), Allocator>: public TransparentBinding<Iface, Impl> {
-public:
+struct New<Iface, Impl($As), Allocator>: public TransparentBinding<Iface, Impl> {
 [[$if i==0 [[
   Impl * provide(Injector &)
 ]] $else [[

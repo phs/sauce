@@ -29,16 +29,14 @@ class Controller {};
 class MyController:
   public Controller {};
 
-class BindingTest:
+struct BindingTest:
   public ::testing::Test {
-public:
 
   BindingTest() {}
 
   virtual void SetUp() {}
 
   virtual void TearDown() {}
-
 };
 
 }

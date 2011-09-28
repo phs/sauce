@@ -40,9 +40,8 @@ public:
  * A binding for a specific interface and implementation.
  */
 template<typename Iface, typename Impl>
-class TransparentBinding:
+struct TransparentBinding:
   public ResolvedBinding<Iface> {
-public:
 
   friend class BindingDeleter<Iface, Impl>;
 
