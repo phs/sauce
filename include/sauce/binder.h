@@ -5,6 +5,7 @@
 #include <utility>
 
 #include <sauce/internal/binding.h>
+#include <sauce/internal/clause.h>
 #include <sauce/internal/bindings/all.h>
 
 namespace sauce {
@@ -15,16 +16,15 @@ class Binder;
  * A builder that creates a single binding.
  */
 template<typename Iface>
-class BindingBuilder {
+struct Bind {
 
-  typedef BindingBuilder<Iface> Builder;
   typedef SAUCE_SHARED_PTR<i::Binding> BindingPointer;
 
   i::BindingMap & bindingMap;
 
   friend class Binder;
 
-  BindingBuilder(i::BindingMap & bindingMap):
+  Bind(i::BindingMap & bindingMap):
     bindingMap(bindingMap) {}
 
 public:
@@ -56,8 +56,8 @@ public:
    * Begin binding the chosen interface.
    */
   template<typename Iface>
-  BindingBuilder<Iface> bind() {
-    return BindingBuilder<Iface>(bindingMap);
+  Bind<Iface> bind() {
+    return Bind<Iface>(bindingMap);
   }
 
 };
