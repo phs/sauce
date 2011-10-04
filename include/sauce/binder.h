@@ -20,9 +20,14 @@ class Bind:
   public i::Clause<Bind<Iface> > {
 
   friend class Binder;
+  friend class i::Clause<Bind<Iface> >;
 
   Bind(i::BindingMap & bindingMap):
     i::Clause<Bind<Iface> >(bindingMap) {}
+
+  static void activate(i::BindingMap &) {
+    std::cerr << "This should signal an exception to be thrown later." << std::endl;
+  }
 
 public:
 
@@ -31,10 +36,6 @@ public:
     i::BindingPointer binding(new b::New<Iface, Ctor, Allocator>());
     this->bindingMap.insert(std::make_pair(binding->getKey(), binding));
     this->pass();
-  }
-
-  static void activate(i::BindingMap &) {
-    std::cerr << "This should signal an exception to be thrown later." << std::endl;
   }
 
 };
