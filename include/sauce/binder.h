@@ -16,16 +16,15 @@ class Binder;
  * A builder that creates a single binding.
  */
 template<typename Iface>
-struct Bind {
+class Bind:
+  public i::Clause<i::IncompleteBinding> {
 
   typedef SAUCE_SHARED_PTR<i::Binding> BindingPointer;
-
-  i::BindingMap & bindingMap;
 
   friend class Binder;
 
   Bind(i::BindingMap & bindingMap):
-    bindingMap(bindingMap) {}
+    i::Clause<i::IncompleteBinding>(bindingMap) {}
 
 public:
 
@@ -33,6 +32,7 @@ public:
   void to() {
     BindingPointer binding(new b::New<Iface, Ctor, Allocator>());
     bindingMap.insert(std::make_pair(binding->getKey(), binding));
+    pass();
   }
 
 };

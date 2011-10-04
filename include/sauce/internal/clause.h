@@ -12,9 +12,11 @@ namespace internal {
 template<typename Action>
 class Clause {
   bool act;
-  BindingMap & bindingMap;
 
 protected:
+
+  // TODO: this wants to be private
+  BindingMap & bindingMap;
 
   Clause(BindingMap & bindingMap):
     act(true),
