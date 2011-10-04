@@ -27,7 +27,7 @@ struct New<Iface, Impl(), Allocator>: public TransparentBinding<Iface, Impl> {
   }
 
   void dispose(Impl * impl) {
-    Allocator allocator;
+    typename Allocator::template rebind<Impl>::other allocator;
     impl->~Impl();
     allocator.deallocate(impl, 1);
   }
@@ -44,7 +44,7 @@ struct New<Iface, Impl(A1), Allocator>: public TransparentBinding<Iface, Impl> {
   }
 
   void dispose(Impl * impl) {
-    Allocator allocator;
+    typename Allocator::template rebind<Impl>::other allocator;
     impl->~Impl();
     allocator.deallocate(impl, 1);
   }
@@ -64,7 +64,7 @@ struct New<Iface, Impl(A1, A2), Allocator>: public TransparentBinding<Iface,
   }
 
   void dispose(Impl * impl) {
-    Allocator allocator;
+    typename Allocator::template rebind<Impl>::other allocator;
     impl->~Impl();
     allocator.deallocate(impl, 1);
   }
@@ -85,7 +85,7 @@ struct New<Iface, Impl(A1, A2, A3),
   }
 
   void dispose(Impl * impl) {
-    Allocator allocator;
+    typename Allocator::template rebind<Impl>::other allocator;
     impl->~Impl();
     allocator.deallocate(impl, 1);
   }
@@ -107,7 +107,7 @@ struct New<Iface, Impl(A1, A2, A3, A4),
   }
 
   void dispose(Impl * impl) {
-    Allocator allocator;
+    typename Allocator::template rebind<Impl>::other allocator;
     impl->~Impl();
     allocator.deallocate(impl, 1);
   }
@@ -130,7 +130,7 @@ struct New<Iface, Impl(A1, A2, A3, A4, A5),
   }
 
   void dispose(Impl * impl) {
-    Allocator allocator;
+    typename Allocator::template rebind<Impl>::other allocator;
     impl->~Impl();
     allocator.deallocate(impl, 1);
   }
@@ -154,7 +154,7 @@ struct New<Iface, Impl(A1, A2, A3, A4, A5, A6),
   }
 
   void dispose(Impl * impl) {
-    Allocator allocator;
+    typename Allocator::template rebind<Impl>::other allocator;
     impl->~Impl();
     allocator.deallocate(impl, 1);
   }
@@ -180,7 +180,7 @@ struct New<Iface, Impl(A1, A2, A3, A4, A5, A6, A7),
   }
 
   void dispose(Impl * impl) {
-    Allocator allocator;
+    typename Allocator::template rebind<Impl>::other allocator;
     impl->~Impl();
     allocator.deallocate(impl, 1);
   }
@@ -207,7 +207,7 @@ struct New<Iface, Impl(A1, A2, A3, A4, A5, A6, A7, A8),
   }
 
   void dispose(Impl * impl) {
-    Allocator allocator;
+    typename Allocator::template rebind<Impl>::other allocator;
     impl->~Impl();
     allocator.deallocate(impl, 1);
   }
@@ -235,7 +235,7 @@ struct New<Iface, Impl(A1, A2, A3, A4, A5, A6, A7, A8, A9),
   }
 
   void dispose(Impl * impl) {
-    Allocator allocator;
+    typename Allocator::template rebind<Impl>::other allocator;
     impl->~Impl();
     allocator.deallocate(impl, 1);
   }
@@ -264,7 +264,7 @@ struct New<Iface, Impl(A1, A2, A3, A4, A5, A6, A7, A8, A9, A10),
   }
 
   void dispose(Impl * impl) {
-    Allocator allocator;
+    typename Allocator::template rebind<Impl>::other allocator;
     impl->~Impl();
     allocator.deallocate(impl, 1);
   }

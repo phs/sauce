@@ -43,7 +43,7 @@ struct New<Iface, Impl($As), Allocator>: public TransparentBinding<Iface, Impl> 
   }
 
   void dispose(Impl * impl) {
-    Allocator allocator;
+    typename Allocator::template rebind<Impl>::other allocator;
     impl->~Impl();
     allocator.deallocate(impl, 1);
   }
