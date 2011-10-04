@@ -117,17 +117,11 @@ template<>
 MockAllocation * AllocateWith<MockAllocation>::Base::backing = NULL;
 
 void HerbieModule(Binder & binder) {
-  binder.
-  bind<Chasis>().
-  to<CoupChasis(), AllocateWith<MockAllocation>::Allocator<CoupChasis> >();
+  typedef AllocateWith<MockAllocation>::Allocator<int> MockAllocator;
 
-  binder.
-  bind<Engine>().
-  to<HybridEngine(), AllocateWith<MockAllocation>::Allocator<HybridEngine> >();
-
-  binder.
-  bind<Vehicle>().
-  to<Herbie(Chasis, Engine), AllocateWith<MockAllocation>::Allocator<Herbie> >();
+  binder.bind<Chasis>().to<CoupChasis()>().allocateFrom<MockAllocator>();
+  binder.bind<Engine>().to<HybridEngine()>().allocateFrom<MockAllocator>();
+  binder.bind<Vehicle>().to<Herbie(Chasis, Engine)>().allocateFrom<MockAllocator>();
 }
 
 struct AllocationTest:
