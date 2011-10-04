@@ -26,6 +26,8 @@ $var as = [[$for j, [[a$j]]]]
 
 template<typename Iface, typename Impl, typename Allocator$comma_typename_As>
 struct New<Iface, Impl($As), Allocator>: public TransparentBinding<Iface, Impl> {
+  typedef typename Allocator::template rebind<Impl>::other ImplAllocator;
+
 [[$if i==0 [[
   Impl * provide(Injector &)
 ]] $else [[
@@ -36,14 +38,14 @@ struct New<Iface, Impl($As), Allocator>: public TransparentBinding<Iface, Impl> 
     SAUCE_SHARED_PTR<A$j> a$j(injector.template get<A$j>());
 
 ]]]]
-    typename Allocator::template rebind<Impl>::other allocator;
+    ImplAllocator allocator;
     Impl * impl = allocator.allocate(1);
     new(impl) Impl($as);
     return impl;
   }
 
   void dispose(Impl * impl) {
-    typename Allocator::template rebind<Impl>::other allocator;
+    ImplAllocator allocator;
     impl->~Impl();
     allocator.deallocate(impl, 1);
   }

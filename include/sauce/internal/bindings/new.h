@@ -19,15 +19,17 @@ class New;
 
 template<typename Iface, typename Impl, typename Allocator>
 struct New<Iface, Impl(), Allocator>: public TransparentBinding<Iface, Impl> {
+  typedef typename Allocator::template rebind<Impl>::other ImplAllocator;
+
   Impl * provide(Injector &) {
-    typename Allocator::template rebind<Impl>::other allocator;
+    ImplAllocator allocator;
     Impl * impl = allocator.allocate(1);
     new(impl) Impl();
     return impl;
   }
 
   void dispose(Impl * impl) {
-    typename Allocator::template rebind<Impl>::other allocator;
+    ImplAllocator allocator;
     impl->~Impl();
     allocator.deallocate(impl, 1);
   }
@@ -35,16 +37,18 @@ struct New<Iface, Impl(), Allocator>: public TransparentBinding<Iface, Impl> {
 
 template<typename Iface, typename Impl, typename Allocator, typename A1>
 struct New<Iface, Impl(A1), Allocator>: public TransparentBinding<Iface, Impl> {
+  typedef typename Allocator::template rebind<Impl>::other ImplAllocator;
+
   Impl * provide(Injector & injector) {
     SAUCE_SHARED_PTR<A1> a1(injector.template get<A1>());
-    typename Allocator::template rebind<Impl>::other allocator;
+    ImplAllocator allocator;
     Impl * impl = allocator.allocate(1);
     new(impl) Impl(a1);
     return impl;
   }
 
   void dispose(Impl * impl) {
-    typename Allocator::template rebind<Impl>::other allocator;
+    ImplAllocator allocator;
     impl->~Impl();
     allocator.deallocate(impl, 1);
   }
@@ -54,17 +58,19 @@ template<typename Iface, typename Impl, typename Allocator, typename A1,
     typename A2>
 struct New<Iface, Impl(A1, A2), Allocator>: public TransparentBinding<Iface,
     Impl> {
+  typedef typename Allocator::template rebind<Impl>::other ImplAllocator;
+
   Impl * provide(Injector & injector) {
     SAUCE_SHARED_PTR<A1> a1(injector.template get<A1>());
     SAUCE_SHARED_PTR<A2> a2(injector.template get<A2>());
-    typename Allocator::template rebind<Impl>::other allocator;
+    ImplAllocator allocator;
     Impl * impl = allocator.allocate(1);
     new(impl) Impl(a1, a2);
     return impl;
   }
 
   void dispose(Impl * impl) {
-    typename Allocator::template rebind<Impl>::other allocator;
+    ImplAllocator allocator;
     impl->~Impl();
     allocator.deallocate(impl, 1);
   }
@@ -74,18 +80,20 @@ template<typename Iface, typename Impl, typename Allocator, typename A1,
     typename A2, typename A3>
 struct New<Iface, Impl(A1, A2, A3),
     Allocator>: public TransparentBinding<Iface, Impl> {
+  typedef typename Allocator::template rebind<Impl>::other ImplAllocator;
+
   Impl * provide(Injector & injector) {
     SAUCE_SHARED_PTR<A1> a1(injector.template get<A1>());
     SAUCE_SHARED_PTR<A2> a2(injector.template get<A2>());
     SAUCE_SHARED_PTR<A3> a3(injector.template get<A3>());
-    typename Allocator::template rebind<Impl>::other allocator;
+    ImplAllocator allocator;
     Impl * impl = allocator.allocate(1);
     new(impl) Impl(a1, a2, a3);
     return impl;
   }
 
   void dispose(Impl * impl) {
-    typename Allocator::template rebind<Impl>::other allocator;
+    ImplAllocator allocator;
     impl->~Impl();
     allocator.deallocate(impl, 1);
   }
@@ -95,19 +103,21 @@ template<typename Iface, typename Impl, typename Allocator, typename A1,
     typename A2, typename A3, typename A4>
 struct New<Iface, Impl(A1, A2, A3, A4),
     Allocator>: public TransparentBinding<Iface, Impl> {
+  typedef typename Allocator::template rebind<Impl>::other ImplAllocator;
+
   Impl * provide(Injector & injector) {
     SAUCE_SHARED_PTR<A1> a1(injector.template get<A1>());
     SAUCE_SHARED_PTR<A2> a2(injector.template get<A2>());
     SAUCE_SHARED_PTR<A3> a3(injector.template get<A3>());
     SAUCE_SHARED_PTR<A4> a4(injector.template get<A4>());
-    typename Allocator::template rebind<Impl>::other allocator;
+    ImplAllocator allocator;
     Impl * impl = allocator.allocate(1);
     new(impl) Impl(a1, a2, a3, a4);
     return impl;
   }
 
   void dispose(Impl * impl) {
-    typename Allocator::template rebind<Impl>::other allocator;
+    ImplAllocator allocator;
     impl->~Impl();
     allocator.deallocate(impl, 1);
   }
@@ -117,20 +127,22 @@ template<typename Iface, typename Impl, typename Allocator, typename A1,
     typename A2, typename A3, typename A4, typename A5>
 struct New<Iface, Impl(A1, A2, A3, A4, A5),
     Allocator>: public TransparentBinding<Iface, Impl> {
+  typedef typename Allocator::template rebind<Impl>::other ImplAllocator;
+
   Impl * provide(Injector & injector) {
     SAUCE_SHARED_PTR<A1> a1(injector.template get<A1>());
     SAUCE_SHARED_PTR<A2> a2(injector.template get<A2>());
     SAUCE_SHARED_PTR<A3> a3(injector.template get<A3>());
     SAUCE_SHARED_PTR<A4> a4(injector.template get<A4>());
     SAUCE_SHARED_PTR<A5> a5(injector.template get<A5>());
-    typename Allocator::template rebind<Impl>::other allocator;
+    ImplAllocator allocator;
     Impl * impl = allocator.allocate(1);
     new(impl) Impl(a1, a2, a3, a4, a5);
     return impl;
   }
 
   void dispose(Impl * impl) {
-    typename Allocator::template rebind<Impl>::other allocator;
+    ImplAllocator allocator;
     impl->~Impl();
     allocator.deallocate(impl, 1);
   }
@@ -140,6 +152,8 @@ template<typename Iface, typename Impl, typename Allocator, typename A1,
     typename A2, typename A3, typename A4, typename A5, typename A6>
 struct New<Iface, Impl(A1, A2, A3, A4, A5, A6),
     Allocator>: public TransparentBinding<Iface, Impl> {
+  typedef typename Allocator::template rebind<Impl>::other ImplAllocator;
+
   Impl * provide(Injector & injector) {
     SAUCE_SHARED_PTR<A1> a1(injector.template get<A1>());
     SAUCE_SHARED_PTR<A2> a2(injector.template get<A2>());
@@ -147,14 +161,14 @@ struct New<Iface, Impl(A1, A2, A3, A4, A5, A6),
     SAUCE_SHARED_PTR<A4> a4(injector.template get<A4>());
     SAUCE_SHARED_PTR<A5> a5(injector.template get<A5>());
     SAUCE_SHARED_PTR<A6> a6(injector.template get<A6>());
-    typename Allocator::template rebind<Impl>::other allocator;
+    ImplAllocator allocator;
     Impl * impl = allocator.allocate(1);
     new(impl) Impl(a1, a2, a3, a4, a5, a6);
     return impl;
   }
 
   void dispose(Impl * impl) {
-    typename Allocator::template rebind<Impl>::other allocator;
+    ImplAllocator allocator;
     impl->~Impl();
     allocator.deallocate(impl, 1);
   }
@@ -165,6 +179,8 @@ template<typename Iface, typename Impl, typename Allocator, typename A1,
     typename A7>
 struct New<Iface, Impl(A1, A2, A3, A4, A5, A6, A7),
     Allocator>: public TransparentBinding<Iface, Impl> {
+  typedef typename Allocator::template rebind<Impl>::other ImplAllocator;
+
   Impl * provide(Injector & injector) {
     SAUCE_SHARED_PTR<A1> a1(injector.template get<A1>());
     SAUCE_SHARED_PTR<A2> a2(injector.template get<A2>());
@@ -173,14 +189,14 @@ struct New<Iface, Impl(A1, A2, A3, A4, A5, A6, A7),
     SAUCE_SHARED_PTR<A5> a5(injector.template get<A5>());
     SAUCE_SHARED_PTR<A6> a6(injector.template get<A6>());
     SAUCE_SHARED_PTR<A7> a7(injector.template get<A7>());
-    typename Allocator::template rebind<Impl>::other allocator;
+    ImplAllocator allocator;
     Impl * impl = allocator.allocate(1);
     new(impl) Impl(a1, a2, a3, a4, a5, a6, a7);
     return impl;
   }
 
   void dispose(Impl * impl) {
-    typename Allocator::template rebind<Impl>::other allocator;
+    ImplAllocator allocator;
     impl->~Impl();
     allocator.deallocate(impl, 1);
   }
@@ -191,6 +207,8 @@ template<typename Iface, typename Impl, typename Allocator, typename A1,
     typename A7, typename A8>
 struct New<Iface, Impl(A1, A2, A3, A4, A5, A6, A7, A8),
     Allocator>: public TransparentBinding<Iface, Impl> {
+  typedef typename Allocator::template rebind<Impl>::other ImplAllocator;
+
   Impl * provide(Injector & injector) {
     SAUCE_SHARED_PTR<A1> a1(injector.template get<A1>());
     SAUCE_SHARED_PTR<A2> a2(injector.template get<A2>());
@@ -200,14 +218,14 @@ struct New<Iface, Impl(A1, A2, A3, A4, A5, A6, A7, A8),
     SAUCE_SHARED_PTR<A6> a6(injector.template get<A6>());
     SAUCE_SHARED_PTR<A7> a7(injector.template get<A7>());
     SAUCE_SHARED_PTR<A8> a8(injector.template get<A8>());
-    typename Allocator::template rebind<Impl>::other allocator;
+    ImplAllocator allocator;
     Impl * impl = allocator.allocate(1);
     new(impl) Impl(a1, a2, a3, a4, a5, a6, a7, a8);
     return impl;
   }
 
   void dispose(Impl * impl) {
-    typename Allocator::template rebind<Impl>::other allocator;
+    ImplAllocator allocator;
     impl->~Impl();
     allocator.deallocate(impl, 1);
   }
@@ -218,6 +236,8 @@ template<typename Iface, typename Impl, typename Allocator, typename A1,
     typename A7, typename A8, typename A9>
 struct New<Iface, Impl(A1, A2, A3, A4, A5, A6, A7, A8, A9),
     Allocator>: public TransparentBinding<Iface, Impl> {
+  typedef typename Allocator::template rebind<Impl>::other ImplAllocator;
+
   Impl * provide(Injector & injector) {
     SAUCE_SHARED_PTR<A1> a1(injector.template get<A1>());
     SAUCE_SHARED_PTR<A2> a2(injector.template get<A2>());
@@ -228,14 +248,14 @@ struct New<Iface, Impl(A1, A2, A3, A4, A5, A6, A7, A8, A9),
     SAUCE_SHARED_PTR<A7> a7(injector.template get<A7>());
     SAUCE_SHARED_PTR<A8> a8(injector.template get<A8>());
     SAUCE_SHARED_PTR<A9> a9(injector.template get<A9>());
-    typename Allocator::template rebind<Impl>::other allocator;
+    ImplAllocator allocator;
     Impl * impl = allocator.allocate(1);
     new(impl) Impl(a1, a2, a3, a4, a5, a6, a7, a8, a9);
     return impl;
   }
 
   void dispose(Impl * impl) {
-    typename Allocator::template rebind<Impl>::other allocator;
+    ImplAllocator allocator;
     impl->~Impl();
     allocator.deallocate(impl, 1);
   }
@@ -246,6 +266,8 @@ template<typename Iface, typename Impl, typename Allocator, typename A1,
     typename A7, typename A8, typename A9, typename A10>
 struct New<Iface, Impl(A1, A2, A3, A4, A5, A6, A7, A8, A9, A10),
     Allocator>: public TransparentBinding<Iface, Impl> {
+  typedef typename Allocator::template rebind<Impl>::other ImplAllocator;
+
   Impl * provide(Injector & injector) {
     SAUCE_SHARED_PTR<A1> a1(injector.template get<A1>());
     SAUCE_SHARED_PTR<A2> a2(injector.template get<A2>());
@@ -257,14 +279,14 @@ struct New<Iface, Impl(A1, A2, A3, A4, A5, A6, A7, A8, A9, A10),
     SAUCE_SHARED_PTR<A8> a8(injector.template get<A8>());
     SAUCE_SHARED_PTR<A9> a9(injector.template get<A9>());
     SAUCE_SHARED_PTR<A10> a10(injector.template get<A10>());
-    typename Allocator::template rebind<Impl>::other allocator;
+    ImplAllocator allocator;
     Impl * impl = allocator.allocate(1);
     new(impl) Impl(a1, a2, a3, a4, a5, a6, a7, a8, a9, a10);
     return impl;
   }
 
   void dispose(Impl * impl) {
-    typename Allocator::template rebind<Impl>::other allocator;
+    ImplAllocator allocator;
     impl->~Impl();
     allocator.deallocate(impl, 1);
   }
