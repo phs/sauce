@@ -6,16 +6,16 @@
 namespace sauce {
 namespace internal {
 
+typedef SAUCE_SHARED_PTR<Binding> BindingPointer;
+
 /**
  * Base class for parts of the fluent binding API.
  */
-template<typename Action>
+template<typename Derived>
 class Clause {
   bool act;
 
 protected:
-
-  typedef SAUCE_SHARED_PTR<i::Binding> BindingPointer;
 
   // TODO: this wants to be private
   BindingMap & bindingMap;
@@ -33,18 +33,8 @@ public:
 
   virtual ~Clause() {
     if (act) {
-      Action action;
-      action(bindingMap);
+      Derived::activate(bindingMap);
     }
-  }
-};
-
-/**
- * Invoked when a binding specification isn't finished.
- */
-struct IncompleteBinding {
-  void operator()(BindingMap &) {
-    std::cerr << "This should signal an exception to be thrown later." << std::endl;
   }
 };
 

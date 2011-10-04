@@ -17,20 +17,24 @@ class Binder;
  */
 template<typename Iface>
 class Bind:
-  public i::Clause<i::IncompleteBinding> {
+  public i::Clause<Bind<Iface> > {
 
   friend class Binder;
 
   Bind(i::BindingMap & bindingMap):
-    i::Clause<i::IncompleteBinding>(bindingMap) {}
+    i::Clause<Bind<Iface> >(bindingMap) {}
 
 public:
 
   template<typename Ctor, typename Allocator>
   void to() {
-    BindingPointer binding(new b::New<Iface, Ctor, Allocator>());
-    bindingMap.insert(std::make_pair(binding->getKey(), binding));
-    pass();
+    i::BindingPointer binding(new b::New<Iface, Ctor, Allocator>());
+    this->bindingMap.insert(std::make_pair(binding->getKey(), binding));
+    this->pass();
+  }
+
+  static void activate(i::BindingMap &) {
+    std::cerr << "This should signal an exception to be thrown later." << std::endl;
   }
 
 };
