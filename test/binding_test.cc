@@ -29,10 +29,17 @@ class Controller {};
 class MyController:
   public Controller {};
 
+struct WebAppModule: ::sauce::AbstractModule {
+  void configure() {}
+};
+
 struct BindingTest:
   public ::testing::Test {
 
-  BindingTest() {}
+  Injector injector;
+
+  BindingTest():
+    injector(Bindings().add(WebAppModule()).createInjector()) {}
 
   virtual void SetUp() {}
 
