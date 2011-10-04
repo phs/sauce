@@ -40,7 +40,7 @@ public:
  */
 struct IncompleteBinding {
   void operator()(BindingMap &) {
-    // Haha! Don't throw in a destructor.
+    std::cerr << "This should signal an exception to be thrown later." << std::endl;
   }
 };
 
