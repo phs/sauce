@@ -49,8 +49,7 @@ class To:
     i::Clause<To<Iface, Ctor> >(bindingMap) {}
 
   static void activate(i::BindingMap & bindingMap) {
-    i::BindingPointer binding(new b::New<Iface, Ctor, std::allocator<Iface> >());
-    bindingMap.insert(std::make_pair(binding->getKey(), binding));
+    AllocateFrom<Iface, Ctor, std::allocator<Iface> >::activate(bindingMap);
   }
 
 public:
