@@ -116,13 +116,17 @@ struct MockAllocation {
 template<>
 MockAllocation * AllocateWith<MockAllocation>::Base::backing = NULL;
 
-void HerbieModule(Binder & binder) {
-  typedef AllocateWith<MockAllocation>::Allocator<int> MockAllocator;
+struct HerbieModule:
+  public sauce::AbstractModule {
 
-  binder.bind<Chasis>().to<CoupChasis()>().allocateFrom<MockAllocator>();
-  binder.bind<Engine>().to<HybridEngine()>().allocateFrom<MockAllocator>();
-  binder.bind<Vehicle>().to<Herbie(Chasis, Engine)>().allocateFrom<MockAllocator>();
-}
+  void configure() {
+    typedef AllocateWith<MockAllocation>::Allocator<int> MockAllocator;
+
+    bind<Chasis>().to<CoupChasis()>().allocateFrom<MockAllocator>();
+    bind<Engine>().to<HybridEngine()>().allocateFrom<MockAllocator>();
+    bind<Vehicle>().to<Herbie(Chasis, Engine)>().allocateFrom<MockAllocator>();
+  }
+};
 
 struct AllocationTest:
   public ::testing::Test {
@@ -140,7 +144,7 @@ struct AllocationTest:
     engine(NULL),
     vehicle(NULL),
     allocator(),
-    injector(Bindings().add(&HerbieModule).createInjector()) {}
+    injector(Bindings().add(HerbieModule()).createInjector()) {}
 
   virtual void SetUp() {
     // Clear the static counters
