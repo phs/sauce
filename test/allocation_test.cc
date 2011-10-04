@@ -116,7 +116,7 @@ struct MockAllocation {
 template<>
 MockAllocation * AllocateWith<MockAllocation>::Base::backing = NULL;
 
-struct HerbieModule: public sauce::AbstractModule {
+struct HerbieModule: sauce::AbstractModule {
   void configure() {
     typedef AllocateWith<MockAllocation>::Allocator<int> MockAllocator;
 
