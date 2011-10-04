@@ -14,11 +14,9 @@ typedef SAUCE_SHARED_PTR<Binding> BindingPointer;
 template<typename Derived>
 class Clause {
   bool act;
+  BindingMap & bindingMap;
 
 protected:
-
-  // TODO: this wants to be private
-  BindingMap & bindingMap;
 
   Clause(BindingMap & bindingMap):
     act(true),
