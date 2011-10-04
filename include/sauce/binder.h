@@ -19,8 +19,6 @@ template<typename Iface>
 class Bind:
   public i::Clause<i::IncompleteBinding> {
 
-  typedef SAUCE_SHARED_PTR<i::Binding> BindingPointer;
-
   friend class Binder;
 
   Bind(i::BindingMap & bindingMap):

@@ -15,6 +15,8 @@ class Clause {
 
 protected:
 
+  typedef SAUCE_SHARED_PTR<i::Binding> BindingPointer;
+
   // TODO: this wants to be private
   BindingMap & bindingMap;
 
