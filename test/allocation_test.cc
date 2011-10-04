@@ -203,6 +203,9 @@ TEST_F(AllocationTest, shouldProvideAndDisposeOfDependenciesTransitively) {
   EXPECT_CALL(allocator, deallocate(vehicle, 1)).InSequence(chasisSeq, engineSeq);
 
   {
+    ASSERT_EQ(0, CoupChasis::constructed);
+    ASSERT_EQ(0, HybridEngine::constructed);
+    ASSERT_EQ(0, Herbie::constructed);
     SAUCE_SHARED_PTR<Vehicle> actual = injector.get<Vehicle>();
     ASSERT_EQ(1, CoupChasis::constructed);
     ASSERT_EQ(1, HybridEngine::constructed);
