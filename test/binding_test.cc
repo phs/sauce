@@ -46,5 +46,10 @@ struct BindingTest:
   virtual void TearDown() {}
 };
 
+TEST_F(BindingTest, shouldThrowExceptionWhenGettingAnUnboundIface) {
+  Injector injector(Bindings().createInjector());
+  ASSERT_THROW(injector.get<Request>(), ::sauce::UnboundException);
+}
+
 }
 }
