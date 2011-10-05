@@ -20,26 +20,6 @@ class Injector {
   Injector(i::BindingMap & bindingMap):
     bindingMap(bindingMap) {}
 
-  class CircularDependencyGuard {
-    friend class Injector;
-
-    i::BindKeys & keys;
-    i::BindKey key;
-
-    CircularDependencyGuard(i::BindKeys & keys, i::BindKey key):
-      keys(keys) {
-      if (keys.find(key) == keys.end()) {
-        keys.insert(key);
-      } else {
-        throw CircularDependencyException();
-      }
-    }
-
-    ~CircularDependencyGuard() {
-      keys.erase(key);
-    }
-  };
-
 public:
 
   template<typename Iface>
@@ -51,8 +31,7 @@ public:
   // TODO: how to hide?
   template<typename Iface>
   SAUCE_SHARED_PTR<Iface> get(i::BindKeys & keys) {
-    i::BindKey key = i::BindKeyOf<Iface>();
-    CircularDependencyGuard guard(keys, key);
+    i::CircularDependencyGuard<Iface> guard(keys);
 
     i::BindingMap::iterator i = bindingMap.find(i::BindKeyOf<Iface>());
     if (i == bindingMap.end()) {

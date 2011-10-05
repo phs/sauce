@@ -6,6 +6,7 @@
 
 #include <cassert>
 
+#include <sauce/exceptions.h>
 #include <sauce/memory.h>
 
 namespace sauce {
@@ -44,6 +45,31 @@ BindKey BindKeyOf() {
  * A set of bind keys used to detect circular dependencies.
  */
 typedef std::set<BindKey> BindKeys;
+
+/**
+ * Detects circular dependencies on behalf of injectors.
+ */
+template<typename Iface>
+class CircularDependencyGuard {
+  friend class ::sauce::Injector;
+
+  BindKeys & keys;
+  BindKey key;
+
+  CircularDependencyGuard(BindKeys & keys):
+    keys(keys),
+    key(BindKeyOf<Iface>()) {
+    if (keys.find(key) == keys.end()) {
+      keys.insert(key);
+    } else {
+      throw CircularDependencyException();
+    }
+  }
+
+  ~CircularDependencyGuard() {
+    keys.erase(key);
+  }
+};
 
 template<typename Iface>
 class ResolvedBinding;
