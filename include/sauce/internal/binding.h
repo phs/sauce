@@ -2,6 +2,7 @@
 #define SAUCE_SAUCE_INTERNAL_BINDING_H_
 
 #include <map>
+#include <set>
 
 #include <cassert>
 
@@ -38,6 +39,11 @@ template<typename Iface>
 BindKey BindKeyOf() {
   return &BindKeyFactory<Iface>;
 }
+
+/**
+ * A set of bind keys used to detect circular dependencies.
+ */
+typedef std::set<BindKey> BindKeys;
 
 template<typename Iface>
 class ResolvedBinding;
@@ -95,8 +101,11 @@ struct ResolvedBinding:
 
   /**
    * Provide an instance of Iface, using the given injector to resolve dependencies.
+   *
+   * The bindKeys indicate which keys are already currently being provided: this is used for
+   * circular dependency detection.
    */
-  virtual SAUCE_SHARED_PTR<Iface> get(Injector & injector) = 0;
+  virtual SAUCE_SHARED_PTR<Iface> get(Injector & injector, BindKeys & bindKeys) = 0;
 
 };
 

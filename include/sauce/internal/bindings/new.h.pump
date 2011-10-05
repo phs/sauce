@@ -29,13 +29,13 @@ struct New<Iface, Impl($As), Allocator>: public TransparentBinding<Iface, Impl> 
   typedef typename Allocator::template rebind<Impl>::other ImplAllocator;
 
 [[$if i==0 [[
-  Impl * provide(Injector &)
+  Impl * provide(Injector &, BindKeys &)
 ]] $else [[
-  Impl * provide(Injector & injector)
+  Impl * provide(Injector & injector, BindKeys & bindKeys)
 ]]]]
  {
 [[$for j [[
-    SAUCE_SHARED_PTR<A$j> a$j(injector.template get<A$j>());
+    SAUCE_SHARED_PTR<A$j> a$j(injector.template get<A$j>(bindKeys));
 
 ]]]]
     ImplAllocator allocator;

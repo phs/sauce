@@ -26,7 +26,7 @@ TODO: More thinking, flush out once a prototype of the feature exists.
 
 ## Wishlist ##
 
-* Circular dependency detection
+* ~~Circular dependency detection~~
 * Setter injection
 * Named, overloaded bindings and dependencies
 * Eager-loaded singletons

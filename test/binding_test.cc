@@ -69,5 +69,25 @@ TEST_F(BindingTest, shouldThrowExceptionWhenGettingAnUnboundIface) {
   ASSERT_THROW(injector.get<Request>(), ::sauce::UnboundException);
 }
 
+struct B;
+
+struct A {
+  A(SAUCE_SHARED_PTR<B> ) {}
+};
+
+struct B {
+  B(SAUCE_SHARED_PTR<A> ) {}
+};
+
+void CircularModule(sauce::Binder & binder) {
+  binder.bind<A>().to<A(B)>();
+  binder.bind<B>().to<B(A)>();
+}
+
+TEST_F(BindingTest, shouldThrowExceptionWhenResolvingCircularDependency) {
+  Injector injector(Bindings().add(&CircularModule).createInjector());
+  ASSERT_THROW(injector.get<A>(), ::sauce::CircularDependencyException);
+}
+
 }
 }
