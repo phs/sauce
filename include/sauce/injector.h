@@ -48,6 +48,7 @@ public:
     return get<Iface>(keys);
   }
 
+  // TODO: how to hide?
   template<typename Iface>
   SAUCE_SHARED_PTR<Iface> get(i::BindKeys & keys) {
     i::BindKey key = i::BindKeyOf<Iface>();
