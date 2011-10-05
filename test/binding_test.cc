@@ -10,27 +10,45 @@ namespace sauce {
 namespace test {
 
 class Store {};
-class DBStore:
-  public Store {};
+class DBStore: public Store {};
 
 class Session {};
-class CookieSession:
-  public Session {};
+class CookieSession: public Session {};
 
 class Request {};
-class HttpRequest:
-  public Request {};
+class HttpRequest: public Request {};
 
 class Response {};
-class HttpResponse:
-  public Response {};
+class HttpResponse: public Response {};
 
 class Controller {};
-class MyController:
-  public Controller {};
+class WelcomeController: public Controller {
+public:
+
+  SAUCE_SHARED_PTR<Store> store;
+  SAUCE_SHARED_PTR<Session> session;
+  SAUCE_SHARED_PTR<Request> request;
+  SAUCE_SHARED_PTR<Response> response;
+
+  WelcomeController(SAUCE_SHARED_PTR<Store> store,
+                    SAUCE_SHARED_PTR<Session> session,
+                    SAUCE_SHARED_PTR<Request> request,
+                    SAUCE_SHARED_PTR<Response> response):
+    store(store),
+    session(session),
+    request(request),
+    response(response) {}
+
+};
 
 struct WebAppModule: ::sauce::AbstractModule {
-  void configure() {}
+  void configure() {
+    bind<Store>().to<DBStore()>();
+    bind<Session>().to<CookieSession()>();
+    bind<Request>().to<HttpRequest()>();
+    bind<Response>().to<HttpResponse()>();
+    bind<Controller>().to<WelcomeController(Store, Session, Request, Response)>();
+  }
 };
 
 struct BindingTest:
