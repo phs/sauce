@@ -70,7 +70,6 @@ struct TransparentBinding:
    * Derived classes should not override this but provide().
    */
   SAUCE_SHARED_PTR<Iface> get(Injector & injector, BindKeys & bindKeys) {
-    // TODO: reuse deleter, but don't inject 'this' in TransparentBinding constructor
     BindingDeleter<Iface, Impl> deleter(this);
     SAUCE_SHARED_PTR<Iface> smartPointer(provide(injector, bindKeys), deleter);
     return smartPointer;
