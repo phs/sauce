@@ -35,7 +35,7 @@ struct New<Iface, Impl($As), Allocator>: public TransparentBinding<Iface, Impl> 
 ]]]]
  {
 [[$for j [[
-    SAUCE_SHARED_PTR<A$j> a$j(injector.template get<A$j>(bindKeys));
+    SAUCE_SHARED_PTR<A$j> a$j(this->template getDependency<A$j>(injector, bindKeys));
 
 ]]]]
     ImplAllocator allocator;

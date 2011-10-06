@@ -9,10 +9,15 @@ namespace sauce {
 
 class Bindings;
 
+namespace internal {
+class DependencyProvider;
+}
+
 class Injector {
   i::BindingMap bindingMap;
 
   friend class Bindings;
+  friend class i::DependencyProvider;
 
   Injector():
     bindingMap() {}
@@ -20,15 +25,6 @@ class Injector {
   Injector(i::BindingMap & bindingMap):
     bindingMap(bindingMap) {}
 
-public:
-
-  template<typename Iface>
-  SAUCE_SHARED_PTR<Iface> get() {
-    i::BindKeys keys;
-    return get<Iface>(keys);
-  }
-
-  // TODO: how to hide?
   template<typename Iface>
   SAUCE_SHARED_PTR<Iface> get(i::BindKeys & keys) {
     i::CircularDependencyGuard<Iface> guard(keys);
@@ -40,6 +36,14 @@ public:
 
     i::Binding & binding = *(i->second.get());
     return binding.resolve<Iface>().get(*this, keys);
+  }
+
+public:
+
+  template<typename Iface>
+  SAUCE_SHARED_PTR<Iface> get() {
+    i::BindKeys keys;
+    return get<Iface>(keys);
   }
 
 };

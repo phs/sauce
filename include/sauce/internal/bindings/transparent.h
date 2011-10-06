@@ -7,6 +7,17 @@
 
 namespace sauce {
 namespace internal {
+
+class DependencyProvider {
+protected:
+
+  template<typename Iface>
+  SAUCE_SHARED_PTR<Iface> getDependency(Injector & injector, BindKeys & keys) {
+    return injector.get<Iface>(keys);
+  }
+
+};
+
 namespace bindings {
 
 template<typename Iface, typename Impl>
@@ -41,7 +52,8 @@ public:
  */
 template<typename Iface, typename Impl>
 struct TransparentBinding:
-  public ResolvedBinding<Iface> {
+  public ResolvedBinding<Iface>,
+  public DependencyProvider {
 
   friend class BindingDeleter<Iface, Impl>;
 
