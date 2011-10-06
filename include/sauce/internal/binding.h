@@ -62,7 +62,7 @@ class CircularDependencyGuard {
     if (keys.find(key) == keys.end()) {
       keys.insert(key);
     } else {
-      throw CircularDependencyException();
+      throw CircularDependencyExceptionFor<Iface>();
     }
   }
 

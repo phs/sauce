@@ -15,9 +15,7 @@ struct Exception: std::runtime_error {
 };
 
 /**
- * Raised when no binding can be found for a given interface.
- *
- * TODO sure would be nice to know who..
+ * Raised when a binding cannot be found.
  */
 struct UnboundException: Exception {
   UnboundException():
@@ -25,13 +23,27 @@ struct UnboundException: Exception {
 };
 
 /**
- * Raised when a cycle is found in the interface's dependencies.
- *
- * TODO sure would be nice to know what the cycle is..
+ * Raised when a binding cannot be found for the given interface.
+ */
+template<typename Iface>
+struct UnboundExceptionFor: UnboundException {
+  UnboundExceptionFor(): UnboundException() {}
+};
+
+/**
+ * Raised when a dependency cycle is found.
  */
 struct CircularDependencyException: Exception {
   CircularDependencyException():
     Exception("Request for unbound interface.") {}
+};
+
+/**
+ * Raised when a dependency cycle is found for the given interface.
+ */
+template<typename Iface>
+struct CircularDependencyExceptionFor: CircularDependencyException {
+  CircularDependencyExceptionFor(): CircularDependencyException() {}
 };
 
 }

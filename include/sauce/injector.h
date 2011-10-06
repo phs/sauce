@@ -31,7 +31,7 @@ class Injector {
 
     i::BindingMap::iterator i = bindingMap.find(i::BindKeyOf<Iface>());
     if (i == bindingMap.end()) {
-      throw UnboundException();
+      throw UnboundExceptionFor<Iface>();
     }
 
     i::Binding & binding = *(i->second.get());
