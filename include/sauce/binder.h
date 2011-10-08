@@ -77,6 +77,7 @@ class Bind:
     i::Clause<Bind<Iface> >(bindingMap) {}
 
   static void activate(i::BindingMap &) {
+    // TODO throw a deferred exception.
     std::cerr << "This should signal an exception to be thrown later." << std::endl;
   }
 
