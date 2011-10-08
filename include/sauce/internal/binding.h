@@ -135,14 +135,21 @@ struct ResolvedBinding:
 
 };
 
-class BindingMap: public std::map<BindKey, SAUCE_SHARED_PTR<Binding> > {
-  typedef void (*PendingThrow)();
-  PendingThrow pending;
+/**
+ * Template function used to create typed, deferred exceptions.
+ *
+ * The exception must have an accessible nullary constructor.
+ * Instances of this template will construct and throw an instance.
+ */
+template<typename Exception>
+void pendingThrowFactory() {
+  throw Exception();
+}
 
-  template<typename Exception>
-  static void pendingThrow() {
-    throw Exception();
-  }
+typedef void (*PendingThrow)();
+
+class BindingMap: public std::map<BindKey, SAUCE_SHARED_PTR<Binding> > {
+  PendingThrow pending;
 
 public:
 
@@ -159,7 +166,7 @@ public:
    */
   template<typename Exception>
   void throwLater() {
-    pending = &pendingThrow<Exception>;
+    pending = &pendingThrowFactory<Exception>;
   }
 
   /**
