@@ -9,21 +9,20 @@ using ::testing::Return;
 namespace sauce {
 namespace test {
 
-class Store {};
-class DBStore: public Store {};
+struct Store {};
+struct DBStore: public Store {};
 
-class Session {};
-class CookieSession: public Session {};
+struct Session {};
+struct CookieSession: public Session {};
 
-class Request {};
-class HttpRequest: public Request {};
+struct Request {};
+struct HttpRequest: public Request {};
 
-class Response {};
-class HttpResponse: public Response {};
+struct Response {};
+struct HttpResponse: public Response {};
 
-class Controller {};
-class WelcomeController: public Controller {
-public:
+struct Controller {};
+struct WelcomeController: public Controller {
 
   SAUCE_SHARED_PTR<Store> store;
   SAUCE_SHARED_PTR<Session> session;
