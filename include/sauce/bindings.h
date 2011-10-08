@@ -16,24 +16,27 @@ namespace sauce {
 class AbstractModule {
   Binder * binder;
 
-  class Chaperon {
+  /**
+   * RIAA object to protecte the state of AbtractModule::binder.
+   */
+  class Guard {
     AbstractModule * module;
     Binder * previousBinder;
 
     friend class AbstractModule;
 
-    Chaperon(AbstractModule * module, Binder * binder):
+    Guard(AbstractModule * module, Binder * binder):
       module(module),
       previousBinder(module->binder) {
       module->binder = binder;
     }
 
-    ~Chaperon() {
+    ~Guard() {
       module->binder = previousBinder;
     }
   };
 
-  friend class Chaperon;
+  friend class Guard;
 
 protected:
 
@@ -56,7 +59,7 @@ protected:
 public:
 
   void operator()(Binder & binder) {
-    Chaperon chaperon(this, &binder);
+    Guard guard(this, &binder);
     configure();
   }
 
