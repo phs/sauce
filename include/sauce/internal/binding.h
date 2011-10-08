@@ -135,7 +135,44 @@ struct ResolvedBinding:
 
 };
 
-typedef std::map<BindKey, SAUCE_SHARED_PTR<Binding> > BindingMap;
+class BindingMap: public std::map<BindKey, SAUCE_SHARED_PTR<Binding> > {
+  typedef void (*PendingThrow)();
+  PendingThrow pending;
+
+  template<typename Exception>
+  static void pendingThrow() {
+    throw Exception();
+  }
+
+public:
+
+  BindingMap():
+    std::map<BindKey, SAUCE_SHARED_PTR<Binding> >(),
+    pending(NULL) {}
+
+  /**
+   * Save an exception of the given type to throw when it is safe.
+   *
+   * The exception must have an accessible nullary constructor.
+   *
+   * Any previously saved exception is dropped.
+   */
+  template<typename Exception>
+  void throwLater() {
+    pending = &pendingThrow<Exception>;
+  }
+
+  /**
+   * Throw and clear any saved exception.
+   */
+  void throwPending() {
+    if (pending) {
+      PendingThrow toThrow = pending;
+      pending = NULL;
+      toThrow();
+    }
+  }
+};
 
 }
 

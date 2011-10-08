@@ -88,5 +88,13 @@ TEST_F(BindingTest, shouldThrowExceptionWhenResolvingCircularDependency) {
   ASSERT_THROW(injector.get<A>(), ::sauce::CircularDependencyException);
 }
 
+void IncompleteModule(sauce::Binder & binder) {
+  binder.bind<A>();
+}
+
+TEST_F(BindingTest, shouldThrowExceptionOnPartialBinding) {
+  ASSERT_THROW(Bindings().add(&IncompleteModule).createInjector(), ::sauce::PartialBindingException);
+}
+
 }
 }

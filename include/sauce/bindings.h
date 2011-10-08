@@ -88,6 +88,7 @@ public:
   template<typename Module>
   Bindings & add(Module module) {
     module(binder);
+    bindingMap.throwPending();
     return *this;
   }
 

@@ -31,6 +31,22 @@ struct UnboundExceptionFor: UnboundException {
 };
 
 /**
+ * Raised when a binding hasn't been completely specified.
+ */
+struct PartialBindingException: Exception {
+  PartialBindingException():
+    Exception("Binding is incomplete.") {}
+};
+
+/**
+ * Raised when a binding hasn't been completely specified for the given interface.
+ */
+template<typename Iface>
+struct PartialBindingFor: PartialBindingException {
+  PartialBindingFor(): PartialBindingException() {}
+};
+
+/**
  * Raised when a dependency cycle is found.
  */
 struct CircularDependencyException: Exception {

@@ -76,9 +76,8 @@ class Bind:
   Bind(i::BindingMap & bindingMap):
     i::Clause<Bind<Iface> >(bindingMap) {}
 
-  static void activate(i::BindingMap &) {
-    // TODO throw a deferred exception.
-    std::cerr << "This should signal an exception to be thrown later." << std::endl;
+  static void activate(i::BindingMap & bindingMap) {
+    bindingMap.throwLater<PartialBindingFor<Iface> >();
   }
 
 public:
@@ -110,6 +109,7 @@ public:
    */
   template<typename Iface>
   Bind<Iface> bind() {
+    bindingMap.throwPending();
     return Bind<Iface>(bindingMap);
   }
 
