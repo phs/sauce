@@ -1,3 +1,5 @@
+#include <string>
+
 #include <gmock/gmock.h>
 #include <gtest/gtest.h>
 
@@ -5,6 +7,9 @@
 
 using ::testing::Sequence;
 using ::testing::Return;
+
+using ::sauce::Binder;
+using ::sauce::Named;
 
 namespace sauce {
 namespace test {
@@ -27,7 +32,7 @@ struct B {
   B(SAUCE_SHARED_PTR<A> ) {}
 };
 
-void CircularModule(sauce::Binder & binder) {
+void CircularModule(Binder & binder) {
   binder.bind<A>().to<A(B)>();
   binder.bind<B>().to<B(A)>();
 }
@@ -37,7 +42,7 @@ TEST(BindingTest, shouldThrowExceptionWhenResolvingCircularDependency) {
   ASSERT_THROW((injector.get<A>()), ::sauce::CircularDependencyException);
 }
 
-void IncompleteModule(sauce::Binder & binder) {
+void IncompleteModule(Binder & binder) {
   binder.bind<C>();
 }
 
@@ -47,7 +52,7 @@ TEST(BindingTest, shouldThrowExceptionOnPartialBinding) {
     ::sauce::PartialBindingException);
 }
 
-void IncompleteNamedModule(sauce::Binder & binder) {
+void IncompleteNamedModule(Binder & binder) {
   binder.bind<A>().named<N>();
 }
 
@@ -55,6 +60,49 @@ TEST(BindingTest, shouldThrowExceptionOnPartialNamedBinding) {
   ASSERT_THROW(
     Bindings().add(&IncompleteNamedModule).createInjector(),
     ::sauce::PartialBindingException);
+}
+
+struct Animal {
+  virtual std::string says() = 0;
+};
+
+struct Cat: Animal {
+  std::string says() { return "Meow"; }
+};
+
+struct Water {};
+struct Fish: Animal {
+  std::string says() { return "Blub blub"; }
+};
+
+struct Farm {};
+struct Cow: Animal {
+  std::string says() { return "Moo"; }
+};
+
+struct Pond {
+  SAUCE_SHARED_PTR<Animal> animal;
+
+  Pond(SAUCE_SHARED_PTR<Animal> animal):
+    animal(animal) {}
+};
+
+void AnimalModule(Binder & binder) {
+  binder.bind<Animal>().to<Cat()>();
+  binder.bind<Animal>().named<Water>().to<Fish()>();
+  binder.bind<Animal>().named<Farm>().to<Cow()>();
+
+  // binder.bind<Pond>().to<Pond(Named<Animal, Water> )>();
+}
+
+TEST(BindingTest, shouldProvidedNamedDependencies) {
+  Injector injector(Bindings().add(&AnimalModule).createInjector());
+
+  EXPECT_EQ("Meow",      (injector.get<Animal>()->says()));
+  EXPECT_EQ("Blub blub", (injector.get<Animal, Water>()->says()));
+  EXPECT_EQ("Moo",       (injector.get<Animal, Farm>()->says()));
+
+  // EXPECT_EQ("Blub blub", (injector.get<Pond>()->animal->says()));
 }
 
 }
