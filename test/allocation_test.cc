@@ -120,9 +120,9 @@ struct HerbieModule: sauce::AbstractModule {
   void configure() {
     typedef AllocateWith<MockAllocation>::Allocator<int> MockAllocator;
 
-    bind<Chasis, sauce::Unnamed>().to<CoupChasis()>().allocateFrom<MockAllocator>();
-    bind<Engine, sauce::Unnamed>().to<HybridEngine()>().allocateFrom<MockAllocator>();
-    bind<Vehicle, sauce::Unnamed>().to<Herbie(Chasis, Engine)>().allocateFrom<MockAllocator>();
+    bind<Chasis>().to<CoupChasis()>().allocateFrom<MockAllocator>();
+    bind<Engine>().to<HybridEngine()>().allocateFrom<MockAllocator>();
+    bind<Vehicle>().to<Herbie(Chasis, Engine)>().allocateFrom<MockAllocator>();
   }
 };
 

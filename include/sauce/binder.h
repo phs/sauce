@@ -32,8 +32,11 @@ class AllocateFrom:
   }
 };
 
-template<typename Iface, typename Name>
+template<typename Iface>
 class Bind;
+
+template<typename Iface, typename Name>
+class NamedClause;
 
 /**
  * Binds to a specific constructor allocating from the heap.
@@ -42,7 +45,8 @@ template<typename Iface, typename Name, typename Ctor>
 class To:
   public i::Clause<To<Iface, Name, Ctor> > {
 
-  friend class Bind<Iface, Name>;
+  friend class Bind<Iface>;
+  friend class NamedClause<Iface, Name>;
   friend class i::Clause<To<Iface, Name, Ctor> >;
 
   To(i::BindingMap & bindingMap):
@@ -61,20 +65,18 @@ public:
 
 };
 
-class Binder;
-
 /**
- * A builder that creates a single binding.
+ * Names the binding.
  */
 template<typename Iface, typename Name>
-class Bind:
-  public i::Clause<Bind<Iface, Name> > {
+class NamedClause:
+  public i::Clause<NamedClause<Iface, Name> > {
 
-  friend class Binder;
-  friend class i::Clause<Bind<Iface, Name> >;
+  friend class Bind<Iface>;
+  friend class i::Clause<NamedClause<Iface, Name> >;
 
-  Bind(i::BindingMap & bindingMap):
-    i::Clause<Bind<Iface, Name> >(bindingMap) {}
+  NamedClause(i::BindingMap & bindingMap):
+    i::Clause<NamedClause<Iface, Name> >(bindingMap) {}
 
   static void activate(i::BindingMap & bindingMap) {
     bindingMap.throwLater<PartialBindingFor<Iface, Name> >();
@@ -85,6 +87,39 @@ public:
   template<typename Ctor>
   To<Iface, Name, Ctor> to() {
     return To<Iface, Name, Ctor>(this->pass());
+  }
+
+};
+
+class Binder;
+
+/**
+ * A builder that creates a single binding.
+ */
+template<typename Iface>
+class Bind:
+  public i::Clause<Bind<Iface> > {
+
+  friend class Binder;
+  friend class i::Clause<Bind<Iface> >;
+
+  Bind(i::BindingMap & bindingMap):
+    i::Clause<Bind<Iface> >(bindingMap) {}
+
+  static void activate(i::BindingMap & bindingMap) {
+    bindingMap.throwLater<PartialBindingFor<Iface, Unnamed> >();
+  }
+
+public:
+
+  template<typename Name>
+  NamedClause<Iface, Name> named() {
+    return NamedClause<Iface, Name>(this->pass());
+  }
+
+  template<typename Ctor>
+  To<Iface, Unnamed, Ctor> to() {
+    return To<Iface, Unnamed, Ctor>(this->pass());
   }
 
 };
@@ -107,10 +142,10 @@ public:
   /**
    * Begin binding the chosen interface.
    */
-  template<typename Iface, typename Name>
-  Bind<Iface, Name> bind() {
+  template<typename Iface>
+  Bind<Iface> bind() {
     bindingMap.throwPending();
-    return Bind<Iface, Name>(bindingMap);
+    return Bind<Iface>(bindingMap);
   }
 
 };

@@ -42,11 +42,11 @@ struct WelcomeController: public Controller {
 
 struct WebAppModule: ::sauce::AbstractModule {
   void configure() {
-    bind<Store, sauce::Unnamed>().to<DBStore()>();
-    bind<Session, sauce::Unnamed>().to<CookieSession()>();
-    bind<Request, sauce::Unnamed>().to<HttpRequest()>();
-    bind<Response, sauce::Unnamed>().to<HttpResponse()>();
-    bind<Controller, sauce::Unnamed>().to<WelcomeController(Store, Session, Request, Response)>();
+    bind<Store>().to<DBStore()>();
+    bind<Session>().to<CookieSession()>();
+    bind<Request>().to<HttpRequest()>();
+    bind<Response>().to<HttpResponse()>();
+    bind<Controller>().to<WelcomeController(Store, Session, Request, Response)>();
   }
 };
 
@@ -79,8 +79,8 @@ struct B {
 };
 
 void CircularModule(sauce::Binder & binder) {
-  binder.bind<A, sauce::Unnamed>().to<A(B)>();
-  binder.bind<B, sauce::Unnamed>().to<B(A)>();
+  binder.bind<A>().to<A(B)>();
+  binder.bind<B>().to<B(A)>();
 }
 
 TEST_F(BindingTest, shouldThrowExceptionWhenResolvingCircularDependency) {
@@ -89,11 +89,23 @@ TEST_F(BindingTest, shouldThrowExceptionWhenResolvingCircularDependency) {
 }
 
 void IncompleteModule(sauce::Binder & binder) {
-  binder.bind<A, sauce::Unnamed>();
+  binder.bind<A>();
 }
 
 TEST_F(BindingTest, shouldThrowExceptionOnPartialBinding) {
-  ASSERT_THROW(Bindings().add(&IncompleteModule).createInjector(), ::sauce::PartialBindingException);
+  ASSERT_THROW(
+    Bindings().add(&IncompleteModule).createInjector(),
+    ::sauce::PartialBindingException);
+}
+
+void IncompleteNamedModule(sauce::Binder & binder) {
+  binder.bind<A>().named<B>();
+}
+
+TEST_F(BindingTest, shouldThrowExceptionOnPartialNamedBinding) {
+  ASSERT_THROW(
+    Bindings().add(&IncompleteNamedModule).createInjector(),
+    ::sauce::PartialBindingException);
 }
 
 }
