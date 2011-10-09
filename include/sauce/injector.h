@@ -51,6 +51,12 @@ class Injector {
 
 public:
 
+  template<typename Iface>
+  SAUCE_SHARED_PTR<Iface> get() {
+    i::BindKeys keys;
+    return get<Iface, Unnamed>(keys);
+  }
+
   template<typename Iface, typename Name>
   SAUCE_SHARED_PTR<Iface> get() {
     i::BindKeys keys;

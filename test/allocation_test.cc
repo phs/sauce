@@ -175,7 +175,7 @@ TEST_F(AllocationTest, shouldProvideAndDisposeADependency) {
   EXPECT_CALL(allocator, deallocate(chasis, 1));
 
   {
-    SAUCE_SHARED_PTR<Chasis> actual = injector.get<Chasis, sauce::Unnamed>();
+    SAUCE_SHARED_PTR<Chasis> actual = injector.get<Chasis>();
     ASSERT_EQ(1, CoupChasis::constructed);
     ASSERT_EQ(chasis, actual.get());
   }
@@ -208,7 +208,7 @@ TEST_F(AllocationTest, shouldProvideAndDisposeOfDependenciesTransitively) {
     ASSERT_EQ(0, CoupChasis::constructed);
     ASSERT_EQ(0, HybridEngine::constructed);
     ASSERT_EQ(0, Herbie::constructed);
-    SAUCE_SHARED_PTR<Vehicle> actual = injector.get<Vehicle, sauce::Unnamed>();
+    SAUCE_SHARED_PTR<Vehicle> actual = injector.get<Vehicle>();
     ASSERT_EQ(1, CoupChasis::constructed);
     ASSERT_EQ(1, HybridEngine::constructed);
     ASSERT_EQ(1, Herbie::constructed);

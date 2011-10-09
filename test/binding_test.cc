@@ -65,7 +65,7 @@ struct BindingTest:
 
 TEST_F(BindingTest, shouldThrowExceptionWhenGettingAnUnboundIface) {
   Injector injector(Bindings().createInjector());
-  ASSERT_THROW((injector.get<Request, sauce::Unnamed>()), ::sauce::UnboundException);
+  ASSERT_THROW((injector.get<Request>()), ::sauce::UnboundException);
 }
 
 struct B;
@@ -85,7 +85,7 @@ void CircularModule(sauce::Binder & binder) {
 
 TEST_F(BindingTest, shouldThrowExceptionWhenResolvingCircularDependency) {
   Injector injector(Bindings().add(&CircularModule).createInjector());
-  ASSERT_THROW((injector.get<A, sauce::Unnamed>()), ::sauce::CircularDependencyException);
+  ASSERT_THROW((injector.get<A>()), ::sauce::CircularDependencyException);
 }
 
 void IncompleteModule(sauce::Binder & binder) {
