@@ -52,7 +52,7 @@ protected:
    * Begin binding the chosen interface.
    */
   template<typename Iface>
-  Bind<Iface> bind() {
+  BindClause<Iface> bind() {
     return binder->bind<Iface>();
   }
 
