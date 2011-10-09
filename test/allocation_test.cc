@@ -120,9 +120,9 @@ struct HerbieModule: sauce::AbstractModule {
   void configure() {
     typedef AllocateWith<MockAllocation>::Allocator<int> MockAllocator;
 
-    bind<Chasis>().to<CoupChasis()>().allocateFrom<MockAllocator>();
-    bind<Engine>().to<HybridEngine()>().allocateFrom<MockAllocator>();
-    bind<Vehicle>().to<Herbie(Chasis, Engine)>().allocateFrom<MockAllocator>();
+    bind<Chasis, sauce::Unnamed>().to<CoupChasis()>().allocateFrom<MockAllocator>();
+    bind<Engine, sauce::Unnamed>().to<HybridEngine()>().allocateFrom<MockAllocator>();
+    bind<Vehicle, sauce::Unnamed>().to<Herbie(Chasis, Engine)>().allocateFrom<MockAllocator>();
   }
 };
 
@@ -175,7 +175,7 @@ TEST_F(AllocationTest, shouldProvideAndDisposeADependency) {
   EXPECT_CALL(allocator, deallocate(chasis, 1));
 
   {
-    SAUCE_SHARED_PTR<Chasis> actual = injector.get<Chasis>();
+    SAUCE_SHARED_PTR<Chasis> actual = injector.get<Chasis, sauce::Unnamed>();
     ASSERT_EQ(1, CoupChasis::constructed);
     ASSERT_EQ(chasis, actual.get());
   }
@@ -208,7 +208,7 @@ TEST_F(AllocationTest, shouldProvideAndDisposeOfDependenciesTransitively) {
     ASSERT_EQ(0, CoupChasis::constructed);
     ASSERT_EQ(0, HybridEngine::constructed);
     ASSERT_EQ(0, Herbie::constructed);
-    SAUCE_SHARED_PTR<Vehicle> actual = injector.get<Vehicle>();
+    SAUCE_SHARED_PTR<Vehicle> actual = injector.get<Vehicle, sauce::Unnamed>();
     ASSERT_EQ(1, CoupChasis::constructed);
     ASSERT_EQ(1, HybridEngine::constructed);
     ASSERT_EQ(1, Herbie::constructed);

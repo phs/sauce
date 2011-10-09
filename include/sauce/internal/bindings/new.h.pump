@@ -14,7 +14,7 @@ namespace sauce {
 namespace internal {
 namespace bindings {
 
-template<typename Iface, typename Constructor, typename Allocator>
+template<typename Iface, typename Name, typename Constructor, typename Allocator>
 class New;
 
 $range i 0..n
@@ -24,8 +24,8 @@ $var comma_typename_As = [[$for j [[, typename A$j]]]]
 $var As = [[$for j, [[A$j]]]]
 $var as = [[$for j, [[a$j]]]]
 
-template<typename Iface, typename Impl, typename Allocator$comma_typename_As>
-struct New<Iface, Impl($As), Allocator>: public TransparentBinding<Iface, Impl> {
+template<typename Iface, typename Name, typename Impl, typename Allocator$comma_typename_As>
+struct New<Iface, Name, Impl($As), Allocator>: public TransparentBinding<Iface, Name, Impl> {
   typedef typename Allocator::template rebind<Impl>::other ImplAllocator;
 
 [[$if i==0 [[
@@ -35,7 +35,7 @@ struct New<Iface, Impl($As), Allocator>: public TransparentBinding<Iface, Impl> 
 ]]]]
  {
 [[$for j [[
-    SAUCE_SHARED_PTR<A$j> a$j(this->template getDependency<A$j>(injector, bindKeys));
+    SAUCE_SHARED_PTR<A$j> a$j(this->template getDependency<A$j, Unnamed>(injector, bindKeys));
 
 ]]]]
     ImplAllocator allocator;

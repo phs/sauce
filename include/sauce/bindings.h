@@ -51,9 +51,9 @@ protected:
   /**
    * Begin binding the chosen interface.
    */
-  template<typename Iface>
-  Bind<Iface> bind() {
-    return binder->bind<Iface>();
+  template<typename Iface, typename Name>
+  Bind<Iface, Name> bind() {
+    return binder->bind<Iface, Name>();
   }
 
 public:

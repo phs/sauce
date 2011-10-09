@@ -13,6 +13,11 @@ namespace internal {
 class DependencyProvider;
 }
 
+/**
+ * The name of all unnamed dependencies.
+ */
+class Unnamed {};
+
 class Injector {
   i::BindingMap bindingMap;
 
@@ -25,25 +30,25 @@ class Injector {
   Injector(i::BindingMap & bindingMap):
     bindingMap(bindingMap) {}
 
-  template<typename Iface>
+  template<typename Iface, typename Name>
   SAUCE_SHARED_PTR<Iface> get(i::BindKeys & keys) {
-    i::CircularDependencyGuard<Iface> guard(keys);
+    i::CircularDependencyGuard<Iface, Name> guard(keys);
 
-    i::BindingMap::iterator i = bindingMap.find(i::BindKeyOf<Iface>());
+    i::BindingMap::iterator i = bindingMap.find(i::BindKeyOf<Iface, Name>());
     if (i == bindingMap.end()) {
-      throw UnboundExceptionFor<Iface>();
+      throw UnboundExceptionFor<Iface, Name>();
     }
 
     i::Binding & binding = *(i->second.get());
-    return binding.resolve<Iface>().get(*this, keys);
+    return binding.resolve<Iface, Name>().get(*this, keys);
   }
 
 public:
 
-  template<typename Iface>
+  template<typename Iface, typename Name>
   SAUCE_SHARED_PTR<Iface> get() {
     i::BindKeys keys;
-    return get<Iface>(keys);
+    return get<Iface, Name>(keys);
   }
 
 };

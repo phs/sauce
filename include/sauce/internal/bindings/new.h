@@ -14,11 +14,13 @@ namespace sauce {
 namespace internal {
 namespace bindings {
 
-template<typename Iface, typename Constructor, typename Allocator>
+template<typename Iface, typename Name, typename Constructor,
+    typename Allocator>
 class New;
 
-template<typename Iface, typename Impl, typename Allocator>
-struct New<Iface, Impl(), Allocator>: public TransparentBinding<Iface, Impl> {
+template<typename Iface, typename Name, typename Impl, typename Allocator>
+struct New<Iface, Name, Impl(), Allocator>: public TransparentBinding<Iface,
+    Name, Impl> {
   typedef typename Allocator::template rebind<Impl>::other ImplAllocator;
 
   Impl * provide(Injector &, BindKeys &) {
@@ -35,12 +37,14 @@ struct New<Iface, Impl(), Allocator>: public TransparentBinding<Iface, Impl> {
   }
 };
 
-template<typename Iface, typename Impl, typename Allocator, typename A1>
-struct New<Iface, Impl(A1), Allocator>: public TransparentBinding<Iface, Impl> {
+template<typename Iface, typename Name, typename Impl, typename Allocator,
+    typename A1>
+struct New<Iface, Name, Impl(A1), Allocator>: public TransparentBinding<Iface,
+    Name, Impl> {
   typedef typename Allocator::template rebind<Impl>::other ImplAllocator;
 
   Impl * provide(Injector & injector, BindKeys & bindKeys) {
-    SAUCE_SHARED_PTR<A1> a1(this->template getDependency<A1>(injector,
+    SAUCE_SHARED_PTR<A1> a1(this->template getDependency<A1, Unnamed>(injector,
         bindKeys));
     ImplAllocator allocator;
     Impl * impl = allocator.allocate(1);
@@ -55,16 +59,16 @@ struct New<Iface, Impl(A1), Allocator>: public TransparentBinding<Iface, Impl> {
   }
 };
 
-template<typename Iface, typename Impl, typename Allocator, typename A1,
-    typename A2>
-struct New<Iface, Impl(A1, A2), Allocator>: public TransparentBinding<Iface,
-    Impl> {
+template<typename Iface, typename Name, typename Impl, typename Allocator,
+    typename A1, typename A2>
+struct New<Iface, Name, Impl(A1, A2),
+    Allocator>: public TransparentBinding<Iface, Name, Impl> {
   typedef typename Allocator::template rebind<Impl>::other ImplAllocator;
 
   Impl * provide(Injector & injector, BindKeys & bindKeys) {
-    SAUCE_SHARED_PTR<A1> a1(this->template getDependency<A1>(injector,
+    SAUCE_SHARED_PTR<A1> a1(this->template getDependency<A1, Unnamed>(injector,
         bindKeys));
-    SAUCE_SHARED_PTR<A2> a2(this->template getDependency<A2>(injector,
+    SAUCE_SHARED_PTR<A2> a2(this->template getDependency<A2, Unnamed>(injector,
         bindKeys));
     ImplAllocator allocator;
     Impl * impl = allocator.allocate(1);
@@ -79,18 +83,18 @@ struct New<Iface, Impl(A1, A2), Allocator>: public TransparentBinding<Iface,
   }
 };
 
-template<typename Iface, typename Impl, typename Allocator, typename A1,
-    typename A2, typename A3>
-struct New<Iface, Impl(A1, A2, A3),
-    Allocator>: public TransparentBinding<Iface, Impl> {
+template<typename Iface, typename Name, typename Impl, typename Allocator,
+    typename A1, typename A2, typename A3>
+struct New<Iface, Name, Impl(A1, A2, A3),
+    Allocator>: public TransparentBinding<Iface, Name, Impl> {
   typedef typename Allocator::template rebind<Impl>::other ImplAllocator;
 
   Impl * provide(Injector & injector, BindKeys & bindKeys) {
-    SAUCE_SHARED_PTR<A1> a1(this->template getDependency<A1>(injector,
+    SAUCE_SHARED_PTR<A1> a1(this->template getDependency<A1, Unnamed>(injector,
         bindKeys));
-    SAUCE_SHARED_PTR<A2> a2(this->template getDependency<A2>(injector,
+    SAUCE_SHARED_PTR<A2> a2(this->template getDependency<A2, Unnamed>(injector,
         bindKeys));
-    SAUCE_SHARED_PTR<A3> a3(this->template getDependency<A3>(injector,
+    SAUCE_SHARED_PTR<A3> a3(this->template getDependency<A3, Unnamed>(injector,
         bindKeys));
     ImplAllocator allocator;
     Impl * impl = allocator.allocate(1);
@@ -105,20 +109,20 @@ struct New<Iface, Impl(A1, A2, A3),
   }
 };
 
-template<typename Iface, typename Impl, typename Allocator, typename A1,
-    typename A2, typename A3, typename A4>
-struct New<Iface, Impl(A1, A2, A3, A4),
-    Allocator>: public TransparentBinding<Iface, Impl> {
+template<typename Iface, typename Name, typename Impl, typename Allocator,
+    typename A1, typename A2, typename A3, typename A4>
+struct New<Iface, Name, Impl(A1, A2, A3, A4),
+    Allocator>: public TransparentBinding<Iface, Name, Impl> {
   typedef typename Allocator::template rebind<Impl>::other ImplAllocator;
 
   Impl * provide(Injector & injector, BindKeys & bindKeys) {
-    SAUCE_SHARED_PTR<A1> a1(this->template getDependency<A1>(injector,
+    SAUCE_SHARED_PTR<A1> a1(this->template getDependency<A1, Unnamed>(injector,
         bindKeys));
-    SAUCE_SHARED_PTR<A2> a2(this->template getDependency<A2>(injector,
+    SAUCE_SHARED_PTR<A2> a2(this->template getDependency<A2, Unnamed>(injector,
         bindKeys));
-    SAUCE_SHARED_PTR<A3> a3(this->template getDependency<A3>(injector,
+    SAUCE_SHARED_PTR<A3> a3(this->template getDependency<A3, Unnamed>(injector,
         bindKeys));
-    SAUCE_SHARED_PTR<A4> a4(this->template getDependency<A4>(injector,
+    SAUCE_SHARED_PTR<A4> a4(this->template getDependency<A4, Unnamed>(injector,
         bindKeys));
     ImplAllocator allocator;
     Impl * impl = allocator.allocate(1);
@@ -133,22 +137,22 @@ struct New<Iface, Impl(A1, A2, A3, A4),
   }
 };
 
-template<typename Iface, typename Impl, typename Allocator, typename A1,
-    typename A2, typename A3, typename A4, typename A5>
-struct New<Iface, Impl(A1, A2, A3, A4, A5),
-    Allocator>: public TransparentBinding<Iface, Impl> {
+template<typename Iface, typename Name, typename Impl, typename Allocator,
+    typename A1, typename A2, typename A3, typename A4, typename A5>
+struct New<Iface, Name, Impl(A1, A2, A3, A4, A5),
+    Allocator>: public TransparentBinding<Iface, Name, Impl> {
   typedef typename Allocator::template rebind<Impl>::other ImplAllocator;
 
   Impl * provide(Injector & injector, BindKeys & bindKeys) {
-    SAUCE_SHARED_PTR<A1> a1(this->template getDependency<A1>(injector,
+    SAUCE_SHARED_PTR<A1> a1(this->template getDependency<A1, Unnamed>(injector,
         bindKeys));
-    SAUCE_SHARED_PTR<A2> a2(this->template getDependency<A2>(injector,
+    SAUCE_SHARED_PTR<A2> a2(this->template getDependency<A2, Unnamed>(injector,
         bindKeys));
-    SAUCE_SHARED_PTR<A3> a3(this->template getDependency<A3>(injector,
+    SAUCE_SHARED_PTR<A3> a3(this->template getDependency<A3, Unnamed>(injector,
         bindKeys));
-    SAUCE_SHARED_PTR<A4> a4(this->template getDependency<A4>(injector,
+    SAUCE_SHARED_PTR<A4> a4(this->template getDependency<A4, Unnamed>(injector,
         bindKeys));
-    SAUCE_SHARED_PTR<A5> a5(this->template getDependency<A5>(injector,
+    SAUCE_SHARED_PTR<A5> a5(this->template getDependency<A5, Unnamed>(injector,
         bindKeys));
     ImplAllocator allocator;
     Impl * impl = allocator.allocate(1);
@@ -163,24 +167,25 @@ struct New<Iface, Impl(A1, A2, A3, A4, A5),
   }
 };
 
-template<typename Iface, typename Impl, typename Allocator, typename A1,
-    typename A2, typename A3, typename A4, typename A5, typename A6>
-struct New<Iface, Impl(A1, A2, A3, A4, A5, A6),
-    Allocator>: public TransparentBinding<Iface, Impl> {
+template<typename Iface, typename Name, typename Impl, typename Allocator,
+    typename A1, typename A2, typename A3, typename A4, typename A5,
+    typename A6>
+struct New<Iface, Name, Impl(A1, A2, A3, A4, A5, A6),
+    Allocator>: public TransparentBinding<Iface, Name, Impl> {
   typedef typename Allocator::template rebind<Impl>::other ImplAllocator;
 
   Impl * provide(Injector & injector, BindKeys & bindKeys) {
-    SAUCE_SHARED_PTR<A1> a1(this->template getDependency<A1>(injector,
+    SAUCE_SHARED_PTR<A1> a1(this->template getDependency<A1, Unnamed>(injector,
         bindKeys));
-    SAUCE_SHARED_PTR<A2> a2(this->template getDependency<A2>(injector,
+    SAUCE_SHARED_PTR<A2> a2(this->template getDependency<A2, Unnamed>(injector,
         bindKeys));
-    SAUCE_SHARED_PTR<A3> a3(this->template getDependency<A3>(injector,
+    SAUCE_SHARED_PTR<A3> a3(this->template getDependency<A3, Unnamed>(injector,
         bindKeys));
-    SAUCE_SHARED_PTR<A4> a4(this->template getDependency<A4>(injector,
+    SAUCE_SHARED_PTR<A4> a4(this->template getDependency<A4, Unnamed>(injector,
         bindKeys));
-    SAUCE_SHARED_PTR<A5> a5(this->template getDependency<A5>(injector,
+    SAUCE_SHARED_PTR<A5> a5(this->template getDependency<A5, Unnamed>(injector,
         bindKeys));
-    SAUCE_SHARED_PTR<A6> a6(this->template getDependency<A6>(injector,
+    SAUCE_SHARED_PTR<A6> a6(this->template getDependency<A6, Unnamed>(injector,
         bindKeys));
     ImplAllocator allocator;
     Impl * impl = allocator.allocate(1);
@@ -195,27 +200,27 @@ struct New<Iface, Impl(A1, A2, A3, A4, A5, A6),
   }
 };
 
-template<typename Iface, typename Impl, typename Allocator, typename A1,
-    typename A2, typename A3, typename A4, typename A5, typename A6,
-    typename A7>
-struct New<Iface, Impl(A1, A2, A3, A4, A5, A6, A7),
-    Allocator>: public TransparentBinding<Iface, Impl> {
+template<typename Iface, typename Name, typename Impl, typename Allocator,
+    typename A1, typename A2, typename A3, typename A4, typename A5,
+    typename A6, typename A7>
+struct New<Iface, Name, Impl(A1, A2, A3, A4, A5, A6, A7),
+    Allocator>: public TransparentBinding<Iface, Name, Impl> {
   typedef typename Allocator::template rebind<Impl>::other ImplAllocator;
 
   Impl * provide(Injector & injector, BindKeys & bindKeys) {
-    SAUCE_SHARED_PTR<A1> a1(this->template getDependency<A1>(injector,
+    SAUCE_SHARED_PTR<A1> a1(this->template getDependency<A1, Unnamed>(injector,
         bindKeys));
-    SAUCE_SHARED_PTR<A2> a2(this->template getDependency<A2>(injector,
+    SAUCE_SHARED_PTR<A2> a2(this->template getDependency<A2, Unnamed>(injector,
         bindKeys));
-    SAUCE_SHARED_PTR<A3> a3(this->template getDependency<A3>(injector,
+    SAUCE_SHARED_PTR<A3> a3(this->template getDependency<A3, Unnamed>(injector,
         bindKeys));
-    SAUCE_SHARED_PTR<A4> a4(this->template getDependency<A4>(injector,
+    SAUCE_SHARED_PTR<A4> a4(this->template getDependency<A4, Unnamed>(injector,
         bindKeys));
-    SAUCE_SHARED_PTR<A5> a5(this->template getDependency<A5>(injector,
+    SAUCE_SHARED_PTR<A5> a5(this->template getDependency<A5, Unnamed>(injector,
         bindKeys));
-    SAUCE_SHARED_PTR<A6> a6(this->template getDependency<A6>(injector,
+    SAUCE_SHARED_PTR<A6> a6(this->template getDependency<A6, Unnamed>(injector,
         bindKeys));
-    SAUCE_SHARED_PTR<A7> a7(this->template getDependency<A7>(injector,
+    SAUCE_SHARED_PTR<A7> a7(this->template getDependency<A7, Unnamed>(injector,
         bindKeys));
     ImplAllocator allocator;
     Impl * impl = allocator.allocate(1);
@@ -230,29 +235,29 @@ struct New<Iface, Impl(A1, A2, A3, A4, A5, A6, A7),
   }
 };
 
-template<typename Iface, typename Impl, typename Allocator, typename A1,
-    typename A2, typename A3, typename A4, typename A5, typename A6,
-    typename A7, typename A8>
-struct New<Iface, Impl(A1, A2, A3, A4, A5, A6, A7, A8),
-    Allocator>: public TransparentBinding<Iface, Impl> {
+template<typename Iface, typename Name, typename Impl, typename Allocator,
+    typename A1, typename A2, typename A3, typename A4, typename A5,
+    typename A6, typename A7, typename A8>
+struct New<Iface, Name, Impl(A1, A2, A3, A4, A5, A6, A7, A8),
+    Allocator>: public TransparentBinding<Iface, Name, Impl> {
   typedef typename Allocator::template rebind<Impl>::other ImplAllocator;
 
   Impl * provide(Injector & injector, BindKeys & bindKeys) {
-    SAUCE_SHARED_PTR<A1> a1(this->template getDependency<A1>(injector,
+    SAUCE_SHARED_PTR<A1> a1(this->template getDependency<A1, Unnamed>(injector,
         bindKeys));
-    SAUCE_SHARED_PTR<A2> a2(this->template getDependency<A2>(injector,
+    SAUCE_SHARED_PTR<A2> a2(this->template getDependency<A2, Unnamed>(injector,
         bindKeys));
-    SAUCE_SHARED_PTR<A3> a3(this->template getDependency<A3>(injector,
+    SAUCE_SHARED_PTR<A3> a3(this->template getDependency<A3, Unnamed>(injector,
         bindKeys));
-    SAUCE_SHARED_PTR<A4> a4(this->template getDependency<A4>(injector,
+    SAUCE_SHARED_PTR<A4> a4(this->template getDependency<A4, Unnamed>(injector,
         bindKeys));
-    SAUCE_SHARED_PTR<A5> a5(this->template getDependency<A5>(injector,
+    SAUCE_SHARED_PTR<A5> a5(this->template getDependency<A5, Unnamed>(injector,
         bindKeys));
-    SAUCE_SHARED_PTR<A6> a6(this->template getDependency<A6>(injector,
+    SAUCE_SHARED_PTR<A6> a6(this->template getDependency<A6, Unnamed>(injector,
         bindKeys));
-    SAUCE_SHARED_PTR<A7> a7(this->template getDependency<A7>(injector,
+    SAUCE_SHARED_PTR<A7> a7(this->template getDependency<A7, Unnamed>(injector,
         bindKeys));
-    SAUCE_SHARED_PTR<A8> a8(this->template getDependency<A8>(injector,
+    SAUCE_SHARED_PTR<A8> a8(this->template getDependency<A8, Unnamed>(injector,
         bindKeys));
     ImplAllocator allocator;
     Impl * impl = allocator.allocate(1);
@@ -267,31 +272,31 @@ struct New<Iface, Impl(A1, A2, A3, A4, A5, A6, A7, A8),
   }
 };
 
-template<typename Iface, typename Impl, typename Allocator, typename A1,
-    typename A2, typename A3, typename A4, typename A5, typename A6,
-    typename A7, typename A8, typename A9>
-struct New<Iface, Impl(A1, A2, A3, A4, A5, A6, A7, A8, A9),
-    Allocator>: public TransparentBinding<Iface, Impl> {
+template<typename Iface, typename Name, typename Impl, typename Allocator,
+    typename A1, typename A2, typename A3, typename A4, typename A5,
+    typename A6, typename A7, typename A8, typename A9>
+struct New<Iface, Name, Impl(A1, A2, A3, A4, A5, A6, A7, A8, A9),
+    Allocator>: public TransparentBinding<Iface, Name, Impl> {
   typedef typename Allocator::template rebind<Impl>::other ImplAllocator;
 
   Impl * provide(Injector & injector, BindKeys & bindKeys) {
-    SAUCE_SHARED_PTR<A1> a1(this->template getDependency<A1>(injector,
+    SAUCE_SHARED_PTR<A1> a1(this->template getDependency<A1, Unnamed>(injector,
         bindKeys));
-    SAUCE_SHARED_PTR<A2> a2(this->template getDependency<A2>(injector,
+    SAUCE_SHARED_PTR<A2> a2(this->template getDependency<A2, Unnamed>(injector,
         bindKeys));
-    SAUCE_SHARED_PTR<A3> a3(this->template getDependency<A3>(injector,
+    SAUCE_SHARED_PTR<A3> a3(this->template getDependency<A3, Unnamed>(injector,
         bindKeys));
-    SAUCE_SHARED_PTR<A4> a4(this->template getDependency<A4>(injector,
+    SAUCE_SHARED_PTR<A4> a4(this->template getDependency<A4, Unnamed>(injector,
         bindKeys));
-    SAUCE_SHARED_PTR<A5> a5(this->template getDependency<A5>(injector,
+    SAUCE_SHARED_PTR<A5> a5(this->template getDependency<A5, Unnamed>(injector,
         bindKeys));
-    SAUCE_SHARED_PTR<A6> a6(this->template getDependency<A6>(injector,
+    SAUCE_SHARED_PTR<A6> a6(this->template getDependency<A6, Unnamed>(injector,
         bindKeys));
-    SAUCE_SHARED_PTR<A7> a7(this->template getDependency<A7>(injector,
+    SAUCE_SHARED_PTR<A7> a7(this->template getDependency<A7, Unnamed>(injector,
         bindKeys));
-    SAUCE_SHARED_PTR<A8> a8(this->template getDependency<A8>(injector,
+    SAUCE_SHARED_PTR<A8> a8(this->template getDependency<A8, Unnamed>(injector,
         bindKeys));
-    SAUCE_SHARED_PTR<A9> a9(this->template getDependency<A9>(injector,
+    SAUCE_SHARED_PTR<A9> a9(this->template getDependency<A9, Unnamed>(injector,
         bindKeys));
     ImplAllocator allocator;
     Impl * impl = allocator.allocate(1);
@@ -306,34 +311,34 @@ struct New<Iface, Impl(A1, A2, A3, A4, A5, A6, A7, A8, A9),
   }
 };
 
-template<typename Iface, typename Impl, typename Allocator, typename A1,
-    typename A2, typename A3, typename A4, typename A5, typename A6,
-    typename A7, typename A8, typename A9, typename A10>
-struct New<Iface, Impl(A1, A2, A3, A4, A5, A6, A7, A8, A9, A10),
-    Allocator>: public TransparentBinding<Iface, Impl> {
+template<typename Iface, typename Name, typename Impl, typename Allocator,
+    typename A1, typename A2, typename A3, typename A4, typename A5,
+    typename A6, typename A7, typename A8, typename A9, typename A10>
+struct New<Iface, Name, Impl(A1, A2, A3, A4, A5, A6, A7, A8, A9, A10),
+    Allocator>: public TransparentBinding<Iface, Name, Impl> {
   typedef typename Allocator::template rebind<Impl>::other ImplAllocator;
 
   Impl * provide(Injector & injector, BindKeys & bindKeys) {
-    SAUCE_SHARED_PTR<A1> a1(this->template getDependency<A1>(injector,
+    SAUCE_SHARED_PTR<A1> a1(this->template getDependency<A1, Unnamed>(injector,
         bindKeys));
-    SAUCE_SHARED_PTR<A2> a2(this->template getDependency<A2>(injector,
+    SAUCE_SHARED_PTR<A2> a2(this->template getDependency<A2, Unnamed>(injector,
         bindKeys));
-    SAUCE_SHARED_PTR<A3> a3(this->template getDependency<A3>(injector,
+    SAUCE_SHARED_PTR<A3> a3(this->template getDependency<A3, Unnamed>(injector,
         bindKeys));
-    SAUCE_SHARED_PTR<A4> a4(this->template getDependency<A4>(injector,
+    SAUCE_SHARED_PTR<A4> a4(this->template getDependency<A4, Unnamed>(injector,
         bindKeys));
-    SAUCE_SHARED_PTR<A5> a5(this->template getDependency<A5>(injector,
+    SAUCE_SHARED_PTR<A5> a5(this->template getDependency<A5, Unnamed>(injector,
         bindKeys));
-    SAUCE_SHARED_PTR<A6> a6(this->template getDependency<A6>(injector,
+    SAUCE_SHARED_PTR<A6> a6(this->template getDependency<A6, Unnamed>(injector,
         bindKeys));
-    SAUCE_SHARED_PTR<A7> a7(this->template getDependency<A7>(injector,
+    SAUCE_SHARED_PTR<A7> a7(this->template getDependency<A7, Unnamed>(injector,
         bindKeys));
-    SAUCE_SHARED_PTR<A8> a8(this->template getDependency<A8>(injector,
+    SAUCE_SHARED_PTR<A8> a8(this->template getDependency<A8, Unnamed>(injector,
         bindKeys));
-    SAUCE_SHARED_PTR<A9> a9(this->template getDependency<A9>(injector,
+    SAUCE_SHARED_PTR<A9> a9(this->template getDependency<A9, Unnamed>(injector,
         bindKeys));
-    SAUCE_SHARED_PTR<A10> a10(this->template getDependency<A10>(injector,
-        bindKeys));
+    SAUCE_SHARED_PTR<A10> a10(this->template getDependency<A10,
+        Unnamed>(injector, bindKeys));
     ImplAllocator allocator;
     Impl * impl = allocator.allocate(1);
     new(impl) Impl(a1, a2, a3, a4, a5, a6, a7, a8, a9, a10);

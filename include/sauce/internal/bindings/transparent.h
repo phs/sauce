@@ -11,29 +11,29 @@ namespace internal {
 class DependencyProvider {
 protected:
 
-  template<typename Iface>
+  template<typename Iface, typename Name>
   SAUCE_SHARED_PTR<Iface> getDependency(Injector & injector, BindKeys & keys) {
-    return injector.get<Iface>(keys);
+    return injector.get<Iface, Name>(keys);
   }
 
 };
 
 namespace bindings {
 
-template<typename Iface, typename Impl>
+template<typename Iface, typename Name, typename Impl>
 class TransparentBinding;
 
 /**
  * A smart pointer deleter that diposes with a given binding.
  */
-template<typename Iface, typename Impl>
+template<typename Iface, typename Name, typename Impl>
 class BindingDeleter {
 
-  friend class TransparentBinding<Iface, Impl>;
+  friend class TransparentBinding<Iface, Name, Impl>;
 
-  TransparentBinding<Iface, Impl> * binding;
+  TransparentBinding<Iface, Name, Impl> * binding;
 
-  BindingDeleter(TransparentBinding<Iface, Impl> * binding):
+  BindingDeleter(TransparentBinding<Iface, Name, Impl> * binding):
     binding(binding) {}
 
 public:
@@ -50,18 +50,18 @@ public:
 /**
  * A binding for a specific interface and implementation.
  */
-template<typename Iface, typename Impl>
+template<typename Iface, typename Name, typename Impl>
 struct TransparentBinding:
-  public ResolvedBinding<Iface>,
+  public ResolvedBinding<Iface, Name>,
   public DependencyProvider {
 
-  friend class BindingDeleter<Iface, Impl>;
+  friend class BindingDeleter<Iface, Name, Impl>;
 
   /**
-   * The BindKey of the Iface template parameter.
+   * The BindKey of the Iface and Name template parameters.
    */
   virtual BindKey getKey() {
-    return BindKeyOf<Iface>();
+    return BindKeyOf<Iface, Name>();
   }
 
   /**
@@ -70,7 +70,7 @@ struct TransparentBinding:
    * Derived classes should not override this but provide().
    */
   SAUCE_SHARED_PTR<Iface> get(Injector & injector, BindKeys & bindKeys) {
-    BindingDeleter<Iface, Impl> deleter(this);
+    BindingDeleter<Iface, Name, Impl> deleter(this);
     SAUCE_SHARED_PTR<Iface> smartPointer(provide(injector, bindKeys), deleter);
     return smartPointer;
   }

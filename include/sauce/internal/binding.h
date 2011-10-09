@@ -30,15 +30,15 @@ typedef void (*BindKey)();
 /**
  * The template that generates BindKeys.
  */
-template<typename Iface>
+template<typename Iface, typename Name>
 void BindKeyFactory() {}
 
 /**
  * A helper that encapsulates getting BindKeys.
  */
-template<typename Iface>
+template<typename Iface, typename Name>
 BindKey BindKeyOf() {
-  return &BindKeyFactory<Iface>;
+  return &BindKeyFactory<Iface, Name>;
 }
 
 /**
@@ -49,7 +49,7 @@ typedef std::set<BindKey> BindKeys;
 /**
  * Detects circular dependencies on behalf of injectors.
  */
-template<typename Iface>
+template<typename Iface, typename Name>
 class CircularDependencyGuard {
   friend class ::sauce::Injector;
 
@@ -58,11 +58,11 @@ class CircularDependencyGuard {
 
   CircularDependencyGuard(BindKeys & keys):
     keys(keys),
-    key(BindKeyOf<Iface>()) {
+    key(BindKeyOf<Iface, Name>()) {
     if (keys.find(key) == keys.end()) {
       keys.insert(key);
     } else {
-      throw CircularDependencyExceptionFor<Iface>();
+      throw CircularDependencyExceptionFor<Iface, Name>();
     }
   }
 
@@ -71,7 +71,7 @@ class CircularDependencyGuard {
   }
 };
 
-template<typename Iface>
+template<typename Iface, typename Name>
 class ResolvedBinding;
 
 /**
@@ -110,10 +110,10 @@ struct Binding {
    * this is an internal type and Sauce's own callers obey this as an
    * invariant, requests for other types will immediately fail an assert.
    */
-  template<typename Iface>
-  ResolvedBinding<Iface> & resolve() {
-    assert(BindKeyOf<Iface>() == getKey());
-    return *static_cast<ResolvedBinding<Iface> *>(this);
+  template<typename Iface, typename Name>
+  ResolvedBinding<Iface, Name> & resolve() {
+    assert((BindKeyOf<Iface, Name>()) == getKey());
+    return *static_cast<ResolvedBinding<Iface, Name> *>(this);
   }
 
 };
@@ -121,7 +121,7 @@ struct Binding {
 /**
  * A binding for a specific interface.
  */
-template<typename Iface>
+template<typename Iface, typename Name>
 struct ResolvedBinding:
   public Binding {
 
