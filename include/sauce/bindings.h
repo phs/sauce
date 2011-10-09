@@ -17,7 +17,7 @@ class AbstractModule {
   Binder * binder;
 
   /**
-   * RIAA object to protecte the state of AbtractModule::binder.
+   * RAII object to protecte the state of AbtractModule::binder.
    */
   class Guard {
     AbstractModule * module;
