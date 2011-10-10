@@ -42,4 +42,4 @@ namespace i = ::sauce::internal;
 
 }
 
-#endif // ifndef SAUCE_SAUCE_CLAUSE_H_
+#endif // SAUCE_SAUCE_CLAUSE_H_

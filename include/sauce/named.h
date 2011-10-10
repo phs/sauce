@@ -53,4 +53,4 @@ namespace i = ::sauce::internal;
 
 }
 
-#endif // ifndef SAUCE_SAUCE_NAMED_H_
+#endif // SAUCE_SAUCE_NAMED_H_

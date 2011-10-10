@@ -6,4 +6,4 @@
 #include <sauce/injector.h>
 #include <sauce/bindings.h>
 
-#endif // ifndef SAUCE_SAUCE_H_
+#endif // SAUCE_SAUCE_H_

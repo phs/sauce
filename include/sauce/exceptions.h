@@ -64,4 +64,4 @@ struct CircularDependencyExceptionFor: CircularDependencyException {
 
 }
 
-#endif // ifndef SAUCE_SAUCE_EXCEPTIONS_H_
+#endif // SAUCE_SAUCE_EXCEPTIONS_H_

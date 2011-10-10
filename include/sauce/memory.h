@@ -14,4 +14,4 @@
   #error Please define one of SAUCE_STD_SMART_PTR, SAUCE_STD_TR1_SMART_PTR or SAUCE_BOOST_SMART_PTR
 #endif
 
-#endif // ifndef SAUCE_SAUCE_MEMORY_H_
+#endif // SAUCE_SAUCE_MEMORY_H_

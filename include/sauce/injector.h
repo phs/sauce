@@ -57,4 +57,4 @@ public:
 
 }
 
-#endif // ifndef SAUCE_SAUCE_INJECTOR_H_
+#endif // SAUCE_SAUCE_INJECTOR_H_
