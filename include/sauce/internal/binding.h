@@ -8,6 +8,7 @@
 
 #include <sauce/exceptions.h>
 #include <sauce/memory.h>
+#include <sauce/named.h>
 
 namespace sauce {
 
@@ -30,15 +31,15 @@ typedef void (*BindKey)();
 /**
  * The template that generates BindKeys.
  */
-template<typename Iface, typename Name>
+template<typename Dependency>
 void BindKeyFactory() {}
 
 /**
  * A helper that encapsulates getting BindKeys.
  */
-template<typename Iface, typename Name>
+template<typename Dependency>
 BindKey BindKeyOf() {
-  return &BindKeyFactory<Iface, Name>;
+  return &BindKeyFactory<Dependency>;
 }
 
 /**
@@ -49,7 +50,7 @@ typedef std::set<BindKey> BindKeys;
 /**
  * Detects circular dependencies on behalf of injectors.
  */
-template<typename Iface, typename Name>
+template<typename Dependency>
 class CircularDependencyGuard {
   friend class ::sauce::Injector;
 
@@ -58,11 +59,11 @@ class CircularDependencyGuard {
 
   CircularDependencyGuard(BindKeys & keys):
     keys(keys),
-    key(BindKeyOf<Iface, Name>()) {
+    key(BindKeyOf<Dependency>()) {
     if (keys.find(key) == keys.end()) {
       keys.insert(key);
     } else {
-      throw CircularDependencyExceptionFor<Iface, Name>();
+      throw CircularDependencyExceptionFor<Dependency>();
     }
   }
 
@@ -71,7 +72,7 @@ class CircularDependencyGuard {
   }
 };
 
-template<typename Iface, typename Name>
+template<typename Dependency>
 class ResolvedBinding;
 
 /**
@@ -110,10 +111,10 @@ struct Binding {
    * this is an internal type and Sauce's own callers obey this as an
    * invariant, requests for other types will immediately fail an assert.
    */
-  template<typename Iface, typename Name>
-  ResolvedBinding<Iface, Name> & resolve() {
-    assert((BindKeyOf<Iface, Name>()) == getKey());
-    return *static_cast<ResolvedBinding<Iface, Name> *>(this);
+  template<typename Dependency>
+  ResolvedBinding<Dependency> & resolve() {
+    assert((BindKeyOf<Dependency>()) == getKey());
+    return *static_cast<ResolvedBinding<Dependency> *>(this);
   }
 
 };
@@ -121,7 +122,7 @@ struct Binding {
 /**
  * A binding for a specific interface.
  */
-template<typename Iface, typename Name>
+template<typename Dependency>
 struct ResolvedBinding:
   public Binding {
 
@@ -131,7 +132,7 @@ struct ResolvedBinding:
    * The bindKeys indicate which keys are already currently being provided: this is used for
    * circular dependency detection.
    */
-  virtual SAUCE_SHARED_PTR<Iface> get(Injector & injector, BindKeys & bindKeys) = 0;
+  virtual typename DependencyKey<Dependency>::Ptr get(Injector & injector, BindKeys & bindKeys) = 0;
 
 };
 

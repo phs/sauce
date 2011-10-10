@@ -1,6 +1,8 @@
 #ifndef SAUCE_SAUCE_NAMED_H_
 #define SAUCE_SAUCE_NAMED_H_
 
+#include <sauce/memory.h>
+
 namespace sauce {
 
 /**
@@ -24,6 +26,7 @@ struct DependencyKey {
   typedef Iface_ Iface;
   typedef SAUCE_SHARED_PTR<Iface> Ptr;
   typedef Unnamed Name;
+  typedef Named<Iface, Name> Dependency;
 };
 
 /**
@@ -34,9 +37,13 @@ struct DependencyKey<Named<Iface_, Name_> > {
   typedef Iface_ Iface;
   typedef SAUCE_SHARED_PTR<Iface> Ptr;
   typedef Name_ Name;
+  typedef Named<Iface, Name> Dependency;
 };
 
 }
+
+namespace i = ::sauce::internal;
+
 }
 
 #endif // ifndef SAUCE_SAUCE_NAMED_H_

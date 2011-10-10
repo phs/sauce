@@ -15,13 +15,12 @@ namespace sauce {
 namespace internal {
 namespace bindings {
 
-template<typename Iface, typename Name, typename Constructor,
-    typename Allocator>
+template<typename Dependency, typename Constructor, typename Allocator>
 class New;
 
-template<typename Iface, typename Name, typename Impl, typename Allocator>
-struct New<Iface, Name, Impl(), Allocator>: public TransparentBinding<Iface,
-    Name, Impl> {
+template<typename Dependency, typename Impl, typename Allocator>
+struct New<Dependency, Impl(),
+    Allocator>: public TransparentBinding<Dependency, Impl> {
   typedef typename Allocator::template rebind<Impl>::other ImplAllocator;
 
   Impl * provide(Injector &, BindKeys &) {
@@ -38,10 +37,9 @@ struct New<Iface, Name, Impl(), Allocator>: public TransparentBinding<Iface,
   }
 };
 
-template<typename Iface, typename Name, typename Impl, typename Allocator,
-    typename A1>
-struct New<Iface, Name, Impl(A1), Allocator>: public TransparentBinding<Iface,
-    Name, Impl> {
+template<typename Dependency, typename Impl, typename Allocator, typename A1>
+struct New<Dependency, Impl(A1),
+    Allocator>: public TransparentBinding<Dependency, Impl> {
   typedef typename Allocator::template rebind<Impl>::other ImplAllocator;
 
   Impl * provide(Injector & injector, BindKeys & bindKeys) {
@@ -60,10 +58,10 @@ struct New<Iface, Name, Impl(A1), Allocator>: public TransparentBinding<Iface,
   }
 };
 
-template<typename Iface, typename Name, typename Impl, typename Allocator,
-    typename A1, typename A2>
-struct New<Iface, Name, Impl(A1, A2),
-    Allocator>: public TransparentBinding<Iface, Name, Impl> {
+template<typename Dependency, typename Impl, typename Allocator, typename A1,
+    typename A2>
+struct New<Dependency, Impl(A1, A2),
+    Allocator>: public TransparentBinding<Dependency, Impl> {
   typedef typename Allocator::template rebind<Impl>::other ImplAllocator;
 
   Impl * provide(Injector & injector, BindKeys & bindKeys) {
@@ -84,10 +82,10 @@ struct New<Iface, Name, Impl(A1, A2),
   }
 };
 
-template<typename Iface, typename Name, typename Impl, typename Allocator,
-    typename A1, typename A2, typename A3>
-struct New<Iface, Name, Impl(A1, A2, A3),
-    Allocator>: public TransparentBinding<Iface, Name, Impl> {
+template<typename Dependency, typename Impl, typename Allocator, typename A1,
+    typename A2, typename A3>
+struct New<Dependency, Impl(A1, A2, A3),
+    Allocator>: public TransparentBinding<Dependency, Impl> {
   typedef typename Allocator::template rebind<Impl>::other ImplAllocator;
 
   Impl * provide(Injector & injector, BindKeys & bindKeys) {
@@ -110,10 +108,10 @@ struct New<Iface, Name, Impl(A1, A2, A3),
   }
 };
 
-template<typename Iface, typename Name, typename Impl, typename Allocator,
-    typename A1, typename A2, typename A3, typename A4>
-struct New<Iface, Name, Impl(A1, A2, A3, A4),
-    Allocator>: public TransparentBinding<Iface, Name, Impl> {
+template<typename Dependency, typename Impl, typename Allocator, typename A1,
+    typename A2, typename A3, typename A4>
+struct New<Dependency, Impl(A1, A2, A3, A4),
+    Allocator>: public TransparentBinding<Dependency, Impl> {
   typedef typename Allocator::template rebind<Impl>::other ImplAllocator;
 
   Impl * provide(Injector & injector, BindKeys & bindKeys) {
@@ -138,10 +136,10 @@ struct New<Iface, Name, Impl(A1, A2, A3, A4),
   }
 };
 
-template<typename Iface, typename Name, typename Impl, typename Allocator,
-    typename A1, typename A2, typename A3, typename A4, typename A5>
-struct New<Iface, Name, Impl(A1, A2, A3, A4, A5),
-    Allocator>: public TransparentBinding<Iface, Name, Impl> {
+template<typename Dependency, typename Impl, typename Allocator, typename A1,
+    typename A2, typename A3, typename A4, typename A5>
+struct New<Dependency, Impl(A1, A2, A3, A4, A5),
+    Allocator>: public TransparentBinding<Dependency, Impl> {
   typedef typename Allocator::template rebind<Impl>::other ImplAllocator;
 
   Impl * provide(Injector & injector, BindKeys & bindKeys) {
@@ -168,11 +166,10 @@ struct New<Iface, Name, Impl(A1, A2, A3, A4, A5),
   }
 };
 
-template<typename Iface, typename Name, typename Impl, typename Allocator,
-    typename A1, typename A2, typename A3, typename A4, typename A5,
-    typename A6>
-struct New<Iface, Name, Impl(A1, A2, A3, A4, A5, A6),
-    Allocator>: public TransparentBinding<Iface, Name, Impl> {
+template<typename Dependency, typename Impl, typename Allocator, typename A1,
+    typename A2, typename A3, typename A4, typename A5, typename A6>
+struct New<Dependency, Impl(A1, A2, A3, A4, A5, A6),
+    Allocator>: public TransparentBinding<Dependency, Impl> {
   typedef typename Allocator::template rebind<Impl>::other ImplAllocator;
 
   Impl * provide(Injector & injector, BindKeys & bindKeys) {
@@ -201,11 +198,11 @@ struct New<Iface, Name, Impl(A1, A2, A3, A4, A5, A6),
   }
 };
 
-template<typename Iface, typename Name, typename Impl, typename Allocator,
-    typename A1, typename A2, typename A3, typename A4, typename A5,
-    typename A6, typename A7>
-struct New<Iface, Name, Impl(A1, A2, A3, A4, A5, A6, A7),
-    Allocator>: public TransparentBinding<Iface, Name, Impl> {
+template<typename Dependency, typename Impl, typename Allocator, typename A1,
+    typename A2, typename A3, typename A4, typename A5, typename A6,
+    typename A7>
+struct New<Dependency, Impl(A1, A2, A3, A4, A5, A6, A7),
+    Allocator>: public TransparentBinding<Dependency, Impl> {
   typedef typename Allocator::template rebind<Impl>::other ImplAllocator;
 
   Impl * provide(Injector & injector, BindKeys & bindKeys) {
@@ -236,11 +233,11 @@ struct New<Iface, Name, Impl(A1, A2, A3, A4, A5, A6, A7),
   }
 };
 
-template<typename Iface, typename Name, typename Impl, typename Allocator,
-    typename A1, typename A2, typename A3, typename A4, typename A5,
-    typename A6, typename A7, typename A8>
-struct New<Iface, Name, Impl(A1, A2, A3, A4, A5, A6, A7, A8),
-    Allocator>: public TransparentBinding<Iface, Name, Impl> {
+template<typename Dependency, typename Impl, typename Allocator, typename A1,
+    typename A2, typename A3, typename A4, typename A5, typename A6,
+    typename A7, typename A8>
+struct New<Dependency, Impl(A1, A2, A3, A4, A5, A6, A7, A8),
+    Allocator>: public TransparentBinding<Dependency, Impl> {
   typedef typename Allocator::template rebind<Impl>::other ImplAllocator;
 
   Impl * provide(Injector & injector, BindKeys & bindKeys) {
@@ -273,11 +270,11 @@ struct New<Iface, Name, Impl(A1, A2, A3, A4, A5, A6, A7, A8),
   }
 };
 
-template<typename Iface, typename Name, typename Impl, typename Allocator,
-    typename A1, typename A2, typename A3, typename A4, typename A5,
-    typename A6, typename A7, typename A8, typename A9>
-struct New<Iface, Name, Impl(A1, A2, A3, A4, A5, A6, A7, A8, A9),
-    Allocator>: public TransparentBinding<Iface, Name, Impl> {
+template<typename Dependency, typename Impl, typename Allocator, typename A1,
+    typename A2, typename A3, typename A4, typename A5, typename A6,
+    typename A7, typename A8, typename A9>
+struct New<Dependency, Impl(A1, A2, A3, A4, A5, A6, A7, A8, A9),
+    Allocator>: public TransparentBinding<Dependency, Impl> {
   typedef typename Allocator::template rebind<Impl>::other ImplAllocator;
 
   Impl * provide(Injector & injector, BindKeys & bindKeys) {
@@ -312,11 +309,11 @@ struct New<Iface, Name, Impl(A1, A2, A3, A4, A5, A6, A7, A8, A9),
   }
 };
 
-template<typename Iface, typename Name, typename Impl, typename Allocator,
-    typename A1, typename A2, typename A3, typename A4, typename A5,
-    typename A6, typename A7, typename A8, typename A9, typename A10>
-struct New<Iface, Name, Impl(A1, A2, A3, A4, A5, A6, A7, A8, A9, A10),
-    Allocator>: public TransparentBinding<Iface, Name, Impl> {
+template<typename Dependency, typename Impl, typename Allocator, typename A1,
+    typename A2, typename A3, typename A4, typename A5, typename A6,
+    typename A7, typename A8, typename A9, typename A10>
+struct New<Dependency, Impl(A1, A2, A3, A4, A5, A6, A7, A8, A9, A10),
+    Allocator>: public TransparentBinding<Dependency, Impl> {
   typedef typename Allocator::template rebind<Impl>::other ImplAllocator;
 
   Impl * provide(Injector & injector, BindKeys & bindKeys) {

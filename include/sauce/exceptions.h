@@ -25,7 +25,7 @@ struct UnboundException: Exception {
 /**
  * Raised when a binding cannot be found for the given interface.
  */
-template<typename Iface, typename Name>
+template<typename Dependency>
 struct UnboundExceptionFor: UnboundException {
   UnboundExceptionFor(): UnboundException() {}
 };
@@ -41,7 +41,7 @@ struct PartialBindingException: Exception {
 /**
  * Raised when a binding hasn't been completely specified for the given interface.
  */
-template<typename Iface, typename Name>
+template<typename Dependency>
 struct PartialBindingFor: PartialBindingException {
   PartialBindingFor(): PartialBindingException() {}
 };
@@ -57,7 +57,7 @@ struct CircularDependencyException: Exception {
 /**
  * Raised when a dependency cycle is found for the given interface.
  */
-template<typename Iface, typename Name>
+template<typename Dependency>
 struct CircularDependencyExceptionFor: CircularDependencyException {
   CircularDependencyExceptionFor(): CircularDependencyException() {}
 };
