@@ -7,6 +7,7 @@
 
 #include <sauce/injector.h>
 #include <sauce/memory.h>
+#include <sauce/named.h>
 #include <sauce/internal/binding.h>
 #include <sauce/internal/bindings/transparent.h>
 

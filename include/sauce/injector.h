@@ -3,6 +3,7 @@
 
 #include <sauce/exceptions.h>
 #include <sauce/memory.h>
+#include <sauce/named.h>
 #include <sauce/internal/binding.h>
 
 namespace sauce {
@@ -11,35 +12,6 @@ class Bindings;
 
 namespace internal {
 class DependencyProvider;
-}
-
-/**
- * Wrap dependency requests with Named to choose one of several named alternatives.
- */
-template<typename Iface, typename Name>
-class Named {};
-
-/**
- * The name of all unnamed dependencies.
- */
-class Unnamed {};
-
-namespace internal {
-
-template<typename Iface_>
-struct DependencyKey {
-  typedef Iface_ Iface;
-  typedef SAUCE_SHARED_PTR<Iface> Ptr;
-  typedef Unnamed Name;
-};
-
-template<typename Iface_, typename Name_>
-struct DependencyKey<Named<Iface_, Name_> > {
-  typedef Iface_ Iface;
-  typedef SAUCE_SHARED_PTR<Iface> Ptr;
-  typedef Name_ Name;
-};
-
 }
 
 class Injector {

@@ -3,6 +3,7 @@
 
 #include <sauce/injector.h>
 #include <sauce/memory.h>
+#include <sauce/named.h>
 #include <sauce/internal/binding.h>
 
 namespace sauce {
