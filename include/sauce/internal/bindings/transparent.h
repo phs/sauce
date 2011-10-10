@@ -11,9 +11,9 @@ namespace internal {
 class DependencyProvider {
 protected:
 
-  template<typename Iface>
-  SAUCE_SHARED_PTR<Iface> getDependency(Injector & injector, BindKeys & keys) {
-    return injector.get<Iface>(keys);
+  template<typename Dependency>
+  typename i::DependencyKey<Dependency>::Ptr getDependency(Injector & injector, BindKeys & keys) {
+    return injector.get<Dependency>(keys);
   }
 
 };
