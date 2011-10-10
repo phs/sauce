@@ -24,6 +24,24 @@ class Named {};
  */
 class Unnamed {};
 
+namespace internal {
+
+template<typename Iface_>
+struct DependencyKey {
+  typedef Iface_ Iface;
+  typedef SAUCE_SHARED_PTR<Iface> Ptr;
+  typedef Unnamed Name;
+};
+
+template<typename Iface_, typename Name_>
+struct DependencyKey<Named<Iface_, Name_> > {
+  typedef Iface_ Iface;
+  typedef SAUCE_SHARED_PTR<Iface> Ptr;
+  typedef Name_ Name;
+};
+
+}
+
 class Injector {
   i::BindingMap bindingMap;
 
@@ -36,8 +54,11 @@ class Injector {
   Injector(i::BindingMap & bindingMap):
     bindingMap(bindingMap) {}
 
-  template<typename Iface, typename Name>
-  SAUCE_SHARED_PTR<Iface> get(i::BindKeys & keys) {
+  template<typename Dependency>
+  typename i::DependencyKey<Dependency>::Ptr get(i::BindKeys & keys) {
+    typedef typename i::DependencyKey<Dependency>::Iface Iface;
+    typedef typename i::DependencyKey<Dependency>::Name Name;
+
     i::CircularDependencyGuard<Iface, Name> guard(keys);
 
     i::BindingMap::iterator i = bindingMap.find(i::BindKeyOf<Iface, Name>());
@@ -51,16 +72,15 @@ class Injector {
 
 public:
 
-  template<typename Iface>
-  SAUCE_SHARED_PTR<Iface> get() {
+  template<typename Dependency>
+  typename i::DependencyKey<Dependency>::Ptr get() {
     i::BindKeys keys;
-    return get<Iface, Unnamed>(keys);
+    return get<Dependency>(keys);
   }
 
   template<typename Iface, typename Name>
-  SAUCE_SHARED_PTR<Iface> get() {
-    i::BindKeys keys;
-    return get<Iface, Name>(keys);
+  typename i::DependencyKey<Named<Iface, Name> >::Ptr get() {
+    return get<Named<Iface, Name> >();
   }
 
 };

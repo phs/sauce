@@ -12,22 +12,8 @@ class DependencyProvider {
 protected:
 
   template<typename Iface>
-  struct NamedDependencyProvider {
-    SAUCE_SHARED_PTR<Iface> getDependency(Injector & injector, BindKeys & keys) {
-      return injector.get<Iface, Unnamed>(keys);
-    }
-  };
-
-  template<typename Iface, typename Name>
-  struct NamedDependencyProvider<Named<Iface, Name> > {
-    SAUCE_SHARED_PTR<Iface> getDependency(Injector & injector, BindKeys & keys) {
-      return injector.get<Iface, Name>(keys);
-    }
-  };
-
-  template<typename Iface>
   SAUCE_SHARED_PTR<Iface> getDependency(Injector & injector, BindKeys & keys) {
-    return NamedDependencyProvider<Iface>().getDependency(injector, keys);
+    return injector.get<Iface>(keys);
   }
 
 };
