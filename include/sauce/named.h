@@ -26,6 +26,13 @@ struct DependencyKey {
   typedef Iface_ Iface;
   typedef SAUCE_SHARED_PTR<Iface> Ptr;
   typedef Unnamed Name;
+
+  /**
+   * Note this is not Iface_, but Named<Iface_, Unnamed>.
+   *
+   * They are logically equivalent, but have different BindKeys.  Where it is ambiguous, we use
+   * the explicit named version (captured by this typedef.)
+   */
   typedef Named<Iface, Name> Dependency;
 };
 
