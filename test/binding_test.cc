@@ -100,7 +100,7 @@ TEST(BindingTest, shouldProvidedNamedDependencies) {
 
   EXPECT_EQ("Meow",      (injector.get<Animal>()->says()));
   EXPECT_EQ("Blub blub", (injector.get<Animal, Water>()->says()));
-  EXPECT_EQ("Moo",       (injector.get<Animal, Farm>()->says()));
+  EXPECT_EQ("Moo",       (injector.get<Named<Animal, Farm> >()->says()));
 
   EXPECT_EQ("Blub blub", (injector.get<Pond>()->animal->says()));
 }
