@@ -25,11 +25,11 @@ TEST(BindingTest, shouldThrowExceptionWhenGettingAnUnboundIface) {
 struct B;
 
 struct A {
-  A(SAUCE_SHARED_PTR<B> ) {}
+  A(SAUCE_SHARED_PTR<B>) {}
 };
 
 struct B {
-  B(SAUCE_SHARED_PTR<A> ) {}
+  B(SAUCE_SHARED_PTR<A>) {}
 };
 
 void CircularModule(Binder & binder) {
@@ -92,7 +92,7 @@ void AnimalModule(Binder & binder) {
   binder.bind<Animal>().named<Water>().to<Fish()>();
   binder.bind<Animal>().named<Farm>().to<Cow()>();
 
-  binder.bind<Pond>().to<Pond(Named<Animal, Water> )>();
+  binder.bind<Pond>().to<Pond(Named<Animal, Water>)>();
 }
 
 TEST(BindingTest, shouldProvidedNamedDependencies) {
