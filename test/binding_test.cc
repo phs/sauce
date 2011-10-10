@@ -92,7 +92,7 @@ void AnimalModule(Binder & binder) {
   binder.bind<Animal>().named<Water>().to<Fish()>();
   binder.bind<Animal>().named<Farm>().to<Cow()>();
 
-  // binder.bind<Pond>().to<Pond(Named<Animal, Water> )>();
+  binder.bind<Pond>().to<Pond(Named<Animal, Water> )>();
 }
 
 TEST(BindingTest, shouldProvidedNamedDependencies) {
@@ -102,7 +102,7 @@ TEST(BindingTest, shouldProvidedNamedDependencies) {
   EXPECT_EQ("Blub blub", (injector.get<Animal, Water>()->says()));
   EXPECT_EQ("Moo",       (injector.get<Animal, Farm>()->says()));
 
-  // EXPECT_EQ("Blub blub", (injector.get<Pond>()->animal->says()));
+  EXPECT_EQ("Blub blub", (injector.get<Pond>()->animal->says()));
 }
 
 }

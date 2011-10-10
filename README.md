@@ -28,7 +28,7 @@ TODO: More thinking, flush out once a prototype of the feature exists.
 
 * ~~Circular dependency detection~~
 * Setter injection
-* Named, overloaded bindings and dependencies
+* ~~Named, overloaded bindings and dependencies~
 * Eager-loaded singletons
 * Injectable Providers for lazy resolution
 * Implicit bindings implied by bound interfaces or implementations
