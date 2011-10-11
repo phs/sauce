@@ -9,8 +9,6 @@ namespace internal {
 
 /**
  * A complete specification of a dependency request.
- *
- * TODO Unify with Named and TypeId?
  */
 template<typename Iface_>
 struct Key {
@@ -19,7 +17,7 @@ struct Key {
   typedef Unnamed Name;
 
   /**
-   * Note this is not Iface_, but Named<Iface_, Unnamed>.
+   * Note this is not Iface, but Named<Iface, Unnamed>.
    *
    * They are logically equivalent, but have different TypeIds.  Where it is ambiguous, we use
    * the explicit named version (captured by this typedef.)
