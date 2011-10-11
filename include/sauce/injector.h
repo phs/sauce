@@ -35,7 +35,7 @@ class Injector {
     typedef typename i::DependencyKey<Dependency_>::Dependency Dependency;
     i::CircularDependencyGuard<Dependency> guard(ids);
 
-    i::BindingMap::iterator i = bindingMap.find(i::TypeIdOf<Dependency>());
+    i::BindingMap::iterator i = bindingMap.find(i::typeIdOf<Dependency>());
     if (i == bindingMap.end()) {
       throw UnboundExceptionFor<Dependency>();
     }

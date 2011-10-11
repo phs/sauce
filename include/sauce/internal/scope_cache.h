@@ -28,7 +28,7 @@ class ScopeCacheLine: public ScopeCacheTraits {
 public:
 
   static void put(Cache & cache, SmartPtr pointer) {
-    TypeId scopeKey = TypeIdOf<Scope>();
+    TypeId scopeKey = typeIdOf<Scope>();
     Cache::iterator singleScopeCache = cache.find(scopeKey);
     if (singleScopeCache == cache.end()) {
       cache.insert(std::make_pair(scopeKey, SingleScopeCache()));
@@ -48,18 +48,18 @@ public:
       static_cast<void *>(new SmartPtr(pointer)),
       ScopeCacheLineDeleter<Dependency>());
 
-    TypeId typeId = TypeIdOf<NamedDependency>();
+    TypeId typeId = typeIdOf<NamedDependency>();
     singleScopeCache->second.insert(std::make_pair(typeId, cachedPtr));
   }
 
   static bool get(Cache & cache, SmartPtr & out) {
-    TypeId scopeKey = TypeIdOf<Scope>();
+    TypeId scopeKey = typeIdOf<Scope>();
     Cache::iterator singleScopeCache = cache.find(scopeKey);
     if (singleScopeCache == cache.end()) {
       return false;
     }
 
-    TypeId typeId = TypeIdOf<NamedDependency>();
+    TypeId typeId = typeIdOf<NamedDependency>();
     SingleScopeCache::iterator cachedPtr = singleScopeCache->second.find(typeId);
     if (cachedPtr == singleScopeCache->second.end()) {
       return false;
@@ -99,7 +99,7 @@ public:
    */
   template<typename Scope>
   void clear() {
-    TypeId scopeKey = TypeIdOf<Scope>();
+    TypeId scopeKey = typeIdOf<Scope>();
     Cache::iterator singleScopeCache = cache.find(scopeKey);
     if (singleScopeCache == cache.end()) {
       return;

@@ -30,7 +30,7 @@ class CircularDependencyGuard {
 
   CircularDependencyGuard(TypeIds & ids):
     ids(ids),
-    id(TypeIdOf<Dependency>()) {
+    id(typeIdOf<Dependency>()) {
     if (ids.find(id) == ids.end()) {
       ids.insert(id);
     } else {
@@ -84,7 +84,7 @@ struct Binding {
    */
   template<typename Dependency>
   ResolvedBinding<Dependency> & resolve() {
-    assert((TypeIdOf<Dependency>()) == getKey());
+    assert((typeIdOf<Dependency>()) == getKey());
     return *static_cast<ResolvedBinding<Dependency> *>(this);
   }
 

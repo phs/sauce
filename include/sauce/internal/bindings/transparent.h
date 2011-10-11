@@ -82,7 +82,7 @@ public:
    * The TypeId of the Iface and Name template parameters.
    */
   virtual TypeId getKey() {
-    return TypeIdOf<Dependency>();
+    return typeIdOf<Dependency>();
   }
 
   /**
@@ -93,7 +93,7 @@ public:
   SAUCE_SHARED_PTR<Iface> get(Injector & injector, TypeIds & typeIds) {
     SAUCE_SHARED_PTR<Iface> smartPointer;
 
-    bool unscoped = TypeIdOf<Scope>() == TypeIdOf<NoScope>();
+    bool unscoped = typeIdOf<Scope>() == typeIdOf<NoScope>();
     if (unscoped || !getFromScopeCache<Dependency, Scope>(injector, smartPointer)) {
       BindingDeleter<Dependency, Scope, Impl> deleter(this);
       smartPointer.reset(provide(injector, typeIds), deleter);

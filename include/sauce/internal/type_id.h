@@ -26,7 +26,7 @@ void TypeIdFactory() {}
  * A helper that encapsulates getting TypeIds.
  */
 template<typename Dependency>
-TypeId TypeIdOf() {
+TypeId typeIdOf() {
   return &TypeIdFactory<Dependency>;
 }
 
