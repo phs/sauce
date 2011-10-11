@@ -20,6 +20,8 @@ namespace internal {
 
 /**
  * Wraps an Iface and a Name.
+ *
+ * TODO Unify with Named and BindKey?
  */
 template<typename Iface_>
 struct DependencyKey {

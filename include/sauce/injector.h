@@ -11,17 +11,19 @@ namespace sauce {
 class Bindings;
 
 namespace internal {
-class DependencyProvider;
+class InjectorFriend;
 }
 
 class Injector {
   i::BindingMap bindingMap;
+  i::ScopeCache scopeCache;
 
   friend class Bindings;
-  friend class i::DependencyProvider;
+  friend class i::InjectorFriend;
 
   Injector():
-    bindingMap() {}
+    bindingMap(),
+    scopeCache() {}
 
   Injector(i::BindingMap & bindingMap):
     bindingMap(bindingMap) {}
@@ -51,6 +53,11 @@ public:
   template<typename Iface, typename Name>
   typename i::DependencyKey<Named<Iface, Name> >::Ptr get() {
     return get<Named<Iface, Name> >();
+  }
+
+  template<typename Scope>
+  void exitScope() {
+    scopeCache.clear<Scope>();
   }
 
 };

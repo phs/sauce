@@ -9,7 +9,7 @@
 namespace sauce {
 namespace internal {
 
-class DependencyProvider {
+class InjectorFriend {
 protected:
 
   template<typename Dependency>
@@ -17,26 +17,36 @@ protected:
     return injector.get<Dependency>(keys);
   }
 
+  template<typename Dependency, typename Scope>
+  void putInScopeCache(Injector & injector, typename i::DependencyKey<Dependency>::Ptr pointer) {
+    injector.scopeCache.template put<Dependency, Scope>(pointer);
+  }
+
+  template<typename Dependency, typename Scope>
+  bool getFromScopeCache(Injector & injector, typename i::DependencyKey<Dependency>::Ptr & out) {
+    return injector.scopeCache.template get<Dependency, Scope>(out);
+  }
+
 };
 
 namespace bindings {
 
-template<typename Dependency, typename Impl>
+template<typename Dependency, typename Scope, typename Impl>
 class TransparentBinding;
 
 /**
  * A smart pointer deleter that diposes with a given binding.
  */
-template<typename Dependency, typename Impl>
+template<typename Dependency, typename Scope, typename Impl>
 class BindingDeleter {
 
   typedef typename DependencyKey<Dependency>::Iface Iface;
 
-  friend class TransparentBinding<Dependency, Impl>;
+  friend class TransparentBinding<Dependency, Scope, Impl>;
 
-  TransparentBinding<Dependency, Impl> * binding;
+  TransparentBinding<Dependency, Scope, Impl> * binding;
 
-  BindingDeleter(TransparentBinding<Dependency, Impl> * binding):
+  BindingDeleter(TransparentBinding<Dependency, Scope, Impl> * binding):
     binding(binding) {}
 
 public:
@@ -53,10 +63,10 @@ public:
 /**
  * A binding for a specific interface and implementation.
  */
-template<typename Dependency, typename Impl>
+template<typename Dependency, typename Scope, typename Impl>
 struct TransparentBinding:
   public ResolvedBinding<Dependency>,
-  public DependencyProvider {
+  public InjectorFriend {
 
 private:
 
@@ -64,7 +74,7 @@ private:
 
 public:
 
-  friend class BindingDeleter<Dependency, Impl>;
+  friend class BindingDeleter<Dependency, Scope, Impl>;
 
   /**
    * The BindKey of the Iface and Name template parameters.
@@ -79,8 +89,17 @@ public:
    * Derived classes should not override this but provide().
    */
   SAUCE_SHARED_PTR<Iface> get(Injector & injector, BindKeys & bindKeys) {
-    BindingDeleter<Dependency, Impl> deleter(this);
-    SAUCE_SHARED_PTR<Iface> smartPointer(provide(injector, bindKeys), deleter);
+    SAUCE_SHARED_PTR<Iface> smartPointer;
+
+    bool unscoped = ScopeKeyOf<Scope>() == ScopeKeyOf<NoScope>();
+    if (unscoped || !getFromScopeCache<Dependency, Scope>(injector, smartPointer)) {
+      BindingDeleter<Dependency, Scope, Impl> deleter(this);
+      smartPointer.reset(provide(injector, bindKeys), deleter);
+      if (!unscoped) {
+        putInScopeCache<Dependency, Scope>(injector, smartPointer);
+      }
+    }
+
     return smartPointer;
   }
 

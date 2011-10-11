@@ -5,30 +5,31 @@
 #include <utility>
 
 #include <sauce/named.h>
+#include <sauce/scopes.h>
 #include <sauce/internal/binding.h>
 #include <sauce/internal/clause.h>
 #include <sauce/internal/bindings/all.h>
 
 namespace sauce {
 
-template<typename Dependency, typename Ctor>
+template<typename Dependency, typename Scope, typename Ctor>
 class ToClause;
 
 /**
  * Binds to a specific constructor and allocator.
  */
-template<typename Dependency, typename Ctor, typename Allocator>
+template<typename Dependency, typename Scope, typename Ctor, typename Allocator>
 class AllocateFromClause:
-  public i::Clause<AllocateFromClause<Dependency, Ctor, Allocator> > {
+  public i::Clause<AllocateFromClause<Dependency, Scope, Ctor, Allocator> > {
 
-  friend class ToClause<Dependency, Ctor>;
-  friend class i::Clause<AllocateFromClause<Dependency, Ctor, Allocator> >;
+  friend class ToClause<Dependency, Scope, Ctor>;
+  friend class i::Clause<AllocateFromClause<Dependency, Scope, Ctor, Allocator> >;
 
   AllocateFromClause(i::BindingMap & bindingMap):
-    i::Clause<AllocateFromClause<Dependency, Ctor, Allocator> >(bindingMap) {}
+    i::Clause<AllocateFromClause<Dependency, Scope, Ctor, Allocator> >(bindingMap) {}
 
   static void activate(i::BindingMap & bindingMap) {
-    i::BindingPointer binding(new b::New<Dependency, Ctor, Allocator>());
+    i::BindingPointer binding(new b::New<Dependency, Scope, Ctor, Allocator>());
     bindingMap.insert(std::make_pair(binding->getKey(), binding));
   }
 };
@@ -39,31 +40,64 @@ class BindClause;
 template<typename Dependency>
 class NamedClause;
 
+template<typename Dependency, typename Scope>
+class InClause;
+
 /**
  * Binds to a specific constructor allocating from the heap.
  */
-template<typename Dependency, typename Ctor>
+template<typename Dependency, typename Scope, typename Ctor>
 class ToClause:
-  public i::Clause<ToClause<Dependency, Ctor> > {
+  public i::Clause<ToClause<Dependency, Scope, Ctor> > {
 
   typedef typename i::DependencyKey<Dependency>::Iface Iface;
 
   friend class BindClause<Iface>;
   friend class NamedClause<Dependency>;
-  friend class i::Clause<ToClause<Dependency, Ctor> >;
+  friend class InClause<Dependency, Scope>;
+  friend class i::Clause<ToClause<Dependency, Scope, Ctor> >;
 
   ToClause(i::BindingMap & bindingMap):
-    i::Clause<ToClause<Dependency, Ctor> >(bindingMap) {}
+    i::Clause<ToClause<Dependency, Scope, Ctor> >(bindingMap) {}
 
   static void activate(i::BindingMap & bindingMap) {
-    AllocateFromClause<Dependency, Ctor, std::allocator<Iface> >::activate(bindingMap);
+    AllocateFromClause<Dependency, Scope, Ctor, std::allocator<Iface> >::activate(bindingMap);
   }
 
 public:
 
   template<typename Allocator>
-  AllocateFromClause<Dependency, Ctor, Allocator> allocateFrom() {
-    return AllocateFromClause<Dependency, Ctor, Allocator>(this->pass());
+  AllocateFromClause<Dependency, Scope, Ctor, Allocator> allocateFrom() {
+    return AllocateFromClause<Dependency, Scope, Ctor, Allocator>(this->pass());
+  }
+
+};
+
+/**
+ * Scopes the binding.
+ */
+template<typename Dependency, typename Scope>
+class InClause:
+  public i::Clause<InClause<Dependency, Scope> > {
+
+  typedef typename i::DependencyKey<Dependency>::Iface Iface;
+
+  friend class BindClause<Iface>;
+  friend class NamedClause<Dependency>;
+  friend class i::Clause<InClause<Dependency, Scope> >;
+
+  InClause(i::BindingMap & bindingMap):
+    i::Clause<InClause<Dependency, Scope> >(bindingMap) {}
+
+  static void activate(i::BindingMap & bindingMap) {
+    bindingMap.throwLater<PartialBindingFor<Dependency> >();
+  }
+
+public:
+
+  template<typename Ctor>
+  ToClause<Dependency, Scope, Ctor> to() {
+    return ToClause<Dependency, Scope, Ctor>(this->pass());
   }
 
 };
@@ -89,9 +123,14 @@ class NamedClause:
 
 public:
 
+  template<typename Scope>
+  InClause<Dependency, Scope> in() {
+    return InClause<Dependency, Scope>(this->pass());
+  }
+
   template<typename Ctor>
-  ToClause<Dependency, Ctor> to() {
-    return ToClause<Dependency, Ctor>(this->pass());
+  ToClause<Dependency, NoScope, Ctor> to() {
+    return ToClause<Dependency, NoScope, Ctor>(this->pass());
   }
 
 };
@@ -122,9 +161,14 @@ public:
     return NamedClause<Named<Iface, Name> >(this->pass());
   }
 
+  template<typename Scope>
+  InClause<Named<Iface, Unnamed>, Scope> in() {
+    return InClause<Named<Iface, Unnamed>, Scope>(this->pass());
+  }
+
   template<typename Ctor>
-  ToClause<Named<Iface, Unnamed>, Ctor> to() {
-    return ToClause<Named<Iface, Unnamed>, Ctor>(this->pass());
+  ToClause<Named<Iface, Unnamed>, NoScope, Ctor> to() {
+    return ToClause<Named<Iface, Unnamed>, NoScope, Ctor>(this->pass());
   }
 
 };

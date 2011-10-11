@@ -15,7 +15,7 @@ namespace sauce {
 namespace internal {
 namespace bindings {
 
-template<typename Dependency, typename Constructor, typename Allocator>
+template<typename Dependency, typename Scope, typename Constructor, typename Allocator>
 class New;
 
 $range i 0..n
@@ -25,8 +25,8 @@ $var comma_typename_As = [[$for j [[, typename A$j]]]]
 $var As = [[$for j, [[A$j]]]]
 $var as = [[$for j, [[a$j]]]]
 
-template<typename Dependency, typename Impl, typename Allocator$comma_typename_As>
-struct New<Dependency, Impl($As), Allocator>: public TransparentBinding<Dependency, Impl> {
+template<typename Dependency, typename Scope, typename Impl, typename Allocator$comma_typename_As>
+struct New<Dependency, Scope, Impl($As), Allocator>: public TransparentBinding<Dependency, Scope, Impl> {
   typedef typename Allocator::template rebind<Impl>::other ImplAllocator;
 
 [[$if i==0 [[
