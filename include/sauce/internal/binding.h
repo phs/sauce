@@ -20,33 +20,33 @@ namespace internal {
 /**
  * An interface specification.
  *
- * BindKeys are opaque objects that fingerprint possible requests one may make
+ * TypeIds are opaque objects that fingerprint possible requests one may make
  * to an Injector.  They are values (not types) with a total ordering.  This
  * allows us to do arbitrary binding resolution, but only at runtime.
  *
  * Concretely, they are function pointers: the total ordering is that of the
  * address space.  No RTTI (i.e. typeid) is used.
  */
-typedef void (*BindKey)();
+typedef void (*TypeId)();
 
 /**
- * The template that generates BindKeys.
+ * The template that generates TypeIds.
  */
 template<typename Dependency>
-void BindKeyFactory() {}
+void TypeIdFactory() {}
 
 /**
- * A helper that encapsulates getting BindKeys.
+ * A helper that encapsulates getting TypeIds.
  */
 template<typename Dependency>
-BindKey BindKeyOf() {
-  return &BindKeyFactory<Dependency>;
+TypeId TypeIdOf() {
+  return &TypeIdFactory<Dependency>;
 }
 
 /**
- * A set of bind keys used to detect circular dependencies.
+ * A set of type ids used to detect circular dependencies.
  */
-typedef std::set<BindKey> BindKeys;
+typedef std::set<TypeId> TypeIds;
 
 /**
  * Detects circular dependencies on behalf of injectors.
@@ -55,21 +55,21 @@ template<typename Dependency>
 class CircularDependencyGuard {
   friend class ::sauce::Injector;
 
-  BindKeys & keys;
-  BindKey key;
+  TypeIds & ids;
+  TypeId id;
 
-  CircularDependencyGuard(BindKeys & keys):
-    keys(keys),
-    key(BindKeyOf<Dependency>()) {
-    if (keys.find(key) == keys.end()) {
-      keys.insert(key);
+  CircularDependencyGuard(TypeIds & ids):
+    ids(ids),
+    id(TypeIdOf<Dependency>()) {
+    if (ids.find(id) == ids.end()) {
+      ids.insert(id);
     } else {
       throw CircularDependencyExceptionFor<Dependency>();
     }
   }
 
   ~CircularDependencyGuard() {
-    keys.erase(key);
+    ids.erase(id);
   }
 };
 
@@ -85,7 +85,7 @@ class ResolvedBinding;
  *
  * To be type-homogenous, Binding is not a template, and particularly not a
  * template of any specific interface or implementation types.  It however has
- * a BindKey, which indirectly identifies the interface it is bound to.
+ * a TypeId, which indirectly identifies the interface it is bound to.
  *
  * The interface is raised to the type system in ResolvedBinding, a templated
  * class deriving from Binding.  The implementation is in turn raised in
@@ -98,12 +98,12 @@ class ResolvedBinding;
 struct Binding {
 
   /**
-   * The BindKey of this Binding's (hidden) interface type.
+   * The TypeId of this Binding's (hidden) interface type.
    *
-   * The Bindkey finger prints which provision requests this Binding may
+   * The TypeId finger prints which provision requests this Binding may
    * satisfy in an Injector.
    */
-  virtual BindKey getKey() = 0;
+  virtual TypeId getKey() = 0;
 
   /**
    * Resolve the interface actually bound.
@@ -114,7 +114,7 @@ struct Binding {
    */
   template<typename Dependency>
   ResolvedBinding<Dependency> & resolve() {
-    assert((BindKeyOf<Dependency>()) == getKey());
+    assert((TypeIdOf<Dependency>()) == getKey());
     return *static_cast<ResolvedBinding<Dependency> *>(this);
   }
 
@@ -130,10 +130,10 @@ struct ResolvedBinding:
   /**
    * Provide an instance of Iface, using the given injector to resolve dependencies.
    *
-   * The bindKeys indicate which keys are already currently being provided: this is used for
+   * The typeIds indicate which keys are already currently being provided: this is used for
    * circular dependency detection.
    */
-  virtual typename DependencyKey<Dependency>::Ptr get(Injector & injector, BindKeys & bindKeys) = 0;
+  virtual typename DependencyKey<Dependency>::Ptr get(Injector & injector, TypeIds & typeIds) = 0;
 
 };
 
@@ -150,13 +150,13 @@ void pendingThrowFactory() {
 
 typedef void (*PendingThrow)();
 
-class BindingMap: public std::map<BindKey, SAUCE_SHARED_PTR<Binding> > {
+class BindingMap: public std::map<TypeId, SAUCE_SHARED_PTR<Binding> > {
   PendingThrow pending;
 
 public:
 
   BindingMap():
-    std::map<BindKey, SAUCE_SHARED_PTR<Binding> >(),
+    std::map<TypeId, SAUCE_SHARED_PTR<Binding> >(),
     pending(NULL) {}
 
   /**

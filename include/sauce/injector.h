@@ -30,25 +30,25 @@ class Injector {
     bindingMap(bindingMap) {}
 
   template<typename Dependency_>
-  typename i::DependencyKey<Dependency_>::Ptr get(i::BindKeys & keys) {
+  typename i::DependencyKey<Dependency_>::Ptr get(i::TypeIds & ids) {
     typedef typename i::DependencyKey<Dependency_>::Dependency Dependency;
-    i::CircularDependencyGuard<Dependency> guard(keys);
+    i::CircularDependencyGuard<Dependency> guard(ids);
 
-    i::BindingMap::iterator i = bindingMap.find(i::BindKeyOf<Dependency>());
+    i::BindingMap::iterator i = bindingMap.find(i::TypeIdOf<Dependency>());
     if (i == bindingMap.end()) {
       throw UnboundExceptionFor<Dependency>();
     }
 
     i::Binding & binding = *(i->second.get());
-    return binding.resolve<Dependency>().get(*this, keys);
+    return binding.resolve<Dependency>().get(*this, ids);
   }
 
 public:
 
   template<typename Dependency>
   typename i::DependencyKey<Dependency>::Ptr get() {
-    i::BindKeys keys;
-    return get<Dependency>(keys);
+    i::TypeIds ids;
+    return get<Dependency>(ids);
   }
 
   template<typename Iface, typename Name>

@@ -24,7 +24,7 @@ struct ScopeCacheLineDeleter {
 
 struct ScopeCacheTraits {
   typedef SAUCE_SHARED_PTR<void> CachedPtr;
-  typedef std::map<BindKey, CachedPtr> SingleScopeCache;
+  typedef std::map<TypeId, CachedPtr> SingleScopeCache;
   typedef std::map<ScopeKey, SingleScopeCache> Cache;
 };
 
@@ -56,8 +56,8 @@ public:
       static_cast<void *>(new SmartPtr(pointer)),
       ScopeCacheLineDeleter<Dependency>());
 
-    BindKey bindKey = BindKeyOf<NamedDependency>();
-    singleScopeCache->second.insert(std::make_pair(bindKey, cachedPtr));
+    TypeId typeId = TypeIdOf<NamedDependency>();
+    singleScopeCache->second.insert(std::make_pair(typeId, cachedPtr));
   }
 
   static bool get(Cache & cache, SmartPtr & out) {
@@ -67,8 +67,8 @@ public:
       return false;
     }
 
-    BindKey bindKey = BindKeyOf<NamedDependency>();
-    SingleScopeCache::iterator cachedPtr = singleScopeCache->second.find(bindKey);
+    TypeId typeId = TypeIdOf<NamedDependency>();
+    SingleScopeCache::iterator cachedPtr = singleScopeCache->second.find(typeId);
     if (cachedPtr == singleScopeCache->second.end()) {
       return false;
     }

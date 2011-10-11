@@ -21,7 +21,7 @@ namespace internal {
 /**
  * Wraps an Iface and a Name.
  *
- * TODO Unify with Named and BindKey?
+ * TODO Unify with Named and TypeId?
  */
 template<typename Iface_>
 struct DependencyKey {
@@ -32,7 +32,7 @@ struct DependencyKey {
   /**
    * Note this is not Iface_, but Named<Iface_, Unnamed>.
    *
-   * They are logically equivalent, but have different BindKeys.  Where it is ambiguous, we use
+   * They are logically equivalent, but have different TypeIds.  Where it is ambiguous, we use
    * the explicit named version (captured by this typedef.)
    */
   typedef Named<Iface, Name> Dependency;

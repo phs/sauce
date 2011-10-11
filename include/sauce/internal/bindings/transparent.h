@@ -14,7 +14,7 @@ class InjectorFriend {
 protected:
 
   template<typename Dependency>
-  typename i::DependencyKey<Dependency>::Ptr getDependency(Injector & injector, BindKeys & keys) {
+  typename i::DependencyKey<Dependency>::Ptr getDependency(Injector & injector, TypeIds & keys) {
     return injector.get<Dependency>(keys);
   }
 
@@ -78,10 +78,10 @@ public:
   friend class BindingDeleter<Dependency, Scope, Impl>;
 
   /**
-   * The BindKey of the Iface and Name template parameters.
+   * The TypeId of the Iface and Name template parameters.
    */
-  virtual BindKey getKey() {
-    return BindKeyOf<Dependency>();
+  virtual TypeId getKey() {
+    return TypeIdOf<Dependency>();
   }
 
   /**
@@ -89,13 +89,13 @@ public:
    *
    * Derived classes should not override this but provide().
    */
-  SAUCE_SHARED_PTR<Iface> get(Injector & injector, BindKeys & bindKeys) {
+  SAUCE_SHARED_PTR<Iface> get(Injector & injector, TypeIds & typeIds) {
     SAUCE_SHARED_PTR<Iface> smartPointer;
 
     bool unscoped = ScopeKeyOf<Scope>() == ScopeKeyOf<NoScope>();
     if (unscoped || !getFromScopeCache<Dependency, Scope>(injector, smartPointer)) {
       BindingDeleter<Dependency, Scope, Impl> deleter(this);
-      smartPointer.reset(provide(injector, bindKeys), deleter);
+      smartPointer.reset(provide(injector, typeIds), deleter);
       if (!unscoped) {
         putInScopeCache<Dependency, Scope>(injector, smartPointer);
       }
@@ -111,7 +111,7 @@ private:
    *
    * The strategy used is left to derived types.
    */
-  virtual Impl * provide(Injector & injector, BindKeys & bindKeys) = 0;
+  virtual Impl * provide(Injector & injector, TypeIds & typeIds) = 0;
 
   /**
    * Dispose of an instance of Iface provided by this binding.
