@@ -93,7 +93,7 @@ public:
   SAUCE_SHARED_PTR<Iface> get(Injector & injector, TypeIds & typeIds) {
     SAUCE_SHARED_PTR<Iface> smartPointer;
 
-    bool unscoped = ScopeKeyOf<Scope>() == ScopeKeyOf<NoScope>();
+    bool unscoped = TypeIdOf<Scope>() == TypeIdOf<NoScope>();
     if (unscoped || !getFromScopeCache<Dependency, Scope>(injector, smartPointer)) {
       BindingDeleter<Dependency, Scope, Impl> deleter(this);
       smartPointer.reset(provide(injector, typeIds), deleter);

@@ -6,16 +6,6 @@
 namespace sauce {
 namespace internal {
 
-typedef void (*ScopeKey)();
-
-template<typename Scope>
-static void ScopeKeyFactory() {}
-
-template<typename Scope>
-ScopeKey ScopeKeyOf() {
-  return &ScopeKeyFactory<Scope>;
-}
-
 template<typename Dependency>
 struct ScopeCacheLineDeleter {
   typedef typename DependencyKey<Dependency>::Ptr SmartPtr;
@@ -27,7 +17,7 @@ struct ScopeCacheLineDeleter {
 struct ScopeCacheTraits {
   typedef SAUCE_SHARED_PTR<void> CachedPtr;
   typedef std::map<TypeId, CachedPtr> SingleScopeCache;
-  typedef std::map<ScopeKey, SingleScopeCache> Cache;
+  typedef std::map<TypeId, SingleScopeCache> Cache;
 };
 
 template<typename Dependency, typename Scope>
@@ -38,7 +28,7 @@ class ScopeCacheLine: public ScopeCacheTraits {
 public:
 
   static void put(Cache & cache, SmartPtr pointer) {
-    ScopeKey scopeKey = ScopeKeyOf<Scope>();
+    TypeId scopeKey = TypeIdOf<Scope>();
     Cache::iterator singleScopeCache = cache.find(scopeKey);
     if (singleScopeCache == cache.end()) {
       cache.insert(std::make_pair(scopeKey, SingleScopeCache()));
@@ -63,7 +53,7 @@ public:
   }
 
   static bool get(Cache & cache, SmartPtr & out) {
-    ScopeKey scopeKey = ScopeKeyOf<Scope>();
+    TypeId scopeKey = TypeIdOf<Scope>();
     Cache::iterator singleScopeCache = cache.find(scopeKey);
     if (singleScopeCache == cache.end()) {
       return false;
@@ -109,7 +99,7 @@ public:
    */
   template<typename Scope>
   void clear() {
-    ScopeKey scopeKey = ScopeKeyOf<Scope>();
+    TypeId scopeKey = TypeIdOf<Scope>();
     Cache::iterator singleScopeCache = cache.find(scopeKey);
     if (singleScopeCache == cache.end()) {
       return;
