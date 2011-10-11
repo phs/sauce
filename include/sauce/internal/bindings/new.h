@@ -10,6 +10,7 @@
 #include <sauce/named.h>
 #include <sauce/internal/binding.h>
 #include <sauce/internal/bindings/transparent.h>
+#include <sauce/internal/type_id.h>
 
 namespace sauce {
 namespace internal {

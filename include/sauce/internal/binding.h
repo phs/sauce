@@ -10,43 +10,13 @@
 #include <sauce/exceptions.h>
 #include <sauce/memory.h>
 #include <sauce/named.h>
+#include <sauce/internal/type_id.h>
 
 namespace sauce {
 
 class Injector;
 
 namespace internal {
-
-/**
- * An interface specification.
- *
- * TypeIds are opaque objects that fingerprint possible requests one may make
- * to an Injector.  They are values (not types) with a total ordering.  This
- * allows us to do arbitrary binding resolution, but only at runtime.
- *
- * Concretely, they are function pointers: the total ordering is that of the
- * address space.  No RTTI (i.e. typeid) is used.
- */
-typedef void (*TypeId)();
-
-/**
- * The template that generates TypeIds.
- */
-template<typename Dependency>
-void TypeIdFactory() {}
-
-/**
- * A helper that encapsulates getting TypeIds.
- */
-template<typename Dependency>
-TypeId TypeIdOf() {
-  return &TypeIdFactory<Dependency>;
-}
-
-/**
- * A set of type ids used to detect circular dependencies.
- */
-typedef std::set<TypeId> TypeIds;
 
 /**
  * Detects circular dependencies on behalf of injectors.
