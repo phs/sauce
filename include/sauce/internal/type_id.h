@@ -5,7 +5,7 @@ namespace sauce {
 namespace internal {
 
 /**
- * An interface specification.
+ * An opaque, reflective value representing an arbitrary type.
  *
  * TypeIds are opaque objects that fingerprint possible requests one may make
  * to an Injector.  They are values (not types) with a total ordering.  This
@@ -31,7 +31,7 @@ TypeId typeIdOf() {
 }
 
 /**
- * A set of type ids used to detect circular dependencies.
+ * A set of type ids.
  */
 typedef std::set<TypeId> TypeIds;
 
