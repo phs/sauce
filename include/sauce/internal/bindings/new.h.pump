@@ -37,7 +37,7 @@ struct New<Dependency, Scope, Impl($As), Allocator>: public TransparentBinding<D
 ]]]]
  {
 [[$for j [[
-    typename i::DependencyKey<A$j>::Ptr a$j(this->template getDependency<A$j>(injector, typeIds));
+    typename i::Key<A$j>::Ptr a$j(this->template getDependency<A$j>(injector, typeIds));
 
 ]]]]
     ImplAllocator allocator;

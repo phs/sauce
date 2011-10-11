@@ -20,12 +20,12 @@ class Unnamed {};
 namespace internal {
 
 /**
- * Wraps an Iface and a Name.
+ * A complete specification of a dependency request.
  *
  * TODO Unify with Named and TypeId?
  */
 template<typename Iface_>
-struct DependencyKey {
+struct Key {
   typedef Iface_ Iface;
   typedef SAUCE_SHARED_PTR<Iface> Ptr;
   typedef Unnamed Name;
@@ -43,7 +43,7 @@ struct DependencyKey {
  * Template specialization when an actual name is used.
  */
 template<typename Iface_, typename Name_>
-struct DependencyKey<Named<Iface_, Name_> > {
+struct Key<Named<Iface_, Name_> > {
   typedef Iface_ Iface;
   typedef SAUCE_SHARED_PTR<Iface> Ptr;
   typedef Name_ Name;

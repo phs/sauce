@@ -8,7 +8,7 @@ namespace internal {
 
 template<typename Dependency>
 struct ScopeCacheLineDeleter {
-  typedef typename DependencyKey<Dependency>::Ptr SmartPtr;
+  typedef typename Key<Dependency>::Ptr SmartPtr;
   void operator()(void * smartPtrPtr) const {
     delete static_cast<SmartPtr *>(smartPtrPtr);
   }
@@ -22,8 +22,8 @@ struct ScopeCacheTraits {
 
 template<typename Dependency, typename Scope>
 class ScopeCacheLine: public ScopeCacheTraits {
-  typedef typename DependencyKey<Dependency>::Dependency NamedDependency;
-  typedef typename DependencyKey<Dependency>::Ptr SmartPtr;
+  typedef typename Key<Dependency>::Dependency NamedDependency;
+  typedef typename Key<Dependency>::Ptr SmartPtr;
 
 public:
 
@@ -79,7 +79,7 @@ public:
    * Insert a dependency into the cache under the given Scope.
    */
   template<typename Dependency, typename Scope>
-  void put(typename DependencyKey<Dependency>::Ptr pointer) {
+  void put(typename Key<Dependency>::Ptr pointer) {
     ScopeCacheLine<Dependency, Scope>::put(cache, pointer);
   }
 
@@ -90,7 +90,7 @@ public:
    * overwritten with the discovered value.
    */
   template<typename Dependency, typename Scope>
-  bool get(typename DependencyKey<Dependency>::Ptr & out) {
+  bool get(typename Key<Dependency>::Ptr & out) {
     return ScopeCacheLine<Dependency, Scope>::get(cache, out);
   }
 

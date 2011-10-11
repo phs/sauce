@@ -15,17 +15,17 @@ class InjectorFriend {
 protected:
 
   template<typename Dependency>
-  typename i::DependencyKey<Dependency>::Ptr getDependency(Injector & injector, TypeIds & keys) {
+  typename i::Key<Dependency>::Ptr getDependency(Injector & injector, TypeIds & keys) {
     return injector.get<Dependency>(keys);
   }
 
   template<typename Dependency, typename Scope>
-  void putInScopeCache(Injector & injector, typename i::DependencyKey<Dependency>::Ptr pointer) {
+  void putInScopeCache(Injector & injector, typename i::Key<Dependency>::Ptr pointer) {
     injector.scopeCache.template put<Dependency, Scope>(pointer);
   }
 
   template<typename Dependency, typename Scope>
-  bool getFromScopeCache(Injector & injector, typename i::DependencyKey<Dependency>::Ptr & out) {
+  bool getFromScopeCache(Injector & injector, typename i::Key<Dependency>::Ptr & out) {
     return injector.scopeCache.template get<Dependency, Scope>(out);
   }
 
@@ -42,7 +42,7 @@ class TransparentBinding;
 template<typename Dependency, typename Scope, typename Impl>
 class BindingDeleter {
 
-  typedef typename DependencyKey<Dependency>::Iface Iface;
+  typedef typename Key<Dependency>::Iface Iface;
 
   friend class TransparentBinding<Dependency, Scope, Impl>;
 
@@ -72,7 +72,7 @@ struct TransparentBinding:
 
 private:
 
-  typedef typename DependencyKey<Dependency>::Iface Iface;
+  typedef typename Key<Dependency>::Iface Iface;
 
 public:
 

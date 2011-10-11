@@ -103,7 +103,7 @@ struct ResolvedBinding:
    * The typeIds indicate which keys are already currently being provided: this is used for
    * circular dependency detection.
    */
-  virtual typename DependencyKey<Dependency>::Ptr get(Injector & injector, TypeIds & typeIds) = 0;
+  virtual typename Key<Dependency>::Ptr get(Injector & injector, TypeIds & typeIds) = 0;
 
 };
 

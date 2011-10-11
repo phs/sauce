@@ -50,7 +50,7 @@ template<typename Dependency, typename Scope, typename Ctor>
 class ToClause:
   public i::Clause<ToClause<Dependency, Scope, Ctor> > {
 
-  typedef typename i::DependencyKey<Dependency>::Iface Iface;
+  typedef typename i::Key<Dependency>::Iface Iface;
 
   friend class BindClause<Iface>;
   friend class NamedClause<Dependency>;
@@ -80,7 +80,7 @@ template<typename Dependency, typename Scope>
 class InClause:
   public i::Clause<InClause<Dependency, Scope> > {
 
-  typedef typename i::DependencyKey<Dependency>::Iface Iface;
+  typedef typename i::Key<Dependency>::Iface Iface;
 
   friend class BindClause<Iface>;
   friend class NamedClause<Dependency>;
@@ -109,7 +109,7 @@ template<typename Dependency>
 class NamedClause:
   public i::Clause<NamedClause<Dependency> > {
 
-  typedef typename i::DependencyKey<Dependency>::Iface Iface;
+  typedef typename i::Key<Dependency>::Iface Iface;
 
   friend class BindClause<Iface>;
   friend class i::Clause<NamedClause<Dependency> >;
