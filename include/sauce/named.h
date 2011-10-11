@@ -36,7 +36,7 @@ struct Key {
    * They are logically equivalent, but have different TypeIds.  Where it is ambiguous, we use
    * the explicit named version (captured by this typedef.)
    */
-  typedef Named<Iface, Name> Dependency;
+  typedef Named<Iface, Name> Normalized;
 };
 
 /**
@@ -47,7 +47,7 @@ struct Key<Named<Iface_, Name_> > {
   typedef Iface_ Iface;
   typedef SAUCE_SHARED_PTR<Iface> Ptr;
   typedef Name_ Name;
-  typedef Named<Iface, Name> Dependency;
+  typedef Named<Iface, Name> Normalized;
 };
 
 }

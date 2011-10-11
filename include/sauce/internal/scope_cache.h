@@ -20,9 +20,9 @@ struct ScopeCacheTraits {
   typedef std::map<TypeId, SingleScopeCache> Cache;
 };
 
-template<typename Dependency, typename Scope>
+template<typename Dependency_, typename Scope>
 class ScopeCacheLine: public ScopeCacheTraits {
-  typedef typename Key<Dependency>::Dependency NamedDependency;
+  typedef typename Key<Dependency_>::Normalized Dependency;
   typedef typename Key<Dependency>::Ptr SmartPtr;
 
 public:
@@ -48,7 +48,7 @@ public:
       static_cast<void *>(new SmartPtr(pointer)),
       ScopeCacheLineDeleter<Dependency>());
 
-    TypeId typeId = typeIdOf<NamedDependency>();
+    TypeId typeId = typeIdOf<Dependency>();
     singleScopeCache->second.insert(std::make_pair(typeId, cachedPtr));
   }
 
@@ -59,7 +59,7 @@ public:
       return false;
     }
 
-    TypeId typeId = typeIdOf<NamedDependency>();
+    TypeId typeId = typeIdOf<Dependency>();
     SingleScopeCache::iterator cachedPtr = singleScopeCache->second.find(typeId);
     if (cachedPtr == singleScopeCache->second.end()) {
       return false;
