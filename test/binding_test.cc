@@ -149,28 +149,28 @@ TEST(BindingTest, shouldProvidedScopedDependencies) {
 
   SAUCE_SHARED_PTR<Singleton> aSingleton = injector.get<Singleton>();
   SAUCE_SHARED_PTR<Singleton> theSameSingleton = injector.get<Singleton>();
-  injector.exitScope<SingletonScope>();
+  injector.reenterScope<SingletonScope>();
   SAUCE_SHARED_PTR<Singleton> aNewSingleton = injector.get<Singleton>();
   EXPECT_EQ(aSingleton, theSameSingleton);
   EXPECT_NE(aSingleton, aNewSingleton);
 
   SAUCE_SHARED_PTR<Session> aSession = injector.get<Session>();
   SAUCE_SHARED_PTR<Session> theSameSession = injector.get<Session>();
-  injector.exitScope<SessionScope>();
+  injector.reenterScope<SessionScope>();
   SAUCE_SHARED_PTR<Session> aNewSession = injector.get<Session>();
   EXPECT_EQ(aSession, theSameSession);
   EXPECT_NE(aSession, aNewSession);
 
   SAUCE_SHARED_PTR<Request> aRequest = injector.get<Request>();
   SAUCE_SHARED_PTR<Request> theSameRequest = injector.get<Request>();
-  injector.exitScope<RequestScope>();
+  injector.reenterScope<RequestScope>();
   SAUCE_SHARED_PTR<Request> aNewRequest = injector.get<Request>();
   EXPECT_EQ(aRequest, theSameRequest);
   EXPECT_NE(aRequest, aNewRequest);
 
   SAUCE_SHARED_PTR<C> aC = injector.get<C>();
   SAUCE_SHARED_PTR<C> theSameC = injector.get<C>();
-  injector.exitScope<MyScope>();
+  injector.reenterScope<MyScope>();
   SAUCE_SHARED_PTR<C> aNewC = injector.get<C>();
   EXPECT_EQ(aC, theSameC);
   EXPECT_NE(aC, aNewC);

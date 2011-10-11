@@ -59,7 +59,7 @@ public:
   }
 
   template<typename Scope>
-  void exitScope() {
+  void reenterScope() {
     scopeCache.clear<Scope>();
   }
 
