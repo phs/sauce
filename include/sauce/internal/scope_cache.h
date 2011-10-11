@@ -1,6 +1,7 @@
 #ifndef SAUCE_SAUCE_INTERNAL_SCOPE_CACHE_H_
 #define SAUCE_SAUCE_INTERNAL_SCOPE_CACHE_H_
 
+#include <sauce/internal/key.h>
 #include <sauce/internal/type_id.h>
 
 namespace sauce {

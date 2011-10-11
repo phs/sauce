@@ -10,6 +10,7 @@
 #include <sauce/exceptions.h>
 #include <sauce/memory.h>
 #include <sauce/named.h>
+#include <sauce/internal/key.h>
 #include <sauce/internal/type_id.h>
 
 namespace sauce {
