@@ -5,6 +5,7 @@
 #include <sauce/memory.h>
 #include <sauce/named.h>
 #include <sauce/internal/binding.h>
+#include <sauce/internal/scope_cache.h>
 
 namespace sauce {
 namespace internal {
