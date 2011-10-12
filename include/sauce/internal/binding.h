@@ -77,6 +77,11 @@ struct Binding {
   virtual TypeId getDependencyId() = 0;
 
   /**
+   * The TypeId of this Binding's (hidden) scope.
+   */
+  virtual TypeId getScopeId() = 0;
+
+  /**
    * Resolve the interface actually bound.
    *
    * Note the caller is expected to understand which interface this is.  As

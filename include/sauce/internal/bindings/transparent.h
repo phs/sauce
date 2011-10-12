@@ -80,10 +80,17 @@ public:
   friend class BindingDeleter<Dependency, Scope, Impl>;
 
   /**
-   * The TypeId of the Iface and Name template parameters.
+   * The TypeId of the Dependency template parameter.
    */
   virtual TypeId getDependencyId() {
     return typeIdOf<Dependency>();
+  }
+
+  /**
+   * The TypeId of the Scope template parameter.
+   */
+  virtual TypeId getScopeId() {
+    return typeIdOf<Scope>();
   }
 
   /**
