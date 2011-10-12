@@ -128,13 +128,14 @@ typedef void (*PendingThrow)();
 
 typedef SAUCE_SHARED_PTR<Binding> BindingPointer;
 
-class BindingMap: public std::map<TypeId, BindingPointer> {
+class BindingMap {
+  std::map<TypeId, BindingPointer> bindingMap;
   PendingThrow pending;
 
 public:
 
   BindingMap():
-    std::map<TypeId, BindingPointer>(),
+    bindingMap(),
     pending(NULL) {}
 
   /**
@@ -143,7 +144,7 @@ public:
   template<typename Binding_>
   void put() {
     BindingPointer binding(new Binding_());
-    this->insert(std::make_pair(binding->getDependencyId(), binding));
+    bindingMap.insert(std::make_pair(binding->getDependencyId(), binding));
   }
 
   /**
@@ -153,8 +154,8 @@ public:
    */
   template<typename Dependency>
   ResolvedBinding<Dependency> & get() {
-    iterator i = this->find(typeIdOf<Dependency>());
-    if (i == this->end()) {
+    std::map<TypeId, BindingPointer>::iterator i = bindingMap.find(typeIdOf<Dependency>());
+    if (i == bindingMap.end()) {
       throw UnboundExceptionFor<Dependency>();
     }
 
