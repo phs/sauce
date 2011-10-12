@@ -136,6 +136,15 @@ public:
     pending(NULL) {}
 
   /**
+   * Insert the given binding.
+   */
+  template<typename Binding_>
+  void put() {
+    SAUCE_SHARED_PTR<Binding> binding(new Binding_());
+    this->insert(std::make_pair(binding->getDependencyId(), binding));
+  }
+
+  /**
    * Save an exception of the given type to throw when it is safe.
    *
    * The exception must have an accessible nullary constructor.

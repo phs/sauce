@@ -30,8 +30,7 @@ class AllocateFromClause:
     i::Clause<AllocateFromClause<Dependency, Scope, Ctor, Allocator> >(bindingMap) {}
 
   static void activate(i::BindingMap & bindingMap) {
-    i::BindingPointer binding(new b::New<Dependency, Scope, Ctor, Allocator>());
-    bindingMap.insert(std::make_pair(binding->getDependencyId(), binding));
+    bindingMap.put<b::New<Dependency, Scope, Ctor, Allocator> >();
   }
 };
 
