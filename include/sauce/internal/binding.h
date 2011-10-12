@@ -96,6 +96,15 @@ struct Binding {
     return *static_cast<ResolvedBinding<Dependency> *>(this);
   }
 
+  /**
+   * Provide, but do not return an instance of the hidden interface.
+   *
+   * Instead, cache the instance in its appropriate scope, if any.  If the binding is not scoped,
+   * this method does nothing.  The typeIds indicate which keys are already currently being
+   * provided: this is used for circular dependency detection.
+   */
+  virtual void eagerlyProvide(Injector &, TypeIds &) {}
+
 };
 
 /**
@@ -179,6 +188,15 @@ public:
 
     Binding & binding = *(i->second.get());
     return binding.resolve<Dependency>();
+  }
+
+  template<typename Scope>
+  void eagerlyProvide(Injector & injector, TypeIds & typeIds) {
+    ScopedBindings & scopedBindings = bindingsInScope(typeIdOf<Scope>());
+    for (ScopedBindings::iterator i = scopedBindings.begin(); i != scopedBindings.end(); ++i) {
+      Binding & binding = *(i->get());
+      binding.eagerlyProvide(injector, typeIds);
+    }
   }
 
   /**

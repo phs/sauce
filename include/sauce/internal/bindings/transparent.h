@@ -113,6 +113,19 @@ public:
     return smartPointer;
   }
 
+  void eagerlyProvide(Injector & injector, TypeIds & typeIds) {
+    if (typeIdOf<Scope>() == typeIdOf<NoScope>()) {
+      return;
+    }
+
+    SAUCE_SHARED_PTR<Iface> smartPointer;
+    if (!getFromScopeCache<Dependency, Scope>(injector, smartPointer)) {
+      BindingDeleter<Dependency, Scope, Impl> deleter(this);
+      smartPointer.reset(provide(injector, typeIds), deleter);
+      putInScopeCache<Dependency, Scope>(injector, smartPointer);
+    }
+  }
+
 private:
 
   /**

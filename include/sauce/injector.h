@@ -57,7 +57,10 @@ public:
   }
 
   template<typename Scope>
-  void eagerlyProvide() {}
+  void eagerlyProvide() {
+    i::TypeIds ids;
+    bindings.eagerlyProvide<Scope>(*this, ids);
+  }
 
 };
 

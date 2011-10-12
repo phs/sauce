@@ -198,7 +198,7 @@ void EagerlyScopedModule(Binder & binder) {
 
 TEST(BindingTest, shouldProvidedScopedDependenciesEagerlyIfAsked) {
   Injector injector(Modules().add(&EagerlyScopedModule).createInjector());
-  // ASSERT_THROW(injector.eagerlyProvide<SingletonScope>(), CrankyConstructor);
+  ASSERT_THROW(injector.eagerlyProvide<SingletonScope>(), CrankyConstructorException);
 }
 
 }
