@@ -147,18 +147,19 @@ public:
   }
 
   /**
-   * Get the binding for the named Dependency.
+   * Get and resolve the binding for the named Dependency.
    *
    * If no binding is found, throw UnboundException.
    */
   template<typename Dependency>
-  Binding & get() {
+  ResolvedBinding<Dependency> & get() {
     iterator i = this->find(typeIdOf<Dependency>());
     if (i == this->end()) {
       throw UnboundExceptionFor<Dependency>();
     }
 
-    return *(i->second.get());
+    Binding & binding = *(i->second.get());
+    return binding.resolve<Dependency>();
   }
 
   /**
