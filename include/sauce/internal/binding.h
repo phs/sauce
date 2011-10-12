@@ -69,10 +69,10 @@ class ResolvedBinding;
 struct Binding {
 
   /**
-   * The TypeId of this Binding's (hidden) interface type.
+   * The TypeId of the (hidden) dependency this Binding provides.
    *
-   * The TypeId finger prints which provision requests this Binding may
-   * satisfy in an Injector.
+   * The dependency id finger prints which provision requests this Binding may satisfy in an
+   * Injector.
    */
   virtual TypeId getDependencyId() = 0;
 
