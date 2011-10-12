@@ -113,6 +113,8 @@ struct ResolvedBinding:
 
 };
 
+typedef void (*PendingThrow)();
+
 /**
  * Template function used to create typed, deferred exceptions.
  *
@@ -124,11 +126,8 @@ void pendingThrowFactory() {
   throw Exception();
 }
 
-typedef void (*PendingThrow)();
-
-typedef SAUCE_SHARED_PTR<Binding> BindingPointer;
-
 class BindingMap {
+  typedef SAUCE_SHARED_PTR<Binding> BindingPointer;
   std::map<TypeId, BindingPointer> bindingMap;
   PendingThrow pending;
 
