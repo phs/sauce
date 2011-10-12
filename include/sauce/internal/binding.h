@@ -100,8 +100,8 @@ struct Binding {
    * Provide, but do not return an instance of the hidden interface.
    *
    * Instead, cache the instance in its appropriate scope, if any.  If the binding is not scoped,
-   * this method does nothing.  The typeIds indicate which keys are already currently being
-   * provided: this is used for circular dependency detection.
+   * do nothing.  The typeIds indicate which keys are already currently being provided: this is
+   * used for circular dependency detection.
    */
   virtual void eagerlyProvide(Injector &, TypeIds &) {}
 

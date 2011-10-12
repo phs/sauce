@@ -125,6 +125,12 @@ public:
     return smartPointer;
   }
 
+  /**
+   * Provide, but do not return an instance of Iface.
+   *
+   * Instead, cache the instance in its appropriate scope, if any.  If the binding is not scoped,
+   * do nothing.
+   */
   void eagerlyProvide(Injector & injector, TypeIds & typeIds) {
     if (typeIdOf<Scope>() == typeIdOf<NoScope>()) {
       return;
