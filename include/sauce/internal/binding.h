@@ -3,6 +3,7 @@
 
 #include <map>
 #include <set>
+#include <vector>
 #include <utility>
 
 #include <cassert>
@@ -32,8 +33,9 @@ class CircularDependencyGuard {
   CircularDependencyGuard(TypeIds & ids):
     ids(ids),
     id(typeIdOf<Dependency>()) {
-    if (ids.find(id) == ids.end()) {
-      ids.insert(id);
+    TypeIds::iterator i = ids.find(id);
+    if (i == ids.end()) {
+      ids.insert(i, id);
     } else {
       throw CircularDependencyExceptionFor<Dependency>();
     }
@@ -129,13 +131,28 @@ void pendingThrowFactory() {
 class Bindings {
   typedef SAUCE_SHARED_PTR<Binding> BindingPointer;
   typedef std::map<TypeId, BindingPointer> BindingMap;
+  typedef std::vector<BindingPointer> ScopedBindings;
+  typedef std::map<TypeId, ScopedBindings> ScopeMap;
+
   BindingMap bindingMap;
+  ScopeMap scopeMap;
   PendingThrow pending;
+
+  ScopedBindings & bindingsInScope(TypeId scopeId) {
+    ScopeMap::iterator i = scopeMap.find(scopeId);
+    if (i == scopeMap.end()) {
+      scopeMap.insert(i, std::make_pair(scopeId, ScopedBindings()));
+      i = scopeMap.find(scopeId);
+    }
+
+    return i->second;
+  }
 
 public:
 
   Bindings():
     bindingMap(),
+    scopeMap(),
     pending(NULL) {}
 
   /**
@@ -145,6 +162,7 @@ public:
   void put() {
     BindingPointer binding(new Binding_());
     bindingMap.insert(std::make_pair(binding->getDependencyId(), binding));
+    bindingsInScope(binding->getScopeId()).push_back(binding);
   }
 
   /**
