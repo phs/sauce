@@ -9,7 +9,7 @@ using ::testing::Sequence;
 using ::testing::Return;
 
 using ::sauce::Injector;
-using ::sauce::Bindings;
+using ::sauce::Modules;
 
 namespace sauce {
 namespace test {
@@ -142,7 +142,7 @@ struct AllocationTest:
     engine(NULL),
     vehicle(NULL),
     allocator(),
-    injector(Bindings().add(HerbieModule()).createInjector()) {}
+    injector(Modules().add(HerbieModule()).createInjector()) {}
 
   virtual void SetUp() {
     // Clear the static counters

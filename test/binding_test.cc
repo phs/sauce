@@ -20,7 +20,7 @@ struct D {};
 struct N {};
 
 TEST(BindingTest, shouldThrowExceptionWhenGettingAnUnboundIface) {
-  Injector injector(Bindings().createInjector());
+  Injector injector(Modules().createInjector());
   ASSERT_THROW((injector.get<C>()), ::sauce::UnboundException);
 }
 
@@ -40,7 +40,7 @@ void CircularModule(Binder & binder) {
 }
 
 TEST(BindingTest, shouldThrowExceptionWhenResolvingCircularDependency) {
-  Injector injector(Bindings().add(&CircularModule).createInjector());
+  Injector injector(Modules().add(&CircularModule).createInjector());
   ASSERT_THROW((injector.get<A>()), ::sauce::CircularDependencyException);
 }
 
@@ -50,7 +50,7 @@ void IncompleteModule(Binder & binder) {
 
 TEST(BindingTest, shouldThrowExceptionOnPartialBinding) {
   ASSERT_THROW(
-    Bindings().add(&IncompleteModule).createInjector(),
+    Modules().add(&IncompleteModule).createInjector(),
     ::sauce::PartialBindingException);
 }
 
@@ -60,7 +60,7 @@ void IncompleteNamedModule(Binder & binder) {
 
 TEST(BindingTest, shouldThrowExceptionOnPartialNamedBinding) {
   ASSERT_THROW(
-    Bindings().add(&IncompleteNamedModule).createInjector(),
+    Modules().add(&IncompleteNamedModule).createInjector(),
     ::sauce::PartialBindingException);
 }
 
@@ -98,7 +98,7 @@ void AnimalModule(Binder & binder) {
 }
 
 TEST(BindingTest, shouldProvidedNamedDependencies) {
-  Injector injector(Bindings().add(&AnimalModule).createInjector());
+  Injector injector(Modules().add(&AnimalModule).createInjector());
 
   EXPECT_EQ("Meow",      (injector.get<Animal>()->says()));
   EXPECT_EQ("Blub blub", (injector.get<Animal, Water>()->says()));
@@ -113,7 +113,7 @@ void IncompleteScopeModule(Binder & binder) {
 
 TEST(BindingTest, shouldThrowExceptionOnPartialScopedBinding) {
   ASSERT_THROW(
-    Bindings().add(&IncompleteScopeModule).createInjector(),
+    Modules().add(&IncompleteScopeModule).createInjector(),
     ::sauce::PartialBindingException);
 }
 
@@ -146,7 +146,7 @@ void ScopedModule(Binder & binder) {
 }
 
 TEST(BindingTest, shouldProvidedScopedDependencies) {
-  Injector injector(Bindings().add(&ScopedModule).createInjector());
+  Injector injector(Modules().add(&ScopedModule).createInjector());
 
   SAUCE_SHARED_PTR<Singleton> aSingleton = injector.get<Singleton>();
   SAUCE_SHARED_PTR<Singleton> theSameSingleton = injector.get<Singleton>();
@@ -197,7 +197,7 @@ void EagerlyScopedModule(Binder & binder) {
 }
 
 TEST(BindingTest, shouldProvidedScopedDependenciesEagerlyIfAsked) {
-  Injector injector(Bindings().add(&EagerlyScopedModule).createInjector());
+  Injector injector(Modules().add(&EagerlyScopedModule).createInjector());
   // ASSERT_THROW(injector.eagerlyProvide<SingletonScope>(), CrankyConstructor);
 }
 

@@ -173,7 +173,7 @@ public:
 
 };
 
-class Bindings;
+class Modules;
 
 /**
  * Passed to modules to create bindings.
@@ -181,7 +181,7 @@ class Bindings;
 class Binder {
   i::BindingMap & bindingMap;
 
-  friend class Bindings;
+  friend class Modules;
 
   Binder(i::BindingMap & bindingMap):
     bindingMap(bindingMap) {}

@@ -11,7 +11,7 @@
 
 namespace sauce {
 
-class Bindings;
+class Modules;
 
 namespace internal {
 class InjectorFriend;
@@ -21,7 +21,7 @@ class Injector {
   i::BindingMap bindingMap;
   i::ScopeCache scopeCache;
 
-  friend class Bindings;
+  friend class Modules;
   friend class i::InjectorFriend;
 
   Injector():
