@@ -82,7 +82,7 @@ public:
   /**
    * The TypeId of the Iface and Name template parameters.
    */
-  virtual TypeId getKey() {
+  virtual TypeId getDependencyId() {
     return typeIdOf<Dependency>();
   }
 

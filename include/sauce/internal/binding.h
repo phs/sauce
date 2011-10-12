@@ -74,7 +74,7 @@ struct Binding {
    * The TypeId finger prints which provision requests this Binding may
    * satisfy in an Injector.
    */
-  virtual TypeId getKey() = 0;
+  virtual TypeId getDependencyId() = 0;
 
   /**
    * Resolve the interface actually bound.
@@ -85,7 +85,7 @@ struct Binding {
    */
   template<typename Dependency>
   ResolvedBinding<Dependency> & resolve() {
-    assert((typeIdOf<Dependency>()) == getKey());
+    assert((typeIdOf<Dependency>()) == getDependencyId());
     return *static_cast<ResolvedBinding<Dependency> *>(this);
   }
 

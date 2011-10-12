@@ -31,7 +31,7 @@ class AllocateFromClause:
 
   static void activate(i::BindingMap & bindingMap) {
     i::BindingPointer binding(new b::New<Dependency, Scope, Ctor, Allocator>());
-    bindingMap.insert(std::make_pair(binding->getKey(), binding));
+    bindingMap.insert(std::make_pair(binding->getDependencyId(), binding));
   }
 };
 
