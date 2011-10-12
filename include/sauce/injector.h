@@ -35,13 +35,7 @@ class Injector {
   typename i::Key<Dependency_>::Ptr get(i::TypeIds & ids) {
     typedef typename i::Key<Dependency_>::Normalized Dependency;
     i::CircularDependencyGuard<Dependency> guard(ids);
-
-    i::BindingMap::iterator i = bindingMap.find(i::typeIdOf<Dependency>());
-    if (i == bindingMap.end()) {
-      throw UnboundExceptionFor<Dependency>();
-    }
-
-    i::Binding & binding = *(i->second.get());
+    i::Binding & binding = bindingMap.get<Dependency>();
     return binding.resolve<Dependency>().get(*this, ids);
   }
 

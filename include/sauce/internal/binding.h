@@ -147,6 +147,21 @@ public:
   }
 
   /**
+   * Get the binding for the named Dependency.
+   *
+   * If no binding is found, throw UnboundException.
+   */
+  template<typename Dependency>
+  Binding & get() {
+    iterator i = this->find(typeIdOf<Dependency>());
+    if (i == this->end()) {
+      throw UnboundExceptionFor<Dependency>();
+    }
+
+    return *(i->second.get());
+  }
+
+  /**
    * Save an exception of the given type to throw when it is safe.
    *
    * The exception must have an accessible nullary constructor.
