@@ -1,5 +1,4 @@
-$$ This is a Pump source file.  Please use Pump to convert it to
-$$ bindings.h
+$$ This is a Pump source file.  Please use Pump to convert it to new.h
 $$
 $var n = 10  $$ The maximum arity we support.
 #ifndef SAUCE_SAUCE_INTERNAL_BINDINGS_NEW_H_
