@@ -12,24 +12,24 @@ namespace internal {
 template<typename Derived>
 class Clause {
   bool act;
-  BindingMap & bindingMap;
+  Bindings & bindings;
 
 protected:
 
-  Clause(BindingMap & bindingMap):
+  Clause(Bindings & bindings):
     act(true),
-    bindingMap(bindingMap) {}
+    bindings(bindings) {}
 
-  BindingMap & pass() {
+  Bindings & pass() {
     act = false;
-    return bindingMap;
+    return bindings;
   }
 
 public:
 
   virtual ~Clause() {
     if (act) {
-      Derived::activate(bindingMap);
+      Derived::activate(bindings);
     }
   }
 };

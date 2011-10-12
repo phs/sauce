@@ -18,24 +18,24 @@ class InjectorFriend;
 }
 
 class Injector {
-  i::BindingMap bindingMap;
+  i::Bindings bindings;
   i::ScopeCache scopeCache;
 
   friend class Modules;
   friend class i::InjectorFriend;
 
   Injector():
-    bindingMap(),
+    bindings(),
     scopeCache() {}
 
-  Injector(i::BindingMap & bindingMap):
-    bindingMap(bindingMap) {}
+  Injector(i::Bindings & bindings):
+    bindings(bindings) {}
 
   template<typename Dependency_>
   typename i::Key<Dependency_>::Ptr get(i::TypeIds & ids) {
     typedef typename i::Key<Dependency_>::Normalized Dependency;
     i::CircularDependencyGuard<Dependency> guard(ids);
-    return bindingMap.get<Dependency>().get(*this, ids);
+    return bindings.get<Dependency>().get(*this, ids);
   }
 
 public:

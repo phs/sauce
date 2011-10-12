@@ -69,7 +69,7 @@ public:
  * A factory that accepts Modules and creates Injectors.
  */
 class Modules {
-  i::BindingMap bindingMap;
+  i::Bindings bindings;
   Binder binder;
 public:
 
@@ -77,8 +77,8 @@ public:
    * Create an empty Modules.
    */
   Modules():
-    bindingMap(),
-    binder(bindingMap) {}
+    bindings(),
+    binder(bindings) {}
 
   /**
    * Add the bindings defined by the given Module instance.
@@ -91,7 +91,7 @@ public:
   template<typename Module>
   Modules & add(Module module) {
     module(binder);
-    bindingMap.throwPending();
+    bindings.throwPending();
     return *this;
   }
 
@@ -101,7 +101,7 @@ public:
    * Any modules added after an Injector is created will have no effect on that Injector.
    */
   Injector createInjector() {
-    return Injector(bindingMap);
+    return Injector(bindings);
   }
 
 };
