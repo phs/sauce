@@ -148,6 +148,7 @@ class Bindings {
   PendingThrow pending;
 
   ScopedBindings & bindingsInScope(TypeId scopeId) {
+    // TODO: thread safety..
     ScopeMap::iterator i = scopeMap.find(scopeId);
     if (i == scopeMap.end()) {
       scopeMap.insert(i, std::make_pair(scopeId, ScopedBindings()));
