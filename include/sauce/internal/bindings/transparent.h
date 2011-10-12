@@ -67,13 +67,25 @@ public:
  * A binding for a specific interface and implementation.
  */
 template<typename Dependency, typename Scope, typename Impl>
-struct TransparentBinding:
+class TransparentBinding:
   public ResolvedBinding<Dependency>,
   public InjectorFriend {
 
-private:
-
   typedef typename Key<Dependency>::Iface Iface;
+
+  /**
+   * Provide an instance of Impl.
+   *
+   * The strategy used is left to derived types.
+   */
+  virtual Impl * provide(Injector & injector, TypeIds & typeIds) = 0;
+
+  /**
+   * Dispose of an instance of Iface provided by this binding.
+   *
+   * The strategy used is left to derived types.
+   */
+  virtual void dispose(Impl * impl) = 0;
 
 public:
 
@@ -125,22 +137,6 @@ public:
       putInScopeCache<Dependency, Scope>(injector, smartPointer);
     }
   }
-
-private:
-
-  /**
-   * Provide an instance of Impl.
-   *
-   * The strategy used is left to derived types.
-   */
-  virtual Impl * provide(Injector & injector, TypeIds & typeIds) = 0;
-
-  /**
-   * Dispose of an instance of Iface provided by this binding.
-   *
-   * The strategy used is left to derived types.
-   */
-  virtual void dispose(Impl * impl) = 0;
 
 };
 
