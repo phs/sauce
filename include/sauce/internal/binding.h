@@ -126,13 +126,15 @@ void pendingThrowFactory() {
 
 typedef void (*PendingThrow)();
 
-class BindingMap: public std::map<TypeId, SAUCE_SHARED_PTR<Binding> > {
+typedef SAUCE_SHARED_PTR<Binding> BindingPointer;
+
+class BindingMap: public std::map<TypeId, BindingPointer> {
   PendingThrow pending;
 
 public:
 
   BindingMap():
-    std::map<TypeId, SAUCE_SHARED_PTR<Binding> >(),
+    std::map<TypeId, BindingPointer>(),
     pending(NULL) {}
 
   /**
@@ -140,7 +142,7 @@ public:
    */
   template<typename Binding_>
   void put() {
-    SAUCE_SHARED_PTR<Binding> binding(new Binding_());
+    BindingPointer binding(new Binding_());
     this->insert(std::make_pair(binding->getDependencyId(), binding));
   }
 

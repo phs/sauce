@@ -6,8 +6,6 @@
 namespace sauce {
 namespace internal {
 
-typedef SAUCE_SHARED_PTR<Binding> BindingPointer;
-
 /**
  * Base class for parts of the fluent binding API.
  */
