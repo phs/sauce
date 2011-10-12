@@ -63,6 +63,9 @@ public:
     scopeCache.clear<Scope>();
   }
 
+  template<typename Scope>
+  void eagerlyProvide() {}
+
 };
 
 }

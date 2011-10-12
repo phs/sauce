@@ -1,4 +1,5 @@
 #include <string>
+#include <stdexcept>
 
 #include <gmock/gmock.h>
 #include <gtest/gtest.h>
@@ -178,6 +179,26 @@ TEST(BindingTest, shouldProvidedScopedDependencies) {
   SAUCE_SHARED_PTR<D> aD = injector.get<D>();
   SAUCE_SHARED_PTR<D> aNewD = injector.get<D>();
   EXPECT_NE(aD, aNewD);
+}
+
+struct CrankyConstructorException: public std::runtime_error {
+  CrankyConstructorException():
+    std::runtime_error("Can't connect to something-er-other!") {}
+};
+
+struct CrankyConstructor {
+  CrankyConstructor() {
+    throw CrankyConstructorException();
+  }
+};
+
+void EagerlyScopedModule(Binder & binder) {
+  binder.bind<CrankyConstructor>().in<SingletonScope>().to<CrankyConstructor()>();
+}
+
+TEST(BindingTest, shouldProvidedScopedDependenciesEagerlyIfAsked) {
+  Injector injector(Bindings().add(&EagerlyScopedModule).createInjector());
+  // ASSERT_THROW(injector.eagerlyProvide<SingletonScope>(), CrankyConstructor);
 }
 
 }
