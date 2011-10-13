@@ -182,14 +182,14 @@ public:
    * If no binding is found, throw UnboundException.
    */
   template<typename Dependency>
-  Binding<Dependency> & get() {
+  typename Key<Dependency>::Ptr get(Injector & injector, TypeIds & typeIds) {
     std::map<TypeId, BindingPointer>::iterator i = bindingMap.find(typeIdOf<Dependency>());
     if (i == bindingMap.end()) {
       throw UnboundExceptionFor<Dependency>();
     }
 
     OpaqueBinding & binding = *(i->second.get());
-    return binding.resolve<Dependency>();
+    return binding.resolve<Dependency>().get(injector, typeIds);
   }
 
   template<typename Scope>
