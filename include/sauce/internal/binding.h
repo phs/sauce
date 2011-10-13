@@ -137,8 +137,9 @@ void pendingThrowFactory() {
   throw Exception();
 }
 
+typedef SAUCE_SHARED_PTR<Binding> BindingPointer;
+
 class Bindings {
-  typedef SAUCE_SHARED_PTR<Binding> BindingPointer;
   typedef std::map<TypeId, BindingPointer> BindingMap;
   typedef std::vector<BindingPointer> ScopedBindings;
   typedef std::map<TypeId, ScopedBindings> ScopeMap;

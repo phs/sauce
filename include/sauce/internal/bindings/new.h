@@ -35,7 +35,7 @@ struct New<Dependency, Scope, Impl(),
 
   void dispose(Impl * impl) {
     ImplAllocator allocator;
-    impl->~Impl();
+    impl->~Impl(); // Must not throw
     allocator.deallocate(impl, 1);
   }
 };
@@ -57,7 +57,7 @@ struct New<Dependency, Scope, Impl(A1),
 
   void dispose(Impl * impl) {
     ImplAllocator allocator;
-    impl->~Impl();
+    impl->~Impl(); // Must not throw
     allocator.deallocate(impl, 1);
   }
 };
@@ -81,7 +81,7 @@ struct New<Dependency, Scope, Impl(A1, A2),
 
   void dispose(Impl * impl) {
     ImplAllocator allocator;
-    impl->~Impl();
+    impl->~Impl(); // Must not throw
     allocator.deallocate(impl, 1);
   }
 };
@@ -107,7 +107,7 @@ struct New<Dependency, Scope, Impl(A1, A2, A3),
 
   void dispose(Impl * impl) {
     ImplAllocator allocator;
-    impl->~Impl();
+    impl->~Impl(); // Must not throw
     allocator.deallocate(impl, 1);
   }
 };
@@ -135,7 +135,7 @@ struct New<Dependency, Scope, Impl(A1, A2, A3, A4),
 
   void dispose(Impl * impl) {
     ImplAllocator allocator;
-    impl->~Impl();
+    impl->~Impl(); // Must not throw
     allocator.deallocate(impl, 1);
   }
 };
@@ -166,7 +166,7 @@ struct New<Dependency, Scope, Impl(A1, A2, A3, A4, A5),
 
   void dispose(Impl * impl) {
     ImplAllocator allocator;
-    impl->~Impl();
+    impl->~Impl(); // Must not throw
     allocator.deallocate(impl, 1);
   }
 };
@@ -199,7 +199,7 @@ struct New<Dependency, Scope, Impl(A1, A2, A3, A4, A5, A6),
 
   void dispose(Impl * impl) {
     ImplAllocator allocator;
-    impl->~Impl();
+    impl->~Impl(); // Must not throw
     allocator.deallocate(impl, 1);
   }
 };
@@ -234,7 +234,7 @@ struct New<Dependency, Scope, Impl(A1, A2, A3, A4, A5, A6, A7),
 
   void dispose(Impl * impl) {
     ImplAllocator allocator;
-    impl->~Impl();
+    impl->~Impl(); // Must not throw
     allocator.deallocate(impl, 1);
   }
 };
@@ -271,7 +271,7 @@ struct New<Dependency, Scope, Impl(A1, A2, A3, A4, A5, A6, A7, A8),
 
   void dispose(Impl * impl) {
     ImplAllocator allocator;
-    impl->~Impl();
+    impl->~Impl(); // Must not throw
     allocator.deallocate(impl, 1);
   }
 };
@@ -310,7 +310,7 @@ struct New<Dependency, Scope, Impl(A1, A2, A3, A4, A5, A6, A7, A8, A9),
 
   void dispose(Impl * impl) {
     ImplAllocator allocator;
-    impl->~Impl();
+    impl->~Impl(); // Must not throw
     allocator.deallocate(impl, 1);
   }
 };
@@ -352,7 +352,7 @@ struct New<Dependency, Scope, Impl(A1, A2, A3, A4, A5, A6, A7, A8, A9, A10),
 
   void dispose(Impl * impl) {
     ImplAllocator allocator;
-    impl->~Impl();
+    impl->~Impl(); // Must not throw
     allocator.deallocate(impl, 1);
   }
 };
