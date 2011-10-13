@@ -48,7 +48,7 @@ struct New<Dependency, Scope, Impl($As), Allocator>: public TransparentBinding<D
 
   void dispose(Impl * impl) {
     ImplAllocator allocator;
-    impl->~Impl();
+    impl->~Impl(); // Must not throw
     allocator.deallocate(impl, 1);
   }
 };
