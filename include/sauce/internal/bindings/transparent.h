@@ -115,6 +115,8 @@ public:
 
     bool unscoped = typeIdOf<Scope>() == typeIdOf<NoScope>();
     if (unscoped || !getFromScopeCache<Dependency, Scope>(injector, smartPointer)) {
+      // TODO: there is no reason to think the deleter won't survive the binding.
+      // The parameter should be the shared_ptr shoved in the Bindings map.
       BindingDeleter<Dependency, Scope, Impl> deleter(this);
       smartPointer.reset(provide(injector, typeIds), deleter);
       if (!unscoped) {
