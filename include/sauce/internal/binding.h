@@ -46,6 +46,7 @@ class CircularDependencyGuard {
   }
 };
 
+// TODO: need forward declaration?
 template<typename Dependency>
 class ResolvedBinding;
 
@@ -68,7 +69,7 @@ class ResolvedBinding;
  * extend TransparentBinding.  Their behavior is exposed to a Binding client
  * by (runtime) polymorphism.
  */
-struct Binding {
+struct OpaqueBinding {
 
   /**
    * The TypeId of the (hidden) dependency this Binding provides.
@@ -112,7 +113,7 @@ struct Binding {
  */
 template<typename Dependency>
 struct ResolvedBinding:
-  public Binding {
+  public OpaqueBinding {
 
   /**
    * Provide an instance of Iface, using the given injector to resolve dependencies.
@@ -137,7 +138,7 @@ void pendingThrowFactory() {
   throw Exception();
 }
 
-typedef SAUCE_SHARED_PTR<Binding> BindingPointer;
+typedef SAUCE_SHARED_PTR<OpaqueBinding> BindingPointer;
 
 class Bindings {
   typedef std::map<TypeId, BindingPointer> BindingMap;
@@ -188,7 +189,7 @@ public:
       throw UnboundExceptionFor<Dependency>();
     }
 
-    Binding & binding = *(i->second.get());
+    OpaqueBinding & binding = *(i->second.get());
     return binding.resolve<Dependency>();
   }
 
@@ -196,7 +197,7 @@ public:
   void eagerlyProvide(Injector & injector, TypeIds & typeIds) {
     ScopedBindings & scopedBindings = bindingsInScope(typeIdOf<Scope>());
     for (ScopedBindings::iterator i = scopedBindings.begin(); i != scopedBindings.end(); ++i) {
-      Binding & binding = *(i->get());
+      OpaqueBinding & binding = *(i->get());
       binding.eagerlyProvide(injector, typeIds);
     }
   }
