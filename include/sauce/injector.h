@@ -24,12 +24,9 @@ class Injector {
   friend class Modules;
   friend class i::InjectorFriend;
 
-  Injector():
-    bindings(),
-    scopeCache() {}
-
   Injector(i::Bindings & bindings):
-    bindings(bindings) {}
+    bindings(bindings),
+    scopeCache() {}
 
   template<typename Dependency_>
   typename i::Key<Dependency_>::Ptr get(i::TypeIds & ids) {
