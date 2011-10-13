@@ -129,18 +129,25 @@ struct HerbieModule: sauce::AbstractModule {
 struct AllocationTest:
   public ::testing::Test {
 
+  template<typename T>
+  struct DeallocateDeleter {
+    void operator()(T * t) const {
+      std::allocator<T>().deallocate(t, 1);
+    }
+  };
+
   // These point to ALLOCATED but UNINITIALIZED memory
-  CoupChasis * chasis;
-  HybridEngine * engine;
-  Herbie * vehicle;
+  SAUCE_SHARED_PTR<CoupChasis> chasis;
+  SAUCE_SHARED_PTR<HybridEngine> engine;
+  SAUCE_SHARED_PTR<Herbie> vehicle;
 
   MockAllocation allocator;
   Injector injector;
 
   AllocationTest():
-    chasis(NULL),
-    engine(NULL),
-    vehicle(NULL),
+    chasis(),
+    engine(),
+    vehicle(),
     allocator(),
     injector(Modules().add(HerbieModule()).createInjector()) {}
 
@@ -157,27 +164,21 @@ struct AllocationTest:
     AllocateWith<MockAllocation>::Base::setBacking(allocator);
 
     // And now use a real one to get some raw memory
-    chasis = std::allocator<CoupChasis>().allocate(1);
-    engine = std::allocator<HybridEngine>().allocate(1);
-    vehicle = std::allocator<Herbie>().allocate(1);
-  }
-
-  virtual void TearDown() {
-    std::allocator<CoupChasis>().deallocate(chasis, 1);
-    std::allocator<HybridEngine>().deallocate(engine, 1);
-    std::allocator<Herbie>().deallocate(vehicle, 1);
+    chasis.reset(std::allocator<CoupChasis>().allocate(1), DeallocateDeleter<CoupChasis>());
+    engine.reset(std::allocator<HybridEngine>().allocate(1), DeallocateDeleter<HybridEngine>());
+    vehicle.reset(std::allocator<Herbie>().allocate(1), DeallocateDeleter<Herbie>());
   }
 
 };
 
 TEST_F(AllocationTest, shouldProvideAndDisposeADependency) {
-  EXPECT_CALL(allocator, allocate(A<CoupChasis>(), 1)).WillOnce(Return(chasis));
-  EXPECT_CALL(allocator, deallocate(chasis, 1));
+  EXPECT_CALL(allocator, allocate(A<CoupChasis>(), 1)).WillOnce(Return(chasis.get()));
+  EXPECT_CALL(allocator, deallocate(chasis.get(), 1));
 
   {
     SAUCE_SHARED_PTR<Chasis> actual = injector.get<Chasis>();
     ASSERT_EQ(1, CoupChasis::constructed);
-    ASSERT_EQ(chasis, actual.get());
+    ASSERT_EQ(chasis.get(), actual.get());
   }
   ASSERT_EQ(1, CoupChasis::destroyed);
 }
@@ -189,20 +190,20 @@ TEST_F(AllocationTest, shouldProvideAndDisposeOfDependenciesTransitively) {
 
   // Allocate the chasis and engine before the vehicle
   EXPECT_CALL(allocator, allocate(A<CoupChasis>(), 1)).
-  InSequence(chasisSeq).WillOnce(Return(chasis));
+  InSequence(chasisSeq).WillOnce(Return(chasis.get()));
 
   EXPECT_CALL(allocator, allocate(A<HybridEngine>(), 1)).
-  InSequence(engineSeq).WillOnce(Return(engine));
+  InSequence(engineSeq).WillOnce(Return(engine.get()));
 
   EXPECT_CALL(allocator, allocate(A<Herbie>(), 1)).
-  InSequence(chasisSeq, engineSeq).WillOnce(Return(vehicle));
+  InSequence(chasisSeq, engineSeq).WillOnce(Return(vehicle.get()));
 
   // Deallocate the chasis and engine *before* the vehicle
   // Should destroying the vehicle after its dependencies be an issue?  This
   // is simply the order that falls out of smart pointer deletion..
-  EXPECT_CALL(allocator, deallocate(engine, 1)).InSequence(engineSeq);
-  EXPECT_CALL(allocator, deallocate(chasis, 1)).InSequence(chasisSeq);
-  EXPECT_CALL(allocator, deallocate(vehicle, 1)).InSequence(chasisSeq, engineSeq);
+  EXPECT_CALL(allocator, deallocate(engine.get(), 1)).InSequence(engineSeq);
+  EXPECT_CALL(allocator, deallocate(chasis.get(), 1)).InSequence(chasisSeq);
+  EXPECT_CALL(allocator, deallocate(vehicle.get(), 1)).InSequence(chasisSeq, engineSeq);
 
   {
     ASSERT_EQ(0, CoupChasis::constructed);
@@ -213,9 +214,9 @@ TEST_F(AllocationTest, shouldProvideAndDisposeOfDependenciesTransitively) {
     ASSERT_EQ(1, HybridEngine::constructed);
     ASSERT_EQ(1, Herbie::constructed);
 
-    ASSERT_EQ(chasis, actual->getChasis().get());
-    ASSERT_EQ(engine, actual->getEngine().get());
-    ASSERT_EQ(vehicle, actual.get());
+    ASSERT_EQ(chasis.get(), actual->getChasis().get());
+    ASSERT_EQ(engine.get(), actual->getEngine().get());
+    ASSERT_EQ(vehicle.get(), actual.get());
   }
   ASSERT_EQ(1, CoupChasis::destroyed);
   ASSERT_EQ(1, HybridEngine::destroyed);
