@@ -68,7 +68,7 @@ public:
  */
 template<typename Dependency, typename Scope, typename Impl>
 class TransparentBinding:
-  public ResolvedBinding<Dependency>,
+  public Binding<Dependency>,
   public InjectorFriend {
 
   typedef typename Key<Dependency>::Iface Iface;

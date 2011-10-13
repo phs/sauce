@@ -46,9 +46,8 @@ class CircularDependencyGuard {
   }
 };
 
-// TODO: need forward declaration?
 template<typename Dependency>
-class ResolvedBinding;
+class Binding;
 
 /**
  * An opaque binding.
@@ -61,9 +60,9 @@ class ResolvedBinding;
  * template of any specific interface or implementation types.  It however has
  * a TypeId, which indirectly identifies the interface it is bound to.
  *
- * The interface is raised to the type system in ResolvedBinding, a templated
+ * The interface is raised to the type system in Binding, a templated
  * class deriving from Binding.  The implementation is in turn raised in
- * TransparentBinding, which derives from ResolvedBinding.
+ * TransparentBinding, which derives from Binding.
  *
  * Other binding implementations (those that implement provision strategies)
  * extend TransparentBinding.  Their behavior is exposed to a Binding client
@@ -92,9 +91,9 @@ struct OpaqueBinding {
    * invariant, requests for other types will immediately fail an assert.
    */
   template<typename Dependency>
-  ResolvedBinding<Dependency> & resolve() {
+  Binding<Dependency> & resolve() {
     assert((typeIdOf<Dependency>()) == getDependencyId());
-    return *static_cast<ResolvedBinding<Dependency> *>(this);
+    return *static_cast<Binding<Dependency> *>(this);
   }
 
   /**
@@ -112,7 +111,7 @@ struct OpaqueBinding {
  * A binding for a specific interface.
  */
 template<typename Dependency>
-struct ResolvedBinding:
+struct Binding:
   public OpaqueBinding {
 
   /**
@@ -183,7 +182,7 @@ public:
    * If no binding is found, throw UnboundException.
    */
   template<typename Dependency>
-  ResolvedBinding<Dependency> & get() {
+  Binding<Dependency> & get() {
     std::map<TypeId, BindingPointer>::iterator i = bindingMap.find(typeIdOf<Dependency>());
     if (i == bindingMap.end()) {
       throw UnboundExceptionFor<Dependency>();
