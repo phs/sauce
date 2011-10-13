@@ -60,8 +60,8 @@ class Binding;
  * template of any specific interface or implementation types.  It however has
  * a TypeId, which indirectly identifies the interface it is bound to.
  *
- * The interface is raised to the type system in Binding, a templated
- * class deriving from Binding.  The implementation is in turn raised in
+ * The interface is raised to the type system in Binding, a templated class
+ * deriving from OpaqueBinding.  The implementation is in turn raised in
  * TransparentBinding, which derives from Binding.
  *
  * Other binding implementations (those that implement provision strategies)
