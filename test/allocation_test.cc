@@ -126,15 +126,15 @@ struct HerbieModule: sauce::AbstractModule {
   }
 };
 
+template<typename T>
+struct DeallocateDeleter {
+  void operator()(T * t) const {
+    std::allocator<T>().deallocate(t, 1);
+  }
+};
+
 struct AllocationTest:
   public ::testing::Test {
-
-  template<typename T>
-  struct DeallocateDeleter {
-    void operator()(T * t) const {
-      std::allocator<T>().deallocate(t, 1);
-    }
-  };
 
   // These point to ALLOCATED but UNINITIALIZED memory
   SAUCE_SHARED_PTR<CoupChasis> chasis;
