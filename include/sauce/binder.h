@@ -193,7 +193,7 @@ public:
    */
   template<typename Iface>
   BindClause<Iface> bind() {
-    bindings.throwPending();
+    bindings.throwAnyPending();
     return BindClause<Iface>(bindings);
   }
 

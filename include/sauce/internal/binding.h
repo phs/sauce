@@ -215,7 +215,7 @@ public:
   /**
    * Throw and clear any saved exception.
    */
-  void throwPending() {
+  void throwAnyPending() {
     if (pending) {
       PendingThrow toThrow = pending;
       pending = NULL;

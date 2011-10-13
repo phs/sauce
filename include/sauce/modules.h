@@ -91,7 +91,7 @@ public:
   template<typename Module>
   Modules & add(Module module) {
     module(binder);
-    bindings.throwPending();
+    bindings.throwAnyPending();
     return *this;
   }
 
