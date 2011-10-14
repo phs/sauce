@@ -28,11 +28,11 @@ class Injector {
     bindings(bindings),
     scopeCache() {}
 
-  template<typename Dependency_>
-  typename i::Key<Dependency_>::Ptr get(i::TypeIds & ids) {
-    typedef typename i::Key<Dependency_>::Normalized Dependency;
-    i::CircularDependencyGuard<Dependency> guard(ids);
-    return bindings.get<Dependency>(*this, ids);
+  template<typename Dependency>
+  typename i::Key<Dependency>::Ptr get(i::TypeIds & ids) {
+    typedef typename i::Key<Dependency>::Normalized Normalized;
+    i::CircularDependencyGuard<Normalized> guard(ids);
+    return bindings.get<Normalized>(*this, ids);
   }
 
 public:
