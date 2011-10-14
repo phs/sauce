@@ -17,10 +17,10 @@ struct Key {
   typedef Unnamed Name;
 
   /**
-   * Note this is not Iface, but Named<Iface, Unnamed>.
+   * Note Normalized is not Iface, but Named<Iface, Unnamed>.
    *
    * They are logically equivalent, but have different TypeIds.  Where it is ambiguous, we use
-   * the explicit named version (captured by this typedef.)
+   * the normalized version.
    */
   typedef Named<Iface, Name> Normalized;
 };
