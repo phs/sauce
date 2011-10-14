@@ -49,6 +49,10 @@ class CircularDependencyGuard {
 template<typename Dependency>
 class Binding;
 
+struct OpaqueBinding;
+
+typedef SAUCE_SHARED_PTR<OpaqueBinding> OpaqueBindingPointer;
+
 /**
  * An opaque binding.
  *
@@ -123,8 +127,6 @@ template<typename Exception>
 void pendingThrowFactory() {
   throw Exception();
 }
-
-typedef SAUCE_SHARED_PTR<OpaqueBinding> OpaqueBindingPointer;
 
 class Bindings {
   typedef std::map<TypeId, OpaqueBindingPointer> BindingMap;
