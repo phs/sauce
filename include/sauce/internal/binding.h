@@ -84,19 +84,6 @@ struct OpaqueBinding {
   virtual TypeId getScopeId() = 0;
 
   /**
-   * Resolve the interface actually bound.
-   *
-   * Note the caller is expected to understand which interface this is.  As
-   * this is an internal type and Sauce's own callers obey this as an
-   * invariant, requests for other types will immediately fail an assert.
-   */
-  template<typename Dependency>
-  Binding<Dependency> & resolve() {
-    assert((typeIdOf<Dependency>()) == getDependencyId());
-    return *static_cast<Binding<Dependency> *>(this);
-  }
-
-  /**
    * Provide, but do not return an instance of the hidden interface.
    *
    * Instead, cache the instance in its appropriate scope, if any.  If the binding is not scoped,
@@ -188,8 +175,11 @@ public:
       throw UnboundExceptionFor<Dependency>();
     }
 
-    OpaqueBinding & binding = *(i->second.get());
-    return binding.resolve<Dependency>().get(injector, typeIds);
+    OpaqueBinding & opaqueBinding = *(i->second.get());
+    assert((typeIdOf<Dependency>()) == opaqueBinding.getDependencyId());
+    Binding<Dependency> & binding = *static_cast<Binding<Dependency> *>(&opaqueBinding);
+
+    return binding.get(injector, typeIds);
   }
 
   template<typename Scope>
