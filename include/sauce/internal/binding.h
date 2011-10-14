@@ -177,7 +177,7 @@ public:
   }
 
   /**
-   * Get and resolve the binding for the named Dependency.
+   * Provide the named Dependency.
    *
    * If no binding is found, throw UnboundException.
    */
