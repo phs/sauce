@@ -91,9 +91,8 @@ class TransparentBinding:
    * Create a shared pointer deleter suitable for this binding.
    */
   DisposalDeleter<Dependency, Scope, Impl> deleter(BindingPointer binding) {
-    typedef TransparentBinding<Dependency, Scope, Impl> ConcreteBinding;
-    SAUCE_SHARED_PTR<ConcreteBinding> concrete =
-      SAUCE_STATIC_POINTER_CAST<ConcreteBinding>(binding);
+    typedef TransparentBinding<Dependency, Scope, Impl> Transparent;
+    SAUCE_SHARED_PTR<Transparent> concrete = SAUCE_STATIC_POINTER_CAST<Transparent>(binding);
     return DisposalDeleter<Dependency, Scope, Impl>(concrete);
   }
 
