@@ -19,24 +19,24 @@ class AbstractModule {
   /**
    * RAII object to protecte the state of AbtractModule::binder.
    */
-  class Guard {
+  class BinderGuard {
     AbstractModule * module;
     Binder * previousBinder;
 
     friend class AbstractModule;
 
-    Guard(AbstractModule * module, Binder * binder):
+    BinderGuard(AbstractModule * module, Binder * binder):
       module(module),
       previousBinder(module->binder) {
       module->binder = binder;
     }
 
-    ~Guard() {
+    ~BinderGuard() {
       module->binder = previousBinder;
     }
   };
 
-  friend class Guard;
+  friend class BinderGuard;
 
 protected:
 
@@ -59,7 +59,7 @@ protected:
 public:
 
   void operator()(Binder & binder) {
-    Guard guard(this, &binder);
+    BinderGuard guard(this, &binder);
     configure();
   }
 
