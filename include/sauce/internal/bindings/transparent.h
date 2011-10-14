@@ -72,6 +72,7 @@ class TransparentBinding:
   public InjectorFriend {
 
   typedef typename Key<Dependency>::Iface Iface;
+  typedef typename Binding<Dependency>::BindingPointer BindingPointer;
 
   /**
    * Provide an instance of Impl.
@@ -110,7 +111,7 @@ public:
    *
    * Derived classes should not override this but provide().
    */
-  SAUCE_SHARED_PTR<Iface> get(Injector & injector, TypeIds & typeIds) {
+  SAUCE_SHARED_PTR<Iface> get(BindingPointer, Injector & injector, TypeIds & typeIds) {
     SAUCE_SHARED_PTR<Iface> smartPointer;
 
     bool unscoped = typeIdOf<Scope>() == typeIdOf<NoScope>();
@@ -133,9 +134,10 @@ public:
    * Instead, cache the instance in its appropriate scope, if any.  If the binding is not scoped,
    * do nothing.
    */
-  void eagerlyProvide(Injector & injector, TypeIds & typeIds) {
+  void eagerlyProvide(OpaqueBindingPointer opaqueBinding, Injector & injector, TypeIds & typeIds) {
     if (typeIdOf<Scope>() != typeIdOf<NoScope>()) {
-      get(injector, typeIds);
+      BindingPointer binding = resolve<Dependency>(opaqueBinding);
+      get(binding, injector, typeIds);
     }
   }
 

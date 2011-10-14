@@ -94,7 +94,7 @@ struct OpaqueBinding {
    * do nothing.  The typeIds indicate which keys are already currently being provided: this is
    * used for circular dependency detection.
    */
-  virtual void eagerlyProvide(Injector &, TypeIds &) {}
+  virtual void eagerlyProvide(OpaqueBindingPointer, Injector &, TypeIds &) {}
 
 };
 
@@ -105,13 +105,17 @@ template<typename Dependency>
 struct Binding:
   public OpaqueBinding {
 
+  typedef SAUCE_SHARED_PTR<Binding<Dependency> > BindingPointer;
+
   /**
    * Get an instance of Iface, using the given injector to provide dependencies.
+   *
+   * The binding pointer must point to this same binding instance.
    *
    * The typeIds indicate which keys are already currently being provided: this is used for
    * circular dependency detection.
    */
-  virtual typename Key<Dependency>::Ptr get(Injector & injector, TypeIds & typeIds) = 0;
+  virtual typename Key<Dependency>::Ptr get(BindingPointer, Injector &, TypeIds &) = 0;
 
 };
 
@@ -189,7 +193,7 @@ public:
     }
 
     SAUCE_SHARED_PTR<Binding<Dependency> > binding = resolve<Dependency>(i->second);
-    return binding->get(injector, typeIds);
+    return binding->get(binding, injector, typeIds);
   }
 
   template<typename Scope>
@@ -197,7 +201,7 @@ public:
     ScopedBindings & scopedBindings = bindingsInScope(typeIdOf<Scope>());
     for (ScopedBindings::iterator i = scopedBindings.begin(); i != scopedBindings.end(); ++i) {
       OpaqueBindingPointer binding = *i;
-      binding->eagerlyProvide(injector, typeIds);
+      binding->eagerlyProvide(binding, injector, typeIds);
     }
   }
 
