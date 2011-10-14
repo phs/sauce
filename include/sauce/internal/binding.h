@@ -75,15 +75,14 @@ typedef SAUCE_SHARED_PTR<OpaqueBinding> OpaqueBindingPointer;
 struct OpaqueBinding {
 
   /**
-   * The TypeId of the (hidden) dependency this Binding provides.
+   * The TypeId of the (hidden) provided dependency.
    *
-   * The dependency id finger prints which provision requests this Binding may satisfy in an
-   * Injector.
+   * The dependency id finger prints which provision requests we can satisfy in an Injector.
    */
   virtual TypeId getDependencyId() = 0;
 
   /**
-   * The TypeId of this Binding's (hidden) scope.
+   * The TypeId of our (hidden) scope.
    */
   virtual TypeId getScopeId() = 0;
 
@@ -91,8 +90,8 @@ struct OpaqueBinding {
    * Provide, but do not return an instance of the hidden interface.
    *
    * Instead, cache the instance in its appropriate scope, if any.  If the binding is not scoped,
-   * do nothing.  The typeIds indicate which keys are already currently being provided: this is
-   * used for circular dependency detection.
+   * do nothing.  The typeIds indicate which keys are already currently being provided to detect
+   * circular dependencies.
    */
   virtual void eagerlyProvide(OpaqueBindingPointer, Injector &, TypeIds &) {}
 
@@ -112,8 +111,8 @@ struct Binding:
    *
    * The binding pointer must point to this same binding instance.
    *
-   * The typeIds indicate which keys are already currently being provided: this is used for
-   * circular dependency detection.
+   * The typeIds indicate which keys are already currently being provided to detect circular
+   * dependencies.
    */
   virtual typename Key<Dependency>::Ptr get(BindingPointer, Injector &, TypeIds &) = 0;
 
@@ -136,7 +135,7 @@ typedef void (*PendingThrow)();
  * Template function used to create typed, deferred exceptions.
  *
  * The exception must have an accessible nullary constructor.
- * Instances of this template will construct and throw an instance.
+ * Template instantiations will construct and throw an instance.
  */
 template<typename Exception>
 void pendingThrowFactory() {
