@@ -72,7 +72,6 @@ class TransparentBinding:
 
   typedef typename Key<Dependency>::Iface Iface;
   typedef typename Binding<Dependency>::BindingPointer BindingPointer;
-  typedef TransparentBinding<Dependency, Scope, Impl> ConcreteBinding;
 
   /**
    * Provide an instance of Impl.
@@ -87,6 +86,16 @@ class TransparentBinding:
    * The strategy used is left to derived types.
    */
   virtual void dispose(Impl * impl) = 0;
+
+  /**
+   * Create a shared pointer deleter suitable for this binding.
+   */
+  DisposalDeleter<Dependency, Scope, Impl> deleter(BindingPointer binding) {
+    typedef TransparentBinding<Dependency, Scope, Impl> ConcreteBinding;
+    SAUCE_SHARED_PTR<ConcreteBinding> concrete =
+      SAUCE_STATIC_POINTER_CAST<ConcreteBinding>(binding);
+    return DisposalDeleter<Dependency, Scope, Impl>(concrete);
+  }
 
 public:
 
@@ -116,11 +125,7 @@ public:
 
     bool unscoped = typeIdOf<Scope>() == typeIdOf<NoScope>();
     if (unscoped || !getFromScopeCache<Dependency, Scope>(injector, smartPointer)) {
-      SAUCE_SHARED_PTR<ConcreteBinding> concrete =
-        SAUCE_STATIC_POINTER_CAST<ConcreteBinding>(binding);
-
-      DisposalDeleter<Dependency, Scope, Impl> deleter(concrete);
-      smartPointer.reset(provide(injector, typeIds), deleter);
+      smartPointer.reset(provide(injector, typeIds), deleter(binding));
       if (!unscoped) {
         putInScopeCache<Dependency, Scope>(injector, smartPointer);
       }
