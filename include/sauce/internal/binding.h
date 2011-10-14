@@ -175,9 +175,9 @@ public:
       throw UnboundExceptionFor<Dependency>();
     }
 
-    OpaqueBinding & opaqueBinding = *(i->second.get());
-    assert((typeIdOf<Dependency>()) == opaqueBinding.getDependencyId());
-    Binding<Dependency> & binding = *static_cast<Binding<Dependency> *>(&opaqueBinding);
+    BindingPointer opaqueBinding = i->second;
+    assert((typeIdOf<Dependency>()) == opaqueBinding->getDependencyId());
+    Binding<Dependency> & binding = *static_cast<Binding<Dependency> *>(opaqueBinding.get());
 
     return binding.get(injector, typeIds);
   }
@@ -186,8 +186,8 @@ public:
   void eagerlyProvide(Injector & injector, TypeIds & typeIds) {
     ScopedBindings & scopedBindings = bindingsInScope(typeIdOf<Scope>());
     for (ScopedBindings::iterator i = scopedBindings.begin(); i != scopedBindings.end(); ++i) {
-      OpaqueBinding & binding = *(i->get());
-      binding.eagerlyProvide(injector, typeIds);
+      BindingPointer binding = *i;
+      binding->eagerlyProvide(injector, typeIds);
     }
   }
 
