@@ -175,11 +175,13 @@ public:
       throw UnboundExceptionFor<Dependency>();
     }
 
+    typedef SAUCE_SHARED_PTR<Binding<Dependency> > BindingPointer;
+
     OpaqueBindingPointer opaqueBinding = i->second;
     assert((typeIdOf<Dependency>()) == opaqueBinding->getDependencyId());
-    Binding<Dependency> & binding = *static_cast<Binding<Dependency> *>(opaqueBinding.get());
+    BindingPointer binding(SAUCE_STATIC_POINTER_CAST<Binding<Dependency> >(opaqueBinding));
 
-    return binding.get(injector, typeIds);
+    return binding->get(injector, typeIds);
   }
 
   template<typename Scope>
