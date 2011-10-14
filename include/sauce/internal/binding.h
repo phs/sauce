@@ -115,6 +115,17 @@ struct Binding:
 
 };
 
+/**
+ * Cast an OpaqueBindingPointer to a Binding smart pointer.
+ *
+ * This must be done carefully (with static_pointer_cast) in order to not lose the ref count.
+ */
+template<typename Dependency>
+SAUCE_SHARED_PTR<Binding<Dependency> > resolve(OpaqueBindingPointer binding) {
+  assert((typeIdOf<Dependency>()) == binding->getDependencyId());
+  return SAUCE_STATIC_POINTER_CAST<Binding<Dependency> >(binding);
+}
+
 typedef void (*PendingThrow)();
 
 /**
@@ -177,12 +188,7 @@ public:
       throw UnboundExceptionFor<Dependency>();
     }
 
-    OpaqueBindingPointer opaqueBinding = i->second;
-
-    assert((typeIdOf<Dependency>()) == opaqueBinding->getDependencyId());
-    SAUCE_SHARED_PTR<Binding<Dependency> > binding =
-      SAUCE_STATIC_POINTER_CAST<Binding<Dependency> >(opaqueBinding);
-
+    SAUCE_SHARED_PTR<Binding<Dependency> > binding = resolve<Dependency>(i->second);
     return binding->get(injector, typeIds);
   }
 
