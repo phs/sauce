@@ -124,11 +124,11 @@ void pendingThrowFactory() {
   throw Exception();
 }
 
-typedef SAUCE_SHARED_PTR<OpaqueBinding> OpaqueBindingPointer;
+typedef SAUCE_SHARED_PTR<OpaqueBinding> BindingPointer;
 
 class Bindings {
-  typedef std::map<TypeId, OpaqueBindingPointer> BindingMap;
-  typedef std::vector<OpaqueBindingPointer> ScopedBindings;
+  typedef std::map<TypeId, BindingPointer> BindingMap;
+  typedef std::vector<BindingPointer> ScopedBindings;
   typedef std::map<TypeId, ScopedBindings> ScopeMap;
 
   BindingMap bindingMap;
@@ -158,7 +158,7 @@ public:
    */
   template<typename Binding_>
   void put() {
-    OpaqueBindingPointer binding(new Binding_());
+    BindingPointer binding(new Binding_());
     bindingMap.insert(std::make_pair(binding->getDependencyId(), binding));
     bindingsInScope(binding->getScopeId()).push_back(binding);
   }
@@ -170,12 +170,12 @@ public:
    */
   template<typename Dependency>
   typename Key<Dependency>::Ptr get(Injector & injector, TypeIds & typeIds) {
-    std::map<TypeId, OpaqueBindingPointer>::iterator i = bindingMap.find(typeIdOf<Dependency>());
+    std::map<TypeId, BindingPointer>::iterator i = bindingMap.find(typeIdOf<Dependency>());
     if (i == bindingMap.end()) {
       throw UnboundExceptionFor<Dependency>();
     }
 
-    OpaqueBindingPointer opaqueBinding = i->second;
+    BindingPointer opaqueBinding = i->second;
     assert((typeIdOf<Dependency>()) == opaqueBinding->getDependencyId());
     Binding<Dependency> & binding = *static_cast<Binding<Dependency> *>(opaqueBinding.get());
 
@@ -186,7 +186,7 @@ public:
   void eagerlyProvide(Injector & injector, TypeIds & typeIds) {
     ScopedBindings & scopedBindings = bindingsInScope(typeIdOf<Scope>());
     for (ScopedBindings::iterator i = scopedBindings.begin(); i != scopedBindings.end(); ++i) {
-      OpaqueBindingPointer binding = *i;
+      BindingPointer binding = *i;
       binding->eagerlyProvide(injector, typeIds);
     }
   }
