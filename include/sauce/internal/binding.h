@@ -178,8 +178,8 @@ public:
     }
 
     OpaqueBindingPointer opaqueBinding = i->second;
-    assert((typeIdOf<Dependency>()) == opaqueBinding->getDependencyId());
 
+    assert((typeIdOf<Dependency>()) == opaqueBinding->getDependencyId());
     SAUCE_SHARED_PTR<Binding<Dependency> > binding =
       SAUCE_STATIC_POINTER_CAST<Binding<Dependency> >(opaqueBinding);
 
