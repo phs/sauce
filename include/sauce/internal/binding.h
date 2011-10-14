@@ -115,7 +115,7 @@ struct Binding:
   public OpaqueBinding {
 
   /**
-   * Provide an instance of Iface, using the given injector to resolve dependencies.
+   * Get an instance of Iface, using the given injector to provide dependencies.
    *
    * The typeIds indicate which keys are already currently being provided: this is used for
    * circular dependency detection.
