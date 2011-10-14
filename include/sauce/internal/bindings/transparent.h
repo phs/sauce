@@ -117,7 +117,7 @@ public:
   /**
    * Provide an instance of Iface.
    *
-   * Derived classes should not override this but provide().
+   * Derived classes should not override get(), but rather provide().
    */
   SAUCE_SHARED_PTR<Iface> get(BindingPointer binding, Injector & injector, TypeIds & typeIds) {
     SAUCE_SHARED_PTR<Iface> smartPointer;
