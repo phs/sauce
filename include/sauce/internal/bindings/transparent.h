@@ -41,7 +41,7 @@ class TransparentBinding;
  * A smart pointer deleter that diposes with a given binding.
  */
 template<typename Dependency, typename Scope, typename Impl>
-class BindingDeleter {
+class DisposalDeleter {
   typedef typename Key<Dependency>::Iface Iface;
   typedef SAUCE_SHARED_PTR<TransparentBinding<Dependency, Scope, Impl> > BindingPointer;
 
@@ -49,7 +49,7 @@ class BindingDeleter {
 
   BindingPointer binding;
 
-  BindingDeleter(BindingPointer binding):
+  DisposalDeleter(BindingPointer binding):
     binding(binding) {}
 
 public:
@@ -90,7 +90,7 @@ class TransparentBinding:
 
 public:
 
-  friend class BindingDeleter<Dependency, Scope, Impl>;
+  friend class DisposalDeleter<Dependency, Scope, Impl>;
 
   /**
    * The TypeId of the Dependency template parameter.
@@ -119,7 +119,7 @@ public:
       SAUCE_SHARED_PTR<ConcreteBinding> concrete =
         SAUCE_STATIC_POINTER_CAST<ConcreteBinding>(binding);
 
-      BindingDeleter<Dependency, Scope, Impl> deleter(concrete);
+      DisposalDeleter<Dependency, Scope, Impl> deleter(concrete);
       smartPointer.reset(provide(injector, typeIds), deleter);
       if (!unscoped) {
         putInScopeCache<Dependency, Scope>(injector, smartPointer);
