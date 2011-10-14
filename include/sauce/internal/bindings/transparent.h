@@ -42,14 +42,14 @@ class TransparentBinding;
  */
 template<typename Dependency, typename Scope, typename Impl>
 class BindingDeleter {
-
   typedef typename Key<Dependency>::Iface Iface;
+  typedef SAUCE_SHARED_PTR<TransparentBinding<Dependency, Scope, Impl> > BindingPointer;
 
   friend class TransparentBinding<Dependency, Scope, Impl>;
 
-  TransparentBinding<Dependency, Scope, Impl> * binding;
+  BindingPointer binding;
 
-  BindingDeleter(TransparentBinding<Dependency, Scope, Impl> * binding):
+  BindingDeleter(BindingPointer binding):
     binding(binding) {}
 
 public:
@@ -60,7 +60,6 @@ public:
   void operator()(Iface * iface) const {
     binding->dispose(static_cast<Impl *>(iface));
   }
-
 };
 
 /**
@@ -73,6 +72,7 @@ class TransparentBinding:
 
   typedef typename Key<Dependency>::Iface Iface;
   typedef typename Binding<Dependency>::BindingPointer BindingPointer;
+  typedef TransparentBinding<Dependency, Scope, Impl> ConcreteBinding;
 
   /**
    * Provide an instance of Impl.
@@ -111,14 +111,15 @@ public:
    *
    * Derived classes should not override this but provide().
    */
-  SAUCE_SHARED_PTR<Iface> get(BindingPointer, Injector & injector, TypeIds & typeIds) {
+  SAUCE_SHARED_PTR<Iface> get(BindingPointer binding, Injector & injector, TypeIds & typeIds) {
     SAUCE_SHARED_PTR<Iface> smartPointer;
 
     bool unscoped = typeIdOf<Scope>() == typeIdOf<NoScope>();
     if (unscoped || !getFromScopeCache<Dependency, Scope>(injector, smartPointer)) {
-      // TODO: there is no reason to think the deleter won't survive the binding.
-      // The parameter should be the shared_ptr shoved in the Bindings map.
-      BindingDeleter<Dependency, Scope, Impl> deleter(this);
+      SAUCE_SHARED_PTR<ConcreteBinding> concrete =
+        SAUCE_STATIC_POINTER_CAST<ConcreteBinding>(binding);
+
+      BindingDeleter<Dependency, Scope, Impl> deleter(concrete);
       smartPointer.reset(provide(injector, typeIds), deleter);
       if (!unscoped) {
         putInScopeCache<Dependency, Scope>(injector, smartPointer);
