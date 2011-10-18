@@ -71,7 +71,7 @@ public:
   }
 };
 
-class ScopeCache: public ScopeCacheTraits {
+class ScopesCache: public ScopeCacheTraits {
   Cache cache;
 
 public:

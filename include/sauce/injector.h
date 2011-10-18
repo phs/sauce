@@ -21,7 +21,7 @@ class UnscopedInjectorFriend;
 
 class UnscopedInjector {
   i::Bindings bindings;
-  i::ScopeCache scopeCache;
+  i::ScopesCache scopeCache;
   SAUCE_WEAK_PTR<UnscopedInjector> self;
 
   friend class Modules;
