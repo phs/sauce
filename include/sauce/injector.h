@@ -16,23 +16,23 @@ namespace sauce {
 class Modules;
 
 namespace internal {
-class InjectorFriend;
+class UnscopedInjectorFriend;
 }
 
-class Injector {
+class UnscopedInjector {
   i::Bindings bindings;
   i::ScopeCache scopeCache;
-  SAUCE_WEAK_PTR<Injector> self;
+  SAUCE_WEAK_PTR<UnscopedInjector> self;
 
   friend class Modules;
-  friend class i::InjectorFriend;
+  friend class i::UnscopedInjectorFriend;
 
-  Injector(i::Bindings & bindings):
+  UnscopedInjector(i::Bindings & bindings):
     bindings(bindings),
     scopeCache(),
     self() {}
 
-  void setSelf(SAUCE_SHARED_PTR<Injector> shared) {
+  void setSelf(SAUCE_SHARED_PTR<UnscopedInjector> shared) {
     assert(shared.get() == this);
     self = shared;
   }

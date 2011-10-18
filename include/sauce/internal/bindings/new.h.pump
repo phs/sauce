@@ -31,9 +31,9 @@ struct New<Dependency, Scope, Impl($As), Allocator>: public TransparentBinding<D
   typedef typename Allocator::template rebind<Impl>::other ImplAllocator;
 
 [[$if i==0 [[
-  Impl * provide(Injector &, TypeIds &)
+  Impl * provide(UnscopedInjector &, TypeIds &)
 ]] $else [[
-  Impl * provide(Injector & injector, TypeIds & typeIds)
+  Impl * provide(UnscopedInjector & injector, TypeIds & typeIds)
 ]]]]
  {
 [[$for j [[

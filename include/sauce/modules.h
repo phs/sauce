@@ -67,7 +67,7 @@ public:
 };
 
 /**
- * A factory that accepts Modules and creates Injectors.
+ * A factory that accepts Modules and creates UnscopedInjectors.
  */
 class Modules {
   i::Bindings bindings;
@@ -86,7 +86,7 @@ public:
    *
    * The module here is any value providing operator()(Binding & bindings).
    *
-   * An Injector created after adding a module will understand how to provide dependencies
+   * An UnscopedInjector created after adding a module will understand how to provide dependencies
    * specified by that module.
    */
   template<typename Module>
@@ -97,12 +97,13 @@ public:
   }
 
   /**
-   * Create an Injector that can provide dependencies specified by all added Modules.
+   * Create an UnscopedInjector that can provide dependencies specified by all added Modules.
    *
-   * Any modules added after an Injector is created will have no effect on that Injector.
+   * Any modules added after an UnscopedInjector is created will have no effect on that
+   * UnscopedInjector.
    */
-  SAUCE_SHARED_PTR<Injector> createInjector() {
-    SAUCE_SHARED_PTR<Injector> injector(new Injector(bindings));
+  SAUCE_SHARED_PTR<UnscopedInjector> createUnscopedInjector() {
+    SAUCE_SHARED_PTR<UnscopedInjector> injector(new UnscopedInjector(bindings));
     injector->setSelf(injector);
     return injector;
   }

@@ -8,7 +8,7 @@
 using ::testing::Sequence;
 using ::testing::Return;
 
-using ::sauce::Injector;
+using ::sauce::UnscopedInjector;
 using ::sauce::Modules;
 
 namespace sauce {
@@ -142,14 +142,14 @@ struct AllocationTest:
   SAUCE_SHARED_PTR<Herbie> vehicle;
 
   MockAllocation allocator;
-  SAUCE_SHARED_PTR<Injector> injector;
+  SAUCE_SHARED_PTR<UnscopedInjector> injector;
 
   AllocationTest():
     chasis(),
     engine(),
     vehicle(),
     allocator(),
-    injector(Modules().add(HerbieModule()).createInjector()) {}
+    injector(Modules().add(HerbieModule()).createUnscopedInjector()) {}
 
   virtual void SetUp() {
     // Clear the static counters
@@ -224,14 +224,14 @@ TEST_F(AllocationTest, shouldProvideAndDisposeOfDependenciesTransitively) {
 }
 
 TEST_F(AllocationTest, shouldCleanItselfUpAsExpected) {
-  SAUCE_WEAK_PTR<Injector> weak;
+  SAUCE_WEAK_PTR<UnscopedInjector> weak;
 
   {
-    SAUCE_SHARED_PTR<Injector> injector = Modules().createInjector();
+    SAUCE_SHARED_PTR<UnscopedInjector> injector = Modules().createUnscopedInjector();
     weak = injector;
   }
 
-  SAUCE_SHARED_PTR<Injector> injector = weak.lock();
+  SAUCE_SHARED_PTR<UnscopedInjector> injector = weak.lock();
   ASSERT_EQ(NULL, injector.get());
 }
 

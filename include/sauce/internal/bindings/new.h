@@ -26,7 +26,7 @@ struct New<Dependency, Scope, Impl(),
     Allocator>: public TransparentBinding<Dependency, Scope, Impl> {
   typedef typename Allocator::template rebind<Impl>::other ImplAllocator;
 
-  Impl * provide(Injector &, TypeIds &) {
+  Impl * provide(UnscopedInjector &, TypeIds &) {
     ImplAllocator allocator;
     Impl * impl = allocator.allocate(1);
     new(impl) Impl();
@@ -46,7 +46,7 @@ struct New<Dependency, Scope, Impl(A1),
     Allocator>: public TransparentBinding<Dependency, Scope, Impl> {
   typedef typename Allocator::template rebind<Impl>::other ImplAllocator;
 
-  Impl * provide(Injector & injector, TypeIds & typeIds) {
+  Impl * provide(UnscopedInjector & injector, TypeIds & typeIds) {
     typename i::Key<A1>::Ptr a1(this->template getDependency<A1>(injector,
         typeIds));
     ImplAllocator allocator;
@@ -68,7 +68,7 @@ struct New<Dependency, Scope, Impl(A1, A2),
     Allocator>: public TransparentBinding<Dependency, Scope, Impl> {
   typedef typename Allocator::template rebind<Impl>::other ImplAllocator;
 
-  Impl * provide(Injector & injector, TypeIds & typeIds) {
+  Impl * provide(UnscopedInjector & injector, TypeIds & typeIds) {
     typename i::Key<A1>::Ptr a1(this->template getDependency<A1>(injector,
         typeIds));
     typename i::Key<A2>::Ptr a2(this->template getDependency<A2>(injector,
@@ -92,7 +92,7 @@ struct New<Dependency, Scope, Impl(A1, A2, A3),
     Allocator>: public TransparentBinding<Dependency, Scope, Impl> {
   typedef typename Allocator::template rebind<Impl>::other ImplAllocator;
 
-  Impl * provide(Injector & injector, TypeIds & typeIds) {
+  Impl * provide(UnscopedInjector & injector, TypeIds & typeIds) {
     typename i::Key<A1>::Ptr a1(this->template getDependency<A1>(injector,
         typeIds));
     typename i::Key<A2>::Ptr a2(this->template getDependency<A2>(injector,
@@ -118,7 +118,7 @@ struct New<Dependency, Scope, Impl(A1, A2, A3, A4),
     Allocator>: public TransparentBinding<Dependency, Scope, Impl> {
   typedef typename Allocator::template rebind<Impl>::other ImplAllocator;
 
-  Impl * provide(Injector & injector, TypeIds & typeIds) {
+  Impl * provide(UnscopedInjector & injector, TypeIds & typeIds) {
     typename i::Key<A1>::Ptr a1(this->template getDependency<A1>(injector,
         typeIds));
     typename i::Key<A2>::Ptr a2(this->template getDependency<A2>(injector,
@@ -147,7 +147,7 @@ struct New<Dependency, Scope, Impl(A1, A2, A3, A4, A5),
     Allocator>: public TransparentBinding<Dependency, Scope, Impl> {
   typedef typename Allocator::template rebind<Impl>::other ImplAllocator;
 
-  Impl * provide(Injector & injector, TypeIds & typeIds) {
+  Impl * provide(UnscopedInjector & injector, TypeIds & typeIds) {
     typename i::Key<A1>::Ptr a1(this->template getDependency<A1>(injector,
         typeIds));
     typename i::Key<A2>::Ptr a2(this->template getDependency<A2>(injector,
@@ -178,7 +178,7 @@ struct New<Dependency, Scope, Impl(A1, A2, A3, A4, A5, A6),
     Allocator>: public TransparentBinding<Dependency, Scope, Impl> {
   typedef typename Allocator::template rebind<Impl>::other ImplAllocator;
 
-  Impl * provide(Injector & injector, TypeIds & typeIds) {
+  Impl * provide(UnscopedInjector & injector, TypeIds & typeIds) {
     typename i::Key<A1>::Ptr a1(this->template getDependency<A1>(injector,
         typeIds));
     typename i::Key<A2>::Ptr a2(this->template getDependency<A2>(injector,
@@ -211,7 +211,7 @@ struct New<Dependency, Scope, Impl(A1, A2, A3, A4, A5, A6, A7),
     Allocator>: public TransparentBinding<Dependency, Scope, Impl> {
   typedef typename Allocator::template rebind<Impl>::other ImplAllocator;
 
-  Impl * provide(Injector & injector, TypeIds & typeIds) {
+  Impl * provide(UnscopedInjector & injector, TypeIds & typeIds) {
     typename i::Key<A1>::Ptr a1(this->template getDependency<A1>(injector,
         typeIds));
     typename i::Key<A2>::Ptr a2(this->template getDependency<A2>(injector,
@@ -246,7 +246,7 @@ struct New<Dependency, Scope, Impl(A1, A2, A3, A4, A5, A6, A7, A8),
     Allocator>: public TransparentBinding<Dependency, Scope, Impl> {
   typedef typename Allocator::template rebind<Impl>::other ImplAllocator;
 
-  Impl * provide(Injector & injector, TypeIds & typeIds) {
+  Impl * provide(UnscopedInjector & injector, TypeIds & typeIds) {
     typename i::Key<A1>::Ptr a1(this->template getDependency<A1>(injector,
         typeIds));
     typename i::Key<A2>::Ptr a2(this->template getDependency<A2>(injector,
@@ -283,7 +283,7 @@ struct New<Dependency, Scope, Impl(A1, A2, A3, A4, A5, A6, A7, A8, A9),
     Allocator>: public TransparentBinding<Dependency, Scope, Impl> {
   typedef typename Allocator::template rebind<Impl>::other ImplAllocator;
 
-  Impl * provide(Injector & injector, TypeIds & typeIds) {
+  Impl * provide(UnscopedInjector & injector, TypeIds & typeIds) {
     typename i::Key<A1>::Ptr a1(this->template getDependency<A1>(injector,
         typeIds));
     typename i::Key<A2>::Ptr a2(this->template getDependency<A2>(injector,
@@ -323,7 +323,7 @@ struct New<Dependency, Scope, Impl(A1, A2, A3, A4, A5, A6, A7, A8, A9, A10),
     Allocator>: public TransparentBinding<Dependency, Scope, Impl> {
   typedef typename Allocator::template rebind<Impl>::other ImplAllocator;
 
-  Impl * provide(Injector & injector, TypeIds & typeIds) {
+  Impl * provide(UnscopedInjector & injector, TypeIds & typeIds) {
     typename i::Key<A1>::Ptr a1(this->template getDependency<A1>(injector,
         typeIds));
     typename i::Key<A2>::Ptr a2(this->template getDependency<A2>(injector,
