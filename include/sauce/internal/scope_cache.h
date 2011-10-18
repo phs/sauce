@@ -22,7 +22,7 @@ struct ScopeCacheTraits {
 };
 
 template<typename Dependency_, typename Scope>
-class ScopeCacheLine: public ScopeCacheTraits {
+class ScopesCacheLine: public ScopeCacheTraits {
   typedef typename Key<Dependency_>::Normalized Dependency;
   typedef typename Key<Dependency>::Ptr SmartPtr;
 
@@ -81,7 +81,7 @@ public:
    */
   template<typename Dependency, typename Scope>
   void put(typename Key<Dependency>::Ptr pointer) {
-    ScopeCacheLine<Dependency, Scope>::put(cache, pointer);
+    ScopesCacheLine<Dependency, Scope>::put(cache, pointer);
   }
 
   /**
@@ -92,7 +92,7 @@ public:
    */
   template<typename Dependency, typename Scope>
   bool get(typename Key<Dependency>::Ptr & out) {
-    return ScopeCacheLine<Dependency, Scope>::get(cache, out);
+    return ScopesCacheLine<Dependency, Scope>::get(cache, out);
   }
 
   /**
