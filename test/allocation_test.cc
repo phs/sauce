@@ -223,5 +223,17 @@ TEST_F(AllocationTest, shouldProvideAndDisposeOfDependenciesTransitively) {
   ASSERT_EQ(1, Herbie::destroyed);
 }
 
+TEST_F(AllocationTest, shouldCleanItselfUpAsExpected) {
+  SAUCE_WEAK_PTR<Injector> weak;
+
+  {
+    SAUCE_SHARED_PTR<Injector> injector = Modules().createInjector();
+    weak = injector;
+  }
+
+  SAUCE_SHARED_PTR<Injector> injector = weak.lock();
+  ASSERT_EQ(NULL, injector.get());
+}
+
 }
 }

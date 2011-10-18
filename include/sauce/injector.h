@@ -1,6 +1,8 @@
 #ifndef SAUCE_SAUCE_INJECTOR_H_
 #define SAUCE_SAUCE_INJECTOR_H_
 
+#include <cassert>
+
 #include <sauce/exceptions.h>
 #include <sauce/memory.h>
 #include <sauce/named.h>
@@ -20,13 +22,20 @@ class InjectorFriend;
 class Injector {
   i::Bindings bindings;
   i::ScopeCache scopeCache;
+  SAUCE_WEAK_PTR<Injector> self;
 
   friend class Modules;
   friend class i::InjectorFriend;
 
   Injector(i::Bindings & bindings):
     bindings(bindings),
-    scopeCache() {}
+    scopeCache(),
+    self() {}
+
+  void setSelf(SAUCE_SHARED_PTR<Injector> shared) {
+    assert(shared.get() == this);
+    self = shared;
+  }
 
   template<typename Dependency>
   typename i::Key<Dependency>::Ptr get(i::TypeIds & ids) {
