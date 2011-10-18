@@ -20,8 +20,8 @@ struct D {};
 struct N {};
 
 TEST(BindingTest, shouldThrowExceptionWhenGettingAnUnboundIface) {
-  Injector injector(Modules().createInjector());
-  ASSERT_THROW((injector.get<C>()), ::sauce::UnboundException);
+  SAUCE_SHARED_PTR<Injector> injector(Modules().createInjector());
+  ASSERT_THROW((injector->get<C>()), ::sauce::UnboundException);
 }
 
 struct B;
@@ -40,8 +40,8 @@ void CircularModule(Binder & binder) {
 }
 
 TEST(BindingTest, shouldThrowExceptionWhenResolvingCircularDependency) {
-  Injector injector(Modules().add(&CircularModule).createInjector());
-  ASSERT_THROW((injector.get<A>()), ::sauce::CircularDependencyException);
+  SAUCE_SHARED_PTR<Injector> injector(Modules().add(&CircularModule).createInjector());
+  ASSERT_THROW((injector->get<A>()), ::sauce::CircularDependencyException);
 }
 
 void IncompleteModule(Binder & binder) {
@@ -98,13 +98,13 @@ void AnimalModule(Binder & binder) {
 }
 
 TEST(BindingTest, shouldProvidedNamedDependencies) {
-  Injector injector(Modules().add(&AnimalModule).createInjector());
+  SAUCE_SHARED_PTR<Injector> injector(Modules().add(&AnimalModule).createInjector());
 
-  EXPECT_EQ("Meow",      (injector.get<Animal>()->says()));
-  EXPECT_EQ("Blub blub", (injector.get<Animal, Water>()->says()));
-  EXPECT_EQ("Moo",       (injector.get<Named<Animal, Farm> >()->says()));
+  EXPECT_EQ("Meow",      (injector->get<Animal>()->says()));
+  EXPECT_EQ("Blub blub", (injector->get<Animal, Water>()->says()));
+  EXPECT_EQ("Moo",       (injector->get<Named<Animal, Farm> >()->says()));
 
-  EXPECT_EQ("Blub blub", (injector.get<Pond>()->animal->says()));
+  EXPECT_EQ("Blub blub", (injector->get<Pond>()->animal->says()));
 }
 
 void IncompleteScopeModule(Binder & binder) {
@@ -146,38 +146,38 @@ void ScopedModule(Binder & binder) {
 }
 
 TEST(BindingTest, shouldProvidedScopedDependencies) {
-  Injector injector(Modules().add(&ScopedModule).createInjector());
+  SAUCE_SHARED_PTR<Injector> injector(Modules().add(&ScopedModule).createInjector());
 
-  SAUCE_SHARED_PTR<Singleton> aSingleton = injector.get<Singleton>();
-  SAUCE_SHARED_PTR<Singleton> theSameSingleton = injector.get<Singleton>();
-  injector.reenter<SingletonScope>();
-  SAUCE_SHARED_PTR<Singleton> aNewSingleton = injector.get<Singleton>();
+  SAUCE_SHARED_PTR<Singleton> aSingleton = injector->get<Singleton>();
+  SAUCE_SHARED_PTR<Singleton> theSameSingleton = injector->get<Singleton>();
+  injector->reenter<SingletonScope>();
+  SAUCE_SHARED_PTR<Singleton> aNewSingleton = injector->get<Singleton>();
   EXPECT_EQ(aSingleton, theSameSingleton);
   EXPECT_NE(aSingleton, aNewSingleton);
 
-  SAUCE_SHARED_PTR<Session> aSession = injector.get<Session>();
-  SAUCE_SHARED_PTR<Session> theSameSession = injector.get<Session>();
-  injector.reenter<SessionScope>();
-  SAUCE_SHARED_PTR<Session> aNewSession = injector.get<Session>();
+  SAUCE_SHARED_PTR<Session> aSession = injector->get<Session>();
+  SAUCE_SHARED_PTR<Session> theSameSession = injector->get<Session>();
+  injector->reenter<SessionScope>();
+  SAUCE_SHARED_PTR<Session> aNewSession = injector->get<Session>();
   EXPECT_EQ(aSession, theSameSession);
   EXPECT_NE(aSession, aNewSession);
 
-  SAUCE_SHARED_PTR<Request> aRequest = injector.get<Request>();
-  SAUCE_SHARED_PTR<Request> theSameRequest = injector.get<Request>();
-  injector.reenter<RequestScope>();
-  SAUCE_SHARED_PTR<Request> aNewRequest = injector.get<Request>();
+  SAUCE_SHARED_PTR<Request> aRequest = injector->get<Request>();
+  SAUCE_SHARED_PTR<Request> theSameRequest = injector->get<Request>();
+  injector->reenter<RequestScope>();
+  SAUCE_SHARED_PTR<Request> aNewRequest = injector->get<Request>();
   EXPECT_EQ(aRequest, theSameRequest);
   EXPECT_NE(aRequest, aNewRequest);
 
-  SAUCE_SHARED_PTR<C> aC = injector.get<C>();
-  SAUCE_SHARED_PTR<C> theSameC = injector.get<C>();
-  injector.reenter<MyScope>();
-  SAUCE_SHARED_PTR<C> aNewC = injector.get<C>();
+  SAUCE_SHARED_PTR<C> aC = injector->get<C>();
+  SAUCE_SHARED_PTR<C> theSameC = injector->get<C>();
+  injector->reenter<MyScope>();
+  SAUCE_SHARED_PTR<C> aNewC = injector->get<C>();
   EXPECT_EQ(aC, theSameC);
   EXPECT_NE(aC, aNewC);
 
-  SAUCE_SHARED_PTR<D> aD = injector.get<D>();
-  SAUCE_SHARED_PTR<D> aNewD = injector.get<D>();
+  SAUCE_SHARED_PTR<D> aD = injector->get<D>();
+  SAUCE_SHARED_PTR<D> aNewD = injector->get<D>();
   EXPECT_NE(aD, aNewD);
 }
 
@@ -197,8 +197,8 @@ void EagerlyScopedModule(Binder & binder) {
 }
 
 TEST(BindingTest, shouldProvidedScopedDependenciesEagerlyIfAsked) {
-  Injector injector(Modules().add(&EagerlyScopedModule).createInjector());
-  ASSERT_THROW(injector.eagerlyProvide<SingletonScope>(), CrankyConstructorException);
+  SAUCE_SHARED_PTR<Injector> injector(Modules().add(&EagerlyScopedModule).createInjector());
+  ASSERT_THROW(injector->eagerlyProvide<SingletonScope>(), CrankyConstructorException);
 }
 
 }

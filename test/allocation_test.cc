@@ -142,7 +142,7 @@ struct AllocationTest:
   SAUCE_SHARED_PTR<Herbie> vehicle;
 
   MockAllocation allocator;
-  Injector injector;
+  SAUCE_SHARED_PTR<Injector> injector;
 
   AllocationTest():
     chasis(),
@@ -176,7 +176,7 @@ TEST_F(AllocationTest, shouldProvideAndDisposeADependency) {
   EXPECT_CALL(allocator, deallocate(chasis.get(), 1));
 
   {
-    SAUCE_SHARED_PTR<Chasis> actual = injector.get<Chasis>();
+    SAUCE_SHARED_PTR<Chasis> actual = injector->get<Chasis>();
     ASSERT_EQ(1, CoupChasis::constructed);
     ASSERT_EQ(chasis.get(), actual.get());
   }
@@ -209,7 +209,7 @@ TEST_F(AllocationTest, shouldProvideAndDisposeOfDependenciesTransitively) {
     ASSERT_EQ(0, CoupChasis::constructed);
     ASSERT_EQ(0, HybridEngine::constructed);
     ASSERT_EQ(0, Herbie::constructed);
-    SAUCE_SHARED_PTR<Vehicle> actual = injector.get<Vehicle>();
+    SAUCE_SHARED_PTR<Vehicle> actual = injector->get<Vehicle>();
     ASSERT_EQ(1, CoupChasis::constructed);
     ASSERT_EQ(1, HybridEngine::constructed);
     ASSERT_EQ(1, Herbie::constructed);

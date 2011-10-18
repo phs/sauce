@@ -3,6 +3,7 @@
 
 #include <sauce/binder.h>
 #include <sauce/injector.h>
+#include <sauce/memory.h>
 #include <sauce/internal/binding.h>
 
 namespace sauce {
@@ -100,8 +101,8 @@ public:
    *
    * Any modules added after an Injector is created will have no effect on that Injector.
    */
-  Injector createInjector() {
-    return Injector(bindings);
+  SAUCE_SHARED_PTR<Injector> createInjector() {
+    return SAUCE_SHARED_PTR<Injector>(new Injector(bindings));
   }
 
 };
