@@ -21,6 +21,7 @@ class InjectorFriend;
 
 class Injector;
 
+// TODO push down into internal
 class UnscopedInjector {
   i::Bindings bindings;
 
@@ -44,7 +45,7 @@ class UnscopedInjector {
 };
 
 class Injector {
-  i::ScopesCache scopeCache;
+  i::ScopesCache scopeCache; // TODO ScopesCache must die! Long live ScopeCache..
   SAUCE_WEAK_PTR<Injector> weak;
   SAUCE_SHARED_PTR<Injector> next;
   SAUCE_SHARED_PTR<UnscopedInjector> unscoped;
@@ -103,6 +104,7 @@ public:
 
   template<typename Scope>
   void eagerlyProvide() {
+    // TODO recursion
     unscoped->eagerlyProvide<Scope>(*this);
   }
 

@@ -137,6 +137,7 @@ struct Request {
 
 struct MyScope {};
 
+// TODO Break out into separate file and fixture
 void ScopedModule(Binder & binder) {
   binder.bind<Singleton>().in<SingletonScope>().to<Singleton()>();
   binder.bind<Session>().in<SessionScope>().to<Session()>();
