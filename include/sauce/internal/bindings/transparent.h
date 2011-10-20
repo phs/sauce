@@ -17,7 +17,7 @@ protected:
 
   template<typename Dependency>
   typename i::Key<Dependency>::Ptr getDependency(Injector & injector, TypeIds & keys) {
-    return injector.get<Dependency>(keys);
+    return injector.get<Dependency>(injector, keys);
   }
 
   template<typename Dependency, typename Scope>

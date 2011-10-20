@@ -164,75 +164,75 @@ TEST(BindingTest, shouldScopeSingletonDependenciesByDefault) {
   EXPECT_NE(aSingleton, aNewSingleton);
 }
 
-// TEST(BindingTest, shouldScopeSessionDependenciesIfAsked) {
-//   SAUCE_SHARED_PTR<Injector> injector(Modules().add(&ScopedModule).createInjector());
-//
-//   SAUCE_SHARED_PTR<Session> aSession;
-//   SAUCE_SHARED_PTR<Session> theSameSession;
-//   SAUCE_SHARED_PTR<Session> aNewSession;
-//
-//   {
-//     SAUCE_SHARED_PTR<Injector> sessionScoped = injector.enter<SessionScope>();
-//     aSession = sessionScoped->get<Session>();
-//     theSameSession = sessionScoped->get<Session>();
-//   }
-//   EXPECT_EQ(aSession, theSameSession);
-//
-//   {
-//     SAUCE_SHARED_PTR<Injector> sessionScoped = injector.enter<SessionScope>();
-//     aNewSession = sessionScoped->get<Session>();
-//   }
-//   EXPECT_NE(aSession, aNewSession);
-// }
-//
-// TEST(BindingTest, shouldScopeRequestDependenciesIfAsked) {
-//   SAUCE_SHARED_PTR<Injector> injector(Modules().add(&ScopedModule).createInjector());
-//
-//   SAUCE_SHARED_PTR<Request> aRequest;
-//   SAUCE_SHARED_PTR<Request> theSameRequest;
-//   SAUCE_SHARED_PTR<Request> aNewRequest;
-//
-//   {
-//     SAUCE_SHARED_PTR<Injector> requestScoped = injector.enter<RequestScope>();
-//     aRequest = requestScoped->get<Request>();
-//     theSameRequest = requestScoped->get<Request>();
-//   }
-//   EXPECT_EQ(aRequest, theSameRequest);
-//
-//   {
-//     SAUCE_SHARED_PTR<Injector> requestScoped = injector.enter<RequestScope>();
-//     aNewRequest = requestScoped->get<Request>();
-//   }
-//   EXPECT_NE(aRequest, aNewRequest);
-// }
-//
-// TEST(BindingTest, shouldScopeCustomScopedDependenciesIfAsked) {
-//   SAUCE_SHARED_PTR<Injector> injector(Modules().add(&ScopedModule).createInjector());
-//
-//   SAUCE_SHARED_PTR<C> aC;
-//   SAUCE_SHARED_PTR<C> theSameC;
-//   SAUCE_SHARED_PTR<C> aNewC;
-//
-//   {
-//     SAUCE_SHARED_PTR<Injector> scoped = injector.enter<RequestScope>();
-//     aC = scoped->get<C>();
-//     theSameC = scoped->get<C>();
-//   }
-//   EXPECT_EQ(aC, theSameC);
-//
-//   {
-//     SAUCE_SHARED_PTR<Injector> scoped = injector.enter<RequestScope>();
-//     aNewC = scoped->get<C>();
-//   }
-//   EXPECT_NE(aC, aNewC);
-// }
-//
-// TEST(BindingTest, shouldNotScopeUnscopedDependencies) {
-//   SAUCE_SHARED_PTR<Injector> injector(Modules().add(&ScopedModule).createInjector());
-//   SAUCE_SHARED_PTR<D> aD = injector->get<D>();
-//   SAUCE_SHARED_PTR<D> aNewD = injector->get<D>();
-//   EXPECT_NE(aD, aNewD);
-// }
+TEST(BindingTest, shouldScopeSessionDependenciesIfAsked) {
+  SAUCE_SHARED_PTR<Injector> injector(Modules().add(&ScopedModule).createInjector());
+
+  SAUCE_SHARED_PTR<Session> aSession;
+  SAUCE_SHARED_PTR<Session> theSameSession;
+  SAUCE_SHARED_PTR<Session> aNewSession;
+
+  {
+    SAUCE_SHARED_PTR<Injector> sessionScoped = injector->enter<SessionScope>();
+    aSession = sessionScoped->get<Session>();
+    theSameSession = sessionScoped->get<Session>();
+  }
+  EXPECT_EQ(aSession, theSameSession);
+
+  {
+    SAUCE_SHARED_PTR<Injector> sessionScoped = injector->enter<SessionScope>();
+    aNewSession = sessionScoped->get<Session>();
+  }
+  EXPECT_NE(aSession, aNewSession);
+}
+
+TEST(BindingTest, shouldScopeRequestDependenciesIfAsked) {
+  SAUCE_SHARED_PTR<Injector> injector(Modules().add(&ScopedModule).createInjector());
+
+  SAUCE_SHARED_PTR<Request> aRequest;
+  SAUCE_SHARED_PTR<Request> theSameRequest;
+  SAUCE_SHARED_PTR<Request> aNewRequest;
+
+  {
+    SAUCE_SHARED_PTR<Injector> requestScoped = injector->enter<RequestScope>();
+    aRequest = requestScoped->get<Request>();
+    theSameRequest = requestScoped->get<Request>();
+  }
+  EXPECT_EQ(aRequest, theSameRequest);
+
+  {
+    SAUCE_SHARED_PTR<Injector> requestScoped = injector->enter<RequestScope>();
+    aNewRequest = requestScoped->get<Request>();
+  }
+  EXPECT_NE(aRequest, aNewRequest);
+}
+
+TEST(BindingTest, shouldScopeCustomScopedDependenciesIfAsked) {
+  SAUCE_SHARED_PTR<Injector> injector(Modules().add(&ScopedModule).createInjector());
+
+  SAUCE_SHARED_PTR<C> aC;
+  SAUCE_SHARED_PTR<C> theSameC;
+  SAUCE_SHARED_PTR<C> aNewC;
+
+  {
+    SAUCE_SHARED_PTR<Injector> scoped = injector->enter<RequestScope>();
+    aC = scoped->get<C>();
+    theSameC = scoped->get<C>();
+  }
+  EXPECT_EQ(aC, theSameC);
+
+  {
+    SAUCE_SHARED_PTR<Injector> scoped = injector->enter<RequestScope>();
+    aNewC = scoped->get<C>();
+  }
+  EXPECT_NE(aC, aNewC);
+}
+
+TEST(BindingTest, shouldNotScopeUnscopedDependencies) {
+  SAUCE_SHARED_PTR<Injector> injector(Modules().add(&ScopedModule).createInjector());
+  SAUCE_SHARED_PTR<D> aD = injector->get<D>();
+  SAUCE_SHARED_PTR<D> aNewD = injector->get<D>();
+  EXPECT_NE(aD, aNewD);
+}
 
 struct CrankyConstructorException: public std::runtime_error {
   CrankyConstructorException():

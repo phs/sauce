@@ -45,7 +45,7 @@ class UnscopedInjector {
 
 class Injector {
   i::ScopesCache scopeCache;
-  SAUCE_WEAK_PTR<Injector> self;
+  SAUCE_WEAK_PTR<Injector> weak;
   SAUCE_SHARED_PTR<Injector> next;
   SAUCE_SHARED_PTR<UnscopedInjector> unscoped;
 
@@ -54,24 +54,28 @@ class Injector {
 
   Injector(SAUCE_SHARED_PTR<Injector> next):
     scopeCache(),
-    self(),
+    weak(),
     next(next),
     unscoped() {}
 
   Injector(i::Bindings & bindings):
     scopeCache(),
-    self(),
+    weak(),
     next(),
     unscoped(new UnscopedInjector(bindings)) {}
 
   void setSelf(SAUCE_SHARED_PTR<Injector> shared) {
     assert(shared.get() == this);
-    self = shared;
+    weak = shared;
   }
 
   template<typename Dependency>
-  typename i::Key<Dependency>::Ptr get(i::TypeIds & ids) {
-    return unscoped->get<Dependency>(*this, ids);
+  typename i::Key<Dependency>::Ptr get(Injector & injector, i::TypeIds & ids) {
+    if (unscoped.get() == NULL) {
+      return next->get<Dependency>(injector, ids);
+    } else {
+      return unscoped->get<Dependency>(injector, ids);
+    }
   }
 
 public:
@@ -79,7 +83,7 @@ public:
   template<typename Dependency>
   typename i::Key<Dependency>::Ptr get() {
     i::TypeIds ids;
-    return get<Dependency>(ids);
+    return get<Dependency>(*this, ids);
   }
 
   template<typename Iface, typename Name>
@@ -88,8 +92,13 @@ public:
   }
 
   template<typename Scope>
-  void reenter() {
-    scopeCache.clear<Scope>();
+  SAUCE_SHARED_PTR<Injector> enter() {
+    SAUCE_SHARED_PTR<Injector> self = weak.lock();
+    assert(self.get() == this);
+
+    SAUCE_SHARED_PTR<Injector> scoped(new Injector(self));
+    scoped->setSelf(scoped);
+    return scoped;
   }
 
   template<typename Scope>
