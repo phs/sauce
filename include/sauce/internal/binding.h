@@ -16,6 +16,7 @@
 
 namespace sauce {
 
+class Injector;
 class UnscopedInjector;
 
 namespace internal {
@@ -77,7 +78,7 @@ struct OpaqueBinding {
   /**
    * The TypeId of the (hidden) provided dependency.
    *
-   * The dependency id finger prints which provision requests we can satisfy in an UnscopedInjector.
+   * The dependency id finger prints which provision requests we can satisfy in an Injector.
    */
   virtual TypeId getDependencyId() = 0;
 
@@ -93,7 +94,7 @@ struct OpaqueBinding {
    * do nothing.  The typeIds indicate which keys are already currently being provided to detect
    * circular dependencies.
    */
-  virtual void eagerlyProvide(OpaqueBindingPointer, UnscopedInjector &, TypeIds &) {}
+  virtual void eagerlyProvide(OpaqueBindingPointer, Injector &, TypeIds &) {}
 
 };
 
@@ -114,7 +115,7 @@ struct Binding:
    * The typeIds indicate which keys are already currently being provided to detect circular
    * dependencies.
    */
-  virtual typename Key<Dependency>::Ptr get(BindingPointer, UnscopedInjector &, TypeIds &) = 0;
+  virtual typename Key<Dependency>::Ptr get(BindingPointer, Injector &, TypeIds &) = 0;
 
 };
 
@@ -185,7 +186,7 @@ public:
    * If no binding is found, throw UnboundException.
    */
   template<typename Dependency>
-  typename Key<Dependency>::Ptr get(UnscopedInjector & injector, TypeIds & typeIds) {
+  typename Key<Dependency>::Ptr get(Injector & injector, TypeIds & typeIds) {
     std::map<TypeId, OpaqueBindingPointer>::iterator i = bindingMap.find(typeIdOf<Dependency>());
     if (i == bindingMap.end()) {
       throw UnboundExceptionFor<Dependency>();
@@ -196,7 +197,7 @@ public:
   }
 
   template<typename Scope>
-  void eagerlyProvide(UnscopedInjector & injector, TypeIds & typeIds) {
+  void eagerlyProvide(Injector & injector, TypeIds & typeIds) {
     ScopedBindings & scopedBindings = bindingsInScope(typeIdOf<Scope>());
     for (ScopedBindings::iterator i = scopedBindings.begin(); i != scopedBindings.end(); ++i) {
       OpaqueBindingPointer binding = *i;

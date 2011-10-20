@@ -16,23 +16,20 @@ namespace sauce {
 class Modules;
 
 namespace internal {
-class UnscopedInjectorFriend;
+class InjectorFriend;
 }
 
 class Injector;
 
 class UnscopedInjector {
   i::Bindings bindings;
-  i::ScopesCache scopeCache;
   SAUCE_WEAK_PTR<UnscopedInjector> self;
 
   friend class Modules;
   friend class Injector;
-  friend class i::UnscopedInjectorFriend;
 
   UnscopedInjector(i::Bindings & bindings):
     bindings(bindings),
-    scopeCache(),
     self() {}
 
   void setSelf(SAUCE_SHARED_PTR<UnscopedInjector> shared) {
@@ -41,41 +38,40 @@ class UnscopedInjector {
   }
 
   template<typename Dependency>
-  typename i::Key<Dependency>::Ptr get(i::TypeIds & ids) {
+  typename i::Key<Dependency>::Ptr get(Injector & injector, i::TypeIds & ids) {
     typedef typename i::Key<Dependency>::Normalized Normalized;
     i::CircularDependencyGuard<Normalized> guard(ids);
-    return bindings.get<Normalized>(*this, ids);
+    return bindings.get<Normalized>(injector, ids);
   }
 
   template<typename Scope>
-  void reenter() {
-    scopeCache.clear<Scope>();
-  }
-
-  template<typename Scope>
-  void eagerlyProvide() {
+  void eagerlyProvide(Injector & injector) {
     i::TypeIds ids;
-    bindings.eagerlyProvide<Scope>(*this, ids);
+    bindings.eagerlyProvide<Scope>(injector, ids);
   }
 };
 
 class Injector {
+  i::ScopesCache scopeCache;
   SAUCE_SHARED_PTR<Injector> next;
   SAUCE_SHARED_PTR<UnscopedInjector> unscoped;
 
   friend class Modules;
+  friend class i::InjectorFriend;
 
   Injector(SAUCE_SHARED_PTR<Injector> next):
+    scopeCache(),
     next(next),
     unscoped() {}
 
   Injector(SAUCE_SHARED_PTR<UnscopedInjector> unscoped):
+    scopeCache(),
     next(),
     unscoped(unscoped) {}
 
   template<typename Dependency>
   typename i::Key<Dependency>::Ptr get(i::TypeIds & ids) {
-    return unscoped->get<Dependency>(ids);
+    return unscoped->get<Dependency>(*this, ids);
   }
 
 public:
@@ -93,12 +89,12 @@ public:
 
   template<typename Scope>
   void reenter() {
-    unscoped->reenter<Scope>();
+    scopeCache.clear<Scope>();
   }
 
   template<typename Scope>
   void eagerlyProvide() {
-    unscoped->eagerlyProvide<Scope>();
+    unscoped->eagerlyProvide<Scope>(*this);
   }
 
 };
