@@ -23,19 +23,12 @@ class Injector;
 
 class UnscopedInjector {
   i::Bindings bindings;
-  SAUCE_WEAK_PTR<UnscopedInjector> self;
 
   friend class Modules;
   friend class Injector;
 
   UnscopedInjector(i::Bindings & bindings):
-    bindings(bindings),
-    self() {}
-
-  void setSelf(SAUCE_SHARED_PTR<UnscopedInjector> shared) {
-    assert(shared.get() == this);
-    self = shared;
-  }
+    bindings(bindings) {}
 
   template<typename Dependency>
   typename i::Key<Dependency>::Ptr get(Injector & injector, i::TypeIds & ids) {
@@ -53,6 +46,7 @@ class UnscopedInjector {
 
 class Injector {
   i::ScopesCache scopeCache;
+  SAUCE_WEAK_PTR<Injector> self;
   SAUCE_SHARED_PTR<Injector> next;
   SAUCE_SHARED_PTR<UnscopedInjector> unscoped;
 
@@ -61,13 +55,20 @@ class Injector {
 
   Injector(SAUCE_SHARED_PTR<Injector> next):
     scopeCache(),
+    self(),
     next(next),
     unscoped() {}
 
   Injector(SAUCE_SHARED_PTR<UnscopedInjector> unscoped):
     scopeCache(),
+    self(),
     next(),
     unscoped(unscoped) {}
+
+  void setSelf(SAUCE_SHARED_PTR<Injector> shared) {
+    assert(shared.get() == this);
+    self = shared;
+  }
 
   template<typename Dependency>
   typename i::Key<Dependency>::Ptr get(i::TypeIds & ids) {

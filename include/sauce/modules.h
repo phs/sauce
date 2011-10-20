@@ -104,9 +104,8 @@ public:
    */
   SAUCE_SHARED_PTR<Injector> createInjector() {
     SAUCE_SHARED_PTR<UnscopedInjector> unscoped(new UnscopedInjector(bindings));
-    unscoped->setSelf(unscoped);
-
     SAUCE_SHARED_PTR<Injector> injector(new Injector(unscoped));
+    injector->setSelf(injector);
     return injector;
   }
 
