@@ -73,12 +73,17 @@ class Injector {
     next(),
     unscoped(unscoped) {}
 
+  template<typename Dependency>
+  typename i::Key<Dependency>::Ptr get(i::TypeIds & ids) {
+    return unscoped->get<Dependency>(ids);
+  }
+
 public:
 
   template<typename Dependency>
   typename i::Key<Dependency>::Ptr get() {
     i::TypeIds ids;
-    return unscoped->get<Dependency>(ids);
+    return get<Dependency>(ids);
   }
 
   template<typename Iface, typename Name>
