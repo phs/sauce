@@ -24,7 +24,6 @@ class Injector;
 class UnscopedInjector {
   i::Bindings bindings;
 
-  friend class Modules;
   friend class Injector;
 
   UnscopedInjector(i::Bindings & bindings):
@@ -59,11 +58,11 @@ class Injector {
     next(next),
     unscoped() {}
 
-  Injector(SAUCE_SHARED_PTR<UnscopedInjector> unscoped):
+  Injector(i::Bindings & bindings):
     scopeCache(),
     self(),
     next(),
-    unscoped(unscoped) {}
+    unscoped(new UnscopedInjector(bindings)) {}
 
   void setSelf(SAUCE_SHARED_PTR<Injector> shared) {
     assert(shared.get() == this);
