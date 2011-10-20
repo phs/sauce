@@ -47,19 +47,6 @@ class UnscopedInjector {
     return bindings.get<Normalized>(*this, ids);
   }
 
-public:
-
-  template<typename Dependency>
-  typename i::Key<Dependency>::Ptr get() {
-    i::TypeIds ids;
-    return get<Dependency>(ids);
-  }
-
-  template<typename Iface, typename Name>
-  typename i::Key<Named<Iface, Name> >::Ptr get() {
-    return get<Named<Iface, Name> >();
-  }
-
   template<typename Scope>
   void reenter() {
     scopeCache.clear<Scope>();
@@ -70,7 +57,6 @@ public:
     i::TypeIds ids;
     bindings.eagerlyProvide<Scope>(*this, ids);
   }
-
 };
 
 class Injector {
