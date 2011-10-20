@@ -8,7 +8,7 @@ namespace internal {
  * An opaque, reflective value representing an arbitrary type.
  *
  * TypeIds are opaque objects that fingerprint possible requests one may make
- * to an UnscopedInjector.  They are values (not types) with a total ordering.  This
+ * to an Injector.  They are values (not types) with a total ordering.  This
  * allows us to do arbitrary binding resolution, but only at runtime.
  *
  * Concretely, they are function pointers: the total ordering is that of the

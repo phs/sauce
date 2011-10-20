@@ -19,12 +19,15 @@ namespace internal {
 class UnscopedInjectorFriend;
 }
 
+class Injector;
+
 class UnscopedInjector {
   i::Bindings bindings;
   i::ScopesCache scopeCache;
   SAUCE_WEAK_PTR<UnscopedInjector> self;
 
   friend class Modules;
+  friend class Injector;
   friend class i::UnscopedInjectorFriend;
 
   UnscopedInjector(i::Bindings & bindings):
@@ -66,6 +69,45 @@ public:
   void eagerlyProvide() {
     i::TypeIds ids;
     bindings.eagerlyProvide<Scope>(*this, ids);
+  }
+
+};
+
+class Injector {
+  SAUCE_SHARED_PTR<Injector> next;
+  SAUCE_SHARED_PTR<UnscopedInjector> unscoped;
+
+  friend class Modules;
+
+  Injector(SAUCE_SHARED_PTR<Injector> next):
+    next(next),
+    unscoped() {}
+
+  Injector(SAUCE_SHARED_PTR<UnscopedInjector> unscoped):
+    next(),
+    unscoped(unscoped) {}
+
+public:
+
+  template<typename Dependency>
+  typename i::Key<Dependency>::Ptr get() {
+    i::TypeIds ids;
+    return unscoped->get<Dependency>(ids);
+  }
+
+  template<typename Iface, typename Name>
+  typename i::Key<Named<Iface, Name> >::Ptr get() {
+    return get<Named<Iface, Name> >();
+  }
+
+  template<typename Scope>
+  void reenter() {
+    unscoped->reenter<Scope>();
+  }
+
+  template<typename Scope>
+  void eagerlyProvide() {
+    unscoped->eagerlyProvide<Scope>();
   }
 
 };
