@@ -1,6 +1,7 @@
 #ifndef SAUCE_SAUCE_INTERNAL_UNSCOPED_INJECTOR_H_
 #define SAUCE_SAUCE_INTERNAL_UNSCOPED_INJECTOR_H_
 
+#include <sauce/exceptions.h>
 #include <sauce/internal/binding.h>
 #include <sauce/internal/key.h>
 #include <sauce/internal/type_id.h>

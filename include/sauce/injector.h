@@ -3,7 +3,6 @@
 
 #include <cassert>
 
-#include <sauce/exceptions.h>
 #include <sauce/memory.h>
 #include <sauce/named.h>
 #include <sauce/internal/binding.h>
