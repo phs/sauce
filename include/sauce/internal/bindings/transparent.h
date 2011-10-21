@@ -22,12 +22,12 @@ protected:
 
   template<typename Dependency, typename Scope>
   void putInScopeCache(Injector & injector, typename i::Key<Dependency>::Ptr pointer) {
-    injector.scopeCache.template put<Dependency, Scope>(pointer);
+    injector.template putInScopeCache<Dependency, Scope>(pointer);
   }
 
   template<typename Dependency, typename Scope>
   bool getFromScopeCache(Injector & injector, typename i::Key<Dependency>::Ptr & out) {
-    return injector.scopeCache.template get<Dependency, Scope>(out);
+    return injector.template getFromScopeCache<Dependency, Scope>(out);
   }
 
 };
