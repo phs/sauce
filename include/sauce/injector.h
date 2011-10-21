@@ -10,6 +10,7 @@
 #include <sauce/internal/key.h>
 #include <sauce/internal/scope_cache.h>
 #include <sauce/internal/type_id.h>
+#include <sauce/internal/unscoped_injector.h>
 
 namespace sauce {
 
@@ -19,36 +20,11 @@ namespace internal {
 class InjectorFriend;
 }
 
-class Injector;
-
-// TODO push down into internal
-class UnscopedInjector {
-  i::Bindings bindings;
-
-  friend class Injector;
-
-  UnscopedInjector(i::Bindings & bindings):
-    bindings(bindings) {}
-
-  template<typename Dependency>
-  typename i::Key<Dependency>::Ptr get(Injector & injector, i::TypeIds & ids) {
-    typedef typename i::Key<Dependency>::Normalized Normalized;
-    i::CircularDependencyGuard<Normalized> guard(ids);
-    return bindings.get<Normalized>(injector, ids);
-  }
-
-  template<typename Scope>
-  void eagerlyProvide(Injector & injector) {
-    i::TypeIds ids;
-    bindings.eagerlyProvide<Scope>(injector, ids);
-  }
-};
-
 class Injector {
   i::ScopesCache scopeCache; // TODO ScopesCache must die! Long live ScopeCache..
   SAUCE_WEAK_PTR<Injector> weak;
   SAUCE_SHARED_PTR<Injector> next;
-  SAUCE_SHARED_PTR<UnscopedInjector> unscoped;
+  SAUCE_SHARED_PTR<i::UnscopedInjector> unscoped;
 
   friend class Modules;
   friend class i::InjectorFriend;
@@ -63,7 +39,7 @@ class Injector {
     scopeCache(),
     weak(),
     next(),
-    unscoped(new UnscopedInjector(bindings)) {}
+    unscoped(new i::UnscopedInjector(bindings)) {}
 
   void setSelf(SAUCE_SHARED_PTR<Injector> shared) {
     assert(shared.get() == this);

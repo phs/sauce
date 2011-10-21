@@ -17,35 +17,8 @@
 namespace sauce {
 
 class Injector;
-class UnscopedInjector;
 
 namespace internal {
-
-/**
- * Detects circular dependencies on behalf of injectors.
- */
-template<typename Dependency>
-class CircularDependencyGuard {
-  friend class ::sauce::UnscopedInjector;
-
-  TypeIds & ids;
-  TypeId id;
-
-  CircularDependencyGuard(TypeIds & ids):
-    ids(ids),
-    id(typeIdOf<Dependency>()) {
-    TypeIds::iterator i = ids.find(id);
-    if (i == ids.end()) {
-      ids.insert(i, id);
-    } else {
-      throw CircularDependencyExceptionFor<Dependency>();
-    }
-  }
-
-  ~CircularDependencyGuard() {
-    ids.erase(id);
-  }
-};
 
 template<typename Dependency>
 class Binding;
