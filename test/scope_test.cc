@@ -150,13 +150,13 @@ struct CrankyConstructor {
 };
 
 void EagerlyScopedModule(Binder & binder) {
-  binder.bind<CrankyConstructor>().in<SingletonScope>().to<CrankyConstructor()>();
+  binder.bind<CrankyConstructor>().in<RequestScope>().to<CrankyConstructor()>();
 }
 
 TEST_F(ScopeTest, shouldProvidedScopedDependenciesEagerlyIfAsked) {
   SAUCE_SHARED_PTR<Injector> injector =
     Modules().add(&EagerlyScopedModule).createInjector();
-  ASSERT_THROW(injector->eagerlyProvide<SingletonScope>(), CrankyConstructorException);
+  ASSERT_THROW(injector->eagerlyProvide<RequestScope>(), CrankyConstructorException);
 }
 
 }
