@@ -21,7 +21,7 @@ class InjectorFriend;
 
 class Injector {
   i::TypeId scopeKey;
-  i::ScopesCache scopeCache; // TODO ScopesCache must die! Long live ScopeCache..
+  i::ScopeCache scopeCache;
   SAUCE_WEAK_PTR<Injector> weak;
   SAUCE_SHARED_PTR<Injector> next;
   SAUCE_SHARED_PTR<i::UnscopedInjector> unscoped;
@@ -69,7 +69,7 @@ class Injector {
   template<typename Dependency, typename Scope>
   void cache(typename i::Key<Dependency>::Ptr pointer) {
     if (scopeKey == i::typeIdOf<Scope>()) {
-      scopeCache.template put<Dependency, Scope>(pointer);
+      scopeCache.template put<Dependency>(pointer);
     } else if (next.get() == NULL) {
       // TODO: explode!
     } else {
@@ -80,7 +80,7 @@ class Injector {
   template<typename Dependency, typename Scope>
   bool probe(typename i::Key<Dependency>::Ptr & out) {
     if (scopeKey == i::typeIdOf<Scope>()) {
-      return scopeCache.template get<Dependency, Scope>(out);
+      return scopeCache.template get<Dependency>(out);
     } else if (next.get() == NULL) {
       // TODO: explode!
       return false;
