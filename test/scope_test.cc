@@ -153,10 +153,18 @@ void EagerlyScopedModule(Binder & binder) {
   binder.bind<CrankyConstructor>().in<RequestScope>().to<CrankyConstructor()>();
 }
 
-TEST_F(ScopeTest, shouldProvidedScopedDependenciesEagerlyIfAsked) {
-  SAUCE_SHARED_PTR<Injector> injector =
-    Modules().add(&EagerlyScopedModule).createInjector();
-  ASSERT_THROW(injector->eagerlyProvide<RequestScope>(), CrankyConstructorException);
+struct EagerlyScopeTest:
+  public ::testing::Test {
+
+  SAUCE_SHARED_PTR<Injector> injector;
+
+  EagerlyScopeTest():
+    injector(Modules().add(&EagerlyScopedModule).createInjector()) {}
+};
+
+TEST_F(EagerlyScopeTest, shouldProvidedScopedDependenciesEagerlyIfAsked) {
+  SAUCE_SHARED_PTR<Injector> requestScoped = injector->enter<RequestScope>();
+  ASSERT_THROW(requestScoped->eagerlyProvide<RequestScope>(), CrankyConstructorException);
 }
 
 }

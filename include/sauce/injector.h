@@ -79,6 +79,15 @@ class Injector {
     }
   }
 
+  template<typename Scope>
+  void eagerlyProvide(Injector & injector) {
+    if (unscoped.get() == NULL) {
+      next->eagerlyProvide<Scope>(injector);
+    } else {
+      unscoped->eagerlyProvide<Scope>(injector);
+    }
+  }
+
 public:
 
   template<typename Dependency>
@@ -104,8 +113,7 @@ public:
 
   template<typename Scope>
   void eagerlyProvide() {
-    // TODO recursion
-    unscoped->eagerlyProvide<Scope>(*this);
+    eagerlyProvide<Scope>(*this);
   }
 
 };
