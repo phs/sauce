@@ -20,6 +20,7 @@ class InjectorFriend;
 }
 
 class Injector {
+  i::TypeId scopeKey;
   i::ScopesCache scopeCache; // TODO ScopesCache must die! Long live ScopeCache..
   SAUCE_WEAK_PTR<Injector> weak;
   SAUCE_SHARED_PTR<Injector> next;
@@ -28,13 +29,15 @@ class Injector {
   friend class Modules;
   friend class i::InjectorFriend;
 
-  Injector(SAUCE_SHARED_PTR<Injector> next):
+  Injector(i::TypeId scopeKey, SAUCE_SHARED_PTR<Injector> next):
+    scopeKey(scopeKey),
     scopeCache(),
     weak(),
     next(next),
     unscoped() {}
 
   Injector(i::Bindings & bindings):
+    scopeKey(i::typeIdOf<SingletonScope>()),
     scopeCache(),
     weak(),
     next(),
@@ -81,7 +84,7 @@ public:
     SAUCE_SHARED_PTR<Injector> self = weak.lock();
     assert(self.get() == this);
 
-    SAUCE_SHARED_PTR<Injector> scoped(new Injector(self));
+    SAUCE_SHARED_PTR<Injector> scoped(new Injector(i::typeIdOf<Scope>(), self));
     scoped->setSelf(scoped);
     return scoped;
   }
