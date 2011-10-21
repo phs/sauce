@@ -42,12 +42,15 @@ struct ScopeTest:
   public ::testing::Test {
 
   Modules modules;
+  SAUCE_SHARED_PTR<Injector> injector;
 
   ScopeTest():
-    modules() {}
+    modules(),
+    injector() {}
 
   virtual void SetUp() {
     modules.add(&ScopedModule);
+    injector = modules.createInjector();
   }
 };
 
@@ -57,22 +60,20 @@ TEST_F(ScopeTest, shouldScopeSingletonDependenciesByDefault) {
   SAUCE_SHARED_PTR<Singleton> aNewSingleton;
 
   {
-    SAUCE_SHARED_PTR<Injector> injector(modules.createInjector());
-    aSingleton = injector->get<Singleton>();
-    theSameSingleton = injector->get<Singleton>();
+    SAUCE_SHARED_PTR<Injector> singletonScoped(modules.createInjector());
+    aSingleton = singletonScoped->get<Singleton>();
+    theSameSingleton = singletonScoped->get<Singleton>();
   }
   EXPECT_EQ(aSingleton, theSameSingleton);
 
   {
-    SAUCE_SHARED_PTR<Injector> injector(modules.createInjector());
-    aNewSingleton = injector->get<Singleton>();
+    SAUCE_SHARED_PTR<Injector> singletonScoped(modules.createInjector());
+    aNewSingleton = singletonScoped->get<Singleton>();
   }
   EXPECT_NE(aSingleton, aNewSingleton);
 }
 
 TEST_F(ScopeTest, shouldScopeSessionDependenciesIfAsked) {
-  SAUCE_SHARED_PTR<Injector> injector(modules.createInjector());
-
   SAUCE_SHARED_PTR<Session> aSession;
   SAUCE_SHARED_PTR<Session> theSameSession;
   SAUCE_SHARED_PTR<Session> aNewSession;
@@ -92,8 +93,6 @@ TEST_F(ScopeTest, shouldScopeSessionDependenciesIfAsked) {
 }
 
 TEST_F(ScopeTest, shouldScopeRequestDependenciesIfAsked) {
-  SAUCE_SHARED_PTR<Injector> injector(modules.createInjector());
-
   SAUCE_SHARED_PTR<Request> aRequest;
   SAUCE_SHARED_PTR<Request> theSameRequest;
   SAUCE_SHARED_PTR<Request> aNewRequest;
@@ -113,8 +112,6 @@ TEST_F(ScopeTest, shouldScopeRequestDependenciesIfAsked) {
 }
 
 TEST_F(ScopeTest, shouldScopeCustomScopedDependenciesIfAsked) {
-  SAUCE_SHARED_PTR<Injector> injector(modules.createInjector());
-
   SAUCE_SHARED_PTR<C> aC;
   SAUCE_SHARED_PTR<C> theSameC;
   SAUCE_SHARED_PTR<C> aNewC;
@@ -133,8 +130,9 @@ TEST_F(ScopeTest, shouldScopeCustomScopedDependenciesIfAsked) {
   EXPECT_NE(aC, aNewC);
 }
 
+// TEST_F(ScopeTest, shouldNestScopes) {}
+
 TEST_F(ScopeTest, shouldNotScopeUnscopedDependencies) {
-  SAUCE_SHARED_PTR<Injector> injector(modules.createInjector());
   SAUCE_SHARED_PTR<D> aD = injector->get<D>();
   SAUCE_SHARED_PTR<D> aNewD = injector->get<D>();
   EXPECT_NE(aD, aNewD);
