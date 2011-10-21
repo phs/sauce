@@ -142,7 +142,7 @@ TEST_F(ScopeTest, shouldNestScopes) {
   EXPECT_EQ(aSingleton, theSameSingleton);
 }
 
-TEST_F(ScopeTest, shouldParallelizeScopes) {
+TEST_F(ScopeTest, shouldReenterScopesInParallelize) {
   SAUCE_SHARED_PTR<Injector> aSessionScope = injector->enter<SessionScope>();
   SAUCE_SHARED_PTR<Injector> aNewSessionScope = injector->enter<SessionScope>();
 
@@ -150,6 +150,14 @@ TEST_F(ScopeTest, shouldParallelizeScopes) {
   SAUCE_SHARED_PTR<Session> aNewSession = aNewSessionScope->get<Session>();
 
   EXPECT_NE(aSession, aNewSession);
+}
+
+/*
+ * There's no strong argument for this constraint, except perhaps the principle of least surprise.
+ */
+TEST_F(ScopeTest, shouldNotReenterScopesInSeries) {
+  SAUCE_SHARED_PTR<Injector> sessionScoped = injector->enter<SessionScope>();
+  ASSERT_THROW(sessionScoped->enter<SessionScope>(), AlreadyInScopeException);
 }
 
 TEST_F(ScopeTest, shouldNotScopeUnscopedDependencies) {

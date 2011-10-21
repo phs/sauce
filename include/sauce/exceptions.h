@@ -78,6 +78,22 @@ struct OutOfScopeExceptionFor: OutOfScopeException {
   OutOfScopeExceptionFor(): OutOfScopeException() {}
 };
 
+/**
+ * Raised when re-entering a scope that is already open.
+ */
+struct AlreadyInScopeException: Exception {
+  AlreadyInScopeException():
+    Exception("Already in scope.") {}
+};
+
+/**
+ * Raised when re-entering the given scope, which is already open.
+ */
+template<typename Scope>
+struct AlreadyInScopeExceptionFor: AlreadyInScopeException {
+  AlreadyInScopeExceptionFor(): AlreadyInScopeException() {}
+};
+
 }
 
 #endif // SAUCE_SAUCE_EXCEPTIONS_H_

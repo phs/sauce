@@ -88,6 +88,17 @@ class Injector {
     }
   }
 
+  template<typename Scope>
+  bool alreadyScoped() {
+    if (scopeKey == i::typeIdOf<Scope>()) {
+      return true;
+    } else if (next.get() == NULL) {
+      return false;
+    } else {
+      return next->alreadyScoped<Scope>();
+    }
+  }
+
 public:
 
   template<typename Dependency>
@@ -103,6 +114,10 @@ public:
 
   template<typename Scope>
   SAUCE_SHARED_PTR<Injector> enter() {
+    if (alreadyScoped<Scope>()) {
+      throw AlreadyInScopeExceptionFor<Scope>();
+    }
+
     SAUCE_SHARED_PTR<Injector> self = weak.lock();
     assert(self.get() == this);
 
