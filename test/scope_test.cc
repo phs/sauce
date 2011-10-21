@@ -142,6 +142,16 @@ TEST_F(ScopeTest, shouldNestScopes) {
   EXPECT_EQ(aSingleton, theSameSingleton);
 }
 
+TEST_F(ScopeTest, shouldParallelizeScopes) {
+  SAUCE_SHARED_PTR<Injector> aSessionScope = injector->enter<SessionScope>();
+  SAUCE_SHARED_PTR<Injector> aNewSessionScope = injector->enter<SessionScope>();
+
+  SAUCE_SHARED_PTR<Session> aSession = aSessionScope->get<Session>();
+  SAUCE_SHARED_PTR<Session> aNewSession = aNewSessionScope->get<Session>();
+
+  EXPECT_NE(aSession, aNewSession);
+}
+
 TEST_F(ScopeTest, shouldNotScopeUnscopedDependencies) {
   SAUCE_SHARED_PTR<D> aD = injector->get<D>();
   SAUCE_SHARED_PTR<D> aNewD = injector->get<D>();
