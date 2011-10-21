@@ -21,13 +21,13 @@ protected:
   }
 
   template<typename Dependency, typename Scope>
-  void putInScopeCache(Injector & injector, typename i::Key<Dependency>::Ptr pointer) {
-    injector.template putInScopeCache<Dependency, Scope>(pointer);
+  void cache(Injector & injector, typename i::Key<Dependency>::Ptr pointer) {
+    injector.template cache<Dependency, Scope>(pointer);
   }
 
   template<typename Dependency, typename Scope>
-  bool getFromScopeCache(Injector & injector, typename i::Key<Dependency>::Ptr & out) {
-    return injector.template getFromScopeCache<Dependency, Scope>(out);
+  bool probe(Injector & injector, typename i::Key<Dependency>::Ptr & out) {
+    return injector.template probe<Dependency, Scope>(out);
   }
 
 };
@@ -123,10 +123,10 @@ public:
     SAUCE_SHARED_PTR<Iface> smartPointer;
 
     bool unscoped = typeIdOf<Scope>() == typeIdOf<NoScope>();
-    if (unscoped || !getFromScopeCache<Dependency, Scope>(injector, smartPointer)) {
+    if (unscoped || !probe<Dependency, Scope>(injector, smartPointer)) {
       smartPointer.reset(provide(injector, typeIds), deleter(binding));
       if (!unscoped) {
-        putInScopeCache<Dependency, Scope>(injector, smartPointer);
+        cache<Dependency, Scope>(injector, smartPointer);
       }
     }
 

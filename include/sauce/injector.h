@@ -67,12 +67,12 @@ class Injector {
   }
 
   template<typename Dependency, typename Scope>
-  void putInScopeCache(typename i::Key<Dependency>::Ptr pointer) {
+  void cache(typename i::Key<Dependency>::Ptr pointer) {
     scopeCache.template put<Dependency, Scope>(pointer);
   }
 
   template<typename Dependency, typename Scope>
-  bool getFromScopeCache(typename i::Key<Dependency>::Ptr & out) {
+  bool probe(typename i::Key<Dependency>::Ptr & out) {
     return scopeCache.template get<Dependency, Scope>(out);
   }
 
