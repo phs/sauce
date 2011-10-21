@@ -117,14 +117,14 @@ TEST_F(ScopeTest, shouldScopeCustomScopedDependenciesIfAsked) {
   SAUCE_SHARED_PTR<C> aNewC;
 
   {
-    SAUCE_SHARED_PTR<Injector> scoped = injector->enter<RequestScope>();
+    SAUCE_SHARED_PTR<Injector> scoped = injector->enter<MyScope>();
     aC = scoped->get<C>();
     theSameC = scoped->get<C>();
   }
   EXPECT_EQ(aC, theSameC);
 
   {
-    SAUCE_SHARED_PTR<Injector> scoped = injector->enter<RequestScope>();
+    SAUCE_SHARED_PTR<Injector> scoped = injector->enter<MyScope>();
     aNewC = scoped->get<C>();
   }
   EXPECT_NE(aC, aNewC);
@@ -139,7 +139,7 @@ TEST_F(ScopeTest, shouldNestScopes) {
     theSameSingleton = sessionScoped->get<Singleton>();
   }
 
-  // EXPECT_EQ(aSingleton, theSameSingleton);
+  EXPECT_EQ(aSingleton, theSameSingleton);
 }
 
 TEST_F(ScopeTest, shouldNotScopeUnscopedDependencies) {

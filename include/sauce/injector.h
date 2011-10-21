@@ -68,12 +68,25 @@ class Injector {
 
   template<typename Dependency, typename Scope>
   void cache(typename i::Key<Dependency>::Ptr pointer) {
-    scopeCache.template put<Dependency, Scope>(pointer);
+    if (scopeKey == i::typeIdOf<Scope>()) {
+      scopeCache.template put<Dependency, Scope>(pointer);
+    } else if (next.get() == NULL) {
+      // TODO: explode!
+    } else {
+      next->cache<Dependency, Scope>(pointer);
+    }
   }
 
   template<typename Dependency, typename Scope>
   bool probe(typename i::Key<Dependency>::Ptr & out) {
-    return scopeCache.template get<Dependency, Scope>(out);
+    if (scopeKey == i::typeIdOf<Scope>()) {
+      return scopeCache.template get<Dependency, Scope>(out);
+    } else if (next.get() == NULL) {
+      // TODO: explode!
+      return false;
+    } else {
+      return next->probe<Dependency, Scope>(out);
+    }
   }
 
 public:
