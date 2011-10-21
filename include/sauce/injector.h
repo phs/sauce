@@ -71,7 +71,7 @@ class Injector {
     if (scopeKey == i::typeIdOf<Scope>()) {
       scopeCache.template put<Dependency>(pointer);
     } else if (next.get() == NULL) {
-      // TODO: explode!
+      throw OutOfScopeExceptionFor<Scope>();
     } else {
       next->cache<Dependency, Scope>(pointer);
     }
@@ -82,8 +82,7 @@ class Injector {
     if (scopeKey == i::typeIdOf<Scope>()) {
       return scopeCache.template get<Dependency>(out);
     } else if (next.get() == NULL) {
-      // TODO: explode!
-      return false;
+      throw OutOfScopeExceptionFor<Scope>();
     } else {
       return next->probe<Dependency, Scope>(out);
     }

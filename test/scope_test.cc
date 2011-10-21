@@ -148,6 +148,10 @@ TEST_F(ScopeTest, shouldNotScopeUnscopedDependencies) {
   EXPECT_NE(aD, aNewD);
 }
 
+TEST_F(ScopeTest, shouldThrowExceptionWhenProvidingDependencyOutOfScope) {
+  ASSERT_THROW(injector->get<Request>(), OutOfScopeException);
+}
+
 struct CrankyConstructorException: public std::runtime_error {
   CrankyConstructorException():
     std::runtime_error("Can't connect to something-er-other!") {}
@@ -175,6 +179,10 @@ struct EagerlyScopeTest:
 TEST_F(EagerlyScopeTest, shouldProvidedScopedDependenciesEagerlyIfAsked) {
   SAUCE_SHARED_PTR<Injector> requestScoped = injector->enter<RequestScope>();
   ASSERT_THROW(requestScoped->eagerlyProvide<RequestScope>(), CrankyConstructorException);
+}
+
+TEST_F(EagerlyScopeTest, shouldThrowExceptionWhenProvidingEagerlyOutOfScope) {
+  ASSERT_THROW(injector->eagerlyProvide<RequestScope>(), OutOfScopeException);
 }
 
 }

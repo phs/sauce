@@ -62,6 +62,22 @@ struct CircularDependencyExceptionFor: CircularDependencyException {
   CircularDependencyExceptionFor(): CircularDependencyException() {}
 };
 
+/**
+ * Raised when a provision is requested outside of its bound scope.
+ */
+struct OutOfScopeException: Exception {
+  OutOfScopeException():
+    Exception("Out of dependency scope.") {}
+};
+
+/**
+ * Raised when a provision is requested outside of its given, bound scope.
+ */
+template<typename Scope>
+struct OutOfScopeExceptionFor: OutOfScopeException {
+  OutOfScopeExceptionFor(): OutOfScopeException() {}
+};
+
 }
 
 #endif // SAUCE_SAUCE_EXCEPTIONS_H_
