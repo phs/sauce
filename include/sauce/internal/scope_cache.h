@@ -17,8 +17,7 @@ struct ScopeCacheLineDeleter {
 
 struct ScopeCacheTraits {
   typedef SAUCE_SHARED_PTR<void> CachedPtr;
-  typedef std::map<TypeId, CachedPtr> SingleScopeCache;
-  typedef std::map<TypeId, SingleScopeCache> Cache;
+  typedef std::map<TypeId, CachedPtr> Cache;
 };
 
 template<typename Dependency_>
@@ -28,7 +27,7 @@ class ScopeCacheLine: public ScopeCacheTraits {
 
 public:
 
-  static void put(SingleScopeCache & singleScopeCache, SmartPtr pointer) {
+  static void put(Cache & singleScopeCache, SmartPtr pointer) {
     /*
      * A voice! a voice! It rang deep to the very last. It survived his strength to hide in the
      * magnificent folds of eloquence the barren darkness of his heart. Oh, he struggled! he
@@ -46,9 +45,9 @@ public:
     singleScopeCache.insert(std::make_pair(typeId, cachedPtr));
   }
 
-  static bool get(SingleScopeCache & singleScopeCache, SmartPtr & out) {
+  static bool get(Cache & singleScopeCache, SmartPtr & out) {
     TypeId typeId = typeIdOf<Dependency>();
-    SingleScopeCache::iterator cachedPtr = singleScopeCache.find(typeId);
+    Cache::iterator cachedPtr = singleScopeCache.find(typeId);
     if (cachedPtr == singleScopeCache.end()) {
       return false;
     }
@@ -59,7 +58,7 @@ public:
 };
 
 class ScopeCache: public ScopeCacheTraits {
-  SingleScopeCache cache;
+  Cache cache;
 
 public:
 
