@@ -49,14 +49,14 @@ class BaseInjector {
     bindings(bindings) {}
 
   template<typename Dependency>
-  typename Key<Dependency>::Ptr get(Injector & injector, TypeIds & ids) {
+  typename Key<Dependency>::Ptr get(Injector & injector, TypeIds & ids) const {
     typedef typename Key<Dependency>::Normalized Normalized;
     CircularDependencyGuard<Normalized> guard(ids);
     return bindings.get<Normalized>(injector, ids);
   }
 
   template<typename Scope>
-  void eagerlyProvide(Injector & injector) {
+  void eagerlyProvide(Injector & injector) const {
     TypeIds ids;
     bindings.eagerlyProvide<Scope>(injector, ids);
   }
