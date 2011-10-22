@@ -143,9 +143,9 @@ public:
 
     ScopeMap::iterator i = scopeMap.find(scopeKey);
     if (i == scopeMap.end()) {
-      ScopedBindings scopedBindings;
-      scopedBindings.push_back(binding);
-      scopeMap.insert(i, std::make_pair(scopeKey, scopedBindings));
+      ScopedBindings bindings;
+      bindings.push_back(binding);
+      scopeMap.insert(i, std::make_pair(scopeKey, bindings));
     } else {
       i->second.push_back(binding);
     }
@@ -174,8 +174,8 @@ public:
       return;
     }
 
-    ScopedBindings & scopedBindings = i->second;
-    for (ScopedBindings::iterator i = scopedBindings.begin(); i != scopedBindings.end(); ++i) {
+    ScopedBindings & bindings = i->second;
+    for (ScopedBindings::iterator i = bindings.begin(); i != bindings.end(); ++i) {
       OpaqueBindingPtr binding = *i;
       binding->eagerlyProvide(binding, injector, typeIds);
     }
