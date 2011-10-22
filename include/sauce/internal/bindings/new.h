@@ -26,14 +26,14 @@ struct New<Dependency, Scope, Impl(),
     Allocator>: public TransparentBinding<Dependency, Scope, Impl> {
   typedef typename Allocator::template rebind<Impl>::other ImplAllocator;
 
-  Impl * provide(Injector &, TypeIds &) {
+  Impl * provide(Injector &, TypeIds &) const {
     ImplAllocator allocator;
     Impl * impl = allocator.allocate(1);
     new(impl) Impl();
     return impl;
   }
 
-  void dispose(Impl * impl) {
+  void dispose(Impl * impl) const {
     ImplAllocator allocator;
     impl->~Impl(); // Must not throw
     allocator.deallocate(impl, 1);
@@ -46,7 +46,7 @@ struct New<Dependency, Scope, Impl(A1),
     Allocator>: public TransparentBinding<Dependency, Scope, Impl> {
   typedef typename Allocator::template rebind<Impl>::other ImplAllocator;
 
-  Impl * provide(Injector & injector, TypeIds & typeIds) {
+  Impl * provide(Injector & injector, TypeIds & typeIds) const {
     typename i::Key<A1>::Ptr a1(this->template getDependency<A1>(injector,
         typeIds));
     ImplAllocator allocator;
@@ -55,7 +55,7 @@ struct New<Dependency, Scope, Impl(A1),
     return impl;
   }
 
-  void dispose(Impl * impl) {
+  void dispose(Impl * impl) const {
     ImplAllocator allocator;
     impl->~Impl(); // Must not throw
     allocator.deallocate(impl, 1);
@@ -68,7 +68,7 @@ struct New<Dependency, Scope, Impl(A1, A2),
     Allocator>: public TransparentBinding<Dependency, Scope, Impl> {
   typedef typename Allocator::template rebind<Impl>::other ImplAllocator;
 
-  Impl * provide(Injector & injector, TypeIds & typeIds) {
+  Impl * provide(Injector & injector, TypeIds & typeIds) const {
     typename i::Key<A1>::Ptr a1(this->template getDependency<A1>(injector,
         typeIds));
     typename i::Key<A2>::Ptr a2(this->template getDependency<A2>(injector,
@@ -79,7 +79,7 @@ struct New<Dependency, Scope, Impl(A1, A2),
     return impl;
   }
 
-  void dispose(Impl * impl) {
+  void dispose(Impl * impl) const {
     ImplAllocator allocator;
     impl->~Impl(); // Must not throw
     allocator.deallocate(impl, 1);
@@ -92,7 +92,7 @@ struct New<Dependency, Scope, Impl(A1, A2, A3),
     Allocator>: public TransparentBinding<Dependency, Scope, Impl> {
   typedef typename Allocator::template rebind<Impl>::other ImplAllocator;
 
-  Impl * provide(Injector & injector, TypeIds & typeIds) {
+  Impl * provide(Injector & injector, TypeIds & typeIds) const {
     typename i::Key<A1>::Ptr a1(this->template getDependency<A1>(injector,
         typeIds));
     typename i::Key<A2>::Ptr a2(this->template getDependency<A2>(injector,
@@ -105,7 +105,7 @@ struct New<Dependency, Scope, Impl(A1, A2, A3),
     return impl;
   }
 
-  void dispose(Impl * impl) {
+  void dispose(Impl * impl) const {
     ImplAllocator allocator;
     impl->~Impl(); // Must not throw
     allocator.deallocate(impl, 1);
@@ -118,7 +118,7 @@ struct New<Dependency, Scope, Impl(A1, A2, A3, A4),
     Allocator>: public TransparentBinding<Dependency, Scope, Impl> {
   typedef typename Allocator::template rebind<Impl>::other ImplAllocator;
 
-  Impl * provide(Injector & injector, TypeIds & typeIds) {
+  Impl * provide(Injector & injector, TypeIds & typeIds) const {
     typename i::Key<A1>::Ptr a1(this->template getDependency<A1>(injector,
         typeIds));
     typename i::Key<A2>::Ptr a2(this->template getDependency<A2>(injector,
@@ -133,7 +133,7 @@ struct New<Dependency, Scope, Impl(A1, A2, A3, A4),
     return impl;
   }
 
-  void dispose(Impl * impl) {
+  void dispose(Impl * impl) const {
     ImplAllocator allocator;
     impl->~Impl(); // Must not throw
     allocator.deallocate(impl, 1);
@@ -147,7 +147,7 @@ struct New<Dependency, Scope, Impl(A1, A2, A3, A4, A5),
     Allocator>: public TransparentBinding<Dependency, Scope, Impl> {
   typedef typename Allocator::template rebind<Impl>::other ImplAllocator;
 
-  Impl * provide(Injector & injector, TypeIds & typeIds) {
+  Impl * provide(Injector & injector, TypeIds & typeIds) const {
     typename i::Key<A1>::Ptr a1(this->template getDependency<A1>(injector,
         typeIds));
     typename i::Key<A2>::Ptr a2(this->template getDependency<A2>(injector,
@@ -164,7 +164,7 @@ struct New<Dependency, Scope, Impl(A1, A2, A3, A4, A5),
     return impl;
   }
 
-  void dispose(Impl * impl) {
+  void dispose(Impl * impl) const {
     ImplAllocator allocator;
     impl->~Impl(); // Must not throw
     allocator.deallocate(impl, 1);
@@ -178,7 +178,7 @@ struct New<Dependency, Scope, Impl(A1, A2, A3, A4, A5, A6),
     Allocator>: public TransparentBinding<Dependency, Scope, Impl> {
   typedef typename Allocator::template rebind<Impl>::other ImplAllocator;
 
-  Impl * provide(Injector & injector, TypeIds & typeIds) {
+  Impl * provide(Injector & injector, TypeIds & typeIds) const {
     typename i::Key<A1>::Ptr a1(this->template getDependency<A1>(injector,
         typeIds));
     typename i::Key<A2>::Ptr a2(this->template getDependency<A2>(injector,
@@ -197,7 +197,7 @@ struct New<Dependency, Scope, Impl(A1, A2, A3, A4, A5, A6),
     return impl;
   }
 
-  void dispose(Impl * impl) {
+  void dispose(Impl * impl) const {
     ImplAllocator allocator;
     impl->~Impl(); // Must not throw
     allocator.deallocate(impl, 1);
@@ -211,7 +211,7 @@ struct New<Dependency, Scope, Impl(A1, A2, A3, A4, A5, A6, A7),
     Allocator>: public TransparentBinding<Dependency, Scope, Impl> {
   typedef typename Allocator::template rebind<Impl>::other ImplAllocator;
 
-  Impl * provide(Injector & injector, TypeIds & typeIds) {
+  Impl * provide(Injector & injector, TypeIds & typeIds) const {
     typename i::Key<A1>::Ptr a1(this->template getDependency<A1>(injector,
         typeIds));
     typename i::Key<A2>::Ptr a2(this->template getDependency<A2>(injector,
@@ -232,7 +232,7 @@ struct New<Dependency, Scope, Impl(A1, A2, A3, A4, A5, A6, A7),
     return impl;
   }
 
-  void dispose(Impl * impl) {
+  void dispose(Impl * impl) const {
     ImplAllocator allocator;
     impl->~Impl(); // Must not throw
     allocator.deallocate(impl, 1);
@@ -246,7 +246,7 @@ struct New<Dependency, Scope, Impl(A1, A2, A3, A4, A5, A6, A7, A8),
     Allocator>: public TransparentBinding<Dependency, Scope, Impl> {
   typedef typename Allocator::template rebind<Impl>::other ImplAllocator;
 
-  Impl * provide(Injector & injector, TypeIds & typeIds) {
+  Impl * provide(Injector & injector, TypeIds & typeIds) const {
     typename i::Key<A1>::Ptr a1(this->template getDependency<A1>(injector,
         typeIds));
     typename i::Key<A2>::Ptr a2(this->template getDependency<A2>(injector,
@@ -269,7 +269,7 @@ struct New<Dependency, Scope, Impl(A1, A2, A3, A4, A5, A6, A7, A8),
     return impl;
   }
 
-  void dispose(Impl * impl) {
+  void dispose(Impl * impl) const {
     ImplAllocator allocator;
     impl->~Impl(); // Must not throw
     allocator.deallocate(impl, 1);
@@ -283,7 +283,7 @@ struct New<Dependency, Scope, Impl(A1, A2, A3, A4, A5, A6, A7, A8, A9),
     Allocator>: public TransparentBinding<Dependency, Scope, Impl> {
   typedef typename Allocator::template rebind<Impl>::other ImplAllocator;
 
-  Impl * provide(Injector & injector, TypeIds & typeIds) {
+  Impl * provide(Injector & injector, TypeIds & typeIds) const {
     typename i::Key<A1>::Ptr a1(this->template getDependency<A1>(injector,
         typeIds));
     typename i::Key<A2>::Ptr a2(this->template getDependency<A2>(injector,
@@ -308,7 +308,7 @@ struct New<Dependency, Scope, Impl(A1, A2, A3, A4, A5, A6, A7, A8, A9),
     return impl;
   }
 
-  void dispose(Impl * impl) {
+  void dispose(Impl * impl) const {
     ImplAllocator allocator;
     impl->~Impl(); // Must not throw
     allocator.deallocate(impl, 1);
@@ -323,7 +323,7 @@ struct New<Dependency, Scope, Impl(A1, A2, A3, A4, A5, A6, A7, A8, A9, A10),
     Allocator>: public TransparentBinding<Dependency, Scope, Impl> {
   typedef typename Allocator::template rebind<Impl>::other ImplAllocator;
 
-  Impl * provide(Injector & injector, TypeIds & typeIds) {
+  Impl * provide(Injector & injector, TypeIds & typeIds) const {
     typename i::Key<A1>::Ptr a1(this->template getDependency<A1>(injector,
         typeIds));
     typename i::Key<A2>::Ptr a2(this->template getDependency<A2>(injector,
@@ -350,7 +350,7 @@ struct New<Dependency, Scope, Impl(A1, A2, A3, A4, A5, A6, A7, A8, A9, A10),
     return impl;
   }
 
-  void dispose(Impl * impl) {
+  void dispose(Impl * impl) const {
     ImplAllocator allocator;
     impl->~Impl(); // Must not throw
     allocator.deallocate(impl, 1);

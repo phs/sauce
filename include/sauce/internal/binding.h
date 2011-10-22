@@ -53,12 +53,12 @@ struct OpaqueBinding {
    *
    * The dependency id finger prints which provision requests we can satisfy in an Injector.
    */
-  virtual TypeId getDependencyId() = 0;
+  virtual TypeId getDependencyId() const = 0;
 
   /**
    * The TypeId of our (hidden) scope.
    */
-  virtual TypeId getScopeId() = 0;
+  virtual TypeId getScopeId() const = 0;
 
   /**
    * Provide, but do not return an instance of the hidden interface.
@@ -67,7 +67,7 @@ struct OpaqueBinding {
    * do nothing.  The typeIds indicate which keys are already currently being provided to detect
    * circular dependencies.
    */
-  virtual void eagerlyProvide(OpaqueBindingPtr, Injector &, TypeIds &) {}
+  virtual void eagerlyProvide(OpaqueBindingPtr, Injector &, TypeIds &) const {}
 
 };
 
@@ -88,7 +88,7 @@ struct Binding:
    * The typeIds indicate which keys are already currently being provided to detect circular
    * dependencies.
    */
-  virtual typename Key<Dependency>::Ptr get(BindingPtr, Injector &, TypeIds &) = 0;
+  virtual typename Key<Dependency>::Ptr get(BindingPtr, Injector &, TypeIds &) const = 0;
 
 };
 

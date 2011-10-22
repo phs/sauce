@@ -16,17 +16,17 @@ class InjectorFriend {
 protected:
 
   template<typename Dependency>
-  typename i::Key<Dependency>::Ptr getDependency(Injector & injector, TypeIds & keys) {
+  typename i::Key<Dependency>::Ptr getDependency(Injector & injector, TypeIds & keys) const {
     return injector.get<Dependency>(injector, keys);
   }
 
   template<typename Dependency, typename Scope>
-  void cache(Injector & injector, typename i::Key<Dependency>::Ptr pointer) {
+  void cache(Injector & injector, typename i::Key<Dependency>::Ptr pointer) const {
     injector.template cache<Dependency, Scope>(pointer);
   }
 
   template<typename Dependency, typename Scope>
-  bool probe(Injector & injector, typename i::Key<Dependency>::Ptr & out) {
+  bool probe(Injector & injector, typename i::Key<Dependency>::Ptr & out) const {
     return injector.template probe<Dependency, Scope>(out);
   }
 
@@ -78,19 +78,19 @@ class TransparentBinding:
    *
    * The strategy used is left to derived types.
    */
-  virtual Impl * provide(Injector & injector, TypeIds & typeIds) = 0;
+  virtual Impl * provide(Injector & injector, TypeIds & typeIds) const = 0;
 
   /**
    * Dispose of an instance of Iface provided by this binding.
    *
    * The strategy used is left to derived types.
    */
-  virtual void dispose(Impl * impl) = 0;
+  virtual void dispose(Impl * impl) const = 0;
 
   /**
    * Create a shared pointer deleter suitable for this binding.
    */
-  DisposalDeleter<Dependency, Scope, Impl> deleter(BindingPtr binding) {
+  DisposalDeleter<Dependency, Scope, Impl> deleter(BindingPtr binding) const {
     typedef TransparentBinding<Dependency, Scope, Impl> Transparent;
     SAUCE_SHARED_PTR<Transparent> concrete = SAUCE_STATIC_POINTER_CAST<Transparent>(binding);
     return DisposalDeleter<Dependency, Scope, Impl>(concrete);
@@ -103,14 +103,14 @@ public:
   /**
    * The TypeId of the Dependency template parameter.
    */
-  virtual TypeId getDependencyId() {
+  virtual TypeId getDependencyId() const {
     return typeIdOf<Dependency>();
   }
 
   /**
    * The TypeId of the Scope template parameter.
    */
-  virtual TypeId getScopeId() {
+  virtual TypeId getScopeId() const {
     return typeIdOf<Scope>();
   }
 
@@ -119,7 +119,7 @@ public:
    *
    * Derived classes should not override get(), but rather provide().
    */
-  SAUCE_SHARED_PTR<Iface> get(BindingPtr binding, Injector & injector, TypeIds & typeIds) {
+  SAUCE_SHARED_PTR<Iface> get(BindingPtr binding, Injector & injector, TypeIds & typeIds) const {
     SAUCE_SHARED_PTR<Iface> smartPointer;
 
     bool unscoped = typeIdOf<Scope>() == typeIdOf<NoScope>();
@@ -139,9 +139,9 @@ public:
    * Instead, cache the instance in its appropriate scope, if any.  If the binding is not scoped,
    * do nothing.
    */
-  void eagerlyProvide(OpaqueBindingPtr opaqueBinding, Injector & injector, TypeIds & typeIds) {
+  void eagerlyProvide(OpaqueBindingPtr opaque, Injector & injector, TypeIds & typeIds) const {
     if (typeIdOf<Scope>() != typeIdOf<NoScope>()) {
-      BindingPtr binding = resolve<Dependency>(opaqueBinding);
+      BindingPtr binding = resolve<Dependency>(opaque);
       get(binding, injector, typeIds);
     }
   }
