@@ -157,8 +157,8 @@ public:
    * If no binding is found, throw UnboundException.
    */
   template<typename Dependency>
-  typename Key<Dependency>::Ptr get(Injector & injector, TypeIds & typeIds) {
-    BindingMap::iterator i = bindingMap.find(typeIdOf<Dependency>());
+  typename Key<Dependency>::Ptr get(Injector & injector, TypeIds & typeIds) const {
+    BindingMap::const_iterator i = bindingMap.find(typeIdOf<Dependency>());
     if (i == bindingMap.end()) {
       throw UnboundExceptionFor<Dependency>();
     }
