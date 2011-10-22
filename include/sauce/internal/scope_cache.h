@@ -16,7 +16,7 @@ struct ScopeCacheLineDeleter {
 };
 
 class ScopeCache {
-  typedef SAUCE_SHARED_PTR<void> CachedPtr;
+  typedef sauce::shared_ptr<void> CachedPtr;
   typedef std::map<TypeId, CachedPtr> Cache;
 
   Cache cache;

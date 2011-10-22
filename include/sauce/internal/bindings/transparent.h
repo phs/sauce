@@ -43,7 +43,7 @@ class TransparentBinding;
 template<typename Dependency, typename Scope, typename Impl>
 class DisposalDeleter {
   typedef typename Key<Dependency>::Iface Iface;
-  typedef SAUCE_SHARED_PTR<TransparentBinding<Dependency, Scope, Impl> > BindingPtr;
+  typedef sauce::shared_ptr<TransparentBinding<Dependency, Scope, Impl> > BindingPtr;
 
   friend class TransparentBinding<Dependency, Scope, Impl>;
 
@@ -92,7 +92,7 @@ class TransparentBinding:
    */
   DisposalDeleter<Dependency, Scope, Impl> deleter(BindingPtr binding) const {
     typedef TransparentBinding<Dependency, Scope, Impl> Transparent;
-    SAUCE_SHARED_PTR<Transparent> concrete = SAUCE_STATIC_POINTER_CAST<Transparent>(binding);
+    sauce::shared_ptr<Transparent> concrete = sauce::static_pointer_cast<Transparent>(binding);
     return DisposalDeleter<Dependency, Scope, Impl>(concrete);
   }
 
@@ -119,8 +119,8 @@ public:
    *
    * Derived classes should not override get(), but rather provide().
    */
-  SAUCE_SHARED_PTR<Iface> get(BindingPtr binding, Injector & injector, TypeIds & typeIds) const {
-    SAUCE_SHARED_PTR<Iface> smartPointer;
+  sauce::shared_ptr<Iface> get(BindingPtr binding, Injector & injector, TypeIds & typeIds) const {
+    sauce::shared_ptr<Iface> smartPointer;
 
     bool unscoped = typeIdOf<Scope>() == typeIdOf<NoScope>();
     if (unscoped || !probe<Dependency, Scope>(injector, smartPointer)) {

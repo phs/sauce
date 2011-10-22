@@ -13,7 +13,7 @@ namespace internal {
 template<typename Iface_>
 struct Key {
   typedef Iface_ Iface;
-  typedef SAUCE_SHARED_PTR<Iface> Ptr;
+  typedef sauce::shared_ptr<Iface> Ptr;
   typedef Unnamed Name;
 
   /**
@@ -31,7 +31,7 @@ struct Key {
 template<typename Iface_, typename Name_>
 struct Key<Named<Iface_, Name_> > {
   typedef Iface_ Iface;
-  typedef SAUCE_SHARED_PTR<Iface> Ptr;
+  typedef sauce::shared_ptr<Iface> Ptr;
   typedef Name_ Name;
   typedef Named<Iface, Name> Normalized;
 };

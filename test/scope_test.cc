@@ -42,7 +42,7 @@ struct ScopeTest:
   public ::testing::Test {
 
   Modules modules;
-  SAUCE_SHARED_PTR<Injector> injector;
+  sauce::shared_ptr<Injector> injector;
 
   ScopeTest():
     modules(),
@@ -55,87 +55,87 @@ struct ScopeTest:
 };
 
 TEST_F(ScopeTest, shouldScopeSingletonDependenciesByDefault) {
-  SAUCE_SHARED_PTR<Singleton> aSingleton;
-  SAUCE_SHARED_PTR<Singleton> theSameSingleton;
-  SAUCE_SHARED_PTR<Singleton> aNewSingleton;
+  sauce::shared_ptr<Singleton> aSingleton;
+  sauce::shared_ptr<Singleton> theSameSingleton;
+  sauce::shared_ptr<Singleton> aNewSingleton;
 
   {
-    SAUCE_SHARED_PTR<Injector> singletonScoped(modules.createInjector());
+    sauce::shared_ptr<Injector> singletonScoped(modules.createInjector());
     aSingleton = singletonScoped->get<Singleton>();
     theSameSingleton = singletonScoped->get<Singleton>();
   }
   EXPECT_EQ(aSingleton, theSameSingleton);
 
   {
-    SAUCE_SHARED_PTR<Injector> singletonScoped(modules.createInjector());
+    sauce::shared_ptr<Injector> singletonScoped(modules.createInjector());
     aNewSingleton = singletonScoped->get<Singleton>();
   }
   EXPECT_NE(aSingleton, aNewSingleton);
 }
 
 TEST_F(ScopeTest, shouldScopeSessionDependenciesIfAsked) {
-  SAUCE_SHARED_PTR<Session> aSession;
-  SAUCE_SHARED_PTR<Session> theSameSession;
-  SAUCE_SHARED_PTR<Session> aNewSession;
+  sauce::shared_ptr<Session> aSession;
+  sauce::shared_ptr<Session> theSameSession;
+  sauce::shared_ptr<Session> aNewSession;
 
   {
-    SAUCE_SHARED_PTR<Injector> sessionScoped = injector->enter<SessionScope>();
+    sauce::shared_ptr<Injector> sessionScoped = injector->enter<SessionScope>();
     aSession = sessionScoped->get<Session>();
     theSameSession = sessionScoped->get<Session>();
   }
   EXPECT_EQ(aSession, theSameSession);
 
   {
-    SAUCE_SHARED_PTR<Injector> sessionScoped = injector->enter<SessionScope>();
+    sauce::shared_ptr<Injector> sessionScoped = injector->enter<SessionScope>();
     aNewSession = sessionScoped->get<Session>();
   }
   EXPECT_NE(aSession, aNewSession);
 }
 
 TEST_F(ScopeTest, shouldScopeRequestDependenciesIfAsked) {
-  SAUCE_SHARED_PTR<Request> aRequest;
-  SAUCE_SHARED_PTR<Request> theSameRequest;
-  SAUCE_SHARED_PTR<Request> aNewRequest;
+  sauce::shared_ptr<Request> aRequest;
+  sauce::shared_ptr<Request> theSameRequest;
+  sauce::shared_ptr<Request> aNewRequest;
 
   {
-    SAUCE_SHARED_PTR<Injector> requestScoped = injector->enter<RequestScope>();
+    sauce::shared_ptr<Injector> requestScoped = injector->enter<RequestScope>();
     aRequest = requestScoped->get<Request>();
     theSameRequest = requestScoped->get<Request>();
   }
   EXPECT_EQ(aRequest, theSameRequest);
 
   {
-    SAUCE_SHARED_PTR<Injector> requestScoped = injector->enter<RequestScope>();
+    sauce::shared_ptr<Injector> requestScoped = injector->enter<RequestScope>();
     aNewRequest = requestScoped->get<Request>();
   }
   EXPECT_NE(aRequest, aNewRequest);
 }
 
 TEST_F(ScopeTest, shouldScopeCustomScopedDependenciesIfAsked) {
-  SAUCE_SHARED_PTR<C> aC;
-  SAUCE_SHARED_PTR<C> theSameC;
-  SAUCE_SHARED_PTR<C> aNewC;
+  sauce::shared_ptr<C> aC;
+  sauce::shared_ptr<C> theSameC;
+  sauce::shared_ptr<C> aNewC;
 
   {
-    SAUCE_SHARED_PTR<Injector> scoped = injector->enter<MyScope>();
+    sauce::shared_ptr<Injector> scoped = injector->enter<MyScope>();
     aC = scoped->get<C>();
     theSameC = scoped->get<C>();
   }
   EXPECT_EQ(aC, theSameC);
 
   {
-    SAUCE_SHARED_PTR<Injector> scoped = injector->enter<MyScope>();
+    sauce::shared_ptr<Injector> scoped = injector->enter<MyScope>();
     aNewC = scoped->get<C>();
   }
   EXPECT_NE(aC, aNewC);
 }
 
 TEST_F(ScopeTest, shouldNestScopes) {
-  SAUCE_SHARED_PTR<Singleton> aSingleton = injector->get<Singleton>();
-  SAUCE_SHARED_PTR<Singleton> theSameSingleton;
+  sauce::shared_ptr<Singleton> aSingleton = injector->get<Singleton>();
+  sauce::shared_ptr<Singleton> theSameSingleton;
 
   {
-    SAUCE_SHARED_PTR<Injector> sessionScoped = injector->enter<SessionScope>();
+    sauce::shared_ptr<Injector> sessionScoped = injector->enter<SessionScope>();
     theSameSingleton = sessionScoped->get<Singleton>();
   }
 
@@ -143,11 +143,11 @@ TEST_F(ScopeTest, shouldNestScopes) {
 }
 
 TEST_F(ScopeTest, shouldReenterScopesInParallelize) {
-  SAUCE_SHARED_PTR<Injector> aSessionScope = injector->enter<SessionScope>();
-  SAUCE_SHARED_PTR<Injector> aNewSessionScope = injector->enter<SessionScope>();
+  sauce::shared_ptr<Injector> aSessionScope = injector->enter<SessionScope>();
+  sauce::shared_ptr<Injector> aNewSessionScope = injector->enter<SessionScope>();
 
-  SAUCE_SHARED_PTR<Session> aSession = aSessionScope->get<Session>();
-  SAUCE_SHARED_PTR<Session> aNewSession = aNewSessionScope->get<Session>();
+  sauce::shared_ptr<Session> aSession = aSessionScope->get<Session>();
+  sauce::shared_ptr<Session> aNewSession = aNewSessionScope->get<Session>();
 
   EXPECT_NE(aSession, aNewSession);
 }
@@ -156,13 +156,13 @@ TEST_F(ScopeTest, shouldReenterScopesInParallelize) {
  * There's no strong argument for this constraint, except perhaps the principle of least surprise.
  */
 TEST_F(ScopeTest, shouldNotReenterScopesInSeries) {
-  SAUCE_SHARED_PTR<Injector> sessionScoped = injector->enter<SessionScope>();
+  sauce::shared_ptr<Injector> sessionScoped = injector->enter<SessionScope>();
   ASSERT_THROW(sessionScoped->enter<SessionScope>(), AlreadyInScopeException);
 }
 
 TEST_F(ScopeTest, shouldNotScopeUnscopedDependencies) {
-  SAUCE_SHARED_PTR<D> aD = injector->get<D>();
-  SAUCE_SHARED_PTR<D> aNewD = injector->get<D>();
+  sauce::shared_ptr<D> aD = injector->get<D>();
+  sauce::shared_ptr<D> aNewD = injector->get<D>();
   EXPECT_NE(aD, aNewD);
 }
 
@@ -188,14 +188,14 @@ void EagerlyScopedModule(Binder & binder) {
 struct EagerlyScopeTest:
   public ::testing::Test {
 
-  SAUCE_SHARED_PTR<Injector> injector;
+  sauce::shared_ptr<Injector> injector;
 
   EagerlyScopeTest():
     injector(Modules().add(&EagerlyScopedModule).createInjector()) {}
 };
 
 TEST_F(EagerlyScopeTest, shouldProvidedScopedDependenciesEagerlyIfAsked) {
-  SAUCE_SHARED_PTR<Injector> requestScoped = injector->enter<RequestScope>();
+  sauce::shared_ptr<Injector> requestScoped = injector->enter<RequestScope>();
   ASSERT_THROW(requestScoped->eagerlyProvide<RequestScope>(), CrankyConstructorException);
 }
 

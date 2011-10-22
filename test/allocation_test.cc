@@ -62,9 +62,9 @@ struct Vehicle {
   Vehicle() {}
   virtual ~Vehicle() {}
 
-  virtual SAUCE_SHARED_PTR<Chasis> getChasis() const = 0;
+  virtual sauce::shared_ptr<Chasis> getChasis() const = 0;
 
-  virtual SAUCE_SHARED_PTR<Engine> getEngine() const = 0;
+  virtual sauce::shared_ptr<Engine> getEngine() const = 0;
 };
 
 struct Herbie:
@@ -72,10 +72,10 @@ struct Herbie:
   static int constructed;
   static int destroyed;
 
-  SAUCE_SHARED_PTR<Chasis> chasis;
-  SAUCE_SHARED_PTR<Engine> engine;
+  sauce::shared_ptr<Chasis> chasis;
+  sauce::shared_ptr<Engine> engine;
 
-  Herbie(SAUCE_SHARED_PTR<Chasis> chasis, SAUCE_SHARED_PTR<Engine> engine):
+  Herbie(sauce::shared_ptr<Chasis> chasis, sauce::shared_ptr<Engine> engine):
     chasis(chasis),
     engine(engine) {
     constructed += 1;
@@ -85,11 +85,11 @@ struct Herbie:
     destroyed += 1;
   }
 
-  SAUCE_SHARED_PTR<Chasis> getChasis() const {
+  sauce::shared_ptr<Chasis> getChasis() const {
     return chasis;
   }
 
-  SAUCE_SHARED_PTR<Engine> getEngine() const {
+  sauce::shared_ptr<Engine> getEngine() const {
     return engine;
   }
 };
@@ -137,12 +137,12 @@ struct AllocationTest:
   public ::testing::Test {
 
   // These point to ALLOCATED but UNINITIALIZED memory
-  SAUCE_SHARED_PTR<CoupChasis> chasis;
-  SAUCE_SHARED_PTR<HybridEngine> engine;
-  SAUCE_SHARED_PTR<Herbie> vehicle;
+  sauce::shared_ptr<CoupChasis> chasis;
+  sauce::shared_ptr<HybridEngine> engine;
+  sauce::shared_ptr<Herbie> vehicle;
 
   MockAllocation allocator;
-  SAUCE_SHARED_PTR<Injector> injector;
+  sauce::shared_ptr<Injector> injector;
 
   AllocationTest():
     chasis(),
@@ -176,7 +176,7 @@ TEST_F(AllocationTest, shouldProvideAndDisposeADependency) {
   EXPECT_CALL(allocator, deallocate(chasis.get(), 1));
 
   {
-    SAUCE_SHARED_PTR<Chasis> actual = injector->get<Chasis>();
+    sauce::shared_ptr<Chasis> actual = injector->get<Chasis>();
     ASSERT_EQ(1, CoupChasis::constructed);
     ASSERT_EQ(chasis.get(), actual.get());
   }
@@ -209,7 +209,7 @@ TEST_F(AllocationTest, shouldProvideAndDisposeOfDependenciesTransitively) {
     ASSERT_EQ(0, CoupChasis::constructed);
     ASSERT_EQ(0, HybridEngine::constructed);
     ASSERT_EQ(0, Herbie::constructed);
-    SAUCE_SHARED_PTR<Vehicle> actual = injector->get<Vehicle>();
+    sauce::shared_ptr<Vehicle> actual = injector->get<Vehicle>();
     ASSERT_EQ(1, CoupChasis::constructed);
     ASSERT_EQ(1, HybridEngine::constructed);
     ASSERT_EQ(1, Herbie::constructed);
@@ -224,14 +224,14 @@ TEST_F(AllocationTest, shouldProvideAndDisposeOfDependenciesTransitively) {
 }
 
 TEST_F(AllocationTest, shouldCleanItselfUpAsExpected) {
-  SAUCE_WEAK_PTR<Injector> weak;
+  sauce::weak_ptr<Injector> weak;
 
   {
-    SAUCE_SHARED_PTR<Injector> injector = Modules().createInjector();
+    sauce::shared_ptr<Injector> injector = Modules().createInjector();
     weak = injector;
   }
 
-  SAUCE_SHARED_PTR<Injector> injector = weak.lock();
+  sauce::shared_ptr<Injector> injector = weak.lock();
   ASSERT_EQ(NULL, injector.get());
 }
 

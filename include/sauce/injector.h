@@ -22,14 +22,14 @@ class InjectorFriend;
 class Injector {
   i::TypeId const scopeKey;
   i::ScopeCache scopeCache;
-  SAUCE_WEAK_PTR<Injector> weak;
-  SAUCE_SHARED_PTR<Injector> const next;
-  SAUCE_SHARED_PTR<i::BaseInjector> const base;
+  sauce::weak_ptr<Injector> weak;
+  sauce::shared_ptr<Injector> const next;
+  sauce::shared_ptr<i::BaseInjector> const base;
 
   friend class Modules;
   friend class i::InjectorFriend;
 
-  Injector(i::TypeId scopeKey, SAUCE_SHARED_PTR<Injector> next):
+  Injector(i::TypeId scopeKey, sauce::shared_ptr<Injector> next):
     scopeKey(scopeKey),
     scopeCache(),
     weak(),
@@ -43,7 +43,7 @@ class Injector {
     next(),
     base(new i::BaseInjector(bindings)) {}
 
-  void setSelf(SAUCE_SHARED_PTR<Injector> shared) {
+  void setSelf(sauce::shared_ptr<Injector> shared) {
     assert(shared.get() == this);
     weak = shared;
   }
@@ -113,15 +113,15 @@ public:
   }
 
   template<typename Scope>
-  SAUCE_SHARED_PTR<Injector> enter() const {
+  sauce::shared_ptr<Injector> enter() const {
     if (alreadyScoped<Scope>()) {
       throw AlreadyInScopeExceptionFor<Scope>();
     }
 
-    SAUCE_SHARED_PTR<Injector> self = weak.lock();
+    sauce::shared_ptr<Injector> self = weak.lock();
     assert(self.get() == this);
 
-    SAUCE_SHARED_PTR<Injector> scoped(new Injector(i::typeIdOf<Scope>(), self));
+    sauce::shared_ptr<Injector> scoped(new Injector(i::typeIdOf<Scope>(), self));
     scoped->setSelf(scoped);
     return scoped;
   }

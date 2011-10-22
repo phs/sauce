@@ -20,18 +20,18 @@ struct D {};
 struct N {};
 
 TEST(BindingTest, shouldThrowExceptionWhenGettingAnUnboundIface) {
-  SAUCE_SHARED_PTR<Injector> injector(Modules().createInjector());
+  sauce::shared_ptr<Injector> injector(Modules().createInjector());
   ASSERT_THROW((injector->get<C>()), ::sauce::UnboundException);
 }
 
 struct B;
 
 struct A {
-  A(SAUCE_SHARED_PTR<B>) {}
+  A(sauce::shared_ptr<B>) {}
 };
 
 struct B {
-  B(SAUCE_SHARED_PTR<A>) {}
+  B(sauce::shared_ptr<A>) {}
 };
 
 void CircularModule(Binder & binder) {
@@ -40,7 +40,7 @@ void CircularModule(Binder & binder) {
 }
 
 TEST(BindingTest, shouldThrowExceptionWhenResolvingCircularDependency) {
-  SAUCE_SHARED_PTR<Injector> injector(Modules().add(&CircularModule).createInjector());
+  sauce::shared_ptr<Injector> injector(Modules().add(&CircularModule).createInjector());
   ASSERT_THROW((injector->get<A>()), ::sauce::CircularDependencyException);
 }
 
@@ -83,9 +83,9 @@ struct Cow: Animal {
 };
 
 struct Pond {
-  SAUCE_SHARED_PTR<Animal> animal;
+  sauce::shared_ptr<Animal> animal;
 
-  Pond(SAUCE_SHARED_PTR<Animal> animal):
+  Pond(sauce::shared_ptr<Animal> animal):
     animal(animal) {}
 };
 
@@ -98,7 +98,7 @@ void AnimalModule(Binder & binder) {
 }
 
 TEST(BindingTest, shouldProvidedNamedDependencies) {
-  SAUCE_SHARED_PTR<Injector> injector(Modules().add(&AnimalModule).createInjector());
+  sauce::shared_ptr<Injector> injector(Modules().add(&AnimalModule).createInjector());
 
   EXPECT_EQ("Meow",      (injector->get<Animal>()->says()));
   EXPECT_EQ("Blub blub", (injector->get<Animal, Water>()->says()));

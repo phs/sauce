@@ -25,7 +25,7 @@ class Binding;
 
 struct OpaqueBinding;
 
-typedef SAUCE_SHARED_PTR<OpaqueBinding> OpaqueBindingPtr;
+typedef sauce::shared_ptr<OpaqueBinding> OpaqueBindingPtr;
 
 /**
  * An opaque binding.
@@ -78,7 +78,7 @@ template<typename Dependency>
 struct Binding:
   public OpaqueBinding {
 
-  typedef SAUCE_SHARED_PTR<Binding<Dependency> > BindingPtr;
+  typedef sauce::shared_ptr<Binding<Dependency> > BindingPtr;
 
   /**
    * Get an instance of Iface, using the given injector to provide dependencies.
@@ -98,9 +98,9 @@ struct Binding:
  * This must be done carefully (with static_pointer_cast) in order to not lose the ref count.
  */
 template<typename Dependency>
-SAUCE_SHARED_PTR<Binding<Dependency> > resolve(OpaqueBindingPtr binding) {
+sauce::shared_ptr<Binding<Dependency> > resolve(OpaqueBindingPtr binding) {
   assert((typeIdOf<Dependency>()) == binding->getDependencyId());
-  return SAUCE_STATIC_POINTER_CAST<Binding<Dependency> >(binding);
+  return sauce::static_pointer_cast<Binding<Dependency> >(binding);
 }
 
 typedef void (*PendingThrow)();
@@ -163,7 +163,7 @@ public:
       throw UnboundExceptionFor<Dependency>();
     }
 
-    SAUCE_SHARED_PTR<Binding<Dependency> > binding = resolve<Dependency>(i->second);
+    sauce::shared_ptr<Binding<Dependency> > binding = resolve<Dependency>(i->second);
     return binding->get(binding, injector, typeIds);
   }
 
