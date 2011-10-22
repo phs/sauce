@@ -53,7 +53,7 @@ struct OpaqueBinding {
    *
    * The dependency id finger prints which provision requests we can satisfy in an Injector.
    */
-  virtual TypeId getDependencyId() const = 0;
+  virtual TypeId getDependencyKey() const = 0;
 
   /**
    * The TypeId of our (hidden) scope.
@@ -99,7 +99,7 @@ struct Binding:
  */
 template<typename Dependency>
 sauce::shared_ptr<Binding<Dependency> > resolve(OpaqueBindingPtr binding) {
-  assert((typeIdOf<Dependency>()) == binding->getDependencyId());
+  assert((typeIdOf<Dependency>()) == binding->getDependencyKey());
   return sauce::static_pointer_cast<Binding<Dependency> >(binding);
 }
 
@@ -138,7 +138,7 @@ public:
   template<typename Binding_>
   void put() {
     OpaqueBindingPtr binding(new Binding_());
-    bindingMap.insert(std::make_pair(binding->getDependencyId(), binding));
+    bindingMap.insert(std::make_pair(binding->getDependencyKey(), binding));
     TypeId scopeKey = binding->getScopeKey();
 
     ScopeMap::iterator i = scopeMap.find(scopeKey);
