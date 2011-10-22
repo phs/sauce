@@ -74,13 +74,6 @@ public:
     out = *static_cast<SmartPtr *>(cachedPtr->second.get());
     return true;
   }
-
-  /**
-   * Clear all cached dependencies.
-   */
-  void clear() {
-    cache.clear();
-  }
 };
 
 }
