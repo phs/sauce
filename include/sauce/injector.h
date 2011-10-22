@@ -20,11 +20,11 @@ class InjectorFriend;
 }
 
 class Injector {
-  i::TypeId scopeKey;
+  i::TypeId const scopeKey;
   i::ScopeCache scopeCache;
   SAUCE_WEAK_PTR<Injector> weak;
-  SAUCE_SHARED_PTR<Injector> next;
-  SAUCE_SHARED_PTR<i::BaseInjector> base;
+  SAUCE_SHARED_PTR<Injector> const next;
+  SAUCE_SHARED_PTR<i::BaseInjector> const base;
 
   friend class Modules;
   friend class i::InjectorFriend;
