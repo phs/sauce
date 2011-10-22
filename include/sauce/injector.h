@@ -9,7 +9,7 @@
 #include <sauce/internal/key.h>
 #include <sauce/internal/scope_cache.h>
 #include <sauce/internal/type_id.h>
-#include <sauce/internal/unscoped_injector.h>
+#include <sauce/internal/base_injector.h>
 
 namespace sauce {
 
@@ -24,7 +24,7 @@ class Injector {
   i::ScopeCache scopeCache;
   SAUCE_WEAK_PTR<Injector> weak;
   SAUCE_SHARED_PTR<Injector> next;
-  SAUCE_SHARED_PTR<i::UnscopedInjector> unscoped;
+  SAUCE_SHARED_PTR<i::BaseInjector> base;
 
   friend class Modules;
   friend class i::InjectorFriend;
@@ -34,14 +34,14 @@ class Injector {
     scopeCache(),
     weak(),
     next(next),
-    unscoped() {}
+    base() {}
 
   Injector(i::Bindings & bindings):
     scopeKey(i::typeIdOf<SingletonScope>()),
     scopeCache(),
     weak(),
     next(),
-    unscoped(new i::UnscopedInjector(bindings)) {}
+    base(new i::BaseInjector(bindings)) {}
 
   void setSelf(SAUCE_SHARED_PTR<Injector> shared) {
     assert(shared.get() == this);
@@ -50,19 +50,19 @@ class Injector {
 
   template<typename Dependency>
   typename i::Key<Dependency>::Ptr get(Injector & injector, i::TypeIds & ids) {
-    if (unscoped.get() == NULL) {
+    if (base.get() == NULL) {
       return next->get<Dependency>(injector, ids);
     } else {
-      return unscoped->get<Dependency>(injector, ids);
+      return base->get<Dependency>(injector, ids);
     }
   }
 
   template<typename Scope>
   void eagerlyProvide(Injector & injector) {
-    if (unscoped.get() == NULL) {
+    if (base.get() == NULL) {
       next->eagerlyProvide<Scope>(injector);
     } else {
-      unscoped->eagerlyProvide<Scope>(injector);
+      base->eagerlyProvide<Scope>(injector);
     }
   }
 

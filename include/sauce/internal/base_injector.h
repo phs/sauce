@@ -1,5 +1,5 @@
-#ifndef SAUCE_SAUCE_INTERNAL_UNSCOPED_INJECTOR_H_
-#define SAUCE_SAUCE_INTERNAL_UNSCOPED_INJECTOR_H_
+#ifndef SAUCE_SAUCE_INTERNAL_BASE_INJECTOR_H_
+#define SAUCE_SAUCE_INTERNAL_BASE_INJECTOR_H_
 
 #include <sauce/exceptions.h>
 #include <sauce/internal/binding.h>
@@ -12,14 +12,14 @@ class Injector;
 
 namespace internal {
 
-class UnscopedInjector;
+class BaseInjector;
 
 /**
  * Detects circular dependencies on behalf of injectors.
  */
 template<typename Dependency>
 class CircularDependencyGuard {
-  friend class UnscopedInjector;
+  friend class BaseInjector;
 
   TypeIds & ids;
   TypeId id;
@@ -40,12 +40,12 @@ class CircularDependencyGuard {
   }
 };
 
-class UnscopedInjector {
+class BaseInjector {
   Bindings bindings;
 
   friend class ::sauce::Injector;
 
-  UnscopedInjector(Bindings & bindings):
+  BaseInjector(Bindings & bindings):
     bindings(bindings) {}
 
   template<typename Dependency>
@@ -68,4 +68,4 @@ namespace i = ::sauce::internal;
 
 }
 
-#endif // SAUCE_SAUCE_INTERNAL_UNSCOPED_INJECTOR_H_
+#endif // SAUCE_SAUCE_INTERNAL_BASE_INJECTOR_H_
