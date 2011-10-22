@@ -158,7 +158,7 @@ public:
    */
   template<typename Dependency>
   typename Key<Dependency>::Ptr get(Injector & injector, TypeIds & typeIds) {
-    std::map<TypeId, OpaqueBindingPtr>::iterator i = bindingMap.find(typeIdOf<Dependency>());
+    BindingMap::iterator i = bindingMap.find(typeIdOf<Dependency>());
     if (i == bindingMap.end()) {
       throw UnboundExceptionFor<Dependency>();
     }
