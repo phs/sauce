@@ -43,13 +43,13 @@ class TransparentBinding;
 template<typename Dependency, typename Scope, typename Impl>
 class DisposalDeleter {
   typedef typename Key<Dependency>::Iface Iface;
-  typedef SAUCE_SHARED_PTR<TransparentBinding<Dependency, Scope, Impl> > BindingPointer;
+  typedef SAUCE_SHARED_PTR<TransparentBinding<Dependency, Scope, Impl> > BindingPtr;
 
   friend class TransparentBinding<Dependency, Scope, Impl>;
 
-  BindingPointer binding;
+  BindingPtr binding;
 
-  DisposalDeleter(BindingPointer binding):
+  DisposalDeleter(BindingPtr binding):
     binding(binding) {}
 
 public:
@@ -71,7 +71,7 @@ class TransparentBinding:
   public InjectorFriend {
 
   typedef typename Key<Dependency>::Iface Iface;
-  typedef typename Binding<Dependency>::BindingPointer BindingPointer;
+  typedef typename Binding<Dependency>::BindingPtr BindingPtr;
 
   /**
    * Provide an instance of Impl.
@@ -90,7 +90,7 @@ class TransparentBinding:
   /**
    * Create a shared pointer deleter suitable for this binding.
    */
-  DisposalDeleter<Dependency, Scope, Impl> deleter(BindingPointer binding) {
+  DisposalDeleter<Dependency, Scope, Impl> deleter(BindingPtr binding) {
     typedef TransparentBinding<Dependency, Scope, Impl> Transparent;
     SAUCE_SHARED_PTR<Transparent> concrete = SAUCE_STATIC_POINTER_CAST<Transparent>(binding);
     return DisposalDeleter<Dependency, Scope, Impl>(concrete);
@@ -119,7 +119,7 @@ public:
    *
    * Derived classes should not override get(), but rather provide().
    */
-  SAUCE_SHARED_PTR<Iface> get(BindingPointer binding, Injector & injector, TypeIds & typeIds) {
+  SAUCE_SHARED_PTR<Iface> get(BindingPtr binding, Injector & injector, TypeIds & typeIds) {
     SAUCE_SHARED_PTR<Iface> smartPointer;
 
     bool unscoped = typeIdOf<Scope>() == typeIdOf<NoScope>();
@@ -139,9 +139,9 @@ public:
    * Instead, cache the instance in its appropriate scope, if any.  If the binding is not scoped,
    * do nothing.
    */
-  void eagerlyProvide(OpaqueBindingPointer opaqueBinding, Injector & injector, TypeIds & typeIds) {
+  void eagerlyProvide(OpaqueBindingPtr opaqueBinding, Injector & injector, TypeIds & typeIds) {
     if (typeIdOf<Scope>() != typeIdOf<NoScope>()) {
-      BindingPointer binding = resolve<Dependency>(opaqueBinding);
+      BindingPtr binding = resolve<Dependency>(opaqueBinding);
       get(binding, injector, typeIds);
     }
   }

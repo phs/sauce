@@ -25,7 +25,7 @@ class Binding;
 
 struct OpaqueBinding;
 
-typedef SAUCE_SHARED_PTR<OpaqueBinding> OpaqueBindingPointer;
+typedef SAUCE_SHARED_PTR<OpaqueBinding> OpaqueBindingPtr;
 
 /**
  * An opaque binding.
@@ -67,7 +67,7 @@ struct OpaqueBinding {
    * do nothing.  The typeIds indicate which keys are already currently being provided to detect
    * circular dependencies.
    */
-  virtual void eagerlyProvide(OpaqueBindingPointer, Injector &, TypeIds &) {}
+  virtual void eagerlyProvide(OpaqueBindingPtr, Injector &, TypeIds &) {}
 
 };
 
@@ -78,7 +78,7 @@ template<typename Dependency>
 struct Binding:
   public OpaqueBinding {
 
-  typedef SAUCE_SHARED_PTR<Binding<Dependency> > BindingPointer;
+  typedef SAUCE_SHARED_PTR<Binding<Dependency> > BindingPtr;
 
   /**
    * Get an instance of Iface, using the given injector to provide dependencies.
@@ -88,17 +88,17 @@ struct Binding:
    * The typeIds indicate which keys are already currently being provided to detect circular
    * dependencies.
    */
-  virtual typename Key<Dependency>::Ptr get(BindingPointer, Injector &, TypeIds &) = 0;
+  virtual typename Key<Dependency>::Ptr get(BindingPtr, Injector &, TypeIds &) = 0;
 
 };
 
 /**
- * Cast an OpaqueBindingPointer to a Binding smart pointer.
+ * Cast an OpaqueBindingPtr to a Binding smart pointer.
  *
  * This must be done carefully (with static_pointer_cast) in order to not lose the ref count.
  */
 template<typename Dependency>
-SAUCE_SHARED_PTR<Binding<Dependency> > resolve(OpaqueBindingPointer binding) {
+SAUCE_SHARED_PTR<Binding<Dependency> > resolve(OpaqueBindingPtr binding) {
   assert((typeIdOf<Dependency>()) == binding->getDependencyId());
   return SAUCE_STATIC_POINTER_CAST<Binding<Dependency> >(binding);
 }
@@ -117,8 +117,8 @@ void pendingThrowFactory() {
 }
 
 class Bindings {
-  typedef std::map<TypeId, OpaqueBindingPointer> BindingMap;
-  typedef std::vector<OpaqueBindingPointer> ScopedBindings;
+  typedef std::map<TypeId, OpaqueBindingPtr> BindingMap;
+  typedef std::vector<OpaqueBindingPtr> ScopedBindings;
   typedef std::map<TypeId, ScopedBindings> ScopeMap;
 
   BindingMap bindingMap;
@@ -137,7 +137,7 @@ public:
    */
   template<typename Binding_>
   void put() {
-    OpaqueBindingPointer binding(new Binding_());
+    OpaqueBindingPtr binding(new Binding_());
     bindingMap.insert(std::make_pair(binding->getDependencyId(), binding));
     TypeId scopeKey = binding->getScopeId();
 
@@ -158,7 +158,7 @@ public:
    */
   template<typename Dependency>
   typename Key<Dependency>::Ptr get(Injector & injector, TypeIds & typeIds) {
-    std::map<TypeId, OpaqueBindingPointer>::iterator i = bindingMap.find(typeIdOf<Dependency>());
+    std::map<TypeId, OpaqueBindingPtr>::iterator i = bindingMap.find(typeIdOf<Dependency>());
     if (i == bindingMap.end()) {
       throw UnboundExceptionFor<Dependency>();
     }
@@ -176,7 +176,7 @@ public:
 
     ScopedBindings & scopedBindings = i->second;
     for (ScopedBindings::iterator i = scopedBindings.begin(); i != scopedBindings.end(); ++i) {
-      OpaqueBindingPointer binding = *i;
+      OpaqueBindingPtr binding = *i;
       binding->eagerlyProvide(binding, injector, typeIds);
     }
   }
