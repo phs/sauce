@@ -41,7 +41,7 @@ class CircularDependencyGuard {
 };
 
 class BaseInjector {
-  Bindings bindings;
+  Bindings const bindings;
 
   friend class ::sauce::Injector;
 
