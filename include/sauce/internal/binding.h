@@ -168,14 +168,14 @@ public:
   }
 
   template<typename Scope>
-  void eagerlyProvide(Injector & injector, TypeIds & typeIds) {
-    ScopeMap::iterator i = scopeMap.find(typeIdOf<Scope>());
+  void eagerlyProvide(Injector & injector, TypeIds & typeIds) const {
+    ScopeMap::const_iterator i = scopeMap.find(typeIdOf<Scope>());
     if (i == scopeMap.end()) {
       return;
     }
 
-    ScopedBindings & bindings = i->second;
-    for (ScopedBindings::iterator i = bindings.begin(); i != bindings.end(); ++i) {
+    ScopedBindings const & bindings = i->second;
+    for (ScopedBindings::const_iterator i = bindings.begin(); i != bindings.end(); ++i) {
       OpaqueBindingPtr binding = *i;
       binding->eagerlyProvide(binding, injector, typeIds);
     }
