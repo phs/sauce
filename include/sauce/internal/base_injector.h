@@ -45,7 +45,7 @@ class BaseInjector {
 
   friend class ::sauce::Injector;
 
-  BaseInjector(Bindings & bindings):
+  BaseInjector(Bindings const & bindings):
     bindings(bindings) {}
 
   template<typename Dependency>

@@ -36,7 +36,7 @@ class Injector {
     next(next),
     base() {}
 
-  Injector(i::Bindings & bindings):
+  Injector(i::Bindings const & bindings):
     scopeKey(i::typeIdOf<SingletonScope>()),
     scopeCache(),
     weak(),

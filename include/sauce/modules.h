@@ -102,7 +102,7 @@ public:
    * Any modules added after an Injector is created will have no effect on that
    * Injector.
    */
-  SAUCE_SHARED_PTR<Injector> createInjector() {
+  SAUCE_SHARED_PTR<Injector> createInjector() const {
     SAUCE_SHARED_PTR<Injector> injector(new Injector(bindings));
     injector->setSelf(injector);
     return injector;
