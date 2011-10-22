@@ -125,17 +125,6 @@ class Bindings {
   ScopeMap scopeMap;
   PendingThrow pending;
 
-  ScopedBindings & bindingsInScope(TypeId scopeKey) {
-    // TODO: thread safety..
-    ScopeMap::iterator i = scopeMap.find(scopeKey);
-    if (i == scopeMap.end()) {
-      scopeMap.insert(i, std::make_pair(scopeKey, ScopedBindings()));
-      i = scopeMap.find(scopeKey);
-    }
-
-    return i->second;
-  }
-
 public:
 
   Bindings():
@@ -150,7 +139,16 @@ public:
   void put() {
     OpaqueBindingPointer binding(new Binding_());
     bindingMap.insert(std::make_pair(binding->getDependencyId(), binding));
-    bindingsInScope(binding->getScopeId()).push_back(binding);
+    TypeId scopeKey = binding->getScopeId();
+
+    ScopeMap::iterator i = scopeMap.find(scopeKey);
+    if (i == scopeMap.end()) {
+      ScopedBindings scopedBindings;
+      scopedBindings.push_back(binding);
+      scopeMap.insert(i, std::make_pair(scopeKey, scopedBindings));
+    } else {
+      i->second.push_back(binding);
+    }
   }
 
   /**
@@ -171,7 +169,12 @@ public:
 
   template<typename Scope>
   void eagerlyProvide(Injector & injector, TypeIds & typeIds) {
-    ScopedBindings & scopedBindings = bindingsInScope(typeIdOf<Scope>());
+    ScopeMap::iterator i = scopeMap.find(typeIdOf<Scope>());
+    if (i == scopeMap.end()) {
+      return;
+    }
+
+    ScopedBindings & scopedBindings = i->second;
     for (ScopedBindings::iterator i = scopedBindings.begin(); i != scopedBindings.end(); ++i) {
       OpaqueBindingPointer binding = *i;
       binding->eagerlyProvide(binding, injector, typeIds);
