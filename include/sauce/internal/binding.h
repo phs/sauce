@@ -58,7 +58,7 @@ struct OpaqueBinding {
   /**
    * The TypeId of our (hidden) scope.
    */
-  virtual TypeId getScopeId() const = 0;
+  virtual TypeId getScopeKey() const = 0;
 
   /**
    * Provide, but do not return an instance of the hidden interface.
@@ -139,7 +139,7 @@ public:
   void put() {
     OpaqueBindingPtr binding(new Binding_());
     bindingMap.insert(std::make_pair(binding->getDependencyId(), binding));
-    TypeId scopeKey = binding->getScopeId();
+    TypeId scopeKey = binding->getScopeKey();
 
     ScopeMap::iterator i = scopeMap.find(scopeKey);
     if (i == scopeMap.end()) {

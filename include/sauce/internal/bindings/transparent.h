@@ -110,7 +110,7 @@ public:
   /**
    * The TypeId of the Scope template parameter.
    */
-  virtual TypeId getScopeId() const {
+  virtual TypeId getScopeKey() const {
     return typeIdOf<Scope>();
   }
 
