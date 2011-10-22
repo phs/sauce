@@ -23,6 +23,9 @@ class ScopeCache {
 
 public:
 
+  ScopeCache():
+    cache() {}
+
   /**
    * Insert a dependency into the cache.
    */
