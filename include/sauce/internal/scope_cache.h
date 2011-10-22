@@ -20,9 +20,9 @@ struct ScopeCacheTraits {
   typedef std::map<TypeId, CachedPtr> Cache;
 };
 
-template<typename Dependency_>
+template<typename UnnormalizedDependency>
 class ScopeCacheLine: public ScopeCacheTraits {
-  typedef typename Key<Dependency_>::Normalized Dependency;
+  typedef typename Key<UnnormalizedDependency>::Normalized Dependency;
   typedef typename Key<Dependency>::Ptr SmartPtr;
 
 public:
