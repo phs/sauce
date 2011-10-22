@@ -59,11 +59,11 @@ public:
    * overwritten with the discovered value.
    */
   template<typename UnnormalizedDependency>
-  bool get(typename Key<UnnormalizedDependency>::Ptr & out) {
+  bool get(typename Key<UnnormalizedDependency>::Ptr & out) const {
     typedef typename Key<UnnormalizedDependency>::Normalized Dependency;
     typedef typename Key<Dependency>::Ptr SmartPtr;
 
-    Cache::iterator cachedPtr = cache.find(typeIdOf<Dependency>());
+    Cache::const_iterator cachedPtr = cache.find(typeIdOf<Dependency>());
     if (cachedPtr == cache.end()) {
       return false;
     }
