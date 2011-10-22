@@ -15,21 +15,22 @@ struct ScopeCacheLineDeleter {
   }
 };
 
-struct ScopeCacheTraits {
+class ScopeCache {
   typedef SAUCE_SHARED_PTR<void> CachedPtr;
   typedef std::map<TypeId, CachedPtr> Cache;
-};
 
-class ScopeCache;
+  Cache cache;
 
-template<typename UnnormalizedDependency>
-class ScopeCacheLine: public ScopeCacheTraits {
-  typedef typename Key<UnnormalizedDependency>::Normalized Dependency;
-  typedef typename Key<Dependency>::Ptr SmartPtr;
+public:
 
-  friend class ScopeCache;
+  /**
+   * Insert a dependency into the cache.
+   */
+  template<typename UnnormalizedDependency>
+  void put(typename Key<UnnormalizedDependency>::Ptr pointer) {
+    typedef typename Key<UnnormalizedDependency>::Normalized Dependency;
+    typedef typename Key<Dependency>::Ptr SmartPtr;
 
-  static void put(Cache & singleScopeCache, SmartPtr pointer) {
     /*
      * A voice! a voice! It rang deep to the very last. It survived his strength to hide in the
      * magnificent folds of eloquence the barren darkness of his heart. Oh, he struggled! he
@@ -39,37 +40,16 @@ class ScopeCacheLine: public ScopeCacheTraits {
      * occasional utterances of elevated sentiments.
      */
 
+    /*
+     * (Make the new smart ptr type agnostic by shoving it into *another* smart pointer.
+     * The deleter casts it back so the reference count isn't leaked.)
+     */
+
     CachedPtr cachedPtr(
       static_cast<void *>(new SmartPtr(pointer)),
       ScopeCacheLineDeleter<Dependency>());
 
-    TypeId typeId = typeIdOf<Dependency>();
-    singleScopeCache.insert(std::make_pair(typeId, cachedPtr));
-  }
-
-  static bool get(Cache & singleScopeCache, SmartPtr & out) {
-    TypeId typeId = typeIdOf<Dependency>();
-    Cache::iterator cachedPtr = singleScopeCache.find(typeId);
-    if (cachedPtr == singleScopeCache.end()) {
-      return false;
-    }
-
-    out = *static_cast<SmartPtr *>(cachedPtr->second.get());
-    return true;
-  }
-};
-
-class ScopeCache: public ScopeCacheTraits {
-  Cache cache;
-
-public:
-
-  /**
-   * Insert a dependency into the cache.
-   */
-  template<typename Dependency>
-  void put(typename Key<Dependency>::Ptr pointer) {
-    ScopeCacheLine<Dependency>::put(cache, pointer);
+    cache.insert(std::make_pair(typeIdOf<Dependency>(), cachedPtr));
   }
 
   /**
@@ -78,9 +58,18 @@ public:
    * The return value indicates if a hit was found.  On a hit, the out argument will be
    * overwritten with the discovered value.
    */
-  template<typename Dependency>
-  bool get(typename Key<Dependency>::Ptr & out) {
-    return ScopeCacheLine<Dependency>::get(cache, out);
+  template<typename UnnormalizedDependency>
+  bool get(typename Key<UnnormalizedDependency>::Ptr & out) {
+    typedef typename Key<UnnormalizedDependency>::Normalized Dependency;
+    typedef typename Key<Dependency>::Ptr SmartPtr;
+
+    Cache::iterator cachedPtr = cache.find(typeIdOf<Dependency>());
+    if (cachedPtr == cache.end()) {
+      return false;
+    }
+
+    out = *static_cast<SmartPtr *>(cachedPtr->second.get());
+    return true;
   }
 
   /**
