@@ -78,7 +78,7 @@ class Injector {
   }
 
   template<typename Dependency, typename Scope>
-  bool probe(typename i::Key<Dependency>::Ptr & out) {
+  bool probe(typename i::Key<Dependency>::Ptr & out) const {
     if (scopeKey == i::typeIdOf<Scope>()) {
       return scopeCache.template get<Dependency>(out);
     } else if (next.get() == NULL) {
@@ -89,7 +89,7 @@ class Injector {
   }
 
   template<typename Scope>
-  bool alreadyScoped() {
+  bool alreadyScoped() const {
     if (scopeKey == i::typeIdOf<Scope>()) {
       return true;
     } else if (next.get() == NULL) {
@@ -113,7 +113,7 @@ public:
   }
 
   template<typename Scope>
-  SAUCE_SHARED_PTR<Injector> enter() {
+  SAUCE_SHARED_PTR<Injector> enter() const {
     if (alreadyScoped<Scope>()) {
       throw AlreadyInScopeExceptionFor<Scope>();
     }
