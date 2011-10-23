@@ -203,5 +203,90 @@ TEST_F(EagerlyScopeTest, shouldThrowExceptionWhenProvidingEagerlyOutOfScope) {
   ASSERT_THROW(injector->eagerlyProvide<RequestScope>(), OutOfScopeException);
 }
 
+struct CurrentUser {
+  sauce::shared_ptr<Session> session;
+
+  CurrentUser(sauce::shared_ptr<Session> session):
+    session(session) {}
+};
+
+struct PersonalizedGreeting {
+  sauce::shared_ptr<CurrentUser> currentUser;
+  sauce::shared_ptr<Request> request;
+
+  PersonalizedGreeting(sauce::shared_ptr<CurrentUser> currentUser,
+                       sauce::shared_ptr<Request> request):
+    currentUser(currentUser),
+    request(request) {}
+};
+
+/**
+ * An opaque value handed to the configured locker on construction.
+ *
+ * In reality this should be a recursive (reentrant) mutex, such as boost/thread's recursive_mutex.
+ */
+struct RecursiveLockStub {};
+
+/**
+ * An RAII lock that accepts a templated mutex reference on construction.
+ *
+ * The intent is the required concept is satisfied by boost/thread's lock_guard.
+ *
+ * This one merely counts, as part of the test fixture.
+ */
+template<typename RecursiveLockable>
+struct CountingLocker {
+  static int reentranceCount;
+  static int maxReentranceCount;
+
+  CountingLocker(RecursiveLockable &) {
+    ++reentranceCount;
+    if (reentranceCount > maxReentranceCount) {
+      maxReentranceCount = reentranceCount;
+    }
+  }
+
+  virtual ~CountingLocker() {
+    --reentranceCount;
+  }
+};
+
+template<typename RecursiveLockable>
+int CountingLocker<RecursiveLockable>::reentranceCount = 0;
+
+template<typename RecursiveLockable>
+int CountingLocker<RecursiveLockable>::maxReentranceCount = 0;
+
+void CrossScopeModule(Binder & binder) {
+  binder.bind<CurrentUser>().to<CurrentUser(Session)>();
+  binder.bind<PersonalizedGreeting>().to<PersonalizedGreeting(CurrentUser, Request)>();
+}
+
+struct SynchronizedScopeTest:
+  public ::testing::Test {
+
+  RecursiveLockStub lock;
+  Modules modules;
+  sauce::shared_ptr<Injector> injector;
+
+  SynchronizedScopeTest():
+    lock(),
+    modules(),
+    injector() {}
+
+  virtual void SetUp() {
+    modules.add(&ScopedModule).add(&CrossScopeModule);
+    CountingLocker<RecursiveLockStub>::maxReentranceCount = 0;
+  }
+};
+
+TEST_F(SynchronizedScopeTest, shouldOptionallyGuardProvisionsWithRecursiveLock) {
+  injector = modules.createInjector<CountingLocker<RecursiveLockStub>, RecursiveLockStub>(lock);
+
+  sauce::shared_ptr<Singleton> singleton = injector->get<Singleton>();
+  ASSERT_EQ(0, CountingLocker<RecursiveLockStub>::reentranceCount);
+  // ASSERT_EQ(1, CountingLocker<RecursiveLockStub>::maxReentranceCount);
+}
+
 }
 }

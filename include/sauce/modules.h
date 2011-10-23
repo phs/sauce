@@ -108,6 +108,17 @@ public:
     return injector;
   }
 
+  /**
+   * Create an Injector that can provide dependencies specified by all added Modules.
+   *
+   * Any modules added after an Injector is created will have no effect on that
+   * Injector.
+   */
+  template<typename Locker, typename Lockable>
+  sauce::shared_ptr<Injector> createInjector(Lockable &) const {
+    return createInjector();
+  }
+
 };
 
 }
