@@ -16,6 +16,8 @@ Requesting the injector for an unbound type results in a runtime exception.
 
 ## Scopes ##
 
+TODO: scopes have been overhauled, needs rewrite..
+
 A side-effect of using an injector to hide implementation choices from dependents is the discouraged use of stack allocation and the `new` operator for dependencies.  The `new` operator (et. al.) has an additional guarantee past the one ensuring your instance's concrete type: you know the instance you get back is unique, and entirely yours.  This raises the question: will the injector always provide new, successive instances, or will it ever reuse some?
 
 It turns out the most useful answer is "both".  Depending on the context, it may be appropriate to always create new instances upon request, to always share a solitary instance with everyone (such as in the _Singleton_ pattern), or something in between.
@@ -26,7 +28,7 @@ Sometimes it is convenient to force the creation of all dependencies in a given 
 
 Unlike Guice, Sauce expects the developer to reenter and eagerly load scopes explicitly, at their convenience.  No reentrance or eager loading occurs implicitly.  However, scopes are implicitly and always _entered_: scoped dependencies are always cached, and only created from the underlying bindings on cache miss.
 
-TODO: Scopes almost surely aren't thread safe..
+Scopes may be made thread-safe by supplying a locker type and a recursive lockable instance when creating the injector.  Boost/thread's lock\_guard and recursive\_lock are suitable for this purpose.
 
 ## Wishlist ##
 
