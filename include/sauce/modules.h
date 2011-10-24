@@ -5,6 +5,7 @@
 #include <sauce/injector.h>
 #include <sauce/memory.h>
 #include <sauce/internal/binding.h>
+#include <sauce/internal/locker_factory.h>
 
 namespace sauce {
 
@@ -103,7 +104,8 @@ public:
    * Injector.
    */
   sauce::shared_ptr<Injector> createInjector() const {
-    sauce::shared_ptr<Injector> injector(new Injector(bindings));
+    sauce::auto_ptr<i::LockFactory> lockFactory(new i::NullLockFactory());
+    sauce::shared_ptr<Injector> injector(new Injector(bindings, lockFactory));
     injector->setSelf(injector);
     return injector;
   }
@@ -115,8 +117,11 @@ public:
    * Injector.
    */
   template<typename Locker, typename Lockable>
-  sauce::shared_ptr<Injector> createInjector(Lockable &) const {
-    return createInjector();
+  sauce::shared_ptr<Injector> createInjector(Lockable & lockable) const {
+    sauce::auto_ptr<i::LockFactory> lockFactory(new i::LockerLockFactory<Locker, Lockable>(lockable));
+    sauce::shared_ptr<Injector> injector(new Injector(bindings, lockFactory));
+    injector->setSelf(injector);
+    return injector;
   }
 
 };

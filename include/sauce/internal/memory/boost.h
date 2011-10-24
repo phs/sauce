@@ -4,6 +4,7 @@
 #include <boost/shared_ptr.hpp>
 
 namespace sauce {
+using boost::auto_ptr;
 using boost::shared_ptr;
 using boost::weak_ptr;
 using boost::static_pointer_cast;

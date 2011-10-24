@@ -2,8 +2,10 @@
 #define SAUCE_SAUCE_INTERNAL_BASE_INJECTOR_H_
 
 #include <sauce/exceptions.h>
+#include <sauce/memory.h>
 #include <sauce/internal/binding.h>
 #include <sauce/internal/key.h>
+#include <sauce/internal/locker_factory.h>
 #include <sauce/internal/type_id.h>
 
 namespace sauce {
@@ -42,11 +44,13 @@ class CircularDependencyGuard {
 
 class BaseInjector {
   Bindings const bindings;
+  sauce::auto_ptr<i::LockFactory> lockFactory;
 
   friend class ::sauce::Injector;
 
-  BaseInjector(Bindings const & bindings):
-    bindings(bindings) {}
+  BaseInjector(Bindings const & bindings, sauce::auto_ptr<i::LockFactory> lockFactory):
+    bindings(bindings),
+    lockFactory(lockFactory) {}
 
   template<typename Dependency>
   typename Key<Dependency>::Ptr get(Injector & injector, TypeIds & ids) const {
@@ -59,6 +63,14 @@ class BaseInjector {
   void eagerlyProvide(Injector & injector) const {
     TypeIds ids;
     bindings.eagerlyProvide<Scope>(injector, ids);
+  }
+
+  /**
+   * Create an RAII synchronization lock.
+   */
+  sauce::auto_ptr<Lock> acquireLock() {
+    sauce::auto_ptr<Lock> lock = lockFactory->createLock();
+    return lock;
   }
 };
 

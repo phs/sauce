@@ -285,7 +285,7 @@ TEST_F(SynchronizedScopeTest, shouldOptionallyGuardProvisionsWithRecursiveLock) 
 
   sauce::shared_ptr<Singleton> singleton = injector->get<Singleton>();
   ASSERT_EQ(0, CountingLocker<RecursiveLockStub>::reentranceCount);
-  // ASSERT_EQ(1, CountingLocker<RecursiveLockStub>::maxReentranceCount);
+  ASSERT_EQ(1, CountingLocker<RecursiveLockStub>::maxReentranceCount);
 }
 
 }

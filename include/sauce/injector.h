@@ -7,6 +7,7 @@
 #include <sauce/named.h>
 #include <sauce/internal/binding.h>
 #include <sauce/internal/key.h>
+#include <sauce/internal/locker_factory.h>
 #include <sauce/internal/scope_cache.h>
 #include <sauce/internal/type_id.h>
 #include <sauce/internal/base_injector.h>
@@ -36,12 +37,12 @@ class Injector {
     next(next),
     base() {}
 
-  Injector(i::Bindings const & bindings):
+  Injector(i::Bindings const & bindings, sauce::auto_ptr<i::LockFactory> lockFactory):
     scopeKey(i::typeIdOf<SingletonScope>()),
     scopeCache(),
     weak(),
     next(),
-    base(new i::BaseInjector(bindings)) {}
+    base(new i::BaseInjector(bindings, lockFactory)) {}
 
   void setSelf(sauce::shared_ptr<Injector> shared) {
     assert(shared.get() == this);
@@ -54,6 +55,17 @@ class Injector {
       return next->get<Dependency>(injector, ids);
     } else {
       return base->get<Dependency>(injector, ids);
+    }
+  }
+
+  /**
+   * Create an RAII synchronization lock.
+   */
+  sauce::auto_ptr<i::Lock> acquireLock() {
+    if (base.get() == NULL) {
+      return next->acquireLock();
+    } else {
+      return base->acquireLock();
     }
   }
 
@@ -103,6 +115,7 @@ public:
 
   template<typename Dependency>
   typename i::Key<Dependency>::Ptr get() {
+    sauce::auto_ptr<i::Lock> lock = acquireLock();
     i::TypeIds ids;
     return get<Dependency>(*this, ids);
   }
@@ -128,6 +141,7 @@ public:
 
   template<typename Scope>
   void eagerlyProvide() {
+    sauce::auto_ptr<i::Lock> lock = acquireLock();
     eagerlyProvide<Scope>(*this);
   }
 
