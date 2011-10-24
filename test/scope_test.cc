@@ -288,5 +288,7 @@ TEST_F(SynchronizedScopeTest, shouldOptionallyGuardProvisionsWithRecursiveLock) 
   ASSERT_EQ(1, CountingLocker<RecursiveLockStub>::maxReentranceCount);
 }
 
+// TODO test synchronization more thoroughly (soon as you figure out how..)
+
 }
 }
