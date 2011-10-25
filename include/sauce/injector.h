@@ -101,13 +101,13 @@ class Injector {
   }
 
   template<typename Scope>
-  bool alreadyScoped() const {
+  bool alreadyInScope() const {
     if (scopeKey == i::typeIdOf<Scope>()) {
       return true;
     } else if (next.get() == NULL) {
       return false;
     } else {
-      return next->alreadyScoped<Scope>();
+      return next->alreadyInScope<Scope>();
     }
   }
 
@@ -127,7 +127,7 @@ public:
 
   template<typename Scope>
   sauce::shared_ptr<Injector> enter() const {
-    if (alreadyScoped<Scope>()) {
+    if (alreadyInScope<Scope>()) {
       throw AlreadyInScopeExceptionFor<Scope>();
     }
 
