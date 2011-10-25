@@ -1,0 +1,14 @@
+<map id="G" name="G">
+<area shape="rect" id="node1" href="$structsauce_1_1_exception.html" title="Base class for all sauce exceptions." alt="" coords="6,132,135,159"/>
+<area shape="rect" id="node3" href="$structsauce_1_1_already_in_scope_exception.html" title="Raised when re&#45;entering a scope that is already open." alt="" coords="207,5,433,32"/>
+<area shape="rect" id="node7" href="$structsauce_1_1_circular_dependency_exception.html" title="Raised when a dependency cycle is found." alt="" coords="194,56,446,83"/>
+<area shape="rect" id="node11" href="$structsauce_1_1_exiting_singleton_scope_exception.html" title="Raised when exiting the singleton scope." alt="" coords="184,107,456,133"/>
+<area shape="rect" id="node13" href="$structsauce_1_1_out_of_scope_exception.html" title="Raised when a provision is requested outside of its bound scope." alt="" coords="216,157,424,184"/>
+<area shape="rect" id="node17" href="$structsauce_1_1_partial_binding_exception.html" title="Raised when a binding hasn&#39;t been completely specified." alt="" coords="213,208,427,235"/>
+<area shape="rect" id="node21" href="$structsauce_1_1_unbound_exception.html" title="Raised when a binding cannot be found." alt="" coords="228,259,412,285"/>
+<area shape="rect" id="node5" href="$structsauce_1_1_already_in_scope_exception_for.html" title="Raised when re&#45;entering the given scope, which is already open." alt="" coords="535,5,846,32"/>
+<area shape="rect" id="node9" href="$structsauce_1_1_circular_dependency_exception_for.html" title="Raised when a dependency cycle is found for the given interface." alt="" coords="505,56,877,83"/>
+<area shape="rect" id="node15" href="$structsauce_1_1_out_of_scope_exception_for.html" title="Raised when a provision is requested outside of its given, bound scope." alt="" coords="545,157,836,184"/>
+<area shape="rect" id="node19" href="$structsauce_1_1_partial_binding_for.html" title="Raised when a binding hasn&#39;t been completely specified for the given interface." alt="" coords="555,208,826,235"/>
+<area shape="rect" id="node23" href="$structsauce_1_1_unbound_exception_for.html" title="Raised when a binding cannot be found for the given interface." alt="" coords="539,259,843,285"/>
+</map>

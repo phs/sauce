@@ -1,0 +1,4 @@
+<map id="G" name="G">
+<area shape="rect" id="node5" href="$structsauce_1_1_circular_dependency_exception_for.html" title="Raised when a dependency cycle is found for the given interface." alt="" coords="5,155,376,181"/>
+<area shape="rect" id="node2" href="$structsauce_1_1_exception.html" title="Base class for all sauce exceptions." alt="" coords="126,5,255,32"/>
+</map>
