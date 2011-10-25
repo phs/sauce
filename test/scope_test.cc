@@ -284,7 +284,7 @@ struct SynchronizedScopeTest:
     injector(Modules().
              add(&ScopedModule).
              add(&CrossScopeModule).
-             createInjector<CountingLocker<LockableStub>, LockableStub>(lock)) {}
+             createInjector<CountingLocker<LockableStub> >(lock)) {}
 
   virtual void SetUp() {
     CountingLocker<LockableStub>::maxReentranceCount = 0;
