@@ -1,4 +1,6 @@
 <map id="G" name="G">
-<area shape="rect" id="node2" href="$structsauce_1_1_circular_dependency_exception.html" title="Raised when a dependency cycle is found." alt="" coords="65,80,316,107"/>
-<area shape="rect" id="node4" href="$structsauce_1_1_exception.html" title="Base class for all sauce exceptions." alt="" coords="126,5,255,32"/>
+<area shape="rect" id="node2" href="$structsauce_1_1_circular_dependency_exception.html" title="Raised when a dependency cycle is found." alt="" coords="65,229,316,256"/>
+<area shape="rect" id="node4" href="$structsauce_1_1_exception.html" title="Base class for all sauce exceptions." alt="" coords="126,155,255,181"/>
+<area shape="rect" id="node6" title="STL class." alt="" coords="125,80,256,107"/>
+<area shape="rect" id="node8" title="STL class." alt="" coords="135,5,247,32"/>
 </map>
