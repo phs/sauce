@@ -34,7 +34,7 @@ Unlike Guice, Sauce expects the developer to enter and eagerly provide scopes ex
 
 * ~~Circular dependency detection~~
 * Setter injection
-* ~~Named, overloaded bindings and dependencies~~
+* ~~Named, overloaded bindings~~
 * ~~Eager-loaded singletons~~
 * Injectable Providers for lazy resolution
 * Implicit bindings implied by bound interfaces or implementations
