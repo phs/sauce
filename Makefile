@@ -17,7 +17,7 @@ UNCRUSTIFY_OUTPUT = $(patsubst %,build/uncrustify/%,$(UNCRUSTIFY_INPUT))
 
 all: precommit
 
-precommit: test-style run-cppcheck test
+precommit: test-style run-cppcheck run-doxygen test
 
 run-uncrustify:
 	mkdir -p build/uncrustify
@@ -44,6 +44,9 @@ accept-style: run-uncrustify
 
 run-cppcheck:
 	cppcheck -q --error-exitcode=1 include test
+
+run-doxygen:
+	doxygen
 
 include/%: include/%.pump
 	vendor/pump.py $+
