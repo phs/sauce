@@ -127,6 +127,7 @@ public:
 
   template<typename Scope>
   sauce::shared_ptr<Injector> enter() const {
+    // TODO: need an exit() ?
     if (alreadyScoped<Scope>()) {
       throw AlreadyInScopeExceptionFor<Scope>();
     }
