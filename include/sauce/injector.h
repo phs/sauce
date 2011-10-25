@@ -127,7 +127,6 @@ public:
 
   template<typename Scope>
   sauce::shared_ptr<Injector> enter() const {
-    // TODO: need an exit() ?
     if (alreadyScoped<Scope>()) {
       throw AlreadyInScopeExceptionFor<Scope>();
     }
@@ -138,6 +137,14 @@ public:
     sauce::shared_ptr<Injector> scoped(new Injector(i::typeIdOf<Scope>(), self));
     scoped->setSelf(scoped);
     return scoped;
+  }
+
+  sauce::shared_ptr<Injector> exit() const {
+    if (next.get() == NULL) {
+      throw ExitingSingletonScopeException();
+    } else {
+      return next;
+    }
   }
 
   template<typename Scope>

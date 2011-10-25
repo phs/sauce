@@ -94,6 +94,14 @@ struct AlreadyInScopeExceptionFor: AlreadyInScopeException {
   AlreadyInScopeExceptionFor(): AlreadyInScopeException() {}
 };
 
+/**
+ * Raised when exiting the singleton scope.
+ */
+struct ExitingSingletonScopeException: Exception {
+  ExitingSingletonScopeException():
+    Exception("Can't exit SingletonScope") {}
+};
+
 }
 
 #endif // SAUCE_SAUCE_EXCEPTIONS_H_

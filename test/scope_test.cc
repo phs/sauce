@@ -144,13 +144,17 @@ TEST_F(ScopeTest, shouldNestScopes) {
     sauce::shared_ptr<Session> aSession = sessionScoped->get<Session>();
     theSameSingleton = sessionScoped->get<Singleton>();
 
-    // sauce::shared_ptr<Injector> backInSingletonScope = injector->exit();
-    // stillTheSameSingleton = backInSingletonScope->get<Singleton>();
-    // ASSERT_THROW(injector->get<Session>(), OutOfScopeException);
+    sauce::shared_ptr<Injector> backInSingletonScope = sessionScoped->exit();
+    stillTheSameSingleton = backInSingletonScope->get<Singleton>();
+    ASSERT_THROW(backInSingletonScope->get<Session>(), OutOfScopeException);
   }
 
   EXPECT_EQ(aSingleton, theSameSingleton);
-  // EXPECT_EQ(aSingleton, stillTheSameSingleton);
+  EXPECT_EQ(aSingleton, stillTheSameSingleton);
+}
+
+TEST_F(ScopeTest, shouldThrowExceptionWhenExitingSingletonScope) {
+  ASSERT_THROW(injector->exit(), ExitingSingletonScopeException);
 }
 
 TEST_F(ScopeTest, shouldReenterScopesInParallelize) {
