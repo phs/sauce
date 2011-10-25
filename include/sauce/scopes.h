@@ -13,8 +13,10 @@ class NoScope {};
 /**
  * The Singleton scope.
  *
- * Its intended use is for extremely long-lived values.
- * TODO mention eager loading once it exists.
+ * Its intended use is for extremely long-lived values.  Dependencies like connection pools or
+ * global configuration stores make good singletons.  One might wish to create
+ * environmentally-dependent singletons such as a connection pool as early as possible: use
+ * Injector::eagerlyProvide() to accomplish this.
  */
 class SingletonScope {};
 
