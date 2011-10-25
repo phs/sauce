@@ -130,16 +130,27 @@ TEST_F(ScopeTest, shouldScopeCustomScopedDependenciesIfAsked) {
   EXPECT_NE(aC, aNewC);
 }
 
+TEST_F(ScopeTest, shouldThrowExceptionWhenProvidingDependencyOutOfScope) {
+  ASSERT_THROW(injector->get<Request>(), OutOfScopeException);
+}
+
 TEST_F(ScopeTest, shouldNestScopes) {
   sauce::shared_ptr<Singleton> aSingleton = injector->get<Singleton>();
   sauce::shared_ptr<Singleton> theSameSingleton;
+  sauce::shared_ptr<Singleton> stillTheSameSingleton;
 
   {
     sauce::shared_ptr<Injector> sessionScoped = injector->enter<SessionScope>();
+    sauce::shared_ptr<Session> aSession = sessionScoped->get<Session>();
     theSameSingleton = sessionScoped->get<Singleton>();
+
+    // sauce::shared_ptr<Injector> backInSingletonScope = injector->exit();
+    // stillTheSameSingleton = backInSingletonScope->get<Singleton>();
+    // ASSERT_THROW(injector->get<Session>(), OutOfScopeException);
   }
 
   EXPECT_EQ(aSingleton, theSameSingleton);
+  // EXPECT_EQ(aSingleton, stillTheSameSingleton);
 }
 
 TEST_F(ScopeTest, shouldReenterScopesInParallelize) {
@@ -164,10 +175,6 @@ TEST_F(ScopeTest, shouldNotScopeUnscopedDependencies) {
   sauce::shared_ptr<D> aD = injector->get<D>();
   sauce::shared_ptr<D> aNewD = injector->get<D>();
   EXPECT_NE(aD, aNewD);
-}
-
-TEST_F(ScopeTest, shouldThrowExceptionWhenProvidingDependencyOutOfScope) {
-  ASSERT_THROW(injector->get<Request>(), OutOfScopeException);
 }
 
 struct CrankyConstructorException: public std::runtime_error {
