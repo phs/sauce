@@ -30,6 +30,10 @@ Sometimes it is convenient to force the creation of all dependencies up front in
 
 Unlike Guice, Sauce expects the developer to enter and eagerly provide scopes explicitly, at their convenience.  No entrance or eager provision occurs implicitly.
 
+## Further Reading ##
+
+* [API Reference](http://phs.github.com/sauce/doc/api/classes.html)
+
 ## Wishlist ##
 
 * ~~Circular dependency detection~~
