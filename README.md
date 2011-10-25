@@ -28,7 +28,7 @@ Sometimes it is convenient to force the creation of all dependencies in a given 
 
 Unlike Guice, Sauce expects the developer to reenter and eagerly load scopes explicitly, at their convenience.  No reentrance or eager loading occurs implicitly.  However, scopes are implicitly and always _entered_: scoped dependencies are always cached, and only created from the underlying bindings on cache miss.
 
-Scopes may be made thread-safe by supplying a locker type and a recursive lockable instance when creating the injector.  Boost/thread's lock\_guard and recursive\_lock are suitable for this purpose.
+Scopes may be made thread-safe by supplying a locker type and a lockable instance when creating the injector.  Boost/thread's `lock\_guard` and `mutex` are suitable for this purpose.
 
 ## Wishlist ##
 

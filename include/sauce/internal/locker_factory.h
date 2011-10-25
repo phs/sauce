@@ -37,10 +37,7 @@ public:
  * the caller via an auto_ptr.
  *
  * This formulation is specifically chosen to cater to boost/thread's approach to RAII lockers.
- * Specifically, a lock_guard used with a recursive_lock should be sufficient for all needs.
- *
- * I cannot stress enough that any lock used must be recursive/reentrant.  Without this quality the
- * uses of this factory (scope thread-safety) have no hope of functioning.
+ * Specifically, a lock_guard used with a mutex should be sufficient for all needs.
  */
 struct LockFactory {
   virtual sauce::auto_ptr<Lock> createLock() = 0;

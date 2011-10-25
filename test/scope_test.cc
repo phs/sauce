@@ -223,9 +223,9 @@ struct PersonalizedGreeting {
 /**
  * An opaque value handed to the configured locker on construction.
  *
- * In reality this should be a recursive (reentrant) mutex, such as boost/thread's recursive_mutex.
+ * In reality this should be a mutex, such as one in boost/thread.
  */
-struct RecursiveLockStub {};
+struct LockableStub {};
 
 /**
  * An RAII lock that accepts a templated mutex reference on construction.
@@ -234,12 +234,12 @@ struct RecursiveLockStub {};
  *
  * This one merely counts, as part of the test fixture.
  */
-template<typename RecursiveLockable>
+template<typename Lockable>
 struct CountingLocker {
   static int reentranceCount;
   static int maxReentranceCount;
 
-  CountingLocker(RecursiveLockable &) {
+  CountingLocker(Lockable &) {
     ++reentranceCount;
     if (reentranceCount > maxReentranceCount) {
       maxReentranceCount = reentranceCount;
@@ -251,11 +251,11 @@ struct CountingLocker {
   }
 };
 
-template<typename RecursiveLockable>
-int CountingLocker<RecursiveLockable>::reentranceCount = 0;
+template<typename Lockable>
+int CountingLocker<Lockable>::reentranceCount = 0;
 
-template<typename RecursiveLockable>
-int CountingLocker<RecursiveLockable>::maxReentranceCount = 0;
+template<typename Lockable>
+int CountingLocker<Lockable>::maxReentranceCount = 0;
 
 void CrossScopeModule(Binder & binder) {
   binder.bind<CurrentUser>().to<CurrentUser(Session)>();
@@ -265,7 +265,7 @@ void CrossScopeModule(Binder & binder) {
 struct SynchronizedScopeTest:
   public ::testing::Test {
 
-  RecursiveLockStub lock;
+  LockableStub lock;
   sauce::shared_ptr<Injector> injector;
 
   SynchronizedScopeTest():
@@ -273,30 +273,30 @@ struct SynchronizedScopeTest:
     injector(Modules().
              add(&ScopedModule).
              add(&CrossScopeModule).
-             createInjector<CountingLocker<RecursiveLockStub>, RecursiveLockStub>(lock)) {}
+             createInjector<CountingLocker<LockableStub>, LockableStub>(lock)) {}
 
   virtual void SetUp() {
-    CountingLocker<RecursiveLockStub>::maxReentranceCount = 0;
+    CountingLocker<LockableStub>::maxReentranceCount = 0;
   }
 };
 
 TEST_F(SynchronizedScopeTest, shouldOptionallyGuardProvisionsWithLockable) {
   sauce::shared_ptr<Singleton> singleton = injector->get<Singleton>();
-  ASSERT_EQ(0, CountingLocker<RecursiveLockStub>::reentranceCount);
-  EXPECT_EQ(1, CountingLocker<RecursiveLockStub>::maxReentranceCount);
+  ASSERT_EQ(0, CountingLocker<LockableStub>::reentranceCount);
+  EXPECT_EQ(1, CountingLocker<LockableStub>::maxReentranceCount);
 }
 
 TEST_F(SynchronizedScopeTest, shouldNotRecurseLockOnEachProvision) {
   injector = injector->enter<SessionScope>()->enter<RequestScope>();
   sauce::shared_ptr<PersonalizedGreeting> greeting = injector->get<PersonalizedGreeting>();
-  ASSERT_EQ(0, CountingLocker<RecursiveLockStub>::reentranceCount);
-  EXPECT_EQ(1, CountingLocker<RecursiveLockStub>::maxReentranceCount);
+  ASSERT_EQ(0, CountingLocker<LockableStub>::reentranceCount);
+  EXPECT_EQ(1, CountingLocker<LockableStub>::maxReentranceCount);
 }
 
 TEST_F(SynchronizedScopeTest, shouldOptionallyGuardEagerProvisionsWithLockable) {
   injector->eagerlyProvide<SingletonScope>();
-  ASSERT_EQ(0, CountingLocker<RecursiveLockStub>::reentranceCount);
-  EXPECT_EQ(1, CountingLocker<RecursiveLockStub>::maxReentranceCount);
+  ASSERT_EQ(0, CountingLocker<LockableStub>::reentranceCount);
+  EXPECT_EQ(1, CountingLocker<LockableStub>::maxReentranceCount);
 }
 
 }
