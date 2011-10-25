@@ -44,4 +44,4 @@ Unlike Guice, Sauce expects the developer to enter and eagerly provide scopes ex
 
 ## Copyright ##
 
-Copyright (c) 2011 Phil Smith. See LICENSE for details.
+Copyright (c) 2011-2012 Phil Smith. See LICENSE for details.
