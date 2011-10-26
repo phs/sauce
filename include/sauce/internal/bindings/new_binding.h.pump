@@ -17,7 +17,7 @@ namespace internal {
 namespace bindings {
 
 template<typename Dependency, typename Scope, typename Constructor, typename Allocator>
-class New;
+class NewBinding;
 
 $range i 0..n
 $for i [[
@@ -27,7 +27,7 @@ $var As = [[$for j, [[A$j]]]]
 $var as = [[$for j, [[a$j]]]]
 
 template<typename Dependency, typename Scope, typename Impl, typename Allocator$comma_typename_As>
-struct New<Dependency, Scope, Impl($As), Allocator>: public TransparentBinding<Dependency, Scope, Impl> {
+struct NewBinding<Dependency, Scope, Impl($As), Allocator>: public TransparentBinding<Dependency, Scope, Impl> {
   typedef typename Allocator::template rebind<Impl>::other ImplAllocator;
 
 [[$if i==0 [[

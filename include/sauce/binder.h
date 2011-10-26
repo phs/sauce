@@ -30,7 +30,7 @@ class AllocateFromClause:
     i::Clause<AllocateFromClause<Dependency, Scope, Ctor, Allocator> >(bindings) {}
 
   static void activate(i::Bindings & bindings) {
-    bindings.put<b::New<Dependency, Scope, Ctor, Allocator> >();
+    bindings.put<b::NewBinding<Dependency, Scope, Ctor, Allocator> >();
   }
 };
 
