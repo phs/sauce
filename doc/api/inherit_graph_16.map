@@ -1,5 +1,0 @@
-<map id="G" name="G">
-<area shape="rect" id="node1" href="$structsauce_1_1internal_1_1_lock.html" title="An RAII wrapper to hide locker details." alt="" coords="5,31,152,57"/>
-<area shape="rect" id="node3" href="$classsauce_1_1internal_1_1_locker_lock.html" title="An adapter to hide the type of the given Locker." alt="" coords="200,5,451,32"/>
-<area shape="rect" id="node5" href="$structsauce_1_1internal_1_1_null_lock.html" title="Not a lock at all, but used when no synchronization is configured." alt="" coords="240,56,411,83"/>
-</map>
