@@ -119,8 +119,8 @@ TEST(BindingTest, shouldThrowExceptionOnPartialScopedBinding) {
 
 TEST(BindingTest, shouldImplicitlyBindTheInjectorItself) {
   sauce::shared_ptr<Injector> expected = Modules().createInjector();
-  // sauce::shared_ptr<Injector> actual = expected->get<Injector>();
-  // ASSERT_EQ(expected, actual);
+  sauce::shared_ptr<Injector> actual = expected->get<Injector>();
+  ASSERT_EQ(expected, actual);
 }
 
 }

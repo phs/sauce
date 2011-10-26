@@ -5,6 +5,7 @@
 #include <sauce/injector.h>
 #include <sauce/memory.h>
 #include <sauce/internal/binding.h>
+#include <sauce/internal/bindings/all.h>
 #include <sauce/internal/locker_factory.h>
 
 namespace sauce {
@@ -73,6 +74,14 @@ public:
 class Modules {
   i::Bindings bindings;
   Binder binder;
+
+  /**
+   * Bind the implicit bindings.
+   */
+  void bindImplicit() {
+    bindings.put<b::InjectorBinding>();
+  }
+
 public:
 
   /**
@@ -80,7 +89,9 @@ public:
    */
   Modules():
     bindings(),
-    binder(bindings) {}
+    binder(bindings) {
+    bindImplicit();
+  }
 
   /**
    * Add the bindings defined by the given Module instance.
