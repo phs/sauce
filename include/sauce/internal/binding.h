@@ -67,7 +67,7 @@ struct OpaqueBinding {
    * do nothing.  The typeIds indicate which keys are already currently being provided to detect
    * circular dependencies.
    */
-  virtual void eagerlyProvide(OpaqueBindingPtr, Injector &, TypeIds &) const {}
+  virtual void eagerlyProvide(OpaqueBindingPtr, sauce::shared_ptr<Injector>, TypeIds &) const {}
 
 };
 
@@ -88,7 +88,8 @@ struct Binding:
    * The typeIds indicate which keys are already currently being provided to detect circular
    * dependencies.
    */
-  virtual typename Key<Dependency>::Ptr get(BindingPtr, Injector &, TypeIds &) const = 0;
+  virtual typename Key<Dependency>::Ptr get(
+    BindingPtr, sauce::shared_ptr<Injector>, TypeIds &) const = 0;
 
 };
 
@@ -157,18 +158,18 @@ public:
    * If no binding is found, throw UnboundException.
    */
   template<typename Dependency>
-  typename Key<Dependency>::Ptr get(Injector & injector, TypeIds & typeIds) const {
+  typename Key<Dependency>::Ptr get(sauce::shared_ptr<Injector> injector, TypeIds & ids) const {
     BindingMap::const_iterator i = bindingMap.find(typeIdOf<Dependency>());
     if (i == bindingMap.end()) {
       throw UnboundExceptionFor<Dependency>();
     }
 
     sauce::shared_ptr<Binding<Dependency> > binding = resolve<Dependency>(i->second);
-    return binding->get(binding, injector, typeIds);
+    return binding->get(binding, injector, ids);
   }
 
   template<typename Scope>
-  void eagerlyProvide(Injector & injector, TypeIds & typeIds) const {
+  void eagerlyProvide(sauce::shared_ptr<Injector> injector, TypeIds & ids) const {
     ScopeMap::const_iterator i = scopeMap.find(typeIdOf<Scope>());
     if (i == scopeMap.end()) {
       return;
@@ -177,7 +178,7 @@ public:
     ScopedBindings const & bindings = i->second;
     for (ScopedBindings::const_iterator i = bindings.begin(); i != bindings.end(); ++i) {
       OpaqueBindingPtr binding = *i;
-      binding->eagerlyProvide(binding, injector, typeIds);
+      binding->eagerlyProvide(binding, injector, ids);
     }
   }
 

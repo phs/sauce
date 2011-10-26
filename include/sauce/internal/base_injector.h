@@ -53,14 +53,14 @@ class BaseInjector {
     lockFactory(lockFactory) {}
 
   template<typename Dependency>
-  typename Key<Dependency>::Ptr get(Injector & injector, TypeIds & ids) const {
+  typename Key<Dependency>::Ptr get(sauce::shared_ptr<Injector> injector, TypeIds & ids) const {
     typedef typename Key<Dependency>::Normalized Normalized;
     CircularDependencyGuard<Normalized> guard(ids);
     return bindings.get<Normalized>(injector, ids);
   }
 
   template<typename Scope>
-  void eagerlyProvide(Injector & injector) const {
+  void eagerlyProvide(sauce::shared_ptr<Injector> injector) const {
     TypeIds ids;
     bindings.eagerlyProvide<Scope>(injector, ids);
   }

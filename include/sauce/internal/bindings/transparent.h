@@ -12,22 +12,24 @@
 namespace sauce {
 namespace internal {
 
+typedef sauce::shared_ptr<Injector> InjectorPtr;
+
 class InjectorFriend {
 protected:
 
   template<typename Dependency>
-  typename i::Key<Dependency>::Ptr getDependency(Injector & injector, TypeIds & keys) const {
-    return injector.get<Dependency>(injector, keys);
+  typename i::Key<Dependency>::Ptr getDependency(InjectorPtr injector, TypeIds & ids) const {
+    return injector->get<Dependency>(injector, ids);
   }
 
   template<typename Dependency, typename Scope>
-  void cache(Injector & injector, typename i::Key<Dependency>::Ptr pointer) const {
-    injector.template cache<Dependency, Scope>(pointer);
+  void cache(InjectorPtr injector, typename i::Key<Dependency>::Ptr pointer) const {
+    injector->template cache<Dependency, Scope>(pointer);
   }
 
   template<typename Dependency, typename Scope>
-  bool probe(Injector & injector, typename i::Key<Dependency>::Ptr & out) const {
-    return injector.template probe<Dependency, Scope>(out);
+  bool probe(InjectorPtr injector, typename i::Key<Dependency>::Ptr & out) const {
+    return injector->template probe<Dependency, Scope>(out);
   }
 
 };
@@ -78,7 +80,7 @@ class TransparentBinding:
    *
    * The strategy used is left to derived types.
    */
-  virtual Impl * provide(Injector & injector, TypeIds & typeIds) const = 0;
+  virtual Impl * provide(InjectorPtr injector, TypeIds & ids) const = 0;
 
   /**
    * Dispose of an instance of Iface provided by this binding.
@@ -119,12 +121,12 @@ public:
    *
    * Derived classes should not override get(), but rather provide().
    */
-  sauce::shared_ptr<Iface> get(BindingPtr binding, Injector & injector, TypeIds & typeIds) const {
+  sauce::shared_ptr<Iface> get(BindingPtr binding, InjectorPtr injector, TypeIds & ids) const {
     sauce::shared_ptr<Iface> smartPointer;
 
     bool unscoped = typeIdOf<Scope>() == typeIdOf<NoScope>();
     if (unscoped || !probe<Dependency, Scope>(injector, smartPointer)) {
-      smartPointer.reset(provide(injector, typeIds), deleter(binding));
+      smartPointer.reset(provide(injector, ids), deleter(binding));
       if (!unscoped) {
         cache<Dependency, Scope>(injector, smartPointer);
       }
@@ -139,10 +141,10 @@ public:
    * Instead, cache the instance in its appropriate scope, if any.  If the binding is not scoped,
    * do nothing.
    */
-  void eagerlyProvide(OpaqueBindingPtr opaque, Injector & injector, TypeIds & typeIds) const {
+  void eagerlyProvide(OpaqueBindingPtr opaque, InjectorPtr injector, TypeIds & ids) const {
     if (typeIdOf<Scope>() != typeIdOf<NoScope>()) {
       BindingPtr binding = resolve<Dependency>(opaque);
-      get(binding, injector, typeIds);
+      get(binding, injector, ids);
     }
   }
 

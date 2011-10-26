@@ -31,13 +31,13 @@ struct New<Dependency, Scope, Impl($As), Allocator>: public TransparentBinding<D
   typedef typename Allocator::template rebind<Impl>::other ImplAllocator;
 
 [[$if i==0 [[
-  Impl * provide(Injector &, TypeIds &) const
+  Impl * provide(sauce::shared_ptr<Injector>, TypeIds &) const
 ]] $else [[
-  Impl * provide(Injector & injector, TypeIds & typeIds) const
+  Impl * provide(sauce::shared_ptr<Injector> injector, TypeIds & ids) const
 ]]]]
  {
 [[$for j [[
-    typename i::Key<A$j>::Ptr a$j(this->template getDependency<A$j>(injector, typeIds));
+    typename i::Key<A$j>::Ptr a$j(this->template getDependency<A$j>(injector, ids));
 
 ]]]]
     ImplAllocator allocator;

@@ -56,7 +56,7 @@ class Injector {
   }
 
   template<typename Dependency>
-  typename i::Key<Dependency>::Ptr get(Injector & injector, i::TypeIds & ids) {
+  typename i::Key<Dependency>::Ptr get(sauce::shared_ptr<Injector> injector, i::TypeIds & ids) {
     if (base.get() == NULL) {
       return next->get<Dependency>(injector, ids);
     } else {
@@ -76,7 +76,7 @@ class Injector {
   }
 
   template<typename Scope>
-  void eagerlyProvide(Injector & injector) {
+  void eagerlyProvide(sauce::shared_ptr<Injector> injector) {
     if (base.get() == NULL) {
       next->eagerlyProvide<Scope>(injector);
     } else {
@@ -123,7 +123,7 @@ public:
   typename i::Key<Dependency>::Ptr get() {
     sauce::auto_ptr<i::Lock> lock = acquireLock();
     i::TypeIds ids;
-    return get<Dependency>(*this, ids);
+    return get<Dependency>(getSelf(), ids);
   }
 
   template<typename Iface, typename Name>
@@ -153,7 +153,7 @@ public:
   template<typename Scope>
   void eagerlyProvide() {
     sauce::auto_ptr<i::Lock> lock = acquireLock();
-    eagerlyProvide<Scope>(*this);
+    eagerlyProvide<Scope>(getSelf());
   }
 
 };
