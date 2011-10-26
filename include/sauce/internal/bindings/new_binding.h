@@ -2,8 +2,8 @@
 //     pump.py new_binding.h.pump
 // DO NOT EDIT BY HAND!!!
 
-#ifndef SAUCE_SAUCE_INTERNAL_BINDINGS_NEW_H_
-#define SAUCE_SAUCE_INTERNAL_BINDINGS_NEW_H_
+#ifndef SAUCE_SAUCE_INTERNAL_BINDINGS_NEW_BINDING_H_
+#define SAUCE_SAUCE_INTERNAL_BINDINGS_NEW_BINDING_H_
 
 #include <sauce/injector.h>
 #include <sauce/memory.h>
@@ -365,4 +365,4 @@ namespace b = ::sauce::internal::bindings;
 
 }
 
-#endif // SAUCE_SAUCE_INTERNAL_BINDINGS_NEW_H_
+#endif // SAUCE_SAUCE_INTERNAL_BINDINGS_NEW_BINDING_H_
