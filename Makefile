@@ -68,3 +68,6 @@ distclean: clean
 
 test: build/tests
 	build/tests
+
+push:
+	git push origin master && git push origin master:gh-pages
