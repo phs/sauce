@@ -49,6 +49,12 @@ class Injector {
     weak = shared;
   }
 
+  sauce::shared_ptr<Injector> getSelf() const {
+    sauce::shared_ptr<Injector> self = weak.lock();
+    assert(self.get() == this);
+    return self;
+  }
+
   template<typename Dependency>
   typename i::Key<Dependency>::Ptr get(Injector & injector, i::TypeIds & ids) {
     if (base.get() == NULL) {
@@ -131,10 +137,7 @@ public:
       throw AlreadyInScopeExceptionFor<Scope>();
     }
 
-    sauce::shared_ptr<Injector> self = weak.lock();
-    assert(self.get() == this);
-
-    sauce::shared_ptr<Injector> scoped(new Injector(i::typeIdOf<Scope>(), self));
+    sauce::shared_ptr<Injector> scoped(new Injector(i::typeIdOf<Scope>(), getSelf()));
     scoped->setSelf(scoped);
     return scoped;
   }
