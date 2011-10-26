@@ -36,34 +36,6 @@ protected:
 
 namespace bindings {
 
-template<typename Dependency, typename Scope, typename Impl>
-class TransparentBinding;
-
-/**
- * A smart pointer deleter that diposes with a given binding.
- */
-template<typename Dependency, typename Scope, typename Impl>
-class DisposalDeleter {
-  typedef typename Key<Dependency>::Iface Iface;
-  typedef sauce::shared_ptr<TransparentBinding<Dependency, Scope, Impl> > BindingPtr;
-
-  friend class TransparentBinding<Dependency, Scope, Impl>;
-
-  BindingPtr binding;
-
-  DisposalDeleter(BindingPtr binding):
-    binding(binding) {}
-
-public:
-
-  /**
-   * Cast and dispose the given Iface instance.
-   */
-  void operator()(Iface * iface) const {
-    binding->dispose(static_cast<Impl *>(iface));
-  }
-};
-
 /**
  * A binding for a specific interface and implementation.
  */
@@ -80,27 +52,9 @@ class TransparentBinding:
    *
    * The strategy used is left to derived types.
    */
-  virtual Impl * provide(InjectorPtr injector, TypeIds & ids) const = 0;
-
-  /**
-   * Dispose of an instance of Iface provided by this binding.
-   *
-   * The strategy used is left to derived types.
-   */
-  virtual void dispose(Impl * impl) const = 0;
-
-  /**
-   * Create a shared pointer deleter suitable for this binding.
-   */
-  DisposalDeleter<Dependency, Scope, Impl> deleter(BindingPtr binding) const {
-    typedef TransparentBinding<Dependency, Scope, Impl> Transparent;
-    sauce::shared_ptr<Transparent> concrete = sauce::static_pointer_cast<Transparent>(binding);
-    return DisposalDeleter<Dependency, Scope, Impl>(concrete);
-  }
+  virtual sauce::shared_ptr<Iface> provide(BindingPtr, InjectorPtr, TypeIds &) const = 0;
 
 public:
-
-  friend class DisposalDeleter<Dependency, Scope, Impl>;
 
   /**
    * The TypeId of the Dependency template parameter.
@@ -126,7 +80,7 @@ public:
 
     bool unscoped = typeIdOf<Scope>() == typeIdOf<NoScope>();
     if (unscoped || !probe<Dependency, Scope>(injector, smartPointer)) {
-      smartPointer.reset(provide(injector, ids), deleter(binding));
+      smartPointer = provide(binding, injector, ids);
       if (!unscoped) {
         cache<Dependency, Scope>(injector, smartPointer);
       }

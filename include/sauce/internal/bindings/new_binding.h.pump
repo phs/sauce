@@ -8,7 +8,7 @@ $var n = 10  $$ The maximum arity we support.
 #include <sauce/memory.h>
 #include <sauce/named.h>
 #include <sauce/internal/binding.h>
-#include <sauce/internal/bindings/transparent_binding.h>
+#include <sauce/internal/bindings/naked_binding.h>
 #include <sauce/internal/key.h>
 #include <sauce/internal/type_id.h>
 
@@ -27,7 +27,7 @@ $var As = [[$for j, [[A$j]]]]
 $var as = [[$for j, [[a$j]]]]
 
 template<typename Dependency, typename Scope, typename Impl, typename Allocator$comma_typename_As>
-struct NewBinding<Dependency, Scope, Impl($As), Allocator>: public TransparentBinding<Dependency, Scope, Impl> {
+struct NewBinding<Dependency, Scope, Impl($As), Allocator>: public NakedBinding<Dependency, Scope, Impl> {
   typedef typename Allocator::template rebind<Impl>::other ImplAllocator;
 
 [[$if i==0 [[

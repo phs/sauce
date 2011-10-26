@@ -9,7 +9,7 @@
 #include <sauce/memory.h>
 #include <sauce/named.h>
 #include <sauce/internal/binding.h>
-#include <sauce/internal/bindings/transparent_binding.h>
+#include <sauce/internal/bindings/naked_binding.h>
 #include <sauce/internal/key.h>
 #include <sauce/internal/type_id.h>
 
@@ -23,7 +23,7 @@ class NewBinding;
 
 template<typename Dependency, typename Scope, typename Impl, typename Allocator>
 struct NewBinding<Dependency, Scope, Impl(),
-    Allocator>: public TransparentBinding<Dependency, Scope, Impl> {
+    Allocator>: public NakedBinding<Dependency, Scope, Impl> {
   typedef typename Allocator::template rebind<Impl>::other ImplAllocator;
 
   Impl * provide(sauce::shared_ptr<Injector>, TypeIds &) const {
@@ -43,7 +43,7 @@ struct NewBinding<Dependency, Scope, Impl(),
 template<typename Dependency, typename Scope, typename Impl,
     typename Allocator, typename A1>
 struct NewBinding<Dependency, Scope, Impl(A1),
-    Allocator>: public TransparentBinding<Dependency, Scope, Impl> {
+    Allocator>: public NakedBinding<Dependency, Scope, Impl> {
   typedef typename Allocator::template rebind<Impl>::other ImplAllocator;
 
   Impl * provide(sauce::shared_ptr<Injector> injector, TypeIds & ids) const {
@@ -65,7 +65,7 @@ struct NewBinding<Dependency, Scope, Impl(A1),
 template<typename Dependency, typename Scope, typename Impl,
     typename Allocator, typename A1, typename A2>
 struct NewBinding<Dependency, Scope, Impl(A1, A2),
-    Allocator>: public TransparentBinding<Dependency, Scope, Impl> {
+    Allocator>: public NakedBinding<Dependency, Scope, Impl> {
   typedef typename Allocator::template rebind<Impl>::other ImplAllocator;
 
   Impl * provide(sauce::shared_ptr<Injector> injector, TypeIds & ids) const {
@@ -89,7 +89,7 @@ struct NewBinding<Dependency, Scope, Impl(A1, A2),
 template<typename Dependency, typename Scope, typename Impl,
     typename Allocator, typename A1, typename A2, typename A3>
 struct NewBinding<Dependency, Scope, Impl(A1, A2, A3),
-    Allocator>: public TransparentBinding<Dependency, Scope, Impl> {
+    Allocator>: public NakedBinding<Dependency, Scope, Impl> {
   typedef typename Allocator::template rebind<Impl>::other ImplAllocator;
 
   Impl * provide(sauce::shared_ptr<Injector> injector, TypeIds & ids) const {
@@ -115,7 +115,7 @@ struct NewBinding<Dependency, Scope, Impl(A1, A2, A3),
 template<typename Dependency, typename Scope, typename Impl,
     typename Allocator, typename A1, typename A2, typename A3, typename A4>
 struct NewBinding<Dependency, Scope, Impl(A1, A2, A3, A4),
-    Allocator>: public TransparentBinding<Dependency, Scope, Impl> {
+    Allocator>: public NakedBinding<Dependency, Scope, Impl> {
   typedef typename Allocator::template rebind<Impl>::other ImplAllocator;
 
   Impl * provide(sauce::shared_ptr<Injector> injector, TypeIds & ids) const {
@@ -144,7 +144,7 @@ template<typename Dependency, typename Scope, typename Impl,
     typename Allocator, typename A1, typename A2, typename A3, typename A4,
     typename A5>
 struct NewBinding<Dependency, Scope, Impl(A1, A2, A3, A4, A5),
-    Allocator>: public TransparentBinding<Dependency, Scope, Impl> {
+    Allocator>: public NakedBinding<Dependency, Scope, Impl> {
   typedef typename Allocator::template rebind<Impl>::other ImplAllocator;
 
   Impl * provide(sauce::shared_ptr<Injector> injector, TypeIds & ids) const {
@@ -175,7 +175,7 @@ template<typename Dependency, typename Scope, typename Impl,
     typename Allocator, typename A1, typename A2, typename A3, typename A4,
     typename A5, typename A6>
 struct NewBinding<Dependency, Scope, Impl(A1, A2, A3, A4, A5, A6),
-    Allocator>: public TransparentBinding<Dependency, Scope, Impl> {
+    Allocator>: public NakedBinding<Dependency, Scope, Impl> {
   typedef typename Allocator::template rebind<Impl>::other ImplAllocator;
 
   Impl * provide(sauce::shared_ptr<Injector> injector, TypeIds & ids) const {
@@ -208,7 +208,7 @@ template<typename Dependency, typename Scope, typename Impl,
     typename Allocator, typename A1, typename A2, typename A3, typename A4,
     typename A5, typename A6, typename A7>
 struct NewBinding<Dependency, Scope, Impl(A1, A2, A3, A4, A5, A6, A7),
-    Allocator>: public TransparentBinding<Dependency, Scope, Impl> {
+    Allocator>: public NakedBinding<Dependency, Scope, Impl> {
   typedef typename Allocator::template rebind<Impl>::other ImplAllocator;
 
   Impl * provide(sauce::shared_ptr<Injector> injector, TypeIds & ids) const {
@@ -243,7 +243,7 @@ template<typename Dependency, typename Scope, typename Impl,
     typename Allocator, typename A1, typename A2, typename A3, typename A4,
     typename A5, typename A6, typename A7, typename A8>
 struct NewBinding<Dependency, Scope, Impl(A1, A2, A3, A4, A5, A6, A7, A8),
-    Allocator>: public TransparentBinding<Dependency, Scope, Impl> {
+    Allocator>: public NakedBinding<Dependency, Scope, Impl> {
   typedef typename Allocator::template rebind<Impl>::other ImplAllocator;
 
   Impl * provide(sauce::shared_ptr<Injector> injector, TypeIds & ids) const {
@@ -280,7 +280,7 @@ template<typename Dependency, typename Scope, typename Impl,
     typename Allocator, typename A1, typename A2, typename A3, typename A4,
     typename A5, typename A6, typename A7, typename A8, typename A9>
 struct NewBinding<Dependency, Scope, Impl(A1, A2, A3, A4, A5, A6, A7, A8, A9),
-    Allocator>: public TransparentBinding<Dependency, Scope, Impl> {
+    Allocator>: public NakedBinding<Dependency, Scope, Impl> {
   typedef typename Allocator::template rebind<Impl>::other ImplAllocator;
 
   Impl * provide(sauce::shared_ptr<Injector> injector, TypeIds & ids) const {
@@ -320,7 +320,7 @@ template<typename Dependency, typename Scope, typename Impl,
     typename A5, typename A6, typename A7, typename A8, typename A9,
     typename A10>
 struct NewBinding<Dependency, Scope, Impl(A1, A2, A3, A4, A5, A6, A7, A8, A9,
-    A10), Allocator>: public TransparentBinding<Dependency, Scope, Impl> {
+    A10), Allocator>: public NakedBinding<Dependency, Scope, Impl> {
   typedef typename Allocator::template rebind<Impl>::other ImplAllocator;
 
   Impl * provide(sauce::shared_ptr<Injector> injector, TypeIds & ids) const {

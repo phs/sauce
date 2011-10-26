@@ -1,0 +1,97 @@
+#ifndef SAUCE_SAUCE_INTERNAL_BINDINGS_NAKED_BINDING_H_
+#define SAUCE_SAUCE_INTERNAL_BINDINGS_NAKED_BINDING_H_
+
+#include <sauce/injector.h>
+#include <sauce/memory.h>
+#include <sauce/internal/bindings/transparent_binding.h>
+
+namespace sauce {
+namespace internal {
+namespace bindings {
+
+template<typename Dependency, typename Scope, typename Impl>
+class NakedBinding;
+
+/**
+ * A smart pointer deleter that diposes with a given binding.
+ */
+template<typename Dependency, typename Scope, typename Impl>
+class DisposalDeleter {
+  typedef typename Key<Dependency>::Iface Iface;
+  typedef sauce::shared_ptr<NakedBinding<Dependency, Scope, Impl> > BindingPtr;
+
+  friend class NakedBinding<Dependency, Scope, Impl>;
+
+  BindingPtr binding;
+
+  DisposalDeleter(BindingPtr binding):
+    binding(binding) {}
+
+public:
+
+  /**
+   * Cast and dispose the given Iface instance.
+   */
+  void operator()(Iface * iface) const {
+    binding->dispose(static_cast<Impl *>(iface));
+  }
+};
+
+/**
+ * A binding that makes implementations by providing and disposing naked pointers.
+ */
+template<typename Dependency, typename Scope, typename Impl>
+class NakedBinding:
+  public TransparentBinding<Dependency, Scope, Impl> {
+
+  typedef typename Key<Dependency>::Iface Iface;
+  typedef typename Binding<Dependency>::BindingPtr BindingPtr;
+
+  /**
+   * Provide a naked Impl pointer.
+   *
+   * The strategy used is left to derived types.
+   */
+  virtual Impl * provide(InjectorPtr, TypeIds &) const = 0;
+
+  /**
+   * Dispose of an instance of Iface provided by this binding.
+   *
+   * The strategy used is left to derived types.
+   */
+  virtual void dispose(Impl *) const = 0;
+
+  /**
+   * Create a shared pointer deleter suitable for this binding.
+   */
+  DisposalDeleter<Dependency, Scope, Impl> deleter(BindingPtr binding) const {
+    typedef NakedBinding<Dependency, Scope, Impl> Transparent;
+    sauce::shared_ptr<Transparent> concrete = sauce::static_pointer_cast<Transparent>(binding);
+    return DisposalDeleter<Dependency, Scope, Impl>(concrete);
+  }
+
+  /**
+   * Provide an instance of Impl.
+   *
+   * A naked instance pointer is obtained with provide(InjectorPtr, TypeIds &), and wrapped in a
+   * shared_ptr.  It is also given a custom deleter, to dispose of the naked pointer with
+   * dispose(Impl *).
+   */
+  sauce::shared_ptr<Iface> provide(BindingPtr binding, InjectorPtr injector, TypeIds & ids) const {
+    sauce::shared_ptr<Iface> provided(provide(injector, ids), deleter(binding));
+    return provided;
+  }
+
+  friend class DisposalDeleter<Dependency, Scope, Impl>;
+
+};
+
+}
+}
+
+namespace i = ::sauce::internal;
+namespace b = ::sauce::internal::bindings;
+
+}
+
+#endif // SAUCE_SAUCE_INTERNAL_BINDINGS_NAKED_BINDING_H_
