@@ -99,11 +99,11 @@ template&lt;typename Binding_ &gt; </td></tr>
 <tr><td class="memTemplItemLeft" align="right" valign="top">void&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classsauce_1_1internal_1_1_bindings.html#aa0965fb0ccf4007867283ae0a4c1934d">put</a> ()</td></tr>
 <tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Insert the given binding. <br/></td></tr>
 <tr><td class="memTemplParams" colspan="2">template&lt;typename Dependency &gt; </td></tr>
-<tr><td class="memTemplItemLeft" align="right" valign="top"><a class="el" href="structsauce_1_1internal_1_1_key.html">Key</a>&lt; Dependency &gt;::Ptr&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classsauce_1_1internal_1_1_bindings.html#ae50e8130e0f6e436d6550af17dd7d38f">get</a> (<a class="el" href="classsauce_1_1_injector.html">Injector</a> &amp;injector, TypeIds &amp;typeIds) const </td></tr>
-<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Provide the named Dependency.  <a href="#ae50e8130e0f6e436d6550af17dd7d38f"></a><br/></td></tr>
-<tr><td class="memTemplParams" colspan="2"><a class="anchor" id="a28cc00c929deae982e09d9c3c351c318"></a><!-- doxytag: member="sauce::internal::Bindings::eagerlyProvide" ref="a28cc00c929deae982e09d9c3c351c318" args="(Injector &amp;injector, TypeIds &amp;typeIds) const " -->
+<tr><td class="memTemplItemLeft" align="right" valign="top"><a class="el" href="structsauce_1_1internal_1_1_key.html">Key</a>&lt; Dependency &gt;::Ptr&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classsauce_1_1internal_1_1_bindings.html#aa999f2eacb94be58993c7b688c6d839d">get</a> (sauce::shared_ptr&lt; <a class="el" href="classsauce_1_1_injector.html">Injector</a> &gt; injector, TypeIds &amp;ids) const </td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Provide the named Dependency.  <a href="#aa999f2eacb94be58993c7b688c6d839d"></a><br/></td></tr>
+<tr><td class="memTemplParams" colspan="2"><a class="anchor" id="a6c02c84381108a491d4585ce293fe641"></a><!-- doxytag: member="sauce::internal::Bindings::eagerlyProvide" ref="a6c02c84381108a491d4585ce293fe641" args="(sauce::shared_ptr&lt; Injector &gt; injector, TypeIds &amp;ids) const " -->
 template&lt;typename Scope &gt; </td></tr>
-<tr><td class="memTemplItemLeft" align="right" valign="top">void&#160;</td><td class="memTemplItemRight" valign="bottom"><b>eagerlyProvide</b> (<a class="el" href="classsauce_1_1_injector.html">Injector</a> &amp;injector, TypeIds &amp;typeIds) const </td></tr>
+<tr><td class="memTemplItemLeft" align="right" valign="top">void&#160;</td><td class="memTemplItemRight" valign="bottom"><b>eagerlyProvide</b> (sauce::shared_ptr&lt; <a class="el" href="classsauce_1_1_injector.html">Injector</a> &gt; injector, TypeIds &amp;ids) const </td></tr>
 <tr><td class="memTemplParams" colspan="2">template&lt;typename Exception &gt; </td></tr>
 <tr><td class="memTemplItemLeft" align="right" valign="top">void&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classsauce_1_1internal_1_1_bindings.html#a4fee79a26ee22d83b11d70cd92bfcfbb">throwLater</a> ()</td></tr>
 <tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Save an exception of the given type to throw when it is safe.  <a href="#a4fee79a26ee22d83b11d70cd92bfcfbb"></a><br/></td></tr>
@@ -112,7 +112,7 @@ void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="clas
 <tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Throw and clear any saved exception. <br/></td></tr>
 </table>
 <hr/><h2>Member Function Documentation</h2>
-<a class="anchor" id="ae50e8130e0f6e436d6550af17dd7d38f"></a><!-- doxytag: member="sauce::internal::Bindings::get" ref="ae50e8130e0f6e436d6550af17dd7d38f" args="(Injector &amp;injector, TypeIds &amp;typeIds) const " -->
+<a class="anchor" id="aa999f2eacb94be58993c7b688c6d839d"></a><!-- doxytag: member="sauce::internal::Bindings::get" ref="aa999f2eacb94be58993c7b688c6d839d" args="(sauce::shared_ptr&lt; Injector &gt; injector, TypeIds &amp;ids) const " -->
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
@@ -121,14 +121,14 @@ template&lt;typename Dependency &gt; </div>
         <tr>
           <td class="memname"><a class="el" href="structsauce_1_1internal_1_1_key.html">Key</a>&lt;Dependency&gt;::Ptr sauce::internal::Bindings::get </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="classsauce_1_1_injector.html">Injector</a> &amp;&#160;</td>
+          <td class="paramtype">sauce::shared_ptr&lt; <a class="el" href="classsauce_1_1_injector.html">Injector</a> &gt;&#160;</td>
           <td class="paramname"><em>injector</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
           <td class="paramtype">TypeIds &amp;&#160;</td>
-          <td class="paramname"><em>typeIds</em>&#160;</td>
+          <td class="paramname"><em>ids</em>&#160;</td>
         </tr>
         <tr>
           <td></td>
@@ -141,14 +141,14 @@ template&lt;typename Dependency &gt; </div>
 
 <p>Provide the named Dependency. </p>
 <p>If no binding is found, throw <a class="el" href="structsauce_1_1_unbound_exception.html" title="Raised when a binding cannot be found.">UnboundException</a>. </p>
-<div class="fragment"><pre class="fragment">                                                                                {
+<div class="fragment"><pre class="fragment">                                                                                           {
     BindingMap::const_iterator i = bindingMap.find(typeIdOf&lt;Dependency&gt;());
     <span class="keywordflow">if</span> (i == bindingMap.end()) {
       <span class="keywordflow">throw</span> UnboundExceptionFor&lt;Dependency&gt;();
     }
 
     sauce::shared_ptr&lt;Binding&lt;Dependency&gt; &gt; binding = resolve&lt;Dependency&gt;(i-&gt;second);
-    <span class="keywordflow">return</span> binding-&gt;get(binding, injector, typeIds);
+    <span class="keywordflow">return</span> binding-&gt;get(binding, injector, ids);
   }
 </pre></div>
 </div>

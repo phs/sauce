@@ -121,10 +121,10 @@ virtual TypeId&#160;</td><td class="memItemRight" valign="bottom"><a class="el" 
 <tr><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a70a671a26b4e09a6a768cacc73ab97a8"></a><!-- doxytag: member="sauce::internal::bindings::TransparentBinding::getScopeKey" ref="a70a671a26b4e09a6a768cacc73ab97a8" args="() const " -->
 virtual TypeId&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classsauce_1_1internal_1_1bindings_1_1_transparent_binding.html#a70a671a26b4e09a6a768cacc73ab97a8">getScopeKey</a> () const </td></tr>
 <tr><td class="mdescLeft">&#160;</td><td class="mdescRight">The TypeId of the Scope template parameter. <br/></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">sauce::shared_ptr&lt; Iface &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classsauce_1_1internal_1_1bindings_1_1_transparent_binding.html#a395a91af894637aa57a69de308967e0d">get</a> (BindingPtr binding, <a class="el" href="classsauce_1_1_injector.html">Injector</a> &amp;injector, TypeIds &amp;typeIds) const </td></tr>
-<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Provide an instance of Iface.  <a href="#a395a91af894637aa57a69de308967e0d"></a><br/></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classsauce_1_1internal_1_1bindings_1_1_transparent_binding.html#aa8025d18373659e96d253812e836fa6e">eagerlyProvide</a> (OpaqueBindingPtr opaque, <a class="el" href="classsauce_1_1_injector.html">Injector</a> &amp;injector, TypeIds &amp;typeIds) const </td></tr>
-<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Provide, but do not return an instance of Iface.  <a href="#aa8025d18373659e96d253812e836fa6e"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">sauce::shared_ptr&lt; Iface &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classsauce_1_1internal_1_1bindings_1_1_transparent_binding.html#ad27479e27f26e6600b328c1ed64c484b">get</a> (BindingPtr binding, InjectorPtr injector, TypeIds &amp;ids) const </td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Provide an instance of Iface.  <a href="#ad27479e27f26e6600b328c1ed64c484b"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classsauce_1_1internal_1_1bindings_1_1_transparent_binding.html#a0dda3d2c73f8104b3a053e2f4dd4cab2">eagerlyProvide</a> (OpaqueBindingPtr opaque, InjectorPtr injector, TypeIds &amp;ids) const </td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Provide, but do not return an instance of Iface.  <a href="#a0dda3d2c73f8104b3a053e2f4dd4cab2"></a><br/></td></tr>
 <tr><td colspan="2"><h2><a name="friends"></a>
 Friends</h2></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a54f9a7a431fb19d4d001a3ce35bd63b7"></a><!-- doxytag: member="sauce::internal::bindings::TransparentBinding::DisposalDeleter&lt; Dependency, Scope, Impl &gt;" ref="a54f9a7a431fb19d4d001a3ce35bd63b7" args="" -->
@@ -136,7 +136,7 @@ class sauce::internal::bindings::TransparentBinding&lt; Dependency, Scope, Impl 
 
 <p>A binding for a specific interface and implementation. </p>
 </div><hr/><h2>Member Function Documentation</h2>
-<a class="anchor" id="aa8025d18373659e96d253812e836fa6e"></a><!-- doxytag: member="sauce::internal::bindings::TransparentBinding::eagerlyProvide" ref="aa8025d18373659e96d253812e836fa6e" args="(OpaqueBindingPtr opaque, Injector &amp;injector, TypeIds &amp;typeIds) const " -->
+<a class="anchor" id="a0dda3d2c73f8104b3a053e2f4dd4cab2"></a><!-- doxytag: member="sauce::internal::bindings::TransparentBinding::eagerlyProvide" ref="a0dda3d2c73f8104b3a053e2f4dd4cab2" args="(OpaqueBindingPtr opaque, InjectorPtr injector, TypeIds &amp;ids) const " -->
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
@@ -151,19 +151,19 @@ template&lt;typename Dependency , typename Scope , typename Impl &gt; </div>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype"><a class="el" href="classsauce_1_1_injector.html">Injector</a> &amp;&#160;</td>
+          <td class="paramtype">InjectorPtr&#160;</td>
           <td class="paramname"><em>injector</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
           <td class="paramtype">TypeIds &amp;&#160;</td>
-          <td class="paramname"><em>typeIds</em>&#160;</td>
+          <td class="paramname"><em>ids</em>&#160;</td>
         </tr>
         <tr>
           <td></td>
           <td>)</td>
-          <td></td><td> const<code> [inline, virtual]</code></td>
+          <td></td><td> const<code> [inline]</code></td>
         </tr>
       </table>
 </div>
@@ -171,18 +171,16 @@ template&lt;typename Dependency , typename Scope , typename Impl &gt; </div>
 
 <p>Provide, but do not return an instance of Iface. </p>
 <p>Instead, cache the instance in its appropriate scope, if any. If the binding is not scoped, do nothing. </p>
-
-<p>Reimplemented from <a class="el" href="structsauce_1_1internal_1_1_opaque_binding.html#a8b04652ce57aa3b41f70738ccdc55fe5">sauce::internal::OpaqueBinding</a>.</p>
-<div class="fragment"><pre class="fragment">                                                                                             {
+<div class="fragment"><pre class="fragment">                                                                                          {
     <span class="keywordflow">if</span> (typeIdOf&lt;Scope&gt;() != typeIdOf&lt;NoScope&gt;()) {
       BindingPtr binding = resolve&lt;Dependency&gt;(opaque);
-      <span class="keyword">get</span>(binding, injector, typeIds);
+      <span class="keyword">get</span>(binding, injector, ids);
     }
   }
 </pre></div>
 </div>
 </div>
-<a class="anchor" id="a395a91af894637aa57a69de308967e0d"></a><!-- doxytag: member="sauce::internal::bindings::TransparentBinding::get" ref="a395a91af894637aa57a69de308967e0d" args="(BindingPtr binding, Injector &amp;injector, TypeIds &amp;typeIds) const " -->
+<a class="anchor" id="ad27479e27f26e6600b328c1ed64c484b"></a><!-- doxytag: member="sauce::internal::bindings::TransparentBinding::get" ref="ad27479e27f26e6600b328c1ed64c484b" args="(BindingPtr binding, InjectorPtr injector, TypeIds &amp;ids) const " -->
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
@@ -197,34 +195,32 @@ template&lt;typename Dependency , typename Scope , typename Impl &gt; </div>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype"><a class="el" href="classsauce_1_1_injector.html">Injector</a> &amp;&#160;</td>
+          <td class="paramtype">InjectorPtr&#160;</td>
           <td class="paramname"><em>injector</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
           <td class="paramtype">TypeIds &amp;&#160;</td>
-          <td class="paramname"><em>typeIds</em>&#160;</td>
+          <td class="paramname"><em>ids</em>&#160;</td>
         </tr>
         <tr>
           <td></td>
           <td>)</td>
-          <td></td><td> const<code> [inline, virtual]</code></td>
+          <td></td><td> const<code> [inline]</code></td>
         </tr>
       </table>
 </div>
 <div class="memdoc">
 
 <p>Provide an instance of Iface. </p>
-<p>Derived classes should not override <a class="el" href="classsauce_1_1internal_1_1bindings_1_1_transparent_binding.html#a395a91af894637aa57a69de308967e0d" title="Provide an instance of Iface.">get()</a>, but rather provide(). </p>
-
-<p>Implements <a class="el" href="structsauce_1_1internal_1_1_binding.html#a4888ce37e06065099d27f6692105b169">sauce::internal::Binding&lt; Dependency &gt;</a>.</p>
-<div class="fragment"><pre class="fragment">                                                                                               {
+<p>Derived classes should not override <a class="el" href="classsauce_1_1internal_1_1bindings_1_1_transparent_binding.html#ad27479e27f26e6600b328c1ed64c484b" title="Provide an instance of Iface.">get()</a>, but rather provide(). </p>
+<div class="fragment"><pre class="fragment">                                                                                            {
     sauce::shared_ptr&lt;Iface&gt; smartPointer;
 
     <span class="keywordtype">bool</span> unscoped = typeIdOf&lt;Scope&gt;() == typeIdOf&lt;NoScope&gt;();
     <span class="keywordflow">if</span> (unscoped || !probe&lt;Dependency, Scope&gt;(injector, smartPointer)) {
-      smartPointer.reset(provide(injector, typeIds), deleter(binding));
+      smartPointer.reset(provide(injector, ids), deleter(binding));
       <span class="keywordflow">if</span> (!unscoped) {
         cache&lt;Dependency, Scope&gt;(injector, smartPointer);
       }

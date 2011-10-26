@@ -115,8 +115,8 @@ typedef Allocator::template <br class="typebreak"/>
 rebind&lt; Impl &gt;::other&#160;</td><td class="memItemRight" valign="bottom"><b>ImplAllocator</b></td></tr>
 <tr><td colspan="2"><h2><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">Impl *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structsauce_1_1internal_1_1bindings_1_1_new_3_01_dependency_00_01_scope_00_01_impl_07_08_00_01_allocator_01_4.html#a800285c2b887d8e9673d7b1c256bb59f">provide</a> (<a class="el" href="classsauce_1_1_injector.html">Injector</a> &amp;, TypeIds &amp;) const </td></tr>
-<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Provide an instance of Impl.  <a href="#a800285c2b887d8e9673d7b1c256bb59f"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a6503e8043747c409db43428c37ccd737"></a><!-- doxytag: member="sauce::internal::bindings::New&lt; Dependency, Scope, Impl(), Allocator &gt;::provide" ref="a6503e8043747c409db43428c37ccd737" args="(sauce::shared_ptr&lt; Injector &gt;, TypeIds &amp;) const " -->
+Impl *&#160;</td><td class="memItemRight" valign="bottom"><b>provide</b> (sauce::shared_ptr&lt; <a class="el" href="classsauce_1_1_injector.html">Injector</a> &gt;, TypeIds &amp;) const </td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structsauce_1_1internal_1_1bindings_1_1_new_3_01_dependency_00_01_scope_00_01_impl_07_08_00_01_allocator_01_4.html#ad537d106ddce3af24251d2825be1a734">dispose</a> (Impl *impl) const </td></tr>
 <tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Dispose of an instance of Iface provided by this binding.  <a href="#ad537d106ddce3af24251d2825be1a734"></a><br/></td></tr>
 </table>
@@ -149,46 +149,6 @@ template&lt;typename Dependency , typename Scope , typename Impl , typename Allo
     ImplAllocator allocator;
     impl-&gt;~Impl(); <span class="comment">// Must not throw</span>
     allocator.deallocate(impl, 1);
-  }
-</pre></div>
-</div>
-</div>
-<a class="anchor" id="a800285c2b887d8e9673d7b1c256bb59f"></a><!-- doxytag: member="sauce::internal::bindings::New&lt; Dependency, Scope, Impl(), Allocator &gt;::provide" ref="a800285c2b887d8e9673d7b1c256bb59f" args="(Injector &amp;, TypeIds &amp;) const " -->
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;typename Dependency , typename Scope , typename Impl , typename Allocator &gt; </div>
-      <table class="memname">
-        <tr>
-          <td class="memname">Impl* sauce::internal::bindings::New&lt; Dependency, Scope, Impl(), Allocator &gt;::provide </td>
-          <td>(</td>
-          <td class="paramtype"><a class="el" href="classsauce_1_1_injector.html">Injector</a> &amp;&#160;</td>
-          <td class="paramname"><em>injector</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">TypeIds &amp;&#160;</td>
-          <td class="paramname"><em>typeIds</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td> const<code> [inline, virtual]</code></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-<p>Provide an instance of Impl. </p>
-<p>The strategy used is left to derived types. </p>
-
-<p>Implements <a class="el" href="classsauce_1_1internal_1_1bindings_1_1_transparent_binding.html">sauce::internal::bindings::TransparentBinding&lt; Dependency, Scope, Impl &gt;</a>.</p>
-<div class="fragment"><pre class="fragment">                                              {
-    ImplAllocator allocator;
-    Impl * impl = allocator.allocate(1);
-    <span class="keyword">new</span>(impl) Impl();
-    <span class="keywordflow">return</span> impl;
   }
 </pre></div>
 </div>

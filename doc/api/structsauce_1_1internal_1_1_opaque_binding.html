@@ -111,8 +111,8 @@ Public Member Functions</h2></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="afcab860863e3fdec961ff24704c45217"></a><!-- doxytag: member="sauce::internal::OpaqueBinding::getScopeKey" ref="afcab860863e3fdec961ff24704c45217" args="() const =0" -->
 virtual TypeId&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structsauce_1_1internal_1_1_opaque_binding.html#afcab860863e3fdec961ff24704c45217">getScopeKey</a> () const =0</td></tr>
 <tr><td class="mdescLeft">&#160;</td><td class="mdescRight">The TypeId of our (hidden) scope. <br/></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structsauce_1_1internal_1_1_opaque_binding.html#a8b04652ce57aa3b41f70738ccdc55fe5">eagerlyProvide</a> (OpaqueBindingPtr, <a class="el" href="classsauce_1_1_injector.html">Injector</a> &amp;, TypeIds &amp;) const </td></tr>
-<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Provide, but do not return an instance of the hidden interface.  <a href="#a8b04652ce57aa3b41f70738ccdc55fe5"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structsauce_1_1internal_1_1_opaque_binding.html#a021b2b5a96a1970afe59c807f3fb2cbb">eagerlyProvide</a> (OpaqueBindingPtr, sauce::shared_ptr&lt; <a class="el" href="classsauce_1_1_injector.html">Injector</a> &gt;, TypeIds &amp;) const </td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Provide, but do not return an instance of the hidden interface.  <a href="#a021b2b5a96a1970afe59c807f3fb2cbb"></a><br/></td></tr>
 </table>
 <hr/><a name="details" id="details"></a><h2>Detailed Description</h2>
 <div class="textblock"><p>An opaque binding. </p>
@@ -121,7 +121,7 @@ virtual TypeId&#160;</td><td class="memItemRight" valign="bottom"><a class="el" 
 <p>The interface is raised to the type system in <a class="el" href="structsauce_1_1internal_1_1_binding.html" title="A binding for a specific interface.">Binding</a>, a templated class deriving from <a class="el" href="structsauce_1_1internal_1_1_opaque_binding.html" title="An opaque binding.">OpaqueBinding</a>. The implementation is in turn raised in TransparentBinding, which derives from <a class="el" href="structsauce_1_1internal_1_1_binding.html" title="A binding for a specific interface.">Binding</a>.</p>
 <p>Other binding implementations (those that implement provision strategies) extend TransparentBinding. Their behavior is exposed to a <a class="el" href="structsauce_1_1internal_1_1_binding.html" title="A binding for a specific interface.">Binding</a> client by (runtime) polymorphism. </p>
 </div><hr/><h2>Member Function Documentation</h2>
-<a class="anchor" id="a8b04652ce57aa3b41f70738ccdc55fe5"></a><!-- doxytag: member="sauce::internal::OpaqueBinding::eagerlyProvide" ref="a8b04652ce57aa3b41f70738ccdc55fe5" args="(OpaqueBindingPtr, Injector &amp;, TypeIds &amp;) const " -->
+<a class="anchor" id="a021b2b5a96a1970afe59c807f3fb2cbb"></a><!-- doxytag: member="sauce::internal::OpaqueBinding::eagerlyProvide" ref="a021b2b5a96a1970afe59c807f3fb2cbb" args="(OpaqueBindingPtr, sauce::shared_ptr&lt; Injector &gt;, TypeIds &amp;) const " -->
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
@@ -134,7 +134,7 @@ virtual TypeId&#160;</td><td class="memItemRight" valign="bottom"><a class="el" 
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype"><a class="el" href="classsauce_1_1_injector.html">Injector</a> &amp;&#160;</td>
+          <td class="paramtype">sauce::shared_ptr&lt; <a class="el" href="classsauce_1_1_injector.html">Injector</a> &gt;&#160;</td>
           <td class="paramname">, </td>
         </tr>
         <tr>
@@ -154,8 +154,6 @@ virtual TypeId&#160;</td><td class="memItemRight" valign="bottom"><a class="el" 
 
 <p>Provide, but do not return an instance of the hidden interface. </p>
 <p>Instead, cache the instance in its appropriate scope, if any. If the binding is not scoped, do nothing. The typeIds indicate which keys are already currently being provided to detect circular dependencies. </p>
-
-<p>Reimplemented in <a class="el" href="classsauce_1_1internal_1_1bindings_1_1_transparent_binding.html#aa8025d18373659e96d253812e836fa6e">sauce::internal::bindings::TransparentBinding&lt; Dependency, Scope, Impl &gt;</a>.</p>
 <div class="fragment"><pre class="fragment">{}
 </pre></div>
 </div>
