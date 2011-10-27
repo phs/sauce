@@ -43,6 +43,23 @@ void pendingThrowFactory() {
   throw Exception();
 }
 
+/**
+ * A container for bindings.
+ *
+ * Each Modules objects creates a Bindings, and passes a const copy to each Injector it creates.
+ * The set of bindings an Injector uses is therefore read-only.
+ *
+ * When providing instances (eagerly and not) the injector is passed in and the dependency is
+ * returned directly, instead of giving the binding to the injector (the binding details stay
+ * hidden.)
+ *
+ * TODO: lies
+ * The template parameter is a strategy type that attempts to located unknown bindings dynamically
+ * (implicitly.)  Due to the threat of circular dependencies, Bindings itself can't be aware of
+ * concrete Binding implementations.  The only time it needs to know about them is when resolving
+ * implicit bindings.  So, this functionality is hidden behind the templated strategy.
+ */
+// template<typename DynamicBindingResolver>
 class Bindings {
   typedef std::map<TypeId, OpaqueBindingPtr> BindingMap;
   typedef std::vector<OpaqueBindingPtr> ScopedBindings;
