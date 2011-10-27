@@ -84,6 +84,13 @@ class Modules {
     bindings.put<b::InjectorBinding>();
   }
 
+  sauce::shared_ptr<Injector> createInjector(sauce::auto_ptr<i::LockFactory> lockFactory) const {
+    sauce::shared_ptr<i::BaseInjector> base(new i::BaseInjector(bindings, lockFactory));
+    sauce::shared_ptr<Injector> injector(new Injector(base));
+    injector->setSelf(injector);
+    return injector;
+  }
+
 public:
 
   /**
@@ -118,10 +125,7 @@ public:
    */
   sauce::shared_ptr<Injector> createInjector() const {
     sauce::auto_ptr<i::LockFactory> lockFactory(new i::NullLockFactory());
-    sauce::shared_ptr<i::BaseInjector> base(new i::BaseInjector(bindings, lockFactory));
-    sauce::shared_ptr<Injector> injector(new Injector(base));
-    injector->setSelf(injector);
-    return injector;
+    return createInjector(lockFactory);
   }
 
   /**
@@ -133,10 +137,7 @@ public:
   template<typename Locker, typename Lockable>
   sauce::shared_ptr<Injector> createInjector(Lockable & lockable) const {
     sauce::auto_ptr<i::LockFactory> lockFactory(new i::LockerLockFactory<Locker, Lockable>(lockable));
-    sauce::shared_ptr<i::BaseInjector> base(new i::BaseInjector(bindings, lockFactory));
-    sauce::shared_ptr<Injector> injector(new Injector(base));
-    injector->setSelf(injector);
-    return injector;
+    return createInjector(lockFactory);
   }
 
 };
