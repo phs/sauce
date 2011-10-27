@@ -6,7 +6,7 @@
 
 #include <sauce/named.h>
 #include <sauce/scopes.h>
-#include <sauce/internal/binding.h>
+#include <sauce/internal/bindings.h>
 #include <sauce/internal/clause.h>
 #include <sauce/internal/key.h>
 #include <sauce/internal/bindings/all.h>

@@ -1,7 +1,7 @@
 #ifndef SAUCE_SAUCE_CLAUSE_H_
 #define SAUCE_SAUCE_CLAUSE_H_
 
-#include <sauce/internal/binding.h>
+#include <sauce/internal/bindings.h>
 
 namespace sauce {
 namespace internal {

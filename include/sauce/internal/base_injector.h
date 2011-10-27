@@ -4,6 +4,7 @@
 #include <sauce/exceptions.h>
 #include <sauce/memory.h>
 #include <sauce/internal/binding.h>
+#include <sauce/internal/bindings.h>
 #include <sauce/internal/key.h>
 #include <sauce/internal/locker_factory.h>
 #include <sauce/internal/type_id.h>
