@@ -6,7 +6,6 @@
 #include <sauce/memory.h>
 #include <sauce/named.h>
 #include <sauce/internal/binding.h>
-#include <sauce/internal/bindings.h>
 #include <sauce/internal/key.h>
 #include <sauce/internal/locker_factory.h>
 #include <sauce/internal/scope_cache.h>
@@ -38,12 +37,12 @@ class Injector {
     next(next),
     base() {}
 
-  Injector(i::Bindings const & bindings, sauce::auto_ptr<i::LockFactory> lockFactory):
+  Injector(sauce::shared_ptr<i::BaseInjector> const base):
     scopeKey(i::typeIdOf<SingletonScope>()),
     scopeCache(),
     weak(),
     next(),
-    base(new i::BaseInjector(bindings, lockFactory)) {}
+    base(base) {}
 
   void setSelf(sauce::shared_ptr<Injector> shared) {
     assert(shared.get() == this);

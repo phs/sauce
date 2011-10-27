@@ -12,6 +12,7 @@
 namespace sauce {
 
 class Injector;
+class Modules;
 
 namespace internal {
 
@@ -47,11 +48,13 @@ class BaseInjector {
   Bindings const bindings;
   sauce::auto_ptr<i::LockFactory> lockFactory;
 
-  friend class ::sauce::Injector;
+  friend class ::sauce::Modules;
 
   BaseInjector(Bindings const & bindings, sauce::auto_ptr<i::LockFactory> lockFactory):
     bindings(bindings),
     lockFactory(lockFactory) {}
+
+public:
 
   template<typename Dependency>
   typename Key<Dependency>::Ptr get(sauce::shared_ptr<Injector> injector, TypeIds & ids) const {
