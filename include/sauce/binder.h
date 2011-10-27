@@ -58,7 +58,7 @@ class ToClause:
   friend class i::Clause<ToClause<Dependency, Scope, Ctor> >;
 
   static void activate(i::Bindings & bindings) {
-    AllocateFromClause<Dependency, Scope, Ctor, std::allocator<Iface> >::activate(bindings);
+    bindings.put<b::NewBinding<Dependency, Scope, Ctor, std::allocator<Iface> > >();
   }
 
 public:
