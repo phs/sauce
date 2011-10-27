@@ -16,8 +16,6 @@ namespace sauce {
 namespace test {
 
 struct C {};
-struct D {};
-struct N {};
 
 TEST(BindingTest, shouldThrowExceptionWhenGettingAnUnboundIface) {
   sauce::shared_ptr<Injector> injector(Modules().createInjector());
@@ -45,22 +43,12 @@ TEST(BindingTest, shouldThrowExceptionWhenResolvingCircularDependency) {
 }
 
 void IncompleteModule(Binder & binder) {
-  binder.bind<C>();
+  binder.bind<C>() /* to ...? */;
 }
 
 TEST(BindingTest, shouldThrowExceptionOnPartialBinding) {
   ASSERT_THROW(
     Modules().add(&IncompleteModule).createInjector(),
-    ::sauce::PartialBindingException);
-}
-
-void IncompleteNamedModule(Binder & binder) {
-  binder.bind<C>().named<N>();
-}
-
-TEST(BindingTest, shouldThrowExceptionOnPartialNamedBinding) {
-  ASSERT_THROW(
-    Modules().add(&IncompleteNamedModule).createInjector(),
     ::sauce::PartialBindingException);
 }
 
@@ -72,12 +60,12 @@ struct Cat: Animal {
   std::string says() { return "Meow"; }
 };
 
-struct Water {};
+struct LieutenantShinysides {};
 struct Fish: Animal {
   std::string says() { return "Blub blub"; }
 };
 
-struct Farm {};
+struct Meatloaf {};
 struct Cow: Animal {
   std::string says() { return "Moo"; }
 };
@@ -91,20 +79,30 @@ struct Pond {
 
 void AnimalModule(Binder & binder) {
   binder.bind<Animal>().to<Cat()>();
-  binder.bind<Animal>().named<Water>().to<Fish()>();
-  binder.bind<Animal>().named<Farm>().to<Cow()>();
+  binder.bind<Animal>().named<LieutenantShinysides>().to<Fish()>();
+  binder.bind<Animal>().named<Meatloaf>().to<Cow()>();
 
-  binder.bind<Pond>().to<Pond(Named<Animal, Water>)>();
+  binder.bind<Pond>().to<Pond(Named<Animal, LieutenantShinysides>)>();
 }
 
 TEST(BindingTest, shouldProvidedNamedDependencies) {
   sauce::shared_ptr<Injector> injector(Modules().add(&AnimalModule).createInjector());
 
   EXPECT_EQ("Meow",      (injector->get<Animal>()->says()));
-  EXPECT_EQ("Blub blub", (injector->get<Animal, Water>()->says()));
-  EXPECT_EQ("Moo",       (injector->get<Named<Animal, Farm> >()->says()));
+  EXPECT_EQ("Blub blub", (injector->get<Animal, LieutenantShinysides>()->says()));
+  EXPECT_EQ("Moo",       (injector->get<Named<Animal, Meatloaf> >()->says()));
 
   EXPECT_EQ("Blub blub", (injector->get<Pond>()->animal->says()));
+}
+
+void IncompleteNamedModule(Binder & binder) {
+  binder.bind<Animal>().named<LieutenantShinysides>() /* to ...? */;
+}
+
+TEST(BindingTest, shouldThrowExceptionOnPartialNamedBinding) {
+  ASSERT_THROW(
+    Modules().add(&IncompleteNamedModule).createInjector(),
+    ::sauce::PartialBindingException);
 }
 
 void IncompleteScopeModule(Binder & binder) {
