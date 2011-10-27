@@ -28,6 +28,16 @@ protected:
     return next;
   }
 
+  template<typename Binding>
+  void put() {
+    bindings->template put<Binding>();
+  }
+
+  template<typename Exception>
+  void throwLater() {
+    bindings->template throwLater<Exception>();
+  }
+
 public:
 
   void setBindings(Bindings & bindings) {
@@ -36,7 +46,7 @@ public:
 
   virtual ~Clause() {
     if (act) {
-      Derived::activate(*bindings);
+      Derived::activate(*this);
     }
   }
 };
