@@ -24,24 +24,24 @@ TEST(BindingTest, shouldThrowExceptionWhenGettingAnUnboundIface) {
   ASSERT_THROW((injector->get<C>()), ::sauce::UnboundException);
 }
 
-struct B;
+struct Dog;
 
-struct A {
-  A(sauce::shared_ptr<B>) {}
+struct Tail {
+  Tail(sauce::shared_ptr<Dog>) {}
 };
 
-struct B {
-  B(sauce::shared_ptr<A>) {}
+struct Dog {
+  Dog(sauce::shared_ptr<Tail>) {}
 };
 
 void CircularModule(Binder & binder) {
-  binder.bind<A>().to<A(B)>();
-  binder.bind<B>().to<B(A)>();
+  binder.bind<Tail>().to<Tail(Dog)>();
+  binder.bind<Dog>().to<Dog(Tail)>();
 }
 
 TEST(BindingTest, shouldThrowExceptionWhenResolvingCircularDependency) {
   sauce::shared_ptr<Injector> injector(Modules().add(&CircularModule).createInjector());
-  ASSERT_THROW((injector->get<A>()), ::sauce::CircularDependencyException);
+  ASSERT_THROW((injector->get<Tail>()), ::sauce::CircularDependencyException);
 }
 
 void IncompleteModule(Binder & binder) {
@@ -55,7 +55,7 @@ TEST(BindingTest, shouldThrowExceptionOnPartialBinding) {
 }
 
 void IncompleteNamedModule(Binder & binder) {
-  binder.bind<A>().named<N>();
+  binder.bind<C>().named<N>();
 }
 
 TEST(BindingTest, shouldThrowExceptionOnPartialNamedBinding) {
@@ -108,7 +108,7 @@ TEST(BindingTest, shouldProvidedNamedDependencies) {
 }
 
 void IncompleteScopeModule(Binder & binder) {
-  binder.bind<A>().in<SingletonScope>();
+  binder.bind<C>().in<SingletonScope>();
 }
 
 TEST(BindingTest, shouldThrowExceptionOnPartialScopedBinding) {
