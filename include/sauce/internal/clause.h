@@ -12,24 +12,31 @@ namespace internal {
 template<typename Derived>
 class Clause {
   bool act;
-  Bindings & bindings;
+  Bindings * bindings;
 
 protected:
 
-  Clause(Bindings & bindings):
+  Clause():
     act(true),
-    bindings(bindings) {}
+    bindings(NULL) {}
 
-  Bindings & pass() {
+  template<typename Next>
+  Next pass() {
     act = false;
-    return bindings;
+    Next next;
+    next.setBindings(*bindings);
+    return next;
   }
 
 public:
 
+  void setBindings(Bindings & bindings) {
+    this->bindings = &bindings;
+  }
+
   virtual ~Clause() {
     if (act) {
-      Derived::activate(bindings);
+      Derived::activate(*bindings);
     }
   }
 };

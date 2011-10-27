@@ -26,9 +26,6 @@ class AllocateFromClause:
   friend class ToClause<Dependency, Scope, Ctor>;
   friend class i::Clause<AllocateFromClause<Dependency, Scope, Ctor, Allocator> >;
 
-  AllocateFromClause(i::Bindings & bindings):
-    i::Clause<AllocateFromClause<Dependency, Scope, Ctor, Allocator> >(bindings) {}
-
   static void activate(i::Bindings & bindings) {
     bindings.put<b::NewBinding<Dependency, Scope, Ctor, Allocator> >();
   }
@@ -57,9 +54,6 @@ class ToClause:
   friend class InClause<Dependency, Scope>;
   friend class i::Clause<ToClause<Dependency, Scope, Ctor> >;
 
-  ToClause(i::Bindings & bindings):
-    i::Clause<ToClause<Dependency, Scope, Ctor> >(bindings) {}
-
   static void activate(i::Bindings & bindings) {
     AllocateFromClause<Dependency, Scope, Ctor, std::allocator<Iface> >::activate(bindings);
   }
@@ -68,7 +62,7 @@ public:
 
   template<typename Allocator>
   AllocateFromClause<Dependency, Scope, Ctor, Allocator> allocateFrom() {
-    return AllocateFromClause<Dependency, Scope, Ctor, Allocator>(this->pass());
+    return this->template pass<AllocateFromClause<Dependency, Scope, Ctor, Allocator> >();
   }
 
 };
@@ -86,9 +80,6 @@ class InClause:
   friend class NamedClause<Dependency>;
   friend class i::Clause<InClause<Dependency, Scope> >;
 
-  InClause(i::Bindings & bindings):
-    i::Clause<InClause<Dependency, Scope> >(bindings) {}
-
   static void activate(i::Bindings & bindings) {
     bindings.throwLater<PartialBindingFor<Dependency> >();
   }
@@ -97,7 +88,7 @@ public:
 
   template<typename Ctor>
   ToClause<Dependency, Scope, Ctor> to() {
-    return ToClause<Dependency, Scope, Ctor>(this->pass());
+    return this->template pass<ToClause<Dependency, Scope, Ctor> >();
   }
 
 };
@@ -114,9 +105,6 @@ class NamedClause:
   friend class BindClause<Iface>;
   friend class i::Clause<NamedClause<Dependency> >;
 
-  NamedClause(i::Bindings & bindings):
-    i::Clause<NamedClause<Dependency> >(bindings) {}
-
   static void activate(i::Bindings & bindings) {
     bindings.throwLater<PartialBindingFor<Dependency> >();
   }
@@ -125,12 +113,12 @@ public:
 
   template<typename Scope>
   InClause<Dependency, Scope> in() {
-    return InClause<Dependency, Scope>(this->pass());
+    return this->template pass<InClause<Dependency, Scope> >();
   }
 
   template<typename Ctor>
   ToClause<Dependency, NoScope, Ctor> to() {
-    return ToClause<Dependency, NoScope, Ctor>(this->pass());
+    return this->template pass<ToClause<Dependency, NoScope, Ctor> >();
   }
 
 };
@@ -147,9 +135,6 @@ class BindClause:
   friend class Binder;
   friend class i::Clause<BindClause<Iface> >;
 
-  BindClause(i::Bindings & bindings):
-    i::Clause<BindClause<Iface> >(bindings) {}
-
   static void activate(i::Bindings & bindings) {
     bindings.throwLater<PartialBindingFor<Named<Iface, Unnamed> > >();
   }
@@ -158,17 +143,17 @@ public:
 
   template<typename Name>
   NamedClause<Named<Iface, Name> > named() {
-    return NamedClause<Named<Iface, Name> >(this->pass());
+    return this->template pass<NamedClause<Named<Iface, Name> > >();
   }
 
   template<typename Scope>
   InClause<Named<Iface, Unnamed>, Scope> in() {
-    return InClause<Named<Iface, Unnamed>, Scope>(this->pass());
+    return this->template pass<InClause<Named<Iface, Unnamed>, Scope> >();
   }
 
   template<typename Ctor>
   ToClause<Named<Iface, Unnamed>, NoScope, Ctor> to() {
-    return ToClause<Named<Iface, Unnamed>, NoScope, Ctor>(this->pass());
+    return this->template pass<ToClause<Named<Iface, Unnamed>, NoScope, Ctor> >();
   }
 
 };
@@ -194,7 +179,9 @@ public:
   template<typename Iface>
   BindClause<Iface> bind() {
     bindings.throwAnyPending();
-    return BindClause<Iface>(bindings);
+    BindClause<Iface> bindClause;
+    bindClause.setBindings(bindings);
+    return bindClause;
   }
 
 };
