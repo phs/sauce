@@ -135,7 +135,7 @@ template&lt;typename Module &gt; </div>
 <p>An <a class="el" href="classsauce_1_1_injector.html">Injector</a> created after adding a module will understand how to provide dependencies specified by that module. </p>
 <div class="fragment"><pre class="fragment">                               {
     module(binder);
-    bindings.<a class="code" href="classsauce_1_1internal_1_1_bindings.html#ae3ae2e217d4d87df1bc74c4d5380f8ba" title="Throw and clear any saved exception.">throwAnyPending</a>();
+    bindings.<a class="code" href="classsauce_1_1internal_1_1_bindings.html#acc933615a12e19eeabc00ff3a9711065" title="Throw and clear any saved exception.">throwAnyPending</a>();
     <span class="keywordflow">return</span> *<span class="keyword">this</span>;
   }
 </pre></div>
@@ -144,7 +144,7 @@ Here is the call graph for this function:</div>
 <div class="dyncontent">
 <div class="center"><img src="classsauce_1_1_modules_a3426dc2443556d594ea44bd06687c89b_cgraph.png" border="0" usemap="#classsauce_1_1_modules_a3426dc2443556d594ea44bd06687c89b_cgraph" alt=""/></div>
 <map name="classsauce_1_1_modules_a3426dc2443556d594ea44bd06687c89b_cgraph" id="classsauce_1_1_modules_a3426dc2443556d594ea44bd06687c89b_cgraph">
-<area shape="rect" id="node3" href="classsauce_1_1internal_1_1_bindings.html#ae3ae2e217d4d87df1bc74c4d5380f8ba" title="Throw and clear any saved exception." alt="" coords="203,5,490,32"/></map>
+<area shape="rect" id="node3" href="classsauce_1_1internal_1_1_bindings.html#acc933615a12e19eeabc00ff3a9711065" title="Throw and clear any saved exception." alt="" coords="203,5,490,32"/></map>
 </div>
 </p>
 
@@ -168,9 +168,7 @@ Here is the call graph for this function:</div>
 <p>Any modules added after an <a class="el" href="classsauce_1_1_injector.html">Injector</a> is created will have no effect on that <a class="el" href="classsauce_1_1_injector.html">Injector</a>. </p>
 <div class="fragment"><pre class="fragment">                                                   {
     sauce::auto_ptr&lt;i::LockFactory&gt; lockFactory(<span class="keyword">new</span> <a class="code" href="structsauce_1_1internal_1_1_null_lock_factory.html">i::NullLockFactory</a>());
-    sauce::shared_ptr&lt;Injector&gt; injector(<span class="keyword">new</span> Injector(bindings, lockFactory));
-    injector-&gt;setSelf(injector);
-    <span class="keywordflow">return</span> injector;
+    <span class="keywordflow">return</span> <a class="code" href="classsauce_1_1_modules.html#a260dc95bac47b875b0daefe8892559d3" title="Create an Injector that can provide dependencies specified by all added Modules.">createInjector</a>(lockFactory);
   }
 </pre></div>
 </div>
@@ -196,11 +194,18 @@ template&lt;typename Locker , typename Lockable &gt; </div>
 <p>Any modules added after an <a class="el" href="classsauce_1_1_injector.html">Injector</a> is created will have no effect on that <a class="el" href="classsauce_1_1_injector.html">Injector</a>. </p>
 <div class="fragment"><pre class="fragment">                                                                      {
     sauce::auto_ptr&lt;i::LockFactory&gt; lockFactory(<span class="keyword">new</span> <a class="code" href="classsauce_1_1internal_1_1_locker_lock_factory.html">i::LockerLockFactory&lt;Locker, Lockable&gt;</a>(lockable));
-    sauce::shared_ptr&lt;Injector&gt; injector(<span class="keyword">new</span> Injector(bindings, lockFactory));
-    injector-&gt;setSelf(injector);
-    <span class="keywordflow">return</span> injector;
+    <span class="keywordflow">return</span> <a class="code" href="classsauce_1_1_modules.html#a260dc95bac47b875b0daefe8892559d3" title="Create an Injector that can provide dependencies specified by all added Modules.">createInjector</a>(lockFactory);
   }
 </pre></div>
+<p><div class="dynheader">
+Here is the call graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="classsauce_1_1_modules_a4f27e08fffc49543c506e51b72477b35_cgraph.png" border="0" usemap="#classsauce_1_1_modules_a4f27e08fffc49543c506e51b72477b35_cgraph" alt=""/></div>
+<map name="classsauce_1_1_modules_a4f27e08fffc49543c506e51b72477b35_cgraph" id="classsauce_1_1_modules_a4f27e08fffc49543c506e51b72477b35_cgraph">
+<area shape="rect" id="node3" href="classsauce_1_1_modules.html#a260dc95bac47b875b0daefe8892559d3" title="Create an Injector that can provide dependencies specified by all added Modules." alt="" coords="267,5,479,32"/></map>
+</div>
+</p>
+
 </div>
 </div>
 <hr/>The documentation for this class was generated from the following file:<ul>
