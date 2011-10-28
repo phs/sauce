@@ -65,8 +65,8 @@ class NakedBinding:
    * Create a shared pointer deleter suitable for this binding.
    */
   DisposalDeleter<Dependency, Scope, Impl> deleter(BindingPtr binding) const {
-    typedef NakedBinding<Dependency, Scope, Impl> Transparent;
-    sauce::shared_ptr<Transparent> concrete = sauce::static_pointer_cast<Transparent>(binding);
+    typedef NakedBinding<Dependency, Scope, Impl> Naked;
+    sauce::shared_ptr<Naked> concrete = sauce::static_pointer_cast<Naked>(binding);
     return DisposalDeleter<Dependency, Scope, Impl>(concrete);
   }
 
