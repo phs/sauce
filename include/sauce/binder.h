@@ -7,9 +7,10 @@
 #include <sauce/named.h>
 #include <sauce/scopes.h>
 #include <sauce/internal/bindings.h>
-#include <sauce/internal/clause.h>
-#include <sauce/internal/key.h>
 #include <sauce/internal/bindings/all.h>
+#include <sauce/internal/clause.h>
+#include <sauce/internal/implicit_bindings.h>
+#include <sauce/internal/key.h>
 
 namespace sauce {
 
@@ -171,11 +172,11 @@ class Modules;
  * Passed to modules to create bindings.
  */
 class Binder {
-  i::Bindings<void> & bindings;
+  i::Bindings<i::ImplicitBindings> & bindings;
 
   friend class Modules;
 
-  Binder(i::Bindings<void> & bindings):
+  Binder(i::Bindings<i::ImplicitBindings> & bindings):
     bindings(bindings) {}
 
 public:

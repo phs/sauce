@@ -8,6 +8,7 @@
 #include <sauce/internal/binding.h>
 #include <sauce/internal/bindings.h>
 #include <sauce/internal/bindings/all.h>
+#include <sauce/internal/implicit_bindings.h>
 #include <sauce/internal/locker_factory.h>
 
 namespace sauce {
@@ -74,7 +75,7 @@ public:
  * A factory that accepts Modules and creates Injectors.
  */
 class Modules {
-  i::Bindings<void> bindings;
+  i::Bindings<i::ImplicitBindings> bindings;
   Binder binder;
 
   /**
@@ -85,7 +86,8 @@ class Modules {
   }
 
   sauce::shared_ptr<Injector> createInjector(sauce::auto_ptr<i::LockFactory> lockFactory) const {
-    sauce::shared_ptr<i::BaseInjector> base(new i::BaseInjector(bindings, lockFactory));
+    sauce::shared_ptr<i::BaseInjector<i::ImplicitBindings> > base(
+      new i::BaseInjector<i::ImplicitBindings>(bindings, lockFactory));
     sauce::shared_ptr<Injector> injector(new Injector(base));
     injector->setSelf(injector);
     return injector;

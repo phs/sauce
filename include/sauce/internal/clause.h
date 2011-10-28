@@ -2,6 +2,7 @@
 #define SAUCE_SAUCE_CLAUSE_H_
 
 #include <sauce/internal/bindings.h>
+#include <sauce/internal/implicit_bindings.h>
 
 namespace sauce {
 namespace internal {
@@ -12,7 +13,7 @@ namespace internal {
 template<typename Derived>
 class Clause {
   bool act;
-  Bindings<void> * bindings;
+  Bindings<ImplicitBindings> * bindings;
 
 protected:
 
@@ -40,7 +41,7 @@ protected:
 
 public:
 
-  void setBindings(Bindings<void> & bindings) {
+  void setBindings(Bindings<ImplicitBindings> & bindings) {
     this->bindings = &bindings;
   }
 

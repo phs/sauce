@@ -10,6 +10,7 @@
 #include <sauce/exceptions.h>
 #include <sauce/memory.h>
 #include <sauce/internal/binding.h>
+#include <sauce/internal/implicit_bindings.h>
 #include <sauce/internal/key.h>
 #include <sauce/internal/type_id.h>
 
@@ -59,7 +60,7 @@ void pendingThrowFactory() {
  * concrete Binding implementations.  The only time it needs to know about them is when resolving
  * implicit bindings.  So, this functionality is hidden behind the templated strategy.
  */
-template<typename DynamicBindingResolver>
+template<typename ImplicitBindings>
 class Bindings {
   typedef std::map<TypeId, OpaqueBindingPtr> BindingMap;
   typedef std::vector<OpaqueBindingPtr> ScopedBindings;

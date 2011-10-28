@@ -16,14 +16,15 @@ class Modules;
 
 namespace internal {
 
+template<typename ImplicitBindings>
 class BaseInjector;
 
 /**
  * Detects circular dependencies on behalf of injectors.
  */
-template<typename Dependency>
+template<typename ImplicitBindings, typename Dependency>
 class CircularDependencyGuard {
-  friend class BaseInjector;
+  friend class BaseInjector<ImplicitBindings>;
 
   TypeIds & ids;
   TypeId id;
@@ -44,13 +45,16 @@ class CircularDependencyGuard {
   }
 };
 
+template<typename ImplicitBindings>
 class BaseInjector {
-  Bindings<void> const bindings;
-  sauce::auto_ptr<i::LockFactory> lockFactory;
+  typedef sauce::auto_ptr<i::LockFactory> LockFactoryPtr;
+
+  Bindings<ImplicitBindings> const bindings;
+  LockFactoryPtr lockFactory;
 
   friend class ::sauce::Modules;
 
-  BaseInjector(Bindings<void> const & bindings, sauce::auto_ptr<i::LockFactory> lockFactory):
+  BaseInjector(Bindings<ImplicitBindings> const & bindings, LockFactoryPtr lockFactory):
     bindings(bindings),
     lockFactory(lockFactory) {}
 
@@ -59,7 +63,7 @@ public:
   template<typename Dependency>
   typename Key<Dependency>::Ptr get(sauce::shared_ptr<Injector> injector, TypeIds & ids) const {
     typedef typename Key<Dependency>::Normalized Normalized;
-    CircularDependencyGuard<Normalized> guard(ids);
+    CircularDependencyGuard<ImplicitBindings, Normalized> guard(ids);
     return bindings.get<Normalized>(injector, ids);
   }
 
