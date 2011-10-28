@@ -47,9 +47,7 @@ struct AllocateWith {
   };
 
   template<class C>
-  class Allocator:
-    public Base {
-  public:
+  struct Allocator: public Base {
 
     typedef size_t    size_type;
     typedef ptrdiff_t difference_type;
@@ -60,8 +58,7 @@ struct AllocateWith {
     typedef C         value_type;
 
     template<typename D>
-    class rebind {
-    public:
+    struct rebind {
       typedef Allocator<D> other;
     };
 

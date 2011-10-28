@@ -75,7 +75,7 @@ public:
  * A factory that accepts Modules and creates Injectors.
  */
 class Modules {
-  i::Bindings<i::ImplicitBindings> bindings;
+  i::Bindings<i::ImplicitBindings<void> > bindings;
   Binder binder;
 
   /**
@@ -86,8 +86,8 @@ class Modules {
   }
 
   sauce::shared_ptr<Injector> createInjector(sauce::auto_ptr<i::LockFactory> lockFactory) const {
-    sauce::shared_ptr<i::BaseInjector<i::ImplicitBindings> > base(
-      new i::BaseInjector<i::ImplicitBindings>(bindings, lockFactory));
+    sauce::shared_ptr<i::BaseInjector<i::ImplicitBindings<void> > > base(
+      new i::BaseInjector<i::ImplicitBindings<void> >(bindings, lockFactory));
     sauce::shared_ptr<Injector> injector(new Injector(base));
     injector->setSelf(injector);
     return injector;

@@ -27,7 +27,7 @@ class Injector {
   i::ScopeCache scopeCache;
   sauce::weak_ptr<Injector> weak;
   sauce::shared_ptr<Injector> const next;
-  sauce::shared_ptr<i::BaseInjector<i::ImplicitBindings> > const base;
+  sauce::shared_ptr<i::BaseInjector<i::ImplicitBindings<void> > > const base;
 
   friend class Modules;
   friend class i::InjectorFriend;
@@ -39,7 +39,7 @@ class Injector {
     next(next),
     base() {}
 
-  Injector(sauce::shared_ptr<i::BaseInjector<i::ImplicitBindings> > const base):
+  Injector(sauce::shared_ptr<i::BaseInjector<i::ImplicitBindings<void> > > const base):
     scopeKey(i::typeIdOf<SingletonScope>()),
     scopeCache(),
     weak(),

@@ -172,11 +172,11 @@ class Modules;
  * Passed to modules to create bindings.
  */
 class Binder {
-  i::Bindings<i::ImplicitBindings> & bindings;
+  i::Bindings<i::ImplicitBindings<void> > & bindings;
 
   friend class Modules;
 
-  Binder(i::Bindings<i::ImplicitBindings> & bindings):
+  Binder(i::Bindings<i::ImplicitBindings<void> > & bindings):
     bindings(bindings) {}
 
 public:
