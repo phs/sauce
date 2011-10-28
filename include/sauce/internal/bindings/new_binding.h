@@ -24,16 +24,18 @@ class NewBinding;
 template<typename Dependency, typename Scope, typename Impl, typename Allocator>
 struct NewBinding<Dependency, Scope, Impl(),
     Allocator>: public NakedBinding<Dependency, Scope, Impl> {
+  typedef typename Key<Dependency>::Iface Iface;
   typedef typename Allocator::template rebind<Impl>::other ImplAllocator;
 
-  Impl * provide(sauce::shared_ptr<Injector>, TypeIds &) const {
+  Iface * provide(sauce::shared_ptr<Injector>, TypeIds &) const {
     ImplAllocator allocator;
     Impl * impl = allocator.allocate(1);
     new(impl) Impl();
     return impl;
   }
 
-  void dispose(Impl * impl) const {
+  void dispose(Iface * iface) const {
+    Impl * impl = static_cast<Impl *>(iface);
     ImplAllocator allocator;
     impl->~Impl(); // Must not throw
     allocator.deallocate(impl, 1);
@@ -44,9 +46,10 @@ template<typename Dependency, typename Scope, typename Impl,
     typename Allocator, typename A1>
 struct NewBinding<Dependency, Scope, Impl(A1),
     Allocator>: public NakedBinding<Dependency, Scope, Impl> {
+  typedef typename Key<Dependency>::Iface Iface;
   typedef typename Allocator::template rebind<Impl>::other ImplAllocator;
 
-  Impl * provide(sauce::shared_ptr<Injector> injector, TypeIds & ids) const {
+  Iface * provide(sauce::shared_ptr<Injector> injector, TypeIds & ids) const {
     typename i::Key<A1>::Ptr a1(this->template getDependency<A1>(injector,
         ids));
     ImplAllocator allocator;
@@ -55,7 +58,8 @@ struct NewBinding<Dependency, Scope, Impl(A1),
     return impl;
   }
 
-  void dispose(Impl * impl) const {
+  void dispose(Iface * iface) const {
+    Impl * impl = static_cast<Impl *>(iface);
     ImplAllocator allocator;
     impl->~Impl(); // Must not throw
     allocator.deallocate(impl, 1);
@@ -66,9 +70,10 @@ template<typename Dependency, typename Scope, typename Impl,
     typename Allocator, typename A1, typename A2>
 struct NewBinding<Dependency, Scope, Impl(A1, A2),
     Allocator>: public NakedBinding<Dependency, Scope, Impl> {
+  typedef typename Key<Dependency>::Iface Iface;
   typedef typename Allocator::template rebind<Impl>::other ImplAllocator;
 
-  Impl * provide(sauce::shared_ptr<Injector> injector, TypeIds & ids) const {
+  Iface * provide(sauce::shared_ptr<Injector> injector, TypeIds & ids) const {
     typename i::Key<A1>::Ptr a1(this->template getDependency<A1>(injector,
         ids));
     typename i::Key<A2>::Ptr a2(this->template getDependency<A2>(injector,
@@ -79,7 +84,8 @@ struct NewBinding<Dependency, Scope, Impl(A1, A2),
     return impl;
   }
 
-  void dispose(Impl * impl) const {
+  void dispose(Iface * iface) const {
+    Impl * impl = static_cast<Impl *>(iface);
     ImplAllocator allocator;
     impl->~Impl(); // Must not throw
     allocator.deallocate(impl, 1);
@@ -90,9 +96,10 @@ template<typename Dependency, typename Scope, typename Impl,
     typename Allocator, typename A1, typename A2, typename A3>
 struct NewBinding<Dependency, Scope, Impl(A1, A2, A3),
     Allocator>: public NakedBinding<Dependency, Scope, Impl> {
+  typedef typename Key<Dependency>::Iface Iface;
   typedef typename Allocator::template rebind<Impl>::other ImplAllocator;
 
-  Impl * provide(sauce::shared_ptr<Injector> injector, TypeIds & ids) const {
+  Iface * provide(sauce::shared_ptr<Injector> injector, TypeIds & ids) const {
     typename i::Key<A1>::Ptr a1(this->template getDependency<A1>(injector,
         ids));
     typename i::Key<A2>::Ptr a2(this->template getDependency<A2>(injector,
@@ -105,7 +112,8 @@ struct NewBinding<Dependency, Scope, Impl(A1, A2, A3),
     return impl;
   }
 
-  void dispose(Impl * impl) const {
+  void dispose(Iface * iface) const {
+    Impl * impl = static_cast<Impl *>(iface);
     ImplAllocator allocator;
     impl->~Impl(); // Must not throw
     allocator.deallocate(impl, 1);
@@ -116,9 +124,10 @@ template<typename Dependency, typename Scope, typename Impl,
     typename Allocator, typename A1, typename A2, typename A3, typename A4>
 struct NewBinding<Dependency, Scope, Impl(A1, A2, A3, A4),
     Allocator>: public NakedBinding<Dependency, Scope, Impl> {
+  typedef typename Key<Dependency>::Iface Iface;
   typedef typename Allocator::template rebind<Impl>::other ImplAllocator;
 
-  Impl * provide(sauce::shared_ptr<Injector> injector, TypeIds & ids) const {
+  Iface * provide(sauce::shared_ptr<Injector> injector, TypeIds & ids) const {
     typename i::Key<A1>::Ptr a1(this->template getDependency<A1>(injector,
         ids));
     typename i::Key<A2>::Ptr a2(this->template getDependency<A2>(injector,
@@ -133,7 +142,8 @@ struct NewBinding<Dependency, Scope, Impl(A1, A2, A3, A4),
     return impl;
   }
 
-  void dispose(Impl * impl) const {
+  void dispose(Iface * iface) const {
+    Impl * impl = static_cast<Impl *>(iface);
     ImplAllocator allocator;
     impl->~Impl(); // Must not throw
     allocator.deallocate(impl, 1);
@@ -145,9 +155,10 @@ template<typename Dependency, typename Scope, typename Impl,
     typename A5>
 struct NewBinding<Dependency, Scope, Impl(A1, A2, A3, A4, A5),
     Allocator>: public NakedBinding<Dependency, Scope, Impl> {
+  typedef typename Key<Dependency>::Iface Iface;
   typedef typename Allocator::template rebind<Impl>::other ImplAllocator;
 
-  Impl * provide(sauce::shared_ptr<Injector> injector, TypeIds & ids) const {
+  Iface * provide(sauce::shared_ptr<Injector> injector, TypeIds & ids) const {
     typename i::Key<A1>::Ptr a1(this->template getDependency<A1>(injector,
         ids));
     typename i::Key<A2>::Ptr a2(this->template getDependency<A2>(injector,
@@ -164,7 +175,8 @@ struct NewBinding<Dependency, Scope, Impl(A1, A2, A3, A4, A5),
     return impl;
   }
 
-  void dispose(Impl * impl) const {
+  void dispose(Iface * iface) const {
+    Impl * impl = static_cast<Impl *>(iface);
     ImplAllocator allocator;
     impl->~Impl(); // Must not throw
     allocator.deallocate(impl, 1);
@@ -176,9 +188,10 @@ template<typename Dependency, typename Scope, typename Impl,
     typename A5, typename A6>
 struct NewBinding<Dependency, Scope, Impl(A1, A2, A3, A4, A5, A6),
     Allocator>: public NakedBinding<Dependency, Scope, Impl> {
+  typedef typename Key<Dependency>::Iface Iface;
   typedef typename Allocator::template rebind<Impl>::other ImplAllocator;
 
-  Impl * provide(sauce::shared_ptr<Injector> injector, TypeIds & ids) const {
+  Iface * provide(sauce::shared_ptr<Injector> injector, TypeIds & ids) const {
     typename i::Key<A1>::Ptr a1(this->template getDependency<A1>(injector,
         ids));
     typename i::Key<A2>::Ptr a2(this->template getDependency<A2>(injector,
@@ -197,7 +210,8 @@ struct NewBinding<Dependency, Scope, Impl(A1, A2, A3, A4, A5, A6),
     return impl;
   }
 
-  void dispose(Impl * impl) const {
+  void dispose(Iface * iface) const {
+    Impl * impl = static_cast<Impl *>(iface);
     ImplAllocator allocator;
     impl->~Impl(); // Must not throw
     allocator.deallocate(impl, 1);
@@ -209,9 +223,10 @@ template<typename Dependency, typename Scope, typename Impl,
     typename A5, typename A6, typename A7>
 struct NewBinding<Dependency, Scope, Impl(A1, A2, A3, A4, A5, A6, A7),
     Allocator>: public NakedBinding<Dependency, Scope, Impl> {
+  typedef typename Key<Dependency>::Iface Iface;
   typedef typename Allocator::template rebind<Impl>::other ImplAllocator;
 
-  Impl * provide(sauce::shared_ptr<Injector> injector, TypeIds & ids) const {
+  Iface * provide(sauce::shared_ptr<Injector> injector, TypeIds & ids) const {
     typename i::Key<A1>::Ptr a1(this->template getDependency<A1>(injector,
         ids));
     typename i::Key<A2>::Ptr a2(this->template getDependency<A2>(injector,
@@ -232,7 +247,8 @@ struct NewBinding<Dependency, Scope, Impl(A1, A2, A3, A4, A5, A6, A7),
     return impl;
   }
 
-  void dispose(Impl * impl) const {
+  void dispose(Iface * iface) const {
+    Impl * impl = static_cast<Impl *>(iface);
     ImplAllocator allocator;
     impl->~Impl(); // Must not throw
     allocator.deallocate(impl, 1);
@@ -244,9 +260,10 @@ template<typename Dependency, typename Scope, typename Impl,
     typename A5, typename A6, typename A7, typename A8>
 struct NewBinding<Dependency, Scope, Impl(A1, A2, A3, A4, A5, A6, A7, A8),
     Allocator>: public NakedBinding<Dependency, Scope, Impl> {
+  typedef typename Key<Dependency>::Iface Iface;
   typedef typename Allocator::template rebind<Impl>::other ImplAllocator;
 
-  Impl * provide(sauce::shared_ptr<Injector> injector, TypeIds & ids) const {
+  Iface * provide(sauce::shared_ptr<Injector> injector, TypeIds & ids) const {
     typename i::Key<A1>::Ptr a1(this->template getDependency<A1>(injector,
         ids));
     typename i::Key<A2>::Ptr a2(this->template getDependency<A2>(injector,
@@ -269,7 +286,8 @@ struct NewBinding<Dependency, Scope, Impl(A1, A2, A3, A4, A5, A6, A7, A8),
     return impl;
   }
 
-  void dispose(Impl * impl) const {
+  void dispose(Iface * iface) const {
+    Impl * impl = static_cast<Impl *>(iface);
     ImplAllocator allocator;
     impl->~Impl(); // Must not throw
     allocator.deallocate(impl, 1);
@@ -281,9 +299,10 @@ template<typename Dependency, typename Scope, typename Impl,
     typename A5, typename A6, typename A7, typename A8, typename A9>
 struct NewBinding<Dependency, Scope, Impl(A1, A2, A3, A4, A5, A6, A7, A8, A9),
     Allocator>: public NakedBinding<Dependency, Scope, Impl> {
+  typedef typename Key<Dependency>::Iface Iface;
   typedef typename Allocator::template rebind<Impl>::other ImplAllocator;
 
-  Impl * provide(sauce::shared_ptr<Injector> injector, TypeIds & ids) const {
+  Iface * provide(sauce::shared_ptr<Injector> injector, TypeIds & ids) const {
     typename i::Key<A1>::Ptr a1(this->template getDependency<A1>(injector,
         ids));
     typename i::Key<A2>::Ptr a2(this->template getDependency<A2>(injector,
@@ -308,7 +327,8 @@ struct NewBinding<Dependency, Scope, Impl(A1, A2, A3, A4, A5, A6, A7, A8, A9),
     return impl;
   }
 
-  void dispose(Impl * impl) const {
+  void dispose(Iface * iface) const {
+    Impl * impl = static_cast<Impl *>(iface);
     ImplAllocator allocator;
     impl->~Impl(); // Must not throw
     allocator.deallocate(impl, 1);
@@ -321,9 +341,10 @@ template<typename Dependency, typename Scope, typename Impl,
     typename A10>
 struct NewBinding<Dependency, Scope, Impl(A1, A2, A3, A4, A5, A6, A7, A8, A9,
     A10), Allocator>: public NakedBinding<Dependency, Scope, Impl> {
+  typedef typename Key<Dependency>::Iface Iface;
   typedef typename Allocator::template rebind<Impl>::other ImplAllocator;
 
-  Impl * provide(sauce::shared_ptr<Injector> injector, TypeIds & ids) const {
+  Iface * provide(sauce::shared_ptr<Injector> injector, TypeIds & ids) const {
     typename i::Key<A1>::Ptr a1(this->template getDependency<A1>(injector,
         ids));
     typename i::Key<A2>::Ptr a2(this->template getDependency<A2>(injector,
@@ -350,7 +371,8 @@ struct NewBinding<Dependency, Scope, Impl(A1, A2, A3, A4, A5, A6, A7, A8, A9,
     return impl;
   }
 
-  void dispose(Impl * impl) const {
+  void dispose(Iface * iface) const {
+    Impl * impl = static_cast<Impl *>(iface);
     ImplAllocator allocator;
     impl->~Impl(); // Must not throw
     allocator.deallocate(impl, 1);

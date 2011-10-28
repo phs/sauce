@@ -33,7 +33,7 @@ public:
    * Cast and dispose the given Iface instance.
    */
   void operator()(Iface * iface) const {
-    binding->dispose(static_cast<Impl *>(iface));
+    binding->dispose(iface);
   }
 };
 
@@ -48,18 +48,18 @@ class NakedBinding:
   typedef typename Binding<Dependency>::BindingPtr BindingPtr;
 
   /**
-   * Provide a naked Impl pointer.
+   * Provide a naked Iface pointer.
    *
    * The strategy used is left to derived types.
    */
-  virtual Impl * provide(InjectorPtr, TypeIds &) const = 0;
+  virtual Iface * provide(InjectorPtr, TypeIds &) const = 0;
 
   /**
    * Dispose of an instance of Iface provided by this binding.
    *
    * The strategy used is left to derived types.
    */
-  virtual void dispose(Impl *) const = 0;
+  virtual void dispose(Iface *) const = 0;
 
   /**
    * Create a shared pointer deleter suitable for this binding.

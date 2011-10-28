@@ -28,12 +28,13 @@ $var as = [[$for j, [[a$j]]]]
 
 template<typename Dependency, typename Scope, typename Impl, typename Allocator$comma_typename_As>
 struct NewBinding<Dependency, Scope, Impl($As), Allocator>: public NakedBinding<Dependency, Scope, Impl> {
+  typedef typename Key<Dependency>::Iface Iface;
   typedef typename Allocator::template rebind<Impl>::other ImplAllocator;
 
 [[$if i==0 [[
-  Impl * provide(sauce::shared_ptr<Injector>, TypeIds &) const
+  Iface * provide(sauce::shared_ptr<Injector>, TypeIds &) const
 ]] $else [[
-  Impl * provide(sauce::shared_ptr<Injector> injector, TypeIds & ids) const
+  Iface * provide(sauce::shared_ptr<Injector> injector, TypeIds & ids) const
 ]]]]
  {
 [[$for j [[
@@ -46,7 +47,8 @@ struct NewBinding<Dependency, Scope, Impl($As), Allocator>: public NakedBinding<
     return impl;
   }
 
-  void dispose(Impl * impl) const {
+  void dispose(Iface * iface) const {
+    Impl * impl = static_cast<Impl *>(iface);
     ImplAllocator allocator;
     impl->~Impl(); // Must not throw
     allocator.deallocate(impl, 1);
