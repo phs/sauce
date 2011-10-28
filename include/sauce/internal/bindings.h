@@ -68,13 +68,15 @@ class Bindings {
   BindingMap bindingMap;
   ScopeMap scopeMap;
   PendingThrow pending;
+  ImplicitBindings implicitBindings;
 
 public:
 
   Bindings():
     bindingMap(),
     scopeMap(),
-    pending(NULL) {}
+    pending(NULL),
+    implicitBindings() {}
 
   /**
    * Insert the given binding.
