@@ -104,12 +104,15 @@ public:
    */
   template<typename Dependency>
   typename Key<Dependency>::Ptr get(sauce::shared_ptr<Injector> injector, TypeIds & ids) const {
+    sauce::shared_ptr<Binding<Dependency> > binding;
+
     BindingMap::const_iterator i = bindingMap.find(typeIdOf<Dependency>());
     if (i == bindingMap.end()) {
       throw UnboundExceptionFor<Dependency>();
+    } else {
+      binding = resolve<Dependency>(i->second);
     }
 
-    sauce::shared_ptr<Binding<Dependency> > binding = resolve<Dependency>(i->second);
     return binding->get(binding, injector, ids);
   }
 
