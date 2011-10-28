@@ -14,7 +14,7 @@ namespace bindings {
  * A binding that provides the injector itself.
  */
 class InjectorBinding:
-  public TransparentBinding<Key<Injector>::Normalized, NoScope, Injector> {
+  public TransparentBinding<Key<Injector>::Normalized, NoScope> {
 
   typedef Binding<Key<Injector>::Normalized>::BindingPtr BindingPtr;
 

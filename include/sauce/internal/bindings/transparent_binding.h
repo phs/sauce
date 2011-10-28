@@ -39,7 +39,7 @@ namespace bindings {
 /**
  * A binding for a specific interface and implementation.
  */
-template<typename Dependency, typename Scope, typename Impl>
+template<typename Dependency, typename Scope>
 class TransparentBinding:
   public Binding<Dependency>,
   public InjectorFriend {
@@ -48,7 +48,7 @@ class TransparentBinding:
   typedef typename Binding<Dependency>::BindingPtr BindingPtr;
 
   /**
-   * Provide an instance of Impl.
+   * Provide an instance of Iface.
    *
    * The strategy used is left to derived types.
    */

@@ -42,7 +42,7 @@ public:
  */
 template<typename Dependency, typename Scope, typename Impl>
 class NakedBinding:
-  public TransparentBinding<Dependency, Scope, Impl> {
+  public TransparentBinding<Dependency, Scope> {
 
   typedef typename Key<Dependency>::Iface Iface;
   typedef typename Binding<Dependency>::BindingPtr BindingPtr;
