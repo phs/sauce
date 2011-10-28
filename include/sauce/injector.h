@@ -8,7 +8,6 @@
 #include <sauce/internal/base_injector.h>
 #include <sauce/internal/binding.h>
 #include <sauce/internal/bindings/all.h>
-#include <sauce/internal/implicit_bindings.h>
 #include <sauce/internal/key.h>
 #include <sauce/internal/locker_factory.h>
 #include <sauce/internal/scope_cache.h>
@@ -19,6 +18,7 @@ namespace sauce {
 class Modules;
 
 namespace internal {
+class ImplicitBindings;
 class InjectorFriend;
 }
 
@@ -27,7 +27,7 @@ class Injector {
   i::ScopeCache scopeCache;
   sauce::weak_ptr<Injector> weak;
   sauce::shared_ptr<Injector> const next;
-  sauce::shared_ptr<i::BaseInjector<i::ImplicitBindings<void> > > const base;
+  sauce::shared_ptr<i::BaseInjector<i::ImplicitBindings> > const base;
 
   friend class Modules;
   friend class i::InjectorFriend;
@@ -39,7 +39,7 @@ class Injector {
     next(next),
     base() {}
 
-  Injector(sauce::shared_ptr<i::BaseInjector<i::ImplicitBindings<void> > > const base):
+  Injector(sauce::shared_ptr<i::BaseInjector<i::ImplicitBindings> > const base):
     scopeKey(i::typeIdOf<SingletonScope>()),
     scopeCache(),
     weak(),

@@ -12,32 +12,33 @@ namespace sauce {
 namespace internal {
 
 /**
- * Attempts to supply a Binding to Bindings when none is found for a dependency.
+ * Attempts to supply a Binding when the given Dependency is not found.
  */
 template<typename Dependency>
-struct ImplicitBindings {
-
-  template<typename AnotherDependency>
-  struct rebind {
-    typedef ImplicitBindings<AnotherDependency> other;
-  };
+struct ImplicitBinding {
 
   /**
    * Attempt to supply a (unknown) Binding at provision time.
    */
-  sauce::shared_ptr<Binding<Dependency> > get() const {
+  static sauce::shared_ptr<Binding<Dependency> > get() {
     throw UnboundExceptionFor<Dependency>();
   }
 
 };
 
-template<>
-struct ImplicitBindings<Named<Injector, Unnamed> > {
-  sauce::shared_ptr<Binding<Named<Injector, Unnamed> > > get() const {
-    // sauce::shared_ptr<Binding<Named<Injector, Unnamed> > > bindingPtr(new b::InjectorBinding());
-    // return bindingPtr;
-    throw UnboundExceptionFor<Named<Injector, Unnamed> >();
+/**
+ * Attempts to supply a Binding to Bindings when none is found for a dependency.
+ */
+struct ImplicitBindings {
+
+  /**
+   * Attempt to supply a (unknown) Binding at provision time.
+   */
+  template<typename Dependency>
+  sauce::shared_ptr<Binding<Dependency> > get() const {
+    return ImplicitBinding<Dependency>::get();
   }
+
 };
 
 }

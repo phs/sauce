@@ -106,8 +106,8 @@ public:
 
     BindingMap::const_iterator i = bindingMap.find(typeIdOf<Dependency>());
     if (i == bindingMap.end()) {
-      typename ImplicitBindings::template rebind<Dependency>::other implicitBindings;
-      binding = implicitBindings.get();
+      ImplicitBindings implicitBindings;
+      binding = implicitBindings.get<Dependency>();
     } else {
       binding = resolve<Dependency>(i->second);
     }

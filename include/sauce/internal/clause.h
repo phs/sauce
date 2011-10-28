@@ -2,10 +2,11 @@
 #define SAUCE_SAUCE_CLAUSE_H_
 
 #include <sauce/internal/bindings.h>
-#include <sauce/internal/implicit_bindings.h>
 
 namespace sauce {
 namespace internal {
+
+class ImplicitBindings;
 
 /**
  * Base class for parts of the fluent binding API.
@@ -13,7 +14,7 @@ namespace internal {
 template<typename Derived>
 class Clause {
   bool act;
-  Bindings<ImplicitBindings<void> > * bindings;
+  Bindings<ImplicitBindings> * bindings;
 
 protected:
 
@@ -41,7 +42,7 @@ protected:
 
 public:
 
-  void setBindings(Bindings<ImplicitBindings<void> > & bindings) {
+  void setBindings(Bindings<ImplicitBindings> & bindings) {
     this->bindings = &bindings;
   }
 
