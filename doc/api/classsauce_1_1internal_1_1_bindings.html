@@ -155,12 +155,13 @@ template&lt;typename Dependency &gt; </div>
 <div class="memdoc">
 
 <p>Provide the named Dependency. </p>
-<p>If no binding is found, throw <a class="el" href="structsauce_1_1_unbound_exception.html" title="Raised when a binding cannot be found.">UnboundException</a>. </p>
+<p>If no binding is found, the implicit bindings are checked. </p>
 <div class="fragment"><pre class="fragment">                                                                                           {
     sauce::shared_ptr&lt;Binding&lt;Dependency&gt; &gt; binding;
 
     BindingMap::const_iterator i = bindingMap.find(typeIdOf&lt;Dependency&gt;());
     <span class="keywordflow">if</span> (i == bindingMap.end()) {
+      ImplicitBindings implicitBindings;
       binding = implicitBindings.get&lt;Dependency&gt;();
     } <span class="keywordflow">else</span> {
       binding = resolve&lt;Dependency&gt;(i-&gt;second);
