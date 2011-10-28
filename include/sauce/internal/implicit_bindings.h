@@ -15,7 +15,7 @@ namespace internal {
 struct ImplicitBindings {
 
   /**
-   * Attempt to supply a Binding at provision time.
+   * Attempt to supply a (unknown) Binding at provision time.
    */
   template<typename Dependency>
   sauce::shared_ptr<Binding<Dependency> > get() const {

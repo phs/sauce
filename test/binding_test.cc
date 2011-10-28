@@ -25,6 +25,12 @@ TEST(BindingTest, shouldThrowExceptionWhenGettingAnUnboundIfaceWithoutNullaryCon
   ASSERT_THROW((injector->get<NoNullaryConstructor>()), ::sauce::UnboundException);
 }
 
+TEST(BindingTest, shouldImplicitlyBindTheInjectorItself) {
+  sauce::shared_ptr<Injector> expected = Modules().createInjector();
+  sauce::shared_ptr<Injector> actual = expected->get<Injector>();
+  ASSERT_EQ(expected, actual);
+}
+
 struct Dog;
 
 struct Tail {
@@ -118,12 +124,6 @@ TEST(BindingTest, shouldThrowExceptionOnPartialScopedBinding) {
   ASSERT_THROW(
     Modules().add(&IncompleteScopeModule).createInjector(),
     ::sauce::PartialBindingException);
-}
-
-TEST(BindingTest, shouldImplicitlyBindTheInjectorItself) {
-  sauce::shared_ptr<Injector> expected = Modules().createInjector();
-  sauce::shared_ptr<Injector> actual = expected->get<Injector>();
-  ASSERT_EQ(expected, actual);
 }
 
 }
