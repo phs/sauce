@@ -59,7 +59,7 @@ void pendingThrowFactory() {
  * concrete Binding implementations.  The only time it needs to know about them is when resolving
  * implicit bindings.  So, this functionality is hidden behind the templated strategy.
  */
-// template<typename DynamicBindingResolver>
+template<typename DynamicBindingResolver>
 class Bindings {
   typedef std::map<TypeId, OpaqueBindingPtr> BindingMap;
   typedef std::vector<OpaqueBindingPtr> ScopedBindings;

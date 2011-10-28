@@ -45,12 +45,12 @@ class CircularDependencyGuard {
 };
 
 class BaseInjector {
-  Bindings const bindings;
+  Bindings<void> const bindings;
   sauce::auto_ptr<i::LockFactory> lockFactory;
 
   friend class ::sauce::Modules;
 
-  BaseInjector(Bindings const & bindings, sauce::auto_ptr<i::LockFactory> lockFactory):
+  BaseInjector(Bindings<void> const & bindings, sauce::auto_ptr<i::LockFactory> lockFactory):
     bindings(bindings),
     lockFactory(lockFactory) {}
 

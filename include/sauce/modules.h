@@ -74,7 +74,7 @@ public:
  * A factory that accepts Modules and creates Injectors.
  */
 class Modules {
-  i::Bindings bindings;
+  i::Bindings<void> bindings;
   Binder binder;
 
   /**

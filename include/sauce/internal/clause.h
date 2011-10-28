@@ -12,7 +12,7 @@ namespace internal {
 template<typename Derived>
 class Clause {
   bool act;
-  Bindings * bindings;
+  Bindings<void> * bindings;
 
 protected:
 
@@ -40,7 +40,7 @@ protected:
 
 public:
 
-  void setBindings(Bindings & bindings) {
+  void setBindings(Bindings<void> & bindings) {
     this->bindings = &bindings;
   }
 
