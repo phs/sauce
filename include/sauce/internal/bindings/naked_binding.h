@@ -55,7 +55,7 @@ class NakedBinding:
   virtual Iface * provide(InjectorPtr, TypeIds &) const = 0;
 
   /**
-   * Dispose of an instance of Iface provided by this binding.
+   * Dispose of an Iface provided by this binding.
    *
    * The strategy used is left to derived types.
    */
@@ -71,7 +71,7 @@ class NakedBinding:
   }
 
   /**
-   * Provide an instance of Iface.
+   * Provide an Iface.
    *
    * A naked instance pointer is obtained with provide(InjectorPtr, TypeIds &), and wrapped in a
    * shared_ptr.  It is also given a custom deleter, to dispose of the naked pointer with

@@ -53,7 +53,7 @@ struct OpaqueBinding {
   virtual TypeId getScopeKey() const = 0;
 
   /**
-   * Provide, but do not return an instance of the hidden interface.
+   * Provide, but do not return the hidden interface.
    *
    * Instead, cache the instance in its appropriate scope, if any.  If the binding is not scoped,
    * do nothing.  The typeIds indicate which keys are already currently being provided to detect
@@ -73,7 +73,7 @@ struct Binding:
   typedef sauce::shared_ptr<Binding<Dependency> > BindingPtr;
 
   /**
-   * Get an instance of Iface, using the given injector to provide dependencies.
+   * Get an Iface, using the given injector to provide dependencies.
    *
    * The binding pointer must point to this same binding instance.
    *

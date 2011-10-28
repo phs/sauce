@@ -5,6 +5,7 @@
 #include <sauce/modules.h>
 #include <sauce/injector.h>
 #include <sauce/named.h>
+#include <sauce/provider.h>
 #include <sauce/scopes.h>
 
 /**

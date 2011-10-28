@@ -48,7 +48,7 @@ class TransparentBinding:
   typedef typename Binding<Dependency>::BindingPtr BindingPtr;
 
   /**
-   * Provide an instance of Iface.
+   * Provide an Iface.
    *
    * The strategy used is left to derived types.
    */
@@ -71,7 +71,7 @@ public:
   }
 
   /**
-   * Provide an instance of Iface.
+   * Provide an Iface.
    *
    * Derived classes should not override get(), but rather provide().
    */
@@ -90,7 +90,7 @@ public:
   }
 
   /**
-   * Provide, but do not return an instance of Iface.
+   * Provide, but do not return an Iface.
    *
    * Instead, cache the instance in its appropriate scope, if any.  If the binding is not scoped,
    * do nothing.

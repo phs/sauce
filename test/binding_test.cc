@@ -15,6 +15,28 @@ using ::sauce::Named;
 namespace sauce {
 namespace test {
 
+struct CustomBuilt {};
+
+struct CustomBuiltProvider: Provider<CustomBuilt> {
+  CustomBuilt * provide() {
+    return new CustomBuilt();
+  }
+
+  void dispose(CustomBuilt * customBuilt) {
+    delete customBuilt;
+  }
+};
+
+// void ProviderModule(Binder & binder) {
+//   binder.bind<CustomBuiltProvider>().to<CustomBuiltProvider()>();
+//   binder.bind<CustomBuilt>().toProvider<CustomBuiltProvider>();
+// }
+
+// TEST(BindingTest, shouldBindProviders) {
+//   sauce::shared_ptr<Injector> injector(Modules().add(&ProviderModule).createInjector());
+//   sauce::shared_ptr<CustomBuilt> customBuilt = injector->get<CustomBuilt>();
+// }
+
 struct Unbound {};
 
 TEST(BindingTest, shouldThrowExceptionWhenGettingAnUnboundIface) {
