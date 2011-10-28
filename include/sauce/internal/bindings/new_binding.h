@@ -23,7 +23,7 @@ class NewBinding;
 
 template<typename Dependency, typename Scope, typename Impl, typename Allocator>
 struct NewBinding<Dependency, Scope, Impl(),
-    Allocator>: public NakedBinding<Dependency, Scope, Impl> {
+    Allocator>: public NakedBinding<Dependency, Scope> {
   typedef typename Key<Dependency>::Iface Iface;
   typedef typename Allocator::template rebind<Impl>::other ImplAllocator;
 
@@ -45,7 +45,7 @@ struct NewBinding<Dependency, Scope, Impl(),
 template<typename Dependency, typename Scope, typename Impl,
     typename Allocator, typename A1>
 struct NewBinding<Dependency, Scope, Impl(A1),
-    Allocator>: public NakedBinding<Dependency, Scope, Impl> {
+    Allocator>: public NakedBinding<Dependency, Scope> {
   typedef typename Key<Dependency>::Iface Iface;
   typedef typename Allocator::template rebind<Impl>::other ImplAllocator;
 
@@ -69,7 +69,7 @@ struct NewBinding<Dependency, Scope, Impl(A1),
 template<typename Dependency, typename Scope, typename Impl,
     typename Allocator, typename A1, typename A2>
 struct NewBinding<Dependency, Scope, Impl(A1, A2),
-    Allocator>: public NakedBinding<Dependency, Scope, Impl> {
+    Allocator>: public NakedBinding<Dependency, Scope> {
   typedef typename Key<Dependency>::Iface Iface;
   typedef typename Allocator::template rebind<Impl>::other ImplAllocator;
 
@@ -95,7 +95,7 @@ struct NewBinding<Dependency, Scope, Impl(A1, A2),
 template<typename Dependency, typename Scope, typename Impl,
     typename Allocator, typename A1, typename A2, typename A3>
 struct NewBinding<Dependency, Scope, Impl(A1, A2, A3),
-    Allocator>: public NakedBinding<Dependency, Scope, Impl> {
+    Allocator>: public NakedBinding<Dependency, Scope> {
   typedef typename Key<Dependency>::Iface Iface;
   typedef typename Allocator::template rebind<Impl>::other ImplAllocator;
 
@@ -123,7 +123,7 @@ struct NewBinding<Dependency, Scope, Impl(A1, A2, A3),
 template<typename Dependency, typename Scope, typename Impl,
     typename Allocator, typename A1, typename A2, typename A3, typename A4>
 struct NewBinding<Dependency, Scope, Impl(A1, A2, A3, A4),
-    Allocator>: public NakedBinding<Dependency, Scope, Impl> {
+    Allocator>: public NakedBinding<Dependency, Scope> {
   typedef typename Key<Dependency>::Iface Iface;
   typedef typename Allocator::template rebind<Impl>::other ImplAllocator;
 
@@ -154,7 +154,7 @@ template<typename Dependency, typename Scope, typename Impl,
     typename Allocator, typename A1, typename A2, typename A3, typename A4,
     typename A5>
 struct NewBinding<Dependency, Scope, Impl(A1, A2, A3, A4, A5),
-    Allocator>: public NakedBinding<Dependency, Scope, Impl> {
+    Allocator>: public NakedBinding<Dependency, Scope> {
   typedef typename Key<Dependency>::Iface Iface;
   typedef typename Allocator::template rebind<Impl>::other ImplAllocator;
 
@@ -187,7 +187,7 @@ template<typename Dependency, typename Scope, typename Impl,
     typename Allocator, typename A1, typename A2, typename A3, typename A4,
     typename A5, typename A6>
 struct NewBinding<Dependency, Scope, Impl(A1, A2, A3, A4, A5, A6),
-    Allocator>: public NakedBinding<Dependency, Scope, Impl> {
+    Allocator>: public NakedBinding<Dependency, Scope> {
   typedef typename Key<Dependency>::Iface Iface;
   typedef typename Allocator::template rebind<Impl>::other ImplAllocator;
 
@@ -222,7 +222,7 @@ template<typename Dependency, typename Scope, typename Impl,
     typename Allocator, typename A1, typename A2, typename A3, typename A4,
     typename A5, typename A6, typename A7>
 struct NewBinding<Dependency, Scope, Impl(A1, A2, A3, A4, A5, A6, A7),
-    Allocator>: public NakedBinding<Dependency, Scope, Impl> {
+    Allocator>: public NakedBinding<Dependency, Scope> {
   typedef typename Key<Dependency>::Iface Iface;
   typedef typename Allocator::template rebind<Impl>::other ImplAllocator;
 
@@ -259,7 +259,7 @@ template<typename Dependency, typename Scope, typename Impl,
     typename Allocator, typename A1, typename A2, typename A3, typename A4,
     typename A5, typename A6, typename A7, typename A8>
 struct NewBinding<Dependency, Scope, Impl(A1, A2, A3, A4, A5, A6, A7, A8),
-    Allocator>: public NakedBinding<Dependency, Scope, Impl> {
+    Allocator>: public NakedBinding<Dependency, Scope> {
   typedef typename Key<Dependency>::Iface Iface;
   typedef typename Allocator::template rebind<Impl>::other ImplAllocator;
 
@@ -298,7 +298,7 @@ template<typename Dependency, typename Scope, typename Impl,
     typename Allocator, typename A1, typename A2, typename A3, typename A4,
     typename A5, typename A6, typename A7, typename A8, typename A9>
 struct NewBinding<Dependency, Scope, Impl(A1, A2, A3, A4, A5, A6, A7, A8, A9),
-    Allocator>: public NakedBinding<Dependency, Scope, Impl> {
+    Allocator>: public NakedBinding<Dependency, Scope> {
   typedef typename Key<Dependency>::Iface Iface;
   typedef typename Allocator::template rebind<Impl>::other ImplAllocator;
 
@@ -340,7 +340,7 @@ template<typename Dependency, typename Scope, typename Impl,
     typename A5, typename A6, typename A7, typename A8, typename A9,
     typename A10>
 struct NewBinding<Dependency, Scope, Impl(A1, A2, A3, A4, A5, A6, A7, A8, A9,
-    A10), Allocator>: public NakedBinding<Dependency, Scope, Impl> {
+    A10), Allocator>: public NakedBinding<Dependency, Scope> {
   typedef typename Key<Dependency>::Iface Iface;
   typedef typename Allocator::template rebind<Impl>::other ImplAllocator;
 

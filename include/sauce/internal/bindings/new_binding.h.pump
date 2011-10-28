@@ -27,7 +27,7 @@ $var As = [[$for j, [[A$j]]]]
 $var as = [[$for j, [[a$j]]]]
 
 template<typename Dependency, typename Scope, typename Impl, typename Allocator$comma_typename_As>
-struct NewBinding<Dependency, Scope, Impl($As), Allocator>: public NakedBinding<Dependency, Scope, Impl> {
+struct NewBinding<Dependency, Scope, Impl($As), Allocator>: public NakedBinding<Dependency, Scope> {
   typedef typename Key<Dependency>::Iface Iface;
   typedef typename Allocator::template rebind<Impl>::other ImplAllocator;
 

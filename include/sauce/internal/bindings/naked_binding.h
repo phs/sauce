@@ -9,18 +9,18 @@ namespace sauce {
 namespace internal {
 namespace bindings {
 
-template<typename Dependency, typename Scope, typename Impl>
+template<typename Dependency, typename Scope>
 class NakedBinding;
 
 /**
  * A smart pointer deleter that diposes with a given binding.
  */
-template<typename Dependency, typename Scope, typename Impl>
+template<typename Dependency, typename Scope>
 class DisposalDeleter {
   typedef typename Key<Dependency>::Iface Iface;
-  typedef sauce::shared_ptr<NakedBinding<Dependency, Scope, Impl> > BindingPtr;
+  typedef sauce::shared_ptr<NakedBinding<Dependency, Scope> > BindingPtr;
 
-  friend class NakedBinding<Dependency, Scope, Impl>;
+  friend class NakedBinding<Dependency, Scope>;
 
   BindingPtr binding;
 
@@ -38,9 +38,9 @@ public:
 };
 
 /**
- * A binding that makes implementations by providing and disposing naked pointers.
+ * A binding that supplies interfaces by providing and disposing naked pointers.
  */
-template<typename Dependency, typename Scope, typename Impl>
+template<typename Dependency, typename Scope>
 class NakedBinding:
   public TransparentBinding<Dependency, Scope> {
 
@@ -64,25 +64,25 @@ class NakedBinding:
   /**
    * Create a shared pointer deleter suitable for this binding.
    */
-  DisposalDeleter<Dependency, Scope, Impl> deleter(BindingPtr binding) const {
-    typedef NakedBinding<Dependency, Scope, Impl> Naked;
+  DisposalDeleter<Dependency, Scope> deleter(BindingPtr binding) const {
+    typedef NakedBinding<Dependency, Scope> Naked;
     sauce::shared_ptr<Naked> concrete = sauce::static_pointer_cast<Naked>(binding);
-    return DisposalDeleter<Dependency, Scope, Impl>(concrete);
+    return DisposalDeleter<Dependency, Scope>(concrete);
   }
 
   /**
-   * Provide an instance of Impl.
+   * Provide an instance of Iface.
    *
    * A naked instance pointer is obtained with provide(InjectorPtr, TypeIds &), and wrapped in a
    * shared_ptr.  It is also given a custom deleter, to dispose of the naked pointer with
-   * dispose(Impl *).
+   * dispose(Iface *).
    */
   sauce::shared_ptr<Iface> provide(BindingPtr binding, InjectorPtr injector, TypeIds & ids) const {
     sauce::shared_ptr<Iface> provided(provide(injector, ids), deleter(binding));
     return provided;
   }
 
-  friend class DisposalDeleter<Dependency, Scope, Impl>;
+  friend class DisposalDeleter<Dependency, Scope>;
 
 };
 
