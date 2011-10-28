@@ -42,8 +42,10 @@ TEST(BindingTest, shouldThrowExceptionWhenResolvingCircularDependency) {
   ASSERT_THROW((injector->get<Tail>()), ::sauce::CircularDependencyException);
 }
 
+struct IncompletelyBound {};
+
 void IncompleteModule(Binder & binder) {
-  binder.bind<C>() /* to ...? */;
+  binder.bind<IncompletelyBound>() /* to ...? */;
 }
 
 TEST(BindingTest, shouldThrowExceptionOnPartialBinding) {
@@ -96,7 +98,7 @@ TEST(BindingTest, shouldProvidedNamedDependencies) {
 }
 
 void IncompleteNamedModule(Binder & binder) {
-  binder.bind<Animal>().named<LieutenantShinysides>() /* to ...? */;
+  binder.bind<IncompletelyBound>().named<LieutenantShinysides>() /* to ...? */;
 }
 
 TEST(BindingTest, shouldThrowExceptionOnPartialNamedBinding) {
@@ -106,7 +108,7 @@ TEST(BindingTest, shouldThrowExceptionOnPartialNamedBinding) {
 }
 
 void IncompleteScopeModule(Binder & binder) {
-  binder.bind<C>().in<SingletonScope>();
+  binder.bind<IncompletelyBound>().in<SingletonScope>();
 }
 
 TEST(BindingTest, shouldThrowExceptionOnPartialScopedBinding) {
