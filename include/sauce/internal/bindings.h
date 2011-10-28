@@ -10,7 +10,6 @@
 #include <sauce/exceptions.h>
 #include <sauce/memory.h>
 #include <sauce/internal/binding.h>
-#include <sauce/internal/implicit_bindings.h>
 #include <sauce/internal/key.h>
 #include <sauce/internal/type_id.h>
 
