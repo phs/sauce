@@ -31,12 +31,14 @@ struct ImplicitBindings {
 
 };
 
-// template<>
-// struct ImplicitBindings<Named<Injector, Unnamed> > {
-//   sauce::shared_ptr<Binding<Named<Injector, Unnamed> > > get() const {
-//     throw UnboundExceptionFor<Named<Injector, Unnamed> >();
-//   }
-// };
+template<>
+struct ImplicitBindings<Named<Injector, Unnamed> > {
+  sauce::shared_ptr<Binding<Named<Injector, Unnamed> > > get() const {
+    // sauce::shared_ptr<Binding<Named<Injector, Unnamed> > > bindingPtr(new b::InjectorBinding());
+    // return bindingPtr;
+    throw UnboundExceptionFor<Named<Injector, Unnamed> >();
+  }
+};
 
 }
 
