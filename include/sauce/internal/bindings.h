@@ -100,7 +100,7 @@ public:
   /**
    * Provide the named Dependency.
    *
-   * If no binding is found, throw UnboundException.
+   * If no binding is found, the implicit bindings are checked.
    */
   template<typename Dependency>
   typename Key<Dependency>::Ptr get(sauce::shared_ptr<Injector> injector, TypeIds & ids) const {
