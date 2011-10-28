@@ -108,7 +108,7 @@ public:
 
     BindingMap::const_iterator i = bindingMap.find(typeIdOf<Dependency>());
     if (i == bindingMap.end()) {
-      throw UnboundExceptionFor<Dependency>();
+      binding = implicitBindings.get<Dependency>();
     } else {
       binding = resolve<Dependency>(i->second);
     }
