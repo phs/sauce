@@ -78,13 +78,6 @@ class Modules {
   i::Bindings<i::ImplicitBindings> bindings;
   Binder binder;
 
-  /**
-   * Bind the implicit bindings.
-   */
-  void bindImplicit() {
-    bindings.put<b::InjectorBinding>();
-  }
-
   sauce::shared_ptr<Injector> createInjector(sauce::auto_ptr<i::LockFactory> lockFactory) const {
     sauce::shared_ptr<i::BaseInjector<i::ImplicitBindings> > base(
       new i::BaseInjector<i::ImplicitBindings>(bindings, lockFactory));
@@ -100,9 +93,7 @@ public:
    */
   Modules():
     bindings(),
-    binder(bindings) {
-    bindImplicit();
-  }
+    binder(bindings) {}
 
   /**
    * Add the bindings defined by the given Module instance.

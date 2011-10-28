@@ -41,6 +41,17 @@ struct ImplicitBindings {
 
 };
 
+/**
+ * Implicit Injector binding.
+ */
+template<>
+struct ImplicitBinding<Named<Injector, Unnamed> > {
+  static sauce::shared_ptr<Binding<Named<Injector, Unnamed> > > get() {
+    sauce::shared_ptr<Binding<Named<Injector, Unnamed> > > binding(new b::InjectorBinding());
+    return binding;
+  }
+};
+
 }
 
 namespace i = ::sauce::internal;
