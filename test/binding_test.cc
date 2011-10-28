@@ -15,11 +15,14 @@ using ::sauce::Named;
 namespace sauce {
 namespace test {
 
-struct C {};
+struct HasNullaryConstructor {};
+struct NoNullaryConstructor {
+  explicit NoNullaryConstructor(std::string) {}
+};
 
-TEST(BindingTest, shouldThrowExceptionWhenGettingAnUnboundIface) {
+TEST(BindingTest, shouldThrowExceptionWhenGettingAnUnboundIfaceWithoutNullaryConstructor) {
   sauce::shared_ptr<Injector> injector(Modules().createInjector());
-  ASSERT_THROW((injector->get<C>()), ::sauce::UnboundException);
+  ASSERT_THROW((injector->get<NoNullaryConstructor>()), ::sauce::UnboundException);
 }
 
 struct Dog;
