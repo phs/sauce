@@ -27,7 +27,7 @@ struct ImplicitBinding {
 };
 
 /**
- * Attempts to supply a Binding to Bindings when none is found for a dependency.
+ * Attempts to supply a Binding when none is found for a dependency.
  */
 struct ImplicitBindings {
 
@@ -42,7 +42,7 @@ struct ImplicitBindings {
 };
 
 /**
- * Implicit Injector binding.
+ * The implicit Injector binding.
  */
 template<>
 struct ImplicitBinding<Named<Injector, Unnamed> > {
