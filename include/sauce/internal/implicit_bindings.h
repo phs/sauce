@@ -46,8 +46,9 @@ struct ImplicitBindings {
  */
 template<>
 struct ImplicitBinding<Named<Injector, Unnamed> > {
-  static sauce::shared_ptr<Binding<Named<Injector, Unnamed> > > get() {
-    sauce::shared_ptr<Binding<Named<Injector, Unnamed> > > binding(new b::InjectorBinding());
+  typedef Named<Injector, Unnamed> Dependency;
+  static sauce::shared_ptr<Binding<Dependency> > get() {
+    sauce::shared_ptr<Binding<Dependency> > binding(new b::InjectorBinding());
     return binding;
   }
 };
