@@ -27,10 +27,10 @@ struct CustomBuiltProvider: Provider<CustomBuilt> {
   }
 };
 
-// void ProviderModule(Binder & binder) {
-//   binder.bind<CustomBuiltProvider>().to<CustomBuiltProvider()>();
-//   binder.bind<CustomBuilt>().toProvider<CustomBuiltProvider>();
-// }
+void ProviderModule(Binder & binder) {
+  binder.bind<CustomBuiltProvider>().to<CustomBuiltProvider()>();
+  binder.bind<CustomBuilt>().toProvider<CustomBuiltProvider>();
+}
 
 // TEST(BindingTest, shouldBindProviders) {
 //   sauce::shared_ptr<Injector> injector(Modules().add(&ProviderModule).createInjector());

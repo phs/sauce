@@ -43,6 +43,24 @@ template<typename Dependency, typename Scope>
 class InClause;
 
 /**
+ * Binds to a provider.
+ */
+template<typename Dependency, typename Scope, typename Provider>
+class ToProviderClause:
+  public i::Clause<ToProviderClause<Dependency, Scope, Provider> > {
+
+  typedef typename i::Key<Dependency>::Iface Iface;
+  typedef i::Clause<ToProviderClause<Dependency, Scope, Provider> > Clause;
+
+  friend class BindClause<Iface>;
+  friend class NamedClause<Dependency>;
+  friend class InClause<Dependency, Scope>;
+  friend class i::Clause<ToProviderClause<Dependency, Scope, Provider> >;
+
+  static void activate(Clause &) {}
+};
+
+/**
  * Binds to a specific constructor allocating from the heap.
  */
 template<typename Dependency, typename Scope, typename Ctor>
@@ -95,6 +113,11 @@ public:
     return this->template pass<ToClause<Dependency, Scope, Ctor> >();
   }
 
+  template<typename Provider>
+  ToProviderClause<Dependency, Scope, Provider> toProvider() {
+    return this->template pass<ToProviderClause<Dependency, Scope, Provider> >();
+  }
+
 };
 
 /**
@@ -124,6 +147,11 @@ public:
   template<typename Ctor>
   ToClause<Dependency, NoScope, Ctor> to() {
     return this->template pass<ToClause<Dependency, NoScope, Ctor> >();
+  }
+
+  template<typename Provider>
+  ToProviderClause<Dependency, NoScope, Provider> toProvider() {
+    return this->template pass<ToProviderClause<Dependency, NoScope, Provider> >();
   }
 
 };
@@ -161,6 +189,11 @@ public:
   template<typename Ctor>
   ToClause<Named<Iface, Unnamed>, NoScope, Ctor> to() {
     return this->template pass<ToClause<Named<Iface, Unnamed>, NoScope, Ctor> >();
+  }
+
+  template<typename Provider>
+  ToProviderClause<Named<Iface, Unnamed>, NoScope, Provider> toProvider() {
+    return this->template pass<ToProviderClause<Named<Iface, Unnamed>, NoScope, Provider> >();
   }
 
 };
