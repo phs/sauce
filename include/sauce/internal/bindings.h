@@ -68,15 +68,13 @@ class Bindings {
   BindingMap bindingMap;
   ScopeMap scopeMap;
   PendingThrow pending;
-  ImplicitBindings implicitBindings;
 
 public:
 
   Bindings():
     bindingMap(),
     scopeMap(),
-    pending(NULL),
-    implicitBindings() {}
+    pending(NULL) {}
 
   /**
    * Insert the given binding.
@@ -108,6 +106,7 @@ public:
 
     BindingMap::const_iterator i = bindingMap.find(typeIdOf<Dependency>());
     if (i == bindingMap.end()) {
+      ImplicitBindings implicitBindings;
       binding = implicitBindings.get<Dependency>();
     } else {
       binding = resolve<Dependency>(i->second);
