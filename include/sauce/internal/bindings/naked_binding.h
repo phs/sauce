@@ -35,6 +35,8 @@ class NakedBinding:
    */
   virtual void dispose(Iface *) const = 0;
 
+  friend class DisposalDeleter<Iface, Naked>;
+
   /**
    * Create a shared pointer deleter suitable for this binding.
    */
@@ -54,8 +56,6 @@ class NakedBinding:
     sauce::shared_ptr<Iface> provided(provide(injector, ids), deleter(binding));
     return provided;
   }
-
-  friend class DisposalDeleter<Iface, Naked>;
 };
 
 }
