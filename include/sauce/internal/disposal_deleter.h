@@ -5,10 +5,13 @@
 
 namespace sauce {
 namespace internal {
-namespace bindings {
 
+namespace bindings {
 template<typename Dependency, typename Scope>
 class NakedBinding;
+}
+
+namespace b = ::sauce::internal::bindings;
 
 /**
  * A smart pointer deleter that diposes with a given binding.
@@ -16,9 +19,9 @@ class NakedBinding;
 template<typename Dependency, typename Scope>
 class DisposalDeleter {
   typedef typename Key<Dependency>::Iface Iface;
-  typedef sauce::shared_ptr<NakedBinding<Dependency, Scope> > BindingPtr;
+  typedef sauce::shared_ptr<b::NakedBinding<Dependency, Scope> > BindingPtr;
 
-  friend class NakedBinding<Dependency, Scope>;
+  friend class b::NakedBinding<Dependency, Scope>;
 
   BindingPtr binding;
 
@@ -36,10 +39,8 @@ public:
 };
 
 }
-}
 
 namespace i = ::sauce::internal;
-namespace b = ::sauce::internal::bindings;
 
 }
 
