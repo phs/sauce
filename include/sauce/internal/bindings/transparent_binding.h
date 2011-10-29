@@ -73,6 +73,9 @@ public:
   /**
    * Provide an Iface.
    *
+   * If a Scope is configured for the binding, this checks the scope cache first before calling
+   * provide(), and caches the new Iface on miss.
+   *
    * Derived classes should not override get(), but rather provide().
    */
   sauce::shared_ptr<Iface> get(BindingPtr binding, InjectorPtr injector, TypeIds & ids) const {
