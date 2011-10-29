@@ -149,7 +149,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <a name="l00106"></a>00106 
 <a name="l00107"></a>00107     BindingMap::const_iterator i = bindingMap.find(typeIdOf&lt;Dependency&gt;());
 <a name="l00108"></a>00108     <span class="keywordflow">if</span> (i == bindingMap.end()) {
-<a name="l00109"></a>00109       <a class="code" href="structsauce_1_1internal_1_1_implicit_bindings.html" title="Attempts to supply a Binding to Bindings when none is found for a dependency.">ImplicitBindings</a> implicitBindings;
+<a name="l00109"></a>00109       <a class="code" href="structsauce_1_1internal_1_1_implicit_bindings.html" title="Attempts to supply a Binding when none is found for a dependency.">ImplicitBindings</a> implicitBindings;
 <a name="l00110"></a>00110       binding = implicitBindings.<a class="code" href="structsauce_1_1internal_1_1_implicit_bindings.html#a45199e6e366cd15c863159150f3042e5" title="Attempt to supply a (unknown) Binding at provision time.">get</a>&lt;Dependency&gt;();
 <a name="l00111"></a>00111     } <span class="keywordflow">else</span> {
 <a name="l00112"></a>00112       binding = resolve&lt;Dependency&gt;(i-&gt;second);

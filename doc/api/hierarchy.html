@@ -107,7 +107,11 @@ This inheritance list is sorted roughly, but not completely, alphabetically:</di
 <li><a class="el" href="classsauce_1_1_to_clause.html">sauce::ToClause&lt; Dependency, Scope, Ctor &gt;</a></li>
 </ul>
 </li>
-<li><a class="el" href="classsauce_1_1internal_1_1bindings_1_1_disposal_deleter.html">sauce::internal::bindings::DisposalDeleter&lt; Dependency, Scope, Impl &gt;</a></li>
+<li><a class="el" href="classsauce_1_1internal_1_1_clause.html">sauce::internal::Clause&lt; ToProviderClause&lt; Dependency, Scope, Provider &gt; &gt;</a><ul>
+<li><a class="el" href="classsauce_1_1_to_provider_clause.html">sauce::ToProviderClause&lt; Dependency, Scope, Provider &gt;</a></li>
+</ul>
+</li>
+<li><a class="el" href="classsauce_1_1internal_1_1bindings_1_1_disposal_deleter.html">sauce::internal::bindings::DisposalDeleter&lt; Dependency, Scope &gt;</a></li>
 <li><a class="el" href="structsauce_1_1_exception.html">sauce::Exception</a><ul>
 <li><a class="el" href="structsauce_1_1_already_in_scope_exception.html">sauce::AlreadyInScopeException</a><ul>
 <li><a class="el" href="structsauce_1_1_already_in_scope_exception_for.html">sauce::AlreadyInScopeExceptionFor&lt; Scope &gt;</a></li>
@@ -137,8 +141,8 @@ This inheritance list is sorted roughly, but not completely, alphabetically:</di
 <li><a class="el" href="structsauce_1_1internal_1_1_implicit_bindings.html">sauce::internal::ImplicitBindings</a></li>
 <li><a class="el" href="classsauce_1_1_injector.html">sauce::Injector</a></li>
 <li><a class="el" href="classsauce_1_1internal_1_1_injector_friend.html">sauce::internal::InjectorFriend</a><ul>
-<li><a class="el" href="classsauce_1_1internal_1_1bindings_1_1_transparent_binding.html">sauce::internal::bindings::TransparentBinding&lt; Dependency, Scope, Impl &gt;</a><ul>
-<li><a class="el" href="classsauce_1_1internal_1_1bindings_1_1_naked_binding.html">sauce::internal::bindings::NakedBinding&lt; Dependency, Scope, Impl &gt;</a><ul>
+<li><a class="el" href="classsauce_1_1internal_1_1bindings_1_1_transparent_binding.html">sauce::internal::bindings::TransparentBinding&lt; Dependency, Scope &gt;</a><ul>
+<li><a class="el" href="classsauce_1_1internal_1_1bindings_1_1_naked_binding.html">sauce::internal::bindings::NakedBinding&lt; Dependency, Scope &gt;</a><ul>
 <li><a class="el" href="structsauce_1_1internal_1_1bindings_1_1_new_binding_3_01_dependency_00_01_scope_00_01_impl_07_08_00_01_allocator_01_4.html">sauce::internal::bindings::NewBinding&lt; Dependency, Scope, Impl(), Allocator &gt;</a></li>
 <li><a class="el" href="structsauce_1_1internal_1_1bindings_1_1_new_binding_3_01_dependency_00_01_scope_00_01_impl_07_a1_08_00_01_allocator_01_4.html">sauce::internal::bindings::NewBinding&lt; Dependency, Scope, Impl(A1), Allocator &gt;</a></li>
 <li><a class="el" href="structsauce_1_1internal_1_1bindings_1_1_new_binding_3_01_dependency_00_01_scope_00_01_impl_07_a1736b7171c88a62178d3938c47297d169.html">sauce::internal::bindings::NewBinding&lt; Dependency, Scope, Impl(A1, A2), Allocator &gt;</a></li>
@@ -150,11 +154,12 @@ This inheritance list is sorted roughly, but not completely, alphabetically:</di
 <li><a class="el" href="structsauce_1_1internal_1_1bindings_1_1_new_binding_3_01_dependency_00_01_scope_00_01_impl_07_a171cc616f432ed22181851660c4de27b4.html">sauce::internal::bindings::NewBinding&lt; Dependency, Scope, Impl(A1, A2, A3, A4, A5, A6, A7, A8), Allocator &gt;</a></li>
 <li><a class="el" href="structsauce_1_1internal_1_1bindings_1_1_new_binding_3_01_dependency_00_01_scope_00_01_impl_07_a18f4b24c36d651119dcdde41b0c5e7e22.html">sauce::internal::bindings::NewBinding&lt; Dependency, Scope, Impl(A1, A2, A3, A4, A5, A6, A7, A8, A9), Allocator &gt;</a></li>
 <li><a class="el" href="structsauce_1_1internal_1_1bindings_1_1_new_binding_3_01_dependency_00_01_scope_00_01_impl_07_a140e0e737cf9bf3b95d8c0d5764c3551b.html">sauce::internal::bindings::NewBinding&lt; Dependency, Scope, Impl(A1, A2, A3, A4, A5, A6, A7, A8, A9, A10), Allocator &gt;</a></li>
+<li><a class="el" href="classsauce_1_1internal_1_1bindings_1_1_provider_binding.html">sauce::internal::bindings::ProviderBinding&lt; Dependency, Scope, Provider &gt;</a></li>
 </ul>
 </li>
 </ul>
 </li>
-<li><a class="el" href="classsauce_1_1internal_1_1bindings_1_1_transparent_binding.html">sauce::internal::bindings::TransparentBinding&lt; Key&lt; Injector &gt;::Normalized, NoScope, Injector &gt;</a><ul>
+<li><a class="el" href="classsauce_1_1internal_1_1bindings_1_1_transparent_binding.html">sauce::internal::bindings::TransparentBinding&lt; Key&lt; Injector &gt;::Normalized, NoScope &gt;</a><ul>
 <li><a class="el" href="classsauce_1_1internal_1_1bindings_1_1_injector_binding.html">sauce::internal::bindings::InjectorBinding</a></li>
 </ul>
 </li>
@@ -177,15 +182,16 @@ This inheritance list is sorted roughly, but not completely, alphabetically:</di
 <li><a class="el" href="classsauce_1_1_no_scope.html">sauce::NoScope</a></li>
 <li><a class="el" href="structsauce_1_1internal_1_1_opaque_binding.html">sauce::internal::OpaqueBinding</a><ul>
 <li><a class="el" href="structsauce_1_1internal_1_1_binding.html">sauce::internal::Binding&lt; Key&lt; Injector &gt;::Normalized &gt;</a><ul>
-<li><a class="el" href="classsauce_1_1internal_1_1bindings_1_1_transparent_binding.html">sauce::internal::bindings::TransparentBinding&lt; Key&lt; Injector &gt;::Normalized, NoScope, Injector &gt;</a></li>
+<li><a class="el" href="classsauce_1_1internal_1_1bindings_1_1_transparent_binding.html">sauce::internal::bindings::TransparentBinding&lt; Key&lt; Injector &gt;::Normalized, NoScope &gt;</a></li>
 </ul>
 </li>
 <li><a class="el" href="structsauce_1_1internal_1_1_binding.html">sauce::internal::Binding&lt; Dependency &gt;</a><ul>
-<li><a class="el" href="classsauce_1_1internal_1_1bindings_1_1_transparent_binding.html">sauce::internal::bindings::TransparentBinding&lt; Dependency, Scope, Impl &gt;</a></li>
+<li><a class="el" href="classsauce_1_1internal_1_1bindings_1_1_transparent_binding.html">sauce::internal::bindings::TransparentBinding&lt; Dependency, Scope &gt;</a></li>
 </ul>
 </li>
 </ul>
 </li>
+<li><a class="el" href="structsauce_1_1_provider.html">sauce::Provider&lt; Iface &gt;</a></li>
 <li><a class="el" href="classsauce_1_1_request_scope.html">sauce::RequestScope</a></li>
 <li><a class="el" href="classsauce_1_1internal_1_1_scope_cache.html">sauce::internal::ScopeCache</a></li>
 <li><a class="el" href="structsauce_1_1internal_1_1_scope_cache_line_deleter.html">sauce::internal::ScopeCacheLineDeleter&lt; Dependency &gt;</a></li>
