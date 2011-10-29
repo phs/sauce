@@ -1,0 +1,4 @@
+<map id="G" name="G">
+<area shape="rect" id="node3" href="$classsauce_1_1internal_1_1_locker_lock.html" title="An adapter to hide the type of the given Locker." alt="" coords="5,80,256,107"/>
+<area shape="rect" id="node5" href="$structsauce_1_1internal_1_1_null_lock.html" title="Not a lock at all, but used when no synchronization is configured." alt="" coords="280,80,451,107"/>
+</map>
