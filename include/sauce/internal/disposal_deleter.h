@@ -6,35 +6,25 @@
 namespace sauce {
 namespace internal {
 
-namespace bindings {
-template<typename Dependency, typename Scope>
-class NakedBinding;
-}
-
-namespace b = ::sauce::internal::bindings;
-
 /**
- * A smart pointer deleter that diposes with a given binding.
+ * A smart pointer deleter that diposes with the given disposal.
  */
-template<typename Dependency, typename Scope>
+template<typename Iface, typename Disposal>
 class DisposalDeleter {
-  typedef typename Key<Dependency>::Iface Iface;
-  typedef sauce::shared_ptr<b::NakedBinding<Dependency, Scope> > BindingPtr;
+  typedef sauce::shared_ptr<Disposal> DisposalPtr;
 
-  friend class b::NakedBinding<Dependency, Scope>;
-
-  BindingPtr binding;
-
-  DisposalDeleter(BindingPtr binding):
-    binding(binding) {}
+  DisposalPtr disposal;
 
 public:
+
+  DisposalDeleter(DisposalPtr disposal):
+    disposal(disposal) {}
 
   /**
    * Cast and dispose the given Iface instance.
    */
   void operator()(Iface * iface) const {
-    binding->dispose(iface);
+    disposal->dispose(iface);
   }
 };
 

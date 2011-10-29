@@ -19,6 +19,7 @@ class NakedBinding:
 
   typedef typename Key<Dependency>::Iface Iface;
   typedef typename Binding<Dependency>::BindingPtr BindingPtr;
+  typedef NakedBinding<Dependency, Scope> Naked;
 
   /**
    * Provide a naked Iface pointer.
@@ -37,10 +38,9 @@ class NakedBinding:
   /**
    * Create a shared pointer deleter suitable for this binding.
    */
-  DisposalDeleter<Dependency, Scope> deleter(BindingPtr binding) const {
-    typedef NakedBinding<Dependency, Scope> Naked;
+  DisposalDeleter<Iface, Naked> deleter(BindingPtr binding) const {
     sauce::shared_ptr<Naked> concrete = sauce::static_pointer_cast<Naked>(binding);
-    return DisposalDeleter<Dependency, Scope>(concrete);
+    return DisposalDeleter<Iface, Naked>(concrete);
   }
 
   /**
@@ -55,8 +55,7 @@ class NakedBinding:
     return provided;
   }
 
-  friend class DisposalDeleter<Dependency, Scope>;
-
+  friend class DisposalDeleter<Iface, Naked>;
 };
 
 }
