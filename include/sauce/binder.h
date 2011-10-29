@@ -57,7 +57,9 @@ class ToProviderClause:
   friend class InClause<Dependency, Scope>;
   friend class i::Clause<ToProviderClause<Dependency, Scope, Provider> >;
 
-  static void activate(Clause &) {}
+  static void activate(Clause & clause) {
+    clause.template put<b::ProviderBinding<Dependency, Scope, Provider> >();
+  }
 };
 
 /**

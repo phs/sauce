@@ -32,10 +32,10 @@ void ProviderModule(Binder & binder) {
   binder.bind<CustomBuilt>().toProvider<CustomBuiltProvider>();
 }
 
-// TEST(BindingTest, shouldBindProviders) {
-//   sauce::shared_ptr<Injector> injector(Modules().add(&ProviderModule).createInjector());
-//   sauce::shared_ptr<CustomBuilt> customBuilt = injector->get<CustomBuilt>();
-// }
+TEST(BindingTest, shouldBindProviders) {
+  sauce::shared_ptr<Injector> injector(Modules().add(&ProviderModule).createInjector());
+  sauce::shared_ptr<CustomBuilt> customBuilt = injector->get<CustomBuilt>();
+}
 
 struct Unbound {};
 
