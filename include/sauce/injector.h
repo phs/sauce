@@ -124,6 +124,21 @@ public:
   template<typename Dependency>
   typename i::Key<Dependency>::Ptr get() {
     sauce::auto_ptr<i::Lock> lock = acquireLock();
+    /*
+     * TODO: this approach to circularity detection sucks.
+     *
+     * A user grievance is it doesn't fail-fast: the circularity is detectible at binding time, but
+     * the exception is not raised until injection time.
+     *
+     * My grievance is carrying the bag of mid-injection ids around prevents me from more
+     * gracefully incorporating the provider interface.  I also refuse to pollute it to pass the
+     * state along.
+     *
+     * If this argument wasn't needed, then NewBinding could be a ProviderBinding, with the heap
+     * allocation logic restricted to a Provider (who has the injector itself injected on
+     * construction.)  This would allow inlining NakedBinding into ProviderBinding, which in turn
+     * would allow tracking providers in provision deleters in a natural way.
+     */
     i::TypeIds ids;
     return get<Dependency>(getSelf(), ids);
   }
