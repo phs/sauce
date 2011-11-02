@@ -41,16 +41,19 @@ typedef sauce::shared_ptr<OpaqueBinding> OpaqueBindingPtr;
 struct OpaqueBinding {
 
   /**
-   * The TypeId of the (hidden) provided dependency.
-   *
-   * The dependency id finger prints which provision requests we can satisfy in an Injector.
+   * The TypeId of the (hidden) provided interface.
    */
   virtual TypeId getKey() const = 0;
 
   /**
-   * The TypeId of our (hidden) scope.
+   * The TypeId of the (hidden) scope.
    */
   virtual TypeId getScopeKey() const = 0;
+
+  /**
+   * The TypeIds of the interface's own immediate dependencies.
+   */
+  virtual TypeIds getDependencyKeys() const = 0;
 
   /**
    * Provide, but do not return the hidden interface.

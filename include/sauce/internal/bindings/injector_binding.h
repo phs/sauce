@@ -18,6 +18,10 @@ class InjectorBinding:
 
   typedef Binding<Key<Injector>::Normalized>::BindingPtr BindingPtr;
 
+  TypeIds getDependencyKeys() const {
+    return TypeIds();
+  }
+
   /**
    * Provide the injector.
    *

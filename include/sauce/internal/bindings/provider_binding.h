@@ -8,6 +8,7 @@
 #include <sauce/internal/binding.h>
 #include <sauce/internal/bindings/naked_binding.h>
 #include <sauce/internal/key.h>
+#include <sauce/internal/type_id.h>
 
 namespace sauce {
 namespace internal {
@@ -22,6 +23,12 @@ class ProviderBinding: public NakedBinding<Dependency, Scope> {
   typedef typename Key<Provider>::Ptr ProviderPtr;
 
   mutable ProviderPtr provider;
+
+  TypeIds getDependencyKeys() const {
+    TypeIds ids;
+    ids.insert(typeIdOf<Provider>());
+    return ids;
+  }
 
   Iface * provide(sauce::shared_ptr<Injector> injector, TypeIds & ids) const {
     if (provider.get() == NULL) {
