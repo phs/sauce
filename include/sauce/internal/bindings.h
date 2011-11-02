@@ -53,11 +53,11 @@ void pendingThrowFactory() {
  * returned directly, instead of giving the binding to the injector (the binding details stay
  * hidden.)
  *
- * TODO: lies
  * The template parameter is a strategy type that attempts to located unknown bindings dynamically
- * (implicitly.)  Due to the threat of circular dependencies, Bindings itself can't be aware of
- * concrete Binding implementations.  The only time it needs to know about them is when resolving
- * implicit bindings.  So, this functionality is hidden behind the templated strategy.
+ * (implicitly.)  Due to the threat of circular dependencies (in Sauce's type space), Bindings
+ * itself can't be aware of concrete Binding implementations.  The only time it needs to know
+ * about them is when resolving implicit bindings.  So, this functionality is hidden behind the
+ * templated strategy.
  */
 template<typename ImplicitBindings>
 class Bindings {
