@@ -124,6 +124,7 @@ public:
   template<typename Dependency>
   typename i::Key<Dependency>::Ptr get() {
     sauce::auto_ptr<i::Lock> lock = acquireLock();
+
     /*
      * TODO: this approach to circularity detection sucks.
      *
