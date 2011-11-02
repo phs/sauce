@@ -73,6 +73,13 @@ struct Binding:
   typedef sauce::shared_ptr<Binding<Dependency> > BindingPtr;
 
   /**
+   * The TypeId of the Dependency template parameter.
+   */
+  virtual TypeId getKey() const {
+    return typeIdOf<Dependency>();
+  }
+
+  /**
    * Get an Iface, using the given injector to provide dependencies.
    *
    * The binding pointer must point to this same binding instance.

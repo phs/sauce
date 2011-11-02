@@ -57,13 +57,6 @@ class TransparentBinding:
 public:
 
   /**
-   * The TypeId of the Dependency template parameter.
-   */
-  virtual TypeId getKey() const {
-    return typeIdOf<Dependency>();
-  }
-
-  /**
    * The TypeId of the Scope template parameter.
    */
   virtual TypeId getScopeKey() const {
