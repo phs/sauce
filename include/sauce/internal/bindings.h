@@ -2,7 +2,6 @@
 #define SAUCE_SAUCE_INTERNAL_BINDINGS_H_
 
 #include <map>
-#include <vector>
 #include <utility>
 
 #include <cassert>
@@ -62,8 +61,7 @@ void pendingThrowFactory() {
 template<typename ImplicitBindings>
 class Bindings {
   typedef std::map<TypeId, OpaqueBindingPtr> BindingMap;
-  typedef std::vector<OpaqueBindingPtr> ScopedBindings;
-  typedef std::map<TypeId, ScopedBindings> ScopeMap;
+  typedef std::multimap<TypeId, OpaqueBindingPtr> ScopeMap;
 
   BindingMap bindingMap;
   ScopeMap scopeMap;
@@ -84,15 +82,7 @@ public:
     OpaqueBindingPtr binding(new Binding_());
     bindingMap.insert(std::make_pair(binding->getDependencyKey(), binding));
     TypeId scopeKey = binding->getScopeKey();
-
-    ScopeMap::iterator i = scopeMap.find(scopeKey);
-    if (i == scopeMap.end()) {
-      ScopedBindings bindings;
-      bindings.push_back(binding);
-      scopeMap.insert(i, std::make_pair(scopeKey, bindings));
-    } else {
-      i->second.push_back(binding);
-    }
+    scopeMap.insert(std::make_pair(scopeKey, binding));
   }
 
   /**
@@ -117,14 +107,12 @@ public:
 
   template<typename Scope>
   void eagerlyProvide(sauce::shared_ptr<Injector> injector, TypeIds & ids) const {
-    ScopeMap::const_iterator i = scopeMap.find(typeIdOf<Scope>());
-    if (i == scopeMap.end()) {
-      return;
-    }
+    TypeId scopeKey = typeIdOf<Scope>();
+    ScopeMap::const_iterator i = scopeMap.lower_bound(scopeKey);
+    ScopeMap::const_iterator end = scopeMap.upper_bound(scopeKey);
 
-    ScopedBindings const & bindings = i->second;
-    for (ScopedBindings::const_iterator i = bindings.begin(); i != bindings.end(); ++i) {
-      OpaqueBindingPtr binding = *i;
+    for (; i != end; ++i) {
+      OpaqueBindingPtr const & binding = i->second;
       binding->eagerlyProvide(binding, injector, ids);
     }
   }
