@@ -45,7 +45,7 @@ struct OpaqueBinding {
    *
    * The dependency id finger prints which provision requests we can satisfy in an Injector.
    */
-  virtual TypeId getDependencyKey() const = 0;
+  virtual TypeId getKey() const = 0;
 
   /**
    * The TypeId of our (hidden) scope.

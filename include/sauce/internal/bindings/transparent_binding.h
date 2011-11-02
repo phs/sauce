@@ -59,7 +59,7 @@ public:
   /**
    * The TypeId of the Dependency template parameter.
    */
-  virtual TypeId getDependencyKey() const {
+  virtual TypeId getKey() const {
     return typeIdOf<Dependency>();
   }
 

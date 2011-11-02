@@ -25,7 +25,7 @@ namespace internal {
  */
 template<typename Dependency>
 sauce::shared_ptr<Binding<Dependency> > resolve(OpaqueBindingPtr binding) {
-  assert((typeIdOf<Dependency>()) == binding->getDependencyKey());
+  assert((typeIdOf<Dependency>()) == binding->getKey());
   return sauce::static_pointer_cast<Binding<Dependency> >(binding);
 }
 
@@ -80,7 +80,7 @@ public:
   template<typename Binding_>
   void put() {
     OpaqueBindingPtr binding(new Binding_());
-    bindingMap.insert(std::make_pair(binding->getDependencyKey(), binding));
+    bindingMap.insert(std::make_pair(binding->getKey(), binding));
     TypeId scopeKey = binding->getScopeKey();
     scopeMap.insert(std::make_pair(scopeKey, binding));
   }
