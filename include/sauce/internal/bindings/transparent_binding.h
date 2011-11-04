@@ -23,8 +23,8 @@ protected:
   }
 
   template<typename Dependency>
-  typename i::Key<Dependency>::Ptr getDependency(InjectorPtr injector, TypeIds & ids) const {
-    return injector->get<Dependency>(injector, ids);
+  typename i::Key<Dependency>::Ptr getDependency(InjectorPtr injector) const {
+    return injector->get<Dependency>(injector);
   }
 
   template<typename Dependency, typename Scope>
@@ -57,7 +57,7 @@ class TransparentBinding:
    *
    * The strategy used is left to derived types.
    */
-  virtual sauce::shared_ptr<Iface> provide(BindingPtr, InjectorPtr, TypeIds &) const = 0;
+  virtual sauce::shared_ptr<Iface> provide(BindingPtr, InjectorPtr) const = 0;
 
 public:
 
@@ -78,12 +78,12 @@ public:
    *
    * Derived classes should not override get(), but rather provide().
    */
-  sauce::shared_ptr<Iface> get(BindingPtr binding, InjectorPtr injector, TypeIds & ids) const {
+  sauce::shared_ptr<Iface> get(BindingPtr binding, InjectorPtr injector) const {
     sauce::shared_ptr<Iface> smartPointer;
 
     bool unscoped = typeIdOf<Scope>() == typeIdOf<NoScope>();
     if (unscoped || !probe<Dependency, Scope>(injector, smartPointer)) {
-      smartPointer = provide(binding, injector, ids);
+      smartPointer = provide(binding, injector);
       if (!unscoped) {
         cache<Dependency, Scope>(injector, smartPointer);
       }
@@ -98,10 +98,10 @@ public:
    * Instead, cache the instance in its appropriate scope, if any.  If the binding is not scoped,
    * do nothing.
    */
-  void eagerlyProvide(OpaqueBindingPtr opaque, InjectorPtr injector, TypeIds & ids) const {
+  void eagerlyProvide(OpaqueBindingPtr opaque, InjectorPtr injector) const {
     if (typeIdOf<Scope>() != typeIdOf<NoScope>()) {
       BindingPtr binding = resolve<Dependency>(opaque);
-      get(binding, injector, ids);
+      get(binding, injector);
     }
   }
 

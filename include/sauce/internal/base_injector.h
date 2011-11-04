@@ -68,15 +68,14 @@ public:
   }
 
   template<typename Dependency>
-  typename Key<Dependency>::Ptr get(sauce::shared_ptr<Injector> injector, TypeIds & ids) const {
+  typename Key<Dependency>::Ptr get(sauce::shared_ptr<Injector> injector) const {
     typedef typename Key<Dependency>::Normalized Normalized;
-    return bindings.get<Normalized>(injector, ids);
+    return bindings.get<Normalized>(injector);
   }
 
   template<typename Scope>
   void eagerlyProvide(sauce::shared_ptr<Injector> injector) const {
-    TypeIds ids;
-    bindings.eagerlyProvide<Scope>(injector, ids);
+    bindings.eagerlyProvide<Scope>(injector);
   }
 
   /**

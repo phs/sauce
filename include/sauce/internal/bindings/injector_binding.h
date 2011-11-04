@@ -25,7 +25,7 @@ class InjectorBinding:
    *
    * Just return the passed injector.
    */
-  InjectorPtr provide(BindingPtr, InjectorPtr injector, TypeIds &) const {
+  InjectorPtr provide(BindingPtr, InjectorPtr injector) const {
     return injector;
   }
 

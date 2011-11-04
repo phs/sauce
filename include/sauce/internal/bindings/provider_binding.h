@@ -28,10 +28,10 @@ class ProviderBinding: public NakedBinding<Dependency, Scope> {
     this->template validateAcyclicos<Provider>(injector, ids);
   }
 
-  Iface * provide(sauce::shared_ptr<Injector> injector, TypeIds & ids) const {
+  Iface * provide(sauce::shared_ptr<Injector> injector) const {
     if (provider.get() == NULL) {
       // TODO: cache on iface somehow instead of on binding?
-      provider = this->template getDependency<Provider>(injector, ids);
+      provider = this->template getDependency<Provider>(injector);
     }
     return provider->provide();
   }

@@ -54,10 +54,9 @@ struct OpaqueBinding {
    * Provide, but do not return the hidden interface.
    *
    * Instead, cache the instance in its appropriate scope, if any.  If the binding is not scoped,
-   * do nothing.  The typeIds indicate which keys are already currently being provided to detect
-   * circular dependencies.
+   * do nothing.
    */
-  virtual void eagerlyProvide(OpaqueBindingPtr, sauce::shared_ptr<Injector>, TypeIds &) const {}
+  virtual void eagerlyProvide(OpaqueBindingPtr, sauce::shared_ptr<Injector>) const {}
 
 };
 
@@ -83,12 +82,8 @@ struct Binding:
    * Get an Iface, using the given injector to provide dependencies.
    *
    * The binding pointer must point to this same binding instance.
-   *
-   * The typeIds indicate which keys are already currently being provided to detect circular
-   * dependencies.
    */
-  virtual typename Key<Dependency>::Ptr get(
-    BindingPtr, sauce::shared_ptr<Injector>, TypeIds &) const = 0;
+  virtual typename Key<Dependency>::Ptr get(BindingPtr, sauce::shared_ptr<Injector>) const = 0;
 
 };
 

@@ -28,7 +28,7 @@ class NakedBinding:
    *
    * The strategy used is left to derived types.
    */
-  virtual Iface * provide(InjectorPtr, TypeIds &) const = 0;
+  virtual Iface * provide(InjectorPtr) const = 0;
 
   /**
    * Dispose of an Iface provided by this binding.
@@ -50,12 +50,12 @@ class NakedBinding:
   /**
    * Provide an Iface.
    *
-   * A naked instance pointer is obtained with provide(InjectorPtr, TypeIds &), and wrapped in a
+   * A naked instance pointer is obtained with provide(InjectorPtr), and wrapped in a
    * shared_ptr.  It is also given a custom deleter, to dispose of the naked pointer with
    * dispose(Iface *).
    */
-  sauce::shared_ptr<Iface> provide(BindingPtr binding, InjectorPtr injector, TypeIds & ids) const {
-    sauce::shared_ptr<Iface> provided(provide(injector, ids), deleter(binding));
+  sauce::shared_ptr<Iface> provide(BindingPtr binding, InjectorPtr injector) const {
+    sauce::shared_ptr<Iface> provided(provide(injector), deleter(binding));
     return provided;
   }
 };

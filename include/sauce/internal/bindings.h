@@ -106,7 +106,7 @@ public:
    * If no binding is found, the implicit bindings are checked.
    */
   template<typename Dependency>
-  typename Key<Dependency>::Ptr get(sauce::shared_ptr<Injector> injector, TypeIds & ids) const {
+  typename Key<Dependency>::Ptr get(sauce::shared_ptr<Injector> injector) const {
     sauce::shared_ptr<Binding<Dependency> > binding;
 
     BindingMap::const_iterator i = bindingMap.find(typeIdOf<Dependency>());
@@ -117,18 +117,18 @@ public:
       binding = resolve<Dependency>(i->second);
     }
 
-    return binding->get(binding, injector, ids);
+    return binding->get(binding, injector);
   }
 
   template<typename Scope>
-  void eagerlyProvide(sauce::shared_ptr<Injector> injector, TypeIds & ids) const {
+  void eagerlyProvide(sauce::shared_ptr<Injector> injector) const {
     TypeId scopeKey = typeIdOf<Scope>();
     ScopeMap::const_iterator i = scopeMap.lower_bound(scopeKey);
     ScopeMap::const_iterator end = scopeMap.upper_bound(scopeKey);
 
     for (; i != end; ++i) {
       OpaqueBindingPtr const & binding = i->second;
-      binding->eagerlyProvide(binding, injector, ids);
+      binding->eagerlyProvide(binding, injector);
     }
   }
 

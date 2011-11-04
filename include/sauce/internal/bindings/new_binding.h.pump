@@ -44,13 +44,13 @@ struct NewBinding<Dependency, Scope, Impl($As), Allocator>: public NakedBinding<
 
 
 [[$if i==0 [[
-  Iface * provide(sauce::shared_ptr<Injector>, TypeIds &) const
+  Iface * provide(sauce::shared_ptr<Injector>) const
 ]] $else [[
-  Iface * provide(sauce::shared_ptr<Injector> injector, TypeIds & ids) const
+  Iface * provide(sauce::shared_ptr<Injector> injector) const
 ]]]]
  {
 [[$for j [[
-    typename i::Key<A$j>::Ptr a$j(this->template getDependency<A$j>(injector, ids));
+    typename i::Key<A$j>::Ptr a$j(this->template getDependency<A$j>(injector));
 
 ]]]]
     ImplAllocator allocator;

@@ -67,11 +67,11 @@ class Injector {
   }
 
   template<typename Dependency>
-  typename i::Key<Dependency>::Ptr get(sauce::shared_ptr<Injector> injector, i::TypeIds & ids) {
+  typename i::Key<Dependency>::Ptr get(sauce::shared_ptr<Injector> injector) {
     if (base.get() == NULL) {
-      return next->get<Dependency>(injector, ids);
+      return next->get<Dependency>(injector);
     } else {
-      return base->get<Dependency>(injector, ids);
+      return base->get<Dependency>(injector);
     }
   }
 
@@ -133,30 +133,9 @@ public:
   template<typename Dependency>
   typename i::Key<Dependency>::Ptr get() {
     sauce::auto_ptr<i::Lock> lock = acquireLock();
-
-    /*
-     * TODO: this approach to circularity detection sucks.
-     *
-     * A user grievance is it doesn't fail-fast: the circularity is detectible at binding time, but
-     * the exception is not raised until injection time.  Note, not actually true: only some cycles
-     * may be detected at binding time.  Particularly, implicit bindings open the possibility of
-     * dependency cycles for types never explicitly configured.  While it's true that the current
-     * set of implicit bindings can't succumb to this, I do not want to commit to it.  Eventually I
-     * may figure out annotation-like in-class implicit binding declarations, and they *will* be
-     * powerful enough to introduce this risk.
-     *
-     * My grievance is carrying the bag of mid-injection ids around prevents me from more
-     * gracefully incorporating the provider interface.  I also refuse to pollute it to pass the
-     * state along.
-     *
-     * If this argument wasn't needed, then NewBinding could be a ProviderBinding, with the heap
-     * allocation logic restricted to a Provider (who has the injector itself injected on
-     * construction.)  This would allow inlining NakedBinding into ProviderBinding, which in turn
-     * would allow tracking providers in provision deleters in a natural way.
-     */
     i::TypeIds ids;
     validateAcyclic<Dependency>(getSelf(), ids);
-    return get<Dependency>(getSelf(), ids);
+    return get<Dependency>(getSelf());
   }
 
   template<typename Iface, typename Name>
