@@ -101,6 +101,8 @@ public:
   void eagerlyProvide(OpaqueBindingPtr opaque, InjectorPtr injector) const {
     if (typeIdOf<Scope>() != typeIdOf<NoScope>()) {
       BindingPtr binding = resolve<Dependency>(opaque);
+      i::TypeIds ids;
+      validateAcyclic(injector, ids);
       get(binding, injector);
     }
   }
