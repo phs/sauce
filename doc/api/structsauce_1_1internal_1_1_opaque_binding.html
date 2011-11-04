@@ -106,13 +106,14 @@ Inheritance diagram for sauce::internal::OpaqueBinding:</div>
 <table class="memberdecls">
 <tr><td colspan="2"><h2><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">virtual TypeId&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structsauce_1_1internal_1_1_opaque_binding.html#a2dae9c248508a39ff5436fe96a77fd11">getDependencyKey</a> () const =0</td></tr>
-<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">The TypeId of the (hidden) provided dependency.  <a href="#a2dae9c248508a39ff5436fe96a77fd11"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a80f94571c2956b36656c33605267e3e1"></a><!-- doxytag: member="sauce::internal::OpaqueBinding::getKey" ref="a80f94571c2956b36656c33605267e3e1" args="() const =0" -->
+virtual TypeId&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structsauce_1_1internal_1_1_opaque_binding.html#a80f94571c2956b36656c33605267e3e1">getKey</a> () const =0</td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">The TypeId of the (hidden) provided interface. <br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="afcab860863e3fdec961ff24704c45217"></a><!-- doxytag: member="sauce::internal::OpaqueBinding::getScopeKey" ref="afcab860863e3fdec961ff24704c45217" args="() const =0" -->
 virtual TypeId&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structsauce_1_1internal_1_1_opaque_binding.html#afcab860863e3fdec961ff24704c45217">getScopeKey</a> () const =0</td></tr>
-<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">The TypeId of our (hidden) scope. <br/></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structsauce_1_1internal_1_1_opaque_binding.html#a021b2b5a96a1970afe59c807f3fb2cbb">eagerlyProvide</a> (OpaqueBindingPtr, sauce::shared_ptr&lt; <a class="el" href="classsauce_1_1_injector.html">Injector</a> &gt;, TypeIds &amp;) const </td></tr>
-<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Provide, but do not return the hidden interface.  <a href="#a021b2b5a96a1970afe59c807f3fb2cbb"></a><br/></td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">The TypeId of the (hidden) scope. <br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structsauce_1_1internal_1_1_opaque_binding.html#a3081d7a8b766e3e6282cb78ea3170e27">eagerlyProvide</a> (OpaqueBindingPtr, sauce::shared_ptr&lt; <a class="el" href="classsauce_1_1_injector.html">Injector</a> &gt;) const </td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Provide, but do not return the hidden interface.  <a href="#a3081d7a8b766e3e6282cb78ea3170e27"></a><br/></td></tr>
 </table>
 <hr/><a name="details" id="details"></a><h2>Detailed Description</h2>
 <div class="textblock"><p>An opaque binding. </p>
@@ -121,7 +122,7 @@ virtual TypeId&#160;</td><td class="memItemRight" valign="bottom"><a class="el" 
 <p>The interface is raised to the type system in <a class="el" href="structsauce_1_1internal_1_1_binding.html" title="A binding for a specific interface.">Binding</a>, a templated class deriving from <a class="el" href="structsauce_1_1internal_1_1_opaque_binding.html" title="An opaque binding.">OpaqueBinding</a>. The implementation is in turn raised in TransparentBinding, which derives from <a class="el" href="structsauce_1_1internal_1_1_binding.html" title="A binding for a specific interface.">Binding</a>.</p>
 <p>Other binding implementations (those that implement provision strategies) extend TransparentBinding. Their behavior is exposed to a <a class="el" href="structsauce_1_1internal_1_1_binding.html" title="A binding for a specific interface.">Binding</a> client by (runtime) polymorphism. </p>
 </div><hr/><h2>Member Function Documentation</h2>
-<a class="anchor" id="a021b2b5a96a1970afe59c807f3fb2cbb"></a><!-- doxytag: member="sauce::internal::OpaqueBinding::eagerlyProvide" ref="a021b2b5a96a1970afe59c807f3fb2cbb" args="(OpaqueBindingPtr, sauce::shared_ptr&lt; Injector &gt;, TypeIds &amp;) const " -->
+<a class="anchor" id="a3081d7a8b766e3e6282cb78ea3170e27"></a><!-- doxytag: member="sauce::internal::OpaqueBinding::eagerlyProvide" ref="a3081d7a8b766e3e6282cb78ea3170e27" args="(OpaqueBindingPtr, sauce::shared_ptr&lt; Injector &gt;) const " -->
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
@@ -135,12 +136,6 @@ virtual TypeId&#160;</td><td class="memItemRight" valign="bottom"><a class="el" 
           <td class="paramkey"></td>
           <td></td>
           <td class="paramtype">sauce::shared_ptr&lt; <a class="el" href="classsauce_1_1_injector.html">Injector</a> &gt;&#160;</td>
-          <td class="paramname">, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">TypeIds &amp;&#160;</td>
           <td class="paramname">&#160;</td>
         </tr>
         <tr>
@@ -153,30 +148,9 @@ virtual TypeId&#160;</td><td class="memItemRight" valign="bottom"><a class="el" 
 <div class="memdoc">
 
 <p>Provide, but do not return the hidden interface. </p>
-<p>Instead, cache the instance in its appropriate scope, if any. If the binding is not scoped, do nothing. The typeIds indicate which keys are already currently being provided to detect circular dependencies. </p>
+<p>Instead, cache the instance in its appropriate scope, if any. If the binding is not scoped, do nothing. </p>
 <div class="fragment"><pre class="fragment">{}
 </pre></div>
-</div>
-</div>
-<a class="anchor" id="a2dae9c248508a39ff5436fe96a77fd11"></a><!-- doxytag: member="sauce::internal::OpaqueBinding::getDependencyKey" ref="a2dae9c248508a39ff5436fe96a77fd11" args="() const =0" -->
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">virtual TypeId sauce::internal::OpaqueBinding::getDependencyKey </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td> const<code> [pure virtual]</code></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-<p>The TypeId of the (hidden) provided dependency. </p>
-<p>The dependency id finger prints which provision requests we can satisfy in an <a class="el" href="classsauce_1_1_injector.html">Injector</a>. </p>
-
-<p>Implemented in <a class="el" href="classsauce_1_1internal_1_1bindings_1_1_transparent_binding.html#a53033faddbf7070b67e4cfb33686be26">sauce::internal::bindings::TransparentBinding&lt; Dependency, Scope &gt;</a>, and <a class="el" href="classsauce_1_1internal_1_1bindings_1_1_transparent_binding.html#a53033faddbf7070b67e4cfb33686be26">sauce::internal::bindings::TransparentBinding&lt; Key&lt; Injector &gt;::Normalized, NoScope &gt;</a>.</p>
-
 </div>
 </div>
 <hr/>The documentation for this struct was generated from the following file:<ul>

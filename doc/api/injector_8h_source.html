@@ -136,108 +136,118 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <a name="l00058"></a>00058   }
 <a name="l00059"></a>00059 
 <a name="l00060"></a>00060   <span class="keyword">template</span>&lt;<span class="keyword">typename</span> Dependency&gt;
-<a name="l00061"></a>00061   <span class="keyword">typename</span> <a class="code" href="structsauce_1_1internal_1_1_key.html" title="A complete specification of a dependency request.">i::Key&lt;Dependency&gt;::Ptr</a> <span class="keyword">get</span>(sauce::shared_ptr&lt;Injector&gt; injector, i::TypeIds &amp; ids) {
+<a name="l00061"></a>00061   <span class="keywordtype">void</span> validateAcyclic(sauce::shared_ptr&lt;Injector&gt; injector, i::TypeIds &amp; ids) {
 <a name="l00062"></a>00062     <span class="keywordflow">if</span> (base.get() == NULL) {
-<a name="l00063"></a>00063       <span class="keywordflow">return</span> next-&gt;get&lt;Dependency&gt;(injector, ids);
+<a name="l00063"></a>00063       next-&gt;validateAcyclic&lt;Dependency&gt;(injector, ids);
 <a name="l00064"></a>00064     } <span class="keywordflow">else</span> {
-<a name="l00065"></a>00065       <span class="keywordflow">return</span> base-&gt;get&lt;Dependency&gt;(injector, ids);
+<a name="l00065"></a>00065       base-&gt;validateAcyclic&lt;Dependency&gt;(injector, ids);
 <a name="l00066"></a>00066     }
 <a name="l00067"></a>00067   }
 <a name="l00068"></a>00068 
-<a name="l00072"></a>00072   sauce::auto_ptr&lt;i::Lock&gt; acquireLock() {
-<a name="l00073"></a>00073     <span class="keywordflow">if</span> (base.get() == NULL) {
-<a name="l00074"></a>00074       <span class="keywordflow">return</span> next-&gt;acquireLock();
-<a name="l00075"></a>00075     } <span class="keywordflow">else</span> {
-<a name="l00076"></a>00076       <span class="keywordflow">return</span> base-&gt;acquireLock();
-<a name="l00077"></a>00077     }
-<a name="l00078"></a>00078   }
-<a name="l00079"></a>00079 
-<a name="l00080"></a>00080   <span class="keyword">template</span>&lt;<span class="keyword">typename</span> Scope&gt;
-<a name="l00081"></a>00081   <span class="keywordtype">void</span> eagerlyProvide(sauce::shared_ptr&lt;Injector&gt; injector) {
+<a name="l00069"></a>00069   <span class="keyword">template</span>&lt;<span class="keyword">typename</span> Dependency&gt;
+<a name="l00070"></a>00070   <span class="keyword">typename</span> <a class="code" href="structsauce_1_1internal_1_1_key.html" title="A complete specification of a dependency request.">i::Key&lt;Dependency&gt;::Ptr</a> <span class="keyword">get</span>(sauce::shared_ptr&lt;Injector&gt; injector) {
+<a name="l00071"></a>00071     <span class="keywordflow">if</span> (base.get() == NULL) {
+<a name="l00072"></a>00072       <span class="keywordflow">return</span> next-&gt;get&lt;Dependency&gt;(injector);
+<a name="l00073"></a>00073     } <span class="keywordflow">else</span> {
+<a name="l00074"></a>00074       <span class="keywordflow">return</span> base-&gt;get&lt;Dependency&gt;(injector);
+<a name="l00075"></a>00075     }
+<a name="l00076"></a>00076   }
+<a name="l00077"></a>00077 
+<a name="l00081"></a>00081   sauce::auto_ptr&lt;i::Lock&gt; acquireLock() {
 <a name="l00082"></a>00082     <span class="keywordflow">if</span> (base.get() == NULL) {
-<a name="l00083"></a>00083       next-&gt;eagerlyProvide&lt;Scope&gt;(injector);
+<a name="l00083"></a>00083       <span class="keywordflow">return</span> next-&gt;acquireLock();
 <a name="l00084"></a>00084     } <span class="keywordflow">else</span> {
-<a name="l00085"></a>00085       base-&gt;eagerlyProvide&lt;Scope&gt;(injector);
+<a name="l00085"></a>00085       <span class="keywordflow">return</span> base-&gt;acquireLock();
 <a name="l00086"></a>00086     }
 <a name="l00087"></a>00087   }
 <a name="l00088"></a>00088 
-<a name="l00089"></a>00089   <span class="keyword">template</span>&lt;<span class="keyword">typename</span> Dependency, <span class="keyword">typename</span> Scope&gt;
-<a name="l00090"></a>00090   <span class="keywordtype">void</span> cache(<span class="keyword">typename</span> <a class="code" href="structsauce_1_1internal_1_1_key.html" title="A complete specification of a dependency request.">i::Key&lt;Dependency&gt;::Ptr</a> pointer) {
-<a name="l00091"></a>00091     <span class="keywordflow">if</span> (scopeKey == i::typeIdOf&lt;Scope&gt;()) {
-<a name="l00092"></a>00092       scopeCache.template put&lt;Dependency&gt;(pointer);
-<a name="l00093"></a>00093     } <span class="keywordflow">else</span> <span class="keywordflow">if</span> (next.get() == NULL) {
-<a name="l00094"></a>00094       <span class="keywordflow">throw</span> <a class="code" href="structsauce_1_1_out_of_scope_exception_for.html" title="Raised when a provision is requested outside of its given, bound scope.">OutOfScopeExceptionFor&lt;Scope&gt;</a>();
-<a name="l00095"></a>00095     } <span class="keywordflow">else</span> {
-<a name="l00096"></a>00096       next-&gt;cache&lt;Dependency, Scope&gt;(pointer);
-<a name="l00097"></a>00097     }
-<a name="l00098"></a>00098   }
-<a name="l00099"></a>00099 
-<a name="l00100"></a>00100   <span class="keyword">template</span>&lt;<span class="keyword">typename</span> Dependency, <span class="keyword">typename</span> Scope&gt;
-<a name="l00101"></a>00101   <span class="keywordtype">bool</span> probe(<span class="keyword">typename</span> <a class="code" href="structsauce_1_1internal_1_1_key.html" title="A complete specification of a dependency request.">i::Key&lt;Dependency&gt;::Ptr</a> &amp; out)<span class="keyword"> const </span>{
-<a name="l00102"></a>00102     <span class="keywordflow">if</span> (scopeKey == i::typeIdOf&lt;Scope&gt;()) {
-<a name="l00103"></a>00103       <span class="keywordflow">return</span> scopeCache.template get&lt;Dependency&gt;(out);
-<a name="l00104"></a>00104     } <span class="keywordflow">else</span> <span class="keywordflow">if</span> (next.get() == NULL) {
-<a name="l00105"></a>00105       <span class="keywordflow">throw</span> <a class="code" href="structsauce_1_1_out_of_scope_exception_for.html" title="Raised when a provision is requested outside of its given, bound scope.">OutOfScopeExceptionFor&lt;Scope&gt;</a>();
-<a name="l00106"></a>00106     } <span class="keywordflow">else</span> {
-<a name="l00107"></a>00107       <span class="keywordflow">return</span> next-&gt;probe&lt;Dependency, Scope&gt;(out);
-<a name="l00108"></a>00108     }
-<a name="l00109"></a>00109   }
-<a name="l00110"></a>00110 
-<a name="l00111"></a>00111   <span class="keyword">template</span>&lt;<span class="keyword">typename</span> Scope&gt;
-<a name="l00112"></a>00112   <span class="keywordtype">bool</span> alreadyInScope()<span class="keyword"> const </span>{
-<a name="l00113"></a>00113     <span class="keywordflow">if</span> (scopeKey == i::typeIdOf&lt;Scope&gt;()) {
-<a name="l00114"></a>00114       <span class="keywordflow">return</span> <span class="keyword">true</span>;
-<a name="l00115"></a>00115     } <span class="keywordflow">else</span> <span class="keywordflow">if</span> (next.get() == NULL) {
-<a name="l00116"></a>00116       <span class="keywordflow">return</span> <span class="keyword">false</span>;
-<a name="l00117"></a>00117     } <span class="keywordflow">else</span> {
-<a name="l00118"></a>00118       <span class="keywordflow">return</span> next-&gt;alreadyInScope&lt;Scope&gt;();
-<a name="l00119"></a>00119     }
-<a name="l00120"></a>00120   }
-<a name="l00121"></a>00121 
-<a name="l00122"></a>00122 <span class="keyword">public</span>:
-<a name="l00123"></a>00123 
-<a name="l00124"></a>00124   <span class="keyword">template</span>&lt;<span class="keyword">typename</span> Dependency&gt;
-<a name="l00125"></a>00125   <span class="keyword">typename</span> <a class="code" href="structsauce_1_1internal_1_1_key.html" title="A complete specification of a dependency request.">i::Key&lt;Dependency&gt;::Ptr</a> <span class="keyword">get</span>() {
-<a name="l00126"></a>00126     sauce::auto_ptr&lt;i::Lock&gt; lock = acquireLock();
-<a name="l00127"></a>00127     i::TypeIds ids;
-<a name="l00128"></a>00128     <span class="keywordflow">return</span> get&lt;Dependency&gt;(getSelf(), ids);
+<a name="l00089"></a>00089   <span class="keyword">template</span>&lt;<span class="keyword">typename</span> Scope&gt;
+<a name="l00090"></a>00090   <span class="keywordtype">void</span> eagerlyProvide(sauce::shared_ptr&lt;Injector&gt; injector) {
+<a name="l00091"></a>00091     <span class="keywordflow">if</span> (base.get() == NULL) {
+<a name="l00092"></a>00092       next-&gt;eagerlyProvide&lt;Scope&gt;(injector);
+<a name="l00093"></a>00093     } <span class="keywordflow">else</span> {
+<a name="l00094"></a>00094       base-&gt;eagerlyProvide&lt;Scope&gt;(injector);
+<a name="l00095"></a>00095     }
+<a name="l00096"></a>00096   }
+<a name="l00097"></a>00097 
+<a name="l00098"></a>00098   <span class="keyword">template</span>&lt;<span class="keyword">typename</span> Dependency, <span class="keyword">typename</span> Scope&gt;
+<a name="l00099"></a>00099   <span class="keywordtype">void</span> cache(<span class="keyword">typename</span> <a class="code" href="structsauce_1_1internal_1_1_key.html" title="A complete specification of a dependency request.">i::Key&lt;Dependency&gt;::Ptr</a> pointer) {
+<a name="l00100"></a>00100     <span class="keywordflow">if</span> (scopeKey == i::typeIdOf&lt;Scope&gt;()) {
+<a name="l00101"></a>00101       scopeCache.template put&lt;Dependency&gt;(pointer);
+<a name="l00102"></a>00102     } <span class="keywordflow">else</span> <span class="keywordflow">if</span> (next.get() == NULL) {
+<a name="l00103"></a>00103       <span class="keywordflow">throw</span> <a class="code" href="structsauce_1_1_out_of_scope_exception_for.html" title="Raised when a provision is requested outside of its given, bound scope.">OutOfScopeExceptionFor&lt;Scope&gt;</a>();
+<a name="l00104"></a>00104     } <span class="keywordflow">else</span> {
+<a name="l00105"></a>00105       next-&gt;cache&lt;Dependency, Scope&gt;(pointer);
+<a name="l00106"></a>00106     }
+<a name="l00107"></a>00107   }
+<a name="l00108"></a>00108 
+<a name="l00109"></a>00109   <span class="keyword">template</span>&lt;<span class="keyword">typename</span> Dependency, <span class="keyword">typename</span> Scope&gt;
+<a name="l00110"></a>00110   <span class="keywordtype">bool</span> probe(<span class="keyword">typename</span> <a class="code" href="structsauce_1_1internal_1_1_key.html" title="A complete specification of a dependency request.">i::Key&lt;Dependency&gt;::Ptr</a> &amp; out)<span class="keyword"> const </span>{
+<a name="l00111"></a>00111     <span class="keywordflow">if</span> (scopeKey == i::typeIdOf&lt;Scope&gt;()) {
+<a name="l00112"></a>00112       <span class="keywordflow">return</span> scopeCache.template get&lt;Dependency&gt;(out);
+<a name="l00113"></a>00113     } <span class="keywordflow">else</span> <span class="keywordflow">if</span> (next.get() == NULL) {
+<a name="l00114"></a>00114       <span class="keywordflow">throw</span> <a class="code" href="structsauce_1_1_out_of_scope_exception_for.html" title="Raised when a provision is requested outside of its given, bound scope.">OutOfScopeExceptionFor&lt;Scope&gt;</a>();
+<a name="l00115"></a>00115     } <span class="keywordflow">else</span> {
+<a name="l00116"></a>00116       <span class="keywordflow">return</span> next-&gt;probe&lt;Dependency, Scope&gt;(out);
+<a name="l00117"></a>00117     }
+<a name="l00118"></a>00118   }
+<a name="l00119"></a>00119 
+<a name="l00120"></a>00120   <span class="keyword">template</span>&lt;<span class="keyword">typename</span> Scope&gt;
+<a name="l00121"></a>00121   <span class="keywordtype">bool</span> alreadyInScope()<span class="keyword"> const </span>{
+<a name="l00122"></a>00122     <span class="keywordflow">if</span> (scopeKey == i::typeIdOf&lt;Scope&gt;()) {
+<a name="l00123"></a>00123       <span class="keywordflow">return</span> <span class="keyword">true</span>;
+<a name="l00124"></a>00124     } <span class="keywordflow">else</span> <span class="keywordflow">if</span> (next.get() == NULL) {
+<a name="l00125"></a>00125       <span class="keywordflow">return</span> <span class="keyword">false</span>;
+<a name="l00126"></a>00126     } <span class="keywordflow">else</span> {
+<a name="l00127"></a>00127       <span class="keywordflow">return</span> next-&gt;alreadyInScope&lt;Scope&gt;();
+<a name="l00128"></a>00128     }
 <a name="l00129"></a>00129   }
 <a name="l00130"></a>00130 
-<a name="l00131"></a>00131   <span class="keyword">template</span>&lt;<span class="keyword">typename</span> Iface, <span class="keyword">typename</span> Name&gt;
-<a name="l00132"></a>00132   <span class="keyword">typename</span> <a class="code" href="structsauce_1_1internal_1_1_key.html" title="A complete specification of a dependency request.">i::Key&lt;Named&lt;Iface, Name&gt;</a> &gt;::Ptr <span class="keyword">get</span>() {
-<a name="l00133"></a>00133     <span class="keywordflow">return</span> get&lt;Named&lt;Iface, Name&gt; &gt;();
-<a name="l00134"></a>00134   }
-<a name="l00135"></a>00135 
-<a name="l00136"></a>00136   <span class="keyword">template</span>&lt;<span class="keyword">typename</span> Scope&gt;
-<a name="l00137"></a>00137   sauce::shared_ptr&lt;Injector&gt; enter()<span class="keyword"> const </span>{
-<a name="l00138"></a>00138     <span class="keywordflow">if</span> (alreadyInScope&lt;Scope&gt;()) {
-<a name="l00139"></a>00139       <span class="keywordflow">throw</span> <a class="code" href="structsauce_1_1_already_in_scope_exception_for.html" title="Raised when re-entering the given scope, which is already open.">AlreadyInScopeExceptionFor&lt;Scope&gt;</a>();
-<a name="l00140"></a>00140     }
-<a name="l00141"></a>00141 
-<a name="l00142"></a>00142     sauce::shared_ptr&lt;Injector&gt; scoped(<span class="keyword">new</span> <a class="code" href="classsauce_1_1_injector.html">Injector</a>(i::typeIdOf&lt;Scope&gt;(), getSelf()));
-<a name="l00143"></a>00143     scoped-&gt;setSelf(scoped);
-<a name="l00144"></a>00144     <span class="keywordflow">return</span> scoped;
-<a name="l00145"></a>00145   }
-<a name="l00146"></a>00146 
-<a name="l00147"></a>00147   sauce::shared_ptr&lt;Injector&gt; exit()<span class="keyword"> const </span>{
-<a name="l00148"></a>00148     <span class="keywordflow">if</span> (next.get() == NULL) {
-<a name="l00149"></a>00149       <span class="keywordflow">throw</span> <a class="code" href="structsauce_1_1_exiting_singleton_scope_exception.html" title="Raised when exiting the singleton scope.">ExitingSingletonScopeException</a>();
-<a name="l00150"></a>00150     } <span class="keywordflow">else</span> {
-<a name="l00151"></a>00151       <span class="keywordflow">return</span> next;
-<a name="l00152"></a>00152     }
-<a name="l00153"></a>00153   }
-<a name="l00154"></a>00154 
-<a name="l00155"></a>00155   <span class="keyword">template</span>&lt;<span class="keyword">typename</span> Scope&gt;
-<a name="l00156"></a>00156   <span class="keywordtype">void</span> eagerlyProvide() {
-<a name="l00157"></a>00157     sauce::auto_ptr&lt;i::Lock&gt; lock = acquireLock();
-<a name="l00158"></a>00158     eagerlyProvide&lt;Scope&gt;(getSelf());
-<a name="l00159"></a>00159   }
-<a name="l00160"></a>00160 
-<a name="l00161"></a>00161 };
-<a name="l00162"></a>00162 
-<a name="l00163"></a>00163 }
+<a name="l00131"></a>00131 <span class="keyword">public</span>:
+<a name="l00132"></a>00132 
+<a name="l00133"></a>00133   <span class="keyword">template</span>&lt;<span class="keyword">typename</span> Dependency&gt;
+<a name="l00134"></a>00134   <span class="keyword">typename</span> <a class="code" href="structsauce_1_1internal_1_1_key.html" title="A complete specification of a dependency request.">i::Key&lt;Dependency&gt;::Ptr</a> <span class="keyword">get</span>() {
+<a name="l00135"></a>00135     sauce::auto_ptr&lt;i::Lock&gt; lock = acquireLock();
+<a name="l00136"></a>00136     i::TypeIds ids;
+<a name="l00137"></a>00137     validateAcyclic&lt;Dependency&gt;(getSelf(), ids);
+<a name="l00138"></a>00138     <span class="keywordflow">return</span> get&lt;Dependency&gt;(getSelf());
+<a name="l00139"></a>00139   }
+<a name="l00140"></a>00140 
+<a name="l00141"></a>00141   <span class="keyword">template</span>&lt;<span class="keyword">typename</span> Iface, <span class="keyword">typename</span> Name&gt;
+<a name="l00142"></a>00142   <span class="keyword">typename</span> <a class="code" href="structsauce_1_1internal_1_1_key.html" title="A complete specification of a dependency request.">i::Key&lt;Named&lt;Iface, Name&gt;</a> &gt;::Ptr <span class="keyword">get</span>() {
+<a name="l00143"></a>00143     <span class="keywordflow">return</span> get&lt;Named&lt;Iface, Name&gt; &gt;();
+<a name="l00144"></a>00144   }
+<a name="l00145"></a>00145 
+<a name="l00146"></a>00146   <span class="keyword">template</span>&lt;<span class="keyword">typename</span> Scope&gt;
+<a name="l00147"></a>00147   sauce::shared_ptr&lt;Injector&gt; enter()<span class="keyword"> const </span>{
+<a name="l00148"></a>00148     <span class="keywordflow">if</span> (alreadyInScope&lt;Scope&gt;()) {
+<a name="l00149"></a>00149       <span class="keywordflow">throw</span> <a class="code" href="structsauce_1_1_already_in_scope_exception_for.html" title="Raised when re-entering the given scope, which is already open.">AlreadyInScopeExceptionFor&lt;Scope&gt;</a>();
+<a name="l00150"></a>00150     }
+<a name="l00151"></a>00151 
+<a name="l00152"></a>00152     sauce::shared_ptr&lt;Injector&gt; scoped(<span class="keyword">new</span> <a class="code" href="classsauce_1_1_injector.html">Injector</a>(i::typeIdOf&lt;Scope&gt;(), getSelf()));
+<a name="l00153"></a>00153     scoped-&gt;setSelf(scoped);
+<a name="l00154"></a>00154     <span class="keywordflow">return</span> scoped;
+<a name="l00155"></a>00155   }
+<a name="l00156"></a>00156 
+<a name="l00157"></a>00157   sauce::shared_ptr&lt;Injector&gt; exit()<span class="keyword"> const </span>{
+<a name="l00158"></a>00158     <span class="keywordflow">if</span> (next.get() == NULL) {
+<a name="l00159"></a>00159       <span class="keywordflow">throw</span> <a class="code" href="structsauce_1_1_exiting_singleton_scope_exception.html" title="Raised when exiting the singleton scope.">ExitingSingletonScopeException</a>();
+<a name="l00160"></a>00160     } <span class="keywordflow">else</span> {
+<a name="l00161"></a>00161       <span class="keywordflow">return</span> next;
+<a name="l00162"></a>00162     }
+<a name="l00163"></a>00163   }
 <a name="l00164"></a>00164 
-<a name="l00165"></a>00165 <span class="preprocessor">#endif // SAUCE_SAUCE_INJECTOR_H_</span>
+<a name="l00165"></a>00165   <span class="keyword">template</span>&lt;<span class="keyword">typename</span> Scope&gt;
+<a name="l00166"></a>00166   <span class="keywordtype">void</span> eagerlyProvide() {
+<a name="l00167"></a>00167     sauce::auto_ptr&lt;i::Lock&gt; lock = acquireLock();
+<a name="l00168"></a>00168     eagerlyProvide&lt;Scope&gt;(getSelf());
+<a name="l00169"></a>00169   }
+<a name="l00170"></a>00170 
+<a name="l00171"></a>00171 };
+<a name="l00172"></a>00172 
+<a name="l00173"></a>00173 }
+<a name="l00174"></a>00174 
+<a name="l00175"></a>00175 <span class="preprocessor">#endif // SAUCE_SAUCE_INJECTOR_H_</span>
 </pre></div></div>
 </div>
 <!-- window showing the filter options -->

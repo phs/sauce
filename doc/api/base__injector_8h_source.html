@@ -136,31 +136,36 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <a name="l00061"></a>00061 <span class="keyword">public</span>:
 <a name="l00062"></a>00062 
 <a name="l00063"></a>00063   <span class="keyword">template</span>&lt;<span class="keyword">typename</span> Dependency&gt;
-<a name="l00064"></a>00064   <span class="keyword">typename</span> Key&lt;Dependency&gt;::Ptr <span class="keyword">get</span>(sauce::shared_ptr&lt;Injector&gt; injector, TypeIds &amp; ids) <span class="keyword">const</span> {
+<a name="l00064"></a>00064   <span class="keywordtype">void</span> validateAcyclic(sauce::shared_ptr&lt;Injector&gt; injector, TypeIds &amp; ids)<span class="keyword"> const </span>{
 <a name="l00065"></a>00065     <span class="keyword">typedef</span> <span class="keyword">typename</span> <a class="code" href="classsauce_1_1_named.html" title="Wrap dependency requests with Named to choose one of several named alternatives.">Key&lt;Dependency&gt;::Normalized</a> Normalized;
 <a name="l00066"></a>00066     <a class="code" href="classsauce_1_1internal_1_1_circular_dependency_guard.html" title="Detects circular dependencies on behalf of injectors.">CircularDependencyGuard&lt;ImplicitBindings, Normalized&gt;</a> guard(ids);
-<a name="l00067"></a>00067     <span class="keywordflow">return</span> bindings.<a class="code" href="classsauce_1_1internal_1_1_bindings.html#a9db7d7e66798e07430efc2628df008fd" title="Provide the named Dependency.">get</a>&lt;Normalized&gt;(injector, ids);
+<a name="l00067"></a>00067     bindings.validateAcyclic&lt;Normalized&gt;(injector, ids);
 <a name="l00068"></a>00068   }
 <a name="l00069"></a>00069 
-<a name="l00070"></a>00070   <span class="keyword">template</span>&lt;<span class="keyword">typename</span> Scope&gt;
-<a name="l00071"></a>00071   <span class="keywordtype">void</span> eagerlyProvide(sauce::shared_ptr&lt;Injector&gt; injector)<span class="keyword"> const </span>{
-<a name="l00072"></a>00072     TypeIds ids;
-<a name="l00073"></a>00073     bindings.eagerlyProvide&lt;Scope&gt;(injector, ids);
+<a name="l00070"></a>00070   <span class="keyword">template</span>&lt;<span class="keyword">typename</span> Dependency&gt;
+<a name="l00071"></a>00071   <span class="keyword">typename</span> Key&lt;Dependency&gt;::Ptr <span class="keyword">get</span>(sauce::shared_ptr&lt;Injector&gt; injector) <span class="keyword">const</span> {
+<a name="l00072"></a>00072     <span class="keyword">typedef</span> <span class="keyword">typename</span> <a class="code" href="classsauce_1_1_named.html" title="Wrap dependency requests with Named to choose one of several named alternatives.">Key&lt;Dependency&gt;::Normalized</a> Normalized;
+<a name="l00073"></a>00073     <span class="keywordflow">return</span> bindings.<a class="code" href="classsauce_1_1internal_1_1_bindings.html#a86540802b63a64932dee9e31bb463e99" title="Provide the named Dependency.">get</a>&lt;Normalized&gt;(injector);
 <a name="l00074"></a>00074   }
 <a name="l00075"></a>00075 
-<a name="l00079"></a><a class="code" href="classsauce_1_1internal_1_1_base_injector.html#a10391f6b6167d89af6c27c64f87a58f8">00079</a>   sauce::auto_ptr&lt;Lock&gt; <a class="code" href="classsauce_1_1internal_1_1_base_injector.html#a10391f6b6167d89af6c27c64f87a58f8" title="Create an RAII synchronization lock.">acquireLock</a>() {
-<a name="l00080"></a>00080     sauce::auto_ptr&lt;Lock&gt; lock = lockFactory-&gt;createLock();
-<a name="l00081"></a>00081     <span class="keywordflow">return</span> lock;
-<a name="l00082"></a>00082   }
-<a name="l00083"></a>00083 };
-<a name="l00084"></a>00084 
-<a name="l00085"></a>00085 }
-<a name="l00086"></a>00086 
-<a name="l00087"></a>00087 <span class="keyword">namespace </span>i = ::sauce::internal;
-<a name="l00088"></a>00088 
-<a name="l00089"></a>00089 }
-<a name="l00090"></a>00090 
-<a name="l00091"></a>00091 <span class="preprocessor">#endif // SAUCE_SAUCE_INTERNAL_BASE_INJECTOR_H_</span>
+<a name="l00076"></a>00076   <span class="keyword">template</span>&lt;<span class="keyword">typename</span> Scope&gt;
+<a name="l00077"></a>00077   <span class="keywordtype">void</span> eagerlyProvide(sauce::shared_ptr&lt;Injector&gt; injector)<span class="keyword"> const </span>{
+<a name="l00078"></a>00078     bindings.eagerlyProvide&lt;Scope&gt;(injector);
+<a name="l00079"></a>00079   }
+<a name="l00080"></a>00080 
+<a name="l00084"></a><a class="code" href="classsauce_1_1internal_1_1_base_injector.html#a10391f6b6167d89af6c27c64f87a58f8">00084</a>   sauce::auto_ptr&lt;Lock&gt; <a class="code" href="classsauce_1_1internal_1_1_base_injector.html#a10391f6b6167d89af6c27c64f87a58f8" title="Create an RAII synchronization lock.">acquireLock</a>() {
+<a name="l00085"></a>00085     sauce::auto_ptr&lt;Lock&gt; lock = lockFactory-&gt;createLock();
+<a name="l00086"></a>00086     <span class="keywordflow">return</span> lock;
+<a name="l00087"></a>00087   }
+<a name="l00088"></a>00088 };
+<a name="l00089"></a>00089 
+<a name="l00090"></a>00090 }
+<a name="l00091"></a>00091 
+<a name="l00092"></a>00092 <span class="keyword">namespace </span>i = ::sauce::internal;
+<a name="l00093"></a>00093 
+<a name="l00094"></a>00094 }
+<a name="l00095"></a>00095 
+<a name="l00096"></a>00096 <span class="preprocessor">#endif // SAUCE_SAUCE_INTERNAL_BASE_INJECTOR_H_</span>
 </pre></div></div>
 </div>
 <!-- window showing the filter options -->

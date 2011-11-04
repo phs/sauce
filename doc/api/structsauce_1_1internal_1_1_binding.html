@@ -119,8 +119,13 @@ typedef sauce::shared_ptr<br class="typebreak"/>
 &lt; <a class="el" href="structsauce_1_1internal_1_1_binding.html">Binding</a>&lt; Dependency &gt; &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>BindingPtr</b></td></tr>
 <tr><td colspan="2"><h2><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="structsauce_1_1internal_1_1_key.html">Key</a>&lt; Dependency &gt;::Ptr&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structsauce_1_1internal_1_1_binding.html#a70b6810aed0f25a6d771dd4f00b5525d">get</a> (BindingPtr, sauce::shared_ptr&lt; <a class="el" href="classsauce_1_1_injector.html">Injector</a> &gt;, TypeIds &amp;) const =0</td></tr>
-<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Get an Iface, using the given injector to provide dependencies.  <a href="#a70b6810aed0f25a6d771dd4f00b5525d"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a18b0ed0dd6563049548a0792f406f392"></a><!-- doxytag: member="sauce::internal::Binding::getKey" ref="a18b0ed0dd6563049548a0792f406f392" args="() const " -->
+virtual TypeId&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structsauce_1_1internal_1_1_binding.html#a18b0ed0dd6563049548a0792f406f392">getKey</a> () const </td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">The TypeId of the Dependency template parameter. <br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a47f97eace2a1e6e4faa8d6369d8e7026"></a><!-- doxytag: member="sauce::internal::Binding::validateAcyclic" ref="a47f97eace2a1e6e4faa8d6369d8e7026" args="(sauce::shared_ptr&lt; Injector &gt;, TypeIds &amp;) const =0" -->
+virtual void&#160;</td><td class="memItemRight" valign="bottom"><b>validateAcyclic</b> (sauce::shared_ptr&lt; <a class="el" href="classsauce_1_1_injector.html">Injector</a> &gt;, TypeIds &amp;) const =0</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="structsauce_1_1internal_1_1_key.html">Key</a>&lt; Dependency &gt;::Ptr&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structsauce_1_1internal_1_1_binding.html#ae8b8142e6d99eef4f4aa9a8b14026939">get</a> (BindingPtr, sauce::shared_ptr&lt; <a class="el" href="classsauce_1_1_injector.html">Injector</a> &gt;) const =0</td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Get an Iface, using the given injector to provide dependencies.  <a href="#ae8b8142e6d99eef4f4aa9a8b14026939"></a><br/></td></tr>
 </table>
 <hr/><a name="details" id="details"></a><h2>Detailed Description</h2>
 <div class="textblock"><h3>template&lt;typename Dependency&gt;<br/>
@@ -128,7 +133,7 @@ struct sauce::internal::Binding&lt; Dependency &gt;</h3>
 
 <p>A binding for a specific interface. </p>
 </div><hr/><h2>Member Function Documentation</h2>
-<a class="anchor" id="a70b6810aed0f25a6d771dd4f00b5525d"></a><!-- doxytag: member="sauce::internal::Binding::get" ref="a70b6810aed0f25a6d771dd4f00b5525d" args="(BindingPtr, sauce::shared_ptr&lt; Injector &gt;, TypeIds &amp;) const =0" -->
+<a class="anchor" id="ae8b8142e6d99eef4f4aa9a8b14026939"></a><!-- doxytag: member="sauce::internal::Binding::get" ref="ae8b8142e6d99eef4f4aa9a8b14026939" args="(BindingPtr, sauce::shared_ptr&lt; Injector &gt;) const =0" -->
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
@@ -144,12 +149,6 @@ template&lt;typename Dependency&gt; </div>
           <td class="paramkey"></td>
           <td></td>
           <td class="paramtype">sauce::shared_ptr&lt; <a class="el" href="classsauce_1_1_injector.html">Injector</a> &gt;&#160;</td>
-          <td class="paramname">, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">TypeIds &amp;&#160;</td>
           <td class="paramname">&#160;</td>
         </tr>
         <tr>
@@ -162,8 +161,7 @@ template&lt;typename Dependency&gt; </div>
 <div class="memdoc">
 
 <p>Get an Iface, using the given injector to provide dependencies. </p>
-<p>The binding pointer must point to this same binding instance.</p>
-<p>The typeIds indicate which keys are already currently being provided to detect circular dependencies. </p>
+<p>The binding pointer must point to this same binding instance. </p>
 
 </div>
 </div>
