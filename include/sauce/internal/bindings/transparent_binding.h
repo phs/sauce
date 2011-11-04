@@ -68,7 +68,7 @@ public:
     return typeIdOf<Scope>();
   }
 
-  virtual void validateAcyclic(BindingPtr binding, InjectorPtr injector, TypeIds & ids) const = 0;
+  virtual void validateAcyclic(InjectorPtr injector, TypeIds & ids) const = 0;
 
   /**
    * Provide an Iface.

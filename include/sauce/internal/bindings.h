@@ -97,7 +97,7 @@ public:
       binding = resolve<Dependency>(i->second);
     }
 
-    binding->validateAcyclic(binding, injector, ids);
+    binding->validateAcyclic(injector, ids);
   }
 
   /**

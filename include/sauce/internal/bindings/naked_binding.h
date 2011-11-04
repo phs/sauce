@@ -47,10 +47,6 @@ class NakedBinding:
     return DisposalDeleter<Iface, Naked>(concrete);
   }
 
-  void validateAcyclic(BindingPtr, InjectorPtr injector, TypeIds & ids) const {
-    validateAcyclic(injector, ids);
-  }
-
   /**
    * Provide an Iface.
    *
