@@ -129,7 +129,12 @@ public:
      * TODO: this approach to circularity detection sucks.
      *
      * A user grievance is it doesn't fail-fast: the circularity is detectible at binding time, but
-     * the exception is not raised until injection time.
+     * the exception is not raised until injection time.  Note, not actually true: only some cycles
+     * may be detected at binding time.  Particularly, implicit bindings open the possibility of
+     * dependency cycles for types never explicitly configured.  While it's true that the current
+     * set of implicit bindings can't succumb to this, I do not want to commit to it.  Eventually I
+     * may figure out annotation-like in-class implicit binding declarations, and they *will* be
+     * powerful enough to introduce this risk.
      *
      * My grievance is carrying the bag of mid-injection ids around prevents me from more
      * gracefully incorporating the provider interface.  I also refuse to pollute it to pass the
