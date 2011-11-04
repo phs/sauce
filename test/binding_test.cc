@@ -61,13 +61,18 @@ struct Dog {
 };
 
 void CircularModule(Binder & binder) {
-  binder.bind<Tail>().to<Tail(Dog)>();
-  binder.bind<Dog>().to<Dog(Tail)>();
+  binder.bind<Tail>().in<SingletonScope>().to<Tail(Dog)>();
+  binder.bind<Dog>().in<SingletonScope>().to<Dog(Tail)>();
 }
 
 TEST(BindingTest, shouldThrowExceptionWhenResolvingCircularDependency) {
   sauce::shared_ptr<Injector> injector(Modules().add(&CircularModule).createInjector());
-  ASSERT_THROW((injector->get<Tail>()), ::sauce::CircularDependencyException);
+  ASSERT_THROW(injector->get<Tail>(), ::sauce::CircularDependencyException);
+}
+
+TEST(BindingTest, shouldThrowExceptionWhenEagerlyProvidingCircularDependency) {
+  sauce::shared_ptr<Injector> injector(Modules().add(&CircularModule).createInjector());
+  // ASSERT_THROW(injector->eagerlyProvide<SingletonScope>(), ::sauce::CircularDependencyException);
 }
 
 struct IncompletelyBound {};
