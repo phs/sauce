@@ -85,6 +85,21 @@ public:
     scopeMap.insert(std::make_pair(scopeKey, binding));
   }
 
+  template<typename Dependency>
+  void validateAcyclic(sauce::shared_ptr<Injector> injector, TypeIds & ids) const {
+    sauce::shared_ptr<Binding<Dependency> > binding;
+
+    BindingMap::const_iterator i = bindingMap.find(typeIdOf<Dependency>());
+    if (i == bindingMap.end()) {
+      ImplicitBindings implicitBindings;
+      binding = implicitBindings.get<Dependency>();
+    } else {
+      binding = resolve<Dependency>(i->second);
+    }
+
+    binding->validateAcyclic(binding, injector, ids);
+  }
+
   /**
    * Provide the named Dependency.
    *

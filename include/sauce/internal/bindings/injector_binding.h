@@ -18,6 +18,8 @@ class InjectorBinding:
 
   typedef Binding<Key<Injector>::Normalized>::BindingPtr BindingPtr;
 
+  void validateAcyclic(BindingPtr, InjectorPtr, TypeIds &) const {}
+
   /**
    * Provide the injector.
    *

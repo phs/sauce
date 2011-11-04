@@ -61,9 +61,15 @@ class BaseInjector {
 public:
 
   template<typename Dependency>
-  typename Key<Dependency>::Ptr get(sauce::shared_ptr<Injector> injector, TypeIds & ids) const {
+  void validateAcyclic(sauce::shared_ptr<Injector> injector, TypeIds & ids) const {
     typedef typename Key<Dependency>::Normalized Normalized;
     CircularDependencyGuard<ImplicitBindings, Normalized> guard(ids);
+    bindings.validateAcyclic<Normalized>(injector, ids);
+  }
+
+  template<typename Dependency>
+  typename Key<Dependency>::Ptr get(sauce::shared_ptr<Injector> injector, TypeIds & ids) const {
+    typedef typename Key<Dependency>::Normalized Normalized;
     return bindings.get<Normalized>(injector, ids);
   }
 

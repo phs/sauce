@@ -27,6 +27,8 @@ struct NewBinding<Dependency, Scope, Impl(),
   typedef typename Key<Dependency>::Iface Iface;
   typedef typename Allocator::template rebind<Impl>::other ImplAllocator;
 
+  void validateAcyclic(sauce::shared_ptr<Injector>, TypeIds &) const {}
+
   Iface * provide(sauce::shared_ptr<Injector>, TypeIds &) const {
     ImplAllocator allocator;
     Impl * impl = allocator.allocate(1);
@@ -48,6 +50,11 @@ struct NewBinding<Dependency, Scope, Impl(A1),
     Allocator>: public NakedBinding<Dependency, Scope> {
   typedef typename Key<Dependency>::Iface Iface;
   typedef typename Allocator::template rebind<Impl>::other ImplAllocator;
+
+  void validateAcyclic(sauce::shared_ptr<Injector> injector,
+      TypeIds & ids) const {
+    this->template validateAcyclicos<A1>(injector, ids);
+  }
 
   Iface * provide(sauce::shared_ptr<Injector> injector, TypeIds & ids) const {
     typename i::Key<A1>::Ptr a1(this->template getDependency<A1>(injector,
@@ -72,6 +79,12 @@ struct NewBinding<Dependency, Scope, Impl(A1, A2),
     Allocator>: public NakedBinding<Dependency, Scope> {
   typedef typename Key<Dependency>::Iface Iface;
   typedef typename Allocator::template rebind<Impl>::other ImplAllocator;
+
+  void validateAcyclic(sauce::shared_ptr<Injector> injector,
+      TypeIds & ids) const {
+    this->template validateAcyclicos<A1>(injector, ids);
+    this->template validateAcyclicos<A2>(injector, ids);
+  }
 
   Iface * provide(sauce::shared_ptr<Injector> injector, TypeIds & ids) const {
     typename i::Key<A1>::Ptr a1(this->template getDependency<A1>(injector,
@@ -98,6 +111,13 @@ struct NewBinding<Dependency, Scope, Impl(A1, A2, A3),
     Allocator>: public NakedBinding<Dependency, Scope> {
   typedef typename Key<Dependency>::Iface Iface;
   typedef typename Allocator::template rebind<Impl>::other ImplAllocator;
+
+  void validateAcyclic(sauce::shared_ptr<Injector> injector,
+      TypeIds & ids) const {
+    this->template validateAcyclicos<A1>(injector, ids);
+    this->template validateAcyclicos<A2>(injector, ids);
+    this->template validateAcyclicos<A3>(injector, ids);
+  }
 
   Iface * provide(sauce::shared_ptr<Injector> injector, TypeIds & ids) const {
     typename i::Key<A1>::Ptr a1(this->template getDependency<A1>(injector,
@@ -126,6 +146,14 @@ struct NewBinding<Dependency, Scope, Impl(A1, A2, A3, A4),
     Allocator>: public NakedBinding<Dependency, Scope> {
   typedef typename Key<Dependency>::Iface Iface;
   typedef typename Allocator::template rebind<Impl>::other ImplAllocator;
+
+  void validateAcyclic(sauce::shared_ptr<Injector> injector,
+      TypeIds & ids) const {
+    this->template validateAcyclicos<A1>(injector, ids);
+    this->template validateAcyclicos<A2>(injector, ids);
+    this->template validateAcyclicos<A3>(injector, ids);
+    this->template validateAcyclicos<A4>(injector, ids);
+  }
 
   Iface * provide(sauce::shared_ptr<Injector> injector, TypeIds & ids) const {
     typename i::Key<A1>::Ptr a1(this->template getDependency<A1>(injector,
@@ -157,6 +185,15 @@ struct NewBinding<Dependency, Scope, Impl(A1, A2, A3, A4, A5),
     Allocator>: public NakedBinding<Dependency, Scope> {
   typedef typename Key<Dependency>::Iface Iface;
   typedef typename Allocator::template rebind<Impl>::other ImplAllocator;
+
+  void validateAcyclic(sauce::shared_ptr<Injector> injector,
+      TypeIds & ids) const {
+    this->template validateAcyclicos<A1>(injector, ids);
+    this->template validateAcyclicos<A2>(injector, ids);
+    this->template validateAcyclicos<A3>(injector, ids);
+    this->template validateAcyclicos<A4>(injector, ids);
+    this->template validateAcyclicos<A5>(injector, ids);
+  }
 
   Iface * provide(sauce::shared_ptr<Injector> injector, TypeIds & ids) const {
     typename i::Key<A1>::Ptr a1(this->template getDependency<A1>(injector,
@@ -190,6 +227,16 @@ struct NewBinding<Dependency, Scope, Impl(A1, A2, A3, A4, A5, A6),
     Allocator>: public NakedBinding<Dependency, Scope> {
   typedef typename Key<Dependency>::Iface Iface;
   typedef typename Allocator::template rebind<Impl>::other ImplAllocator;
+
+  void validateAcyclic(sauce::shared_ptr<Injector> injector,
+      TypeIds & ids) const {
+    this->template validateAcyclicos<A1>(injector, ids);
+    this->template validateAcyclicos<A2>(injector, ids);
+    this->template validateAcyclicos<A3>(injector, ids);
+    this->template validateAcyclicos<A4>(injector, ids);
+    this->template validateAcyclicos<A5>(injector, ids);
+    this->template validateAcyclicos<A6>(injector, ids);
+  }
 
   Iface * provide(sauce::shared_ptr<Injector> injector, TypeIds & ids) const {
     typename i::Key<A1>::Ptr a1(this->template getDependency<A1>(injector,
@@ -225,6 +272,17 @@ struct NewBinding<Dependency, Scope, Impl(A1, A2, A3, A4, A5, A6, A7),
     Allocator>: public NakedBinding<Dependency, Scope> {
   typedef typename Key<Dependency>::Iface Iface;
   typedef typename Allocator::template rebind<Impl>::other ImplAllocator;
+
+  void validateAcyclic(sauce::shared_ptr<Injector> injector,
+      TypeIds & ids) const {
+    this->template validateAcyclicos<A1>(injector, ids);
+    this->template validateAcyclicos<A2>(injector, ids);
+    this->template validateAcyclicos<A3>(injector, ids);
+    this->template validateAcyclicos<A4>(injector, ids);
+    this->template validateAcyclicos<A5>(injector, ids);
+    this->template validateAcyclicos<A6>(injector, ids);
+    this->template validateAcyclicos<A7>(injector, ids);
+  }
 
   Iface * provide(sauce::shared_ptr<Injector> injector, TypeIds & ids) const {
     typename i::Key<A1>::Ptr a1(this->template getDependency<A1>(injector,
@@ -262,6 +320,18 @@ struct NewBinding<Dependency, Scope, Impl(A1, A2, A3, A4, A5, A6, A7, A8),
     Allocator>: public NakedBinding<Dependency, Scope> {
   typedef typename Key<Dependency>::Iface Iface;
   typedef typename Allocator::template rebind<Impl>::other ImplAllocator;
+
+  void validateAcyclic(sauce::shared_ptr<Injector> injector,
+      TypeIds & ids) const {
+    this->template validateAcyclicos<A1>(injector, ids);
+    this->template validateAcyclicos<A2>(injector, ids);
+    this->template validateAcyclicos<A3>(injector, ids);
+    this->template validateAcyclicos<A4>(injector, ids);
+    this->template validateAcyclicos<A5>(injector, ids);
+    this->template validateAcyclicos<A6>(injector, ids);
+    this->template validateAcyclicos<A7>(injector, ids);
+    this->template validateAcyclicos<A8>(injector, ids);
+  }
 
   Iface * provide(sauce::shared_ptr<Injector> injector, TypeIds & ids) const {
     typename i::Key<A1>::Ptr a1(this->template getDependency<A1>(injector,
@@ -301,6 +371,19 @@ struct NewBinding<Dependency, Scope, Impl(A1, A2, A3, A4, A5, A6, A7, A8, A9),
     Allocator>: public NakedBinding<Dependency, Scope> {
   typedef typename Key<Dependency>::Iface Iface;
   typedef typename Allocator::template rebind<Impl>::other ImplAllocator;
+
+  void validateAcyclic(sauce::shared_ptr<Injector> injector,
+      TypeIds & ids) const {
+    this->template validateAcyclicos<A1>(injector, ids);
+    this->template validateAcyclicos<A2>(injector, ids);
+    this->template validateAcyclicos<A3>(injector, ids);
+    this->template validateAcyclicos<A4>(injector, ids);
+    this->template validateAcyclicos<A5>(injector, ids);
+    this->template validateAcyclicos<A6>(injector, ids);
+    this->template validateAcyclicos<A7>(injector, ids);
+    this->template validateAcyclicos<A8>(injector, ids);
+    this->template validateAcyclicos<A9>(injector, ids);
+  }
 
   Iface * provide(sauce::shared_ptr<Injector> injector, TypeIds & ids) const {
     typename i::Key<A1>::Ptr a1(this->template getDependency<A1>(injector,
@@ -343,6 +426,20 @@ struct NewBinding<Dependency, Scope, Impl(A1, A2, A3, A4, A5, A6, A7, A8, A9,
     A10), Allocator>: public NakedBinding<Dependency, Scope> {
   typedef typename Key<Dependency>::Iface Iface;
   typedef typename Allocator::template rebind<Impl>::other ImplAllocator;
+
+  void validateAcyclic(sauce::shared_ptr<Injector> injector,
+      TypeIds & ids) const {
+    this->template validateAcyclicos<A1>(injector, ids);
+    this->template validateAcyclicos<A2>(injector, ids);
+    this->template validateAcyclicos<A3>(injector, ids);
+    this->template validateAcyclicos<A4>(injector, ids);
+    this->template validateAcyclicos<A5>(injector, ids);
+    this->template validateAcyclicos<A6>(injector, ids);
+    this->template validateAcyclicos<A7>(injector, ids);
+    this->template validateAcyclicos<A8>(injector, ids);
+    this->template validateAcyclicos<A9>(injector, ids);
+    this->template validateAcyclicos<A10>(injector, ids);
+  }
 
   Iface * provide(sauce::shared_ptr<Injector> injector, TypeIds & ids) const {
     typename i::Key<A1>::Ptr a1(this->template getDependency<A1>(injector,

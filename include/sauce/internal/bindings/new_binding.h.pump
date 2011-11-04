@@ -32,6 +32,18 @@ struct NewBinding<Dependency, Scope, Impl($As), Allocator>: public NakedBinding<
   typedef typename Allocator::template rebind<Impl>::other ImplAllocator;
 
 [[$if i==0 [[
+  void validateAcyclic(sauce::shared_ptr<Injector>, TypeIds &) const {}
+]] $else [[
+  void validateAcyclic(sauce::shared_ptr<Injector> injector, TypeIds & ids) const {
+[[$for j [[
+    this->template validateAcyclicos<A$j>(injector, ids);
+
+]]]]
+  }
+]]]]
+
+
+[[$if i==0 [[
   Iface * provide(sauce::shared_ptr<Injector>, TypeIds &) const
 ]] $else [[
   Iface * provide(sauce::shared_ptr<Injector> injector, TypeIds & ids) const

@@ -21,6 +21,8 @@ class NakedBinding:
   typedef typename Binding<Dependency>::BindingPtr BindingPtr;
   typedef NakedBinding<Dependency, Scope> Naked;
 
+  virtual void validateAcyclic(InjectorPtr, TypeIds &) const = 0;
+
   /**
    * Provide a naked Iface pointer.
    *
@@ -43,6 +45,10 @@ class NakedBinding:
   DisposalDeleter<Iface, Naked> deleter(BindingPtr binding) const {
     sauce::shared_ptr<Naked> concrete = sauce::static_pointer_cast<Naked>(binding);
     return DisposalDeleter<Iface, Naked>(concrete);
+  }
+
+  void validateAcyclic(BindingPtr, InjectorPtr injector, TypeIds & ids) const {
+    validateAcyclic(injector, ids);
   }
 
   /**

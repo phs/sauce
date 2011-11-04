@@ -18,6 +18,11 @@ class InjectorFriend {
 protected:
 
   template<typename Dependency>
+  void validateAcyclicos(InjectorPtr injector, TypeIds & ids) const {
+    injector->validateAcyclic<Dependency>(injector, ids);
+  }
+
+  template<typename Dependency>
   typename i::Key<Dependency>::Ptr getDependency(InjectorPtr injector, TypeIds & ids) const {
     return injector->get<Dependency>(injector, ids);
   }
@@ -62,6 +67,8 @@ public:
   virtual TypeId getScopeKey() const {
     return typeIdOf<Scope>();
   }
+
+  virtual void validateAcyclic(BindingPtr binding, InjectorPtr injector, TypeIds & ids) const = 0;
 
   /**
    * Provide an Iface.

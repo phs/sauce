@@ -58,6 +58,15 @@ class Injector {
   }
 
   template<typename Dependency>
+  void validateAcyclic(sauce::shared_ptr<Injector> injector, i::TypeIds & ids) {
+    if (base.get() == NULL) {
+      next->validateAcyclic<Dependency>(injector, ids);
+    } else {
+      base->validateAcyclic<Dependency>(injector, ids);
+    }
+  }
+
+  template<typename Dependency>
   typename i::Key<Dependency>::Ptr get(sauce::shared_ptr<Injector> injector, i::TypeIds & ids) {
     if (base.get() == NULL) {
       return next->get<Dependency>(injector, ids);
@@ -146,6 +155,7 @@ public:
      * would allow tracking providers in provision deleters in a natural way.
      */
     i::TypeIds ids;
+    validateAcyclic<Dependency>(getSelf(), ids);
     return get<Dependency>(getSelf(), ids);
   }
 

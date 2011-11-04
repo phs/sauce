@@ -24,6 +24,10 @@ class ProviderBinding: public NakedBinding<Dependency, Scope> {
 
   mutable ProviderPtr provider;
 
+  void validateAcyclic(sauce::shared_ptr<Injector> injector, TypeIds & ids) const {
+    this->template validateAcyclicos<Provider>(injector, ids);
+  }
+
   Iface * provide(sauce::shared_ptr<Injector> injector, TypeIds & ids) const {
     if (provider.get() == NULL) {
       // TODO: cache on iface somehow instead of on binding?
