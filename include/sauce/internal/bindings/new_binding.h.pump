@@ -31,15 +31,6 @@ struct NewBinding<Dependency, Scope, Impl($As), Allocator>: public NakedBinding<
   typedef typename Key<Dependency>::Iface Iface;
   typedef typename Allocator::template rebind<Impl>::other ImplAllocator;
 
-  TypeIds getDependencyKeys() const {
-    TypeIds ids;
-[[$for j [[
-    ids.insert(typeIdOf<A$j>());
-
-]]]]
-    return ids;
-  }
-
 [[$if i==0 [[
   Iface * provide(sauce::shared_ptr<Injector>, TypeIds &) const
 ]] $else [[

@@ -51,11 +51,6 @@ struct OpaqueBinding {
   virtual TypeId getScopeKey() const = 0;
 
   /**
-   * The TypeIds of the interface's own immediate dependencies.
-   */
-  virtual TypeIds getDependencyKeys() const = 0;
-
-  /**
    * Provide, but do not return the hidden interface.
    *
    * Instead, cache the instance in its appropriate scope, if any.  If the binding is not scoped,

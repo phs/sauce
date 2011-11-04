@@ -27,11 +27,6 @@ struct NewBinding<Dependency, Scope, Impl(),
   typedef typename Key<Dependency>::Iface Iface;
   typedef typename Allocator::template rebind<Impl>::other ImplAllocator;
 
-  TypeIds getDependencyKeys() const {
-    TypeIds ids;
-    return ids;
-  }
-
   Iface * provide(sauce::shared_ptr<Injector>, TypeIds &) const {
     ImplAllocator allocator;
     Impl * impl = allocator.allocate(1);
@@ -53,12 +48,6 @@ struct NewBinding<Dependency, Scope, Impl(A1),
     Allocator>: public NakedBinding<Dependency, Scope> {
   typedef typename Key<Dependency>::Iface Iface;
   typedef typename Allocator::template rebind<Impl>::other ImplAllocator;
-
-  TypeIds getDependencyKeys() const {
-    TypeIds ids;
-    ids.insert(typeIdOf<A1>());
-    return ids;
-  }
 
   Iface * provide(sauce::shared_ptr<Injector> injector, TypeIds & ids) const {
     typename i::Key<A1>::Ptr a1(this->template getDependency<A1>(injector,
@@ -83,13 +72,6 @@ struct NewBinding<Dependency, Scope, Impl(A1, A2),
     Allocator>: public NakedBinding<Dependency, Scope> {
   typedef typename Key<Dependency>::Iface Iface;
   typedef typename Allocator::template rebind<Impl>::other ImplAllocator;
-
-  TypeIds getDependencyKeys() const {
-    TypeIds ids;
-    ids.insert(typeIdOf<A1>());
-    ids.insert(typeIdOf<A2>());
-    return ids;
-  }
 
   Iface * provide(sauce::shared_ptr<Injector> injector, TypeIds & ids) const {
     typename i::Key<A1>::Ptr a1(this->template getDependency<A1>(injector,
@@ -116,14 +98,6 @@ struct NewBinding<Dependency, Scope, Impl(A1, A2, A3),
     Allocator>: public NakedBinding<Dependency, Scope> {
   typedef typename Key<Dependency>::Iface Iface;
   typedef typename Allocator::template rebind<Impl>::other ImplAllocator;
-
-  TypeIds getDependencyKeys() const {
-    TypeIds ids;
-    ids.insert(typeIdOf<A1>());
-    ids.insert(typeIdOf<A2>());
-    ids.insert(typeIdOf<A3>());
-    return ids;
-  }
 
   Iface * provide(sauce::shared_ptr<Injector> injector, TypeIds & ids) const {
     typename i::Key<A1>::Ptr a1(this->template getDependency<A1>(injector,
@@ -152,15 +126,6 @@ struct NewBinding<Dependency, Scope, Impl(A1, A2, A3, A4),
     Allocator>: public NakedBinding<Dependency, Scope> {
   typedef typename Key<Dependency>::Iface Iface;
   typedef typename Allocator::template rebind<Impl>::other ImplAllocator;
-
-  TypeIds getDependencyKeys() const {
-    TypeIds ids;
-    ids.insert(typeIdOf<A1>());
-    ids.insert(typeIdOf<A2>());
-    ids.insert(typeIdOf<A3>());
-    ids.insert(typeIdOf<A4>());
-    return ids;
-  }
 
   Iface * provide(sauce::shared_ptr<Injector> injector, TypeIds & ids) const {
     typename i::Key<A1>::Ptr a1(this->template getDependency<A1>(injector,
@@ -192,16 +157,6 @@ struct NewBinding<Dependency, Scope, Impl(A1, A2, A3, A4, A5),
     Allocator>: public NakedBinding<Dependency, Scope> {
   typedef typename Key<Dependency>::Iface Iface;
   typedef typename Allocator::template rebind<Impl>::other ImplAllocator;
-
-  TypeIds getDependencyKeys() const {
-    TypeIds ids;
-    ids.insert(typeIdOf<A1>());
-    ids.insert(typeIdOf<A2>());
-    ids.insert(typeIdOf<A3>());
-    ids.insert(typeIdOf<A4>());
-    ids.insert(typeIdOf<A5>());
-    return ids;
-  }
 
   Iface * provide(sauce::shared_ptr<Injector> injector, TypeIds & ids) const {
     typename i::Key<A1>::Ptr a1(this->template getDependency<A1>(injector,
@@ -235,17 +190,6 @@ struct NewBinding<Dependency, Scope, Impl(A1, A2, A3, A4, A5, A6),
     Allocator>: public NakedBinding<Dependency, Scope> {
   typedef typename Key<Dependency>::Iface Iface;
   typedef typename Allocator::template rebind<Impl>::other ImplAllocator;
-
-  TypeIds getDependencyKeys() const {
-    TypeIds ids;
-    ids.insert(typeIdOf<A1>());
-    ids.insert(typeIdOf<A2>());
-    ids.insert(typeIdOf<A3>());
-    ids.insert(typeIdOf<A4>());
-    ids.insert(typeIdOf<A5>());
-    ids.insert(typeIdOf<A6>());
-    return ids;
-  }
 
   Iface * provide(sauce::shared_ptr<Injector> injector, TypeIds & ids) const {
     typename i::Key<A1>::Ptr a1(this->template getDependency<A1>(injector,
@@ -281,18 +225,6 @@ struct NewBinding<Dependency, Scope, Impl(A1, A2, A3, A4, A5, A6, A7),
     Allocator>: public NakedBinding<Dependency, Scope> {
   typedef typename Key<Dependency>::Iface Iface;
   typedef typename Allocator::template rebind<Impl>::other ImplAllocator;
-
-  TypeIds getDependencyKeys() const {
-    TypeIds ids;
-    ids.insert(typeIdOf<A1>());
-    ids.insert(typeIdOf<A2>());
-    ids.insert(typeIdOf<A3>());
-    ids.insert(typeIdOf<A4>());
-    ids.insert(typeIdOf<A5>());
-    ids.insert(typeIdOf<A6>());
-    ids.insert(typeIdOf<A7>());
-    return ids;
-  }
 
   Iface * provide(sauce::shared_ptr<Injector> injector, TypeIds & ids) const {
     typename i::Key<A1>::Ptr a1(this->template getDependency<A1>(injector,
@@ -330,19 +262,6 @@ struct NewBinding<Dependency, Scope, Impl(A1, A2, A3, A4, A5, A6, A7, A8),
     Allocator>: public NakedBinding<Dependency, Scope> {
   typedef typename Key<Dependency>::Iface Iface;
   typedef typename Allocator::template rebind<Impl>::other ImplAllocator;
-
-  TypeIds getDependencyKeys() const {
-    TypeIds ids;
-    ids.insert(typeIdOf<A1>());
-    ids.insert(typeIdOf<A2>());
-    ids.insert(typeIdOf<A3>());
-    ids.insert(typeIdOf<A4>());
-    ids.insert(typeIdOf<A5>());
-    ids.insert(typeIdOf<A6>());
-    ids.insert(typeIdOf<A7>());
-    ids.insert(typeIdOf<A8>());
-    return ids;
-  }
 
   Iface * provide(sauce::shared_ptr<Injector> injector, TypeIds & ids) const {
     typename i::Key<A1>::Ptr a1(this->template getDependency<A1>(injector,
@@ -382,20 +301,6 @@ struct NewBinding<Dependency, Scope, Impl(A1, A2, A3, A4, A5, A6, A7, A8, A9),
     Allocator>: public NakedBinding<Dependency, Scope> {
   typedef typename Key<Dependency>::Iface Iface;
   typedef typename Allocator::template rebind<Impl>::other ImplAllocator;
-
-  TypeIds getDependencyKeys() const {
-    TypeIds ids;
-    ids.insert(typeIdOf<A1>());
-    ids.insert(typeIdOf<A2>());
-    ids.insert(typeIdOf<A3>());
-    ids.insert(typeIdOf<A4>());
-    ids.insert(typeIdOf<A5>());
-    ids.insert(typeIdOf<A6>());
-    ids.insert(typeIdOf<A7>());
-    ids.insert(typeIdOf<A8>());
-    ids.insert(typeIdOf<A9>());
-    return ids;
-  }
 
   Iface * provide(sauce::shared_ptr<Injector> injector, TypeIds & ids) const {
     typename i::Key<A1>::Ptr a1(this->template getDependency<A1>(injector,
@@ -438,21 +343,6 @@ struct NewBinding<Dependency, Scope, Impl(A1, A2, A3, A4, A5, A6, A7, A8, A9,
     A10), Allocator>: public NakedBinding<Dependency, Scope> {
   typedef typename Key<Dependency>::Iface Iface;
   typedef typename Allocator::template rebind<Impl>::other ImplAllocator;
-
-  TypeIds getDependencyKeys() const {
-    TypeIds ids;
-    ids.insert(typeIdOf<A1>());
-    ids.insert(typeIdOf<A2>());
-    ids.insert(typeIdOf<A3>());
-    ids.insert(typeIdOf<A4>());
-    ids.insert(typeIdOf<A5>());
-    ids.insert(typeIdOf<A6>());
-    ids.insert(typeIdOf<A7>());
-    ids.insert(typeIdOf<A8>());
-    ids.insert(typeIdOf<A9>());
-    ids.insert(typeIdOf<A10>());
-    return ids;
-  }
 
   Iface * provide(sauce::shared_ptr<Injector> injector, TypeIds & ids) const {
     typename i::Key<A1>::Ptr a1(this->template getDependency<A1>(injector,
