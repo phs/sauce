@@ -41,7 +41,7 @@ struct Unbound {};
 
 TEST(BindingTest, shouldThrowExceptionWhenGettingAnUnboundIface) {
   sauce::shared_ptr<Injector> injector(Modules().createInjector());
-  ASSERT_THROW((injector->get<Unbound>()), ::sauce::UnboundException);
+  ASSERT_THROW(injector->get<Unbound>(), ::sauce::UnboundException);
 }
 
 TEST(BindingTest, shouldImplicitlyBindTheInjectorItself) {
