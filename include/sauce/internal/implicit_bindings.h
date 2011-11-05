@@ -58,6 +58,21 @@ struct ImplicitBinding<Named<Injector, Unnamed> > {
   }
 };
 
+/**
+ * The implicit Provider binding for bound dependencies.
+ */
+template<typename Dependency, typename Name>
+struct ImplicitBinding<Named<Provider<Dependency>, Name> > {
+  typedef Named<Provider<Dependency>, Name> ProviderDependency;
+  typedef sauce::shared_ptr<Binding<ProviderDependency> > BindingPtr;
+
+  static BindingPtr get(Bindings<ImplicitBindings> const & bindings) {
+    typedef typename Key<Dependency>::Normalized Normalized;
+    bindings.getBinding<Normalized>();
+    throw "waaa";
+  }
+};
+
 }
 
 namespace i = ::sauce::internal;
