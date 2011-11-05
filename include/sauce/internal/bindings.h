@@ -92,7 +92,7 @@ public:
     BindingMap::const_iterator i = bindingMap.find(typeIdOf<Dependency>());
     if (i == bindingMap.end()) {
       ImplicitBindings implicitBindings;
-      binding = implicitBindings.get<Dependency>();
+      binding = implicitBindings.get<Dependency>(*this);
     } else {
       binding = resolve<Dependency>(i->second);
     }
@@ -112,7 +112,7 @@ public:
     BindingMap::const_iterator i = bindingMap.find(typeIdOf<Dependency>());
     if (i == bindingMap.end()) {
       ImplicitBindings implicitBindings;
-      binding = implicitBindings.get<Dependency>();
+      binding = implicitBindings.get<Dependency>(*this);
     } else {
       binding = resolve<Dependency>(i->second);
     }

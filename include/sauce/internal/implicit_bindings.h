@@ -4,12 +4,16 @@
 #include <sauce/exceptions.h>
 #include <sauce/injector.h>
 #include <sauce/memory.h>
+#include <sauce/provider.h>
 #include <sauce/internal/binding.h>
+#include <sauce/internal/bindings.h>
 #include <sauce/internal/bindings/all.h>
 #include <sauce/internal/key.h>
 
 namespace sauce {
 namespace internal {
+
+struct ImplicitBindings;
 
 /**
  * Attempts to supply a Binding when the given Dependency is not found.
@@ -20,7 +24,7 @@ struct ImplicitBinding {
   /**
    * Attempt to supply a (unknown) Binding at provision time.
    */
-  static sauce::shared_ptr<Binding<Dependency> > get() {
+  static sauce::shared_ptr<Binding<Dependency> > get(Bindings<ImplicitBindings> const &) {
     throw UnboundExceptionFor<Dependency>();
   }
 
@@ -35,8 +39,8 @@ struct ImplicitBindings {
    * Attempt to supply a (unknown) Binding at provision time.
    */
   template<typename Dependency>
-  sauce::shared_ptr<Binding<Dependency> > get() const {
-    return ImplicitBinding<Dependency>::get();
+  sauce::shared_ptr<Binding<Dependency> > get(Bindings<ImplicitBindings> const & bindings) const {
+    return ImplicitBinding<Dependency>::get(bindings);
   }
 
 };
@@ -47,7 +51,7 @@ struct ImplicitBindings {
 template<>
 struct ImplicitBinding<Named<Injector, Unnamed> > {
   typedef Named<Injector, Unnamed> Dependency;
-  static sauce::shared_ptr<Binding<Dependency> > get() {
+  static sauce::shared_ptr<Binding<Dependency> > get(Bindings<ImplicitBindings> const &) {
     sauce::shared_ptr<Binding<Dependency> > binding(new b::InjectorBinding());
     return binding;
   }
