@@ -34,7 +34,12 @@ void ProviderModule(Binder & binder) {
 
 TEST(BindingTest, shouldProvideDependenciesBoundToProviders) {
   sauce::shared_ptr<Injector> injector(Modules().add(&ProviderModule).createInjector());
+
+  // We can get an instance
   sauce::shared_ptr<CustomBuilt> customBuilt = injector->get<CustomBuilt>();
+
+  // Or the provider itself, if we like
+  // sauce::shared_ptr<Provider<CustomBuilt> > provider = injector->get<Provider<CustomBuilt> >();
 }
 
 struct Unbound {};
