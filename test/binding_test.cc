@@ -28,8 +28,8 @@ struct CustomBuiltProvider: Provider<CustomBuilt> {
 };
 
 void ProviderModule(Binder & binder) {
-  binder.bind<CustomBuiltProvider>().to<CustomBuiltProvider()>();
-  binder.bind<CustomBuilt>().toProvider<CustomBuiltProvider>();
+  binder.bind<Provider<CustomBuilt> >().to<CustomBuiltProvider()>();
+  binder.bind<CustomBuilt>().toProvider<Provider<CustomBuilt> >();
 }
 
 TEST(BindingTest, shouldProvideDependenciesBoundToProviders) {
@@ -39,7 +39,7 @@ TEST(BindingTest, shouldProvideDependenciesBoundToProviders) {
   sauce::shared_ptr<CustomBuilt> customBuilt = injector->get<CustomBuilt>();
 
   // Or the provider itself, if we like
-  // sauce::shared_ptr<Provider<CustomBuilt> > provider = injector->get<Provider<CustomBuilt> >();
+  sauce::shared_ptr<Provider<CustomBuilt> > provider = injector->get<Provider<CustomBuilt> >();
 }
 
 struct Unbound {};
