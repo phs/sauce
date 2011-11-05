@@ -20,11 +20,12 @@ struct ImplicitBindings;
  */
 template<typename Dependency>
 struct ImplicitBinding {
+  typedef sauce::shared_ptr<Binding<Dependency> > BindingPtr;
 
   /**
    * Attempt to supply a (unknown) Binding at provision time.
    */
-  static sauce::shared_ptr<Binding<Dependency> > get(Bindings<ImplicitBindings> const &) {
+  static BindingPtr get(Bindings<ImplicitBindings> const &) {
     throw UnboundExceptionFor<Dependency>();
   }
 
@@ -50,9 +51,9 @@ struct ImplicitBindings {
  */
 template<>
 struct ImplicitBinding<Named<Injector, Unnamed> > {
-  typedef Named<Injector, Unnamed> Dependency;
-  static sauce::shared_ptr<Binding<Dependency> > get(Bindings<ImplicitBindings> const &) {
-    sauce::shared_ptr<Binding<Dependency> > binding(new b::InjectorBinding());
+  typedef sauce::shared_ptr<Binding<Named<Injector, Unnamed> > > BindingPtr;
+  static BindingPtr get(Bindings<ImplicitBindings> const &) {
+    BindingPtr binding(new b::InjectorBinding());
     return binding;
   }
 };
