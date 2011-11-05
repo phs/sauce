@@ -1,13 +1,17 @@
 #ifndef SAUCE_SAUCE_PROVIDER_H_
 #define SAUCE_SAUCE_PROVIDER_H_
 
+#include <sauce/internal/key.h>
+
 namespace sauce {
 
 /**
  * An interface for including custom factories in an Injector.
  */
-template<typename Iface>
+template<typename Dependency>
 struct Provider {
+
+  typedef typename i::Key<Dependency>::Iface Iface;
 
   /**
    * Provide a naked Iface pointer.
