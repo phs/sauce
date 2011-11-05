@@ -86,7 +86,7 @@ public:
   }
 
   template<typename Dependency>
-  void validateAcyclic(sauce::shared_ptr<Injector> injector, TypeIds & ids) const {
+  sauce::shared_ptr<Binding<Dependency> > getBinding() const {
     sauce::shared_ptr<Binding<Dependency> > binding;
 
     BindingMap::const_iterator i = bindingMap.find(typeIdOf<Dependency>());
@@ -97,7 +97,12 @@ public:
       binding = resolve<Dependency>(i->second);
     }
 
-    binding->validateAcyclic(injector, ids);
+    return binding;
+  }
+
+  template<typename Dependency>
+  void validateAcyclic(sauce::shared_ptr<Injector> injector, TypeIds & ids) const {
+    getBinding<Dependency>()->validateAcyclic(injector, ids);
   }
 
   /**
@@ -107,16 +112,7 @@ public:
    */
   template<typename Dependency>
   typename Key<Dependency>::Ptr get(sauce::shared_ptr<Injector> injector) const {
-    sauce::shared_ptr<Binding<Dependency> > binding;
-
-    BindingMap::const_iterator i = bindingMap.find(typeIdOf<Dependency>());
-    if (i == bindingMap.end()) {
-      ImplicitBindings implicitBindings;
-      binding = implicitBindings.get<Dependency>(*this);
-    } else {
-      binding = resolve<Dependency>(i->second);
-    }
-
+    sauce::shared_ptr<Binding<Dependency> > binding(getBinding<Dependency>());
     return binding->get(binding, injector);
   }
 
