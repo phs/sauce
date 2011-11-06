@@ -96,7 +96,7 @@ struct GetDecorator<ImplicitBindings, Named<Provider<ProvidedDependency>, Name> 
 
 template<typename ImplicitBindings>
 class BaseInjector {
-  typedef sauce::auto_ptr<i::LockFactory> LockFactoryPtr;
+  typedef sauce::auto_ptr<LockFactory> LockFactoryPtr;
 
   Bindings<ImplicitBindings> const bindings;
   LockFactoryPtr lockFactory;

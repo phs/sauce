@@ -23,17 +23,17 @@ protected:
   }
 
   template<typename Dependency>
-  typename i::Key<Dependency>::Ptr getDependency(InjectorPtr injector) const {
+  typename Key<Dependency>::Ptr getDependency(InjectorPtr injector) const {
     return injector->get<Dependency>(injector);
   }
 
   template<typename Dependency, typename Scope>
-  void cache(InjectorPtr injector, typename i::Key<Dependency>::Ptr pointer) const {
+  void cache(InjectorPtr injector, typename Key<Dependency>::Ptr pointer) const {
     injector->template cache<Dependency, Scope>(pointer);
   }
 
   template<typename Dependency, typename Scope>
-  bool probe(InjectorPtr injector, typename i::Key<Dependency>::Ptr & out) const {
+  bool probe(InjectorPtr injector, typename Key<Dependency>::Ptr & out) const {
     return injector->template probe<Dependency, Scope>(out);
   }
 
@@ -101,7 +101,7 @@ public:
   void eagerlyProvide(OpaqueBindingPtr opaque, InjectorPtr injector) const {
     if (typeIdOf<Scope>() != typeIdOf<NoScope>()) {
       BindingPtr binding = resolve<Dependency>(opaque);
-      i::TypeIds ids;
+      TypeIds ids;
       validateAcyclic(injector, ids);
       get(binding, injector);
     }

@@ -50,7 +50,7 @@ struct NewBinding<Dependency, Scope, Impl($As), Allocator>: public NakedBinding<
 ]]]]
  {
 [[$for j [[
-    typename i::Key<A$j>::Ptr a$j(this->template getDependency<A$j>(injector));
+    typename Key<A$j>::Ptr a$j(this->template getDependency<A$j>(injector));
 
 ]]]]
     ImplAllocator allocator;

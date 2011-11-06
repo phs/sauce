@@ -57,7 +57,7 @@ struct NewBinding<Dependency, Scope, Impl(A1),
   }
 
   Iface * provide(sauce::shared_ptr<Injector> injector) const {
-    typename i::Key<A1>::Ptr a1(this->template getDependency<A1>(injector));
+    typename Key<A1>::Ptr a1(this->template getDependency<A1>(injector));
     ImplAllocator allocator;
     Impl * impl = allocator.allocate(1);
     new(impl) Impl(a1);
@@ -86,8 +86,8 @@ struct NewBinding<Dependency, Scope, Impl(A1, A2),
   }
 
   Iface * provide(sauce::shared_ptr<Injector> injector) const {
-    typename i::Key<A1>::Ptr a1(this->template getDependency<A1>(injector));
-    typename i::Key<A2>::Ptr a2(this->template getDependency<A2>(injector));
+    typename Key<A1>::Ptr a1(this->template getDependency<A1>(injector));
+    typename Key<A2>::Ptr a2(this->template getDependency<A2>(injector));
     ImplAllocator allocator;
     Impl * impl = allocator.allocate(1);
     new(impl) Impl(a1, a2);
@@ -117,9 +117,9 @@ struct NewBinding<Dependency, Scope, Impl(A1, A2, A3),
   }
 
   Iface * provide(sauce::shared_ptr<Injector> injector) const {
-    typename i::Key<A1>::Ptr a1(this->template getDependency<A1>(injector));
-    typename i::Key<A2>::Ptr a2(this->template getDependency<A2>(injector));
-    typename i::Key<A3>::Ptr a3(this->template getDependency<A3>(injector));
+    typename Key<A1>::Ptr a1(this->template getDependency<A1>(injector));
+    typename Key<A2>::Ptr a2(this->template getDependency<A2>(injector));
+    typename Key<A3>::Ptr a3(this->template getDependency<A3>(injector));
     ImplAllocator allocator;
     Impl * impl = allocator.allocate(1);
     new(impl) Impl(a1, a2, a3);
@@ -150,10 +150,10 @@ struct NewBinding<Dependency, Scope, Impl(A1, A2, A3, A4),
   }
 
   Iface * provide(sauce::shared_ptr<Injector> injector) const {
-    typename i::Key<A1>::Ptr a1(this->template getDependency<A1>(injector));
-    typename i::Key<A2>::Ptr a2(this->template getDependency<A2>(injector));
-    typename i::Key<A3>::Ptr a3(this->template getDependency<A3>(injector));
-    typename i::Key<A4>::Ptr a4(this->template getDependency<A4>(injector));
+    typename Key<A1>::Ptr a1(this->template getDependency<A1>(injector));
+    typename Key<A2>::Ptr a2(this->template getDependency<A2>(injector));
+    typename Key<A3>::Ptr a3(this->template getDependency<A3>(injector));
+    typename Key<A4>::Ptr a4(this->template getDependency<A4>(injector));
     ImplAllocator allocator;
     Impl * impl = allocator.allocate(1);
     new(impl) Impl(a1, a2, a3, a4);
@@ -186,11 +186,11 @@ struct NewBinding<Dependency, Scope, Impl(A1, A2, A3, A4, A5),
   }
 
   Iface * provide(sauce::shared_ptr<Injector> injector) const {
-    typename i::Key<A1>::Ptr a1(this->template getDependency<A1>(injector));
-    typename i::Key<A2>::Ptr a2(this->template getDependency<A2>(injector));
-    typename i::Key<A3>::Ptr a3(this->template getDependency<A3>(injector));
-    typename i::Key<A4>::Ptr a4(this->template getDependency<A4>(injector));
-    typename i::Key<A5>::Ptr a5(this->template getDependency<A5>(injector));
+    typename Key<A1>::Ptr a1(this->template getDependency<A1>(injector));
+    typename Key<A2>::Ptr a2(this->template getDependency<A2>(injector));
+    typename Key<A3>::Ptr a3(this->template getDependency<A3>(injector));
+    typename Key<A4>::Ptr a4(this->template getDependency<A4>(injector));
+    typename Key<A5>::Ptr a5(this->template getDependency<A5>(injector));
     ImplAllocator allocator;
     Impl * impl = allocator.allocate(1);
     new(impl) Impl(a1, a2, a3, a4, a5);
@@ -224,12 +224,12 @@ struct NewBinding<Dependency, Scope, Impl(A1, A2, A3, A4, A5, A6),
   }
 
   Iface * provide(sauce::shared_ptr<Injector> injector) const {
-    typename i::Key<A1>::Ptr a1(this->template getDependency<A1>(injector));
-    typename i::Key<A2>::Ptr a2(this->template getDependency<A2>(injector));
-    typename i::Key<A3>::Ptr a3(this->template getDependency<A3>(injector));
-    typename i::Key<A4>::Ptr a4(this->template getDependency<A4>(injector));
-    typename i::Key<A5>::Ptr a5(this->template getDependency<A5>(injector));
-    typename i::Key<A6>::Ptr a6(this->template getDependency<A6>(injector));
+    typename Key<A1>::Ptr a1(this->template getDependency<A1>(injector));
+    typename Key<A2>::Ptr a2(this->template getDependency<A2>(injector));
+    typename Key<A3>::Ptr a3(this->template getDependency<A3>(injector));
+    typename Key<A4>::Ptr a4(this->template getDependency<A4>(injector));
+    typename Key<A5>::Ptr a5(this->template getDependency<A5>(injector));
+    typename Key<A6>::Ptr a6(this->template getDependency<A6>(injector));
     ImplAllocator allocator;
     Impl * impl = allocator.allocate(1);
     new(impl) Impl(a1, a2, a3, a4, a5, a6);
@@ -264,13 +264,13 @@ struct NewBinding<Dependency, Scope, Impl(A1, A2, A3, A4, A5, A6, A7),
   }
 
   Iface * provide(sauce::shared_ptr<Injector> injector) const {
-    typename i::Key<A1>::Ptr a1(this->template getDependency<A1>(injector));
-    typename i::Key<A2>::Ptr a2(this->template getDependency<A2>(injector));
-    typename i::Key<A3>::Ptr a3(this->template getDependency<A3>(injector));
-    typename i::Key<A4>::Ptr a4(this->template getDependency<A4>(injector));
-    typename i::Key<A5>::Ptr a5(this->template getDependency<A5>(injector));
-    typename i::Key<A6>::Ptr a6(this->template getDependency<A6>(injector));
-    typename i::Key<A7>::Ptr a7(this->template getDependency<A7>(injector));
+    typename Key<A1>::Ptr a1(this->template getDependency<A1>(injector));
+    typename Key<A2>::Ptr a2(this->template getDependency<A2>(injector));
+    typename Key<A3>::Ptr a3(this->template getDependency<A3>(injector));
+    typename Key<A4>::Ptr a4(this->template getDependency<A4>(injector));
+    typename Key<A5>::Ptr a5(this->template getDependency<A5>(injector));
+    typename Key<A6>::Ptr a6(this->template getDependency<A6>(injector));
+    typename Key<A7>::Ptr a7(this->template getDependency<A7>(injector));
     ImplAllocator allocator;
     Impl * impl = allocator.allocate(1);
     new(impl) Impl(a1, a2, a3, a4, a5, a6, a7);
@@ -306,14 +306,14 @@ struct NewBinding<Dependency, Scope, Impl(A1, A2, A3, A4, A5, A6, A7, A8),
   }
 
   Iface * provide(sauce::shared_ptr<Injector> injector) const {
-    typename i::Key<A1>::Ptr a1(this->template getDependency<A1>(injector));
-    typename i::Key<A2>::Ptr a2(this->template getDependency<A2>(injector));
-    typename i::Key<A3>::Ptr a3(this->template getDependency<A3>(injector));
-    typename i::Key<A4>::Ptr a4(this->template getDependency<A4>(injector));
-    typename i::Key<A5>::Ptr a5(this->template getDependency<A5>(injector));
-    typename i::Key<A6>::Ptr a6(this->template getDependency<A6>(injector));
-    typename i::Key<A7>::Ptr a7(this->template getDependency<A7>(injector));
-    typename i::Key<A8>::Ptr a8(this->template getDependency<A8>(injector));
+    typename Key<A1>::Ptr a1(this->template getDependency<A1>(injector));
+    typename Key<A2>::Ptr a2(this->template getDependency<A2>(injector));
+    typename Key<A3>::Ptr a3(this->template getDependency<A3>(injector));
+    typename Key<A4>::Ptr a4(this->template getDependency<A4>(injector));
+    typename Key<A5>::Ptr a5(this->template getDependency<A5>(injector));
+    typename Key<A6>::Ptr a6(this->template getDependency<A6>(injector));
+    typename Key<A7>::Ptr a7(this->template getDependency<A7>(injector));
+    typename Key<A8>::Ptr a8(this->template getDependency<A8>(injector));
     ImplAllocator allocator;
     Impl * impl = allocator.allocate(1);
     new(impl) Impl(a1, a2, a3, a4, a5, a6, a7, a8);
@@ -350,15 +350,15 @@ struct NewBinding<Dependency, Scope, Impl(A1, A2, A3, A4, A5, A6, A7, A8, A9),
   }
 
   Iface * provide(sauce::shared_ptr<Injector> injector) const {
-    typename i::Key<A1>::Ptr a1(this->template getDependency<A1>(injector));
-    typename i::Key<A2>::Ptr a2(this->template getDependency<A2>(injector));
-    typename i::Key<A3>::Ptr a3(this->template getDependency<A3>(injector));
-    typename i::Key<A4>::Ptr a4(this->template getDependency<A4>(injector));
-    typename i::Key<A5>::Ptr a5(this->template getDependency<A5>(injector));
-    typename i::Key<A6>::Ptr a6(this->template getDependency<A6>(injector));
-    typename i::Key<A7>::Ptr a7(this->template getDependency<A7>(injector));
-    typename i::Key<A8>::Ptr a8(this->template getDependency<A8>(injector));
-    typename i::Key<A9>::Ptr a9(this->template getDependency<A9>(injector));
+    typename Key<A1>::Ptr a1(this->template getDependency<A1>(injector));
+    typename Key<A2>::Ptr a2(this->template getDependency<A2>(injector));
+    typename Key<A3>::Ptr a3(this->template getDependency<A3>(injector));
+    typename Key<A4>::Ptr a4(this->template getDependency<A4>(injector));
+    typename Key<A5>::Ptr a5(this->template getDependency<A5>(injector));
+    typename Key<A6>::Ptr a6(this->template getDependency<A6>(injector));
+    typename Key<A7>::Ptr a7(this->template getDependency<A7>(injector));
+    typename Key<A8>::Ptr a8(this->template getDependency<A8>(injector));
+    typename Key<A9>::Ptr a9(this->template getDependency<A9>(injector));
     ImplAllocator allocator;
     Impl * impl = allocator.allocate(1);
     new(impl) Impl(a1, a2, a3, a4, a5, a6, a7, a8, a9);
@@ -397,16 +397,16 @@ struct NewBinding<Dependency, Scope, Impl(A1, A2, A3, A4, A5, A6, A7, A8, A9,
   }
 
   Iface * provide(sauce::shared_ptr<Injector> injector) const {
-    typename i::Key<A1>::Ptr a1(this->template getDependency<A1>(injector));
-    typename i::Key<A2>::Ptr a2(this->template getDependency<A2>(injector));
-    typename i::Key<A3>::Ptr a3(this->template getDependency<A3>(injector));
-    typename i::Key<A4>::Ptr a4(this->template getDependency<A4>(injector));
-    typename i::Key<A5>::Ptr a5(this->template getDependency<A5>(injector));
-    typename i::Key<A6>::Ptr a6(this->template getDependency<A6>(injector));
-    typename i::Key<A7>::Ptr a7(this->template getDependency<A7>(injector));
-    typename i::Key<A8>::Ptr a8(this->template getDependency<A8>(injector));
-    typename i::Key<A9>::Ptr a9(this->template getDependency<A9>(injector));
-    typename i::Key<A10>::Ptr a10(this->template getDependency<A10>(injector));
+    typename Key<A1>::Ptr a1(this->template getDependency<A1>(injector));
+    typename Key<A2>::Ptr a2(this->template getDependency<A2>(injector));
+    typename Key<A3>::Ptr a3(this->template getDependency<A3>(injector));
+    typename Key<A4>::Ptr a4(this->template getDependency<A4>(injector));
+    typename Key<A5>::Ptr a5(this->template getDependency<A5>(injector));
+    typename Key<A6>::Ptr a6(this->template getDependency<A6>(injector));
+    typename Key<A7>::Ptr a7(this->template getDependency<A7>(injector));
+    typename Key<A8>::Ptr a8(this->template getDependency<A8>(injector));
+    typename Key<A9>::Ptr a9(this->template getDependency<A9>(injector));
+    typename Key<A10>::Ptr a10(this->template getDependency<A10>(injector));
     ImplAllocator allocator;
     Impl * impl = allocator.allocate(1);
     new(impl) Impl(a1, a2, a3, a4, a5, a6, a7, a8, a9, a10);
