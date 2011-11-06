@@ -8,8 +8,10 @@
 #include <sauce/injector.h>
 #include <sauce/memory.h>
 #include <sauce/named.h>
+#include <sauce/provider.h>
 #include <sauce/internal/binding.h>
 #include <sauce/internal/bindings/naked_binding.h>
+#include <sauce/internal/bindings/transparent_binding.h>
 #include <sauce/internal/key.h>
 #include <sauce/internal/type_id.h>
 
@@ -20,6 +22,29 @@ namespace bindings {
 template<typename Dependency, typename Scope, typename Constructor,
     typename Allocator>
 class NewBinding;
+
+template<typename Dependency, typename Constructor, typename Allocator>
+class NewProvider;
+
+template<typename Dependency, typename Impl, typename Allocator>
+class NewProvider<Dependency, Impl(), Allocator>: NakedProvider<Dependency> {
+  typedef typename Key<Dependency>::Iface Iface;
+  typedef typename Allocator::template rebind<Impl>::other ImplAllocator;
+
+  Iface * provide() {
+    ImplAllocator allocator;
+    Impl * impl = allocator.allocate(1);
+    new(impl) Impl();
+    return impl;
+  }
+
+  void dispose(Iface * iface) {
+    Impl * impl = static_cast<Impl *>(iface);
+    ImplAllocator allocator;
+    impl->~Impl(); // Must not throw
+    allocator.deallocate(impl, 1);
+  }
+};
 
 template<typename Dependency, typename Scope, typename Impl, typename Allocator>
 struct NewBinding<Dependency, Scope, Impl(),
@@ -37,6 +62,32 @@ struct NewBinding<Dependency, Scope, Impl(),
   }
 
   void dispose(Iface * iface) const {
+    Impl * impl = static_cast<Impl *>(iface);
+    ImplAllocator allocator;
+    impl->~Impl(); // Must not throw
+    allocator.deallocate(impl, 1);
+  }
+};
+
+template<typename Dependency, typename Impl, typename Allocator, typename A1>
+class NewProvider<Dependency, Impl(A1), Allocator>: NakedProvider<Dependency> {
+  typedef typename Key<Dependency>::Iface Iface;
+  typedef typename Allocator::template rebind<Impl>::other ImplAllocator;
+
+  typename Key<Provider<A1> >::Ptr provider1;
+
+  NewProvider(typename Key<Provider<A1> >::Ptr provider1):
+    NakedProvider<Dependency>(),
+    provider1(provider1) {}
+  Iface * provide() {
+    typename Key<A1>::Ptr a1 = provider1->get();
+    ImplAllocator allocator;
+    Impl * impl = allocator.allocate(1);
+    new(impl) Impl(a1);
+    return impl;
+  }
+
+  void dispose(Iface * iface) {
     Impl * impl = static_cast<Impl *>(iface);
     ImplAllocator allocator;
     impl->~Impl(); // Must not throw
@@ -65,6 +116,38 @@ struct NewBinding<Dependency, Scope, Impl(A1),
   }
 
   void dispose(Iface * iface) const {
+    Impl * impl = static_cast<Impl *>(iface);
+    ImplAllocator allocator;
+    impl->~Impl(); // Must not throw
+    allocator.deallocate(impl, 1);
+  }
+};
+
+template<typename Dependency, typename Impl, typename Allocator, typename A1,
+    typename A2>
+class NewProvider<Dependency, Impl(A1, A2),
+    Allocator>: NakedProvider<Dependency> {
+  typedef typename Key<Dependency>::Iface Iface;
+  typedef typename Allocator::template rebind<Impl>::other ImplAllocator;
+
+  typename Key<Provider<A1> >::Ptr provider1;
+  typename Key<Provider<A2> >::Ptr provider2;
+
+  NewProvider(typename Key<Provider<A1> >::Ptr provider1,
+      typename Key<Provider<A2> >::Ptr provider2):
+    NakedProvider<Dependency>(),
+    provider1(provider1),
+    provider2(provider2) {}
+  Iface * provide() {
+    typename Key<A1>::Ptr a1 = provider1->get();
+    typename Key<A2>::Ptr a2 = provider2->get();
+    ImplAllocator allocator;
+    Impl * impl = allocator.allocate(1);
+    new(impl) Impl(a1, a2);
+    return impl;
+  }
+
+  void dispose(Iface * iface) {
     Impl * impl = static_cast<Impl *>(iface);
     ImplAllocator allocator;
     impl->~Impl(); // Must not throw
@@ -102,6 +185,42 @@ struct NewBinding<Dependency, Scope, Impl(A1, A2),
   }
 };
 
+template<typename Dependency, typename Impl, typename Allocator, typename A1,
+    typename A2, typename A3>
+class NewProvider<Dependency, Impl(A1, A2, A3),
+    Allocator>: NakedProvider<Dependency> {
+  typedef typename Key<Dependency>::Iface Iface;
+  typedef typename Allocator::template rebind<Impl>::other ImplAllocator;
+
+  typename Key<Provider<A1> >::Ptr provider1;
+  typename Key<Provider<A2> >::Ptr provider2;
+  typename Key<Provider<A3> >::Ptr provider3;
+
+  NewProvider(typename Key<Provider<A1> >::Ptr provider1,
+      typename Key<Provider<A2> >::Ptr provider2,
+      typename Key<Provider<A3> >::Ptr provider3):
+    NakedProvider<Dependency>(),
+    provider1(provider1),
+    provider2(provider2),
+    provider3(provider3) {}
+  Iface * provide() {
+    typename Key<A1>::Ptr a1 = provider1->get();
+    typename Key<A2>::Ptr a2 = provider2->get();
+    typename Key<A3>::Ptr a3 = provider3->get();
+    ImplAllocator allocator;
+    Impl * impl = allocator.allocate(1);
+    new(impl) Impl(a1, a2, a3);
+    return impl;
+  }
+
+  void dispose(Iface * iface) {
+    Impl * impl = static_cast<Impl *>(iface);
+    ImplAllocator allocator;
+    impl->~Impl(); // Must not throw
+    allocator.deallocate(impl, 1);
+  }
+};
+
 template<typename Dependency, typename Scope, typename Impl,
     typename Allocator, typename A1, typename A2, typename A3>
 struct NewBinding<Dependency, Scope, Impl(A1, A2, A3),
@@ -127,6 +246,46 @@ struct NewBinding<Dependency, Scope, Impl(A1, A2, A3),
   }
 
   void dispose(Iface * iface) const {
+    Impl * impl = static_cast<Impl *>(iface);
+    ImplAllocator allocator;
+    impl->~Impl(); // Must not throw
+    allocator.deallocate(impl, 1);
+  }
+};
+
+template<typename Dependency, typename Impl, typename Allocator, typename A1,
+    typename A2, typename A3, typename A4>
+class NewProvider<Dependency, Impl(A1, A2, A3, A4),
+    Allocator>: NakedProvider<Dependency> {
+  typedef typename Key<Dependency>::Iface Iface;
+  typedef typename Allocator::template rebind<Impl>::other ImplAllocator;
+
+  typename Key<Provider<A1> >::Ptr provider1;
+  typename Key<Provider<A2> >::Ptr provider2;
+  typename Key<Provider<A3> >::Ptr provider3;
+  typename Key<Provider<A4> >::Ptr provider4;
+
+  NewProvider(typename Key<Provider<A1> >::Ptr provider1,
+      typename Key<Provider<A2> >::Ptr provider2,
+      typename Key<Provider<A3> >::Ptr provider3,
+      typename Key<Provider<A4> >::Ptr provider4):
+    NakedProvider<Dependency>(),
+    provider1(provider1),
+    provider2(provider2),
+    provider3(provider3),
+    provider4(provider4) {}
+  Iface * provide() {
+    typename Key<A1>::Ptr a1 = provider1->get();
+    typename Key<A2>::Ptr a2 = provider2->get();
+    typename Key<A3>::Ptr a3 = provider3->get();
+    typename Key<A4>::Ptr a4 = provider4->get();
+    ImplAllocator allocator;
+    Impl * impl = allocator.allocate(1);
+    new(impl) Impl(a1, a2, a3, a4);
+    return impl;
+  }
+
+  void dispose(Iface * iface) {
     Impl * impl = static_cast<Impl *>(iface);
     ImplAllocator allocator;
     impl->~Impl(); // Must not throw
@@ -168,6 +327,50 @@ struct NewBinding<Dependency, Scope, Impl(A1, A2, A3, A4),
   }
 };
 
+template<typename Dependency, typename Impl, typename Allocator, typename A1,
+    typename A2, typename A3, typename A4, typename A5>
+class NewProvider<Dependency, Impl(A1, A2, A3, A4, A5),
+    Allocator>: NakedProvider<Dependency> {
+  typedef typename Key<Dependency>::Iface Iface;
+  typedef typename Allocator::template rebind<Impl>::other ImplAllocator;
+
+  typename Key<Provider<A1> >::Ptr provider1;
+  typename Key<Provider<A2> >::Ptr provider2;
+  typename Key<Provider<A3> >::Ptr provider3;
+  typename Key<Provider<A4> >::Ptr provider4;
+  typename Key<Provider<A5> >::Ptr provider5;
+
+  NewProvider(typename Key<Provider<A1> >::Ptr provider1,
+      typename Key<Provider<A2> >::Ptr provider2,
+      typename Key<Provider<A3> >::Ptr provider3,
+      typename Key<Provider<A4> >::Ptr provider4,
+      typename Key<Provider<A5> >::Ptr provider5):
+    NakedProvider<Dependency>(),
+    provider1(provider1),
+    provider2(provider2),
+    provider3(provider3),
+    provider4(provider4),
+    provider5(provider5) {}
+  Iface * provide() {
+    typename Key<A1>::Ptr a1 = provider1->get();
+    typename Key<A2>::Ptr a2 = provider2->get();
+    typename Key<A3>::Ptr a3 = provider3->get();
+    typename Key<A4>::Ptr a4 = provider4->get();
+    typename Key<A5>::Ptr a5 = provider5->get();
+    ImplAllocator allocator;
+    Impl * impl = allocator.allocate(1);
+    new(impl) Impl(a1, a2, a3, a4, a5);
+    return impl;
+  }
+
+  void dispose(Iface * iface) {
+    Impl * impl = static_cast<Impl *>(iface);
+    ImplAllocator allocator;
+    impl->~Impl(); // Must not throw
+    allocator.deallocate(impl, 1);
+  }
+};
+
 template<typename Dependency, typename Scope, typename Impl,
     typename Allocator, typename A1, typename A2, typename A3, typename A4,
     typename A5>
@@ -198,6 +401,54 @@ struct NewBinding<Dependency, Scope, Impl(A1, A2, A3, A4, A5),
   }
 
   void dispose(Iface * iface) const {
+    Impl * impl = static_cast<Impl *>(iface);
+    ImplAllocator allocator;
+    impl->~Impl(); // Must not throw
+    allocator.deallocate(impl, 1);
+  }
+};
+
+template<typename Dependency, typename Impl, typename Allocator, typename A1,
+    typename A2, typename A3, typename A4, typename A5, typename A6>
+class NewProvider<Dependency, Impl(A1, A2, A3, A4, A5, A6),
+    Allocator>: NakedProvider<Dependency> {
+  typedef typename Key<Dependency>::Iface Iface;
+  typedef typename Allocator::template rebind<Impl>::other ImplAllocator;
+
+  typename Key<Provider<A1> >::Ptr provider1;
+  typename Key<Provider<A2> >::Ptr provider2;
+  typename Key<Provider<A3> >::Ptr provider3;
+  typename Key<Provider<A4> >::Ptr provider4;
+  typename Key<Provider<A5> >::Ptr provider5;
+  typename Key<Provider<A6> >::Ptr provider6;
+
+  NewProvider(typename Key<Provider<A1> >::Ptr provider1,
+      typename Key<Provider<A2> >::Ptr provider2,
+      typename Key<Provider<A3> >::Ptr provider3,
+      typename Key<Provider<A4> >::Ptr provider4,
+      typename Key<Provider<A5> >::Ptr provider5,
+      typename Key<Provider<A6> >::Ptr provider6):
+    NakedProvider<Dependency>(),
+    provider1(provider1),
+    provider2(provider2),
+    provider3(provider3),
+    provider4(provider4),
+    provider5(provider5),
+    provider6(provider6) {}
+  Iface * provide() {
+    typename Key<A1>::Ptr a1 = provider1->get();
+    typename Key<A2>::Ptr a2 = provider2->get();
+    typename Key<A3>::Ptr a3 = provider3->get();
+    typename Key<A4>::Ptr a4 = provider4->get();
+    typename Key<A5>::Ptr a5 = provider5->get();
+    typename Key<A6>::Ptr a6 = provider6->get();
+    ImplAllocator allocator;
+    Impl * impl = allocator.allocate(1);
+    new(impl) Impl(a1, a2, a3, a4, a5, a6);
+    return impl;
+  }
+
+  void dispose(Iface * iface) {
     Impl * impl = static_cast<Impl *>(iface);
     ImplAllocator allocator;
     impl->~Impl(); // Must not throw
@@ -244,6 +495,59 @@ struct NewBinding<Dependency, Scope, Impl(A1, A2, A3, A4, A5, A6),
   }
 };
 
+template<typename Dependency, typename Impl, typename Allocator, typename A1,
+    typename A2, typename A3, typename A4, typename A5, typename A6,
+    typename A7>
+class NewProvider<Dependency, Impl(A1, A2, A3, A4, A5, A6, A7),
+    Allocator>: NakedProvider<Dependency> {
+  typedef typename Key<Dependency>::Iface Iface;
+  typedef typename Allocator::template rebind<Impl>::other ImplAllocator;
+
+  typename Key<Provider<A1> >::Ptr provider1;
+  typename Key<Provider<A2> >::Ptr provider2;
+  typename Key<Provider<A3> >::Ptr provider3;
+  typename Key<Provider<A4> >::Ptr provider4;
+  typename Key<Provider<A5> >::Ptr provider5;
+  typename Key<Provider<A6> >::Ptr provider6;
+  typename Key<Provider<A7> >::Ptr provider7;
+
+  NewProvider(typename Key<Provider<A1> >::Ptr provider1,
+      typename Key<Provider<A2> >::Ptr provider2,
+      typename Key<Provider<A3> >::Ptr provider3,
+      typename Key<Provider<A4> >::Ptr provider4,
+      typename Key<Provider<A5> >::Ptr provider5,
+      typename Key<Provider<A6> >::Ptr provider6,
+      typename Key<Provider<A7> >::Ptr provider7):
+    NakedProvider<Dependency>(),
+    provider1(provider1),
+    provider2(provider2),
+    provider3(provider3),
+    provider4(provider4),
+    provider5(provider5),
+    provider6(provider6),
+    provider7(provider7) {}
+  Iface * provide() {
+    typename Key<A1>::Ptr a1 = provider1->get();
+    typename Key<A2>::Ptr a2 = provider2->get();
+    typename Key<A3>::Ptr a3 = provider3->get();
+    typename Key<A4>::Ptr a4 = provider4->get();
+    typename Key<A5>::Ptr a5 = provider5->get();
+    typename Key<A6>::Ptr a6 = provider6->get();
+    typename Key<A7>::Ptr a7 = provider7->get();
+    ImplAllocator allocator;
+    Impl * impl = allocator.allocate(1);
+    new(impl) Impl(a1, a2, a3, a4, a5, a6, a7);
+    return impl;
+  }
+
+  void dispose(Iface * iface) {
+    Impl * impl = static_cast<Impl *>(iface);
+    ImplAllocator allocator;
+    impl->~Impl(); // Must not throw
+    allocator.deallocate(impl, 1);
+  }
+};
+
 template<typename Dependency, typename Scope, typename Impl,
     typename Allocator, typename A1, typename A2, typename A3, typename A4,
     typename A5, typename A6, typename A7>
@@ -278,6 +582,63 @@ struct NewBinding<Dependency, Scope, Impl(A1, A2, A3, A4, A5, A6, A7),
   }
 
   void dispose(Iface * iface) const {
+    Impl * impl = static_cast<Impl *>(iface);
+    ImplAllocator allocator;
+    impl->~Impl(); // Must not throw
+    allocator.deallocate(impl, 1);
+  }
+};
+
+template<typename Dependency, typename Impl, typename Allocator, typename A1,
+    typename A2, typename A3, typename A4, typename A5, typename A6,
+    typename A7, typename A8>
+class NewProvider<Dependency, Impl(A1, A2, A3, A4, A5, A6, A7, A8),
+    Allocator>: NakedProvider<Dependency> {
+  typedef typename Key<Dependency>::Iface Iface;
+  typedef typename Allocator::template rebind<Impl>::other ImplAllocator;
+
+  typename Key<Provider<A1> >::Ptr provider1;
+  typename Key<Provider<A2> >::Ptr provider2;
+  typename Key<Provider<A3> >::Ptr provider3;
+  typename Key<Provider<A4> >::Ptr provider4;
+  typename Key<Provider<A5> >::Ptr provider5;
+  typename Key<Provider<A6> >::Ptr provider6;
+  typename Key<Provider<A7> >::Ptr provider7;
+  typename Key<Provider<A8> >::Ptr provider8;
+
+  NewProvider(typename Key<Provider<A1> >::Ptr provider1,
+      typename Key<Provider<A2> >::Ptr provider2,
+      typename Key<Provider<A3> >::Ptr provider3,
+      typename Key<Provider<A4> >::Ptr provider4,
+      typename Key<Provider<A5> >::Ptr provider5,
+      typename Key<Provider<A6> >::Ptr provider6,
+      typename Key<Provider<A7> >::Ptr provider7,
+      typename Key<Provider<A8> >::Ptr provider8):
+    NakedProvider<Dependency>(),
+    provider1(provider1),
+    provider2(provider2),
+    provider3(provider3),
+    provider4(provider4),
+    provider5(provider5),
+    provider6(provider6),
+    provider7(provider7),
+    provider8(provider8) {}
+  Iface * provide() {
+    typename Key<A1>::Ptr a1 = provider1->get();
+    typename Key<A2>::Ptr a2 = provider2->get();
+    typename Key<A3>::Ptr a3 = provider3->get();
+    typename Key<A4>::Ptr a4 = provider4->get();
+    typename Key<A5>::Ptr a5 = provider5->get();
+    typename Key<A6>::Ptr a6 = provider6->get();
+    typename Key<A7>::Ptr a7 = provider7->get();
+    typename Key<A8>::Ptr a8 = provider8->get();
+    ImplAllocator allocator;
+    Impl * impl = allocator.allocate(1);
+    new(impl) Impl(a1, a2, a3, a4, a5, a6, a7, a8);
+    return impl;
+  }
+
+  void dispose(Iface * iface) {
     Impl * impl = static_cast<Impl *>(iface);
     ImplAllocator allocator;
     impl->~Impl(); // Must not throw
@@ -328,6 +689,67 @@ struct NewBinding<Dependency, Scope, Impl(A1, A2, A3, A4, A5, A6, A7, A8),
   }
 };
 
+template<typename Dependency, typename Impl, typename Allocator, typename A1,
+    typename A2, typename A3, typename A4, typename A5, typename A6,
+    typename A7, typename A8, typename A9>
+class NewProvider<Dependency, Impl(A1, A2, A3, A4, A5, A6, A7, A8, A9),
+    Allocator>: NakedProvider<Dependency> {
+  typedef typename Key<Dependency>::Iface Iface;
+  typedef typename Allocator::template rebind<Impl>::other ImplAllocator;
+
+  typename Key<Provider<A1> >::Ptr provider1;
+  typename Key<Provider<A2> >::Ptr provider2;
+  typename Key<Provider<A3> >::Ptr provider3;
+  typename Key<Provider<A4> >::Ptr provider4;
+  typename Key<Provider<A5> >::Ptr provider5;
+  typename Key<Provider<A6> >::Ptr provider6;
+  typename Key<Provider<A7> >::Ptr provider7;
+  typename Key<Provider<A8> >::Ptr provider8;
+  typename Key<Provider<A9> >::Ptr provider9;
+
+  NewProvider(typename Key<Provider<A1> >::Ptr provider1,
+      typename Key<Provider<A2> >::Ptr provider2,
+      typename Key<Provider<A3> >::Ptr provider3,
+      typename Key<Provider<A4> >::Ptr provider4,
+      typename Key<Provider<A5> >::Ptr provider5,
+      typename Key<Provider<A6> >::Ptr provider6,
+      typename Key<Provider<A7> >::Ptr provider7,
+      typename Key<Provider<A8> >::Ptr provider8,
+      typename Key<Provider<A9> >::Ptr provider9):
+    NakedProvider<Dependency>(),
+    provider1(provider1),
+    provider2(provider2),
+    provider3(provider3),
+    provider4(provider4),
+    provider5(provider5),
+    provider6(provider6),
+    provider7(provider7),
+    provider8(provider8),
+    provider9(provider9) {}
+  Iface * provide() {
+    typename Key<A1>::Ptr a1 = provider1->get();
+    typename Key<A2>::Ptr a2 = provider2->get();
+    typename Key<A3>::Ptr a3 = provider3->get();
+    typename Key<A4>::Ptr a4 = provider4->get();
+    typename Key<A5>::Ptr a5 = provider5->get();
+    typename Key<A6>::Ptr a6 = provider6->get();
+    typename Key<A7>::Ptr a7 = provider7->get();
+    typename Key<A8>::Ptr a8 = provider8->get();
+    typename Key<A9>::Ptr a9 = provider9->get();
+    ImplAllocator allocator;
+    Impl * impl = allocator.allocate(1);
+    new(impl) Impl(a1, a2, a3, a4, a5, a6, a7, a8, a9);
+    return impl;
+  }
+
+  void dispose(Iface * iface) {
+    Impl * impl = static_cast<Impl *>(iface);
+    ImplAllocator allocator;
+    impl->~Impl(); // Must not throw
+    allocator.deallocate(impl, 1);
+  }
+};
+
 template<typename Dependency, typename Scope, typename Impl,
     typename Allocator, typename A1, typename A2, typename A3, typename A4,
     typename A5, typename A6, typename A7, typename A8, typename A9>
@@ -366,6 +788,71 @@ struct NewBinding<Dependency, Scope, Impl(A1, A2, A3, A4, A5, A6, A7, A8, A9),
   }
 
   void dispose(Iface * iface) const {
+    Impl * impl = static_cast<Impl *>(iface);
+    ImplAllocator allocator;
+    impl->~Impl(); // Must not throw
+    allocator.deallocate(impl, 1);
+  }
+};
+
+template<typename Dependency, typename Impl, typename Allocator, typename A1,
+    typename A2, typename A3, typename A4, typename A5, typename A6,
+    typename A7, typename A8, typename A9, typename A10>
+class NewProvider<Dependency, Impl(A1, A2, A3, A4, A5, A6, A7, A8, A9, A10),
+    Allocator>: NakedProvider<Dependency> {
+  typedef typename Key<Dependency>::Iface Iface;
+  typedef typename Allocator::template rebind<Impl>::other ImplAllocator;
+
+  typename Key<Provider<A1> >::Ptr provider1;
+  typename Key<Provider<A2> >::Ptr provider2;
+  typename Key<Provider<A3> >::Ptr provider3;
+  typename Key<Provider<A4> >::Ptr provider4;
+  typename Key<Provider<A5> >::Ptr provider5;
+  typename Key<Provider<A6> >::Ptr provider6;
+  typename Key<Provider<A7> >::Ptr provider7;
+  typename Key<Provider<A8> >::Ptr provider8;
+  typename Key<Provider<A9> >::Ptr provider9;
+  typename Key<Provider<A10> >::Ptr provider10;
+
+  NewProvider(typename Key<Provider<A1> >::Ptr provider1,
+      typename Key<Provider<A2> >::Ptr provider2,
+      typename Key<Provider<A3> >::Ptr provider3,
+      typename Key<Provider<A4> >::Ptr provider4,
+      typename Key<Provider<A5> >::Ptr provider5,
+      typename Key<Provider<A6> >::Ptr provider6,
+      typename Key<Provider<A7> >::Ptr provider7,
+      typename Key<Provider<A8> >::Ptr provider8,
+      typename Key<Provider<A9> >::Ptr provider9,
+      typename Key<Provider<A10> >::Ptr provider10):
+    NakedProvider<Dependency>(),
+    provider1(provider1),
+    provider2(provider2),
+    provider3(provider3),
+    provider4(provider4),
+    provider5(provider5),
+    provider6(provider6),
+    provider7(provider7),
+    provider8(provider8),
+    provider9(provider9),
+    provider10(provider10) {}
+  Iface * provide() {
+    typename Key<A1>::Ptr a1 = provider1->get();
+    typename Key<A2>::Ptr a2 = provider2->get();
+    typename Key<A3>::Ptr a3 = provider3->get();
+    typename Key<A4>::Ptr a4 = provider4->get();
+    typename Key<A5>::Ptr a5 = provider5->get();
+    typename Key<A6>::Ptr a6 = provider6->get();
+    typename Key<A7>::Ptr a7 = provider7->get();
+    typename Key<A8>::Ptr a8 = provider8->get();
+    typename Key<A9>::Ptr a9 = provider9->get();
+    typename Key<A10>::Ptr a10 = provider10->get();
+    ImplAllocator allocator;
+    Impl * impl = allocator.allocate(1);
+    new(impl) Impl(a1, a2, a3, a4, a5, a6, a7, a8, a9, a10);
+    return impl;
+  }
+
+  void dispose(Iface * iface) {
     Impl * impl = static_cast<Impl *>(iface);
     ImplAllocator allocator;
     impl->~Impl(); // Must not throw
