@@ -45,8 +45,8 @@ struct CustomBuiltProvider: NakedProvider<CustomBuilt> {
 
 void ProviderModule(Binder & binder) {
   // TODO: One of these should be implicit, or one binding should specify both somehow
-  binder.bind<NakedProvider<CustomBuilt> >().to<CustomBuiltProvider()>();
-  binder.bind<CustomBuilt>().toProvider<NakedProvider<CustomBuilt> >();
+  binder.bind<Provider<CustomBuilt> >().to<CustomBuiltProvider()>();
+  binder.bind<CustomBuilt>().toProvider<Provider<CustomBuilt> >();
 }
 
 TEST(BindingTest, shouldProvideDependenciesBoundToProvidersAndTheProvidersToo) {
@@ -56,7 +56,7 @@ TEST(BindingTest, shouldProvideDependenciesBoundToProvidersAndTheProvidersToo) {
   sauce::shared_ptr<CustomBuilt> customBuilt = injector->get<CustomBuilt>();
 
   // Or a provider
-  sauce::shared_ptr<NakedProvider<CustomBuilt> > provider = injector->get<NakedProvider<CustomBuilt> >();
+  sauce::shared_ptr<Provider<CustomBuilt> > provider = injector->get<Provider<CustomBuilt> >();
 }
 
 struct Unbound {};

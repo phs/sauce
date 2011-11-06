@@ -14,8 +14,7 @@ namespace bindings {
  * A binding that supplies interfaces by providing and disposing naked pointers.
  */
 template<typename Dependency, typename Scope>
-class NakedBinding:
-  public TransparentBinding<Dependency, Scope> {
+class NakedBinding: public TransparentBinding<Dependency, Scope> {
 
   typedef typename Key<Dependency>::Iface Iface;
   typedef typename Binding<Dependency>::BindingPtr BindingPtr;
