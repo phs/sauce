@@ -4,6 +4,7 @@
 #include <cassert>
 
 #include <sauce/memory.h>
+#include <sauce/internal/disposal_deleter.h>
 #include <sauce/internal/key.h>
 
 namespace sauce {
@@ -32,13 +33,60 @@ class Provider {
 
 protected:
 
-  sauce::shared_ptr<Injector> getSelf() const {
-    sauce::shared_ptr<Injector> self = weak.lock();
+  sauce::shared_ptr<Provider<Dependency> > getSelf() const {
+    sauce::shared_ptr<Provider<Dependency> > self = weak.lock();
     assert(self.get() == this);
     return self;
   }
 
 public:
+
+  Provider():
+    weak() {}
+
+  /**
+   * Provide an Iface.
+   */
+  virtual sauce::shared_ptr<Iface> get() = 0;
+
+};
+
+/**
+ * An interface for including custom factories in an Injector.
+ */
+template<typename Dependency>
+class NakedProvider: public Provider<Dependency> {
+
+  typedef typename i::Key<Dependency>::Iface Iface;
+  typedef sauce::shared_ptr<Provider<Dependency> > ProviderPtr;
+  typedef NakedProvider<Dependency> Naked;
+  typedef sauce::shared_ptr<Naked> NakedPtr;
+
+  /**
+   * Create a shared pointer deleter suitable for this provider.
+   */
+  i::DisposalDeleter<Iface, Naked> deleter() const {
+    ProviderPtr provider = this->getSelf();
+    NakedPtr naked = sauce::static_pointer_cast<Naked>(provider);
+    i::DisposalDeleter<Iface, Naked> deleter(naked);
+    return deleter;
+  }
+
+public:
+
+  NakedProvider():
+    Provider<Dependency>() {}
+
+  /**
+   * Provide an Iface.
+   *
+   * A naked instance pointer is obtained with provide(), and wrapped in a shared_ptr.  It is also
+   * given a custom deleter, to dispose of the naked pointer with dispose(Iface *).
+   */
+  sauce::shared_ptr<Iface> get() {
+    sauce::shared_ptr<Iface> provided(provide(), deleter());
+    return provided;
+  }
 
   /**
    * Provide a naked Iface pointer.
