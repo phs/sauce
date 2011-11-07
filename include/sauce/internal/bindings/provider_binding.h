@@ -21,11 +21,11 @@ class ProviderBinding: public TransparentBinding<Dependency, Scope> {
   typedef typename Binding<Dependency>::BindingPtr BindingPtr;
 
   void validateAcyclic(InjectorPtr injector, TypeIds & ids) const {
-    this->template validateAcyclicos<Provider>(injector, ids);
+    this->template validateAcyclicHelper<Provider>(injector, ids);
   }
 
   typename Key<Dependency>::Ptr provide(BindingPtr, InjectorPtr injector) const {
-    return this->template getDependency<Provider>(injector)->get();
+    return this->template getHelper<Provider>(injector)->get();
   }
 };
 

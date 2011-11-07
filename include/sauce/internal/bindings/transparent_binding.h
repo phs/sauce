@@ -18,12 +18,12 @@ class InjectorFriend {
 protected:
 
   template<typename Dependency>
-  void validateAcyclicos(InjectorPtr injector, TypeIds & ids) const {
+  void validateAcyclicHelper(InjectorPtr injector, TypeIds & ids) const {
     injector->validateAcyclic<Dependency>(injector, ids);
   }
 
   template<typename Dependency>
-  typename Key<Dependency>::Ptr getDependency(InjectorPtr injector) const {
+  typename Key<Dependency>::Ptr getHelper(InjectorPtr injector) const {
     return injector->get<Dependency>(injector);
   }
 

@@ -55,7 +55,7 @@ class NewBinding<Dependency, Scope, Impl($As), Allocator>:
  Ptr provide(BindingPtr binding, InjectorPtr injector) const
 ]]]] {
 [[$for j [[
-    typename Key<A$j>::Ptr a$j(this->template getDependency<A$j>(injector));
+    typename Key<A$j>::Ptr a$j(this->template getHelper<A$j>(injector));
 
 ]]]]
     Deleter deleter(sauce::static_pointer_cast<New>(binding));
@@ -67,7 +67,7 @@ class NewBinding<Dependency, Scope, Impl($As), Allocator>:
 
   void validateAcyclic(InjectorPtr injector, TypeIds & ids) const {
 [[$for j [[
-    this->template validateAcyclicos<A$j>(injector, ids);
+    this->template validateAcyclicHelper<A$j>(injector, ids);
 
 ]]]]
   }

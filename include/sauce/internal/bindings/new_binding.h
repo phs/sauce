@@ -83,7 +83,7 @@ class NewBinding<Dependency, Scope, Impl(A1), Allocator>:
    * dispose(Iface *).
    */
  Ptr provide(BindingPtr binding, InjectorPtr injector) const {
-    typename Key<A1>::Ptr a1(this->template getDependency<A1>(injector));
+    typename Key<A1>::Ptr a1(this->template getHelper<A1>(injector));
     Deleter deleter(sauce::static_pointer_cast<New>(binding));
     Impl * impl = allocator.allocate(1);
     Ptr provided(new(impl) Impl(a1), deleter);
@@ -91,7 +91,7 @@ class NewBinding<Dependency, Scope, Impl(A1), Allocator>:
   }
 
   void validateAcyclic(InjectorPtr injector, TypeIds & ids) const {
-    this->template validateAcyclicos<A1>(injector, ids);
+    this->template validateAcyclicHelper<A1>(injector, ids);
   }
 
   void dispose(Iface * iface) const {
@@ -126,8 +126,8 @@ class NewBinding<Dependency, Scope, Impl(A1, A2), Allocator>:
    * dispose(Iface *).
    */
  Ptr provide(BindingPtr binding, InjectorPtr injector) const {
-    typename Key<A1>::Ptr a1(this->template getDependency<A1>(injector));
-    typename Key<A2>::Ptr a2(this->template getDependency<A2>(injector));
+    typename Key<A1>::Ptr a1(this->template getHelper<A1>(injector));
+    typename Key<A2>::Ptr a2(this->template getHelper<A2>(injector));
     Deleter deleter(sauce::static_pointer_cast<New>(binding));
     Impl * impl = allocator.allocate(1);
     Ptr provided(new(impl) Impl(a1, a2), deleter);
@@ -135,8 +135,8 @@ class NewBinding<Dependency, Scope, Impl(A1, A2), Allocator>:
   }
 
   void validateAcyclic(InjectorPtr injector, TypeIds & ids) const {
-    this->template validateAcyclicos<A1>(injector, ids);
-    this->template validateAcyclicos<A2>(injector, ids);
+    this->template validateAcyclicHelper<A1>(injector, ids);
+    this->template validateAcyclicHelper<A2>(injector, ids);
   }
 
   void dispose(Iface * iface) const {
@@ -171,9 +171,9 @@ class NewBinding<Dependency, Scope, Impl(A1, A2, A3), Allocator>:
    * dispose(Iface *).
    */
  Ptr provide(BindingPtr binding, InjectorPtr injector) const {
-    typename Key<A1>::Ptr a1(this->template getDependency<A1>(injector));
-    typename Key<A2>::Ptr a2(this->template getDependency<A2>(injector));
-    typename Key<A3>::Ptr a3(this->template getDependency<A3>(injector));
+    typename Key<A1>::Ptr a1(this->template getHelper<A1>(injector));
+    typename Key<A2>::Ptr a2(this->template getHelper<A2>(injector));
+    typename Key<A3>::Ptr a3(this->template getHelper<A3>(injector));
     Deleter deleter(sauce::static_pointer_cast<New>(binding));
     Impl * impl = allocator.allocate(1);
     Ptr provided(new(impl) Impl(a1, a2, a3), deleter);
@@ -181,9 +181,9 @@ class NewBinding<Dependency, Scope, Impl(A1, A2, A3), Allocator>:
   }
 
   void validateAcyclic(InjectorPtr injector, TypeIds & ids) const {
-    this->template validateAcyclicos<A1>(injector, ids);
-    this->template validateAcyclicos<A2>(injector, ids);
-    this->template validateAcyclicos<A3>(injector, ids);
+    this->template validateAcyclicHelper<A1>(injector, ids);
+    this->template validateAcyclicHelper<A2>(injector, ids);
+    this->template validateAcyclicHelper<A3>(injector, ids);
   }
 
   void dispose(Iface * iface) const {
@@ -218,10 +218,10 @@ class NewBinding<Dependency, Scope, Impl(A1, A2, A3, A4), Allocator>:
    * dispose(Iface *).
    */
  Ptr provide(BindingPtr binding, InjectorPtr injector) const {
-    typename Key<A1>::Ptr a1(this->template getDependency<A1>(injector));
-    typename Key<A2>::Ptr a2(this->template getDependency<A2>(injector));
-    typename Key<A3>::Ptr a3(this->template getDependency<A3>(injector));
-    typename Key<A4>::Ptr a4(this->template getDependency<A4>(injector));
+    typename Key<A1>::Ptr a1(this->template getHelper<A1>(injector));
+    typename Key<A2>::Ptr a2(this->template getHelper<A2>(injector));
+    typename Key<A3>::Ptr a3(this->template getHelper<A3>(injector));
+    typename Key<A4>::Ptr a4(this->template getHelper<A4>(injector));
     Deleter deleter(sauce::static_pointer_cast<New>(binding));
     Impl * impl = allocator.allocate(1);
     Ptr provided(new(impl) Impl(a1, a2, a3, a4), deleter);
@@ -229,10 +229,10 @@ class NewBinding<Dependency, Scope, Impl(A1, A2, A3, A4), Allocator>:
   }
 
   void validateAcyclic(InjectorPtr injector, TypeIds & ids) const {
-    this->template validateAcyclicos<A1>(injector, ids);
-    this->template validateAcyclicos<A2>(injector, ids);
-    this->template validateAcyclicos<A3>(injector, ids);
-    this->template validateAcyclicos<A4>(injector, ids);
+    this->template validateAcyclicHelper<A1>(injector, ids);
+    this->template validateAcyclicHelper<A2>(injector, ids);
+    this->template validateAcyclicHelper<A3>(injector, ids);
+    this->template validateAcyclicHelper<A4>(injector, ids);
   }
 
   void dispose(Iface * iface) const {
@@ -269,11 +269,11 @@ class NewBinding<Dependency, Scope, Impl(A1, A2, A3, A4, A5), Allocator>:
    * dispose(Iface *).
    */
  Ptr provide(BindingPtr binding, InjectorPtr injector) const {
-    typename Key<A1>::Ptr a1(this->template getDependency<A1>(injector));
-    typename Key<A2>::Ptr a2(this->template getDependency<A2>(injector));
-    typename Key<A3>::Ptr a3(this->template getDependency<A3>(injector));
-    typename Key<A4>::Ptr a4(this->template getDependency<A4>(injector));
-    typename Key<A5>::Ptr a5(this->template getDependency<A5>(injector));
+    typename Key<A1>::Ptr a1(this->template getHelper<A1>(injector));
+    typename Key<A2>::Ptr a2(this->template getHelper<A2>(injector));
+    typename Key<A3>::Ptr a3(this->template getHelper<A3>(injector));
+    typename Key<A4>::Ptr a4(this->template getHelper<A4>(injector));
+    typename Key<A5>::Ptr a5(this->template getHelper<A5>(injector));
     Deleter deleter(sauce::static_pointer_cast<New>(binding));
     Impl * impl = allocator.allocate(1);
     Ptr provided(new(impl) Impl(a1, a2, a3, a4, a5), deleter);
@@ -281,11 +281,11 @@ class NewBinding<Dependency, Scope, Impl(A1, A2, A3, A4, A5), Allocator>:
   }
 
   void validateAcyclic(InjectorPtr injector, TypeIds & ids) const {
-    this->template validateAcyclicos<A1>(injector, ids);
-    this->template validateAcyclicos<A2>(injector, ids);
-    this->template validateAcyclicos<A3>(injector, ids);
-    this->template validateAcyclicos<A4>(injector, ids);
-    this->template validateAcyclicos<A5>(injector, ids);
+    this->template validateAcyclicHelper<A1>(injector, ids);
+    this->template validateAcyclicHelper<A2>(injector, ids);
+    this->template validateAcyclicHelper<A3>(injector, ids);
+    this->template validateAcyclicHelper<A4>(injector, ids);
+    this->template validateAcyclicHelper<A5>(injector, ids);
   }
 
   void dispose(Iface * iface) const {
@@ -322,12 +322,12 @@ class NewBinding<Dependency, Scope, Impl(A1, A2, A3, A4, A5, A6), Allocator>:
    * dispose(Iface *).
    */
  Ptr provide(BindingPtr binding, InjectorPtr injector) const {
-    typename Key<A1>::Ptr a1(this->template getDependency<A1>(injector));
-    typename Key<A2>::Ptr a2(this->template getDependency<A2>(injector));
-    typename Key<A3>::Ptr a3(this->template getDependency<A3>(injector));
-    typename Key<A4>::Ptr a4(this->template getDependency<A4>(injector));
-    typename Key<A5>::Ptr a5(this->template getDependency<A5>(injector));
-    typename Key<A6>::Ptr a6(this->template getDependency<A6>(injector));
+    typename Key<A1>::Ptr a1(this->template getHelper<A1>(injector));
+    typename Key<A2>::Ptr a2(this->template getHelper<A2>(injector));
+    typename Key<A3>::Ptr a3(this->template getHelper<A3>(injector));
+    typename Key<A4>::Ptr a4(this->template getHelper<A4>(injector));
+    typename Key<A5>::Ptr a5(this->template getHelper<A5>(injector));
+    typename Key<A6>::Ptr a6(this->template getHelper<A6>(injector));
     Deleter deleter(sauce::static_pointer_cast<New>(binding));
     Impl * impl = allocator.allocate(1);
     Ptr provided(new(impl) Impl(a1, a2, a3, a4, a5, a6), deleter);
@@ -335,12 +335,12 @@ class NewBinding<Dependency, Scope, Impl(A1, A2, A3, A4, A5, A6), Allocator>:
   }
 
   void validateAcyclic(InjectorPtr injector, TypeIds & ids) const {
-    this->template validateAcyclicos<A1>(injector, ids);
-    this->template validateAcyclicos<A2>(injector, ids);
-    this->template validateAcyclicos<A3>(injector, ids);
-    this->template validateAcyclicos<A4>(injector, ids);
-    this->template validateAcyclicos<A5>(injector, ids);
-    this->template validateAcyclicos<A6>(injector, ids);
+    this->template validateAcyclicHelper<A1>(injector, ids);
+    this->template validateAcyclicHelper<A2>(injector, ids);
+    this->template validateAcyclicHelper<A3>(injector, ids);
+    this->template validateAcyclicHelper<A4>(injector, ids);
+    this->template validateAcyclicHelper<A5>(injector, ids);
+    this->template validateAcyclicHelper<A6>(injector, ids);
   }
 
   void dispose(Iface * iface) const {
@@ -378,13 +378,13 @@ class NewBinding<Dependency, Scope, Impl(A1, A2, A3, A4, A5, A6, A7),
    * dispose(Iface *).
    */
  Ptr provide(BindingPtr binding, InjectorPtr injector) const {
-    typename Key<A1>::Ptr a1(this->template getDependency<A1>(injector));
-    typename Key<A2>::Ptr a2(this->template getDependency<A2>(injector));
-    typename Key<A3>::Ptr a3(this->template getDependency<A3>(injector));
-    typename Key<A4>::Ptr a4(this->template getDependency<A4>(injector));
-    typename Key<A5>::Ptr a5(this->template getDependency<A5>(injector));
-    typename Key<A6>::Ptr a6(this->template getDependency<A6>(injector));
-    typename Key<A7>::Ptr a7(this->template getDependency<A7>(injector));
+    typename Key<A1>::Ptr a1(this->template getHelper<A1>(injector));
+    typename Key<A2>::Ptr a2(this->template getHelper<A2>(injector));
+    typename Key<A3>::Ptr a3(this->template getHelper<A3>(injector));
+    typename Key<A4>::Ptr a4(this->template getHelper<A4>(injector));
+    typename Key<A5>::Ptr a5(this->template getHelper<A5>(injector));
+    typename Key<A6>::Ptr a6(this->template getHelper<A6>(injector));
+    typename Key<A7>::Ptr a7(this->template getHelper<A7>(injector));
     Deleter deleter(sauce::static_pointer_cast<New>(binding));
     Impl * impl = allocator.allocate(1);
     Ptr provided(new(impl) Impl(a1, a2, a3, a4, a5, a6, a7), deleter);
@@ -392,13 +392,13 @@ class NewBinding<Dependency, Scope, Impl(A1, A2, A3, A4, A5, A6, A7),
   }
 
   void validateAcyclic(InjectorPtr injector, TypeIds & ids) const {
-    this->template validateAcyclicos<A1>(injector, ids);
-    this->template validateAcyclicos<A2>(injector, ids);
-    this->template validateAcyclicos<A3>(injector, ids);
-    this->template validateAcyclicos<A4>(injector, ids);
-    this->template validateAcyclicos<A5>(injector, ids);
-    this->template validateAcyclicos<A6>(injector, ids);
-    this->template validateAcyclicos<A7>(injector, ids);
+    this->template validateAcyclicHelper<A1>(injector, ids);
+    this->template validateAcyclicHelper<A2>(injector, ids);
+    this->template validateAcyclicHelper<A3>(injector, ids);
+    this->template validateAcyclicHelper<A4>(injector, ids);
+    this->template validateAcyclicHelper<A5>(injector, ids);
+    this->template validateAcyclicHelper<A6>(injector, ids);
+    this->template validateAcyclicHelper<A7>(injector, ids);
   }
 
   void dispose(Iface * iface) const {
@@ -436,14 +436,14 @@ class NewBinding<Dependency, Scope, Impl(A1, A2, A3, A4, A5, A6, A7, A8),
    * dispose(Iface *).
    */
  Ptr provide(BindingPtr binding, InjectorPtr injector) const {
-    typename Key<A1>::Ptr a1(this->template getDependency<A1>(injector));
-    typename Key<A2>::Ptr a2(this->template getDependency<A2>(injector));
-    typename Key<A3>::Ptr a3(this->template getDependency<A3>(injector));
-    typename Key<A4>::Ptr a4(this->template getDependency<A4>(injector));
-    typename Key<A5>::Ptr a5(this->template getDependency<A5>(injector));
-    typename Key<A6>::Ptr a6(this->template getDependency<A6>(injector));
-    typename Key<A7>::Ptr a7(this->template getDependency<A7>(injector));
-    typename Key<A8>::Ptr a8(this->template getDependency<A8>(injector));
+    typename Key<A1>::Ptr a1(this->template getHelper<A1>(injector));
+    typename Key<A2>::Ptr a2(this->template getHelper<A2>(injector));
+    typename Key<A3>::Ptr a3(this->template getHelper<A3>(injector));
+    typename Key<A4>::Ptr a4(this->template getHelper<A4>(injector));
+    typename Key<A5>::Ptr a5(this->template getHelper<A5>(injector));
+    typename Key<A6>::Ptr a6(this->template getHelper<A6>(injector));
+    typename Key<A7>::Ptr a7(this->template getHelper<A7>(injector));
+    typename Key<A8>::Ptr a8(this->template getHelper<A8>(injector));
     Deleter deleter(sauce::static_pointer_cast<New>(binding));
     Impl * impl = allocator.allocate(1);
     Ptr provided(new(impl) Impl(a1, a2, a3, a4, a5, a6, a7, a8), deleter);
@@ -451,14 +451,14 @@ class NewBinding<Dependency, Scope, Impl(A1, A2, A3, A4, A5, A6, A7, A8),
   }
 
   void validateAcyclic(InjectorPtr injector, TypeIds & ids) const {
-    this->template validateAcyclicos<A1>(injector, ids);
-    this->template validateAcyclicos<A2>(injector, ids);
-    this->template validateAcyclicos<A3>(injector, ids);
-    this->template validateAcyclicos<A4>(injector, ids);
-    this->template validateAcyclicos<A5>(injector, ids);
-    this->template validateAcyclicos<A6>(injector, ids);
-    this->template validateAcyclicos<A7>(injector, ids);
-    this->template validateAcyclicos<A8>(injector, ids);
+    this->template validateAcyclicHelper<A1>(injector, ids);
+    this->template validateAcyclicHelper<A2>(injector, ids);
+    this->template validateAcyclicHelper<A3>(injector, ids);
+    this->template validateAcyclicHelper<A4>(injector, ids);
+    this->template validateAcyclicHelper<A5>(injector, ids);
+    this->template validateAcyclicHelper<A6>(injector, ids);
+    this->template validateAcyclicHelper<A7>(injector, ids);
+    this->template validateAcyclicHelper<A8>(injector, ids);
   }
 
   void dispose(Iface * iface) const {
@@ -496,15 +496,15 @@ class NewBinding<Dependency, Scope, Impl(A1, A2, A3, A4, A5, A6, A7, A8, A9),
    * dispose(Iface *).
    */
  Ptr provide(BindingPtr binding, InjectorPtr injector) const {
-    typename Key<A1>::Ptr a1(this->template getDependency<A1>(injector));
-    typename Key<A2>::Ptr a2(this->template getDependency<A2>(injector));
-    typename Key<A3>::Ptr a3(this->template getDependency<A3>(injector));
-    typename Key<A4>::Ptr a4(this->template getDependency<A4>(injector));
-    typename Key<A5>::Ptr a5(this->template getDependency<A5>(injector));
-    typename Key<A6>::Ptr a6(this->template getDependency<A6>(injector));
-    typename Key<A7>::Ptr a7(this->template getDependency<A7>(injector));
-    typename Key<A8>::Ptr a8(this->template getDependency<A8>(injector));
-    typename Key<A9>::Ptr a9(this->template getDependency<A9>(injector));
+    typename Key<A1>::Ptr a1(this->template getHelper<A1>(injector));
+    typename Key<A2>::Ptr a2(this->template getHelper<A2>(injector));
+    typename Key<A3>::Ptr a3(this->template getHelper<A3>(injector));
+    typename Key<A4>::Ptr a4(this->template getHelper<A4>(injector));
+    typename Key<A5>::Ptr a5(this->template getHelper<A5>(injector));
+    typename Key<A6>::Ptr a6(this->template getHelper<A6>(injector));
+    typename Key<A7>::Ptr a7(this->template getHelper<A7>(injector));
+    typename Key<A8>::Ptr a8(this->template getHelper<A8>(injector));
+    typename Key<A9>::Ptr a9(this->template getHelper<A9>(injector));
     Deleter deleter(sauce::static_pointer_cast<New>(binding));
     Impl * impl = allocator.allocate(1);
     Ptr provided(new(impl) Impl(a1, a2, a3, a4, a5, a6, a7, a8, a9), deleter);
@@ -512,15 +512,15 @@ class NewBinding<Dependency, Scope, Impl(A1, A2, A3, A4, A5, A6, A7, A8, A9),
   }
 
   void validateAcyclic(InjectorPtr injector, TypeIds & ids) const {
-    this->template validateAcyclicos<A1>(injector, ids);
-    this->template validateAcyclicos<A2>(injector, ids);
-    this->template validateAcyclicos<A3>(injector, ids);
-    this->template validateAcyclicos<A4>(injector, ids);
-    this->template validateAcyclicos<A5>(injector, ids);
-    this->template validateAcyclicos<A6>(injector, ids);
-    this->template validateAcyclicos<A7>(injector, ids);
-    this->template validateAcyclicos<A8>(injector, ids);
-    this->template validateAcyclicos<A9>(injector, ids);
+    this->template validateAcyclicHelper<A1>(injector, ids);
+    this->template validateAcyclicHelper<A2>(injector, ids);
+    this->template validateAcyclicHelper<A3>(injector, ids);
+    this->template validateAcyclicHelper<A4>(injector, ids);
+    this->template validateAcyclicHelper<A5>(injector, ids);
+    this->template validateAcyclicHelper<A6>(injector, ids);
+    this->template validateAcyclicHelper<A7>(injector, ids);
+    this->template validateAcyclicHelper<A8>(injector, ids);
+    this->template validateAcyclicHelper<A9>(injector, ids);
   }
 
   void dispose(Iface * iface) const {
@@ -559,16 +559,16 @@ class NewBinding<Dependency, Scope, Impl(A1, A2, A3, A4, A5, A6, A7, A8, A9,
    * dispose(Iface *).
    */
  Ptr provide(BindingPtr binding, InjectorPtr injector) const {
-    typename Key<A1>::Ptr a1(this->template getDependency<A1>(injector));
-    typename Key<A2>::Ptr a2(this->template getDependency<A2>(injector));
-    typename Key<A3>::Ptr a3(this->template getDependency<A3>(injector));
-    typename Key<A4>::Ptr a4(this->template getDependency<A4>(injector));
-    typename Key<A5>::Ptr a5(this->template getDependency<A5>(injector));
-    typename Key<A6>::Ptr a6(this->template getDependency<A6>(injector));
-    typename Key<A7>::Ptr a7(this->template getDependency<A7>(injector));
-    typename Key<A8>::Ptr a8(this->template getDependency<A8>(injector));
-    typename Key<A9>::Ptr a9(this->template getDependency<A9>(injector));
-    typename Key<A10>::Ptr a10(this->template getDependency<A10>(injector));
+    typename Key<A1>::Ptr a1(this->template getHelper<A1>(injector));
+    typename Key<A2>::Ptr a2(this->template getHelper<A2>(injector));
+    typename Key<A3>::Ptr a3(this->template getHelper<A3>(injector));
+    typename Key<A4>::Ptr a4(this->template getHelper<A4>(injector));
+    typename Key<A5>::Ptr a5(this->template getHelper<A5>(injector));
+    typename Key<A6>::Ptr a6(this->template getHelper<A6>(injector));
+    typename Key<A7>::Ptr a7(this->template getHelper<A7>(injector));
+    typename Key<A8>::Ptr a8(this->template getHelper<A8>(injector));
+    typename Key<A9>::Ptr a9(this->template getHelper<A9>(injector));
+    typename Key<A10>::Ptr a10(this->template getHelper<A10>(injector));
     Deleter deleter(sauce::static_pointer_cast<New>(binding));
     Impl * impl = allocator.allocate(1);
     Ptr provided(new(impl) Impl(a1, a2, a3, a4, a5, a6, a7, a8, a9, a10),
@@ -577,16 +577,16 @@ class NewBinding<Dependency, Scope, Impl(A1, A2, A3, A4, A5, A6, A7, A8, A9,
   }
 
   void validateAcyclic(InjectorPtr injector, TypeIds & ids) const {
-    this->template validateAcyclicos<A1>(injector, ids);
-    this->template validateAcyclicos<A2>(injector, ids);
-    this->template validateAcyclicos<A3>(injector, ids);
-    this->template validateAcyclicos<A4>(injector, ids);
-    this->template validateAcyclicos<A5>(injector, ids);
-    this->template validateAcyclicos<A6>(injector, ids);
-    this->template validateAcyclicos<A7>(injector, ids);
-    this->template validateAcyclicos<A8>(injector, ids);
-    this->template validateAcyclicos<A9>(injector, ids);
-    this->template validateAcyclicos<A10>(injector, ids);
+    this->template validateAcyclicHelper<A1>(injector, ids);
+    this->template validateAcyclicHelper<A2>(injector, ids);
+    this->template validateAcyclicHelper<A3>(injector, ids);
+    this->template validateAcyclicHelper<A4>(injector, ids);
+    this->template validateAcyclicHelper<A5>(injector, ids);
+    this->template validateAcyclicHelper<A6>(injector, ids);
+    this->template validateAcyclicHelper<A7>(injector, ids);
+    this->template validateAcyclicHelper<A8>(injector, ids);
+    this->template validateAcyclicHelper<A9>(injector, ids);
+    this->template validateAcyclicHelper<A10>(injector, ids);
   }
 
   void dispose(Iface * iface) const {
