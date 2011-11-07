@@ -73,22 +73,10 @@ template<typename Dependency>
 class AbstractProvider: public Provider<Dependency> {
 
   typedef typename i::Key<Dependency>::Iface Iface;
-  typedef sauce::shared_ptr<Provider<Dependency> > ProviderPtr;
   typedef AbstractProvider<Dependency> Abstract;
-  typedef sauce::shared_ptr<Abstract> AbstractProviderPtr;
   typedef i::DisposalDeleter<Iface, Abstract> Deleter;
 
   friend class i::DisposalDeleter<Iface, Abstract>;
-
-  /**
-   * Create a shared pointer deleter suitable for this provider.
-   */
-  Deleter deleter() const {
-    ProviderPtr provider = this->getSelf();
-    AbstractProviderPtr abstract = sauce::static_pointer_cast<Abstract>(provider);
-    Deleter deleter(abstract);
-    return deleter;
-  }
 
   /**
    * Provide a naked Iface pointer.
@@ -109,7 +97,8 @@ public:
    * given a custom deleter, to dispose of the naked pointer with dispose(Iface *).
    */
   sauce::shared_ptr<Iface> get() {
-    sauce::shared_ptr<Iface> provided(provide(), deleter());
+    Deleter deleter(sauce::static_pointer_cast<Abstract>(this->getSelf()));
+    sauce::shared_ptr<Iface> provided(provide(), deleter);
     return provided;
   }
 
