@@ -148,6 +148,17 @@ TEST(BindingTest, shouldProvidedNamedDependencies) {
   EXPECT_EQ("Blub blub", (injector->get<Pond>()->animal->says()));
 }
 
+TEST(BindingTest, shouldProvidedNamedDependencyProviders) {
+  sauce::shared_ptr<Injector> injector(Modules().add(&AnimalModule).createInjector());
+
+  sauce::shared_ptr<Provider<Animal> > animalProvider = injector->get<Provider<Animal> >();
+  EXPECT_EQ("Meow", animalProvider->get()->says());
+
+  sauce::shared_ptr<Provider<Named<Animal, LieutenantShinysides> > > namedAnimalProvider =
+    injector->get<Provider<Named<Animal, LieutenantShinysides> > >();
+  EXPECT_EQ("Blub blub", namedAnimalProvider->get()->says());
+}
+
 void IncompleteNamedModule(Binder & binder) {
   binder.bind<IncompletelyBound>().named<LieutenantShinysides>() /* to ...? */;
 }
