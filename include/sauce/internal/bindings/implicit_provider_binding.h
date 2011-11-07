@@ -61,7 +61,7 @@ class ImplicitProviderBinding:
 
   ProviderPtr provide(BindingPtr, InjectorPtr injector) const {
     ProviderPtr provider(new ImplicitProvider<Dependency, Name>(providedBinding, injector));
-    this->setSelf<Dependency, Name>(provider);
+    setSelf<Dependency, Name>(provider);
     return provider;
   }
 
