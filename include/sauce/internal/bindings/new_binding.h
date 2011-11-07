@@ -10,7 +10,6 @@
 #include <sauce/named.h>
 #include <sauce/provider.h>
 #include <sauce/internal/binding.h>
-#include <sauce/internal/bindings/naked_binding.h>
 #include <sauce/internal/bindings/transparent_binding.h>
 #include <sauce/internal/key.h>
 #include <sauce/internal/type_id.h>
@@ -23,364 +22,267 @@ template<typename Dependency, typename Scope, typename Constructor,
     typename Allocator>
 class NewBinding;
 
-template<typename Dependency, typename Constructor, typename Allocator>
-class NewProvider;
-
-template<typename Dependency, typename Impl, typename Allocator>
-class NewProvider<Dependency, Impl(), Allocator>: AbstractProvider<Dependency> {
-  typedef typename Key<Dependency>::Iface Iface;
-  typedef typename Allocator::template rebind<Impl>::other ImplAllocator;
-
-  Iface * provide() {
-    ImplAllocator allocator;
-    Impl * impl = allocator.allocate(1);
-    new(impl) Impl();
-    return impl;
-  }
-
-  void dispose(Iface * iface) {
-    Impl * impl = static_cast<Impl *>(iface);
-    ImplAllocator allocator;
-    impl->~Impl(); // Must not throw
-    allocator.deallocate(impl, 1);
-  }
-};
-
 template<typename Dependency, typename Scope, typename Impl, typename Allocator>
-struct NewBinding<Dependency, Scope, Impl(),
-    Allocator>: public NakedBinding<Dependency, Scope> {
+class NewBinding<Dependency, Scope, Impl(), Allocator>:
+  public TransparentBinding<Dependency, Scope> {
+
   typedef typename Key<Dependency>::Iface Iface;
+  typedef typename Key<Dependency>::Ptr Ptr;
+  typedef typename Binding<Dependency>::BindingPtr BindingPtr;
   typedef typename Allocator::template rebind<Impl>::other ImplAllocator;
+  typedef NewBinding<Dependency, Scope, Impl(), Allocator> New;
+  typedef DisposalDeleter<Iface, New> Deleter;
 
-  void validateAcyclic(sauce::shared_ptr<Injector>, TypeIds &) const {}
+  friend class DisposalDeleter<Iface, New>;
 
-  Iface * provide(sauce::shared_ptr<Injector>) const {
-    ImplAllocator allocator;
+  mutable ImplAllocator allocator;
+
+  /**
+   * Provide an Iface.
+   *
+   * A naked instance pointer is allocated and wrapped in a shared_ptr.  It is
+   * also given a custom deleter, to dispose of the naked pointer with
+   * dispose(Iface *).
+   */
+ Ptr provide(BindingPtr binding, InjectorPtr) const {
+    Deleter deleter(sauce::static_pointer_cast<New>(binding));
     Impl * impl = allocator.allocate(1);
-    new(impl) Impl();
-    return impl;
+    Ptr provided(new(impl) Impl(), deleter);
+    return provided;
   }
+
+  void validateAcyclic(InjectorPtr, TypeIds &) const {}
 
   void dispose(Iface * iface) const {
     Impl * impl = static_cast<Impl *>(iface);
-    ImplAllocator allocator;
     impl->~Impl(); // Must not throw
     allocator.deallocate(impl, 1);
   }
-};
 
-template<typename Dependency, typename Impl, typename Allocator, typename A1>
-class NewProvider<Dependency, Impl(A1), Allocator>: AbstractProvider<Dependency> {
-  typedef typename Key<Dependency>::Iface Iface;
-  typedef typename Allocator::template rebind<Impl>::other ImplAllocator;
-
-  typename Key<Provider<A1> >::Ptr provider1;
-
-  NewProvider(typename Key<Provider<A1> >::Ptr provider1):
-    AbstractProvider<Dependency>(),
-    provider1(provider1) {}
-  Iface * provide() {
-    typename Key<A1>::Ptr a1 = provider1->get();
-    ImplAllocator allocator;
-    Impl * impl = allocator.allocate(1);
-    new(impl) Impl(a1);
-    return impl;
-  }
-
-  void dispose(Iface * iface) {
-    Impl * impl = static_cast<Impl *>(iface);
-    ImplAllocator allocator;
-    impl->~Impl(); // Must not throw
-    allocator.deallocate(impl, 1);
-  }
 };
 
 template<typename Dependency, typename Scope, typename Impl,
     typename Allocator, typename A1>
-struct NewBinding<Dependency, Scope, Impl(A1),
-    Allocator>: public NakedBinding<Dependency, Scope> {
-  typedef typename Key<Dependency>::Iface Iface;
-  typedef typename Allocator::template rebind<Impl>::other ImplAllocator;
+class NewBinding<Dependency, Scope, Impl(A1), Allocator>:
+  public TransparentBinding<Dependency, Scope> {
 
-  void validateAcyclic(sauce::shared_ptr<Injector> injector,
-      TypeIds & ids) const {
-    this->template validateAcyclicos<A1>(injector, ids);
+  typedef typename Key<Dependency>::Iface Iface;
+  typedef typename Key<Dependency>::Ptr Ptr;
+  typedef typename Binding<Dependency>::BindingPtr BindingPtr;
+  typedef typename Allocator::template rebind<Impl>::other ImplAllocator;
+  typedef NewBinding<Dependency, Scope, Impl(A1), Allocator> New;
+  typedef DisposalDeleter<Iface, New> Deleter;
+
+  friend class DisposalDeleter<Iface, New>;
+
+  mutable ImplAllocator allocator;
+
+  /**
+   * Provide an Iface.
+   *
+   * A naked instance pointer is allocated and wrapped in a shared_ptr.  It is
+   * also given a custom deleter, to dispose of the naked pointer with
+   * dispose(Iface *).
+   */
+ Ptr provide(BindingPtr binding, InjectorPtr injector) const {
+    typename Key<A1>::Ptr a1(this->template getDependency<A1>(injector));
+    Deleter deleter(sauce::static_pointer_cast<New>(binding));
+    Impl * impl = allocator.allocate(1);
+    Ptr provided(new(impl) Impl(a1), deleter);
+    return provided;
   }
 
-  Iface * provide(sauce::shared_ptr<Injector> injector) const {
-    typename Key<A1>::Ptr a1(this->template getDependency<A1>(injector));
-    ImplAllocator allocator;
-    Impl * impl = allocator.allocate(1);
-    new(impl) Impl(a1);
-    return impl;
+  void validateAcyclic(InjectorPtr injector, TypeIds & ids) const {
+    this->template validateAcyclicos<A1>(injector, ids);
   }
 
   void dispose(Iface * iface) const {
     Impl * impl = static_cast<Impl *>(iface);
-    ImplAllocator allocator;
     impl->~Impl(); // Must not throw
     allocator.deallocate(impl, 1);
   }
-};
 
-template<typename Dependency, typename Impl, typename Allocator, typename A1,
-    typename A2>
-class NewProvider<Dependency, Impl(A1, A2),
-    Allocator>: AbstractProvider<Dependency> {
-  typedef typename Key<Dependency>::Iface Iface;
-  typedef typename Allocator::template rebind<Impl>::other ImplAllocator;
-
-  typename Key<Provider<A1> >::Ptr provider1;
-  typename Key<Provider<A2> >::Ptr provider2;
-
-  NewProvider(typename Key<Provider<A1> >::Ptr provider1,
-      typename Key<Provider<A2> >::Ptr provider2):
-    AbstractProvider<Dependency>(),
-    provider1(provider1),
-    provider2(provider2) {}
-  Iface * provide() {
-    typename Key<A1>::Ptr a1 = provider1->get();
-    typename Key<A2>::Ptr a2 = provider2->get();
-    ImplAllocator allocator;
-    Impl * impl = allocator.allocate(1);
-    new(impl) Impl(a1, a2);
-    return impl;
-  }
-
-  void dispose(Iface * iface) {
-    Impl * impl = static_cast<Impl *>(iface);
-    ImplAllocator allocator;
-    impl->~Impl(); // Must not throw
-    allocator.deallocate(impl, 1);
-  }
 };
 
 template<typename Dependency, typename Scope, typename Impl,
     typename Allocator, typename A1, typename A2>
-struct NewBinding<Dependency, Scope, Impl(A1, A2),
-    Allocator>: public NakedBinding<Dependency, Scope> {
-  typedef typename Key<Dependency>::Iface Iface;
-  typedef typename Allocator::template rebind<Impl>::other ImplAllocator;
+class NewBinding<Dependency, Scope, Impl(A1, A2), Allocator>:
+  public TransparentBinding<Dependency, Scope> {
 
-  void validateAcyclic(sauce::shared_ptr<Injector> injector,
-      TypeIds & ids) const {
+  typedef typename Key<Dependency>::Iface Iface;
+  typedef typename Key<Dependency>::Ptr Ptr;
+  typedef typename Binding<Dependency>::BindingPtr BindingPtr;
+  typedef typename Allocator::template rebind<Impl>::other ImplAllocator;
+  typedef NewBinding<Dependency, Scope, Impl(A1, A2), Allocator> New;
+  typedef DisposalDeleter<Iface, New> Deleter;
+
+  friend class DisposalDeleter<Iface, New>;
+
+  mutable ImplAllocator allocator;
+
+  /**
+   * Provide an Iface.
+   *
+   * A naked instance pointer is allocated and wrapped in a shared_ptr.  It is
+   * also given a custom deleter, to dispose of the naked pointer with
+   * dispose(Iface *).
+   */
+ Ptr provide(BindingPtr binding, InjectorPtr injector) const {
+    typename Key<A1>::Ptr a1(this->template getDependency<A1>(injector));
+    typename Key<A2>::Ptr a2(this->template getDependency<A2>(injector));
+    Deleter deleter(sauce::static_pointer_cast<New>(binding));
+    Impl * impl = allocator.allocate(1);
+    Ptr provided(new(impl) Impl(a1, a2), deleter);
+    return provided;
+  }
+
+  void validateAcyclic(InjectorPtr injector, TypeIds & ids) const {
     this->template validateAcyclicos<A1>(injector, ids);
     this->template validateAcyclicos<A2>(injector, ids);
   }
 
-  Iface * provide(sauce::shared_ptr<Injector> injector) const {
-    typename Key<A1>::Ptr a1(this->template getDependency<A1>(injector));
-    typename Key<A2>::Ptr a2(this->template getDependency<A2>(injector));
-    ImplAllocator allocator;
-    Impl * impl = allocator.allocate(1);
-    new(impl) Impl(a1, a2);
-    return impl;
-  }
-
   void dispose(Iface * iface) const {
     Impl * impl = static_cast<Impl *>(iface);
-    ImplAllocator allocator;
     impl->~Impl(); // Must not throw
     allocator.deallocate(impl, 1);
   }
-};
 
-template<typename Dependency, typename Impl, typename Allocator, typename A1,
-    typename A2, typename A3>
-class NewProvider<Dependency, Impl(A1, A2, A3),
-    Allocator>: AbstractProvider<Dependency> {
-  typedef typename Key<Dependency>::Iface Iface;
-  typedef typename Allocator::template rebind<Impl>::other ImplAllocator;
-
-  typename Key<Provider<A1> >::Ptr provider1;
-  typename Key<Provider<A2> >::Ptr provider2;
-  typename Key<Provider<A3> >::Ptr provider3;
-
-  NewProvider(typename Key<Provider<A1> >::Ptr provider1,
-      typename Key<Provider<A2> >::Ptr provider2,
-      typename Key<Provider<A3> >::Ptr provider3):
-    AbstractProvider<Dependency>(),
-    provider1(provider1),
-    provider2(provider2),
-    provider3(provider3) {}
-  Iface * provide() {
-    typename Key<A1>::Ptr a1 = provider1->get();
-    typename Key<A2>::Ptr a2 = provider2->get();
-    typename Key<A3>::Ptr a3 = provider3->get();
-    ImplAllocator allocator;
-    Impl * impl = allocator.allocate(1);
-    new(impl) Impl(a1, a2, a3);
-    return impl;
-  }
-
-  void dispose(Iface * iface) {
-    Impl * impl = static_cast<Impl *>(iface);
-    ImplAllocator allocator;
-    impl->~Impl(); // Must not throw
-    allocator.deallocate(impl, 1);
-  }
 };
 
 template<typename Dependency, typename Scope, typename Impl,
     typename Allocator, typename A1, typename A2, typename A3>
-struct NewBinding<Dependency, Scope, Impl(A1, A2, A3),
-    Allocator>: public NakedBinding<Dependency, Scope> {
-  typedef typename Key<Dependency>::Iface Iface;
-  typedef typename Allocator::template rebind<Impl>::other ImplAllocator;
+class NewBinding<Dependency, Scope, Impl(A1, A2, A3), Allocator>:
+  public TransparentBinding<Dependency, Scope> {
 
-  void validateAcyclic(sauce::shared_ptr<Injector> injector,
-      TypeIds & ids) const {
+  typedef typename Key<Dependency>::Iface Iface;
+  typedef typename Key<Dependency>::Ptr Ptr;
+  typedef typename Binding<Dependency>::BindingPtr BindingPtr;
+  typedef typename Allocator::template rebind<Impl>::other ImplAllocator;
+  typedef NewBinding<Dependency, Scope, Impl(A1, A2, A3), Allocator> New;
+  typedef DisposalDeleter<Iface, New> Deleter;
+
+  friend class DisposalDeleter<Iface, New>;
+
+  mutable ImplAllocator allocator;
+
+  /**
+   * Provide an Iface.
+   *
+   * A naked instance pointer is allocated and wrapped in a shared_ptr.  It is
+   * also given a custom deleter, to dispose of the naked pointer with
+   * dispose(Iface *).
+   */
+ Ptr provide(BindingPtr binding, InjectorPtr injector) const {
+    typename Key<A1>::Ptr a1(this->template getDependency<A1>(injector));
+    typename Key<A2>::Ptr a2(this->template getDependency<A2>(injector));
+    typename Key<A3>::Ptr a3(this->template getDependency<A3>(injector));
+    Deleter deleter(sauce::static_pointer_cast<New>(binding));
+    Impl * impl = allocator.allocate(1);
+    Ptr provided(new(impl) Impl(a1, a2, a3), deleter);
+    return provided;
+  }
+
+  void validateAcyclic(InjectorPtr injector, TypeIds & ids) const {
     this->template validateAcyclicos<A1>(injector, ids);
     this->template validateAcyclicos<A2>(injector, ids);
     this->template validateAcyclicos<A3>(injector, ids);
   }
 
-  Iface * provide(sauce::shared_ptr<Injector> injector) const {
-    typename Key<A1>::Ptr a1(this->template getDependency<A1>(injector));
-    typename Key<A2>::Ptr a2(this->template getDependency<A2>(injector));
-    typename Key<A3>::Ptr a3(this->template getDependency<A3>(injector));
-    ImplAllocator allocator;
-    Impl * impl = allocator.allocate(1);
-    new(impl) Impl(a1, a2, a3);
-    return impl;
-  }
-
   void dispose(Iface * iface) const {
     Impl * impl = static_cast<Impl *>(iface);
-    ImplAllocator allocator;
     impl->~Impl(); // Must not throw
     allocator.deallocate(impl, 1);
   }
-};
 
-template<typename Dependency, typename Impl, typename Allocator, typename A1,
-    typename A2, typename A3, typename A4>
-class NewProvider<Dependency, Impl(A1, A2, A3, A4),
-    Allocator>: AbstractProvider<Dependency> {
-  typedef typename Key<Dependency>::Iface Iface;
-  typedef typename Allocator::template rebind<Impl>::other ImplAllocator;
-
-  typename Key<Provider<A1> >::Ptr provider1;
-  typename Key<Provider<A2> >::Ptr provider2;
-  typename Key<Provider<A3> >::Ptr provider3;
-  typename Key<Provider<A4> >::Ptr provider4;
-
-  NewProvider(typename Key<Provider<A1> >::Ptr provider1,
-      typename Key<Provider<A2> >::Ptr provider2,
-      typename Key<Provider<A3> >::Ptr provider3,
-      typename Key<Provider<A4> >::Ptr provider4):
-    AbstractProvider<Dependency>(),
-    provider1(provider1),
-    provider2(provider2),
-    provider3(provider3),
-    provider4(provider4) {}
-  Iface * provide() {
-    typename Key<A1>::Ptr a1 = provider1->get();
-    typename Key<A2>::Ptr a2 = provider2->get();
-    typename Key<A3>::Ptr a3 = provider3->get();
-    typename Key<A4>::Ptr a4 = provider4->get();
-    ImplAllocator allocator;
-    Impl * impl = allocator.allocate(1);
-    new(impl) Impl(a1, a2, a3, a4);
-    return impl;
-  }
-
-  void dispose(Iface * iface) {
-    Impl * impl = static_cast<Impl *>(iface);
-    ImplAllocator allocator;
-    impl->~Impl(); // Must not throw
-    allocator.deallocate(impl, 1);
-  }
 };
 
 template<typename Dependency, typename Scope, typename Impl,
     typename Allocator, typename A1, typename A2, typename A3, typename A4>
-struct NewBinding<Dependency, Scope, Impl(A1, A2, A3, A4),
-    Allocator>: public NakedBinding<Dependency, Scope> {
-  typedef typename Key<Dependency>::Iface Iface;
-  typedef typename Allocator::template rebind<Impl>::other ImplAllocator;
+class NewBinding<Dependency, Scope, Impl(A1, A2, A3, A4), Allocator>:
+  public TransparentBinding<Dependency, Scope> {
 
-  void validateAcyclic(sauce::shared_ptr<Injector> injector,
-      TypeIds & ids) const {
+  typedef typename Key<Dependency>::Iface Iface;
+  typedef typename Key<Dependency>::Ptr Ptr;
+  typedef typename Binding<Dependency>::BindingPtr BindingPtr;
+  typedef typename Allocator::template rebind<Impl>::other ImplAllocator;
+  typedef NewBinding<Dependency, Scope, Impl(A1, A2, A3, A4), Allocator> New;
+  typedef DisposalDeleter<Iface, New> Deleter;
+
+  friend class DisposalDeleter<Iface, New>;
+
+  mutable ImplAllocator allocator;
+
+  /**
+   * Provide an Iface.
+   *
+   * A naked instance pointer is allocated and wrapped in a shared_ptr.  It is
+   * also given a custom deleter, to dispose of the naked pointer with
+   * dispose(Iface *).
+   */
+ Ptr provide(BindingPtr binding, InjectorPtr injector) const {
+    typename Key<A1>::Ptr a1(this->template getDependency<A1>(injector));
+    typename Key<A2>::Ptr a2(this->template getDependency<A2>(injector));
+    typename Key<A3>::Ptr a3(this->template getDependency<A3>(injector));
+    typename Key<A4>::Ptr a4(this->template getDependency<A4>(injector));
+    Deleter deleter(sauce::static_pointer_cast<New>(binding));
+    Impl * impl = allocator.allocate(1);
+    Ptr provided(new(impl) Impl(a1, a2, a3, a4), deleter);
+    return provided;
+  }
+
+  void validateAcyclic(InjectorPtr injector, TypeIds & ids) const {
     this->template validateAcyclicos<A1>(injector, ids);
     this->template validateAcyclicos<A2>(injector, ids);
     this->template validateAcyclicos<A3>(injector, ids);
     this->template validateAcyclicos<A4>(injector, ids);
   }
 
-  Iface * provide(sauce::shared_ptr<Injector> injector) const {
-    typename Key<A1>::Ptr a1(this->template getDependency<A1>(injector));
-    typename Key<A2>::Ptr a2(this->template getDependency<A2>(injector));
-    typename Key<A3>::Ptr a3(this->template getDependency<A3>(injector));
-    typename Key<A4>::Ptr a4(this->template getDependency<A4>(injector));
-    ImplAllocator allocator;
-    Impl * impl = allocator.allocate(1);
-    new(impl) Impl(a1, a2, a3, a4);
-    return impl;
-  }
-
   void dispose(Iface * iface) const {
     Impl * impl = static_cast<Impl *>(iface);
-    ImplAllocator allocator;
     impl->~Impl(); // Must not throw
     allocator.deallocate(impl, 1);
   }
-};
 
-template<typename Dependency, typename Impl, typename Allocator, typename A1,
-    typename A2, typename A3, typename A4, typename A5>
-class NewProvider<Dependency, Impl(A1, A2, A3, A4, A5),
-    Allocator>: AbstractProvider<Dependency> {
-  typedef typename Key<Dependency>::Iface Iface;
-  typedef typename Allocator::template rebind<Impl>::other ImplAllocator;
-
-  typename Key<Provider<A1> >::Ptr provider1;
-  typename Key<Provider<A2> >::Ptr provider2;
-  typename Key<Provider<A3> >::Ptr provider3;
-  typename Key<Provider<A4> >::Ptr provider4;
-  typename Key<Provider<A5> >::Ptr provider5;
-
-  NewProvider(typename Key<Provider<A1> >::Ptr provider1,
-      typename Key<Provider<A2> >::Ptr provider2,
-      typename Key<Provider<A3> >::Ptr provider3,
-      typename Key<Provider<A4> >::Ptr provider4,
-      typename Key<Provider<A5> >::Ptr provider5):
-    AbstractProvider<Dependency>(),
-    provider1(provider1),
-    provider2(provider2),
-    provider3(provider3),
-    provider4(provider4),
-    provider5(provider5) {}
-  Iface * provide() {
-    typename Key<A1>::Ptr a1 = provider1->get();
-    typename Key<A2>::Ptr a2 = provider2->get();
-    typename Key<A3>::Ptr a3 = provider3->get();
-    typename Key<A4>::Ptr a4 = provider4->get();
-    typename Key<A5>::Ptr a5 = provider5->get();
-    ImplAllocator allocator;
-    Impl * impl = allocator.allocate(1);
-    new(impl) Impl(a1, a2, a3, a4, a5);
-    return impl;
-  }
-
-  void dispose(Iface * iface) {
-    Impl * impl = static_cast<Impl *>(iface);
-    ImplAllocator allocator;
-    impl->~Impl(); // Must not throw
-    allocator.deallocate(impl, 1);
-  }
 };
 
 template<typename Dependency, typename Scope, typename Impl,
     typename Allocator, typename A1, typename A2, typename A3, typename A4,
     typename A5>
-struct NewBinding<Dependency, Scope, Impl(A1, A2, A3, A4, A5),
-    Allocator>: public NakedBinding<Dependency, Scope> {
-  typedef typename Key<Dependency>::Iface Iface;
-  typedef typename Allocator::template rebind<Impl>::other ImplAllocator;
+class NewBinding<Dependency, Scope, Impl(A1, A2, A3, A4, A5), Allocator>:
+  public TransparentBinding<Dependency, Scope> {
 
-  void validateAcyclic(sauce::shared_ptr<Injector> injector,
-      TypeIds & ids) const {
+  typedef typename Key<Dependency>::Iface Iface;
+  typedef typename Key<Dependency>::Ptr Ptr;
+  typedef typename Binding<Dependency>::BindingPtr BindingPtr;
+  typedef typename Allocator::template rebind<Impl>::other ImplAllocator;
+  typedef NewBinding<Dependency, Scope, Impl(A1, A2, A3, A4, A5),
+      Allocator> New;
+  typedef DisposalDeleter<Iface, New> Deleter;
+
+  friend class DisposalDeleter<Iface, New>;
+
+  mutable ImplAllocator allocator;
+
+  /**
+   * Provide an Iface.
+   *
+   * A naked instance pointer is allocated and wrapped in a shared_ptr.  It is
+   * also given a custom deleter, to dispose of the naked pointer with
+   * dispose(Iface *).
+   */
+ Ptr provide(BindingPtr binding, InjectorPtr injector) const {
+    typename Key<A1>::Ptr a1(this->template getDependency<A1>(injector));
+    typename Key<A2>::Ptr a2(this->template getDependency<A2>(injector));
+    typename Key<A3>::Ptr a3(this->template getDependency<A3>(injector));
+    typename Key<A4>::Ptr a4(this->template getDependency<A4>(injector));
+    typename Key<A5>::Ptr a5(this->template getDependency<A5>(injector));
+    Deleter deleter(sauce::static_pointer_cast<New>(binding));
+    Impl * impl = allocator.allocate(1);
+    Ptr provided(new(impl) Impl(a1, a2, a3, a4, a5), deleter);
+    return provided;
+  }
+
+  void validateAcyclic(InjectorPtr injector, TypeIds & ids) const {
     this->template validateAcyclicos<A1>(injector, ids);
     this->template validateAcyclicos<A2>(injector, ids);
     this->template validateAcyclicos<A3>(injector, ids);
@@ -388,84 +290,53 @@ struct NewBinding<Dependency, Scope, Impl(A1, A2, A3, A4, A5),
     this->template validateAcyclicos<A5>(injector, ids);
   }
 
-  Iface * provide(sauce::shared_ptr<Injector> injector) const {
-    typename Key<A1>::Ptr a1(this->template getDependency<A1>(injector));
-    typename Key<A2>::Ptr a2(this->template getDependency<A2>(injector));
-    typename Key<A3>::Ptr a3(this->template getDependency<A3>(injector));
-    typename Key<A4>::Ptr a4(this->template getDependency<A4>(injector));
-    typename Key<A5>::Ptr a5(this->template getDependency<A5>(injector));
-    ImplAllocator allocator;
-    Impl * impl = allocator.allocate(1);
-    new(impl) Impl(a1, a2, a3, a4, a5);
-    return impl;
-  }
-
   void dispose(Iface * iface) const {
     Impl * impl = static_cast<Impl *>(iface);
-    ImplAllocator allocator;
     impl->~Impl(); // Must not throw
     allocator.deallocate(impl, 1);
   }
-};
 
-template<typename Dependency, typename Impl, typename Allocator, typename A1,
-    typename A2, typename A3, typename A4, typename A5, typename A6>
-class NewProvider<Dependency, Impl(A1, A2, A3, A4, A5, A6),
-    Allocator>: AbstractProvider<Dependency> {
-  typedef typename Key<Dependency>::Iface Iface;
-  typedef typename Allocator::template rebind<Impl>::other ImplAllocator;
-
-  typename Key<Provider<A1> >::Ptr provider1;
-  typename Key<Provider<A2> >::Ptr provider2;
-  typename Key<Provider<A3> >::Ptr provider3;
-  typename Key<Provider<A4> >::Ptr provider4;
-  typename Key<Provider<A5> >::Ptr provider5;
-  typename Key<Provider<A6> >::Ptr provider6;
-
-  NewProvider(typename Key<Provider<A1> >::Ptr provider1,
-      typename Key<Provider<A2> >::Ptr provider2,
-      typename Key<Provider<A3> >::Ptr provider3,
-      typename Key<Provider<A4> >::Ptr provider4,
-      typename Key<Provider<A5> >::Ptr provider5,
-      typename Key<Provider<A6> >::Ptr provider6):
-    AbstractProvider<Dependency>(),
-    provider1(provider1),
-    provider2(provider2),
-    provider3(provider3),
-    provider4(provider4),
-    provider5(provider5),
-    provider6(provider6) {}
-  Iface * provide() {
-    typename Key<A1>::Ptr a1 = provider1->get();
-    typename Key<A2>::Ptr a2 = provider2->get();
-    typename Key<A3>::Ptr a3 = provider3->get();
-    typename Key<A4>::Ptr a4 = provider4->get();
-    typename Key<A5>::Ptr a5 = provider5->get();
-    typename Key<A6>::Ptr a6 = provider6->get();
-    ImplAllocator allocator;
-    Impl * impl = allocator.allocate(1);
-    new(impl) Impl(a1, a2, a3, a4, a5, a6);
-    return impl;
-  }
-
-  void dispose(Iface * iface) {
-    Impl * impl = static_cast<Impl *>(iface);
-    ImplAllocator allocator;
-    impl->~Impl(); // Must not throw
-    allocator.deallocate(impl, 1);
-  }
 };
 
 template<typename Dependency, typename Scope, typename Impl,
     typename Allocator, typename A1, typename A2, typename A3, typename A4,
     typename A5, typename A6>
-struct NewBinding<Dependency, Scope, Impl(A1, A2, A3, A4, A5, A6),
-    Allocator>: public NakedBinding<Dependency, Scope> {
-  typedef typename Key<Dependency>::Iface Iface;
-  typedef typename Allocator::template rebind<Impl>::other ImplAllocator;
+class NewBinding<Dependency, Scope, Impl(A1, A2, A3, A4, A5, A6), Allocator>:
+  public TransparentBinding<Dependency, Scope> {
 
-  void validateAcyclic(sauce::shared_ptr<Injector> injector,
-      TypeIds & ids) const {
+  typedef typename Key<Dependency>::Iface Iface;
+  typedef typename Key<Dependency>::Ptr Ptr;
+  typedef typename Binding<Dependency>::BindingPtr BindingPtr;
+  typedef typename Allocator::template rebind<Impl>::other ImplAllocator;
+  typedef NewBinding<Dependency, Scope, Impl(A1, A2, A3, A4, A5, A6),
+      Allocator> New;
+  typedef DisposalDeleter<Iface, New> Deleter;
+
+  friend class DisposalDeleter<Iface, New>;
+
+  mutable ImplAllocator allocator;
+
+  /**
+   * Provide an Iface.
+   *
+   * A naked instance pointer is allocated and wrapped in a shared_ptr.  It is
+   * also given a custom deleter, to dispose of the naked pointer with
+   * dispose(Iface *).
+   */
+ Ptr provide(BindingPtr binding, InjectorPtr injector) const {
+    typename Key<A1>::Ptr a1(this->template getDependency<A1>(injector));
+    typename Key<A2>::Ptr a2(this->template getDependency<A2>(injector));
+    typename Key<A3>::Ptr a3(this->template getDependency<A3>(injector));
+    typename Key<A4>::Ptr a4(this->template getDependency<A4>(injector));
+    typename Key<A5>::Ptr a5(this->template getDependency<A5>(injector));
+    typename Key<A6>::Ptr a6(this->template getDependency<A6>(injector));
+    Deleter deleter(sauce::static_pointer_cast<New>(binding));
+    Impl * impl = allocator.allocate(1);
+    Ptr provided(new(impl) Impl(a1, a2, a3, a4, a5, a6), deleter);
+    return provided;
+  }
+
+  void validateAcyclic(InjectorPtr injector, TypeIds & ids) const {
     this->template validateAcyclicos<A1>(injector, ids);
     this->template validateAcyclicos<A2>(injector, ids);
     this->template validateAcyclicos<A3>(injector, ids);
@@ -474,90 +345,55 @@ struct NewBinding<Dependency, Scope, Impl(A1, A2, A3, A4, A5, A6),
     this->template validateAcyclicos<A6>(injector, ids);
   }
 
-  Iface * provide(sauce::shared_ptr<Injector> injector) const {
+  void dispose(Iface * iface) const {
+    Impl * impl = static_cast<Impl *>(iface);
+    impl->~Impl(); // Must not throw
+    allocator.deallocate(impl, 1);
+  }
+
+};
+
+template<typename Dependency, typename Scope, typename Impl,
+    typename Allocator, typename A1, typename A2, typename A3, typename A4,
+    typename A5, typename A6, typename A7>
+class NewBinding<Dependency, Scope, Impl(A1, A2, A3, A4, A5, A6, A7),
+    Allocator>:
+  public TransparentBinding<Dependency, Scope> {
+
+  typedef typename Key<Dependency>::Iface Iface;
+  typedef typename Key<Dependency>::Ptr Ptr;
+  typedef typename Binding<Dependency>::BindingPtr BindingPtr;
+  typedef typename Allocator::template rebind<Impl>::other ImplAllocator;
+  typedef NewBinding<Dependency, Scope, Impl(A1, A2, A3, A4, A5, A6, A7),
+      Allocator> New;
+  typedef DisposalDeleter<Iface, New> Deleter;
+
+  friend class DisposalDeleter<Iface, New>;
+
+  mutable ImplAllocator allocator;
+
+  /**
+   * Provide an Iface.
+   *
+   * A naked instance pointer is allocated and wrapped in a shared_ptr.  It is
+   * also given a custom deleter, to dispose of the naked pointer with
+   * dispose(Iface *).
+   */
+ Ptr provide(BindingPtr binding, InjectorPtr injector) const {
     typename Key<A1>::Ptr a1(this->template getDependency<A1>(injector));
     typename Key<A2>::Ptr a2(this->template getDependency<A2>(injector));
     typename Key<A3>::Ptr a3(this->template getDependency<A3>(injector));
     typename Key<A4>::Ptr a4(this->template getDependency<A4>(injector));
     typename Key<A5>::Ptr a5(this->template getDependency<A5>(injector));
     typename Key<A6>::Ptr a6(this->template getDependency<A6>(injector));
-    ImplAllocator allocator;
+    typename Key<A7>::Ptr a7(this->template getDependency<A7>(injector));
+    Deleter deleter(sauce::static_pointer_cast<New>(binding));
     Impl * impl = allocator.allocate(1);
-    new(impl) Impl(a1, a2, a3, a4, a5, a6);
-    return impl;
+    Ptr provided(new(impl) Impl(a1, a2, a3, a4, a5, a6, a7), deleter);
+    return provided;
   }
 
-  void dispose(Iface * iface) const {
-    Impl * impl = static_cast<Impl *>(iface);
-    ImplAllocator allocator;
-    impl->~Impl(); // Must not throw
-    allocator.deallocate(impl, 1);
-  }
-};
-
-template<typename Dependency, typename Impl, typename Allocator, typename A1,
-    typename A2, typename A3, typename A4, typename A5, typename A6,
-    typename A7>
-class NewProvider<Dependency, Impl(A1, A2, A3, A4, A5, A6, A7),
-    Allocator>: AbstractProvider<Dependency> {
-  typedef typename Key<Dependency>::Iface Iface;
-  typedef typename Allocator::template rebind<Impl>::other ImplAllocator;
-
-  typename Key<Provider<A1> >::Ptr provider1;
-  typename Key<Provider<A2> >::Ptr provider2;
-  typename Key<Provider<A3> >::Ptr provider3;
-  typename Key<Provider<A4> >::Ptr provider4;
-  typename Key<Provider<A5> >::Ptr provider5;
-  typename Key<Provider<A6> >::Ptr provider6;
-  typename Key<Provider<A7> >::Ptr provider7;
-
-  NewProvider(typename Key<Provider<A1> >::Ptr provider1,
-      typename Key<Provider<A2> >::Ptr provider2,
-      typename Key<Provider<A3> >::Ptr provider3,
-      typename Key<Provider<A4> >::Ptr provider4,
-      typename Key<Provider<A5> >::Ptr provider5,
-      typename Key<Provider<A6> >::Ptr provider6,
-      typename Key<Provider<A7> >::Ptr provider7):
-    AbstractProvider<Dependency>(),
-    provider1(provider1),
-    provider2(provider2),
-    provider3(provider3),
-    provider4(provider4),
-    provider5(provider5),
-    provider6(provider6),
-    provider7(provider7) {}
-  Iface * provide() {
-    typename Key<A1>::Ptr a1 = provider1->get();
-    typename Key<A2>::Ptr a2 = provider2->get();
-    typename Key<A3>::Ptr a3 = provider3->get();
-    typename Key<A4>::Ptr a4 = provider4->get();
-    typename Key<A5>::Ptr a5 = provider5->get();
-    typename Key<A6>::Ptr a6 = provider6->get();
-    typename Key<A7>::Ptr a7 = provider7->get();
-    ImplAllocator allocator;
-    Impl * impl = allocator.allocate(1);
-    new(impl) Impl(a1, a2, a3, a4, a5, a6, a7);
-    return impl;
-  }
-
-  void dispose(Iface * iface) {
-    Impl * impl = static_cast<Impl *>(iface);
-    ImplAllocator allocator;
-    impl->~Impl(); // Must not throw
-    allocator.deallocate(impl, 1);
-  }
-};
-
-template<typename Dependency, typename Scope, typename Impl,
-    typename Allocator, typename A1, typename A2, typename A3, typename A4,
-    typename A5, typename A6, typename A7>
-struct NewBinding<Dependency, Scope, Impl(A1, A2, A3, A4, A5, A6, A7),
-    Allocator>: public NakedBinding<Dependency, Scope> {
-  typedef typename Key<Dependency>::Iface Iface;
-  typedef typename Allocator::template rebind<Impl>::other ImplAllocator;
-
-  void validateAcyclic(sauce::shared_ptr<Injector> injector,
-      TypeIds & ids) const {
+  void validateAcyclic(InjectorPtr injector, TypeIds & ids) const {
     this->template validateAcyclicos<A1>(injector, ids);
     this->template validateAcyclicos<A2>(injector, ids);
     this->template validateAcyclicos<A3>(injector, ids);
@@ -567,7 +403,41 @@ struct NewBinding<Dependency, Scope, Impl(A1, A2, A3, A4, A5, A6, A7),
     this->template validateAcyclicos<A7>(injector, ids);
   }
 
-  Iface * provide(sauce::shared_ptr<Injector> injector) const {
+  void dispose(Iface * iface) const {
+    Impl * impl = static_cast<Impl *>(iface);
+    impl->~Impl(); // Must not throw
+    allocator.deallocate(impl, 1);
+  }
+
+};
+
+template<typename Dependency, typename Scope, typename Impl,
+    typename Allocator, typename A1, typename A2, typename A3, typename A4,
+    typename A5, typename A6, typename A7, typename A8>
+class NewBinding<Dependency, Scope, Impl(A1, A2, A3, A4, A5, A6, A7, A8),
+    Allocator>:
+  public TransparentBinding<Dependency, Scope> {
+
+  typedef typename Key<Dependency>::Iface Iface;
+  typedef typename Key<Dependency>::Ptr Ptr;
+  typedef typename Binding<Dependency>::BindingPtr BindingPtr;
+  typedef typename Allocator::template rebind<Impl>::other ImplAllocator;
+  typedef NewBinding<Dependency, Scope, Impl(A1, A2, A3, A4, A5, A6, A7, A8),
+      Allocator> New;
+  typedef DisposalDeleter<Iface, New> Deleter;
+
+  friend class DisposalDeleter<Iface, New>;
+
+  mutable ImplAllocator allocator;
+
+  /**
+   * Provide an Iface.
+   *
+   * A naked instance pointer is allocated and wrapped in a shared_ptr.  It is
+   * also given a custom deleter, to dispose of the naked pointer with
+   * dispose(Iface *).
+   */
+ Ptr provide(BindingPtr binding, InjectorPtr injector) const {
     typename Key<A1>::Ptr a1(this->template getDependency<A1>(injector));
     typename Key<A2>::Ptr a2(this->template getDependency<A2>(injector));
     typename Key<A3>::Ptr a3(this->template getDependency<A3>(injector));
@@ -575,87 +445,14 @@ struct NewBinding<Dependency, Scope, Impl(A1, A2, A3, A4, A5, A6, A7),
     typename Key<A5>::Ptr a5(this->template getDependency<A5>(injector));
     typename Key<A6>::Ptr a6(this->template getDependency<A6>(injector));
     typename Key<A7>::Ptr a7(this->template getDependency<A7>(injector));
-    ImplAllocator allocator;
+    typename Key<A8>::Ptr a8(this->template getDependency<A8>(injector));
+    Deleter deleter(sauce::static_pointer_cast<New>(binding));
     Impl * impl = allocator.allocate(1);
-    new(impl) Impl(a1, a2, a3, a4, a5, a6, a7);
-    return impl;
+    Ptr provided(new(impl) Impl(a1, a2, a3, a4, a5, a6, a7, a8), deleter);
+    return provided;
   }
 
-  void dispose(Iface * iface) const {
-    Impl * impl = static_cast<Impl *>(iface);
-    ImplAllocator allocator;
-    impl->~Impl(); // Must not throw
-    allocator.deallocate(impl, 1);
-  }
-};
-
-template<typename Dependency, typename Impl, typename Allocator, typename A1,
-    typename A2, typename A3, typename A4, typename A5, typename A6,
-    typename A7, typename A8>
-class NewProvider<Dependency, Impl(A1, A2, A3, A4, A5, A6, A7, A8),
-    Allocator>: AbstractProvider<Dependency> {
-  typedef typename Key<Dependency>::Iface Iface;
-  typedef typename Allocator::template rebind<Impl>::other ImplAllocator;
-
-  typename Key<Provider<A1> >::Ptr provider1;
-  typename Key<Provider<A2> >::Ptr provider2;
-  typename Key<Provider<A3> >::Ptr provider3;
-  typename Key<Provider<A4> >::Ptr provider4;
-  typename Key<Provider<A5> >::Ptr provider5;
-  typename Key<Provider<A6> >::Ptr provider6;
-  typename Key<Provider<A7> >::Ptr provider7;
-  typename Key<Provider<A8> >::Ptr provider8;
-
-  NewProvider(typename Key<Provider<A1> >::Ptr provider1,
-      typename Key<Provider<A2> >::Ptr provider2,
-      typename Key<Provider<A3> >::Ptr provider3,
-      typename Key<Provider<A4> >::Ptr provider4,
-      typename Key<Provider<A5> >::Ptr provider5,
-      typename Key<Provider<A6> >::Ptr provider6,
-      typename Key<Provider<A7> >::Ptr provider7,
-      typename Key<Provider<A8> >::Ptr provider8):
-    AbstractProvider<Dependency>(),
-    provider1(provider1),
-    provider2(provider2),
-    provider3(provider3),
-    provider4(provider4),
-    provider5(provider5),
-    provider6(provider6),
-    provider7(provider7),
-    provider8(provider8) {}
-  Iface * provide() {
-    typename Key<A1>::Ptr a1 = provider1->get();
-    typename Key<A2>::Ptr a2 = provider2->get();
-    typename Key<A3>::Ptr a3 = provider3->get();
-    typename Key<A4>::Ptr a4 = provider4->get();
-    typename Key<A5>::Ptr a5 = provider5->get();
-    typename Key<A6>::Ptr a6 = provider6->get();
-    typename Key<A7>::Ptr a7 = provider7->get();
-    typename Key<A8>::Ptr a8 = provider8->get();
-    ImplAllocator allocator;
-    Impl * impl = allocator.allocate(1);
-    new(impl) Impl(a1, a2, a3, a4, a5, a6, a7, a8);
-    return impl;
-  }
-
-  void dispose(Iface * iface) {
-    Impl * impl = static_cast<Impl *>(iface);
-    ImplAllocator allocator;
-    impl->~Impl(); // Must not throw
-    allocator.deallocate(impl, 1);
-  }
-};
-
-template<typename Dependency, typename Scope, typename Impl,
-    typename Allocator, typename A1, typename A2, typename A3, typename A4,
-    typename A5, typename A6, typename A7, typename A8>
-struct NewBinding<Dependency, Scope, Impl(A1, A2, A3, A4, A5, A6, A7, A8),
-    Allocator>: public NakedBinding<Dependency, Scope> {
-  typedef typename Key<Dependency>::Iface Iface;
-  typedef typename Allocator::template rebind<Impl>::other ImplAllocator;
-
-  void validateAcyclic(sauce::shared_ptr<Injector> injector,
-      TypeIds & ids) const {
+  void validateAcyclic(InjectorPtr injector, TypeIds & ids) const {
     this->template validateAcyclicos<A1>(injector, ids);
     this->template validateAcyclicos<A2>(injector, ids);
     this->template validateAcyclicos<A3>(injector, ids);
@@ -666,7 +463,41 @@ struct NewBinding<Dependency, Scope, Impl(A1, A2, A3, A4, A5, A6, A7, A8),
     this->template validateAcyclicos<A8>(injector, ids);
   }
 
-  Iface * provide(sauce::shared_ptr<Injector> injector) const {
+  void dispose(Iface * iface) const {
+    Impl * impl = static_cast<Impl *>(iface);
+    impl->~Impl(); // Must not throw
+    allocator.deallocate(impl, 1);
+  }
+
+};
+
+template<typename Dependency, typename Scope, typename Impl,
+    typename Allocator, typename A1, typename A2, typename A3, typename A4,
+    typename A5, typename A6, typename A7, typename A8, typename A9>
+class NewBinding<Dependency, Scope, Impl(A1, A2, A3, A4, A5, A6, A7, A8, A9),
+    Allocator>:
+  public TransparentBinding<Dependency, Scope> {
+
+  typedef typename Key<Dependency>::Iface Iface;
+  typedef typename Key<Dependency>::Ptr Ptr;
+  typedef typename Binding<Dependency>::BindingPtr BindingPtr;
+  typedef typename Allocator::template rebind<Impl>::other ImplAllocator;
+  typedef NewBinding<Dependency, Scope, Impl(A1, A2, A3, A4, A5, A6, A7, A8,
+      A9), Allocator> New;
+  typedef DisposalDeleter<Iface, New> Deleter;
+
+  friend class DisposalDeleter<Iface, New>;
+
+  mutable ImplAllocator allocator;
+
+  /**
+   * Provide an Iface.
+   *
+   * A naked instance pointer is allocated and wrapped in a shared_ptr.  It is
+   * also given a custom deleter, to dispose of the naked pointer with
+   * dispose(Iface *).
+   */
+ Ptr provide(BindingPtr binding, InjectorPtr injector) const {
     typename Key<A1>::Ptr a1(this->template getDependency<A1>(injector));
     typename Key<A2>::Ptr a2(this->template getDependency<A2>(injector));
     typename Key<A3>::Ptr a3(this->template getDependency<A3>(injector));
@@ -675,91 +506,14 @@ struct NewBinding<Dependency, Scope, Impl(A1, A2, A3, A4, A5, A6, A7, A8),
     typename Key<A6>::Ptr a6(this->template getDependency<A6>(injector));
     typename Key<A7>::Ptr a7(this->template getDependency<A7>(injector));
     typename Key<A8>::Ptr a8(this->template getDependency<A8>(injector));
-    ImplAllocator allocator;
+    typename Key<A9>::Ptr a9(this->template getDependency<A9>(injector));
+    Deleter deleter(sauce::static_pointer_cast<New>(binding));
     Impl * impl = allocator.allocate(1);
-    new(impl) Impl(a1, a2, a3, a4, a5, a6, a7, a8);
-    return impl;
+    Ptr provided(new(impl) Impl(a1, a2, a3, a4, a5, a6, a7, a8, a9), deleter);
+    return provided;
   }
 
-  void dispose(Iface * iface) const {
-    Impl * impl = static_cast<Impl *>(iface);
-    ImplAllocator allocator;
-    impl->~Impl(); // Must not throw
-    allocator.deallocate(impl, 1);
-  }
-};
-
-template<typename Dependency, typename Impl, typename Allocator, typename A1,
-    typename A2, typename A3, typename A4, typename A5, typename A6,
-    typename A7, typename A8, typename A9>
-class NewProvider<Dependency, Impl(A1, A2, A3, A4, A5, A6, A7, A8, A9),
-    Allocator>: AbstractProvider<Dependency> {
-  typedef typename Key<Dependency>::Iface Iface;
-  typedef typename Allocator::template rebind<Impl>::other ImplAllocator;
-
-  typename Key<Provider<A1> >::Ptr provider1;
-  typename Key<Provider<A2> >::Ptr provider2;
-  typename Key<Provider<A3> >::Ptr provider3;
-  typename Key<Provider<A4> >::Ptr provider4;
-  typename Key<Provider<A5> >::Ptr provider5;
-  typename Key<Provider<A6> >::Ptr provider6;
-  typename Key<Provider<A7> >::Ptr provider7;
-  typename Key<Provider<A8> >::Ptr provider8;
-  typename Key<Provider<A9> >::Ptr provider9;
-
-  NewProvider(typename Key<Provider<A1> >::Ptr provider1,
-      typename Key<Provider<A2> >::Ptr provider2,
-      typename Key<Provider<A3> >::Ptr provider3,
-      typename Key<Provider<A4> >::Ptr provider4,
-      typename Key<Provider<A5> >::Ptr provider5,
-      typename Key<Provider<A6> >::Ptr provider6,
-      typename Key<Provider<A7> >::Ptr provider7,
-      typename Key<Provider<A8> >::Ptr provider8,
-      typename Key<Provider<A9> >::Ptr provider9):
-    AbstractProvider<Dependency>(),
-    provider1(provider1),
-    provider2(provider2),
-    provider3(provider3),
-    provider4(provider4),
-    provider5(provider5),
-    provider6(provider6),
-    provider7(provider7),
-    provider8(provider8),
-    provider9(provider9) {}
-  Iface * provide() {
-    typename Key<A1>::Ptr a1 = provider1->get();
-    typename Key<A2>::Ptr a2 = provider2->get();
-    typename Key<A3>::Ptr a3 = provider3->get();
-    typename Key<A4>::Ptr a4 = provider4->get();
-    typename Key<A5>::Ptr a5 = provider5->get();
-    typename Key<A6>::Ptr a6 = provider6->get();
-    typename Key<A7>::Ptr a7 = provider7->get();
-    typename Key<A8>::Ptr a8 = provider8->get();
-    typename Key<A9>::Ptr a9 = provider9->get();
-    ImplAllocator allocator;
-    Impl * impl = allocator.allocate(1);
-    new(impl) Impl(a1, a2, a3, a4, a5, a6, a7, a8, a9);
-    return impl;
-  }
-
-  void dispose(Iface * iface) {
-    Impl * impl = static_cast<Impl *>(iface);
-    ImplAllocator allocator;
-    impl->~Impl(); // Must not throw
-    allocator.deallocate(impl, 1);
-  }
-};
-
-template<typename Dependency, typename Scope, typename Impl,
-    typename Allocator, typename A1, typename A2, typename A3, typename A4,
-    typename A5, typename A6, typename A7, typename A8, typename A9>
-struct NewBinding<Dependency, Scope, Impl(A1, A2, A3, A4, A5, A6, A7, A8, A9),
-    Allocator>: public NakedBinding<Dependency, Scope> {
-  typedef typename Key<Dependency>::Iface Iface;
-  typedef typename Allocator::template rebind<Impl>::other ImplAllocator;
-
-  void validateAcyclic(sauce::shared_ptr<Injector> injector,
-      TypeIds & ids) const {
+  void validateAcyclic(InjectorPtr injector, TypeIds & ids) const {
     this->template validateAcyclicos<A1>(injector, ids);
     this->template validateAcyclicos<A2>(injector, ids);
     this->template validateAcyclicos<A3>(injector, ids);
@@ -771,7 +525,42 @@ struct NewBinding<Dependency, Scope, Impl(A1, A2, A3, A4, A5, A6, A7, A8, A9),
     this->template validateAcyclicos<A9>(injector, ids);
   }
 
-  Iface * provide(sauce::shared_ptr<Injector> injector) const {
+  void dispose(Iface * iface) const {
+    Impl * impl = static_cast<Impl *>(iface);
+    impl->~Impl(); // Must not throw
+    allocator.deallocate(impl, 1);
+  }
+
+};
+
+template<typename Dependency, typename Scope, typename Impl,
+    typename Allocator, typename A1, typename A2, typename A3, typename A4,
+    typename A5, typename A6, typename A7, typename A8, typename A9,
+    typename A10>
+class NewBinding<Dependency, Scope, Impl(A1, A2, A3, A4, A5, A6, A7, A8, A9,
+    A10), Allocator>:
+  public TransparentBinding<Dependency, Scope> {
+
+  typedef typename Key<Dependency>::Iface Iface;
+  typedef typename Key<Dependency>::Ptr Ptr;
+  typedef typename Binding<Dependency>::BindingPtr BindingPtr;
+  typedef typename Allocator::template rebind<Impl>::other ImplAllocator;
+  typedef NewBinding<Dependency, Scope, Impl(A1, A2, A3, A4, A5, A6, A7, A8,
+      A9, A10), Allocator> New;
+  typedef DisposalDeleter<Iface, New> Deleter;
+
+  friend class DisposalDeleter<Iface, New>;
+
+  mutable ImplAllocator allocator;
+
+  /**
+   * Provide an Iface.
+   *
+   * A naked instance pointer is allocated and wrapped in a shared_ptr.  It is
+   * also given a custom deleter, to dispose of the naked pointer with
+   * dispose(Iface *).
+   */
+ Ptr provide(BindingPtr binding, InjectorPtr injector) const {
     typename Key<A1>::Ptr a1(this->template getDependency<A1>(injector));
     typename Key<A2>::Ptr a2(this->template getDependency<A2>(injector));
     typename Key<A3>::Ptr a3(this->template getDependency<A3>(injector));
@@ -781,96 +570,15 @@ struct NewBinding<Dependency, Scope, Impl(A1, A2, A3, A4, A5, A6, A7, A8, A9),
     typename Key<A7>::Ptr a7(this->template getDependency<A7>(injector));
     typename Key<A8>::Ptr a8(this->template getDependency<A8>(injector));
     typename Key<A9>::Ptr a9(this->template getDependency<A9>(injector));
-    ImplAllocator allocator;
+    typename Key<A10>::Ptr a10(this->template getDependency<A10>(injector));
+    Deleter deleter(sauce::static_pointer_cast<New>(binding));
     Impl * impl = allocator.allocate(1);
-    new(impl) Impl(a1, a2, a3, a4, a5, a6, a7, a8, a9);
-    return impl;
+    Ptr provided(new(impl) Impl(a1, a2, a3, a4, a5, a6, a7, a8, a9, a10),
+        deleter);
+    return provided;
   }
 
-  void dispose(Iface * iface) const {
-    Impl * impl = static_cast<Impl *>(iface);
-    ImplAllocator allocator;
-    impl->~Impl(); // Must not throw
-    allocator.deallocate(impl, 1);
-  }
-};
-
-template<typename Dependency, typename Impl, typename Allocator, typename A1,
-    typename A2, typename A3, typename A4, typename A5, typename A6,
-    typename A7, typename A8, typename A9, typename A10>
-class NewProvider<Dependency, Impl(A1, A2, A3, A4, A5, A6, A7, A8, A9, A10),
-    Allocator>: AbstractProvider<Dependency> {
-  typedef typename Key<Dependency>::Iface Iface;
-  typedef typename Allocator::template rebind<Impl>::other ImplAllocator;
-
-  typename Key<Provider<A1> >::Ptr provider1;
-  typename Key<Provider<A2> >::Ptr provider2;
-  typename Key<Provider<A3> >::Ptr provider3;
-  typename Key<Provider<A4> >::Ptr provider4;
-  typename Key<Provider<A5> >::Ptr provider5;
-  typename Key<Provider<A6> >::Ptr provider6;
-  typename Key<Provider<A7> >::Ptr provider7;
-  typename Key<Provider<A8> >::Ptr provider8;
-  typename Key<Provider<A9> >::Ptr provider9;
-  typename Key<Provider<A10> >::Ptr provider10;
-
-  NewProvider(typename Key<Provider<A1> >::Ptr provider1,
-      typename Key<Provider<A2> >::Ptr provider2,
-      typename Key<Provider<A3> >::Ptr provider3,
-      typename Key<Provider<A4> >::Ptr provider4,
-      typename Key<Provider<A5> >::Ptr provider5,
-      typename Key<Provider<A6> >::Ptr provider6,
-      typename Key<Provider<A7> >::Ptr provider7,
-      typename Key<Provider<A8> >::Ptr provider8,
-      typename Key<Provider<A9> >::Ptr provider9,
-      typename Key<Provider<A10> >::Ptr provider10):
-    AbstractProvider<Dependency>(),
-    provider1(provider1),
-    provider2(provider2),
-    provider3(provider3),
-    provider4(provider4),
-    provider5(provider5),
-    provider6(provider6),
-    provider7(provider7),
-    provider8(provider8),
-    provider9(provider9),
-    provider10(provider10) {}
-  Iface * provide() {
-    typename Key<A1>::Ptr a1 = provider1->get();
-    typename Key<A2>::Ptr a2 = provider2->get();
-    typename Key<A3>::Ptr a3 = provider3->get();
-    typename Key<A4>::Ptr a4 = provider4->get();
-    typename Key<A5>::Ptr a5 = provider5->get();
-    typename Key<A6>::Ptr a6 = provider6->get();
-    typename Key<A7>::Ptr a7 = provider7->get();
-    typename Key<A8>::Ptr a8 = provider8->get();
-    typename Key<A9>::Ptr a9 = provider9->get();
-    typename Key<A10>::Ptr a10 = provider10->get();
-    ImplAllocator allocator;
-    Impl * impl = allocator.allocate(1);
-    new(impl) Impl(a1, a2, a3, a4, a5, a6, a7, a8, a9, a10);
-    return impl;
-  }
-
-  void dispose(Iface * iface) {
-    Impl * impl = static_cast<Impl *>(iface);
-    ImplAllocator allocator;
-    impl->~Impl(); // Must not throw
-    allocator.deallocate(impl, 1);
-  }
-};
-
-template<typename Dependency, typename Scope, typename Impl,
-    typename Allocator, typename A1, typename A2, typename A3, typename A4,
-    typename A5, typename A6, typename A7, typename A8, typename A9,
-    typename A10>
-struct NewBinding<Dependency, Scope, Impl(A1, A2, A3, A4, A5, A6, A7, A8, A9,
-    A10), Allocator>: public NakedBinding<Dependency, Scope> {
-  typedef typename Key<Dependency>::Iface Iface;
-  typedef typename Allocator::template rebind<Impl>::other ImplAllocator;
-
-  void validateAcyclic(sauce::shared_ptr<Injector> injector,
-      TypeIds & ids) const {
+  void validateAcyclic(InjectorPtr injector, TypeIds & ids) const {
     this->template validateAcyclicos<A1>(injector, ids);
     this->template validateAcyclicos<A2>(injector, ids);
     this->template validateAcyclicos<A3>(injector, ids);
@@ -883,29 +591,12 @@ struct NewBinding<Dependency, Scope, Impl(A1, A2, A3, A4, A5, A6, A7, A8, A9,
     this->template validateAcyclicos<A10>(injector, ids);
   }
 
-  Iface * provide(sauce::shared_ptr<Injector> injector) const {
-    typename Key<A1>::Ptr a1(this->template getDependency<A1>(injector));
-    typename Key<A2>::Ptr a2(this->template getDependency<A2>(injector));
-    typename Key<A3>::Ptr a3(this->template getDependency<A3>(injector));
-    typename Key<A4>::Ptr a4(this->template getDependency<A4>(injector));
-    typename Key<A5>::Ptr a5(this->template getDependency<A5>(injector));
-    typename Key<A6>::Ptr a6(this->template getDependency<A6>(injector));
-    typename Key<A7>::Ptr a7(this->template getDependency<A7>(injector));
-    typename Key<A8>::Ptr a8(this->template getDependency<A8>(injector));
-    typename Key<A9>::Ptr a9(this->template getDependency<A9>(injector));
-    typename Key<A10>::Ptr a10(this->template getDependency<A10>(injector));
-    ImplAllocator allocator;
-    Impl * impl = allocator.allocate(1);
-    new(impl) Impl(a1, a2, a3, a4, a5, a6, a7, a8, a9, a10);
-    return impl;
-  }
-
   void dispose(Iface * iface) const {
     Impl * impl = static_cast<Impl *>(iface);
-    ImplAllocator allocator;
     impl->~Impl(); // Must not throw
     allocator.deallocate(impl, 1);
   }
+
 };
 
 }
