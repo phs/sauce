@@ -29,10 +29,10 @@ public:
   /**
    * Insert a dependency into the cache.
    */
-  template<typename UnnormalizedDependency>
-  void put(typename Key<UnnormalizedDependency>::Ptr pointer) {
-    typedef typename Key<UnnormalizedDependency>::Normalized Dependency;
-    typedef typename Key<Dependency>::Ptr SmartPtr;
+  template<typename Dependency>
+  void put(typename Key<Dependency>::Ptr pointer) {
+    typedef typename Key<Dependency>::Normalized Normalized;
+    typedef typename Key<Normalized>::Ptr SmartPtr;
 
     /*
      * A voice! a voice! It rang deep to the very last. It survived his strength to hide in the
@@ -50,9 +50,9 @@ public:
 
     CachedPtr cachedPtr(
       static_cast<void *>(new SmartPtr(pointer)),
-      ScopeCacheLineDeleter<Dependency>());
+      ScopeCacheLineDeleter<Normalized>());
 
-    cache.insert(std::make_pair(typeIdOf<Dependency>(), cachedPtr));
+    cache.insert(std::make_pair(typeIdOf<Normalized>(), cachedPtr));
   }
 
   /**
@@ -61,12 +61,12 @@ public:
    * The return value indicates if a hit was found.  On a hit, the out argument will be
    * overwritten with the discovered value.
    */
-  template<typename UnnormalizedDependency>
-  bool get(typename Key<UnnormalizedDependency>::Ptr & out) const {
-    typedef typename Key<UnnormalizedDependency>::Normalized Dependency;
-    typedef typename Key<Dependency>::Ptr SmartPtr;
+  template<typename Dependency>
+  bool get(typename Key<Dependency>::Ptr & out) const {
+    typedef typename Key<Dependency>::Normalized Normalized;
+    typedef typename Key<Normalized>::Ptr SmartPtr;
 
-    Cache::const_iterator cachedPtr = cache.find(typeIdOf<Dependency>());
+    Cache::const_iterator cachedPtr = cache.find(typeIdOf<Normalized>());
     if (cachedPtr == cache.end()) {
       return false;
     }
