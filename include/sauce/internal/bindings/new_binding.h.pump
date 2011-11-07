@@ -21,53 +21,12 @@ namespace bindings {
 template<typename Dependency, typename Scope, typename Constructor, typename Allocator>
 class NewBinding;
 
-template<typename Dependency, typename Constructor, typename Allocator>
-class NewProvider;
-
 $range i 0..n
 $for i [[
 $range j 1..i
 $var comma_typename_As = [[$for j [[, typename A$j]]]]
 $var As = [[$for j, [[A$j]]]]
 $var as = [[$for j, [[a$j]]]]
-
-template<typename Dependency, typename Impl, typename Allocator$comma_typename_As>
-class NewProvider<Dependency, Impl($As), Allocator>: NakedProvider<Dependency> {
-  typedef typename Key<Dependency>::Iface Iface;
-  typedef typename Allocator::template rebind<Impl>::other ImplAllocator;
-[[$if i>0 [[
-
-[[$for j [[
-  typename Key<Provider<A$j> >::Ptr provider$j;
-
-]]]]
-
-  NewProvider([[$for j, [[
-typename Key<Provider<A$j> >::Ptr provider$j
-]]]]):
-    NakedProvider<Dependency>()[[$for j [[,
-    provider$j(provider$j)
-]]]] {}
-]]]]
-
-  Iface * provide() {
-[[$for j [[
-    typename Key<A$j>::Ptr a$j = provider$j->get();
-
-]]]]
-    ImplAllocator allocator;
-    Impl * impl = allocator.allocate(1);
-    new(impl) Impl($as);
-    return impl;
-  }
-
-  void dispose(Iface * iface) {
-    Impl * impl = static_cast<Impl *>(iface);
-    ImplAllocator allocator;
-    impl->~Impl(); // Must not throw
-    allocator.deallocate(impl, 1);
-  }
-};
 
 template<typename Dependency, typename Scope, typename Impl, typename Allocator$comma_typename_As>
 struct NewBinding<Dependency, Scope, Impl($As), Allocator>: public NakedBinding<Dependency, Scope> {
