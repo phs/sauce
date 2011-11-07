@@ -24,10 +24,8 @@ void BoundModule(Binder & binder) {
 TEST(BindingTest, shouldProvideBoundDependenciesAndTheirProvidersToo) {
   sauce::shared_ptr<Injector> injector(Modules().add(&BoundModule).createInjector());
 
-  // We can get an instance
+  // We can get an instance, or a provider
   sauce::shared_ptr<Bound> explicitlyBound = injector->get<Bound>();
-
-  // Or a provider
   sauce::shared_ptr<Provider<Bound> > provider = injector->get<Provider<Bound> >();
 }
 
@@ -52,10 +50,8 @@ void ProviderModule(Binder & binder) {
 TEST(BindingTest, shouldProvideDependenciesBoundToProvidersAndTheProvidersToo) {
   sauce::shared_ptr<Injector> injector(Modules().add(&ProviderModule).createInjector());
 
-  // We can get an instance
+  // We can get an instance, or a provider
   sauce::shared_ptr<CustomBuilt> customBuilt = injector->get<CustomBuilt>();
-
-  // Or a provider
   sauce::shared_ptr<Provider<CustomBuilt> > provider = injector->get<Provider<CustomBuilt> >();
 }
 
