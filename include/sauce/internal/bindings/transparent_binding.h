@@ -68,8 +68,6 @@ public:
     return typeIdOf<Scope>();
   }
 
-  virtual void validateAcyclic(InjectorPtr injector, TypeIds & ids) const = 0;
-
   /**
    * Provide an Iface.
    *
@@ -102,7 +100,7 @@ public:
     if (typeIdOf<Scope>() != typeIdOf<NoScope>()) {
       BindingPtr binding = resolve<Dependency>(opaque);
       TypeIds ids;
-      validateAcyclic(injector, ids);
+      this->validateAcyclic(injector, ids);
       get(binding, injector);
     }
   }

@@ -76,7 +76,7 @@ struct Binding:
     return typeIdOf<Dependency>();
   }
 
-  virtual void validateAcyclic(sauce::shared_ptr<Injector>, TypeIds &) const = 0;
+  virtual void validateAcyclic(sauce::shared_ptr<Injector>, TypeIds &) const {}
 
   /**
    * Get an Iface, using the given injector to provide dependencies.

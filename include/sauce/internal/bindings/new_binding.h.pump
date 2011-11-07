@@ -53,8 +53,7 @@ class NewBinding<Dependency, Scope, Impl($As), Allocator>:
  Ptr provide(BindingPtr binding, InjectorPtr) const
 ]] $else [[
  Ptr provide(BindingPtr binding, InjectorPtr injector) const
-]]]]
- {
+]]]] {
 [[$for j [[
     typename Key<A$j>::Ptr a$j(this->template getDependency<A$j>(injector));
 
@@ -64,18 +63,16 @@ class NewBinding<Dependency, Scope, Impl($As), Allocator>:
     Ptr provided(new(impl) Impl($as), deleter);
     return provided;
   }
+[[$if i>0 [[
 
-[[$if i==0 [[
-  void validateAcyclic(InjectorPtr, TypeIds &) const {}
-]] $else [[
   void validateAcyclic(InjectorPtr injector, TypeIds & ids) const {
 [[$for j [[
     this->template validateAcyclicos<A$j>(injector, ids);
 
 ]]]]
   }
-]]]]
 
+]]]]
 
   void dispose(Iface * iface) const {
     Impl * impl = static_cast<Impl *>(iface);

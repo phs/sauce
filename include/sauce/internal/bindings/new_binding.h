@@ -51,8 +51,6 @@ class NewBinding<Dependency, Scope, Impl(), Allocator>:
     return provided;
   }
 
-  void validateAcyclic(InjectorPtr, TypeIds &) const {}
-
   void dispose(Iface * iface) const {
     Impl * impl = static_cast<Impl *>(iface);
     impl->~Impl(); // Must not throw

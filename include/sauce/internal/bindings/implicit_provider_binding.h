@@ -57,8 +57,6 @@ class ImplicitProviderBinding:
   typedef typename Binding<ProviderDependency>::BindingPtr BindingPtr;
   typedef typename Key<ProviderDependency>::Ptr ProviderPtr;
 
-  void validateAcyclic(InjectorPtr, TypeIds &) const {}
-
   ProviderPtr provide(BindingPtr, InjectorPtr injector) const {
     ProviderPtr provider(new ImplicitProvider<Dependency, Name>(providedBinding, injector));
     setSelf<Dependency, Name>(provider);
