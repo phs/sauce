@@ -28,7 +28,7 @@ TEST(BindingTest, shouldProvideBoundDependenciesAndTheirProvidersToo) {
   sauce::shared_ptr<Bound> explicitlyBound = injector->get<Bound>();
 
   // Or a provider
-  // sauce::shared_ptr<Provider<Bound> > provider = injector->get<Provider<Bound> >();
+  sauce::shared_ptr<Provider<Bound> > provider = injector->get<Provider<Bound> >();
 }
 
 struct CustomBuilt {};

@@ -63,13 +63,15 @@ struct ImplicitBinding<Named<Injector, Unnamed> > {
  */
 template<typename Dependency, typename Name>
 struct ImplicitBinding<Named<Provider<Dependency>, Name> > {
+  typedef typename Key<Dependency>::Normalized Normalized;
   typedef Named<Provider<Dependency>, Name> ProviderDependency;
-  typedef sauce::shared_ptr<Binding<ProviderDependency> > BindingPtr;
+  typedef typename Binding<ProviderDependency>::BindingPtr BindingPtr;
+  typedef typename Binding<Normalized>::BindingPtr ProvidedBindingPtr;
 
   static BindingPtr get(Bindings<ImplicitBindings> const & bindings) {
-    typedef typename Key<Dependency>::Normalized Normalized;
-    bindings.getBinding<Normalized>();
-    throw "waaa";
+    ProvidedBindingPtr providedBinding(bindings.getBinding<Normalized>());
+    BindingPtr binding(new b::ImplicitProviderBinding<Dependency, Name>(providedBinding));
+    return binding;
   }
 };
 
