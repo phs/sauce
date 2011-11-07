@@ -41,6 +41,7 @@ class Provider {
   friend class ::sauce::internal::ProviderFriend;
 
   sauce::weak_ptr<Provider<Dependency> > weak;
+
   void setSelf(sauce::shared_ptr<Provider<Dependency> > shared) {
     assert(shared.get() == this);
     weak = shared;
