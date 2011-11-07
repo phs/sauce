@@ -74,16 +74,16 @@ class AbstractProvider: public Provider<Dependency> {
 
   typedef typename i::Key<Dependency>::Iface Iface;
   typedef sauce::shared_ptr<Provider<Dependency> > ProviderPtr;
-  typedef AbstractProvider<Dependency> Naked;
-  typedef sauce::shared_ptr<Naked> NakedPtr;
+  typedef AbstractProvider<Dependency> Abstract;
+  typedef sauce::shared_ptr<Abstract> AbstractProviderPtr;
 
   /**
    * Create a shared pointer deleter suitable for this provider.
    */
-  i::DisposalDeleter<Iface, Naked> deleter() const {
+  i::DisposalDeleter<Iface, Abstract> deleter() const {
     ProviderPtr provider = this->getSelf();
-    NakedPtr naked = sauce::static_pointer_cast<Naked>(provider);
-    i::DisposalDeleter<Iface, Naked> deleter(naked);
+    AbstractProviderPtr abstract = sauce::static_pointer_cast<Abstract>(provider);
+    i::DisposalDeleter<Iface, Abstract> deleter(abstract);
     return deleter;
   }
 
