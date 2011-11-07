@@ -102,9 +102,6 @@ class AbstractProvider: public Provider<Dependency> {
 
 public:
 
-  AbstractProvider():
-    Provider<Dependency>() {}
-
   /**
    * Provide an Iface.
    *
