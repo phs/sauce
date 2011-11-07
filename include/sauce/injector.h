@@ -132,10 +132,11 @@ public:
 
   template<typename Dependency>
   typename i::Key<Dependency>::Ptr get() {
+    typedef typename i::Key<Dependency>::Normalized Normalized;
     sauce::auto_ptr<i::Lock> lock = acquireLock();
     i::TypeIds ids;
-    validateAcyclic<Dependency>(getSelf(), ids);
-    return get<Dependency>(getSelf());
+    validateAcyclic<Normalized>(getSelf(), ids);
+    return get<Normalized>(getSelf());
   }
 
   template<typename Iface, typename Name>
