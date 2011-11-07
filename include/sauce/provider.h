@@ -70,11 +70,11 @@ public:
  * An interface for including custom factories in an Injector.
  */
 template<typename Dependency>
-class NakedProvider: public Provider<Dependency> {
+class AbstractProvider: public Provider<Dependency> {
 
   typedef typename i::Key<Dependency>::Iface Iface;
   typedef sauce::shared_ptr<Provider<Dependency> > ProviderPtr;
-  typedef NakedProvider<Dependency> Naked;
+  typedef AbstractProvider<Dependency> Naked;
   typedef sauce::shared_ptr<Naked> NakedPtr;
 
   /**
@@ -89,7 +89,7 @@ class NakedProvider: public Provider<Dependency> {
 
 public:
 
-  NakedProvider():
+  AbstractProvider():
     Provider<Dependency>() {}
 
   /**

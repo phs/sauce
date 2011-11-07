@@ -31,7 +31,7 @@ TEST(BindingTest, shouldProvideBoundDependenciesAndTheirProvidersToo) {
 
 struct CustomBuilt {};
 
-struct CustomBuiltProvider: NakedProvider<CustomBuilt> {
+struct CustomBuiltProvider: AbstractProvider<CustomBuilt> {
   CustomBuilt * provide() {
     return new CustomBuilt();
   }
