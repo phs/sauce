@@ -130,6 +130,28 @@ TEST_F(ScopeTest, shouldScopeCustomScopedDependenciesIfAsked) {
   EXPECT_NE(aC, aNewC);
 }
 
+TEST_F(ScopeTest, shouldScopeDependenciesFromProviders) {
+  sauce::shared_ptr<Provider<Session> > sessionProvider;
+  sauce::shared_ptr<Session> aSession;
+  sauce::shared_ptr<Session> theSameSession;
+  sauce::shared_ptr<Session> aNewSession;
+
+  {
+    sauce::shared_ptr<Injector> scoped = injector->enter<SessionScope>();
+    sessionProvider = scoped->get<Provider<Session> >();
+    aSession = sessionProvider->get();
+    theSameSession = sessionProvider->get();
+  }
+  EXPECT_EQ(aSession, theSameSession);
+
+  {
+    sauce::shared_ptr<Injector> scoped = injector->enter<SessionScope>();
+    sessionProvider = scoped->get<Provider<Session> >();
+    aNewSession = sessionProvider->get();
+  }
+  EXPECT_NE(aSession, aNewSession);
+}
+
 TEST_F(ScopeTest, shouldThrowExceptionWhenProvidingDependencyOutOfScope) {
   ASSERT_THROW(injector->get<Request>(), OutOfScopeException);
 }
