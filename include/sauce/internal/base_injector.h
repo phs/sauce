@@ -48,18 +48,6 @@ class CircularDependencyGuard {
 };
 
 /**
- * A friend of the Provider base type.
- *
- * Enables GetDecorators to give a Provider its own smart pointer.
- */
-struct ProviderFriend {
-  template<typename ProvidedDependency, typename Name>
-  void setSelf(typename Key<Named<Provider<ProvidedDependency>, Name> >::Ptr ptr) {
-    ptr->setSelf(ptr);
-  }
-};
-
-/**
  * Calls Bindings::get on behalf of BaseInjector.
  *
  * It's a separate type to afford template specialization, something a method can't do.

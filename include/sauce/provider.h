@@ -11,8 +11,23 @@ namespace sauce {
 
 class Injector;
 
+template<typename Dependency>
+class Provider;
+
 namespace internal {
-class ProviderFriend;
+
+/**
+ * A friend of the Provider base type.
+ *
+ * Enables inheritors to give a Provider its own smart pointer.
+ */
+struct ProviderFriend {
+  template<typename ProvidedDependency, typename Name>
+  void setSelf(typename Key<Named<Provider<ProvidedDependency>, Name> >::Ptr ptr) {
+    ptr->setSelf(ptr);
+  }
+};
+
 }
 
 /**
