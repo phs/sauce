@@ -23,7 +23,7 @@ namespace internal {
  */
 struct ProviderFriend {
   template<typename ProvidedDependency, typename Name>
-  void setSelf(typename Key<Named<Provider<ProvidedDependency>, Name> >::Ptr ptr) {
+  void setSelf(typename Key<Named<Provider<ProvidedDependency>, Name> >::Ptr ptr) const {
     ptr->setSelf(ptr);
   }
 };
