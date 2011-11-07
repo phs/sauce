@@ -56,9 +56,6 @@ protected:
 
 public:
 
-  Provider():
-    weak() {}
-
   /**
    * Provide an Iface.
    */
