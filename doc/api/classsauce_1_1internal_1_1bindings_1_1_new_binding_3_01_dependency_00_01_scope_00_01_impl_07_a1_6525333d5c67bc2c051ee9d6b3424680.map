@@ -1,0 +1,6 @@
+<map id="G" name="G">
+<area shape="rect" id="node2" href="$classsauce_1_1internal_1_1bindings_1_1_transparent_binding.html" title="A binding for a specific interface and implementation." alt="" coords="157,155,600,181"/>
+<area shape="rect" id="node4" href="$structsauce_1_1internal_1_1_binding.html" title="A binding for a specific interface." alt="" coords="119,80,383,107"/>
+<area shape="rect" id="node6" href="$structsauce_1_1internal_1_1_opaque_binding.html" title="An opaque binding." alt="" coords="144,5,357,32"/>
+<area shape="rect" id="node8" href="$classsauce_1_1internal_1_1_injector_friend.html" title="sauce::internal::InjectorFriend" alt="" coords="407,80,609,107"/>
+</map>
