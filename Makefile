@@ -48,6 +48,8 @@ run-cppcheck:
 doc: run-doxygen
 
 run-doxygen:
+	mkdir -p doc/api
+	rm -rf doc/api/*
 	doxygen
 
 include/%: include/%.pump
