@@ -103,6 +103,10 @@ Public Member Functions</h2></td></tr>
 template&lt;typename Binding_ &gt; </td></tr>
 <tr><td class="memTemplItemLeft" align="right" valign="top">void&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classsauce_1_1internal_1_1_bindings.html#a0ddac69994eeaace224c6e28de8a2cb8">put</a> ()</td></tr>
 <tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Insert the given binding. <br/></td></tr>
+<tr><td class="memTemplParams" colspan="2"><a class="anchor" id="accbe4b99a13ad964b156eaa83ffb74e6"></a><!-- doxytag: member="sauce::internal::Bindings::getBinding" ref="accbe4b99a13ad964b156eaa83ffb74e6" args="() const " -->
+template&lt;typename Dependency &gt; </td></tr>
+<tr><td class="memTemplItemLeft" align="right" valign="top">sauce::shared_ptr&lt; <a class="el" href="structsauce_1_1internal_1_1_binding.html">Binding</a><br class="typebreak"/>
+&lt; Dependency &gt; &gt;&#160;</td><td class="memTemplItemRight" valign="bottom"><b>getBinding</b> () const </td></tr>
 <tr><td class="memTemplParams" colspan="2"><a class="anchor" id="af8581d35c9c936b636c321537df221bb"></a><!-- doxytag: member="sauce::internal::Bindings::validateAcyclic" ref="af8581d35c9c936b636c321537df221bb" args="(sauce::shared_ptr&lt; Injector &gt; injector, TypeIds &amp;ids) const " -->
 template&lt;typename Dependency &gt; </td></tr>
 <tr><td class="memTemplItemLeft" align="right" valign="top">void&#160;</td><td class="memTemplItemRight" valign="bottom"><b>validateAcyclic</b> (sauce::shared_ptr&lt; <a class="el" href="classsauce_1_1_injector.html">Injector</a> &gt; injector, TypeIds &amp;ids) const </td></tr>
@@ -150,16 +154,7 @@ template&lt;typename Dependency &gt; </div>
 <p>Provide the named Dependency. </p>
 <p>If no binding is found, the implicit bindings are checked. </p>
 <div class="fragment"><pre class="fragment">                                                                            {
-    sauce::shared_ptr&lt;Binding&lt;Dependency&gt; &gt; binding;
-
-    BindingMap::const_iterator i = bindingMap.find(typeIdOf&lt;Dependency&gt;());
-    <span class="keywordflow">if</span> (i == bindingMap.end()) {
-      ImplicitBindings implicitBindings;
-      binding = implicitBindings.get&lt;Dependency&gt;();
-    } <span class="keywordflow">else</span> {
-      binding = resolve&lt;Dependency&gt;(i-&gt;second);
-    }
-
+    sauce::shared_ptr&lt;Binding&lt;Dependency&gt; &gt; binding(getBinding&lt;Dependency&gt;());
     <span class="keywordflow">return</span> binding-&gt;get(binding, injector);
   }
 </pre></div>

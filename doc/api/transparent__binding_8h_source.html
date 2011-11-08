@@ -81,96 +81,92 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <a name="l00003"></a>00003 <span class="preprocessor"></span>
 <a name="l00004"></a>00004 <span class="preprocessor">#include &lt;sauce/injector.h&gt;</span>
 <a name="l00005"></a>00005 <span class="preprocessor">#include &lt;sauce/memory.h&gt;</span>
-<a name="l00006"></a>00006 <span class="preprocessor">#include &lt;sauce/named.h&gt;</span>
-<a name="l00007"></a>00007 <span class="preprocessor">#include &lt;sauce/internal/binding.h&gt;</span>
-<a name="l00008"></a>00008 <span class="preprocessor">#include &lt;sauce/internal/key.h&gt;</span>
-<a name="l00009"></a>00009 <span class="preprocessor">#include &lt;sauce/internal/scope_cache.h&gt;</span>
-<a name="l00010"></a>00010 <span class="preprocessor">#include &lt;sauce/internal/type_id.h&gt;</span>
-<a name="l00011"></a>00011 
-<a name="l00012"></a>00012 <span class="keyword">namespace </span>sauce {
-<a name="l00013"></a>00013 <span class="keyword">namespace </span>internal {
+<a name="l00006"></a>00006 <span class="preprocessor">#include &lt;sauce/internal/binding.h&gt;</span>
+<a name="l00007"></a>00007 <span class="preprocessor">#include &lt;sauce/internal/key.h&gt;</span>
+<a name="l00008"></a>00008 <span class="preprocessor">#include &lt;sauce/internal/type_id.h&gt;</span>
+<a name="l00009"></a>00009 
+<a name="l00010"></a>00010 <span class="keyword">namespace </span>sauce {
+<a name="l00011"></a>00011 <span class="keyword">namespace </span>internal {
+<a name="l00012"></a>00012 
+<a name="l00013"></a>00013 <span class="keyword">typedef</span> sauce::shared_ptr&lt;Injector&gt; InjectorPtr;
 <a name="l00014"></a>00014 
-<a name="l00015"></a>00015 <span class="keyword">typedef</span> sauce::shared_ptr&lt;Injector&gt; InjectorPtr;
-<a name="l00016"></a>00016 
-<a name="l00017"></a><a class="code" href="classsauce_1_1internal_1_1_injector_friend.html">00017</a> <span class="keyword">class </span><a class="code" href="classsauce_1_1internal_1_1_injector_friend.html">InjectorFriend</a> {
-<a name="l00018"></a>00018 <span class="keyword">protected</span>:
-<a name="l00019"></a>00019 
-<a name="l00020"></a>00020   <span class="keyword">template</span>&lt;<span class="keyword">typename</span> Dependency&gt;
-<a name="l00021"></a>00021   <span class="keywordtype">void</span> validateAcyclicos(InjectorPtr injector, TypeIds &amp; ids)<span class="keyword"> const </span>{
-<a name="l00022"></a>00022     injector-&gt;validateAcyclic&lt;Dependency&gt;(injector, ids);
-<a name="l00023"></a>00023   }
-<a name="l00024"></a>00024 
-<a name="l00025"></a>00025   <span class="keyword">template</span>&lt;<span class="keyword">typename</span> Dependency&gt;
-<a name="l00026"></a>00026   <span class="keyword">typename</span> <a class="code" href="structsauce_1_1internal_1_1_key.html" title="A complete specification of a dependency request.">i::Key&lt;Dependency&gt;::Ptr</a> getDependency(InjectorPtr injector)<span class="keyword"> const </span>{
-<a name="l00027"></a>00027     <span class="keywordflow">return</span> injector-&gt;get&lt;Dependency&gt;(injector);
-<a name="l00028"></a>00028   }
-<a name="l00029"></a>00029 
-<a name="l00030"></a>00030   <span class="keyword">template</span>&lt;<span class="keyword">typename</span> Dependency, <span class="keyword">typename</span> Scope&gt;
-<a name="l00031"></a>00031   <span class="keywordtype">void</span> cache(InjectorPtr injector, <span class="keyword">typename</span> <a class="code" href="structsauce_1_1internal_1_1_key.html" title="A complete specification of a dependency request.">i::Key&lt;Dependency&gt;::Ptr</a> pointer)<span class="keyword"> const </span>{
-<a name="l00032"></a>00032     injector-&gt;template cache&lt;Dependency, Scope&gt;(pointer);
-<a name="l00033"></a>00033   }
-<a name="l00034"></a>00034 
-<a name="l00035"></a>00035   <span class="keyword">template</span>&lt;<span class="keyword">typename</span> Dependency, <span class="keyword">typename</span> Scope&gt;
-<a name="l00036"></a>00036   <span class="keywordtype">bool</span> probe(InjectorPtr injector, <span class="keyword">typename</span> <a class="code" href="structsauce_1_1internal_1_1_key.html" title="A complete specification of a dependency request.">i::Key&lt;Dependency&gt;::Ptr</a> &amp; out)<span class="keyword"> const </span>{
-<a name="l00037"></a>00037     <span class="keywordflow">return</span> injector-&gt;template probe&lt;Dependency, Scope&gt;(out);
-<a name="l00038"></a>00038   }
+<a name="l00015"></a><a class="code" href="classsauce_1_1internal_1_1_injector_friend.html">00015</a> <span class="keyword">class </span><a class="code" href="classsauce_1_1internal_1_1_injector_friend.html">InjectorFriend</a> {
+<a name="l00016"></a>00016 <span class="keyword">protected</span>:
+<a name="l00017"></a>00017 
+<a name="l00018"></a>00018   <span class="keyword">template</span>&lt;<span class="keyword">typename</span> Dependency&gt;
+<a name="l00019"></a>00019   <span class="keywordtype">void</span> validateAcyclicHelper(InjectorPtr injector, TypeIds &amp; ids)<span class="keyword"> const </span>{
+<a name="l00020"></a>00020     injector-&gt;validateAcyclic&lt;Dependency&gt;(injector, ids);
+<a name="l00021"></a>00021   }
+<a name="l00022"></a>00022 
+<a name="l00023"></a>00023   <span class="keyword">template</span>&lt;<span class="keyword">typename</span> Dependency&gt;
+<a name="l00024"></a>00024   <span class="keyword">typename</span> Key&lt;Dependency&gt;::Ptr getHelper(InjectorPtr injector)<span class="keyword"> const </span>{
+<a name="l00025"></a>00025     <span class="keywordflow">return</span> injector-&gt;get&lt;Dependency&gt;(injector);
+<a name="l00026"></a>00026   }
+<a name="l00027"></a>00027 
+<a name="l00028"></a>00028   <span class="keyword">template</span>&lt;<span class="keyword">typename</span> Dependency, <span class="keyword">typename</span> Scope&gt;
+<a name="l00029"></a>00029   <span class="keywordtype">void</span> cache(InjectorPtr injector, <span class="keyword">typename</span> Key&lt;Dependency&gt;::Ptr pointer)<span class="keyword"> const </span>{
+<a name="l00030"></a>00030     injector-&gt;template cache&lt;Dependency, Scope&gt;(pointer);
+<a name="l00031"></a>00031   }
+<a name="l00032"></a>00032 
+<a name="l00033"></a>00033   <span class="keyword">template</span>&lt;<span class="keyword">typename</span> Dependency, <span class="keyword">typename</span> Scope&gt;
+<a name="l00034"></a>00034   <span class="keywordtype">bool</span> probe(InjectorPtr injector, <span class="keyword">typename</span> Key&lt;Dependency&gt;::Ptr &amp; out)<span class="keyword"> const </span>{
+<a name="l00035"></a>00035     <span class="keywordflow">return</span> injector-&gt;template probe&lt;Dependency, Scope&gt;(out);
+<a name="l00036"></a>00036   }
+<a name="l00037"></a>00037 
+<a name="l00038"></a>00038 };
 <a name="l00039"></a>00039 
-<a name="l00040"></a>00040 };
+<a name="l00040"></a>00040 <span class="keyword">namespace </span>bindings {
 <a name="l00041"></a>00041 
-<a name="l00042"></a>00042 <span class="keyword">namespace </span>bindings {
-<a name="l00043"></a>00043 
-<a name="l00047"></a>00047 <span class="keyword">template</span>&lt;<span class="keyword">typename</span> Dependency, <span class="keyword">typename</span> Scope&gt;
-<a name="l00048"></a><a class="code" href="classsauce_1_1internal_1_1bindings_1_1_transparent_binding.html">00048</a> <span class="keyword">class </span><a class="code" href="classsauce_1_1internal_1_1bindings_1_1_transparent_binding.html" title="A binding for a specific interface and implementation.">TransparentBinding</a>:
-<a name="l00049"></a>00049   <span class="keyword">public</span> <a class="code" href="structsauce_1_1internal_1_1_binding.html" title="A binding for a specific interface.">Binding</a>&lt;Dependency&gt;,
-<a name="l00050"></a>00050   <span class="keyword">public</span> <a class="code" href="classsauce_1_1internal_1_1_injector_friend.html">InjectorFriend</a> {
-<a name="l00051"></a>00051 
-<a name="l00052"></a>00052   <span class="keyword">typedef</span> <span class="keyword">typename</span> Key&lt;Dependency&gt;::Iface Iface;
-<a name="l00053"></a>00053   <span class="keyword">typedef</span> <span class="keyword">typename</span> Binding&lt;Dependency&gt;::BindingPtr BindingPtr;
-<a name="l00054"></a>00054 
-<a name="l00060"></a>00060   <span class="keyword">virtual</span> sauce::shared_ptr&lt;Iface&gt; provide(BindingPtr, InjectorPtr) <span class="keyword">const</span> = 0;
+<a name="l00045"></a>00045 <span class="keyword">template</span>&lt;<span class="keyword">typename</span> Dependency, <span class="keyword">typename</span> Scope&gt;
+<a name="l00046"></a><a class="code" href="classsauce_1_1internal_1_1bindings_1_1_transparent_binding.html">00046</a> <span class="keyword">class </span><a class="code" href="classsauce_1_1internal_1_1bindings_1_1_transparent_binding.html" title="A binding for a specific interface and implementation.">TransparentBinding</a>:
+<a name="l00047"></a>00047   <span class="keyword">public</span> <a class="code" href="structsauce_1_1internal_1_1_binding.html" title="A binding for a specific interface.">Binding</a>&lt;Dependency&gt;,
+<a name="l00048"></a>00048   <span class="keyword">public</span> <a class="code" href="classsauce_1_1internal_1_1_injector_friend.html">InjectorFriend</a> {
+<a name="l00049"></a>00049 
+<a name="l00050"></a>00050   <span class="keyword">typedef</span> <span class="keyword">typename</span> Key&lt;Dependency&gt;::Iface Iface;
+<a name="l00051"></a>00051   <span class="keyword">typedef</span> <span class="keyword">typename</span> Binding&lt;Dependency&gt;::BindingPtr BindingPtr;
+<a name="l00052"></a>00052 
+<a name="l00058"></a>00058   <span class="keyword">virtual</span> sauce::shared_ptr&lt;Iface&gt; provide(BindingPtr, InjectorPtr) <span class="keyword">const</span> = 0;
+<a name="l00059"></a>00059 
+<a name="l00060"></a>00060 <span class="keyword">public</span>:
 <a name="l00061"></a>00061 
-<a name="l00062"></a>00062 <span class="keyword">public</span>:
-<a name="l00063"></a>00063 
-<a name="l00067"></a><a class="code" href="classsauce_1_1internal_1_1bindings_1_1_transparent_binding.html#a47f50b8c7521b7dffb0d78f8af8b2a99">00067</a>   <span class="keyword">virtual</span> TypeId <a class="code" href="classsauce_1_1internal_1_1bindings_1_1_transparent_binding.html#a47f50b8c7521b7dffb0d78f8af8b2a99" title="The TypeId of the Scope template parameter.">getScopeKey</a>()<span class="keyword"> const </span>{
-<a name="l00068"></a>00068     <span class="keywordflow">return</span> typeIdOf&lt;Scope&gt;();
-<a name="l00069"></a>00069   }
-<a name="l00070"></a>00070 
-<a name="l00071"></a>00071   <span class="keyword">virtual</span> <span class="keywordtype">void</span> validateAcyclic(InjectorPtr injector, TypeIds &amp; ids) <span class="keyword">const</span> = 0;
-<a name="l00072"></a>00072 
-<a name="l00081"></a><a class="code" href="classsauce_1_1internal_1_1bindings_1_1_transparent_binding.html#aaab044ff0efa9eb5bf94ac8a609e8f61">00081</a>   sauce::shared_ptr&lt;Iface&gt; <span class="keyword">get</span>(BindingPtr binding, InjectorPtr injector) <span class="keyword">const</span> {
-<a name="l00082"></a>00082     sauce::shared_ptr&lt;Iface&gt; smartPointer;
-<a name="l00083"></a>00083 
-<a name="l00084"></a>00084     <span class="keywordtype">bool</span> unscoped = typeIdOf&lt;Scope&gt;() == typeIdOf&lt;NoScope&gt;();
-<a name="l00085"></a>00085     <span class="keywordflow">if</span> (unscoped || !probe&lt;Dependency, Scope&gt;(injector, smartPointer)) {
-<a name="l00086"></a>00086       smartPointer = provide(binding, injector);
-<a name="l00087"></a>00087       <span class="keywordflow">if</span> (!unscoped) {
-<a name="l00088"></a>00088         cache&lt;Dependency, Scope&gt;(injector, smartPointer);
-<a name="l00089"></a>00089       }
-<a name="l00090"></a>00090     }
-<a name="l00091"></a>00091 
-<a name="l00092"></a>00092     <span class="keywordflow">return</span> smartPointer;
-<a name="l00093"></a>00093   }
-<a name="l00094"></a>00094 
-<a name="l00101"></a><a class="code" href="classsauce_1_1internal_1_1bindings_1_1_transparent_binding.html#a9cc4c0e4f835bfd6b6043e20666308c9">00101</a>   <span class="keywordtype">void</span> <a class="code" href="classsauce_1_1internal_1_1bindings_1_1_transparent_binding.html#a9cc4c0e4f835bfd6b6043e20666308c9" title="Provide, but do not return an Iface.">eagerlyProvide</a>(OpaqueBindingPtr opaque, InjectorPtr injector)<span class="keyword"> const </span>{
-<a name="l00102"></a>00102     <span class="keywordflow">if</span> (typeIdOf&lt;Scope&gt;() != typeIdOf&lt;NoScope&gt;()) {
-<a name="l00103"></a>00103       BindingPtr binding = resolve&lt;Dependency&gt;(opaque);
-<a name="l00104"></a>00104       i::TypeIds ids;
-<a name="l00105"></a>00105       validateAcyclic(injector, ids);
-<a name="l00106"></a>00106       <span class="keyword">get</span>(binding, injector);
-<a name="l00107"></a>00107     }
-<a name="l00108"></a>00108   }
-<a name="l00109"></a>00109 
-<a name="l00110"></a>00110 };
-<a name="l00111"></a>00111 
-<a name="l00112"></a>00112 }
-<a name="l00113"></a>00113 }
-<a name="l00114"></a>00114 
-<a name="l00115"></a>00115 <span class="keyword">namespace </span>i = ::sauce::internal;
-<a name="l00116"></a>00116 <span class="keyword">namespace </span>b = ::sauce::internal::bindings;
-<a name="l00117"></a>00117 
-<a name="l00118"></a>00118 }
-<a name="l00119"></a>00119 
-<a name="l00120"></a>00120 <span class="preprocessor">#endif // SAUCE_SAUCE_INTERNAL_BINDINGS_TRANSPARENT_BINDING_H_</span>
+<a name="l00065"></a><a class="code" href="classsauce_1_1internal_1_1bindings_1_1_transparent_binding.html#a47f50b8c7521b7dffb0d78f8af8b2a99">00065</a>   <span class="keyword">virtual</span> TypeId <a class="code" href="classsauce_1_1internal_1_1bindings_1_1_transparent_binding.html#a47f50b8c7521b7dffb0d78f8af8b2a99" title="The TypeId of the Scope template parameter.">getScopeKey</a>()<span class="keyword"> const </span>{
+<a name="l00066"></a>00066     <span class="keywordflow">return</span> typeIdOf&lt;Scope&gt;();
+<a name="l00067"></a>00067   }
+<a name="l00068"></a>00068 
+<a name="l00077"></a><a class="code" href="classsauce_1_1internal_1_1bindings_1_1_transparent_binding.html#aaab044ff0efa9eb5bf94ac8a609e8f61">00077</a>   sauce::shared_ptr&lt;Iface&gt; <span class="keyword">get</span>(BindingPtr binding, InjectorPtr injector) <span class="keyword">const</span> {
+<a name="l00078"></a>00078     sauce::shared_ptr&lt;Iface&gt; smartPointer;
+<a name="l00079"></a>00079 
+<a name="l00080"></a>00080     <span class="keywordtype">bool</span> unscoped = typeIdOf&lt;Scope&gt;() == typeIdOf&lt;NoScope&gt;();
+<a name="l00081"></a>00081     <span class="keywordflow">if</span> (unscoped || !probe&lt;Dependency, Scope&gt;(injector, smartPointer)) {
+<a name="l00082"></a>00082       smartPointer = provide(binding, injector);
+<a name="l00083"></a>00083       <span class="keywordflow">if</span> (!unscoped) {
+<a name="l00084"></a>00084         cache&lt;Dependency, Scope&gt;(injector, smartPointer);
+<a name="l00085"></a>00085       }
+<a name="l00086"></a>00086     }
+<a name="l00087"></a>00087 
+<a name="l00088"></a>00088     <span class="keywordflow">return</span> smartPointer;
+<a name="l00089"></a>00089   }
+<a name="l00090"></a>00090 
+<a name="l00097"></a><a class="code" href="classsauce_1_1internal_1_1bindings_1_1_transparent_binding.html#a9cc4c0e4f835bfd6b6043e20666308c9">00097</a>   <span class="keywordtype">void</span> <a class="code" href="classsauce_1_1internal_1_1bindings_1_1_transparent_binding.html#a9cc4c0e4f835bfd6b6043e20666308c9" title="Provide, but do not return an Iface.">eagerlyProvide</a>(OpaqueBindingPtr opaque, InjectorPtr injector)<span class="keyword"> const </span>{
+<a name="l00098"></a>00098     <span class="keywordflow">if</span> (typeIdOf&lt;Scope&gt;() != typeIdOf&lt;NoScope&gt;()) {
+<a name="l00099"></a>00099       BindingPtr binding = resolve&lt;Dependency&gt;(opaque);
+<a name="l00100"></a>00100       TypeIds ids;
+<a name="l00101"></a>00101       this-&gt;validateAcyclic(injector, ids);
+<a name="l00102"></a>00102       <span class="keyword">get</span>(binding, injector);
+<a name="l00103"></a>00103     }
+<a name="l00104"></a>00104   }
+<a name="l00105"></a>00105 
+<a name="l00106"></a>00106 };
+<a name="l00107"></a>00107 
+<a name="l00108"></a>00108 }
+<a name="l00109"></a>00109 }
+<a name="l00110"></a>00110 
+<a name="l00111"></a>00111 <span class="keyword">namespace </span>i = ::sauce::internal;
+<a name="l00112"></a>00112 <span class="keyword">namespace </span>b = ::sauce::internal::bindings;
+<a name="l00113"></a>00113 
+<a name="l00114"></a>00114 }
+<a name="l00115"></a>00115 
+<a name="l00116"></a>00116 <span class="preprocessor">#endif // SAUCE_SAUCE_INTERNAL_BINDINGS_TRANSPARENT_BINDING_H_</span>
 </pre></div></div>
 </div>
 <!-- window showing the filter options -->

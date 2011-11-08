@@ -117,7 +117,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <a name="l00076"></a>00076     <span class="keywordflow">return</span> typeIdOf&lt;Dependency&gt;();
 <a name="l00077"></a>00077   }
 <a name="l00078"></a>00078 
-<a name="l00079"></a>00079   <span class="keyword">virtual</span> <span class="keywordtype">void</span> validateAcyclic(sauce::shared_ptr&lt;Injector&gt;, TypeIds &amp;) <span class="keyword">const</span> = 0;
+<a name="l00079"></a>00079   <span class="keyword">virtual</span> <span class="keywordtype">void</span> validateAcyclic(sauce::shared_ptr&lt;Injector&gt;, TypeIds &amp;)<span class="keyword"> const </span>{}
 <a name="l00080"></a>00080 
 <a name="l00086"></a>00086   <span class="keyword">virtual</span> <span class="keyword">typename</span> Key&lt;Dependency&gt;::Ptr <span class="keyword">get</span>(BindingPtr, sauce::shared_ptr&lt;Injector&gt;) <span class="keyword">const</span> = 0;
 <a name="l00087"></a>00087 

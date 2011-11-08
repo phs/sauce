@@ -94,25 +94,25 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <table class="memberdecls">
 <tr><td colspan="2"><h2><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr><td class="memTemplParams" colspan="2"><a class="anchor" id="ad894cc47091ace85bd7245dad8c1f255"></a><!-- doxytag: member="sauce::internal::ScopeCache::put" ref="ad894cc47091ace85bd7245dad8c1f255" args="(typename Key&lt; UnnormalizedDependency &gt;::Ptr pointer)" -->
-template&lt;typename UnnormalizedDependency &gt; </td></tr>
-<tr><td class="memTemplItemLeft" align="right" valign="top">void&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classsauce_1_1internal_1_1_scope_cache.html#ad894cc47091ace85bd7245dad8c1f255">put</a> (typename <a class="el" href="structsauce_1_1internal_1_1_key.html">Key</a>&lt; UnnormalizedDependency &gt;::Ptr pointer)</td></tr>
+<tr><td class="memTemplParams" colspan="2"><a class="anchor" id="ae6db090d1bac1460ce8ba5763f26363c"></a><!-- doxytag: member="sauce::internal::ScopeCache::put" ref="ae6db090d1bac1460ce8ba5763f26363c" args="(typename Key&lt; Dependency &gt;::Ptr pointer)" -->
+template&lt;typename Dependency &gt; </td></tr>
+<tr><td class="memTemplItemLeft" align="right" valign="top">void&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classsauce_1_1internal_1_1_scope_cache.html#ae6db090d1bac1460ce8ba5763f26363c">put</a> (typename <a class="el" href="structsauce_1_1internal_1_1_key.html">Key</a>&lt; Dependency &gt;::Ptr pointer)</td></tr>
 <tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Insert a dependency into the cache. <br/></td></tr>
-<tr><td class="memTemplParams" colspan="2">template&lt;typename UnnormalizedDependency &gt; </td></tr>
-<tr><td class="memTemplItemLeft" align="right" valign="top">bool&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classsauce_1_1internal_1_1_scope_cache.html#af5c88c1e19318e057ff942f3eac997b1">get</a> (typename <a class="el" href="structsauce_1_1internal_1_1_key.html">Key</a>&lt; UnnormalizedDependency &gt;::Ptr &amp;out) const </td></tr>
-<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Probe the cache for a dependency.  <a href="#af5c88c1e19318e057ff942f3eac997b1"></a><br/></td></tr>
+<tr><td class="memTemplParams" colspan="2">template&lt;typename Dependency &gt; </td></tr>
+<tr><td class="memTemplItemLeft" align="right" valign="top">bool&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classsauce_1_1internal_1_1_scope_cache.html#ab4335c0d0372cdbea5009dbbce256bf3">get</a> (typename <a class="el" href="structsauce_1_1internal_1_1_key.html">Key</a>&lt; Dependency &gt;::Ptr &amp;out) const </td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Probe the cache for a dependency.  <a href="#ab4335c0d0372cdbea5009dbbce256bf3"></a><br/></td></tr>
 </table>
 <hr/><h2>Member Function Documentation</h2>
-<a class="anchor" id="af5c88c1e19318e057ff942f3eac997b1"></a><!-- doxytag: member="sauce::internal::ScopeCache::get" ref="af5c88c1e19318e057ff942f3eac997b1" args="(typename Key&lt; UnnormalizedDependency &gt;::Ptr &amp;out) const " -->
+<a class="anchor" id="ab4335c0d0372cdbea5009dbbce256bf3"></a><!-- doxytag: member="sauce::internal::ScopeCache::get" ref="ab4335c0d0372cdbea5009dbbce256bf3" args="(typename Key&lt; Dependency &gt;::Ptr &amp;out) const " -->
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;typename UnnormalizedDependency &gt; </div>
+template&lt;typename Dependency &gt; </div>
       <table class="memname">
         <tr>
           <td class="memname">bool sauce::internal::ScopeCache::get </td>
           <td>(</td>
-          <td class="paramtype">typename <a class="el" href="structsauce_1_1internal_1_1_key.html">Key</a>&lt; UnnormalizedDependency &gt;::Ptr &amp;&#160;</td>
+          <td class="paramtype">typename <a class="el" href="structsauce_1_1internal_1_1_key.html">Key</a>&lt; Dependency &gt;::Ptr &amp;&#160;</td>
           <td class="paramname"><em>out</em></td><td>)</td>
           <td> const<code> [inline]</code></td>
         </tr>
@@ -122,11 +122,11 @@ template&lt;typename UnnormalizedDependency &gt; </div>
 
 <p>Probe the cache for a dependency. </p>
 <p>The return value indicates if a hit was found. On a hit, the out argument will be overwritten with the discovered value. </p>
-<div class="fragment"><pre class="fragment">                                                                {
-    <span class="keyword">typedef</span> <span class="keyword">typename</span> Key&lt;UnnormalizedDependency&gt;::Normalized Dependency;
-    <span class="keyword">typedef</span> <span class="keyword">typename</span> Key&lt;Dependency&gt;::Ptr SmartPtr;
+<div class="fragment"><pre class="fragment">                                                    {
+    <span class="keyword">typedef</span> <span class="keyword">typename</span> Key&lt;Dependency&gt;::Normalized Normalized;
+    <span class="keyword">typedef</span> <span class="keyword">typename</span> Key&lt;Normalized&gt;::Ptr SmartPtr;
 
-    Cache::const_iterator cachedPtr = cache.find(typeIdOf&lt;Dependency&gt;());
+    Cache::const_iterator cachedPtr = cache.find(typeIdOf&lt;Normalized&gt;());
     <span class="keywordflow">if</span> (cachedPtr == cache.end()) {
       <span class="keywordflow">return</span> <span class="keyword">false</span>;
     }
