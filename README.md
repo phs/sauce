@@ -40,8 +40,8 @@ Unlike Guice, Sauce expects the developer to enter and eagerly provide scopes ex
 * Setter injection
 * ~~Named, overloaded bindings~~
 * ~~Eager-loaded singletons~~
-* Injectable Providers for lazy resolution
-* Implicit bindings implied by bound interfaces or implementations
+* ~~Injectable Providers for lazy resolution~~
+* Implicit bindings implied by integration within interfaces or implementations
 * On-demand injection for provided instances
 * Member field injection (meh)
 * Static injection (meh)
