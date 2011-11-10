@@ -68,6 +68,37 @@ TEST(BindingTest, shouldImplicitlyBindTheInjectorItself) {
   ASSERT_EQ(expected, actual);
 }
 
+struct HasBound {
+  virtual sauce::shared_ptr<Bound> getBound() = 0;
+};
+
+struct HasSetter: public HasBound {
+  sauce::shared_ptr<Bound> bound;
+
+  HasSetter():
+    HasBound(),
+    bound() {}
+
+  void setBound(sauce::shared_ptr<Bound> bound) {
+    this->bound = bound;
+  }
+
+  sauce::shared_ptr<Bound> getBound() {
+    return bound;
+  }
+};
+
+void SetterModule(Binder & binder) {
+  binder.bind<Bound>().in<SingletonScope>().to<Bound()>();
+  // binder.bind<HasBound>().to<HasSetter()>().toMethod(&HasSetter::setBound);
+}
+
+TEST(BindingTest, shouldInjectBoundSetters) {
+  sauce::shared_ptr<Injector> injector(Modules().add(&SetterModule).createInjector());
+  sauce::shared_ptr<Bound> bound = injector->get<Bound>();
+  // ASSERT_EQ(bound, injector->get<HasBound>()->getBound()); // Equal since Bound is a singleton
+}
+
 struct Dog;
 
 struct Tail {
