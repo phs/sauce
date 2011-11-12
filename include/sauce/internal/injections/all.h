@@ -3,8 +3,8 @@
 
 #include <sauce/internal/injections/injection.h>
 #include <sauce/internal/injections/implicit_provider_injection.h>
-#include <sauce/internal/injections/injector_binding.h>
-#include <sauce/internal/injections/new_binding.h>
-#include <sauce/internal/injections/provider_binding.h>
+#include <sauce/internal/injections/injector_injection.h>
+#include <sauce/internal/injections/new_injection.h>
+#include <sauce/internal/injections/provider_injection.h>
 
 #endif // SAUCE_INTERNAL_INJECTIONS_ALL_H_
