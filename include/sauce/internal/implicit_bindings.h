@@ -70,7 +70,7 @@ struct ImplicitBinding<Named<Provider<Dependency>, Name> > {
 
   static BindingPtr get(Bindings<ImplicitBindings> const & bindings) {
     ProvidedBindingPtr providedBinding(bindings.getBinding<Normalized>());
-    BindingPtr binding(new inj::ImplicitProviderBinding<Dependency, Name>(providedBinding));
+    BindingPtr binding(new inj::ImplicitProviderInjection<Dependency, Name>(providedBinding));
     return binding;
   }
 };

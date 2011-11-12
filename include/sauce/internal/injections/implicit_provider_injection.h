@@ -16,7 +16,7 @@ namespace internal {
 namespace injections {
 
 template<typename Dependency, typename Name>
-class ImplicitProviderBinding;
+class ImplicitProviderInjection;
 
 /**
  * A Provider for an explicitly-bound Dependency.
@@ -29,7 +29,7 @@ class ImplicitProvider: public Provider<Dependency> {
   BindingPtr binding;
   InjectorPtr injector;
 
-  friend class ImplicitProviderBinding<Dependency, Name>;
+  friend class ImplicitProviderInjection<Dependency, Name>;
 
   ImplicitProvider(BindingPtr binding, InjectorPtr injector):
     Provider<Dependency>(),
@@ -47,7 +47,7 @@ public:
  * A binding that provides Providers for an already-bound dependency.
  */
 template<typename Dependency, typename Name>
-class ImplicitProviderBinding:
+class ImplicitProviderInjection:
   public Injection<Named<Provider<Dependency>, Name>, NoScope>,
   public ProviderFriend {
 
@@ -67,7 +67,7 @@ class ImplicitProviderBinding:
 
 public:
 
-  ImplicitProviderBinding(ProvidedBindingPtr providedBinding):
+  ImplicitProviderInjection(ProvidedBindingPtr providedBinding):
     Injection<Named<Provider<Dependency>, Name>, NoScope>(),
     ProviderFriend(),
     providedBinding(providedBinding) {}
