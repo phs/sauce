@@ -9,34 +9,6 @@
 
 namespace sauce {
 namespace internal {
-
-typedef sauce::shared_ptr<Injector> InjectorPtr;
-
-class InjectorFriend {
-protected:
-
-  template<typename Dependency>
-  void validateAcyclicHelper(InjectorPtr injector, TypeIds & ids) const {
-    injector->validateAcyclic<Dependency>(injector, ids);
-  }
-
-  template<typename Dependency>
-  typename Key<Dependency>::Ptr getHelper(InjectorPtr injector) const {
-    return injector->get<Dependency>(injector);
-  }
-
-  template<typename Dependency, typename Scope>
-  void cache(InjectorPtr injector, typename Key<Dependency>::Ptr pointer) const {
-    injector->template cache<Dependency, Scope>(pointer);
-  }
-
-  template<typename Dependency, typename Scope>
-  bool probe(InjectorPtr injector, typename Key<Dependency>::Ptr & out) const {
-    return injector->template probe<Dependency, Scope>(out);
-  }
-
-};
-
 namespace injections {
 
 /**
