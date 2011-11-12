@@ -33,7 +33,7 @@ class ProviderBinding: public Injection<Dependency, Scope> {
 }
 
 namespace i = ::sauce::internal;
-namespace b = ::sauce::internal::bindings;
+namespace inj = ::sauce::internal::bindings;
 
 }
 

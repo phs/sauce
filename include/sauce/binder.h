@@ -29,7 +29,7 @@ class AllocateFromClause:
   friend class i::Clause<AllocateFromClause<Dependency, Scope, Ctor, Allocator> >;
 
   static void activate(Clause & clause) {
-    clause.template put<b::NewBinding<Dependency, Scope, Ctor, Allocator> >();
+    clause.template put<inj::NewBinding<Dependency, Scope, Ctor, Allocator> >();
   }
 };
 
@@ -58,7 +58,7 @@ class ToProviderClause:
   friend class i::Clause<ToProviderClause<Dependency, Scope, Provider> >;
 
   static void activate(Clause & clause) {
-    clause.template put<b::ProviderBinding<Dependency, Scope, Provider> >();
+    clause.template put<inj::ProviderBinding<Dependency, Scope, Provider> >();
   }
 };
 
@@ -78,7 +78,7 @@ class ToClause:
   friend class i::Clause<ToClause<Dependency, Scope, Ctor> >;
 
   static void activate(Clause & clause) {
-    clause.template put<b::NewBinding<Dependency, Scope, Ctor, std::allocator<Iface> > >();
+    clause.template put<inj::NewBinding<Dependency, Scope, Ctor, std::allocator<Iface> > >();
   }
 
 public:

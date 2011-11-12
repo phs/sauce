@@ -88,7 +88,7 @@ class NewBinding<Dependency, Scope, Impl($As), Allocator>:
 }
 
 namespace i = ::sauce::internal;
-namespace b = ::sauce::internal::bindings;
+namespace inj = ::sauce::internal::bindings;
 
 }
 

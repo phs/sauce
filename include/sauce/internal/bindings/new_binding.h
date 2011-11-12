@@ -601,7 +601,7 @@ class NewBinding<Dependency, Scope, Impl(A1, A2, A3, A4, A5, A6, A7, A8, A9,
 }
 
 namespace i = ::sauce::internal;
-namespace b = ::sauce::internal::bindings;
+namespace inj = ::sauce::internal::bindings;
 
 }
 
