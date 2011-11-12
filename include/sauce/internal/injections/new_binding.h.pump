@@ -15,7 +15,7 @@ $var n = 10  $$ The maximum arity we support.
 
 namespace sauce {
 namespace internal {
-namespace bindings {
+namespace injections {
 
 template<typename Dependency, typename Scope, typename Constructor, typename Allocator>
 class NewBinding;
@@ -88,7 +88,7 @@ class NewBinding<Dependency, Scope, Impl($As), Allocator>:
 }
 
 namespace i = ::sauce::internal;
-namespace inj = ::sauce::internal::bindings;
+namespace inj = ::sauce::internal::injections;
 
 }
 

@@ -37,7 +37,7 @@ protected:
 
 };
 
-namespace bindings {
+namespace injections {
 
 /**
  * A strategy for satisfying provisions for the given interface.
@@ -109,7 +109,7 @@ public:
 }
 
 namespace i = ::sauce::internal;
-namespace inj = ::sauce::internal::bindings;
+namespace inj = ::sauce::internal::injections;
 
 }
 

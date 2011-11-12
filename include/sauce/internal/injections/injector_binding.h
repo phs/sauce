@@ -8,7 +8,7 @@
 
 namespace sauce {
 namespace internal {
-namespace bindings {
+namespace injections {
 
 /**
  * A binding that provides the injector itself.
@@ -33,7 +33,7 @@ class InjectorBinding:
 }
 
 namespace i = ::sauce::internal;
-namespace inj = ::sauce::internal::bindings;
+namespace inj = ::sauce::internal::injections;
 
 }
 
