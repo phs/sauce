@@ -8,7 +8,7 @@
 #include <sauce/memory.h>
 #include <sauce/named.h>
 #include <sauce/internal/binding.h>
-#include <sauce/internal/bindings/transparent_binding.h>
+#include <sauce/internal/bindings/injection.h>
 #include <sauce/internal/key.h>
 
 namespace sauce {
@@ -48,7 +48,7 @@ public:
  */
 template<typename Dependency, typename Name>
 class ImplicitProviderBinding:
-  public TransparentBinding<Named<Provider<Dependency>, Name>, NoScope>,
+  public Injection<Named<Provider<Dependency>, Name>, NoScope>,
   public ProviderFriend {
 
   typedef typename Key<Dependency>::Normalized Normalized;
@@ -68,7 +68,7 @@ class ImplicitProviderBinding:
 public:
 
   ImplicitProviderBinding(ProvidedBindingPtr providedBinding):
-    TransparentBinding<Named<Provider<Dependency>, Name>, NoScope>(),
+    Injection<Named<Provider<Dependency>, Name>, NoScope>(),
     ProviderFriend(),
     providedBinding(providedBinding) {}
 

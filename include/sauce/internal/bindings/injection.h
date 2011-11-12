@@ -1,5 +1,5 @@
-#ifndef SAUCE_SAUCE_INTERNAL_BINDINGS_TRANSPARENT_BINDING_H_
-#define SAUCE_SAUCE_INTERNAL_BINDINGS_TRANSPARENT_BINDING_H_
+#ifndef SAUCE_SAUCE_INTERNAL_BINDINGS_INJECTION_H_
+#define SAUCE_SAUCE_INTERNAL_BINDINGS_INJECTION_H_
 
 #include <sauce/injector.h>
 #include <sauce/memory.h>
@@ -40,10 +40,10 @@ protected:
 namespace bindings {
 
 /**
- * A binding for a specific interface and implementation.
+ * A strategy for satisfying provisions for the given interface.
  */
 template<typename Dependency, typename Scope>
-class TransparentBinding:
+class Injection:
   public Binding<Dependency>,
   public InjectorFriend {
 
@@ -113,4 +113,4 @@ namespace b = ::sauce::internal::bindings;
 
 }
 
-#endif // SAUCE_SAUCE_INTERNAL_BINDINGS_TRANSPARENT_BINDING_H_
+#endif // SAUCE_SAUCE_INTERNAL_BINDINGS_INJECTION_H_

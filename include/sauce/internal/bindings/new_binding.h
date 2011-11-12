@@ -10,7 +10,7 @@
 #include <sauce/named.h>
 #include <sauce/provider.h>
 #include <sauce/internal/binding.h>
-#include <sauce/internal/bindings/transparent_binding.h>
+#include <sauce/internal/bindings/injection.h>
 #include <sauce/internal/key.h>
 #include <sauce/internal/type_id.h>
 
@@ -24,7 +24,7 @@ class NewBinding;
 
 template<typename Dependency, typename Scope, typename Impl, typename Allocator>
 class NewBinding<Dependency, Scope, Impl(), Allocator>:
-  public TransparentBinding<Dependency, Scope> {
+  public Injection<Dependency, Scope> {
 
   typedef typename Key<Dependency>::Iface Iface;
   typedef typename Key<Dependency>::Ptr Ptr;
@@ -62,7 +62,7 @@ class NewBinding<Dependency, Scope, Impl(), Allocator>:
 template<typename Dependency, typename Scope, typename Impl,
     typename Allocator, typename A1>
 class NewBinding<Dependency, Scope, Impl(A1), Allocator>:
-  public TransparentBinding<Dependency, Scope> {
+  public Injection<Dependency, Scope> {
 
   typedef typename Key<Dependency>::Iface Iface;
   typedef typename Key<Dependency>::Ptr Ptr;
@@ -105,7 +105,7 @@ class NewBinding<Dependency, Scope, Impl(A1), Allocator>:
 template<typename Dependency, typename Scope, typename Impl,
     typename Allocator, typename A1, typename A2>
 class NewBinding<Dependency, Scope, Impl(A1, A2), Allocator>:
-  public TransparentBinding<Dependency, Scope> {
+  public Injection<Dependency, Scope> {
 
   typedef typename Key<Dependency>::Iface Iface;
   typedef typename Key<Dependency>::Ptr Ptr;
@@ -150,7 +150,7 @@ class NewBinding<Dependency, Scope, Impl(A1, A2), Allocator>:
 template<typename Dependency, typename Scope, typename Impl,
     typename Allocator, typename A1, typename A2, typename A3>
 class NewBinding<Dependency, Scope, Impl(A1, A2, A3), Allocator>:
-  public TransparentBinding<Dependency, Scope> {
+  public Injection<Dependency, Scope> {
 
   typedef typename Key<Dependency>::Iface Iface;
   typedef typename Key<Dependency>::Ptr Ptr;
@@ -197,7 +197,7 @@ class NewBinding<Dependency, Scope, Impl(A1, A2, A3), Allocator>:
 template<typename Dependency, typename Scope, typename Impl,
     typename Allocator, typename A1, typename A2, typename A3, typename A4>
 class NewBinding<Dependency, Scope, Impl(A1, A2, A3, A4), Allocator>:
-  public TransparentBinding<Dependency, Scope> {
+  public Injection<Dependency, Scope> {
 
   typedef typename Key<Dependency>::Iface Iface;
   typedef typename Key<Dependency>::Ptr Ptr;
@@ -247,7 +247,7 @@ template<typename Dependency, typename Scope, typename Impl,
     typename Allocator, typename A1, typename A2, typename A3, typename A4,
     typename A5>
 class NewBinding<Dependency, Scope, Impl(A1, A2, A3, A4, A5), Allocator>:
-  public TransparentBinding<Dependency, Scope> {
+  public Injection<Dependency, Scope> {
 
   typedef typename Key<Dependency>::Iface Iface;
   typedef typename Key<Dependency>::Ptr Ptr;
@@ -300,7 +300,7 @@ template<typename Dependency, typename Scope, typename Impl,
     typename Allocator, typename A1, typename A2, typename A3, typename A4,
     typename A5, typename A6>
 class NewBinding<Dependency, Scope, Impl(A1, A2, A3, A4, A5, A6), Allocator>:
-  public TransparentBinding<Dependency, Scope> {
+  public Injection<Dependency, Scope> {
 
   typedef typename Key<Dependency>::Iface Iface;
   typedef typename Key<Dependency>::Ptr Ptr;
@@ -356,7 +356,7 @@ template<typename Dependency, typename Scope, typename Impl,
     typename A5, typename A6, typename A7>
 class NewBinding<Dependency, Scope, Impl(A1, A2, A3, A4, A5, A6, A7),
     Allocator>:
-  public TransparentBinding<Dependency, Scope> {
+  public Injection<Dependency, Scope> {
 
   typedef typename Key<Dependency>::Iface Iface;
   typedef typename Key<Dependency>::Ptr Ptr;
@@ -414,7 +414,7 @@ template<typename Dependency, typename Scope, typename Impl,
     typename A5, typename A6, typename A7, typename A8>
 class NewBinding<Dependency, Scope, Impl(A1, A2, A3, A4, A5, A6, A7, A8),
     Allocator>:
-  public TransparentBinding<Dependency, Scope> {
+  public Injection<Dependency, Scope> {
 
   typedef typename Key<Dependency>::Iface Iface;
   typedef typename Key<Dependency>::Ptr Ptr;
@@ -474,7 +474,7 @@ template<typename Dependency, typename Scope, typename Impl,
     typename A5, typename A6, typename A7, typename A8, typename A9>
 class NewBinding<Dependency, Scope, Impl(A1, A2, A3, A4, A5, A6, A7, A8, A9),
     Allocator>:
-  public TransparentBinding<Dependency, Scope> {
+  public Injection<Dependency, Scope> {
 
   typedef typename Key<Dependency>::Iface Iface;
   typedef typename Key<Dependency>::Ptr Ptr;
@@ -537,7 +537,7 @@ template<typename Dependency, typename Scope, typename Impl,
     typename A10>
 class NewBinding<Dependency, Scope, Impl(A1, A2, A3, A4, A5, A6, A7, A8, A9,
     A10), Allocator>:
-  public TransparentBinding<Dependency, Scope> {
+  public Injection<Dependency, Scope> {
 
   typedef typename Key<Dependency>::Iface Iface;
   typedef typename Key<Dependency>::Ptr Ptr;

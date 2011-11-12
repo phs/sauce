@@ -32,10 +32,10 @@ typedef sauce::shared_ptr<OpaqueBinding> OpaqueBindingPtr;
  *
  * The interface is raised to the type system in Binding, a templated class
  * deriving from OpaqueBinding.  The implementation is in turn raised in
- * TransparentBinding, which derives from Binding.
+ * Injection, which derives from Binding.
  *
  * Other binding implementations (those that implement provision strategies)
- * extend TransparentBinding.  Their behavior is exposed to a Binding client
+ * extend Injection.  Their behavior is exposed to a Binding client
  * by (runtime) polymorphism.
  */
 struct OpaqueBinding {

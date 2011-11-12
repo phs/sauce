@@ -3,7 +3,7 @@
 
 #include <sauce/injector.h>
 #include <sauce/memory.h>
-#include <sauce/internal/bindings/transparent_binding.h>
+#include <sauce/internal/bindings/injection.h>
 #include <sauce/internal/key.h>
 
 namespace sauce {
@@ -14,7 +14,7 @@ namespace bindings {
  * A binding that provides the injector itself.
  */
 class InjectorBinding:
-  public TransparentBinding<Key<Injector>::Normalized, NoScope> {
+  public Injection<Key<Injector>::Normalized, NoScope> {
 
   typedef Binding<Key<Injector>::Normalized>::BindingPtr BindingPtr;
 

@@ -6,7 +6,7 @@
 #include <sauce/injector.h>
 #include <sauce/memory.h>
 #include <sauce/internal/binding.h>
-#include <sauce/internal/bindings/transparent_binding.h>
+#include <sauce/internal/bindings/injection.h>
 #include <sauce/internal/key.h>
 
 namespace sauce {
@@ -17,7 +17,7 @@ namespace bindings {
  * A binding that provides from the configured provider.
  */
 template<typename Dependency, typename Scope, typename Provider>
-class ProviderBinding: public TransparentBinding<Dependency, Scope> {
+class ProviderBinding: public Injection<Dependency, Scope> {
   typedef typename Binding<Dependency>::BindingPtr BindingPtr;
 
   void validateAcyclic(InjectorPtr injector, TypeIds & ids) const {
