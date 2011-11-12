@@ -7,7 +7,7 @@
 #include <sauce/provider.h>
 #include <sauce/internal/binding.h>
 #include <sauce/internal/bindings.h>
-#include <sauce/internal/bindings/all.h>
+#include <sauce/internal/injections/all.h>
 #include <sauce/internal/key.h>
 
 namespace sauce {

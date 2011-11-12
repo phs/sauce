@@ -7,7 +7,7 @@
 #include <sauce/named.h>
 #include <sauce/internal/base_injector.h>
 #include <sauce/internal/binding.h>
-#include <sauce/internal/bindings/all.h>
+#include <sauce/internal/injections/all.h>
 #include <sauce/internal/key.h>
 #include <sauce/internal/locker_factory.h>
 #include <sauce/internal/scope_cache.h>

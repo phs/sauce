@@ -8,7 +8,7 @@
 #include <sauce/memory.h>
 #include <sauce/named.h>
 #include <sauce/internal/binding.h>
-#include <sauce/internal/bindings/injection.h>
+#include <sauce/internal/injections/injection.h>
 #include <sauce/internal/key.h>
 
 namespace sauce {
