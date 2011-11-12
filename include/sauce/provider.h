@@ -1,5 +1,5 @@
-#ifndef SAUCE_SAUCE_PROVIDER_H_
-#define SAUCE_SAUCE_PROVIDER_H_
+#ifndef SAUCE_PROVIDER_H_
+#define SAUCE_PROVIDER_H_
 
 #include <cassert>
 
@@ -104,4 +104,4 @@ public:
 
 }
 
-#endif // SAUCE_SAUCE_PROVIDER_H_
+#endif // SAUCE_PROVIDER_H_

@@ -1,5 +1,5 @@
-#ifndef SAUCE_SAUCE_INTERNAL_BINDING_H_
-#define SAUCE_SAUCE_INTERNAL_BINDING_H_
+#ifndef SAUCE_INTERNAL_BINDING_H_
+#define SAUCE_INTERNAL_BINDING_H_
 
 #include <sauce/memory.h>
 #include <sauce/named.h>
@@ -93,4 +93,4 @@ namespace i = ::sauce::internal;
 
 }
 
-#endif // SAUCE_SAUCE_INTERNAL_BINDING_H_
+#endif // SAUCE_INTERNAL_BINDING_H_

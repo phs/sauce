@@ -1,5 +1,5 @@
-#ifndef SAUCE_SAUCE_EXCEPTIONS_H_
-#define SAUCE_SAUCE_EXCEPTIONS_H_
+#ifndef SAUCE_EXCEPTIONS_H_
+#define SAUCE_EXCEPTIONS_H_
 
 #include <string>
 #include <stdexcept>
@@ -104,4 +104,4 @@ struct ExitingSingletonScopeException: Exception {
 
 }
 
-#endif // SAUCE_SAUCE_EXCEPTIONS_H_
+#endif // SAUCE_EXCEPTIONS_H_

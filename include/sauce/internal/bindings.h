@@ -1,5 +1,5 @@
-#ifndef SAUCE_SAUCE_INTERNAL_BINDINGS_H_
-#define SAUCE_SAUCE_INTERNAL_BINDINGS_H_
+#ifndef SAUCE_INTERNAL_BINDINGS_H_
+#define SAUCE_INTERNAL_BINDINGS_H_
 
 #include <map>
 #include <utility>
@@ -158,4 +158,4 @@ namespace i = ::sauce::internal;
 
 }
 
-#endif // SAUCE_SAUCE_INTERNAL_BINDINGS_H_
+#endif // SAUCE_INTERNAL_BINDINGS_H_

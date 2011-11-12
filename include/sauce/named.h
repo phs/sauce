@@ -1,5 +1,5 @@
-#ifndef SAUCE_SAUCE_NAMED_H_
-#define SAUCE_SAUCE_NAMED_H_
+#ifndef SAUCE_NAMED_H_
+#define SAUCE_NAMED_H_
 
 namespace sauce {
 
@@ -16,4 +16,4 @@ class Unnamed {};
 
 }
 
-#endif // SAUCE_SAUCE_NAMED_H_
+#endif // SAUCE_NAMED_H_

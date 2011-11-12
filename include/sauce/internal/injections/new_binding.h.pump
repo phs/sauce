@@ -1,8 +1,8 @@
 $$ This is a Pump source file.  Please use Pump to convert it to new.h
 $$
 $var n = 10  $$ The maximum arity we support.
-#ifndef SAUCE_SAUCE_INTERNAL_INJECTIONS_NEW_BINDING_H_
-#define SAUCE_SAUCE_INTERNAL_INJECTIONS_NEW_BINDING_H_
+#ifndef SAUCE_INTERNAL_INJECTIONS_NEW_BINDING_H_
+#define SAUCE_INTERNAL_INJECTIONS_NEW_BINDING_H_
 
 #include <sauce/injector.h>
 #include <sauce/memory.h>
@@ -92,4 +92,4 @@ namespace inj = ::sauce::internal::injections;
 
 }
 
-#endif // SAUCE_SAUCE_INTERNAL_INJECTIONS_NEW_BINDING_H_
+#endif // SAUCE_INTERNAL_INJECTIONS_NEW_BINDING_H_

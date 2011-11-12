@@ -1,5 +1,5 @@
-#ifndef SAUCE_SAUCE_INTERNAL_MEMORY_STD_H_
-#define SAUCE_SAUCE_INTERNAL_MEMORY_STD_H_
+#ifndef SAUCE_INTERNAL_MEMORY_STD_H_
+#define SAUCE_INTERNAL_MEMORY_STD_H_
 
 #include <memory>
 
@@ -10,4 +10,4 @@ using std::weak_ptr;
 using std::static_pointer_cast;
 }
 
-#endif // SAUCE_SAUCE_INTERNAL_MEMORY_STD_H_
+#endif // SAUCE_INTERNAL_MEMORY_STD_H_

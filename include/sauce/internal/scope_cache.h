@@ -1,5 +1,5 @@
-#ifndef SAUCE_SAUCE_INTERNAL_SCOPE_CACHE_H_
-#define SAUCE_SAUCE_INTERNAL_SCOPE_CACHE_H_
+#ifndef SAUCE_INTERNAL_SCOPE_CACHE_H_
+#define SAUCE_INTERNAL_SCOPE_CACHE_H_
 
 #include <sauce/internal/key.h>
 #include <sauce/internal/type_id.h>
@@ -82,4 +82,4 @@ namespace i = ::sauce::internal;
 
 }
 
-#endif // SAUCE_SAUCE_INTERNAL_SCOPE_CACHE_H_
+#endif // SAUCE_INTERNAL_SCOPE_CACHE_H_

@@ -1,5 +1,5 @@
-#ifndef SAUCE_SAUCE_SCOPES_H_
-#define SAUCE_SAUCE_SCOPES_H_
+#ifndef SAUCE_SCOPES_H_
+#define SAUCE_SCOPES_H_
 
 namespace sauce {
 
@@ -36,4 +36,4 @@ class RequestScope {};
 
 }
 
-#endif // SAUCE_SAUCE_SCOPES_H_
+#endif // SAUCE_SCOPES_H_

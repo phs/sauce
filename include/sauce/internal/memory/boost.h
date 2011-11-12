@@ -1,5 +1,5 @@
-#ifndef SAUCE_SAUCE_INTERNAL_MEMORY_BOOST_H_
-#define SAUCE_SAUCE_INTERNAL_MEMORY_BOOST_H_
+#ifndef SAUCE_INTERNAL_MEMORY_BOOST_H_
+#define SAUCE_INTERNAL_MEMORY_BOOST_H_
 
 #include <boost/shared_ptr.hpp>
 
@@ -10,4 +10,4 @@ using boost::weak_ptr;
 using boost::static_pointer_cast;
 }
 
-#endif // SAUCE_SAUCE_INTERNAL_MEMORY_BOOST_H_
+#endif // SAUCE_INTERNAL_MEMORY_BOOST_H_

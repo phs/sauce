@@ -1,5 +1,5 @@
-#ifndef SAUCE_SAUCE_INJECTOR_H_
-#define SAUCE_SAUCE_INJECTOR_H_
+#ifndef SAUCE_INJECTOR_H_
+#define SAUCE_INJECTOR_H_
 
 #include <cassert>
 
@@ -173,4 +173,4 @@ public:
 
 }
 
-#endif // SAUCE_SAUCE_INJECTOR_H_
+#endif // SAUCE_INJECTOR_H_

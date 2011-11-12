@@ -1,5 +1,5 @@
-#ifndef SAUCE_SAUCE_BINDER_H_
-#define SAUCE_SAUCE_BINDER_H_
+#ifndef SAUCE_BINDER_H_
+#define SAUCE_BINDER_H_
 
 #include <memory>
 #include <utility>
@@ -234,4 +234,4 @@ public:
 
 }
 
-#endif // SAUCE_SAUCE_BINDER_H_
+#endif // SAUCE_BINDER_H_

@@ -1,5 +1,5 @@
-#ifndef SAUCE_SAUCE_MEMORY_H_
-#define SAUCE_SAUCE_MEMORY_H_
+#ifndef SAUCE_MEMORY_H_
+#define SAUCE_MEMORY_H_
 
 #if SAUCE_STD_SMART_PTR
   #include <sauce/internal/memory/std.h>
@@ -11,4 +11,4 @@
   #error Please define one of SAUCE_STD_SMART_PTR, SAUCE_STD_TR1_SMART_PTR or SAUCE_BOOST_SMART_PTR
 #endif
 
-#endif // SAUCE_SAUCE_MEMORY_H_
+#endif // SAUCE_MEMORY_H_

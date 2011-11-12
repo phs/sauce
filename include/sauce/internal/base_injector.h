@@ -1,5 +1,5 @@
-#ifndef SAUCE_SAUCE_INTERNAL_BASE_INJECTOR_H_
-#define SAUCE_SAUCE_INTERNAL_BASE_INJECTOR_H_
+#ifndef SAUCE_INTERNAL_BASE_INJECTOR_H_
+#define SAUCE_INTERNAL_BASE_INJECTOR_H_
 
 #include <sauce/exceptions.h>
 #include <sauce/memory.h>
@@ -131,4 +131,4 @@ namespace i = ::sauce::internal;
 
 }
 
-#endif // SAUCE_SAUCE_INTERNAL_BASE_INJECTOR_H_
+#endif // SAUCE_INTERNAL_BASE_INJECTOR_H_

@@ -1,5 +1,5 @@
-#ifndef SAUCE_SAUCE_INTERNAL_KEY_H_
-#define SAUCE_SAUCE_INTERNAL_KEY_H_
+#ifndef SAUCE_INTERNAL_KEY_H_
+#define SAUCE_INTERNAL_KEY_H_
 
 #include <sauce/memory.h>
 #include <sauce/internal/type_id.h>
@@ -42,4 +42,4 @@ namespace i = ::sauce::internal;
 
 }
 
-#endif // SAUCE_SAUCE_INTERNAL_KEY_H_
+#endif // SAUCE_INTERNAL_KEY_H_

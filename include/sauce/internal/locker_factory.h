@@ -1,5 +1,5 @@
-#ifndef SAUCE_SAUCE_INTERNAL_LOCKER_FACTORY_H_
-#define SAUCE_SAUCE_INTERNAL_LOCKER_FACTORY_H_
+#ifndef SAUCE_INTERNAL_LOCKER_FACTORY_H_
+#define SAUCE_INTERNAL_LOCKER_FACTORY_H_
 
 namespace sauce {
 namespace internal {
@@ -72,4 +72,4 @@ namespace i = ::sauce::internal;
 
 }
 
-#endif // SAUCE_SAUCE_INTERNAL_LOCKER_FACTORY_H_
+#endif // SAUCE_INTERNAL_LOCKER_FACTORY_H_

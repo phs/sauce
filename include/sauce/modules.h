@@ -1,5 +1,5 @@
-#ifndef SAUCE_SAUCE_MODULES_H_
-#define SAUCE_SAUCE_MODULES_H_
+#ifndef SAUCE_MODULES_H_
+#define SAUCE_MODULES_H_
 
 #include <sauce/binder.h>
 #include <sauce/injector.h>
@@ -137,4 +137,4 @@ public:
 
 }
 
-#endif // SAUCE_SAUCE_MODULES_H_
+#endif // SAUCE_MODULES_H_

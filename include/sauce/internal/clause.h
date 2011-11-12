@@ -1,5 +1,5 @@
-#ifndef SAUCE_SAUCE_CLAUSE_H_
-#define SAUCE_SAUCE_CLAUSE_H_
+#ifndef SAUCE_CLAUSE_H_
+#define SAUCE_CLAUSE_H_
 
 #include <sauce/internal/bindings.h>
 
@@ -59,4 +59,4 @@ namespace i = ::sauce::internal;
 
 }
 
-#endif // SAUCE_SAUCE_CLAUSE_H_
+#endif // SAUCE_CLAUSE_H_

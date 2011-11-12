@@ -1,5 +1,5 @@
-#ifndef SAUCE_SAUCE_H_
-#define SAUCE_SAUCE_H_
+#ifndef SAUCE_H_
+#define SAUCE_H_
 
 #include <sauce/binder.h>
 #include <sauce/modules.h>
@@ -17,4 +17,4 @@
  * </div>
  */
 
-#endif // SAUCE_SAUCE_H_
+#endif // SAUCE_H_
