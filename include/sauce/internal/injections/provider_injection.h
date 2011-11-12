@@ -14,7 +14,7 @@ namespace internal {
 namespace injections {
 
 /**
- * A binding that provides from the configured provider.
+ * An injection that provides from the configured provider.
  */
 template<typename Dependency, typename Scope, typename Provider>
 class ProviderInjection: public Injection<Dependency, Scope> {

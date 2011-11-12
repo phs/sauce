@@ -11,7 +11,7 @@ namespace internal {
 namespace injections {
 
 /**
- * A binding that provides the injector itself.
+ * An injection that provides the injector itself.
  */
 class InjectorInjection:
   public Injection<Key<Injector>::Normalized, NoScope> {

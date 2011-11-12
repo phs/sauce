@@ -44,7 +44,7 @@ public:
 };
 
 /**
- * A binding that provides Providers for an already-bound dependency.
+ * An injection that provides Providers for an already-bound dependency.
  */
 template<typename Dependency, typename Name>
 class ImplicitProviderInjection:

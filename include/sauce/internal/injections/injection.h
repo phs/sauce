@@ -69,7 +69,7 @@ public:
   /**
    * Provide an Iface.
    *
-   * If a Scope is configured for the binding, this checks the scope cache first before calling
+   * If a Scope is configured for the injection, this checks the scope cache first before calling
    * provide(), and caches the new Iface on miss.
    *
    * Derived classes should not override get(), but rather provide().
@@ -91,7 +91,7 @@ public:
   /**
    * Provide, but do not return an Iface.
    *
-   * Instead, cache the instance in its appropriate scope, if any.  If the binding is not scoped,
+   * Instead, cache the instance in its appropriate scope, if any.  If the injection is not scoped,
    * do nothing.
    */
   void eagerlyProvide(OpaqueBindingPtr opaque, InjectorPtr injector) const {
