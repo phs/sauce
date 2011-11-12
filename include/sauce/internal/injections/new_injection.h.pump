@@ -18,7 +18,7 @@ namespace internal {
 namespace injections {
 
 template<typename Dependency, typename Scope, typename Constructor, typename Allocator>
-class NewBinding;
+class NewInjection;
 
 $range i 0..n
 $for i [[
@@ -28,14 +28,14 @@ $var As = [[$for j, [[A$j]]]]
 $var as = [[$for j, [[a$j]]]]
 
 template<typename Dependency, typename Scope, typename Impl, typename Allocator$comma_typename_As>
-class NewBinding<Dependency, Scope, Impl($As), Allocator>:
+class NewInjection<Dependency, Scope, Impl($As), Allocator>:
   public Injection<Dependency, Scope> {
 
   typedef typename Key<Dependency>::Iface Iface;
   typedef typename Key<Dependency>::Ptr Ptr;
   typedef typename Binding<Dependency>::BindingPtr BindingPtr;
   typedef typename Allocator::template rebind<Impl>::other ImplAllocator;
-  typedef NewBinding<Dependency, Scope, Impl($As), Allocator> New;
+  typedef NewInjection<Dependency, Scope, Impl($As), Allocator> New;
   typedef DisposalDeleter<Iface, New> Deleter;
 
   friend class DisposalDeleter<Iface, New>;

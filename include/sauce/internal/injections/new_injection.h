@@ -20,17 +20,17 @@ namespace injections {
 
 template<typename Dependency, typename Scope, typename Constructor,
     typename Allocator>
-class NewBinding;
+class NewInjection;
 
 template<typename Dependency, typename Scope, typename Impl, typename Allocator>
-class NewBinding<Dependency, Scope, Impl(), Allocator>:
+class NewInjection<Dependency, Scope, Impl(), Allocator>:
   public Injection<Dependency, Scope> {
 
   typedef typename Key<Dependency>::Iface Iface;
   typedef typename Key<Dependency>::Ptr Ptr;
   typedef typename Binding<Dependency>::BindingPtr BindingPtr;
   typedef typename Allocator::template rebind<Impl>::other ImplAllocator;
-  typedef NewBinding<Dependency, Scope, Impl(), Allocator> New;
+  typedef NewInjection<Dependency, Scope, Impl(), Allocator> New;
   typedef DisposalDeleter<Iface, New> Deleter;
 
   friend class DisposalDeleter<Iface, New>;
@@ -61,14 +61,14 @@ class NewBinding<Dependency, Scope, Impl(), Allocator>:
 
 template<typename Dependency, typename Scope, typename Impl,
     typename Allocator, typename A1>
-class NewBinding<Dependency, Scope, Impl(A1), Allocator>:
+class NewInjection<Dependency, Scope, Impl(A1), Allocator>:
   public Injection<Dependency, Scope> {
 
   typedef typename Key<Dependency>::Iface Iface;
   typedef typename Key<Dependency>::Ptr Ptr;
   typedef typename Binding<Dependency>::BindingPtr BindingPtr;
   typedef typename Allocator::template rebind<Impl>::other ImplAllocator;
-  typedef NewBinding<Dependency, Scope, Impl(A1), Allocator> New;
+  typedef NewInjection<Dependency, Scope, Impl(A1), Allocator> New;
   typedef DisposalDeleter<Iface, New> Deleter;
 
   friend class DisposalDeleter<Iface, New>;
@@ -104,14 +104,14 @@ class NewBinding<Dependency, Scope, Impl(A1), Allocator>:
 
 template<typename Dependency, typename Scope, typename Impl,
     typename Allocator, typename A1, typename A2>
-class NewBinding<Dependency, Scope, Impl(A1, A2), Allocator>:
+class NewInjection<Dependency, Scope, Impl(A1, A2), Allocator>:
   public Injection<Dependency, Scope> {
 
   typedef typename Key<Dependency>::Iface Iface;
   typedef typename Key<Dependency>::Ptr Ptr;
   typedef typename Binding<Dependency>::BindingPtr BindingPtr;
   typedef typename Allocator::template rebind<Impl>::other ImplAllocator;
-  typedef NewBinding<Dependency, Scope, Impl(A1, A2), Allocator> New;
+  typedef NewInjection<Dependency, Scope, Impl(A1, A2), Allocator> New;
   typedef DisposalDeleter<Iface, New> Deleter;
 
   friend class DisposalDeleter<Iface, New>;
@@ -149,14 +149,14 @@ class NewBinding<Dependency, Scope, Impl(A1, A2), Allocator>:
 
 template<typename Dependency, typename Scope, typename Impl,
     typename Allocator, typename A1, typename A2, typename A3>
-class NewBinding<Dependency, Scope, Impl(A1, A2, A3), Allocator>:
+class NewInjection<Dependency, Scope, Impl(A1, A2, A3), Allocator>:
   public Injection<Dependency, Scope> {
 
   typedef typename Key<Dependency>::Iface Iface;
   typedef typename Key<Dependency>::Ptr Ptr;
   typedef typename Binding<Dependency>::BindingPtr BindingPtr;
   typedef typename Allocator::template rebind<Impl>::other ImplAllocator;
-  typedef NewBinding<Dependency, Scope, Impl(A1, A2, A3), Allocator> New;
+  typedef NewInjection<Dependency, Scope, Impl(A1, A2, A3), Allocator> New;
   typedef DisposalDeleter<Iface, New> Deleter;
 
   friend class DisposalDeleter<Iface, New>;
@@ -196,14 +196,14 @@ class NewBinding<Dependency, Scope, Impl(A1, A2, A3), Allocator>:
 
 template<typename Dependency, typename Scope, typename Impl,
     typename Allocator, typename A1, typename A2, typename A3, typename A4>
-class NewBinding<Dependency, Scope, Impl(A1, A2, A3, A4), Allocator>:
+class NewInjection<Dependency, Scope, Impl(A1, A2, A3, A4), Allocator>:
   public Injection<Dependency, Scope> {
 
   typedef typename Key<Dependency>::Iface Iface;
   typedef typename Key<Dependency>::Ptr Ptr;
   typedef typename Binding<Dependency>::BindingPtr BindingPtr;
   typedef typename Allocator::template rebind<Impl>::other ImplAllocator;
-  typedef NewBinding<Dependency, Scope, Impl(A1, A2, A3, A4), Allocator> New;
+  typedef NewInjection<Dependency, Scope, Impl(A1, A2, A3, A4), Allocator> New;
   typedef DisposalDeleter<Iface, New> Deleter;
 
   friend class DisposalDeleter<Iface, New>;
@@ -246,14 +246,14 @@ class NewBinding<Dependency, Scope, Impl(A1, A2, A3, A4), Allocator>:
 template<typename Dependency, typename Scope, typename Impl,
     typename Allocator, typename A1, typename A2, typename A3, typename A4,
     typename A5>
-class NewBinding<Dependency, Scope, Impl(A1, A2, A3, A4, A5), Allocator>:
+class NewInjection<Dependency, Scope, Impl(A1, A2, A3, A4, A5), Allocator>:
   public Injection<Dependency, Scope> {
 
   typedef typename Key<Dependency>::Iface Iface;
   typedef typename Key<Dependency>::Ptr Ptr;
   typedef typename Binding<Dependency>::BindingPtr BindingPtr;
   typedef typename Allocator::template rebind<Impl>::other ImplAllocator;
-  typedef NewBinding<Dependency, Scope, Impl(A1, A2, A3, A4, A5),
+  typedef NewInjection<Dependency, Scope, Impl(A1, A2, A3, A4, A5),
       Allocator> New;
   typedef DisposalDeleter<Iface, New> Deleter;
 
@@ -299,14 +299,14 @@ class NewBinding<Dependency, Scope, Impl(A1, A2, A3, A4, A5), Allocator>:
 template<typename Dependency, typename Scope, typename Impl,
     typename Allocator, typename A1, typename A2, typename A3, typename A4,
     typename A5, typename A6>
-class NewBinding<Dependency, Scope, Impl(A1, A2, A3, A4, A5, A6), Allocator>:
+class NewInjection<Dependency, Scope, Impl(A1, A2, A3, A4, A5, A6), Allocator>:
   public Injection<Dependency, Scope> {
 
   typedef typename Key<Dependency>::Iface Iface;
   typedef typename Key<Dependency>::Ptr Ptr;
   typedef typename Binding<Dependency>::BindingPtr BindingPtr;
   typedef typename Allocator::template rebind<Impl>::other ImplAllocator;
-  typedef NewBinding<Dependency, Scope, Impl(A1, A2, A3, A4, A5, A6),
+  typedef NewInjection<Dependency, Scope, Impl(A1, A2, A3, A4, A5, A6),
       Allocator> New;
   typedef DisposalDeleter<Iface, New> Deleter;
 
@@ -354,7 +354,7 @@ class NewBinding<Dependency, Scope, Impl(A1, A2, A3, A4, A5, A6), Allocator>:
 template<typename Dependency, typename Scope, typename Impl,
     typename Allocator, typename A1, typename A2, typename A3, typename A4,
     typename A5, typename A6, typename A7>
-class NewBinding<Dependency, Scope, Impl(A1, A2, A3, A4, A5, A6, A7),
+class NewInjection<Dependency, Scope, Impl(A1, A2, A3, A4, A5, A6, A7),
     Allocator>:
   public Injection<Dependency, Scope> {
 
@@ -362,7 +362,7 @@ class NewBinding<Dependency, Scope, Impl(A1, A2, A3, A4, A5, A6, A7),
   typedef typename Key<Dependency>::Ptr Ptr;
   typedef typename Binding<Dependency>::BindingPtr BindingPtr;
   typedef typename Allocator::template rebind<Impl>::other ImplAllocator;
-  typedef NewBinding<Dependency, Scope, Impl(A1, A2, A3, A4, A5, A6, A7),
+  typedef NewInjection<Dependency, Scope, Impl(A1, A2, A3, A4, A5, A6, A7),
       Allocator> New;
   typedef DisposalDeleter<Iface, New> Deleter;
 
@@ -412,7 +412,7 @@ class NewBinding<Dependency, Scope, Impl(A1, A2, A3, A4, A5, A6, A7),
 template<typename Dependency, typename Scope, typename Impl,
     typename Allocator, typename A1, typename A2, typename A3, typename A4,
     typename A5, typename A6, typename A7, typename A8>
-class NewBinding<Dependency, Scope, Impl(A1, A2, A3, A4, A5, A6, A7, A8),
+class NewInjection<Dependency, Scope, Impl(A1, A2, A3, A4, A5, A6, A7, A8),
     Allocator>:
   public Injection<Dependency, Scope> {
 
@@ -420,7 +420,7 @@ class NewBinding<Dependency, Scope, Impl(A1, A2, A3, A4, A5, A6, A7, A8),
   typedef typename Key<Dependency>::Ptr Ptr;
   typedef typename Binding<Dependency>::BindingPtr BindingPtr;
   typedef typename Allocator::template rebind<Impl>::other ImplAllocator;
-  typedef NewBinding<Dependency, Scope, Impl(A1, A2, A3, A4, A5, A6, A7, A8),
+  typedef NewInjection<Dependency, Scope, Impl(A1, A2, A3, A4, A5, A6, A7, A8),
       Allocator> New;
   typedef DisposalDeleter<Iface, New> Deleter;
 
@@ -472,7 +472,7 @@ class NewBinding<Dependency, Scope, Impl(A1, A2, A3, A4, A5, A6, A7, A8),
 template<typename Dependency, typename Scope, typename Impl,
     typename Allocator, typename A1, typename A2, typename A3, typename A4,
     typename A5, typename A6, typename A7, typename A8, typename A9>
-class NewBinding<Dependency, Scope, Impl(A1, A2, A3, A4, A5, A6, A7, A8, A9),
+class NewInjection<Dependency, Scope, Impl(A1, A2, A3, A4, A5, A6, A7, A8, A9),
     Allocator>:
   public Injection<Dependency, Scope> {
 
@@ -480,7 +480,7 @@ class NewBinding<Dependency, Scope, Impl(A1, A2, A3, A4, A5, A6, A7, A8, A9),
   typedef typename Key<Dependency>::Ptr Ptr;
   typedef typename Binding<Dependency>::BindingPtr BindingPtr;
   typedef typename Allocator::template rebind<Impl>::other ImplAllocator;
-  typedef NewBinding<Dependency, Scope, Impl(A1, A2, A3, A4, A5, A6, A7, A8,
+  typedef NewInjection<Dependency, Scope, Impl(A1, A2, A3, A4, A5, A6, A7, A8,
       A9), Allocator> New;
   typedef DisposalDeleter<Iface, New> Deleter;
 
@@ -535,7 +535,7 @@ template<typename Dependency, typename Scope, typename Impl,
     typename Allocator, typename A1, typename A2, typename A3, typename A4,
     typename A5, typename A6, typename A7, typename A8, typename A9,
     typename A10>
-class NewBinding<Dependency, Scope, Impl(A1, A2, A3, A4, A5, A6, A7, A8, A9,
+class NewInjection<Dependency, Scope, Impl(A1, A2, A3, A4, A5, A6, A7, A8, A9,
     A10), Allocator>:
   public Injection<Dependency, Scope> {
 
@@ -543,7 +543,7 @@ class NewBinding<Dependency, Scope, Impl(A1, A2, A3, A4, A5, A6, A7, A8, A9,
   typedef typename Key<Dependency>::Ptr Ptr;
   typedef typename Binding<Dependency>::BindingPtr BindingPtr;
   typedef typename Allocator::template rebind<Impl>::other ImplAllocator;
-  typedef NewBinding<Dependency, Scope, Impl(A1, A2, A3, A4, A5, A6, A7, A8,
+  typedef NewInjection<Dependency, Scope, Impl(A1, A2, A3, A4, A5, A6, A7, A8,
       A9, A10), Allocator> New;
   typedef DisposalDeleter<Iface, New> Deleter;
 

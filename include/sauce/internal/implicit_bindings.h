@@ -53,7 +53,7 @@ template<>
 struct ImplicitBinding<Named<Injector, Unnamed> > {
   typedef sauce::shared_ptr<Binding<Named<Injector, Unnamed> > > BindingPtr;
   static BindingPtr get(Bindings<ImplicitBindings> const &) {
-    BindingPtr binding(new inj::InjectorBinding());
+    BindingPtr binding(new inj::InjectorInjection());
     return binding;
   }
 };

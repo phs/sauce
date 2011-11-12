@@ -13,7 +13,7 @@ namespace injections {
 /**
  * A binding that provides the injector itself.
  */
-class InjectorBinding:
+class InjectorInjection:
   public Injection<Key<Injector>::Normalized, NoScope> {
 
   typedef Binding<Key<Injector>::Normalized>::BindingPtr BindingPtr;

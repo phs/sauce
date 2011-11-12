@@ -17,7 +17,7 @@ namespace injections {
  * A binding that provides from the configured provider.
  */
 template<typename Dependency, typename Scope, typename Provider>
-class ProviderBinding: public Injection<Dependency, Scope> {
+class ProviderInjection: public Injection<Dependency, Scope> {
   typedef typename Binding<Dependency>::BindingPtr BindingPtr;
 
   void validateAcyclic(InjectorPtr injector, TypeIds & ids) const {
