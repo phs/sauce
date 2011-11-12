@@ -76,8 +76,8 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="title">include/sauce/internal/implicit_bindings.h</div>  </div>
 </div>
 <div class="contents">
-<div class="fragment"><pre class="fragment"><a name="l00001"></a>00001 <span class="preprocessor">#ifndef SAUCE_SAUCE_INTERNAL_IMPLICIT_BINDINGS_H_</span>
-<a name="l00002"></a>00002 <span class="preprocessor"></span><span class="preprocessor">#define SAUCE_SAUCE_INTERNAL_IMPLICIT_BINDINGS_H_</span>
+<div class="fragment"><pre class="fragment"><a name="l00001"></a>00001 <span class="preprocessor">#ifndef SAUCE_INTERNAL_IMPLICIT_BINDINGS_H_</span>
+<a name="l00002"></a>00002 <span class="preprocessor"></span><span class="preprocessor">#define SAUCE_INTERNAL_IMPLICIT_BINDINGS_H_</span>
 <a name="l00003"></a>00003 <span class="preprocessor"></span>
 <a name="l00004"></a>00004 <span class="preprocessor">#include &lt;sauce/exceptions.h&gt;</span>
 <a name="l00005"></a>00005 <span class="preprocessor">#include &lt;sauce/injector.h&gt;</span>
@@ -85,7 +85,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <a name="l00007"></a>00007 <span class="preprocessor">#include &lt;sauce/provider.h&gt;</span>
 <a name="l00008"></a>00008 <span class="preprocessor">#include &lt;sauce/internal/binding.h&gt;</span>
 <a name="l00009"></a>00009 <span class="preprocessor">#include &lt;sauce/internal/bindings.h&gt;</span>
-<a name="l00010"></a>00010 <span class="preprocessor">#include &lt;sauce/internal/bindings/all.h&gt;</span>
+<a name="l00010"></a>00010 <span class="preprocessor">#include &lt;sauce/internal/injections/all.h&gt;</span>
 <a name="l00011"></a>00011 <span class="preprocessor">#include &lt;sauce/internal/key.h&gt;</span>
 <a name="l00012"></a>00012 
 <a name="l00013"></a>00013 <span class="keyword">namespace </span>sauce {
@@ -116,7 +116,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <a name="l00053"></a><a class="code" href="structsauce_1_1internal_1_1_implicit_binding_3_01_named_3_01_injector_00_01_unnamed_01_4_01_4.html">00053</a> <span class="keyword">struct </span><a class="code" href="structsauce_1_1internal_1_1_implicit_binding.html" title="Attempts to supply a Binding when the given Dependency is not found.">ImplicitBinding</a>&lt;<a class="code" href="classsauce_1_1_named.html" title="Wrap dependency requests with Named to choose one of several named alternatives.">Named</a>&lt;<a class="code" href="classsauce_1_1_injector.html">Injector</a>, <a class="code" href="classsauce_1_1_unnamed.html" title="The name of all unnamed dependencies.">Unnamed</a>&gt; &gt; {
 <a name="l00054"></a>00054   <span class="keyword">typedef</span> sauce::shared_ptr&lt;Binding&lt;Named&lt;Injector, Unnamed&gt; &gt; &gt; BindingPtr;
 <a name="l00055"></a>00055   <span class="keyword">static</span> BindingPtr <span class="keyword">get</span>(<a class="code" href="classsauce_1_1internal_1_1_bindings.html" title="A container for bindings.">Bindings&lt;ImplicitBindings&gt;</a> <span class="keyword">const</span> &amp;) {
-<a name="l00056"></a>00056     BindingPtr binding(<span class="keyword">new</span> <a class="code" href="classsauce_1_1internal_1_1bindings_1_1_injector_binding.html" title="A binding that provides the injector itself.">b::InjectorBinding</a>());
+<a name="l00056"></a>00056     BindingPtr binding(<span class="keyword">new</span> <a class="code" href="classsauce_1_1internal_1_1injections_1_1_injector_injection.html" title="An injection that provides the injector itself.">inj::InjectorInjection</a>());
 <a name="l00057"></a>00057     <span class="keywordflow">return</span> binding;
 <a name="l00058"></a>00058   }
 <a name="l00059"></a>00059 };
@@ -130,7 +130,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <a name="l00070"></a>00070 
 <a name="l00071"></a>00071   <span class="keyword">static</span> BindingPtr <span class="keyword">get</span>(<a class="code" href="classsauce_1_1internal_1_1_bindings.html" title="A container for bindings.">Bindings&lt;ImplicitBindings&gt;</a> <span class="keyword">const</span> &amp; bindings) {
 <a name="l00072"></a>00072     ProvidedBindingPtr providedBinding(bindings.getBinding&lt;<a class="code" href="classsauce_1_1_named.html" title="Wrap dependency requests with Named to choose one of several named alternatives.">Normalized</a>&gt;());
-<a name="l00073"></a>00073     BindingPtr binding(<span class="keyword">new</span> <a class="code" href="classsauce_1_1internal_1_1bindings_1_1_implicit_provider_binding.html" title="A binding that provides Providers for an already-bound dependency.">b::ImplicitProviderBinding&lt;Dependency, Name&gt;</a>(providedBinding));
+<a name="l00073"></a>00073     BindingPtr binding(<span class="keyword">new</span> <a class="code" href="classsauce_1_1internal_1_1injections_1_1_implicit_provider_injection.html" title="An injection that provides Providers for an already-bound dependency.">inj::ImplicitProviderInjection&lt;Dependency, Name&gt;</a>(providedBinding));
 <a name="l00074"></a>00074     <span class="keywordflow">return</span> binding;
 <a name="l00075"></a>00075   }
 <a name="l00076"></a>00076 };
@@ -141,7 +141,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <a name="l00081"></a>00081 
 <a name="l00082"></a>00082 }
 <a name="l00083"></a>00083 
-<a name="l00084"></a>00084 <span class="preprocessor">#endif // SAUCE_SAUCE_INTERNAL_IMPLICIT_BINDINGS_H_</span>
+<a name="l00084"></a>00084 <span class="preprocessor">#endif // SAUCE_INTERNAL_IMPLICIT_BINDINGS_H_</span>
 </pre></div></div>
 </div>
 <!-- window showing the filter options -->
