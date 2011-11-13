@@ -58,7 +58,7 @@ struct OpaqueBinding {
 };
 
 /**
- * A binding for a specific interface.
+ * A binding for an acknowledged interface.
  */
 template<typename Dependency>
 struct Binding:
