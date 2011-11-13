@@ -23,7 +23,9 @@ public:
 
   ClauseState(Bindings<ImplicitBindings> & bindings):
     bindings(bindings),
-    binding() {}
+    binding() {
+    bindings.throwAnyPending();
+  }
 
   virtual ~ClauseState() {
     if (binding.get() != NULL) {
