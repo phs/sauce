@@ -224,7 +224,7 @@ public:
    */
   template<typename Iface>
   BindClause<Iface> bind() {
-    i::ClauseStatePtr clauseState(new i::ClauseState(bindings));
+    i::ClauseStatePtr clauseState(new i::ClauseState(bindings, bindings));
     BindClause<Iface> bindClause;
     bindClause.setState(clauseState);
     return bindClause;

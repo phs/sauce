@@ -4,6 +4,7 @@
 #include <sauce/exceptions.h>
 #include <sauce/memory.h>
 #include <sauce/internal/bindings.h>
+#include <sauce/internal/pending_thrower.h>
 #include <sauce/internal/opaque_binding.h>
 
 namespace sauce {
@@ -17,14 +18,16 @@ class ImplicitBindings;
 class ClauseState {
 
   Bindings<ImplicitBindings> & bindings;
+  PendingThrower & pendingThrower;
   OpaqueBindingPtr binding;
 
 public:
 
-  ClauseState(Bindings<ImplicitBindings> & bindings):
+  ClauseState(Bindings<ImplicitBindings> & bindings, PendingThrower & pendingThrower):
     bindings(bindings),
+    pendingThrower(pendingThrower),
     binding() {
-    bindings.throwAnyPending();
+    pendingThrower.throwAnyPending();
   }
 
   virtual ~ClauseState() {
@@ -40,7 +43,7 @@ public:
 
   template<typename Exception>
   void throwLater() {
-    bindings.template throwLater<Exception>();
+    pendingThrower.template throwLater<Exception>();
   }
 
 };
