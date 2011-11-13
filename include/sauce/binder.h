@@ -73,7 +73,7 @@ public:
 
   template<typename Allocator>
   AllocateFromClause<Dependency, Scope, Ctor, Allocator> allocateFrom() {
-    return this->template pass<AllocateFromClause<Dependency, Scope, Ctor, Allocator> >();
+    return pass(AllocateFromClause<Dependency, Scope, Ctor, Allocator>());
   }
 
 };
@@ -96,12 +96,12 @@ public:
 
   template<typename Ctor>
   ToClause<Dependency, Scope, Ctor> to() {
-    return this->template pass<ToClause<Dependency, Scope, Ctor> >();
+    return pass(ToClause<Dependency, Scope, Ctor>());
   }
 
   template<typename Provider>
   ToProviderClause<Dependency, Scope, Provider> toProvider() {
-    return this->template pass<ToProviderClause<Dependency, Scope, Provider> >();
+    return pass(ToProviderClause<Dependency, Scope, Provider>());
   }
 };
 
@@ -122,17 +122,17 @@ public:
 
   template<typename Scope>
   InClause<Dependency, Scope> in() {
-    return this->template pass<InClause<Dependency, Scope> >();
+    return pass(InClause<Dependency, Scope>());
   }
 
   template<typename Ctor>
   ToClause<Dependency, NoScope, Ctor> to() {
-    return this->template pass<ToClause<Dependency, NoScope, Ctor> >();
+    return pass(ToClause<Dependency, NoScope, Ctor>());
   }
 
   template<typename Provider>
   ToProviderClause<Dependency, NoScope, Provider> toProvider() {
-    return this->template pass<ToProviderClause<Dependency, NoScope, Provider> >();
+    return pass(ToProviderClause<Dependency, NoScope, Provider>());
   }
 };
 
@@ -153,22 +153,22 @@ public:
 
   template<typename Name>
   NamedClause<Named<Iface, Name> > named() {
-    return this->template pass<NamedClause<Named<Iface, Name> > >();
+    return pass(NamedClause<Named<Iface, Name> >());
   }
 
   template<typename Scope>
   InClause<Named<Iface, Unnamed>, Scope> in() {
-    return this->template pass<InClause<Named<Iface, Unnamed>, Scope> >();
+    return pass(InClause<Named<Iface, Unnamed>, Scope>());
   }
 
   template<typename Ctor>
   ToClause<Named<Iface, Unnamed>, NoScope, Ctor> to() {
-    return this->template pass<ToClause<Named<Iface, Unnamed>, NoScope, Ctor> >();
+    return pass(ToClause<Named<Iface, Unnamed>, NoScope, Ctor>());
   }
 
   template<typename Provider>
   ToProviderClause<Named<Iface, Unnamed>, NoScope, Provider> toProvider() {
-    return this->template pass<ToProviderClause<Named<Iface, Unnamed>, NoScope, Provider> >();
+    return pass(ToProviderClause<Named<Iface, Unnamed>, NoScope, Provider>());
   }
 };
 

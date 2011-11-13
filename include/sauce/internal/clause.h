@@ -69,9 +69,8 @@ protected:
     state() {}
 
   template<typename Next>
-  Next pass() {
+  Next pass(Next next) {
     state->clear();
-    Next next;
     next.setState(state);
     return next;
   }
