@@ -62,7 +62,7 @@ template<typename Derived>
 class Clause {
   ClauseStatePtr state;
 
-  virtual void complete() = 0;
+  virtual void onComplete() = 0;
 
 protected:
 
@@ -91,7 +91,7 @@ public:
 
   void setState(ClauseStatePtr state) {
     this->state = state;
-    complete();
+    onComplete();
   }
 };
 
