@@ -7,7 +7,6 @@
 #include <sauce/internal/base_injector.h>
 #include <sauce/internal/binding.h>
 #include <sauce/internal/bindings.h>
-#include <sauce/internal/injections/all.h>
 #include <sauce/internal/implicit_bindings.h>
 #include <sauce/internal/locker_factory.h>
 
