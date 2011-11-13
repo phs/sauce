@@ -9,7 +9,7 @@
 #include <sauce/memory.h>
 #include <sauce/named.h>
 #include <sauce/provider.h>
-#include <sauce/internal/opaque_binding.h>
+#include <sauce/internal/resolved_binding.h>
 #include <sauce/internal/injections/injection.h>
 #include <sauce/internal/key.h>
 #include <sauce/internal/type_id.h>

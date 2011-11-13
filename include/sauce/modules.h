@@ -5,7 +5,7 @@
 #include <sauce/injector.h>
 #include <sauce/memory.h>
 #include <sauce/internal/base_injector.h>
-#include <sauce/internal/opaque_binding.h>
+#include <sauce/internal/resolved_binding.h>
 #include <sauce/internal/bindings.h>
 #include <sauce/internal/implicit_bindings.h>
 #include <sauce/internal/locker_factory.h>
