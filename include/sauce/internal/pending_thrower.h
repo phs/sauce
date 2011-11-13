@@ -44,7 +44,7 @@ public:
    * Throw and clear any saved exception.
    */
   void throwAnyPending() {
-    PendingThrow toThrow = clearPending();
+    PendingThrow toThrow = clear();
     if (toThrow) {
       toThrow();
     }
@@ -55,7 +55,7 @@ public:
    *
    * returns NULL if no exception is pending.
    */
-  PendingThrow clearPending() {
+  PendingThrow clear() {
     PendingThrow toThrow = pending;
     pending = NULL;
     return toThrow;
