@@ -23,7 +23,8 @@ public:
 
   template<typename Binding>
   void put() {
-    bindings.template put<Binding>();
+    OpaqueBindingPtr binding(new Binding());
+    bindings.put(binding);
   }
 
   template<typename Exception>
