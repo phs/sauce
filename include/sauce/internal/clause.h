@@ -1,8 +1,10 @@
 #ifndef SAUCE_CLAUSE_H_
 #define SAUCE_CLAUSE_H_
 
+#include <sauce/exceptions.h>
 #include <sauce/memory.h>
 #include <sauce/internal/bindings.h>
+#include <sauce/internal/opaque_binding.h>
 
 namespace sauce {
 namespace internal {
@@ -15,16 +17,23 @@ class ImplicitBindings;
 class ClauseState {
 
   Bindings<ImplicitBindings> & bindings;
+  OpaqueBindingPtr binding;
 
 public:
 
   ClauseState(Bindings<ImplicitBindings> & bindings):
-    bindings(bindings) {}
+    bindings(bindings),
+    binding() {}
+
+  virtual ~ClauseState() {
+    if (binding.get() != NULL) {
+      bindings.put(binding);
+    }
+  }
 
   template<typename Binding>
   void put() {
-    OpaqueBindingPtr binding(new Binding());
-    bindings.put(binding);
+    binding.reset(new Binding());
   }
 
   template<typename Exception>
