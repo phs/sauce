@@ -75,7 +75,7 @@ public:
 
   virtual ~Clause() {
     if (act) {
-      Derived::activate(*this);
+      Derived::complete(*this);
     }
   }
 };
