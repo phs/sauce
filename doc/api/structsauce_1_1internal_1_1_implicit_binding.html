@@ -91,7 +91,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 </div>
 <div class="contents">
 <!-- doxytag: class="sauce::internal::ImplicitBinding" -->
-<p>Attempts to supply a <a class="el" href="structsauce_1_1internal_1_1_binding.html" title="A binding for a specific interface.">Binding</a> when the given Dependency is not found.  
+<p>Attempts to supply a Binding when the given Dependency is not found.  
  <a href="structsauce_1_1internal_1_1_implicit_binding.html#details">More...</a></p>
 
 <p><code>#include &lt;<a class="el" href="implicit__bindings_8h_source.html">implicit_bindings.h</a>&gt;</code></p>
@@ -100,20 +100,20 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <table class="memberdecls">
 <tr><td colspan="2"><h2><a name="pub-types"></a>
 Public Types</h2></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a49fc7a61ddd21ee4e02eb53c7992b1c8"></a><!-- doxytag: member="sauce::internal::ImplicitBinding::BindingPtr" ref="a49fc7a61ddd21ee4e02eb53c7992b1c8" args="" -->
+<tr><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ad1ff71134ebebf9146bcbb3182f7357f"></a><!-- doxytag: member="sauce::internal::ImplicitBinding::BindingPtr" ref="ad1ff71134ebebf9146bcbb3182f7357f" args="" -->
 typedef sauce::shared_ptr<br class="typebreak"/>
-&lt; <a class="el" href="structsauce_1_1internal_1_1_binding.html">Binding</a>&lt; Dependency &gt; &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>BindingPtr</b></td></tr>
+&lt; <a class="el" href="structsauce_1_1internal_1_1_resolved_binding.html">ResolvedBinding</a>&lt; Dependency &gt; &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>BindingPtr</b></td></tr>
 <tr><td colspan="2"><h2><a name="pub-static-methods"></a>
 Static Public Member Functions</h2></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ab54d6c2248dc0f00112e2d9bdb38830b"></a><!-- doxytag: member="sauce::internal::ImplicitBinding::get" ref="ab54d6c2248dc0f00112e2d9bdb38830b" args="(Bindings&lt; ImplicitBindings &gt; const &amp;)" -->
-static BindingPtr&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structsauce_1_1internal_1_1_implicit_binding.html#ab54d6c2248dc0f00112e2d9bdb38830b">get</a> (<a class="el" href="classsauce_1_1internal_1_1_bindings.html">Bindings</a>&lt; <a class="el" href="structsauce_1_1internal_1_1_implicit_bindings.html">ImplicitBindings</a> &gt; const &amp;)</td></tr>
-<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Attempt to supply a (unknown) <a class="el" href="structsauce_1_1internal_1_1_binding.html" title="A binding for a specific interface.">Binding</a> at provision time. <br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="aebd3f78ff7d17c2724acd25567a68baf"></a><!-- doxytag: member="sauce::internal::ImplicitBinding::get" ref="aebd3f78ff7d17c2724acd25567a68baf" args="(ConcreteBindings const &amp;)" -->
+static BindingPtr&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structsauce_1_1internal_1_1_implicit_binding.html#aebd3f78ff7d17c2724acd25567a68baf">get</a> (<a class="el" href="classsauce_1_1internal_1_1_bindings.html">ConcreteBindings</a> const &amp;)</td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Attempt to supply a (unknown) Binding at provision time. <br/></td></tr>
 </table>
 <hr/><a name="details" id="details"></a><h2>Detailed Description</h2>
 <div class="textblock"><h3>template&lt;typename Dependency&gt;<br/>
 struct sauce::internal::ImplicitBinding&lt; Dependency &gt;</h3>
 
-<p>Attempts to supply a <a class="el" href="structsauce_1_1internal_1_1_binding.html" title="A binding for a specific interface.">Binding</a> when the given Dependency is not found. </p>
+<p>Attempts to supply a Binding when the given Dependency is not found. </p>
 </div><hr/>The documentation for this struct was generated from the following file:<ul>
 <li>include/sauce/internal/<a class="el" href="implicit__bindings_8h_source.html">implicit_bindings.h</a></li>
 </ul>

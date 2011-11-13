@@ -100,13 +100,13 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <tr><td colspan="2"><h2><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
 <tr><td class="memTemplParams" colspan="2"><a class="anchor" id="a0ddac69994eeaace224c6e28de8a2cb8"></a><!-- doxytag: member="sauce::internal::Bindings::put" ref="a0ddac69994eeaace224c6e28de8a2cb8" args="()" -->
-template&lt;typename Binding_ &gt; </td></tr>
+template&lt;typename Binding &gt; </td></tr>
 <tr><td class="memTemplItemLeft" align="right" valign="top">void&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classsauce_1_1internal_1_1_bindings.html#a0ddac69994eeaace224c6e28de8a2cb8">put</a> ()</td></tr>
 <tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Insert the given binding. <br/></td></tr>
-<tr><td class="memTemplParams" colspan="2"><a class="anchor" id="accbe4b99a13ad964b156eaa83ffb74e6"></a><!-- doxytag: member="sauce::internal::Bindings::getBinding" ref="accbe4b99a13ad964b156eaa83ffb74e6" args="() const " -->
+<tr><td class="memTemplParams" colspan="2"><a class="anchor" id="a7d236bc47d069909b74945af67a4beda"></a><!-- doxytag: member="sauce::internal::Bindings::getBinding" ref="a7d236bc47d069909b74945af67a4beda" args="() const " -->
 template&lt;typename Dependency &gt; </td></tr>
-<tr><td class="memTemplItemLeft" align="right" valign="top">sauce::shared_ptr&lt; <a class="el" href="structsauce_1_1internal_1_1_binding.html">Binding</a><br class="typebreak"/>
-&lt; Dependency &gt; &gt;&#160;</td><td class="memTemplItemRight" valign="bottom"><b>getBinding</b> () const </td></tr>
+<tr><td class="memTemplItemLeft" align="right" valign="top">sauce::shared_ptr<br class="typebreak"/>
+&lt; <a class="el" href="structsauce_1_1internal_1_1_resolved_binding.html">ResolvedBinding</a>&lt; Dependency &gt; &gt;&#160;</td><td class="memTemplItemRight" valign="bottom"><b>getBinding</b> () const </td></tr>
 <tr><td class="memTemplParams" colspan="2"><a class="anchor" id="af8581d35c9c936b636c321537df221bb"></a><!-- doxytag: member="sauce::internal::Bindings::validateAcyclic" ref="af8581d35c9c936b636c321537df221bb" args="(sauce::shared_ptr&lt; Injector &gt; injector, TypeIds &amp;ids) const " -->
 template&lt;typename Dependency &gt; </td></tr>
 <tr><td class="memTemplItemLeft" align="right" valign="top">void&#160;</td><td class="memTemplItemRight" valign="bottom"><b>validateAcyclic</b> (sauce::shared_ptr&lt; <a class="el" href="classsauce_1_1_injector.html">Injector</a> &gt; injector, TypeIds &amp;ids) const </td></tr>
@@ -130,7 +130,7 @@ class sauce::internal::Bindings&lt; ImplicitBindings &gt;</h3>
 <p>A container for bindings. </p>
 <p>Each <a class="el" href="classsauce_1_1_modules.html" title="A factory that accepts Modules and creates Injectors.">Modules</a> objects creates a <a class="el" href="classsauce_1_1internal_1_1_bindings.html" title="A container for bindings.">Bindings</a>, and passes a const copy to each <a class="el" href="classsauce_1_1_injector.html">Injector</a> it creates. The set of bindings an <a class="el" href="classsauce_1_1_injector.html">Injector</a> uses is therefore read-only.</p>
 <p>When providing instances (eagerly and not) the injector is passed in and the dependency is returned directly, instead of giving the binding to the injector (the binding details stay hidden.)</p>
-<p>The template parameter is a strategy type that attempts to located unknown bindings dynamically (implicitly.) Due to the threat of circular dependencies (in Sauce's type space), <a class="el" href="classsauce_1_1internal_1_1_bindings.html" title="A container for bindings.">Bindings</a> itself can't be aware of concrete <a class="el" href="structsauce_1_1internal_1_1_binding.html" title="A binding for a specific interface.">Binding</a> implementations. The only time it needs to know about them is when resolving implicit bindings. So, this functionality is hidden behind the templated strategy. </p>
+<p>The template parameter is a strategy type that attempts to located unknown bindings dynamically (implicitly.) Due to the threat of circular dependencies (in Sauce's type space), <a class="el" href="classsauce_1_1internal_1_1_bindings.html" title="A container for bindings.">Bindings</a> itself can't be aware of concrete Binding implementations. The only time it needs to know about them is when resolving implicit bindings. So, this functionality is hidden behind the templated strategy. </p>
 </div><hr/><h2>Member Function Documentation</h2>
 <a class="anchor" id="a86540802b63a64932dee9e31bb463e99"></a><!-- doxytag: member="sauce::internal::Bindings::get" ref="a86540802b63a64932dee9e31bb463e99" args="(sauce::shared_ptr&lt; Injector &gt; injector) const " -->
 <div class="memitem">
@@ -154,7 +154,7 @@ template&lt;typename Dependency &gt; </div>
 <p>Provide the named Dependency. </p>
 <p>If no binding is found, the implicit bindings are checked. </p>
 <div class="fragment"><pre class="fragment">                                                                            {
-    sauce::shared_ptr&lt;Binding&lt;Dependency&gt; &gt; binding(getBinding&lt;Dependency&gt;());
+    sauce::shared_ptr&lt;ResolvedBinding&lt;Dependency&gt; &gt; binding(getBinding&lt;Dependency&gt;());
     <span class="keywordflow">return</span> binding-&gt;get(binding, injector);
   }
 </pre></div>

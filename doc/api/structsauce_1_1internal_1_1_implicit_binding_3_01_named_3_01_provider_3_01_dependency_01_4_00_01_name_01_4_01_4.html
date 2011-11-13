@@ -106,17 +106,17 @@ typedef <a class="el" href="structsauce_1_1internal_1_1_key.html">Key</a>&lt; De
 <tr><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ac6b75816eb36a853ad5871eb4c559f30"></a><!-- doxytag: member="sauce::internal::ImplicitBinding&lt; Named&lt; Provider&lt; Dependency &gt;, Name &gt; &gt;::ProviderDependency" ref="ac6b75816eb36a853ad5871eb4c559f30" args="" -->
 typedef <a class="el" href="classsauce_1_1_named.html">Named</a>&lt; <a class="el" href="classsauce_1_1_provider.html">Provider</a><br class="typebreak"/>
 &lt; Dependency &gt;, Name &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>ProviderDependency</b></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a46a973b87bc3602cc20c6e78f24126bf"></a><!-- doxytag: member="sauce::internal::ImplicitBinding&lt; Named&lt; Provider&lt; Dependency &gt;, Name &gt; &gt;::BindingPtr" ref="a46a973b87bc3602cc20c6e78f24126bf" args="" -->
-typedef <a class="el" href="structsauce_1_1internal_1_1_binding.html">Binding</a><br class="typebreak"/>
+<tr><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a14268aef6837a1d6df01ba7cb79ac460"></a><!-- doxytag: member="sauce::internal::ImplicitBinding&lt; Named&lt; Provider&lt; Dependency &gt;, Name &gt; &gt;::BindingPtr" ref="a14268aef6837a1d6df01ba7cb79ac460" args="" -->
+typedef <a class="el" href="structsauce_1_1internal_1_1_resolved_binding.html">ResolvedBinding</a><br class="typebreak"/>
 &lt; <a class="el" href="classsauce_1_1_named.html">ProviderDependency</a> &gt;<br class="typebreak"/>
 ::BindingPtr&#160;</td><td class="memItemRight" valign="bottom"><b>BindingPtr</b></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="abdee8fec72c90b0a0732a001973b0ee4"></a><!-- doxytag: member="sauce::internal::ImplicitBinding&lt; Named&lt; Provider&lt; Dependency &gt;, Name &gt; &gt;::ProvidedBindingPtr" ref="abdee8fec72c90b0a0732a001973b0ee4" args="" -->
-typedef <a class="el" href="structsauce_1_1internal_1_1_binding.html">Binding</a>&lt; <a class="el" href="classsauce_1_1_named.html">Normalized</a> &gt;<br class="typebreak"/>
-::BindingPtr&#160;</td><td class="memItemRight" valign="bottom"><b>ProvidedBindingPtr</b></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="aa31999871fb51fe1ac6f4ccbf28e9abb"></a><!-- doxytag: member="sauce::internal::ImplicitBinding&lt; Named&lt; Provider&lt; Dependency &gt;, Name &gt; &gt;::ProvidedBindingPtr" ref="aa31999871fb51fe1ac6f4ccbf28e9abb" args="" -->
+typedef <a class="el" href="structsauce_1_1internal_1_1_resolved_binding.html">ResolvedBinding</a><br class="typebreak"/>
+&lt; <a class="el" href="classsauce_1_1_named.html">Normalized</a> &gt;::BindingPtr&#160;</td><td class="memItemRight" valign="bottom"><b>ProvidedBindingPtr</b></td></tr>
 <tr><td colspan="2"><h2><a name="pub-static-methods"></a>
 Static Public Member Functions</h2></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="afa2f1ad5112fedb26fde0bdeead67bf0"></a><!-- doxytag: member="sauce::internal::ImplicitBinding&lt; Named&lt; Provider&lt; Dependency &gt;, Name &gt; &gt;::get" ref="afa2f1ad5112fedb26fde0bdeead67bf0" args="(Bindings&lt; ImplicitBindings &gt; const &amp;bindings)" -->
-static BindingPtr&#160;</td><td class="memItemRight" valign="bottom"><b>get</b> (<a class="el" href="classsauce_1_1internal_1_1_bindings.html">Bindings</a>&lt; <a class="el" href="structsauce_1_1internal_1_1_implicit_bindings.html">ImplicitBindings</a> &gt; const &amp;bindings)</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ae0d08880b01f003e71cf066879fe6d11"></a><!-- doxytag: member="sauce::internal::ImplicitBinding&lt; Named&lt; Provider&lt; Dependency &gt;, Name &gt; &gt;::get" ref="ae0d08880b01f003e71cf066879fe6d11" args="(ConcreteBindings const &amp;bindings)" -->
+static BindingPtr&#160;</td><td class="memItemRight" valign="bottom"><b>get</b> (<a class="el" href="classsauce_1_1internal_1_1_bindings.html">ConcreteBindings</a> const &amp;bindings)</td></tr>
 </table>
 <hr/><a name="details" id="details"></a><h2>Detailed Description</h2>
 <div class="textblock"><h3>template&lt;typename Dependency, typename Name&gt;<br/>
