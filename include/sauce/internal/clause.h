@@ -75,9 +75,9 @@ protected:
     return next;
   }
 
-  template<typename Binding_>
-  void bind(Binding_) {
-    state->template bind<Binding_>();
+  template<typename Binding>
+  void bind(Binding) {
+    state->template bind<Binding>();
   }
 
   template<typename Exception>
