@@ -12,9 +12,6 @@ class Injector;
 
 namespace internal {
 
-template<typename Dependency>
-class Binding;
-
 struct OpaqueBinding;
 
 typedef sauce::shared_ptr<OpaqueBinding> OpaqueBindingPtr;
