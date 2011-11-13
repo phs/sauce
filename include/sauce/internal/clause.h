@@ -58,7 +58,6 @@ typedef sauce::shared_ptr<ClauseState> ClauseStatePtr;
 /**
  * Base class for parts of the fluent binding API.
  */
-template<typename Derived>
 class Clause {
   ClauseStatePtr state;
 

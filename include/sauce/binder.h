@@ -21,9 +21,7 @@ class ToClause;
  * Binds to a specific constructor and allocator.
  */
 template<typename Dependency, typename Scope, typename Ctor, typename Allocator>
-class AllocateFromClause:
-  public i::Clause<AllocateFromClause<Dependency, Scope, Ctor, Allocator> > {
-
+class AllocateFromClause: public i::Clause {
   friend class ToClause<Dependency, Scope, Ctor>;
 
   void onComplete() {
@@ -44,9 +42,7 @@ class InClause;
  * Binds to a provider.
  */
 template<typename Dependency, typename Scope, typename Provider>
-class ToProviderClause:
-  public i::Clause<ToProviderClause<Dependency, Scope, Provider> > {
-
+class ToProviderClause: public i::Clause {
   typedef typename i::Key<Dependency>::Iface Iface;
 
   friend class BindClause<Iface>;
@@ -62,9 +58,7 @@ class ToProviderClause:
  * Binds to a specific constructor allocating from the heap.
  */
 template<typename Dependency, typename Scope, typename Ctor>
-class ToClause:
-  public i::Clause<ToClause<Dependency, Scope, Ctor> > {
-
+class ToClause: public i::Clause {
   typedef typename i::Key<Dependency>::Iface Iface;
 
   friend class BindClause<Iface>;
@@ -88,9 +82,7 @@ public:
  * Scopes the binding.
  */
 template<typename Dependency, typename Scope>
-class InClause:
-  public i::Clause<InClause<Dependency, Scope> > {
-
+class InClause: public i::Clause {
   typedef typename i::Key<Dependency>::Iface Iface;
 
   friend class BindClause<Iface>;
@@ -111,16 +103,13 @@ public:
   ToProviderClause<Dependency, Scope, Provider> toProvider() {
     return this->template pass<ToProviderClause<Dependency, Scope, Provider> >();
   }
-
 };
 
 /**
  * Names the binding.
  */
 template<typename Dependency>
-class NamedClause:
-  public i::Clause<NamedClause<Dependency> > {
-
+class NamedClause: public i::Clause {
   typedef typename i::Key<Dependency>::Iface Iface;
 
   friend class BindClause<Iface>;
@@ -145,7 +134,6 @@ public:
   ToProviderClause<Dependency, NoScope, Provider> toProvider() {
     return this->template pass<ToProviderClause<Dependency, NoScope, Provider> >();
   }
-
 };
 
 class Binder;
@@ -154,9 +142,7 @@ class Binder;
  * A builder that creates a single binding.
  */
 template<typename Iface>
-class BindClause:
-  public i::Clause<BindClause<Iface> > {
-
+class BindClause: public i::Clause {
   friend class Binder;
 
   void onComplete() {
@@ -184,7 +170,6 @@ public:
   ToProviderClause<Named<Iface, Unnamed>, NoScope, Provider> toProvider() {
     return this->template pass<ToProviderClause<Named<Iface, Unnamed>, NoScope, Provider> >();
   }
-
 };
 
 class Modules;
