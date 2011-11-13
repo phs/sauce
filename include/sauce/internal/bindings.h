@@ -11,7 +11,6 @@
 #include <sauce/internal/opaque_binding.h>
 #include <sauce/internal/resolved_binding.h>
 #include <sauce/internal/key.h>
-#include <sauce/internal/pending_thrower.h>
 #include <sauce/internal/type_id.h>
 
 namespace sauce {
@@ -48,7 +47,7 @@ sauce::shared_ptr<ResolvedBinding<Dependency> > resolve(OpaqueBindingPtr binding
  * templated strategy.
  */
 template<typename ImplicitBindings>
-class Bindings: public PendingThrower {
+class Bindings {
   typedef std::map<TypeId, OpaqueBindingPtr> BindingMap;
   typedef std::multimap<TypeId, OpaqueBindingPtr> ScopeMap;
 
@@ -58,7 +57,6 @@ class Bindings: public PendingThrower {
 public:
 
   Bindings():
-    PendingThrower(),
     bindingMap(),
     scopeMap() {}
 

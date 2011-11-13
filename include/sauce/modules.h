@@ -105,7 +105,7 @@ public:
   template<typename Module>
   Modules & add(Module module) {
     module(binder);
-    bindings.throwAnyPending();
+    binder.throwAnyPending();
     return *this;
   }
 

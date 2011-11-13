@@ -10,6 +10,7 @@
 #include <sauce/internal/clause.h>
 #include <sauce/internal/injections/all.h>
 #include <sauce/internal/key.h>
+#include <sauce/internal/pending_thrower.h>
 
 namespace sauce {
 
@@ -209,12 +210,13 @@ class ImplicitBindings;
 /**
  * Passed to modules to create bindings.
  */
-class Binder {
+class Binder: public i::PendingThrower {
   i::Bindings<i::ImplicitBindings> & bindings;
 
   friend class Modules;
 
   Binder(i::Bindings<i::ImplicitBindings> & bindings):
+    PendingThrower(),
     bindings(bindings) {}
 
 public:
@@ -224,7 +226,7 @@ public:
    */
   template<typename Iface>
   BindClause<Iface> bind() {
-    i::ClauseStatePtr clauseState(new i::ClauseState(bindings, bindings));
+    i::ClauseStatePtr clauseState(new i::ClauseState(bindings, *this));
     BindClause<Iface> bindClause;
     bindClause.setState(clauseState);
     return bindClause;
