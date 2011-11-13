@@ -5,7 +5,6 @@
 #include <sauce/memory.h>
 #include <sauce/named.h>
 #include <sauce/provider.h>
-#include <sauce/internal/resolved_binding.h>
 #include <sauce/internal/bindings.h>
 #include <sauce/internal/key.h>
 #include <sauce/internal/locker_factory.h>
