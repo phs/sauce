@@ -15,7 +15,7 @@ struct Exception: std::runtime_error {
 };
 
 /**
- * Raised when a binding cannot be found.
+ * Thrown when a binding cannot be found.
  */
 struct UnboundException: Exception {
   UnboundException():
@@ -23,7 +23,7 @@ struct UnboundException: Exception {
 };
 
 /**
- * Raised when a binding cannot be found for the given interface.
+ * Thrown when a binding cannot be found for the given interface.
  */
 template<typename Dependency>
 struct UnboundExceptionFor: UnboundException {
@@ -31,7 +31,7 @@ struct UnboundExceptionFor: UnboundException {
 };
 
 /**
- * Raised when a binding hasn't been completely specified.
+ * Thrown when a binding hasn't been completely specified.
  */
 struct PartialBindingException: Exception {
   PartialBindingException():
@@ -39,7 +39,7 @@ struct PartialBindingException: Exception {
 };
 
 /**
- * Raised when a binding hasn't been completely specified for the given interface.
+ * Thrown when a binding hasn't been completely specified for the given interface.
  */
 template<typename Dependency>
 struct PartialBindingFor: PartialBindingException {
@@ -47,7 +47,7 @@ struct PartialBindingFor: PartialBindingException {
 };
 
 /**
- * Raised when a dependency cycle is found.
+ * Thrown when a dependency cycle is found.
  */
 struct CircularDependencyException: Exception {
   CircularDependencyException():
@@ -55,7 +55,7 @@ struct CircularDependencyException: Exception {
 };
 
 /**
- * Raised when a dependency cycle is found for the given interface.
+ * Thrown when a dependency cycle is found for the given interface.
  */
 template<typename Dependency>
 struct CircularDependencyExceptionFor: CircularDependencyException {
@@ -63,7 +63,7 @@ struct CircularDependencyExceptionFor: CircularDependencyException {
 };
 
 /**
- * Raised when a provision is requested outside of its bound scope.
+ * Thrown when a provision is requested outside of its bound scope.
  */
 struct OutOfScopeException: Exception {
   OutOfScopeException():
@@ -71,7 +71,7 @@ struct OutOfScopeException: Exception {
 };
 
 /**
- * Raised when a provision is requested outside of its given, bound scope.
+ * Thrown when a provision is requested outside of its given, bound scope.
  */
 template<typename Scope>
 struct OutOfScopeExceptionFor: OutOfScopeException {
@@ -79,7 +79,7 @@ struct OutOfScopeExceptionFor: OutOfScopeException {
 };
 
 /**
- * Raised when re-entering a scope that is already open.
+ * Thrown when re-entering a scope that is already open.
  */
 struct AlreadyInScopeException: Exception {
   AlreadyInScopeException():
@@ -87,7 +87,7 @@ struct AlreadyInScopeException: Exception {
 };
 
 /**
- * Raised when re-entering the given scope, which is already open.
+ * Thrown when re-entering the given scope, which is already open.
  */
 template<typename Scope>
 struct AlreadyInScopeExceptionFor: AlreadyInScopeException {
@@ -95,7 +95,7 @@ struct AlreadyInScopeExceptionFor: AlreadyInScopeException {
 };
 
 /**
- * Raised when exiting the singleton scope.
+ * Thrown when exiting the singleton scope.
  */
 struct ExitingSingletonScopeException: Exception {
   ExitingSingletonScopeException():
