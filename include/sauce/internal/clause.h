@@ -37,7 +37,7 @@ public:
   }
 
   template<typename Binding>
-  void put() {
+  void bind() {
     binding.reset(new Binding());
   }
 
@@ -73,8 +73,8 @@ protected:
   }
 
   template<typename Binding>
-  void put() {
-    state->template put<Binding>();
+  void bind() {
+    state->template bind<Binding>();
   }
 
   template<typename Exception>
