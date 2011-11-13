@@ -1,3 +1,5 @@
 <map id="G" name="G">
-<area shape="rect" id="node1" href="$structsauce_1_1internal_1_1_implicit_binding_3_01_named_3_01_injector_00_01_unnamed_01_4_01_4.html" title="The implicit Injector binding." alt="" coords="6,5,415,32"/>
+<area shape="rect" id="node1" href="$structsauce_1_1internal_1_1_lock_factory.html" title="Facility to create opaque RAII guards, intended to be synchronization lockers." alt="" coords="6,31,199,57"/>
+<area shape="rect" id="node3" href="$classsauce_1_1internal_1_1_locker_lock_factory.html" title="sauce::internal::LockerLockFactory\&lt; Locker, Lockable \&gt;" alt="" coords="248,5,608,32"/>
+<area shape="rect" id="node5" href="$structsauce_1_1internal_1_1_null_lock_factory.html" title="sauce::internal::NullLockFactory" alt="" coords="320,56,536,83"/>
 </map>

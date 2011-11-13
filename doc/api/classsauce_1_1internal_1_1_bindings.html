@@ -99,9 +99,8 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <table class="memberdecls">
 <tr><td colspan="2"><h2><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr><td class="memTemplParams" colspan="2"><a class="anchor" id="a0ddac69994eeaace224c6e28de8a2cb8"></a><!-- doxytag: member="sauce::internal::Bindings::put" ref="a0ddac69994eeaace224c6e28de8a2cb8" args="()" -->
-template&lt;typename Binding &gt; </td></tr>
-<tr><td class="memTemplItemLeft" align="right" valign="top">void&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classsauce_1_1internal_1_1_bindings.html#a0ddac69994eeaace224c6e28de8a2cb8">put</a> ()</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="aa0ca489e85131a5f772f02752e4af4e5"></a><!-- doxytag: member="sauce::internal::Bindings::put" ref="aa0ca489e85131a5f772f02752e4af4e5" args="(OpaqueBindingPtr binding)" -->
+void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classsauce_1_1internal_1_1_bindings.html#aa0ca489e85131a5f772f02752e4af4e5">put</a> (OpaqueBindingPtr binding)</td></tr>
 <tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Insert the given binding. <br/></td></tr>
 <tr><td class="memTemplParams" colspan="2"><a class="anchor" id="a7d236bc47d069909b74945af67a4beda"></a><!-- doxytag: member="sauce::internal::Bindings::getBinding" ref="a7d236bc47d069909b74945af67a4beda" args="() const " -->
 template&lt;typename Dependency &gt; </td></tr>
@@ -116,12 +115,6 @@ template&lt;typename Dependency &gt; </td></tr>
 <tr><td class="memTemplParams" colspan="2"><a class="anchor" id="a274fb076325b3ff14fae36205d2956dd"></a><!-- doxytag: member="sauce::internal::Bindings::eagerlyProvide" ref="a274fb076325b3ff14fae36205d2956dd" args="(sauce::shared_ptr&lt; Injector &gt; injector) const " -->
 template&lt;typename Scope &gt; </td></tr>
 <tr><td class="memTemplItemLeft" align="right" valign="top">void&#160;</td><td class="memTemplItemRight" valign="bottom"><b>eagerlyProvide</b> (sauce::shared_ptr&lt; <a class="el" href="classsauce_1_1_injector.html">Injector</a> &gt; injector) const </td></tr>
-<tr><td class="memTemplParams" colspan="2">template&lt;typename Exception &gt; </td></tr>
-<tr><td class="memTemplItemLeft" align="right" valign="top">void&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classsauce_1_1internal_1_1_bindings.html#a30814c356541023e2278876ce99491f6">throwLater</a> ()</td></tr>
-<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Save an exception of the given type to throw when it is safe.  <a href="#a30814c356541023e2278876ce99491f6"></a><br/></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="acc933615a12e19eeabc00ff3a9711065"></a><!-- doxytag: member="sauce::internal::Bindings::throwAnyPending" ref="acc933615a12e19eeabc00ff3a9711065" args="()" -->
-void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classsauce_1_1internal_1_1_bindings.html#acc933615a12e19eeabc00ff3a9711065">throwAnyPending</a> ()</td></tr>
-<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Throw and clear any saved exception. <br/></td></tr>
 </table>
 <hr/><a name="details" id="details"></a><h2>Detailed Description</h2>
 <div class="textblock"><h3>template&lt;typename ImplicitBindings&gt;<br/>
@@ -156,33 +149,6 @@ template&lt;typename Dependency &gt; </div>
 <div class="fragment"><pre class="fragment">                                                                            {
     sauce::shared_ptr&lt;ResolvedBinding&lt;Dependency&gt; &gt; binding(getBinding&lt;Dependency&gt;());
     <span class="keywordflow">return</span> binding-&gt;get(binding, injector);
-  }
-</pre></div>
-</div>
-</div>
-<a class="anchor" id="a30814c356541023e2278876ce99491f6"></a><!-- doxytag: member="sauce::internal::Bindings::throwLater" ref="a30814c356541023e2278876ce99491f6" args="()" -->
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;typename ImplicitBindings&gt; </div>
-<div class="memtemplate">
-template&lt;typename Exception &gt; </div>
-      <table class="memname">
-        <tr>
-          <td class="memname">void <a class="el" href="classsauce_1_1internal_1_1_bindings.html">sauce::internal::Bindings</a>&lt; <a class="el" href="structsauce_1_1internal_1_1_implicit_bindings.html">ImplicitBindings</a> &gt;::throwLater </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td><code> [inline]</code></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-<p>Save an exception of the given type to throw when it is safe. </p>
-<p>The exception must have an accessible nullary constructor.</p>
-<p>Any previously saved exception is dropped. </p>
-<div class="fragment"><pre class="fragment">                    {
-    pending = &amp;pendingThrowFactory&lt;Exception&gt;;
   }
 </pre></div>
 </div>

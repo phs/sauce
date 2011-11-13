@@ -1,3 +1,5 @@
 <map id="G" name="G">
-<area shape="rect" id="node1" href="$classsauce_1_1internal_1_1_scope_cache.html" title="sauce::internal::ScopeCache" alt="" coords="6,5,205,32"/>
+<area shape="rect" id="node1" href="$classsauce_1_1_provider.html" title="An interface for including custom factories in an Injector." alt="" coords="6,31,223,57"/>
+<area shape="rect" id="node3" href="$classsauce_1_1_abstract_provider.html" title="An interface for including custom factories in an Injector." alt="" coords="349,5,619,32"/>
+<area shape="rect" id="node5" href="$classsauce_1_1internal_1_1injections_1_1_implicit_provider.html" title="A Provider for an explicitly&#45;bound Dependency." alt="" coords="272,56,696,83"/>
 </map>

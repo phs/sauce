@@ -1,0 +1,8 @@
+<map id="G" name="G">
+<area shape="rect" id="node3" href="$classsauce_1_1_allocate_from_clause.html" title="Binds to a specific constructor and allocator." alt="" coords="213,5,648,32"/>
+<area shape="rect" id="node5" href="$classsauce_1_1_bind_clause.html" title="A builder that creates a single binding." alt="" coords="337,56,525,83"/>
+<area shape="rect" id="node7" href="$classsauce_1_1_in_clause.html" title="Scopes the binding." alt="" coords="297,107,565,133"/>
+<area shape="rect" id="node9" href="$classsauce_1_1_named_clause.html" title="Names the binding." alt="" coords="305,157,557,184"/>
+<area shape="rect" id="node11" href="$classsauce_1_1_to_clause.html" title="Binds to a specific constructor allocating from the heap." alt="" coords="277,208,585,235"/>
+<area shape="rect" id="node13" href="$classsauce_1_1_to_provider_clause.html" title="Binds to a provider." alt="" coords="239,259,622,285"/>
+</map>

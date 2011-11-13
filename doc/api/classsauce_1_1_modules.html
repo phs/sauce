@@ -135,7 +135,7 @@ template&lt;typename Module &gt; </div>
 <p>An <a class="el" href="classsauce_1_1_injector.html">Injector</a> created after adding a module will understand how to provide dependencies specified by that module. </p>
 <div class="fragment"><pre class="fragment">                               {
     module(binder);
-    bindings.<a class="code" href="classsauce_1_1internal_1_1_bindings.html#acc933615a12e19eeabc00ff3a9711065" title="Throw and clear any saved exception.">throwAnyPending</a>();
+    binder.throwAnyPending();
     <span class="keywordflow">return</span> *<span class="keyword">this</span>;
   }
 </pre></div>
@@ -144,7 +144,7 @@ Here is the call graph for this function:</div>
 <div class="dyncontent">
 <div class="center"><img src="classsauce_1_1_modules_a3426dc2443556d594ea44bd06687c89b_cgraph.png" border="0" usemap="#classsauce_1_1_modules_a3426dc2443556d594ea44bd06687c89b_cgraph" alt=""/></div>
 <map name="classsauce_1_1_modules_a3426dc2443556d594ea44bd06687c89b_cgraph" id="classsauce_1_1_modules_a3426dc2443556d594ea44bd06687c89b_cgraph">
-<area shape="rect" id="node3" href="classsauce_1_1internal_1_1_bindings.html#acc933615a12e19eeabc00ff3a9711065" title="Throw and clear any saved exception." alt="" coords="203,5,490,32"/></map>
+<area shape="rect" id="node3" href="classsauce_1_1internal_1_1_pending_thrower.html#a80772a6475085b37319d9b1902d35cdf" title="Throw and clear any saved exception." alt="" coords="203,5,538,32"/><area shape="rect" id="node5" href="classsauce_1_1internal_1_1_pending_thrower.html#a6419d1831ceae6ceb70502c4a6c16a8d" title="Clear and return any saved exception." alt="" coords="587,5,842,32"/></map>
 </div>
 </p>
 

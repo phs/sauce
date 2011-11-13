@@ -1,4 +1,3 @@
 <map id="G" name="G">
-<area shape="rect" id="node1" href="$classsauce_1_1internal_1_1_clause.html" title="sauce::internal::Clause\&lt; ToProviderClause\&lt; Dependency, Scope, Provider \&gt; \&gt;" alt="" coords="5,5,504,32"/>
-<area shape="rect" id="node3" href="$classsauce_1_1_to_provider_clause.html" title="Binds to a provider." alt="" coords="553,5,935,32"/>
+<area shape="rect" id="node1" href="$structsauce_1_1internal_1_1_key.html" title="A complete specification of a dependency request." alt="" coords="6,5,207,32"/>
 </map>

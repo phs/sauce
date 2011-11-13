@@ -100,7 +100,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <a name="l00025"></a>00025   <span class="keyword">typedef</span> sauce::shared_ptr&lt;ResolvedBinding&lt;Dependency&gt; &gt; BindingPtr;
 <a name="l00026"></a>00026 
 <a name="l00030"></a><a class="code" href="structsauce_1_1internal_1_1_implicit_binding.html#aebd3f78ff7d17c2724acd25567a68baf">00030</a>   <span class="keyword">static</span> BindingPtr <span class="keyword">get</span>(<a class="code" href="classsauce_1_1internal_1_1_bindings.html" title="A container for bindings.">ConcreteBindings</a> <span class="keyword">const</span> &amp;) {
-<a name="l00031"></a>00031     <span class="keywordflow">throw</span> <a class="code" href="structsauce_1_1_unbound_exception_for.html" title="Raised when a binding cannot be found for the given interface.">UnboundExceptionFor&lt;Dependency&gt;</a>();
+<a name="l00031"></a>00031     <span class="keywordflow">throw</span> <a class="code" href="structsauce_1_1_unbound_exception_for.html" title="Thrown when a binding cannot be found for the given interface.">UnboundExceptionFor&lt;Dependency&gt;</a>();
 <a name="l00032"></a>00032   }
 <a name="l00033"></a>00033 
 <a name="l00034"></a>00034 };

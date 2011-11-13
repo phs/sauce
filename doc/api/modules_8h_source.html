@@ -154,7 +154,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <a name="l00105"></a>00105   <span class="keyword">template</span>&lt;<span class="keyword">typename</span> Module&gt;
 <a name="l00106"></a><a class="code" href="classsauce_1_1_modules.html#a3426dc2443556d594ea44bd06687c89b">00106</a>   <a class="code" href="classsauce_1_1_modules.html" title="A factory that accepts Modules and creates Injectors.">Modules</a> &amp; <a class="code" href="classsauce_1_1_modules.html#a3426dc2443556d594ea44bd06687c89b" title="Add the bindings defined by the given Module instance.">add</a>(Module module) {
 <a name="l00107"></a>00107     module(binder);
-<a name="l00108"></a>00108     bindings.<a class="code" href="classsauce_1_1internal_1_1_bindings.html#acc933615a12e19eeabc00ff3a9711065" title="Throw and clear any saved exception.">throwAnyPending</a>();
+<a name="l00108"></a>00108     binder.<a class="code" href="classsauce_1_1internal_1_1_pending_thrower.html#a80772a6475085b37319d9b1902d35cdf" title="Throw and clear any saved exception.">throwAnyPending</a>();
 <a name="l00109"></a>00109     <span class="keywordflow">return</span> *<span class="keyword">this</span>;
 <a name="l00110"></a>00110   }
 <a name="l00111"></a>00111 

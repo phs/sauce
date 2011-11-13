@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
-<title>sauce: sauce::internal::Clause&lt; Derived &gt; Class Template Reference</title>
+<title>sauce: sauce::internal::Clause Class Reference</title>
 
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <link href="doxygen.css" rel="stylesheet" type="text/css" />
@@ -87,7 +87,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <a href="#pub-methods">Public Member Functions</a> &#124;
 <a href="#pro-methods">Protected Member Functions</a>  </div>
   <div class="headertitle">
-<div class="title">sauce::internal::Clause&lt; Derived &gt; Class Template Reference</div>  </div>
+<div class="title">sauce::internal::Clause Class Reference</div>  </div>
 </div>
 <div class="contents">
 <!-- doxytag: class="sauce::internal::Clause" -->
@@ -95,30 +95,34 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
  <a href="classsauce_1_1internal_1_1_clause.html#details">More...</a></p>
 
 <p><code>#include &lt;<a class="el" href="clause_8h_source.html">clause.h</a>&gt;</code></p>
+<div class="dynheader">
+Inheritance diagram for sauce::internal::Clause:</div>
+<div class="dyncontent">
+<div class="center"><img src="classsauce_1_1internal_1_1_clause__inherit__graph.png" border="0" usemap="#sauce_1_1internal_1_1_clause_inherit__map" alt="Inheritance graph"/></div>
+<map name="sauce_1_1internal_1_1_clause_inherit__map" id="sauce_1_1internal_1_1_clause_inherit__map">
+<area shape="rect" id="node3" href="classsauce_1_1_allocate_from_clause.html" title="Binds to a specific constructor and allocator." alt="" coords="213,5,648,32"/><area shape="rect" id="node5" href="classsauce_1_1_bind_clause.html" title="A builder that creates a single binding." alt="" coords="337,56,525,83"/><area shape="rect" id="node7" href="classsauce_1_1_in_clause.html" title="Scopes the binding." alt="" coords="297,107,565,133"/><area shape="rect" id="node9" href="classsauce_1_1_named_clause.html" title="Names the binding." alt="" coords="305,157,557,184"/><area shape="rect" id="node11" href="classsauce_1_1_to_clause.html" title="Binds to a specific constructor allocating from the heap." alt="" coords="277,208,585,235"/><area shape="rect" id="node13" href="classsauce_1_1_to_provider_clause.html" title="Binds to a provider." alt="" coords="239,259,622,285"/></map>
+<center><span class="legend">[<a href="graph_legend.html">legend</a>]</span></center></div>
 
 <p><a href="classsauce_1_1internal_1_1_clause-members.html">List of all members.</a></p>
 <table class="memberdecls">
 <tr><td colspan="2"><h2><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a93b8909c48a9348e71ed42a808dac95d"></a><!-- doxytag: member="sauce::internal::Clause::setBindings" ref="a93b8909c48a9348e71ed42a808dac95d" args="(Bindings&lt; ImplicitBindings &gt; &amp;bindings)" -->
-void&#160;</td><td class="memItemRight" valign="bottom"><b>setBindings</b> (<a class="el" href="classsauce_1_1internal_1_1_bindings.html">Bindings</a>&lt; <a class="el" href="structsauce_1_1internal_1_1_implicit_bindings.html">ImplicitBindings</a> &gt; &amp;bindings)</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="aef02a802352982d9f9401a44db28386d"></a><!-- doxytag: member="sauce::internal::Clause::setState" ref="aef02a802352982d9f9401a44db28386d" args="(ClauseStatePtr state)" -->
+void&#160;</td><td class="memItemRight" valign="bottom"><b>setState</b> (ClauseStatePtr state)</td></tr>
 <tr><td colspan="2"><h2><a name="pro-methods"></a>
 Protected Member Functions</h2></td></tr>
-<tr><td class="memTemplParams" colspan="2"><a class="anchor" id="a178e05a947fedc2df27c5098775e307f"></a><!-- doxytag: member="sauce::internal::Clause::pass" ref="a178e05a947fedc2df27c5098775e307f" args="()" -->
+<tr><td class="memTemplParams" colspan="2"><a class="anchor" id="a3f6c15e27eaf5c5f5a764d909afc2d3f"></a><!-- doxytag: member="sauce::internal::Clause::pass" ref="a3f6c15e27eaf5c5f5a764d909afc2d3f" args="(Next next)" -->
 template&lt;typename Next &gt; </td></tr>
-<tr><td class="memTemplItemLeft" align="right" valign="top">Next&#160;</td><td class="memTemplItemRight" valign="bottom"><b>pass</b> ()</td></tr>
-<tr><td class="memTemplParams" colspan="2"><a class="anchor" id="aec9c966a7d70c0641a8111cf881440fb"></a><!-- doxytag: member="sauce::internal::Clause::put" ref="aec9c966a7d70c0641a8111cf881440fb" args="()" -->
+<tr><td class="memTemplItemLeft" align="right" valign="top">Next&#160;</td><td class="memTemplItemRight" valign="bottom"><b>pass</b> (Next next)</td></tr>
+<tr><td class="memTemplParams" colspan="2"><a class="anchor" id="a9eb437355d98d049a38cdfb995167b36"></a><!-- doxytag: member="sauce::internal::Clause::bind" ref="a9eb437355d98d049a38cdfb995167b36" args="(Binding)" -->
 template&lt;typename Binding &gt; </td></tr>
-<tr><td class="memTemplItemLeft" align="right" valign="top">void&#160;</td><td class="memTemplItemRight" valign="bottom"><b>put</b> ()</td></tr>
-<tr><td class="memTemplParams" colspan="2"><a class="anchor" id="ae3abae2f3eb0987b0a3eef456baa8831"></a><!-- doxytag: member="sauce::internal::Clause::throwLater" ref="ae3abae2f3eb0987b0a3eef456baa8831" args="()" -->
+<tr><td class="memTemplItemLeft" align="right" valign="top">void&#160;</td><td class="memTemplItemRight" valign="bottom"><b>bind</b> (Binding)</td></tr>
+<tr><td class="memTemplParams" colspan="2"><a class="anchor" id="a263b7bff96fdf9f03f87c17355051263"></a><!-- doxytag: member="sauce::internal::Clause::throwLater" ref="a263b7bff96fdf9f03f87c17355051263" args="(Exception)" -->
 template&lt;typename Exception &gt; </td></tr>
-<tr><td class="memTemplItemLeft" align="right" valign="top">void&#160;</td><td class="memTemplItemRight" valign="bottom"><b>throwLater</b> ()</td></tr>
+<tr><td class="memTemplItemLeft" align="right" valign="top">void&#160;</td><td class="memTemplItemRight" valign="bottom"><b>throwLater</b> (<a class="el" href="structsauce_1_1_exception.html">Exception</a>)</td></tr>
 </table>
 <hr/><a name="details" id="details"></a><h2>Detailed Description</h2>
-<div class="textblock"><h3>template&lt;typename Derived&gt;<br/>
-class sauce::internal::Clause&lt; Derived &gt;</h3>
-
-<p>Base class for parts of the fluent binding API. </p>
+<div class="textblock"><p>Base class for parts of the fluent binding API. </p>
 </div><hr/>The documentation for this class was generated from the following file:<ul>
 <li>include/sauce/internal/<a class="el" href="clause_8h_source.html">clause.h</a></li>
 </ul>
