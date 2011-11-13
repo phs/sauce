@@ -46,6 +46,11 @@ public:
     pendingThrower.template throwLater<Exception>();
   }
 
+  void clear() {
+    pendingThrower.clearPending();
+    binding.reset();
+  }
+
 };
 
 typedef sauce::shared_ptr<ClauseState> ClauseStatePtr;
@@ -55,18 +60,16 @@ typedef sauce::shared_ptr<ClauseState> ClauseStatePtr;
  */
 template<typename Derived>
 class Clause {
-  bool act;
   ClauseStatePtr state;
 
 protected:
 
   Clause():
-    act(true),
     state() {}
 
   template<typename Next>
   Next pass() {
-    act = false;
+    state->clear();
     Next next;
     next.setState(state);
     return next;
@@ -86,12 +89,7 @@ public:
 
   void setState(ClauseStatePtr state) {
     this->state = state;
-  }
-
-  virtual ~Clause() {
-    if (act) {
-      Derived::complete(*this);
-    }
+    Derived::complete(*this);
   }
 };
 
