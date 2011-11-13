@@ -64,7 +64,7 @@ struct AllocateWith {
 
     Allocator() {}
 
-    Allocator(Allocator const & a) {}
+    Allocator(Allocator const &) {}
 
     template<typename D> Allocator(Allocator<D> const &) {}
 
