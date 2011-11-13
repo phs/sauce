@@ -81,7 +81,7 @@ protected:
   }
 
   template<typename Exception>
-  void throwLater() {
+  void throwLater(Exception) {
     state->template throwLater<Exception>();
   }
 
