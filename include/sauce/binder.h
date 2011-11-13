@@ -24,8 +24,6 @@ template<typename Dependency, typename Scope, typename Ctor, typename Allocator>
 class AllocateFromClause:
   public i::Clause<AllocateFromClause<Dependency, Scope, Ctor, Allocator> > {
 
-  typedef i::Clause<AllocateFromClause<Dependency, Scope, Ctor, Allocator> > Clause;
-
   friend class ToClause<Dependency, Scope, Ctor>;
   friend class i::Clause<AllocateFromClause<Dependency, Scope, Ctor, Allocator> >;
 
@@ -51,7 +49,6 @@ class ToProviderClause:
   public i::Clause<ToProviderClause<Dependency, Scope, Provider> > {
 
   typedef typename i::Key<Dependency>::Iface Iface;
-  typedef i::Clause<ToProviderClause<Dependency, Scope, Provider> > Clause;
 
   friend class BindClause<Iface>;
   friend class NamedClause<Dependency>;
@@ -71,7 +68,6 @@ class ToClause:
   public i::Clause<ToClause<Dependency, Scope, Ctor> > {
 
   typedef typename i::Key<Dependency>::Iface Iface;
-  typedef i::Clause<ToClause<Dependency, Scope, Ctor> > Clause;
 
   friend class BindClause<Iface>;
   friend class NamedClause<Dependency>;
@@ -99,7 +95,6 @@ class InClause:
   public i::Clause<InClause<Dependency, Scope> > {
 
   typedef typename i::Key<Dependency>::Iface Iface;
-  typedef i::Clause<InClause<Dependency, Scope> > Clause;
 
   friend class BindClause<Iface>;
   friend class NamedClause<Dependency>;
@@ -131,7 +126,6 @@ class NamedClause:
   public i::Clause<NamedClause<Dependency> > {
 
   typedef typename i::Key<Dependency>::Iface Iface;
-  typedef i::Clause<NamedClause<Dependency> > Clause;
 
   friend class BindClause<Iface>;
   friend class i::Clause<NamedClause<Dependency> >;
@@ -167,8 +161,6 @@ class Binder;
 template<typename Iface>
 class BindClause:
   public i::Clause<BindClause<Iface> > {
-
-  typedef i::Clause<BindClause<Iface> > Clause;
 
   friend class Binder;
   friend class i::Clause<BindClause<Iface> >;
