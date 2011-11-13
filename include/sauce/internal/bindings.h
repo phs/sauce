@@ -44,6 +44,41 @@ void pendingThrowFactory() {
 }
 
 /**
+ * A mixin to defer and throw pending exceptions.
+ */
+class PendingThrower { // Tempted to call it PendingThrowDown
+  PendingThrow pending;
+
+public:
+
+  PendingThrower():
+    pending(NULL) {}
+
+  /**
+   * Save an exception of the given type to throw when it is safe.
+   *
+   * The exception must have an accessible nullary constructor.
+   *
+   * Any previously saved exception is dropped.
+   */
+  template<typename Exception>
+  void throwLater() {
+    pending = &pendingThrowFactory<Exception>;
+  }
+
+  /**
+   * Throw and clear any saved exception.
+   */
+  void throwAnyPending() {
+    if (pending) {
+      PendingThrow toThrow = pending;
+      pending = NULL;
+      toThrow();
+    }
+  }
+};
+
+/**
  * A container for bindings.
  *
  * Each Modules objects creates a Bindings, and passes a const copy to each Injector it creates.
@@ -60,20 +95,19 @@ void pendingThrowFactory() {
  * templated strategy.
  */
 template<typename ImplicitBindings>
-class Bindings {
+class Bindings: public PendingThrower {
   typedef std::map<TypeId, OpaqueBindingPtr> BindingMap;
   typedef std::multimap<TypeId, OpaqueBindingPtr> ScopeMap;
 
   BindingMap bindingMap;
   ScopeMap scopeMap;
-  PendingThrow pending;
 
 public:
 
   Bindings():
+    PendingThrower(),
     bindingMap(),
-    scopeMap(),
-    pending(NULL) {}
+    scopeMap() {}
 
   /**
    * Insert the given binding.
@@ -124,29 +158,6 @@ public:
     for (; i != end; ++i) {
       OpaqueBindingPtr const & binding = i->second;
       binding->eagerlyProvide(binding, injector);
-    }
-  }
-
-  /**
-   * Save an exception of the given type to throw when it is safe.
-   *
-   * The exception must have an accessible nullary constructor.
-   *
-   * Any previously saved exception is dropped.
-   */
-  template<typename Exception>
-  void throwLater() {
-    pending = &pendingThrowFactory<Exception>;
-  }
-
-  /**
-   * Throw and clear any saved exception.
-   */
-  void throwAnyPending() {
-    if (pending) {
-      PendingThrow toThrow = pending;
-      pending = NULL;
-      toThrow();
     }
   }
 };
