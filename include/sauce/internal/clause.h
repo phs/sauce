@@ -62,6 +62,8 @@ template<typename Derived>
 class Clause {
   ClauseStatePtr state;
 
+  virtual void complete(Clause & clause) = 0;
+
 protected:
 
   Clause():
@@ -89,7 +91,7 @@ public:
 
   void setState(ClauseStatePtr state) {
     this->state = state;
-    Derived::complete(*this);
+    complete(*this);
   }
 };
 

@@ -29,7 +29,7 @@ class AllocateFromClause:
   friend class ToClause<Dependency, Scope, Ctor>;
   friend class i::Clause<AllocateFromClause<Dependency, Scope, Ctor, Allocator> >;
 
-  static void complete(Clause & clause) {
+  void complete(Clause & clause) {
     clause.template bind<inj::NewInjection<Dependency, Scope, Ctor, Allocator> >();
   }
 };
@@ -58,7 +58,7 @@ class ToProviderClause:
   friend class InClause<Dependency, Scope>;
   friend class i::Clause<ToProviderClause<Dependency, Scope, Provider> >;
 
-  static void complete(Clause & clause) {
+  void complete(Clause & clause) {
     clause.template bind<inj::ProviderInjection<Dependency, Scope, Provider> >();
   }
 };
@@ -78,7 +78,7 @@ class ToClause:
   friend class InClause<Dependency, Scope>;
   friend class i::Clause<ToClause<Dependency, Scope, Ctor> >;
 
-  static void complete(Clause & clause) {
+  void complete(Clause & clause) {
     clause.template bind<inj::NewInjection<Dependency, Scope, Ctor, std::allocator<Iface> > >();
   }
 
@@ -105,7 +105,7 @@ class InClause:
   friend class NamedClause<Dependency>;
   friend class i::Clause<InClause<Dependency, Scope> >;
 
-  static void complete(Clause & clause) {
+  void complete(Clause & clause) {
     clause.template throwLater<PartialBindingFor<Dependency> >();
   }
 
@@ -136,7 +136,7 @@ class NamedClause:
   friend class BindClause<Iface>;
   friend class i::Clause<NamedClause<Dependency> >;
 
-  static void complete(Clause & clause) {
+  void complete(Clause & clause) {
     clause.template throwLater<PartialBindingFor<Dependency> >();
   }
 
@@ -173,7 +173,7 @@ class BindClause:
   friend class Binder;
   friend class i::Clause<BindClause<Iface> >;
 
-  static void complete(Clause & clause) {
+  void complete(Clause & clause) {
     clause.template throwLater<PartialBindingFor<Named<Iface, Unnamed> > >();
   }
 
