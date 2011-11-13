@@ -16,7 +16,7 @@ namespace injections {
 class InjectorInjection:
   public Injection<Key<Injector>::Normalized, NoScope> {
 
-  typedef Binding<Key<Injector>::Normalized>::BindingPtr BindingPtr;
+  typedef ResolvedBinding<Key<Injector>::Normalized>::BindingPtr BindingPtr;
 
   /**
    * Provide the injector.

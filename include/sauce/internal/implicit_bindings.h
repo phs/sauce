@@ -15,17 +15,19 @@ namespace internal {
 
 struct ImplicitBindings;
 
+typedef Bindings<ImplicitBindings> ConcreteBindings;
+
 /**
  * Attempts to supply a Binding when the given Dependency is not found.
  */
 template<typename Dependency>
 struct ImplicitBinding {
-  typedef sauce::shared_ptr<Binding<Dependency> > BindingPtr;
+  typedef sauce::shared_ptr<ResolvedBinding<Dependency> > BindingPtr;
 
   /**
    * Attempt to supply a (unknown) Binding at provision time.
    */
-  static BindingPtr get(Bindings<ImplicitBindings> const &) {
+  static BindingPtr get(ConcreteBindings const &) {
     throw UnboundExceptionFor<Dependency>();
   }
 
@@ -40,7 +42,7 @@ struct ImplicitBindings {
    * Attempt to supply a (unknown) Binding at provision time.
    */
   template<typename Dependency>
-  sauce::shared_ptr<Binding<Dependency> > get(Bindings<ImplicitBindings> const & bindings) const {
+  sauce::shared_ptr<ResolvedBinding<Dependency> > get(ConcreteBindings const & bindings) const {
     return ImplicitBinding<Dependency>::get(bindings);
   }
 
@@ -51,8 +53,8 @@ struct ImplicitBindings {
  */
 template<>
 struct ImplicitBinding<Named<Injector, Unnamed> > {
-  typedef sauce::shared_ptr<Binding<Named<Injector, Unnamed> > > BindingPtr;
-  static BindingPtr get(Bindings<ImplicitBindings> const &) {
+  typedef sauce::shared_ptr<ResolvedBinding<Named<Injector, Unnamed> > > BindingPtr;
+  static BindingPtr get(ConcreteBindings const &) {
     BindingPtr binding(new inj::InjectorInjection());
     return binding;
   }
@@ -65,10 +67,10 @@ template<typename Dependency, typename Name>
 struct ImplicitBinding<Named<Provider<Dependency>, Name> > {
   typedef typename Key<Dependency>::Normalized Normalized;
   typedef Named<Provider<Dependency>, Name> ProviderDependency;
-  typedef typename Binding<ProviderDependency>::BindingPtr BindingPtr;
-  typedef typename Binding<Normalized>::BindingPtr ProvidedBindingPtr;
+  typedef typename ResolvedBinding<ProviderDependency>::BindingPtr BindingPtr;
+  typedef typename ResolvedBinding<Normalized>::BindingPtr ProvidedBindingPtr;
 
-  static BindingPtr get(Bindings<ImplicitBindings> const & bindings) {
+  static BindingPtr get(ConcreteBindings const & bindings) {
     ProvidedBindingPtr providedBinding(bindings.getBinding<Normalized>());
     BindingPtr binding(new inj::ImplicitProviderInjection<Dependency, Name>(providedBinding));
     return binding;

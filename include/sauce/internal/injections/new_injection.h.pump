@@ -33,7 +33,7 @@ class NewInjection<Dependency, Scope, Impl($As), Allocator>:
 
   typedef typename Key<Dependency>::Iface Iface;
   typedef typename Key<Dependency>::Ptr Ptr;
-  typedef typename Binding<Dependency>::BindingPtr BindingPtr;
+  typedef typename ResolvedBinding<Dependency>::BindingPtr BindingPtr;
   typedef typename Allocator::template rebind<Impl>::other ImplAllocator;
   typedef NewInjection<Dependency, Scope, Impl($As), Allocator> New;
   typedef DisposalDeleter<Iface, New> Deleter;

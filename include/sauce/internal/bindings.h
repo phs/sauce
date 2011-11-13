@@ -24,9 +24,9 @@ namespace internal {
  * This must be done carefully (with static_pointer_cast) in order to not lose the ref count.
  */
 template<typename Dependency>
-sauce::shared_ptr<Binding<Dependency> > resolve(OpaqueBindingPtr binding) {
+sauce::shared_ptr<ResolvedBinding<Dependency> > resolve(OpaqueBindingPtr binding) {
   assert((typeIdOf<Dependency>()) == binding->getKey());
-  return sauce::static_pointer_cast<Binding<Dependency> >(binding);
+  return sauce::static_pointer_cast<ResolvedBinding<Dependency> >(binding);
 }
 
 typedef void (*PendingThrow)();
@@ -77,17 +77,17 @@ public:
   /**
    * Insert the given binding.
    */
-  template<typename Binding_>
+  template<typename Binding>
   void put() {
-    OpaqueBindingPtr binding(new Binding_());
+    OpaqueBindingPtr binding(new Binding());
     bindingMap.insert(std::make_pair(binding->getKey(), binding));
     TypeId scopeKey = binding->getScopeKey();
     scopeMap.insert(std::make_pair(scopeKey, binding));
   }
 
   template<typename Dependency>
-  sauce::shared_ptr<Binding<Dependency> > getBinding() const {
-    sauce::shared_ptr<Binding<Dependency> > binding;
+  sauce::shared_ptr<ResolvedBinding<Dependency> > getBinding() const {
+    sauce::shared_ptr<ResolvedBinding<Dependency> > binding;
 
     BindingMap::const_iterator i = bindingMap.find(typeIdOf<Dependency>());
     if (i == bindingMap.end()) {
@@ -112,7 +112,7 @@ public:
    */
   template<typename Dependency>
   typename Key<Dependency>::Ptr get(sauce::shared_ptr<Injector> injector) const {
-    sauce::shared_ptr<Binding<Dependency> > binding(getBinding<Dependency>());
+    sauce::shared_ptr<ResolvedBinding<Dependency> > binding(getBinding<Dependency>());
     return binding->get(binding, injector);
   }
 

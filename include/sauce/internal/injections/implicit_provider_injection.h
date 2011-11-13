@@ -24,7 +24,7 @@ class ImplicitProviderInjection;
 template<typename Dependency, typename Name>
 class ImplicitProvider: public Provider<Dependency> {
   typedef typename Key<Dependency>::Normalized Normalized;
-  typedef typename Binding<Normalized>::BindingPtr BindingPtr;
+  typedef typename ResolvedBinding<Normalized>::BindingPtr BindingPtr;
 
   BindingPtr binding;
   InjectorPtr injector;
@@ -52,9 +52,9 @@ class ImplicitProviderInjection:
   public ProviderFriend {
 
   typedef typename Key<Dependency>::Normalized Normalized;
-  typedef typename Binding<Normalized>::BindingPtr ProvidedBindingPtr;
+  typedef typename ResolvedBinding<Normalized>::BindingPtr ProvidedBindingPtr;
   typedef Named<Provider<Dependency>, Name> ProviderDependency;
-  typedef typename Binding<ProviderDependency>::BindingPtr BindingPtr;
+  typedef typename ResolvedBinding<ProviderDependency>::BindingPtr BindingPtr;
   typedef typename Key<ProviderDependency>::Ptr ProviderPtr;
 
   ProviderPtr provide(BindingPtr, InjectorPtr injector) const {

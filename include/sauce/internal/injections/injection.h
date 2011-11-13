@@ -16,11 +16,11 @@ namespace injections {
  */
 template<typename Dependency, typename Scope>
 class Injection:
-  public Binding<Dependency>,
+  public ResolvedBinding<Dependency>,
   public InjectorFriend {
 
   typedef typename Key<Dependency>::Iface Iface;
-  typedef typename Binding<Dependency>::BindingPtr BindingPtr;
+  typedef typename ResolvedBinding<Dependency>::BindingPtr BindingPtr;
 
   /**
    * Provide an Iface.

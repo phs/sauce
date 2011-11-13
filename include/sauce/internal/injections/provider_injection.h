@@ -18,7 +18,7 @@ namespace injections {
  */
 template<typename Dependency, typename Scope, typename Provider>
 class ProviderInjection: public Injection<Dependency, Scope> {
-  typedef typename Binding<Dependency>::BindingPtr BindingPtr;
+  typedef typename ResolvedBinding<Dependency>::BindingPtr BindingPtr;
 
   void validateAcyclic(InjectorPtr injector, TypeIds & ids) const {
     this->template validateAcyclicHelper<Provider>(injector, ids);

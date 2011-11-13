@@ -61,10 +61,10 @@ struct OpaqueBinding {
  * A binding for an acknowledged interface.
  */
 template<typename Dependency>
-struct Binding:
+struct ResolvedBinding:
   public OpaqueBinding {
 
-  typedef sauce::shared_ptr<Binding<Dependency> > BindingPtr;
+  typedef sauce::shared_ptr<ResolvedBinding<Dependency> > BindingPtr;
 
   /**
    * The TypeId of the Dependency template parameter.
