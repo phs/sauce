@@ -16,7 +16,6 @@ class ImplicitBindings;
  * The accumulated state passed between Clauses that ultimately results in a new Binding.
  */
 class ClauseState {
-
   Bindings<ImplicitBindings> & bindings;
   PendingThrower & pendingThrower;
   OpaqueBindingPtr binding;
@@ -49,7 +48,6 @@ public:
   void clear() {
     pendingThrower.clear();
   }
-
 };
 
 typedef sauce::shared_ptr<ClauseState> ClauseStatePtr;
