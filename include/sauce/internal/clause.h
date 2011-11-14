@@ -48,7 +48,6 @@ public:
 
   void clear() {
     pendingThrower.clear();
-    binding.reset();
   }
 
 };
