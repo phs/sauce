@@ -50,11 +50,11 @@ public:
   sauce::shared_ptr<Iface> get(BindingPtr binding, InjectorPtr injector) const {
     sauce::shared_ptr<Iface> smartPointer;
 
-    bool unscoped = typeIdOf<Scope>() == typeIdOf<NoScope>();
-    if (unscoped || !probe<Dependency>(injector, smartPointer, typeIdOf<Scope>())) {
+    bool unscoped = getScopeKey() == typeIdOf<NoScope>();
+    if (unscoped || !probe<Dependency>(injector, smartPointer, getScopeKey())) {
       smartPointer = provide(binding, injector);
       if (!unscoped) {
-        cache<Dependency>(injector, smartPointer, typeIdOf<Scope>());
+        cache<Dependency>(injector, smartPointer, getScopeKey());
       }
     }
 
@@ -68,7 +68,7 @@ public:
    * do nothing.
    */
   void eagerlyProvide(OpaqueBindingPtr opaque, InjectorPtr injector) const {
-    if (typeIdOf<Scope>() != typeIdOf<NoScope>()) {
+    if (getScopeKey() != typeIdOf<NoScope>()) {
       BindingPtr binding = resolve<Dependency>(opaque);
       TypeIds ids;
       this->validateAcyclic(injector, ids);
