@@ -15,7 +15,7 @@ namespace injections {
 /**
  * A strategy for satisfying provisions for the given interface.
  */
-template<typename Dependency, typename Scope>
+template<typename Dependency>
 class Injection:
   public ResolvedBinding<Dependency>,
   public InjectorFriend {
