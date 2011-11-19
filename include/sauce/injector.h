@@ -93,26 +93,26 @@ class Injector {
     }
   }
 
-  template<typename Dependency, typename Scope>
-  void cache(typename i::Key<Dependency>::Ptr pointer) {
-    if (scopeKey == i::typeIdOf<Scope>()) {
+  template<typename Dependency>
+  void cache(typename i::Key<Dependency>::Ptr pointer, i::TypeId dependencyScopeKey) {
+    if (scopeKey == dependencyScopeKey) {
       scopeCache.template put<Dependency>(pointer);
     } else if (next.get() == NULL) {
-      i::typeIdOf<Scope>().throwOutOfScopeException();
+      dependencyScopeKey.throwOutOfScopeException();
     } else {
-      next->cache<Dependency, Scope>(pointer);
+      next->cache<Dependency>(pointer, dependencyScopeKey);
     }
   }
 
-  template<typename Dependency, typename Scope>
-  bool probe(typename i::Key<Dependency>::Ptr & out) const {
-    if (scopeKey == i::typeIdOf<Scope>()) {
+  template<typename Dependency>
+  bool probe(typename i::Key<Dependency>::Ptr & out, i::TypeId dependencyScopeKey) const {
+    if (scopeKey == dependencyScopeKey) {
       return scopeCache.template get<Dependency>(out);
     } else if (next.get() == NULL) {
-      i::typeIdOf<Scope>().throwOutOfScopeException();
+      dependencyScopeKey.throwOutOfScopeException();
       return false; // never reached
     } else {
-      return next->probe<Dependency, Scope>(out);
+      return next->probe<Dependency>(out, dependencyScopeKey);
     }
   }
 
@@ -187,14 +187,14 @@ protected:
     return injector->get<Dependency>(injector);
   }
 
-  template<typename Dependency, typename Scope>
-  void cache(InjectorPtr injector, typename Key<Dependency>::Ptr pointer) const {
-    injector->template cache<Dependency, Scope>(pointer);
+  template<typename Dependency>
+  void cache(InjectorPtr injector, typename Key<Dependency>::Ptr pointer, i::TypeId scope) const {
+    injector->template cache<Dependency>(pointer, scope);
   }
 
-  template<typename Dependency, typename Scope>
-  bool probe(InjectorPtr injector, typename Key<Dependency>::Ptr & out) const {
-    return injector->template probe<Dependency, Scope>(out);
+  template<typename Dependency>
+  bool probe(InjectorPtr injector, typename Key<Dependency>::Ptr & out, i::TypeId scope) const {
+    return injector->template probe<Dependency>(out, scope);
   }
 
 };

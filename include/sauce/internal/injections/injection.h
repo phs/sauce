@@ -51,10 +51,10 @@ public:
     sauce::shared_ptr<Iface> smartPointer;
 
     bool unscoped = typeIdOf<Scope>() == typeIdOf<NoScope>();
-    if (unscoped || !probe<Dependency, Scope>(injector, smartPointer)) {
+    if (unscoped || !probe<Dependency>(injector, smartPointer, typeIdOf<Scope>())) {
       smartPointer = provide(binding, injector);
       if (!unscoped) {
-        cache<Dependency, Scope>(injector, smartPointer);
+        cache<Dependency>(injector, smartPointer, typeIdOf<Scope>());
       }
     }
 
