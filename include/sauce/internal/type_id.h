@@ -14,20 +14,63 @@ namespace internal {
  * Concretely, they are function pointers: the total ordering is that of the
  * address space.  No RTTI (i.e. typeid) is used.
  */
-typedef void (*TypeId)();
+typedef void (*TypeSignature)();
 
 /**
- * The template that generates TypeIds.
+ * The template that generates TypeSignatures.
  */
-template<typename Dependency>
-void TypeIdFactory() {}
+template<typename Type>
+void TypeSignatureFactory() {}
 
 /**
- * A helper that encapsulates getting TypeIds.
+ * A TypeSignature equipped with specific helper methods dealing in the hidden type.
  */
-template<typename Dependency>
+class TypeId {
+  TypeSignature signature;
+
+  TypeId():
+    signature(NULL) {}
+
+protected:
+
+  TypeId(TypeSignature const & signature):
+    signature(signature) {}
+
+public:
+
+  bool operator==(TypeId const & id) const {
+    return signature == id.signature;
+  }
+
+  bool operator!=(TypeId const & id) const {
+    return signature != id.signature;
+  }
+
+  bool operator<(TypeId const & id) const {
+    return signature < id.signature;
+  }
+};
+
+template<typename Type>
+TypeId typeIdOf();
+
+/**
+ * The TypeId derived class that acknowledges the hidden type.
+ */
+template<typename Type>
+class ResolvedTypeId: public TypeId {
+  friend TypeId typeIdOf<Type>();
+
+  ResolvedTypeId():
+    TypeId(&TypeSignatureFactory<Type>) {}
+};
+
+/**
+ * How one gets TypeIds.
+ */
+template<typename Type>
 TypeId typeIdOf() {
-  return &TypeIdFactory<Dependency>;
+  return ResolvedTypeId<Type>();
 }
 
 /**
