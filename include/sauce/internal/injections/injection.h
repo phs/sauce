@@ -30,14 +30,14 @@ class Injection:
    */
   virtual sauce::shared_ptr<Iface> provide(BindingPtr, InjectorPtr) const = 0;
 
-public:
-
   /**
    * The TypeId of the Scope template parameter.
    */
   virtual TypeId getScopeKey() const {
     return typeIdOf<Scope>();
   }
+
+public:
 
   /**
    * Provide an Iface.
