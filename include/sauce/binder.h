@@ -89,7 +89,7 @@ class InClause: public i::Clause {
   friend class NamedClause<Dependency>;
 
   void onComplete() {
-    throwLater(PartialBindingFor<Dependency>());
+    throwLater(PartialBindingExceptionFor<Dependency>());
   }
 
 public:
@@ -115,7 +115,7 @@ class NamedClause: public i::Clause {
   friend class BindClause<Iface>;
 
   void onComplete() {
-    throwLater(PartialBindingFor<Dependency>());
+    throwLater(PartialBindingExceptionFor<Dependency>());
   }
 
 public:
@@ -146,7 +146,7 @@ class BindClause: public i::Clause {
   friend class Binder;
 
   void onComplete() {
-    throwLater(PartialBindingFor<Named<Iface, Unnamed> >());
+    throwLater(PartialBindingExceptionFor<Named<Iface, Unnamed> >());
   }
 
 public:

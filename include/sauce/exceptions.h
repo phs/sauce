@@ -42,8 +42,8 @@ struct PartialBindingException: Exception {
  * Thrown when a binding hasn't been completely specified for the given interface.
  */
 template<typename Dependency>
-struct PartialBindingFor: PartialBindingException {
-  PartialBindingFor(): PartialBindingException() {}
+struct PartialBindingExceptionFor: PartialBindingException {
+  PartialBindingExceptionFor(): PartialBindingException() {}
 };
 
 /**
