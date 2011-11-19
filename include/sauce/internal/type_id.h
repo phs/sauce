@@ -1,6 +1,8 @@
 #ifndef SAUCE_INTERNAL_TYPE_ID_H_
 #define SAUCE_INTERNAL_TYPE_ID_H_
 
+#include <sauce/exceptions.h>
+
 namespace sauce {
 namespace internal {
 
@@ -49,6 +51,13 @@ public:
   bool operator<(TypeId const & id) const {
     return signature < id.signature;
   }
+
+  /**
+   * Throw an OutOfScopeException appropriate for the hidden type, assuming it is a Scope.
+   */
+  virtual void throwOutOfScopeException() const {
+    throw OutOfScopeException();
+  }
 };
 
 template<typename Type>
@@ -63,6 +72,12 @@ class ResolvedTypeId: public TypeId {
 
   ResolvedTypeId():
     TypeId(&TypeSignatureFactory<Type>) {}
+
+public:
+
+  void throwOutOfScopeException() const {
+    throw OutOfScopeExceptionFor<Type>();
+  }
 };
 
 /**
