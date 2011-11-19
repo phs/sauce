@@ -10,6 +10,6 @@
 <area shape="rect" id="node9" href="$structsauce_1_1_already_in_scope_exception_for.html" title="Thrown when re&#45;entering the given scope, which is already open." alt="" coords="874,5,1185,32"/>
 <area shape="rect" id="node13" href="$structsauce_1_1_circular_dependency_exception_for.html" title="Thrown when a dependency cycle is found for the given interface." alt="" coords="843,56,1215,83"/>
 <area shape="rect" id="node19" href="$structsauce_1_1_out_of_scope_exception_for.html" title="Thrown when a provision is requested outside of its given, bound scope." alt="" coords="884,157,1175,184"/>
-<area shape="rect" id="node23" href="$structsauce_1_1_partial_binding_for.html" title="Thrown when a binding hasn&#39;t been completely specified for the given interface." alt="" coords="894,208,1165,235"/>
+<area shape="rect" id="node23" href="$structsauce_1_1_partial_binding_exception_for.html" title="Thrown when a binding hasn&#39;t been completely specified for the given interface." alt="" coords="863,208,1196,235"/>
 <area shape="rect" id="node27" href="$structsauce_1_1_unbound_exception_for.html" title="Thrown when a binding cannot be found for the given interface." alt="" coords="877,259,1181,285"/>
 </map>

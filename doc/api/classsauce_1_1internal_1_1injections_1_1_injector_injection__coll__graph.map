@@ -1,5 +1,5 @@
 <map id="G" name="G">
-<area shape="rect" id="node2" href="$classsauce_1_1internal_1_1injections_1_1_injection.html" title="sauce::internal::injections::Injection\&lt; Key\&lt; Injector \&gt;::Normalized, NoScope \&gt;" alt="" coords="731,31,1227,57"/>
+<area shape="rect" id="node2" href="$classsauce_1_1internal_1_1injections_1_1_injection.html" title="sauce::internal::injections::Injection\&lt; Key\&lt; Injector \&gt;::Normalized \&gt;" alt="" coords="731,31,1160,57"/>
 <area shape="rect" id="node4" href="$structsauce_1_1internal_1_1_resolved_binding.html" title="sauce::internal::ResolvedBinding\&lt; Key\&lt; Injector \&gt;::Normalized \&gt;" alt="" coords="267,5,682,32"/>
 <area shape="rect" id="node6" href="$structsauce_1_1internal_1_1_opaque_binding.html" title="An opaque binding." alt="" coords="5,5,219,32"/>
 <area shape="rect" id="node8" href="$classsauce_1_1internal_1_1_injector_friend.html" title="sauce::internal::InjectorFriend" alt="" coords="373,56,576,83"/>

@@ -1,5 +1,5 @@
 <map id="G" name="G">
-<area shape="rect" id="node2" href="$classsauce_1_1internal_1_1injections_1_1_injection.html" title="A strategy for satisfying provisions for the given interface." alt="" coords="117,155,504,181"/>
+<area shape="rect" id="node2" href="$classsauce_1_1internal_1_1injections_1_1_injection.html" title="A strategy for satisfying provisions for the given interface." alt="" coords="141,155,480,181"/>
 <area shape="rect" id="node4" href="$structsauce_1_1internal_1_1_resolved_binding.html" title="A binding for an acknowledged interface." alt="" coords="7,80,329,107"/>
 <area shape="rect" id="node6" href="$structsauce_1_1internal_1_1_opaque_binding.html" title="An opaque binding." alt="" coords="61,5,275,32"/>
 <area shape="rect" id="node8" href="$classsauce_1_1internal_1_1_injector_friend.html" title="sauce::internal::InjectorFriend" alt="" coords="353,80,556,107"/>

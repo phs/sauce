@@ -120,7 +120,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <a name="l00045"></a>00045 
 <a name="l00049"></a>00049 <span class="keyword">template</span>&lt;<span class="keyword">typename</span> Dependency, <span class="keyword">typename</span> Name&gt;
 <a name="l00050"></a><a class="code" href="classsauce_1_1internal_1_1injections_1_1_implicit_provider_injection.html">00050</a> <span class="keyword">class </span><a class="code" href="classsauce_1_1internal_1_1injections_1_1_implicit_provider_injection.html" title="An injection that provides Providers for an already-bound dependency.">ImplicitProviderInjection</a>:
-<a name="l00051"></a>00051   <span class="keyword">public</span> <a class="code" href="classsauce_1_1internal_1_1injections_1_1_injection.html" title="A strategy for satisfying provisions for the given interface.">Injection</a>&lt;Named&lt;Provider&lt;Dependency&gt;, Name&gt;, NoScope&gt;,
+<a name="l00051"></a>00051   <span class="keyword">public</span> <a class="code" href="classsauce_1_1internal_1_1injections_1_1_injection.html" title="A strategy for satisfying provisions for the given interface.">Injection</a>&lt;Named&lt;Provider&lt;Dependency&gt;, Name&gt; &gt;,
 <a name="l00052"></a>00052   <span class="keyword">public</span> <a class="code" href="structsauce_1_1internal_1_1_provider_friend.html" title="A friend of the Provider base type.">ProviderFriend</a> {
 <a name="l00053"></a>00053 
 <a name="l00054"></a>00054   <span class="keyword">typedef</span> <span class="keyword">typename</span> <a class="code" href="classsauce_1_1_named.html" title="Wrap dependency requests with Named to choose one of several named alternatives.">Key&lt;Dependency&gt;::Normalized</a> <a class="code" href="classsauce_1_1_named.html" title="Wrap dependency requests with Named to choose one of several named alternatives.">Normalized</a>;
@@ -135,26 +135,29 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <a name="l00063"></a>00063     <span class="keywordflow">return</span> provider;
 <a name="l00064"></a>00064   }
 <a name="l00065"></a>00065 
-<a name="l00066"></a>00066   ProvidedBindingPtr providedBinding;
-<a name="l00067"></a>00067 
-<a name="l00068"></a>00068 <span class="keyword">public</span>:
+<a name="l00066"></a>00066   <a class="code" href="classsauce_1_1internal_1_1_type_id.html" title="A TypeSignature equipped with specific helper methods dealing in the hidden type.">TypeId</a> getScopeKey()<span class="keyword"> const </span>{
+<a name="l00067"></a>00067     <span class="keywordflow">return</span> typeIdOf&lt;NoScope&gt;();
+<a name="l00068"></a>00068   }
 <a name="l00069"></a>00069 
-<a name="l00070"></a>00070   <a class="code" href="classsauce_1_1internal_1_1injections_1_1_implicit_provider_injection.html" title="An injection that provides Providers for an already-bound dependency.">ImplicitProviderInjection</a>(ProvidedBindingPtr providedBinding):
-<a name="l00071"></a>00071     <a class="code" href="classsauce_1_1internal_1_1injections_1_1_injection.html" title="A strategy for satisfying provisions for the given interface.">Injection&lt;Named&lt;Provider&lt;Dependency&gt;</a>, Name&gt;, <a class="code" href="classsauce_1_1_no_scope.html" title="The scope of unscoped bindings.">NoScope</a>&gt;(),
-<a name="l00072"></a>00072     <a class="code" href="structsauce_1_1internal_1_1_provider_friend.html" title="A friend of the Provider base type.">ProviderFriend</a>(),
-<a name="l00073"></a>00073     providedBinding(providedBinding) {}
-<a name="l00074"></a>00074 
-<a name="l00075"></a>00075 };
-<a name="l00076"></a>00076 
-<a name="l00077"></a>00077 }
-<a name="l00078"></a>00078 }
+<a name="l00070"></a>00070   ProvidedBindingPtr providedBinding;
+<a name="l00071"></a>00071 
+<a name="l00072"></a>00072 <span class="keyword">public</span>:
+<a name="l00073"></a>00073 
+<a name="l00074"></a>00074   <a class="code" href="classsauce_1_1internal_1_1injections_1_1_implicit_provider_injection.html" title="An injection that provides Providers for an already-bound dependency.">ImplicitProviderInjection</a>(ProvidedBindingPtr providedBinding):
+<a name="l00075"></a>00075     <a class="code" href="classsauce_1_1internal_1_1injections_1_1_injection.html" title="A strategy for satisfying provisions for the given interface.">Injection&lt;Named&lt;Provider&lt;Dependency&gt;</a>, Name&gt; &gt;(),
+<a name="l00076"></a>00076     <a class="code" href="structsauce_1_1internal_1_1_provider_friend.html" title="A friend of the Provider base type.">ProviderFriend</a>(),
+<a name="l00077"></a>00077     providedBinding(providedBinding) {}
+<a name="l00078"></a>00078 };
 <a name="l00079"></a>00079 
-<a name="l00080"></a>00080 <span class="keyword">namespace </span>i = ::sauce::internal;
-<a name="l00081"></a>00081 <span class="keyword">namespace </span>inj = ::sauce::internal::injections;
+<a name="l00080"></a>00080 }
+<a name="l00081"></a>00081 }
 <a name="l00082"></a>00082 
-<a name="l00083"></a>00083 }
-<a name="l00084"></a>00084 
-<a name="l00085"></a>00085 <span class="preprocessor">#endif // SAUCE_INTERNAL_INJECTIONS_IMPLICIT_PROVIDER_INJECTION_H_</span>
+<a name="l00083"></a>00083 <span class="keyword">namespace </span>i = ::sauce::internal;
+<a name="l00084"></a>00084 <span class="keyword">namespace </span>inj = ::sauce::internal::injections;
+<a name="l00085"></a>00085 
+<a name="l00086"></a>00086 }
+<a name="l00087"></a>00087 
+<a name="l00088"></a>00088 <span class="preprocessor">#endif // SAUCE_INTERNAL_INJECTIONS_IMPLICIT_PROVIDER_INJECTION_H_</span>
 </pre></div></div>
 </div>
 <!-- window showing the filter options -->
@@ -162,7 +165,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
      onmouseover="return searchBox.OnSearchSelectShow()"
      onmouseout="return searchBox.OnSearchSelectHide()"
      onkeydown="return searchBox.OnSearchSelectKey(event)">
-<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Typedefs</a></div>
+<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Typedefs</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Friends</a></div>
 
 <!-- iframe showing the search results (closed by default) -->
 <div id="MSearchResultsWindow">
