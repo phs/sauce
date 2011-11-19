@@ -57,6 +57,9 @@ class NewInjection<Dependency, Scope, Impl(), Allocator>:
     allocator.deallocate(impl, 1);
   }
 
+  TypeId getScopeKey() const {
+    return typeIdOf<Scope>();
+  }
 };
 
 template<typename Dependency, typename Scope, typename Impl,
@@ -100,6 +103,9 @@ class NewInjection<Dependency, Scope, Impl(A1), Allocator>:
     allocator.deallocate(impl, 1);
   }
 
+  TypeId getScopeKey() const {
+    return typeIdOf<Scope>();
+  }
 };
 
 template<typename Dependency, typename Scope, typename Impl,
@@ -145,6 +151,9 @@ class NewInjection<Dependency, Scope, Impl(A1, A2), Allocator>:
     allocator.deallocate(impl, 1);
   }
 
+  TypeId getScopeKey() const {
+    return typeIdOf<Scope>();
+  }
 };
 
 template<typename Dependency, typename Scope, typename Impl,
@@ -192,6 +201,9 @@ class NewInjection<Dependency, Scope, Impl(A1, A2, A3), Allocator>:
     allocator.deallocate(impl, 1);
   }
 
+  TypeId getScopeKey() const {
+    return typeIdOf<Scope>();
+  }
 };
 
 template<typename Dependency, typename Scope, typename Impl,
@@ -241,6 +253,9 @@ class NewInjection<Dependency, Scope, Impl(A1, A2, A3, A4), Allocator>:
     allocator.deallocate(impl, 1);
   }
 
+  TypeId getScopeKey() const {
+    return typeIdOf<Scope>();
+  }
 };
 
 template<typename Dependency, typename Scope, typename Impl,
@@ -294,6 +309,9 @@ class NewInjection<Dependency, Scope, Impl(A1, A2, A3, A4, A5), Allocator>:
     allocator.deallocate(impl, 1);
   }
 
+  TypeId getScopeKey() const {
+    return typeIdOf<Scope>();
+  }
 };
 
 template<typename Dependency, typename Scope, typename Impl,
@@ -349,6 +367,9 @@ class NewInjection<Dependency, Scope, Impl(A1, A2, A3, A4, A5, A6), Allocator>:
     allocator.deallocate(impl, 1);
   }
 
+  TypeId getScopeKey() const {
+    return typeIdOf<Scope>();
+  }
 };
 
 template<typename Dependency, typename Scope, typename Impl,
@@ -407,6 +428,9 @@ class NewInjection<Dependency, Scope, Impl(A1, A2, A3, A4, A5, A6, A7),
     allocator.deallocate(impl, 1);
   }
 
+  TypeId getScopeKey() const {
+    return typeIdOf<Scope>();
+  }
 };
 
 template<typename Dependency, typename Scope, typename Impl,
@@ -467,6 +491,9 @@ class NewInjection<Dependency, Scope, Impl(A1, A2, A3, A4, A5, A6, A7, A8),
     allocator.deallocate(impl, 1);
   }
 
+  TypeId getScopeKey() const {
+    return typeIdOf<Scope>();
+  }
 };
 
 template<typename Dependency, typename Scope, typename Impl,
@@ -529,6 +556,9 @@ class NewInjection<Dependency, Scope, Impl(A1, A2, A3, A4, A5, A6, A7, A8, A9),
     allocator.deallocate(impl, 1);
   }
 
+  TypeId getScopeKey() const {
+    return typeIdOf<Scope>();
+  }
 };
 
 template<typename Dependency, typename Scope, typename Impl,
@@ -595,6 +625,9 @@ class NewInjection<Dependency, Scope, Impl(A1, A2, A3, A4, A5, A6, A7, A8, A9,
     allocator.deallocate(impl, 1);
   }
 
+  TypeId getScopeKey() const {
+    return typeIdOf<Scope>();
+  }
 };
 
 }

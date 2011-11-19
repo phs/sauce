@@ -27,6 +27,9 @@ class InjectorInjection:
     return injector;
   }
 
+  TypeId getScopeKey() const {
+    return typeIdOf<NoScope>();
+  }
 };
 
 }

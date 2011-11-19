@@ -80,6 +80,9 @@ class NewInjection<Dependency, Scope, Impl($As), Allocator>:
     allocator.deallocate(impl, 1);
   }
 
+  TypeId getScopeKey() const {
+    return typeIdOf<Scope>();
+  }
 };
 
 ]]
