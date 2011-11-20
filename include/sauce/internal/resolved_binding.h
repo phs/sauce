@@ -16,15 +16,14 @@ namespace internal {
  * A binding for an acknowledged interface.
  */
 template<typename Dependency>
-struct ResolvedBinding:
-  public OpaqueBinding {
+struct ResolvedBinding: public OpaqueBinding {
 
   typedef sauce::shared_ptr<ResolvedBinding<Dependency> > BindingPtr;
 
   /**
    * The TypeId of the Dependency template parameter.
    */
-  virtual TypeId getKey() const {
+  TypeId getKey() const {
     return typeIdOf<Dependency>();
   }
 
