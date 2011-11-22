@@ -48,7 +48,7 @@ public:
  */
 template<typename Dependency, typename Name>
 class ImplicitProviderInjection:
-  public Injection<Named<Provider<Dependency>, Name> >,
+  public Injection<Named<Provider<Dependency>, Name>, NoScope>,
   public ProviderFriend {
 
   typedef typename Key<Dependency>::Normalized Normalized;
@@ -72,7 +72,7 @@ class ImplicitProviderInjection:
 public:
 
   ImplicitProviderInjection(ProvidedBindingPtr providedBinding):
-    Injection<Named<Provider<Dependency>, Name> >(),
+    Injection<Named<Provider<Dependency>, Name>, NoScope>(),
     ProviderFriend(),
     providedBinding(providedBinding) {}
 };

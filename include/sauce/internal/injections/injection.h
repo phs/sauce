@@ -16,9 +16,9 @@ namespace injections {
 /**
  * A strategy for satisfying provisions for the given interface.
  */
-template<typename Dependency>
+template<typename Dependency, typename Scope>
 class Injection:
-  public InjectionBinding<Dependency>,
+  public InjectionBinding<Dependency, Scope>,
   public InjectorFriend {
 
   typedef typename Key<Dependency>::Iface Iface;

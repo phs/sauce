@@ -9,7 +9,7 @@ namespace internal {
 /**
  * A binding that uses an Injection to satisfy dependencies.
  */
-template<typename Dependency>
+template<typename Dependency, typename Scope>
 struct InjectionBinding: public ResolvedBinding<Dependency> {};
 
 }
