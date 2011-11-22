@@ -4,6 +4,7 @@
 #include <sauce/injector.h>
 #include <sauce/memory.h>
 #include <sauce/internal/opaque_binding.h>
+#include <sauce/internal/resolved_binding.h>
 #include <sauce/internal/injection_binding.h>
 #include <sauce/internal/key.h>
 #include <sauce/internal/type_id.h>
@@ -21,7 +22,7 @@ class Injection:
   public InjectorFriend {
 
   typedef typename Key<Dependency>::Iface Iface;
-  typedef typename InjectionBinding<Dependency>::BindingPtr BindingPtr;
+  typedef typename ResolvedBinding<Dependency>::BindingPtr BindingPtr;
 
   /**
    * Provide an Iface.

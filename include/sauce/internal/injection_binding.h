@@ -10,11 +10,7 @@ namespace internal {
  * A binding that uses an Injection to satisfy dependencies.
  */
 template<typename Dependency>
-struct InjectionBinding: public ResolvedBinding<Dependency> {
-
-  typedef sauce::shared_ptr<ResolvedBinding<Dependency> > BindingPtr;
-
-};
+struct InjectionBinding: public ResolvedBinding<Dependency> {};
 
 }
 
