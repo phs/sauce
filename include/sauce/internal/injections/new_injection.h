@@ -56,10 +56,6 @@ class NewInjection<Dependency, Scope, Impl(), Allocator>:
     impl->~Impl(); // Must not throw
     allocator.deallocate(impl, 1);
   }
-
-  TypeId getScopeKey() const {
-    return typeIdOf<Scope>();
-  }
 };
 
 template<typename Dependency, typename Scope, typename Impl,
@@ -101,10 +97,6 @@ class NewInjection<Dependency, Scope, Impl(A1), Allocator>:
     Impl * impl = static_cast<Impl *>(iface);
     impl->~Impl(); // Must not throw
     allocator.deallocate(impl, 1);
-  }
-
-  TypeId getScopeKey() const {
-    return typeIdOf<Scope>();
   }
 };
 
@@ -149,10 +141,6 @@ class NewInjection<Dependency, Scope, Impl(A1, A2), Allocator>:
     Impl * impl = static_cast<Impl *>(iface);
     impl->~Impl(); // Must not throw
     allocator.deallocate(impl, 1);
-  }
-
-  TypeId getScopeKey() const {
-    return typeIdOf<Scope>();
   }
 };
 
@@ -199,10 +187,6 @@ class NewInjection<Dependency, Scope, Impl(A1, A2, A3), Allocator>:
     Impl * impl = static_cast<Impl *>(iface);
     impl->~Impl(); // Must not throw
     allocator.deallocate(impl, 1);
-  }
-
-  TypeId getScopeKey() const {
-    return typeIdOf<Scope>();
   }
 };
 
@@ -251,10 +235,6 @@ class NewInjection<Dependency, Scope, Impl(A1, A2, A3, A4), Allocator>:
     Impl * impl = static_cast<Impl *>(iface);
     impl->~Impl(); // Must not throw
     allocator.deallocate(impl, 1);
-  }
-
-  TypeId getScopeKey() const {
-    return typeIdOf<Scope>();
   }
 };
 
@@ -307,10 +287,6 @@ class NewInjection<Dependency, Scope, Impl(A1, A2, A3, A4, A5), Allocator>:
     Impl * impl = static_cast<Impl *>(iface);
     impl->~Impl(); // Must not throw
     allocator.deallocate(impl, 1);
-  }
-
-  TypeId getScopeKey() const {
-    return typeIdOf<Scope>();
   }
 };
 
@@ -365,10 +341,6 @@ class NewInjection<Dependency, Scope, Impl(A1, A2, A3, A4, A5, A6), Allocator>:
     Impl * impl = static_cast<Impl *>(iface);
     impl->~Impl(); // Must not throw
     allocator.deallocate(impl, 1);
-  }
-
-  TypeId getScopeKey() const {
-    return typeIdOf<Scope>();
   }
 };
 
@@ -426,10 +398,6 @@ class NewInjection<Dependency, Scope, Impl(A1, A2, A3, A4, A5, A6, A7),
     Impl * impl = static_cast<Impl *>(iface);
     impl->~Impl(); // Must not throw
     allocator.deallocate(impl, 1);
-  }
-
-  TypeId getScopeKey() const {
-    return typeIdOf<Scope>();
   }
 };
 
@@ -489,10 +457,6 @@ class NewInjection<Dependency, Scope, Impl(A1, A2, A3, A4, A5, A6, A7, A8),
     Impl * impl = static_cast<Impl *>(iface);
     impl->~Impl(); // Must not throw
     allocator.deallocate(impl, 1);
-  }
-
-  TypeId getScopeKey() const {
-    return typeIdOf<Scope>();
   }
 };
 
@@ -554,10 +518,6 @@ class NewInjection<Dependency, Scope, Impl(A1, A2, A3, A4, A5, A6, A7, A8, A9),
     Impl * impl = static_cast<Impl *>(iface);
     impl->~Impl(); // Must not throw
     allocator.deallocate(impl, 1);
-  }
-
-  TypeId getScopeKey() const {
-    return typeIdOf<Scope>();
   }
 };
 
@@ -623,10 +583,6 @@ class NewInjection<Dependency, Scope, Impl(A1, A2, A3, A4, A5, A6, A7, A8, A9,
     Impl * impl = static_cast<Impl *>(iface);
     impl->~Impl(); // Must not throw
     allocator.deallocate(impl, 1);
-  }
-
-  TypeId getScopeKey() const {
-    return typeIdOf<Scope>();
   }
 };
 

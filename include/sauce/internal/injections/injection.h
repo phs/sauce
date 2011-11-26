@@ -34,7 +34,9 @@ class Injection:
   /**
    * The TypeId of the Scope template parameter.
    */
-  virtual TypeId getScopeKey() const = 0;
+  TypeId getScopeKey() const {
+    return typeIdOf<Scope>();
+  }
 
 public:
 

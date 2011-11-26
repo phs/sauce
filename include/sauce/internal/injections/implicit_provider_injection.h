@@ -63,10 +63,6 @@ class ImplicitProviderInjection:
     return provider;
   }
 
-  TypeId getScopeKey() const {
-    return typeIdOf<NoScope>();
-  }
-
   ProvidedBindingPtr providedBinding;
 
 public:

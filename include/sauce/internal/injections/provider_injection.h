@@ -27,10 +27,6 @@ class ProviderInjection: public Injection<Dependency, Scope> {
   typename Key<Dependency>::Ptr provide(BindingPtr, InjectorPtr injector) const {
     return this->template getHelper<Provider>(injector)->get();
   }
-
-  TypeId getScopeKey() const {
-    return typeIdOf<Scope>();
-  }
 };
 
 }

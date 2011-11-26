@@ -79,10 +79,6 @@ class NewInjection<Dependency, Scope, Impl($As), Allocator>:
     impl->~Impl(); // Must not throw
     allocator.deallocate(impl, 1);
   }
-
-  TypeId getScopeKey() const {
-    return typeIdOf<Scope>();
-  }
 };
 
 ]]

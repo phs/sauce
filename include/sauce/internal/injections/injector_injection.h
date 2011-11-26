@@ -26,11 +26,6 @@ class InjectorInjection:
   InjectorPtr provide(BindingPtr, InjectorPtr injector) const {
     return injector;
   }
-
-  // TODO: hoist these, restore use of Scope template parameter in base class.
-  TypeId getScopeKey() const {
-    return typeIdOf<NoScope>();
-  }
 };
 
 }
