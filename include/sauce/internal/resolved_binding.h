@@ -18,6 +18,7 @@ namespace internal {
 template<typename Dependency>
 struct ResolvedBinding: public OpaqueBinding {
 
+  typedef typename Key<Dependency>::Ptr IfacePtr;
   typedef sauce::shared_ptr<ResolvedBinding<Dependency> > BindingPtr;
 
   /**
@@ -34,7 +35,7 @@ struct ResolvedBinding: public OpaqueBinding {
    *
    * The binding pointer must point to this same binding instance.
    */
-  virtual typename Key<Dependency>::Ptr get(BindingPtr, sauce::shared_ptr<Injector>) const = 0;
+  virtual IfacePtr get(BindingPtr, sauce::shared_ptr<Injector>) const = 0;
 
 };
 
