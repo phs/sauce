@@ -21,7 +21,7 @@ class Injection:
   public InjectionBinding<Dependency, Scope>,
   public InjectorFriend {
 
-  typedef typename Key<Dependency>::Iface Iface;
+  typedef typename Key<Dependency>::Ptr IfacePtr;
   typedef typename ResolvedBinding<Dependency>::BindingPtr BindingPtr;
 
   /**
@@ -29,7 +29,7 @@ class Injection:
    *
    * The strategy used is left to derived types.
    */
-  virtual sauce::shared_ptr<Iface> provide(BindingPtr, InjectorPtr) const = 0;
+  virtual IfacePtr provide(BindingPtr, InjectorPtr) const = 0;
 
   /**
    * The TypeId of the Scope template parameter.
@@ -48,8 +48,8 @@ public:
    *
    * Derived classes should not override get(), but rather provide().
    */
-  sauce::shared_ptr<Iface> get(BindingPtr binding, InjectorPtr injector) const {
-    sauce::shared_ptr<Iface> smartPointer;
+  IfacePtr get(BindingPtr binding, InjectorPtr injector) const {
+    IfacePtr smartPointer;
 
     bool unscoped = getScopeKey() == typeIdOf<NoScope>();
     if (unscoped || !probe<Dependency>(injector, smartPointer, getScopeKey())) {
