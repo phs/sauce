@@ -37,7 +37,8 @@ public:
 
   template<typename BoundInjection>
   void bind() {
-    binding.reset(new BoundInjection());
+    typename BoundInjection::InjectionPtr injection(new BoundInjection());
+    binding = injection;
   }
 
   template<typename Exception>
