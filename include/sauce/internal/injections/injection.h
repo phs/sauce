@@ -40,6 +40,8 @@ class Injection:
 
 public:
 
+  typedef sauce::shared_ptr<Injection<Dependency, Scope> > InjectionPtr;
+
   /**
    * Provide an Iface.
    *
