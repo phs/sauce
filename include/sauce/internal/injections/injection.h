@@ -18,8 +18,7 @@ namespace injections {
  */
 template<typename _Dependency, typename _Scope>
 struct Injection:
-  public InjectionBinding<_Dependency, _Scope>,
-  public InjectorFriend {
+  public InjectionBinding<_Dependency, _Scope> {
 
   typedef _Dependency Dependency;
   typedef _Scope Scope;
@@ -36,37 +35,6 @@ private:
    * The strategy used is left to derived types.
    */
   virtual IfacePtr provide(BindingPtr, InjectorPtr) const = 0;
-
-public:
-
-  /**
-   * The TypeId of the Scope template parameter.
-   */
-  TypeId getScopeKey() const {
-    return typeIdOf<Scope>();
-  }
-
-  /**
-   * Provide an Iface.
-   *
-   * If a Scope is configured for the injection, this checks the scope cache first before calling
-   * provide(), and caches the new Iface on miss.
-   *
-   * Derived classes should not override get(), but rather provide().
-   */
-  IfacePtr get(BindingPtr binding, InjectorPtr injector) const {
-    IfacePtr smartPointer;
-
-    bool unscoped = getScopeKey() == typeIdOf<NoScope>();
-    if (unscoped || !probe<Dependency>(injector, smartPointer, getScopeKey())) {
-      smartPointer = provide(binding, injector);
-      if (!unscoped) {
-        cache<Dependency>(injector, smartPointer, getScopeKey());
-      }
-    }
-
-    return smartPointer;
-  }
 
 };
 
