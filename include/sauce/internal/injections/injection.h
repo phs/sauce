@@ -16,10 +16,16 @@ namespace injections {
 /**
  * A strategy for satisfying provisions for the given interface.
  */
-template<typename Dependency, typename Scope>
-class Injection:
-  public InjectionBinding<Dependency, Scope>,
+template<typename _Dependency, typename _Scope>
+struct Injection:
+  public InjectionBinding<_Dependency, _Scope>,
   public InjectorFriend {
+
+  typedef _Dependency Dependency;
+  typedef _Scope Scope;
+  typedef sauce::shared_ptr<Injection<Dependency, Scope> > InjectionPtr;
+
+private:
 
   typedef typename Key<Dependency>::Ptr IfacePtr;
   typedef typename ResolvedBinding<Dependency>::BindingPtr BindingPtr;
@@ -39,8 +45,6 @@ class Injection:
   }
 
 public:
-
-  typedef sauce::shared_ptr<Injection<Dependency, Scope> > InjectionPtr;
 
   /**
    * Provide an Iface.
