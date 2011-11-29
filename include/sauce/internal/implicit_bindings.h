@@ -54,9 +54,11 @@ struct ImplicitBindings {
 template<>
 struct ImplicitBinding<Named<Injector, Unnamed> > {
   typedef sauce::shared_ptr<ResolvedBinding<Named<Injector, Unnamed> > > BindingPtr;
-  typedef sauce::internal::injections::InjectorInjection Injection;
+  typedef sauce::internal::injections::InjectorInjection BoundInjection;
+  typedef BoundInjection::InjectionPtr InjectionPtr;
   static BindingPtr get(ConcreteBindings const &) {
-    BindingPtr binding(new Injection());
+    InjectionPtr injection(new BoundInjection());
+    BindingPtr binding = injection;
     return binding;
   }
 };
@@ -70,11 +72,13 @@ struct ImplicitBinding<Named<Provider<Dependency>, Name> > {
   typedef Named<Provider<Dependency>, Name> ProviderDependency;
   typedef typename ResolvedBinding<ProviderDependency>::BindingPtr BindingPtr;
   typedef typename ResolvedBinding<Normalized>::BindingPtr ProvidedBindingPtr;
-  typedef sauce::internal::injections::ImplicitProviderInjection<Dependency, Name> Injection;
+  typedef sauce::internal::injections::ImplicitProviderInjection<Dependency, Name> BoundInjection;
+  typedef typename BoundInjection::InjectionPtr InjectionPtr;
 
   static BindingPtr get(ConcreteBindings const & bindings) {
     ProvidedBindingPtr providedBinding(bindings.getBinding<Normalized>());
-    BindingPtr binding(new Injection(providedBinding));
+    InjectionPtr injection(new BoundInjection(providedBinding));
+    BindingPtr binding = injection;
     return binding;
   }
 };
