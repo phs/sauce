@@ -54,8 +54,9 @@ struct ImplicitBindings {
 template<>
 struct ImplicitBinding<Named<Injector, Unnamed> > {
   typedef sauce::shared_ptr<ResolvedBinding<Named<Injector, Unnamed> > > BindingPtr;
+  typedef sauce::internal::injections::InjectorInjection Injection;
   static BindingPtr get(ConcreteBindings const &) {
-    BindingPtr binding(new inj::InjectorInjection());
+    BindingPtr binding(new Injection());
     return binding;
   }
 };
@@ -69,10 +70,11 @@ struct ImplicitBinding<Named<Provider<Dependency>, Name> > {
   typedef Named<Provider<Dependency>, Name> ProviderDependency;
   typedef typename ResolvedBinding<ProviderDependency>::BindingPtr BindingPtr;
   typedef typename ResolvedBinding<Normalized>::BindingPtr ProvidedBindingPtr;
+  typedef sauce::internal::injections::ImplicitProviderInjection<Dependency, Name> Injection;
 
   static BindingPtr get(ConcreteBindings const & bindings) {
     ProvidedBindingPtr providedBinding(bindings.getBinding<Normalized>());
-    BindingPtr binding(new inj::ImplicitProviderInjection<Dependency, Name>(providedBinding));
+    BindingPtr binding(new Injection(providedBinding));
     return binding;
   }
 };
