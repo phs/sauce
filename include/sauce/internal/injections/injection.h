@@ -37,14 +37,14 @@ private:
    */
   virtual IfacePtr provide(BindingPtr, InjectorPtr) const = 0;
 
+public:
+
   /**
    * The TypeId of the Scope template parameter.
    */
   TypeId getScopeKey() const {
     return typeIdOf<Scope>();
   }
-
-public:
 
   /**
    * Provide an Iface.
