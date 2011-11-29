@@ -35,9 +35,9 @@ public:
     }
   }
 
-  template<typename Binding>
+  template<typename Injection>
   void bind() {
-    binding.reset(new Binding());
+    binding.reset(new Injection());
   }
 
   template<typename Exception>
@@ -72,9 +72,9 @@ protected:
     return next;
   }
 
-  template<typename Binding>
-  void bind(Binding) {
-    state->template bind<Binding>();
+  template<typename Injection>
+  void bind(Injection) {
+    state->template bind<Injection>();
   }
 
   template<typename Exception>
