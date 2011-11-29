@@ -42,6 +42,10 @@ class NewInjection<Dependency, Scope, Impl($As), Allocator>:
 
   mutable ImplAllocator allocator;
 
+public:
+
+  typedef typename Injection<Dependency, Scope>::InjectionPtr InjectionPtr;
+
   /**
    * Provide an Iface.
    *

@@ -57,20 +57,22 @@ class ImplicitProviderInjection:
   typedef typename ResolvedBinding<ProviderDependency>::BindingPtr BindingPtr;
   typedef typename Key<ProviderDependency>::Ptr ProviderPtr;
 
-  ProviderPtr provide(BindingPtr, InjectorPtr injector) const {
-    ProviderPtr provider(new ImplicitProvider<Dependency, Name>(providedBinding, injector));
-    setSelf<Dependency, Name>(provider);
-    return provider;
-  }
-
   ProvidedBindingPtr providedBinding;
 
 public:
+
+  typedef typename Injection<Named<Provider<Dependency>, Name>, NoScope>::InjectionPtr InjectionPtr;
 
   ImplicitProviderInjection(ProvidedBindingPtr providedBinding):
     Injection<Named<Provider<Dependency>, Name>, NoScope>(),
     ProviderFriend(),
     providedBinding(providedBinding) {}
+
+  ProviderPtr provide(BindingPtr, InjectorPtr injector) const {
+    ProviderPtr provider(new ImplicitProvider<Dependency, Name>(providedBinding, injector));
+    setSelf<Dependency, Name>(provider);
+    return provider;
+  }
 };
 
 }

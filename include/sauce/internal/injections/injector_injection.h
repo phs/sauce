@@ -13,10 +13,9 @@ namespace injections {
 /**
  * An injection that provides the injector itself.
  */
-class InjectorInjection:
-  public Injection<Key<Injector>::Normalized, NoScope> {
-
+struct InjectorInjection: public Injection<Key<Injector>::Normalized, NoScope> {
   typedef ResolvedBinding<Key<Injector>::Normalized>::BindingPtr BindingPtr;
+  typedef Injection<Key<Injector>::Normalized, NoScope>::InjectionPtr InjectionPtr;
 
   /**
    * Provide the injector.

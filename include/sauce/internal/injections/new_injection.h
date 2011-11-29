@@ -37,6 +37,10 @@ class NewInjection<Dependency, Scope, Impl(), Allocator>:
 
   mutable ImplAllocator allocator;
 
+public:
+
+  typedef typename Injection<Dependency, Scope>::InjectionPtr InjectionPtr;
+
   /**
    * Provide an Iface.
    *
@@ -73,6 +77,10 @@ class NewInjection<Dependency, Scope, Impl(A1), Allocator>:
   friend class DisposalDeleter<Iface, New>;
 
   mutable ImplAllocator allocator;
+
+public:
+
+  typedef typename Injection<Dependency, Scope>::InjectionPtr InjectionPtr;
 
   /**
    * Provide an Iface.
@@ -115,6 +123,10 @@ class NewInjection<Dependency, Scope, Impl(A1, A2), Allocator>:
   friend class DisposalDeleter<Iface, New>;
 
   mutable ImplAllocator allocator;
+
+public:
+
+  typedef typename Injection<Dependency, Scope>::InjectionPtr InjectionPtr;
 
   /**
    * Provide an Iface.
@@ -159,6 +171,10 @@ class NewInjection<Dependency, Scope, Impl(A1, A2, A3), Allocator>:
   friend class DisposalDeleter<Iface, New>;
 
   mutable ImplAllocator allocator;
+
+public:
+
+  typedef typename Injection<Dependency, Scope>::InjectionPtr InjectionPtr;
 
   /**
    * Provide an Iface.
@@ -205,6 +221,10 @@ class NewInjection<Dependency, Scope, Impl(A1, A2, A3, A4), Allocator>:
   friend class DisposalDeleter<Iface, New>;
 
   mutable ImplAllocator allocator;
+
+public:
+
+  typedef typename Injection<Dependency, Scope>::InjectionPtr InjectionPtr;
 
   /**
    * Provide an Iface.
@@ -255,6 +275,10 @@ class NewInjection<Dependency, Scope, Impl(A1, A2, A3, A4, A5), Allocator>:
   friend class DisposalDeleter<Iface, New>;
 
   mutable ImplAllocator allocator;
+
+public:
+
+  typedef typename Injection<Dependency, Scope>::InjectionPtr InjectionPtr;
 
   /**
    * Provide an Iface.
@@ -307,6 +331,10 @@ class NewInjection<Dependency, Scope, Impl(A1, A2, A3, A4, A5, A6), Allocator>:
   friend class DisposalDeleter<Iface, New>;
 
   mutable ImplAllocator allocator;
+
+public:
+
+  typedef typename Injection<Dependency, Scope>::InjectionPtr InjectionPtr;
 
   /**
    * Provide an Iface.
@@ -362,6 +390,10 @@ class NewInjection<Dependency, Scope, Impl(A1, A2, A3, A4, A5, A6, A7),
   friend class DisposalDeleter<Iface, New>;
 
   mutable ImplAllocator allocator;
+
+public:
+
+  typedef typename Injection<Dependency, Scope>::InjectionPtr InjectionPtr;
 
   /**
    * Provide an Iface.
@@ -419,6 +451,10 @@ class NewInjection<Dependency, Scope, Impl(A1, A2, A3, A4, A5, A6, A7, A8),
   friend class DisposalDeleter<Iface, New>;
 
   mutable ImplAllocator allocator;
+
+public:
+
+  typedef typename Injection<Dependency, Scope>::InjectionPtr InjectionPtr;
 
   /**
    * Provide an Iface.
@@ -478,6 +514,10 @@ class NewInjection<Dependency, Scope, Impl(A1, A2, A3, A4, A5, A6, A7, A8, A9),
   friend class DisposalDeleter<Iface, New>;
 
   mutable ImplAllocator allocator;
+
+public:
+
+  typedef typename Injection<Dependency, Scope>::InjectionPtr InjectionPtr;
 
   /**
    * Provide an Iface.
@@ -540,6 +580,10 @@ class NewInjection<Dependency, Scope, Impl(A1, A2, A3, A4, A5, A6, A7, A8, A9,
   friend class DisposalDeleter<Iface, New>;
 
   mutable ImplAllocator allocator;
+
+public:
+
+  typedef typename Injection<Dependency, Scope>::InjectionPtr InjectionPtr;
 
   /**
    * Provide an Iface.
