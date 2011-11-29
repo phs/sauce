@@ -37,6 +37,8 @@ public:
 
   template<typename BoundInjection>
   void bind() {
+    typedef typename BoundInjection::Dependency Dependency;
+    typedef typename BoundInjection::Scope Scope;
     typename BoundInjection::InjectionPtr injection(new BoundInjection());
     binding = injection;
   }
