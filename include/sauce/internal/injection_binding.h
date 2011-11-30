@@ -2,7 +2,11 @@
 #define SAUCE_INTERNAL_INJECTION_BINDING_H_
 
 #include <sauce/injector.h>
+#include <sauce/memory.h>
+#include <sauce/internal/key.h>
+#include <sauce/internal/opaque_binding.h>
 #include <sauce/internal/resolved_binding.h>
+#include <sauce/internal/type_id.h>
 
 namespace sauce {
 namespace internal {
