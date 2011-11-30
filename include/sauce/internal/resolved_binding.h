@@ -28,6 +28,12 @@ struct ResolvedBinding: public OpaqueBinding {
     return typeIdOf<Dependency>();
   }
 
+  /**
+   * Establish that further dependencies do not introduce cycles with ones already accumulated.
+   *
+   * This is Tarjan's algorithm using the call stack.  When a cycle is detected a
+   * CircularDependencyException is thrown.
+   */
   virtual void validateAcyclic(sauce::shared_ptr<Injector>, TypeIds &) const {}
 
   /**

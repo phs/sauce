@@ -55,6 +55,14 @@ class InjectionBinding:
   }
 
   /**
+   * Establish that further dependencies do not introduce cycles with ones already accumulated.
+   *
+   * This is Tarjan's algorithm using the call stack.  When a cycle is detected a
+   * CircularDependencyException is thrown.
+   */
+  virtual void validateAcyclic(sauce::shared_ptr<Injector>, TypeIds &) const {}
+
+  /**
    * Provide, but do not return an Iface.
    *
    * Instead, cache the instance in its appropriate scope, if any.  If the injection is not scoped,
