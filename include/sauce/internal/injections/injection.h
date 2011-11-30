@@ -16,11 +16,11 @@ namespace injections {
 /**
  * A strategy for satisfying provisions for the given interface.
  */
-template<typename _Dependency, typename _Scope>
+template<typename Dependency_, typename _Scope>
 struct Injection:
-  public InjectionBinding<_Dependency, _Scope> {
+  public InjectionBinding<Dependency_, _Scope> {
 
-  typedef _Dependency Dependency;
+  typedef Dependency_ Dependency;
   typedef _Scope Scope;
   typedef sauce::shared_ptr<Injection<Dependency, Scope> > InjectionPtr;
 
