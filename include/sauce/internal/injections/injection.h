@@ -4,7 +4,6 @@
 #include <sauce/injector.h>
 #include <sauce/memory.h>
 #include <sauce/internal/resolved_binding.h>
-#include <sauce/internal/injection_binding.h>
 #include <sauce/internal/key.h>
 #include <sauce/internal/type_id.h>
 
@@ -16,15 +15,11 @@ namespace injections {
  * A strategy for satisfying provisions for the given interface.
  */
 template<typename Dependency_, typename _Scope>
-struct Injection:
-  public InjectionBinding<Dependency_, _Scope> {
+struct Injection: public InjectorFriend {
 
-  typedef Dependency_ Dependency;
+  typedef typename Key<Dependency_>::Normalized Dependency;
   typedef _Scope Scope;
   typedef sauce::shared_ptr<Injection<Dependency, Scope> > InjectionPtr;
-
-private:
-
   typedef typename Key<Dependency>::Ptr IfacePtr;
   typedef typename ResolvedBinding<Dependency>::BindingPtr BindingPtr;
 

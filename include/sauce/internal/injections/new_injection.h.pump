@@ -9,6 +9,7 @@ $var n = 10  $$ The maximum arity we support.
 #include <sauce/named.h>
 #include <sauce/provider.h>
 #include <sauce/internal/resolved_binding.h>
+#include <sauce/internal/injection_binding.h>
 #include <sauce/internal/injections/injection.h>
 #include <sauce/internal/key.h>
 #include <sauce/internal/type_id.h>
@@ -62,7 +63,11 @@ public:
     typename Key<A$j>::Ptr a$j(this->template getHelper<A$j>(injector));
 
 ]]]]
-    Deleter deleter(sauce::static_pointer_cast<New>(binding));
+    // TODO: yuck
+    typedef InjectionBinding<Dependency, Scope> ActualBinding;
+    typedef sauce::shared_ptr<ActualBinding> ActualBindingPtr;
+    ActualBindingPtr actualBinding(sauce::static_pointer_cast<ActualBinding>(binding));
+    Deleter deleter(sauce::static_pointer_cast<New>(actualBinding->getInjection()));
     Impl * impl = allocator.allocate(1);
     Ptr provided(new(impl) Impl($as), deleter);
     return provided;

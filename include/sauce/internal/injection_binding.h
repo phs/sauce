@@ -3,6 +3,7 @@
 
 #include <sauce/injector.h>
 #include <sauce/memory.h>
+#include <sauce/internal/injections/injection.h>
 #include <sauce/internal/key.h>
 #include <sauce/internal/opaque_binding.h>
 #include <sauce/internal/resolved_binding.h>
@@ -21,6 +22,9 @@ class InjectionBinding:
 
   typedef typename Key<Dependency>::Ptr IfacePtr;
   typedef typename ResolvedBinding<Dependency>::BindingPtr BindingPtr;
+  typedef typename inj::Injection<Dependency, Scope>::InjectionPtr InjectionPtr;
+
+  InjectionPtr injection;
 
   /**
    * The TypeId of the Scope template parameter.
@@ -34,7 +38,9 @@ class InjectionBinding:
    *
    * The strategy used is left to derived types.
    */
-  virtual IfacePtr provide(BindingPtr, InjectorPtr) const = 0;
+  IfacePtr provide(BindingPtr binding, InjectorPtr injector) const {
+    return injection->provide(binding, injector);
+  }
 
   /**
    * Provide an Iface.
@@ -64,7 +70,9 @@ class InjectionBinding:
    * This is Tarjan's algorithm using the call stack.  When a cycle is detected a
    * CircularDependencyException is thrown.
    */
-  virtual void validateAcyclic(sauce::shared_ptr<Injector>, TypeIds &) const {}
+  void validateAcyclic(InjectorPtr injector, TypeIds & ids) const {
+    injection->validateAcyclic(injector, ids);
+  }
 
   /**
    * Provide, but do not return an Iface.
@@ -76,9 +84,19 @@ class InjectionBinding:
     if (getScopeKey() != typeIdOf<NoScope>()) {
       BindingPtr binding = resolve<Dependency>(opaque);
       TypeIds ids;
+      // TODO: need this-> ?
       this->validateAcyclic(injector, ids);
       get(binding, injector);
     }
+  }
+
+public:
+
+  InjectionBinding(InjectionPtr injection):
+    injection(injection) {}
+
+  InjectionPtr getInjection() {
+    return injection;
   }
 
 };

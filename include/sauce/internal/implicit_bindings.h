@@ -6,6 +6,7 @@
 #include <sauce/memory.h>
 #include <sauce/provider.h>
 #include <sauce/internal/resolved_binding.h>
+#include <sauce/internal/injection_binding.h>
 #include <sauce/internal/bindings.h>
 #include <sauce/internal/injections/all.h>
 #include <sauce/internal/key.h>
@@ -60,7 +61,7 @@ struct ImplicitBinding<Named<Injector, Unnamed> > {
   typedef BoundInjection::InjectionPtr InjectionPtr;
   static BindingPtr get(ConcreteBindings const &) {
     InjectionPtr injection(new BoundInjection());
-    BindingPtr binding = injection;
+    BindingPtr binding(new InjectionBinding<Dependency, Scope>(injection));
     return binding;
   }
 };
@@ -81,7 +82,7 @@ struct ImplicitBinding<Named<Provider<Dependency>, Name> > {
   static BindingPtr get(ConcreteBindings const & bindings) {
     ProvidedBindingPtr providedBinding(bindings.getBinding<Normalized>());
     InjectionPtr injection(new BoundInjection(providedBinding));
-    BindingPtr binding = injection;
+    BindingPtr binding(new InjectionBinding<ProviderDependency, Scope>(injection));
     return binding;
   }
 };

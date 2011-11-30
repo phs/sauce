@@ -6,6 +6,7 @@
 #include <sauce/internal/bindings.h>
 #include <sauce/internal/pending_thrower.h>
 #include <sauce/internal/opaque_binding.h>
+#include <sauce/internal/injection_binding.h>
 
 namespace sauce {
 namespace internal {
@@ -40,7 +41,7 @@ public:
     typedef typename BoundInjection::Dependency Dependency;
     typedef typename BoundInjection::Scope Scope;
     typename BoundInjection::InjectionPtr injection(new BoundInjection());
-    binding = injection;
+    binding.reset(new InjectionBinding<Dependency, Scope>(injection));
   }
 
   template<typename Exception>
