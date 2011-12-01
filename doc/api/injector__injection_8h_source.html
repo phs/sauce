@@ -88,29 +88,23 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <a name="l00010"></a>00010 <span class="keyword">namespace </span>internal {
 <a name="l00011"></a>00011 <span class="keyword">namespace </span>injections {
 <a name="l00012"></a>00012 
-<a name="l00016"></a><a class="code" href="classsauce_1_1internal_1_1injections_1_1_injector_injection.html">00016</a> <span class="keyword">class </span><a class="code" href="classsauce_1_1internal_1_1injections_1_1_injector_injection.html" title="An injection that provides the injector itself.">InjectorInjection</a>:
-<a name="l00017"></a>00017   <span class="keyword">public</span> <a class="code" href="classsauce_1_1internal_1_1injections_1_1_injection.html" title="A strategy for satisfying provisions for the given interface.">Injection</a>&lt;Key&lt;Injector&gt;::Normalized&gt; {
+<a name="l00016"></a><a class="code" href="structsauce_1_1internal_1_1injections_1_1_injector_injection.html">00016</a> <span class="keyword">struct </span><a class="code" href="structsauce_1_1internal_1_1injections_1_1_injector_injection.html" title="An injection that provides the injector itself.">InjectorInjection</a>: <span class="keyword">public</span> <a class="code" href="structsauce_1_1internal_1_1injections_1_1_injection.html" title="A strategy for satisfying provisions for the given interface.">Injection</a>&lt;Key&lt;Injector&gt;::Normalized, NoScope&gt; {
+<a name="l00017"></a>00017   <span class="keyword">typedef</span> <a class="code" href="structsauce_1_1internal_1_1injections_1_1_injection.html" title="A strategy for satisfying provisions for the given interface.">Injection&lt;Key&lt;Injector&gt;::Normalized</a>, <a class="code" href="classsauce_1_1_no_scope.html" title="The scope of unscoped bindings.">NoScope</a>&gt;::InjectionPtr InjectionPtr;
 <a name="l00018"></a>00018 
-<a name="l00019"></a>00019   <span class="keyword">typedef</span> <a class="code" href="structsauce_1_1internal_1_1_resolved_binding.html" title="A binding for an acknowledged interface.">ResolvedBinding&lt;Key&lt;Injector&gt;::Normalized</a>&gt;::BindingPtr BindingPtr;
-<a name="l00020"></a>00020 
-<a name="l00026"></a>00026   InjectorPtr provide(BindingPtr, InjectorPtr injector)<span class="keyword"> const </span>{
-<a name="l00027"></a>00027     <span class="keywordflow">return</span> injector;
-<a name="l00028"></a>00028   }
-<a name="l00029"></a>00029 
-<a name="l00030"></a>00030   <a class="code" href="classsauce_1_1internal_1_1_type_id.html" title="A TypeSignature equipped with specific helper methods dealing in the hidden type.">TypeId</a> getScopeKey()<span class="keyword"> const </span>{
-<a name="l00031"></a>00031     <span class="keywordflow">return</span> typeIdOf&lt;NoScope&gt;();
-<a name="l00032"></a>00032   }
-<a name="l00033"></a>00033 };
+<a name="l00024"></a><a class="code" href="structsauce_1_1internal_1_1injections_1_1_injector_injection.html#a05f64ca3701bc84671b450a83f27418f">00024</a>   InjectorPtr <a class="code" href="structsauce_1_1internal_1_1injections_1_1_injector_injection.html#a05f64ca3701bc84671b450a83f27418f" title="Provide the injector.">provide</a>(InjectionPtr, InjectorPtr injector)<span class="keyword"> const </span>{
+<a name="l00025"></a>00025     <span class="keywordflow">return</span> injector;
+<a name="l00026"></a>00026   }
+<a name="l00027"></a>00027 };
+<a name="l00028"></a>00028 
+<a name="l00029"></a>00029 }
+<a name="l00030"></a>00030 }
+<a name="l00031"></a>00031 
+<a name="l00032"></a>00032 <span class="keyword">namespace </span>i = ::sauce::internal;
+<a name="l00033"></a>00033 <span class="keyword">namespace </span>inj = ::sauce::internal::injections;
 <a name="l00034"></a>00034 
 <a name="l00035"></a>00035 }
-<a name="l00036"></a>00036 }
-<a name="l00037"></a>00037 
-<a name="l00038"></a>00038 <span class="keyword">namespace </span>i = ::sauce::internal;
-<a name="l00039"></a>00039 <span class="keyword">namespace </span>inj = ::sauce::internal::injections;
-<a name="l00040"></a>00040 
-<a name="l00041"></a>00041 }
-<a name="l00042"></a>00042 
-<a name="l00043"></a>00043 <span class="preprocessor">#endif // SAUCE_INTERNAL_INJECTIONS_NAKED_INJECTION_H_</span>
+<a name="l00036"></a>00036 
+<a name="l00037"></a>00037 <span class="preprocessor">#endif // SAUCE_INTERNAL_INJECTIONS_NAKED_INJECTION_H_</span>
 </pre></div></div>
 </div>
 <!-- window showing the filter options -->
