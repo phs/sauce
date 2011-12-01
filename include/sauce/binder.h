@@ -25,7 +25,7 @@ class AllocateFromClause: public i::Clause {
   friend class ToClause<Dependency, Scope, Ctor>;
 
   void onComplete() {
-    bind(inj::NewInjection<Dependency, Scope, Ctor, Allocator>());
+    bind<Scope>(inj::NewInjection<Dependency, Scope, Ctor, Allocator>());
   }
 };
 
@@ -50,7 +50,7 @@ class ToProviderClause: public i::Clause {
   friend class InClause<Dependency, Scope>;
 
   void onComplete() {
-    bind(inj::ProviderInjection<Dependency, Scope, Provider>());
+    bind<Scope>(inj::ProviderInjection<Dependency, Scope, Provider>());
   }
 };
 
@@ -66,7 +66,7 @@ class ToClause: public i::Clause {
   friend class InClause<Dependency, Scope>;
 
   void onComplete() {
-    bind(inj::NewInjection<Dependency, Scope, Ctor, std::allocator<Iface> >());
+    bind<Scope>(inj::NewInjection<Dependency, Scope, Ctor, std::allocator<Iface> >());
   }
 
 public:

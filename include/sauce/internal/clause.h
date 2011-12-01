@@ -36,10 +36,9 @@ public:
     }
   }
 
-  template<typename BoundInjection>
+  template<typename Scope, typename BoundInjection>
   void bind() {
     typedef typename BoundInjection::Dependency Dependency;
-    typedef typename BoundInjection::Scope Scope;
     typename BoundInjection::InjectionPtr injection(new BoundInjection());
     binding.reset(new InjectionBinding<Dependency, Scope>(injection));
   }
@@ -76,9 +75,9 @@ protected:
     return next;
   }
 
-  template<typename BoundInjection>
+  template<typename Scope, typename BoundInjection>
   void bind(BoundInjection) {
-    state->template bind<BoundInjection>();
+    state->template bind<Scope, BoundInjection>();
   }
 
   template<typename Exception>
