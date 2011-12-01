@@ -19,6 +19,14 @@ struct ImplicitBindings;
 
 typedef Bindings<ImplicitBindings> ConcreteBindings;
 
+template<typename ImplicitInjection_>
+struct ImplicitBindingTraits {
+  typedef ImplicitInjection_ ImplicitInjection;
+  typedef typename ImplicitInjection::Dependency Dependency;
+  typedef typename ImplicitInjection::InjectionPtr InjectionPtr;
+  typedef sauce::shared_ptr<ResolvedBinding<Dependency> > BindingPtr;
+};
+
 /**
  * Attempts to supply a Binding when the given Dependency is not found.
  */
@@ -54,13 +62,9 @@ struct ImplicitBindings {
  * The implicit Injector binding.
  */
 template<>
-struct ImplicitBinding<Named<Injector, Unnamed> > {
-  typedef sauce::shared_ptr<ResolvedBinding<Named<Injector, Unnamed> > > BindingPtr;
-  typedef sauce::internal::injections::InjectorInjection BoundInjection;
-  typedef BoundInjection::Dependency Dependency;
-  typedef BoundInjection::InjectionPtr InjectionPtr;
+struct ImplicitBinding<Named<Injector, Unnamed> >: ImplicitBindingTraits<inj::InjectorInjection> {
   static BindingPtr get(ConcreteBindings const &) {
-    InjectionPtr injection(new BoundInjection());
+    InjectionPtr injection(new ImplicitInjection());
     BindingPtr binding(new InjectionBinding<Dependency, NoScope>(injection));
     return binding;
   }
@@ -69,19 +73,22 @@ struct ImplicitBinding<Named<Injector, Unnamed> > {
 /**
  * The implicit Provider binding for bound dependencies.
  */
-template<typename Dependency, typename Name>
-struct ImplicitBinding<Named<Provider<Dependency>, Name> > {
-  typedef typename Key<Dependency>::Normalized Normalized;
-  typedef Named<Provider<Dependency>, Name> ProviderDependency;
-  typedef typename ResolvedBinding<ProviderDependency>::BindingPtr BindingPtr;
-  typedef typename ResolvedBinding<Normalized>::BindingPtr ProvidedBindingPtr;
-  typedef sauce::internal::injections::ImplicitProviderInjection<Dependency, Name> BoundInjection;
-  typedef typename BoundInjection::InjectionPtr InjectionPtr;
+template<typename ProvidedDependency, typename Name>
+struct ImplicitBinding<Named<Provider<ProvidedDependency>, Name> > {
+  // TODO: inherit from ImplicitBindingTraits ?
+
+  typedef inj::ImplicitProviderInjection<ProvidedDependency, Name> ImplicitInjection;
+  typedef typename ImplicitBindingTraits<ImplicitInjection>::Dependency Dependency;
+  typedef typename ImplicitBindingTraits<ImplicitInjection>::InjectionPtr InjectionPtr;
+  typedef typename ImplicitBindingTraits<ImplicitInjection>::BindingPtr BindingPtr;
 
   static BindingPtr get(ConcreteBindings const & bindings) {
+    typedef typename Key<ProvidedDependency>::Normalized Normalized;
+    typedef typename ResolvedBinding<Normalized>::BindingPtr ProvidedBindingPtr;
+
     ProvidedBindingPtr providedBinding(bindings.getBinding<Normalized>());
-    InjectionPtr injection(new BoundInjection(providedBinding));
-    BindingPtr binding(new InjectionBinding<ProviderDependency, NoScope>(injection));
+    InjectionPtr injection(new ImplicitInjection(providedBinding));
+    BindingPtr binding(new InjectionBinding<Dependency, NoScope>(injection));
     return binding;
   }
 };
