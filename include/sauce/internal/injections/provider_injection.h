@@ -5,7 +5,6 @@
 
 #include <sauce/injector.h>
 #include <sauce/memory.h>
-#include <sauce/internal/resolved_binding.h>
 #include <sauce/internal/injections/injection.h>
 #include <sauce/internal/key.h>
 
@@ -18,14 +17,13 @@ namespace injections {
  */
 template<typename Dependency, typename Scope, typename Provider>
 struct ProviderInjection: public Injection<Dependency, Scope> {
-  typedef typename ResolvedBinding<Dependency>::BindingPtr BindingPtr;
   typedef typename Injection<Dependency, Scope>::InjectionPtr InjectionPtr;
 
   void validateAcyclic(InjectorPtr injector, TypeIds & ids) const {
     this->template validateAcyclicHelper<Provider>(injector, ids);
   }
 
-  typename Key<Dependency>::Ptr provide(BindingPtr, InjectorPtr injector) const {
+  typename Key<Dependency>::Ptr provide(InjectionPtr, InjectorPtr injector) const {
     return this->template getHelper<Provider>(injector)->get();
   }
 };

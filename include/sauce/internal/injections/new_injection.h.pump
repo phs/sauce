@@ -8,7 +8,6 @@ $var n = 10  $$ The maximum arity we support.
 #include <sauce/memory.h>
 #include <sauce/named.h>
 #include <sauce/provider.h>
-#include <sauce/internal/resolved_binding.h>
 #include <sauce/internal/injection_binding.h>
 #include <sauce/internal/injections/injection.h>
 #include <sauce/internal/key.h>
@@ -34,7 +33,6 @@ class NewInjection<Dependency, Scope, Impl($As), Allocator>:
 
   typedef typename Key<Dependency>::Iface Iface;
   typedef typename Key<Dependency>::Ptr Ptr;
-  typedef typename ResolvedBinding<Dependency>::BindingPtr BindingPtr;
   typedef typename Allocator::template rebind<Impl>::other ImplAllocator;
   typedef NewInjection<Dependency, Scope, Impl($As), Allocator> New;
   typedef DisposalDeleter<Iface, New> Deleter;
@@ -55,19 +53,15 @@ public:
    * dispose(Iface *).
    */
 [[$if i==0 [[
- Ptr provide(BindingPtr binding, InjectorPtr) const
+ Ptr provide(InjectionPtr injection, InjectorPtr) const
 ]] $else [[
- Ptr provide(BindingPtr binding, InjectorPtr injector) const
+ Ptr provide(InjectionPtr injection, InjectorPtr injector) const
 ]]]] {
 [[$for j [[
     typename Key<A$j>::Ptr a$j(this->template getHelper<A$j>(injector));
 
 ]]]]
-    // TODO: yuck
-    typedef InjectionBinding<Dependency, Scope> ActualBinding;
-    typedef sauce::shared_ptr<ActualBinding> ActualBindingPtr;
-    ActualBindingPtr actualBinding(sauce::static_pointer_cast<ActualBinding>(binding));
-    Deleter deleter(sauce::static_pointer_cast<New>(actualBinding->getInjection()));
+    Deleter deleter(sauce::static_pointer_cast<New>(injection));
     Impl * impl = allocator.allocate(1);
     Ptr provided(new(impl) Impl($as), deleter);
     return provided;

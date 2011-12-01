@@ -3,7 +3,6 @@
 
 #include <sauce/injector.h>
 #include <sauce/memory.h>
-#include <sauce/internal/resolved_binding.h>
 #include <sauce/internal/key.h>
 #include <sauce/internal/type_id.h>
 
@@ -21,14 +20,13 @@ struct Injection: public InjectorFriend {
   typedef _Scope Scope;
   typedef sauce::shared_ptr<Injection<Dependency, Scope> > InjectionPtr;
   typedef typename Key<Dependency>::Ptr IfacePtr;
-  typedef typename ResolvedBinding<Dependency>::BindingPtr BindingPtr;
 
   /**
    * Provide an Iface.
    *
    * The strategy used is left to derived types.
    */
-  virtual IfacePtr provide(BindingPtr, InjectorPtr) const = 0;
+  virtual IfacePtr provide(InjectionPtr, InjectorPtr) const = 0;
 
   /**
    * Establish that further dependencies do not introduce cycles with ones already accumulated.

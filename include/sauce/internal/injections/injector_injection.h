@@ -14,7 +14,6 @@ namespace injections {
  * An injection that provides the injector itself.
  */
 struct InjectorInjection: public Injection<Key<Injector>::Normalized, NoScope> {
-  typedef ResolvedBinding<Key<Injector>::Normalized>::BindingPtr BindingPtr;
   typedef Injection<Key<Injector>::Normalized, NoScope>::InjectionPtr InjectionPtr;
 
   /**
@@ -22,7 +21,7 @@ struct InjectorInjection: public Injection<Key<Injector>::Normalized, NoScope> {
    *
    * Just return the passed injector.
    */
-  InjectorPtr provide(BindingPtr, InjectorPtr injector) const {
+  InjectorPtr provide(InjectionPtr, InjectorPtr injector) const {
     return injector;
   }
 };

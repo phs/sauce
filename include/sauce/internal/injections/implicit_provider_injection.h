@@ -54,7 +54,6 @@ class ImplicitProviderInjection:
   typedef typename Key<Dependency>::Normalized Normalized;
   typedef typename ResolvedBinding<Normalized>::BindingPtr ProvidedBindingPtr;
   typedef Named<Provider<Dependency>, Name> ProviderDependency;
-  typedef typename ResolvedBinding<ProviderDependency>::BindingPtr BindingPtr;
   typedef typename Key<ProviderDependency>::Ptr ProviderPtr;
 
   ProvidedBindingPtr providedBinding;
@@ -68,7 +67,7 @@ public:
     ProviderFriend(),
     providedBinding(providedBinding) {}
 
-  ProviderPtr provide(BindingPtr, InjectorPtr injector) const {
+  ProviderPtr provide(InjectionPtr, InjectorPtr injector) const {
     ProviderPtr provider(new ImplicitProvider<Dependency, Name>(providedBinding, injector));
     setSelf<Dependency, Name>(provider);
     return provider;

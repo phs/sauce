@@ -38,8 +38,9 @@ class InjectionBinding:
    *
    * The strategy used is left to derived types.
    */
-  IfacePtr provide(BindingPtr binding, InjectorPtr injector) const {
-    return injection->provide(binding, injector);
+  IfacePtr provide(BindingPtr, InjectorPtr injector) const {
+    // Don't ditch BindingPtr, you'll want it for setter injection
+    return injection->provide(injection, injector);
   }
 
   /**
