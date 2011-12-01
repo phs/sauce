@@ -95,10 +95,6 @@ public:
   InjectionBinding(InjectionPtr injection):
     injection(injection) {}
 
-  InjectionPtr getInjection() {
-    return injection;
-  }
-
 };
 
 }
