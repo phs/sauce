@@ -5,6 +5,7 @@
 #include <sauce/injector.h>
 #include <sauce/memory.h>
 #include <sauce/provider.h>
+#include <sauce/scopes.h>
 #include <sauce/internal/resolved_binding.h>
 #include <sauce/internal/injection_binding.h>
 #include <sauce/internal/bindings.h>
@@ -57,11 +58,10 @@ struct ImplicitBinding<Named<Injector, Unnamed> > {
   typedef sauce::shared_ptr<ResolvedBinding<Named<Injector, Unnamed> > > BindingPtr;
   typedef sauce::internal::injections::InjectorInjection BoundInjection;
   typedef BoundInjection::Dependency Dependency;
-  typedef BoundInjection::Scope Scope;
   typedef BoundInjection::InjectionPtr InjectionPtr;
   static BindingPtr get(ConcreteBindings const &) {
     InjectionPtr injection(new BoundInjection());
-    BindingPtr binding(new InjectionBinding<Dependency, Scope>(injection));
+    BindingPtr binding(new InjectionBinding<Dependency, NoScope>(injection));
     return binding;
   }
 };
@@ -76,13 +76,12 @@ struct ImplicitBinding<Named<Provider<Dependency>, Name> > {
   typedef typename ResolvedBinding<ProviderDependency>::BindingPtr BindingPtr;
   typedef typename ResolvedBinding<Normalized>::BindingPtr ProvidedBindingPtr;
   typedef sauce::internal::injections::ImplicitProviderInjection<Dependency, Name> BoundInjection;
-  typedef typename BoundInjection::Scope Scope;
   typedef typename BoundInjection::InjectionPtr InjectionPtr;
 
   static BindingPtr get(ConcreteBindings const & bindings) {
     ProvidedBindingPtr providedBinding(bindings.getBinding<Normalized>());
     InjectionPtr injection(new BoundInjection(providedBinding));
-    BindingPtr binding(new InjectionBinding<ProviderDependency, Scope>(injection));
+    BindingPtr binding(new InjectionBinding<ProviderDependency, NoScope>(injection));
     return binding;
   }
 };
