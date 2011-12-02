@@ -13,12 +13,11 @@ namespace injections {
 /**
  * A strategy for satisfying provisions for the given interface.
  */
-template<typename Dependency_, typename _Scope>
+template<typename Dependency_>
 struct Injection: public InjectorFriend {
 
   typedef typename Key<Dependency_>::Normalized Dependency;
-  typedef _Scope Scope;
-  typedef sauce::shared_ptr<Injection<Dependency, Scope> > InjectionPtr;
+  typedef sauce::shared_ptr<Injection<Dependency> > InjectionPtr;
   typedef typename Key<Dependency>::Ptr IfacePtr;
 
   /**

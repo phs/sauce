@@ -3,7 +3,6 @@
 
 #include <cassert>
 
-#include <sauce/scopes.h>
 #include <sauce/injector.h>
 #include <sauce/memory.h>
 #include <sauce/named.h>
@@ -48,7 +47,7 @@ public:
  */
 template<typename Dependency, typename Name>
 class ImplicitProviderInjection:
-  public Injection<Named<Provider<Dependency>, Name>, NoScope>,
+  public Injection<Named<Provider<Dependency>, Name> >,
   public ProviderFriend {
 
   typedef typename Key<Dependency>::Normalized Normalized;
@@ -60,10 +59,10 @@ class ImplicitProviderInjection:
 
 public:
 
-  typedef typename Injection<Named<Provider<Dependency>, Name>, NoScope>::InjectionPtr InjectionPtr;
+  typedef typename Injection<Named<Provider<Dependency>, Name> >::InjectionPtr InjectionPtr;
 
   ImplicitProviderInjection(ProvidedBindingPtr providedBinding):
-    Injection<Named<Provider<Dependency>, Name>, NoScope>(),
+    Injection<Named<Provider<Dependency>, Name> >(),
     ProviderFriend(),
     providedBinding(providedBinding) {}
 

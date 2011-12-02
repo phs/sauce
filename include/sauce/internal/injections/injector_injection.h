@@ -13,8 +13,8 @@ namespace injections {
 /**
  * An injection that provides the injector itself.
  */
-struct InjectorInjection: public Injection<Key<Injector>::Normalized, NoScope> {
-  typedef Injection<Key<Injector>::Normalized, NoScope>::InjectionPtr InjectionPtr;
+struct InjectorInjection: public Injection<Key<Injector>::Normalized> {
+  typedef Injection<Key<Injector>::Normalized>::InjectionPtr InjectionPtr;
 
   /**
    * Provide the injector.
