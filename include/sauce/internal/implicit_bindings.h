@@ -75,12 +75,11 @@ struct ImplicitBinding<Named<Injector, Unnamed> >: ImplicitBindingTraits<inj::In
  */
 template<typename ProvidedDependency, typename Name>
 struct ImplicitBinding<Named<Provider<ProvidedDependency>, Name> > {
-  // TODO: inherit from ImplicitBindingTraits ?
-
-  typedef inj::ImplicitProviderInjection<ProvidedDependency, Name> ImplicitInjection;
-  typedef typename ImplicitBindingTraits<ImplicitInjection>::Dependency Dependency;
-  typedef typename ImplicitBindingTraits<ImplicitInjection>::InjectionPtr InjectionPtr;
-  typedef typename ImplicitBindingTraits<ImplicitInjection>::BindingPtr BindingPtr;
+  typedef ImplicitBindingTraits<inj::ImplicitProviderInjection<ProvidedDependency, Name> > Traits;
+  typedef typename Traits::ImplicitInjection ImplicitInjection;
+  typedef typename Traits::Dependency Dependency;
+  typedef typename Traits::InjectionPtr InjectionPtr;
+  typedef typename Traits::BindingPtr BindingPtr;
 
   static BindingPtr get(ConcreteBindings const & bindings) {
     typedef typename Key<ProvidedDependency>::Normalized Normalized;
