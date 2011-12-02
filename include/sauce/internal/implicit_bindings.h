@@ -24,7 +24,7 @@ struct ImplicitBindingTraits {
   typedef ImplicitInjection_ ImplicitInjection;
   typedef typename ImplicitInjection::Dependency Dependency;
   typedef typename ImplicitInjection::InjectionPtr InjectionPtr;
-  typedef sauce::shared_ptr<ResolvedBinding<Dependency> > BindingPtr;
+  typedef typename ResolvedBinding<Dependency>::BindingPtr BindingPtr;
 };
 
 /**
