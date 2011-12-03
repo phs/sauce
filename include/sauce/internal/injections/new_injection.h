@@ -10,7 +10,7 @@
 #include <sauce/named.h>
 #include <sauce/provider.h>
 #include <sauce/internal/injection_binding.h>
-#include <sauce/internal/injections/injection.h>
+#include <sauce/internal/injections/providing_injection.h>
 #include <sauce/internal/key.h>
 #include <sauce/internal/type_id.h>
 

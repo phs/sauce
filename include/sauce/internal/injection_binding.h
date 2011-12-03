@@ -3,7 +3,7 @@
 
 #include <sauce/injector.h>
 #include <sauce/memory.h>
-#include <sauce/internal/injections/injection.h>
+#include <sauce/internal/injections/providing_injection.h>
 #include <sauce/internal/key.h>
 #include <sauce/internal/opaque_binding.h>
 #include <sauce/internal/resolved_binding.h>
