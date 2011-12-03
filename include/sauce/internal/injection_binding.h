@@ -13,7 +13,7 @@ namespace sauce {
 namespace internal {
 
 /**
- * A binding that uses an Injection to satisfy dependencies.
+ * A binding that uses injections to satisfy dependencies.
  */
 template<typename Dependency, typename Scope>
 class InjectionBinding:
@@ -22,7 +22,7 @@ class InjectionBinding:
 
   typedef typename Key<Dependency>::Ptr IfacePtr;
   typedef typename ResolvedBinding<Dependency>::BindingPtr BindingPtr;
-  typedef typename inj::Injection<Dependency>::InjectionPtr InjectionPtr;
+  typedef typename inj::ProvidingInjection<Dependency>::InjectionPtr InjectionPtr;
 
   InjectionPtr injection;
 

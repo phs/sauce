@@ -21,17 +21,11 @@ typedef sauce::shared_ptr<OpaqueBinding> OpaqueBindingPtr;
  * comes about is determine by derived types.  Binding itself is a pure
  * interface.
  *
- * To be type-homogenous, Binding is not a template, and particularly not a
+ * To be type-homogenous, OpaqueBinding is not a template, and particularly not a
  * template of any specific interface or implementation types.  It however has
- * a TypeId, which indirectly identifies the interface it is bound to.
- *
- * The interface is raised to the type system in Binding, a templated class
- * deriving from OpaqueBinding.  The implementation is in turn raised in
- * Injection, which derives from Binding.
- *
- * Other binding implementations (those that implement provision strategies)
- * extend Injection.  Their behavior is exposed to a Binding client
- * by (runtime) polymorphism.
+ * a TypeId, which indirectly identifies the interface it is bound to. The
+ * interface is raised to the type system in ResolvedBinding, a class template
+ * deriving from OpaqueBinding.
  */
 struct OpaqueBinding {
 

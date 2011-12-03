@@ -29,7 +29,7 @@ $var as = [[$for j, [[a$j]]]]
 
 template<typename Dependency, typename Impl, typename Allocator$comma_typename_As>
 class NewInjection<Dependency, Impl($As), Allocator>:
-  public Injection<Dependency> {
+  public ProvidingInjection<Dependency> {
 
   typedef typename Key<Dependency>::Iface Iface;
   typedef typename Key<Dependency>::Ptr Ptr;
@@ -43,7 +43,7 @@ class NewInjection<Dependency, Impl($As), Allocator>:
 
 public:
 
-  typedef typename Injection<Dependency>::InjectionPtr InjectionPtr;
+  typedef typename ProvidingInjection<Dependency>::InjectionPtr InjectionPtr;
 
   /**
    * Provide an Iface.

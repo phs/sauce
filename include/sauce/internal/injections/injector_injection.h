@@ -13,7 +13,7 @@ namespace injections {
 /**
  * An injection that provides the injector itself.
  */
-struct InjectorInjection: public Injection<Key<Injector>::Normalized> {
+struct InjectorInjection: public ProvidingInjection<Key<Injector>::Normalized> {
   /**
    * Provide the injector.
    *

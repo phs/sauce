@@ -14,10 +14,10 @@ namespace injections {
  * A strategy for satisfying provisions for the given interface.
  */
 template<typename Dependency_>
-struct Injection: InjectorFriend {
+struct ProvidingInjection: InjectorFriend {
 
   typedef typename Key<Dependency_>::Normalized Dependency;
-  typedef sauce::shared_ptr<Injection<Dependency> > InjectionPtr;
+  typedef sauce::shared_ptr<ProvidingInjection<Dependency> > InjectionPtr;
   typedef typename Key<Dependency>::Ptr IfacePtr;
 
   /**

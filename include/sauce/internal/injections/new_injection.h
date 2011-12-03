@@ -23,7 +23,7 @@ class NewInjection;
 
 template<typename Dependency, typename Impl, typename Allocator>
 class NewInjection<Dependency, Impl(), Allocator>:
-  public Injection<Dependency> {
+  public ProvidingInjection<Dependency> {
 
   typedef typename Key<Dependency>::Iface Iface;
   typedef typename Key<Dependency>::Ptr Ptr;
@@ -37,7 +37,7 @@ class NewInjection<Dependency, Impl(), Allocator>:
 
 public:
 
-  typedef typename Injection<Dependency>::InjectionPtr InjectionPtr;
+  typedef typename ProvidingInjection<Dependency>::InjectionPtr InjectionPtr;
 
   /**
    * Provide an Iface.
@@ -62,7 +62,7 @@ public:
 
 template<typename Dependency, typename Impl, typename Allocator, typename A1>
 class NewInjection<Dependency, Impl(A1), Allocator>:
-  public Injection<Dependency> {
+  public ProvidingInjection<Dependency> {
 
   typedef typename Key<Dependency>::Iface Iface;
   typedef typename Key<Dependency>::Ptr Ptr;
@@ -76,7 +76,7 @@ class NewInjection<Dependency, Impl(A1), Allocator>:
 
 public:
 
-  typedef typename Injection<Dependency>::InjectionPtr InjectionPtr;
+  typedef typename ProvidingInjection<Dependency>::InjectionPtr InjectionPtr;
 
   /**
    * Provide an Iface.
@@ -107,7 +107,7 @@ public:
 template<typename Dependency, typename Impl, typename Allocator, typename A1,
     typename A2>
 class NewInjection<Dependency, Impl(A1, A2), Allocator>:
-  public Injection<Dependency> {
+  public ProvidingInjection<Dependency> {
 
   typedef typename Key<Dependency>::Iface Iface;
   typedef typename Key<Dependency>::Ptr Ptr;
@@ -121,7 +121,7 @@ class NewInjection<Dependency, Impl(A1, A2), Allocator>:
 
 public:
 
-  typedef typename Injection<Dependency>::InjectionPtr InjectionPtr;
+  typedef typename ProvidingInjection<Dependency>::InjectionPtr InjectionPtr;
 
   /**
    * Provide an Iface.
@@ -154,7 +154,7 @@ public:
 template<typename Dependency, typename Impl, typename Allocator, typename A1,
     typename A2, typename A3>
 class NewInjection<Dependency, Impl(A1, A2, A3), Allocator>:
-  public Injection<Dependency> {
+  public ProvidingInjection<Dependency> {
 
   typedef typename Key<Dependency>::Iface Iface;
   typedef typename Key<Dependency>::Ptr Ptr;
@@ -168,7 +168,7 @@ class NewInjection<Dependency, Impl(A1, A2, A3), Allocator>:
 
 public:
 
-  typedef typename Injection<Dependency>::InjectionPtr InjectionPtr;
+  typedef typename ProvidingInjection<Dependency>::InjectionPtr InjectionPtr;
 
   /**
    * Provide an Iface.
@@ -203,7 +203,7 @@ public:
 template<typename Dependency, typename Impl, typename Allocator, typename A1,
     typename A2, typename A3, typename A4>
 class NewInjection<Dependency, Impl(A1, A2, A3, A4), Allocator>:
-  public Injection<Dependency> {
+  public ProvidingInjection<Dependency> {
 
   typedef typename Key<Dependency>::Iface Iface;
   typedef typename Key<Dependency>::Ptr Ptr;
@@ -217,7 +217,7 @@ class NewInjection<Dependency, Impl(A1, A2, A3, A4), Allocator>:
 
 public:
 
-  typedef typename Injection<Dependency>::InjectionPtr InjectionPtr;
+  typedef typename ProvidingInjection<Dependency>::InjectionPtr InjectionPtr;
 
   /**
    * Provide an Iface.
@@ -254,7 +254,7 @@ public:
 template<typename Dependency, typename Impl, typename Allocator, typename A1,
     typename A2, typename A3, typename A4, typename A5>
 class NewInjection<Dependency, Impl(A1, A2, A3, A4, A5), Allocator>:
-  public Injection<Dependency> {
+  public ProvidingInjection<Dependency> {
 
   typedef typename Key<Dependency>::Iface Iface;
   typedef typename Key<Dependency>::Ptr Ptr;
@@ -268,7 +268,7 @@ class NewInjection<Dependency, Impl(A1, A2, A3, A4, A5), Allocator>:
 
 public:
 
-  typedef typename Injection<Dependency>::InjectionPtr InjectionPtr;
+  typedef typename ProvidingInjection<Dependency>::InjectionPtr InjectionPtr;
 
   /**
    * Provide an Iface.
@@ -307,7 +307,7 @@ public:
 template<typename Dependency, typename Impl, typename Allocator, typename A1,
     typename A2, typename A3, typename A4, typename A5, typename A6>
 class NewInjection<Dependency, Impl(A1, A2, A3, A4, A5, A6), Allocator>:
-  public Injection<Dependency> {
+  public ProvidingInjection<Dependency> {
 
   typedef typename Key<Dependency>::Iface Iface;
   typedef typename Key<Dependency>::Ptr Ptr;
@@ -321,7 +321,7 @@ class NewInjection<Dependency, Impl(A1, A2, A3, A4, A5, A6), Allocator>:
 
 public:
 
-  typedef typename Injection<Dependency>::InjectionPtr InjectionPtr;
+  typedef typename ProvidingInjection<Dependency>::InjectionPtr InjectionPtr;
 
   /**
    * Provide an Iface.
@@ -363,7 +363,7 @@ template<typename Dependency, typename Impl, typename Allocator, typename A1,
     typename A2, typename A3, typename A4, typename A5, typename A6,
     typename A7>
 class NewInjection<Dependency, Impl(A1, A2, A3, A4, A5, A6, A7), Allocator>:
-  public Injection<Dependency> {
+  public ProvidingInjection<Dependency> {
 
   typedef typename Key<Dependency>::Iface Iface;
   typedef typename Key<Dependency>::Ptr Ptr;
@@ -378,7 +378,7 @@ class NewInjection<Dependency, Impl(A1, A2, A3, A4, A5, A6, A7), Allocator>:
 
 public:
 
-  typedef typename Injection<Dependency>::InjectionPtr InjectionPtr;
+  typedef typename ProvidingInjection<Dependency>::InjectionPtr InjectionPtr;
 
   /**
    * Provide an Iface.
@@ -422,7 +422,7 @@ template<typename Dependency, typename Impl, typename Allocator, typename A1,
     typename A2, typename A3, typename A4, typename A5, typename A6,
     typename A7, typename A8>
 class NewInjection<Dependency, Impl(A1, A2, A3, A4, A5, A6, A7, A8), Allocator>:
-  public Injection<Dependency> {
+  public ProvidingInjection<Dependency> {
 
   typedef typename Key<Dependency>::Iface Iface;
   typedef typename Key<Dependency>::Ptr Ptr;
@@ -437,7 +437,7 @@ class NewInjection<Dependency, Impl(A1, A2, A3, A4, A5, A6, A7, A8), Allocator>:
 
 public:
 
-  typedef typename Injection<Dependency>::InjectionPtr InjectionPtr;
+  typedef typename ProvidingInjection<Dependency>::InjectionPtr InjectionPtr;
 
   /**
    * Provide an Iface.
@@ -484,7 +484,7 @@ template<typename Dependency, typename Impl, typename Allocator, typename A1,
     typename A7, typename A8, typename A9>
 class NewInjection<Dependency, Impl(A1, A2, A3, A4, A5, A6, A7, A8, A9),
     Allocator>:
-  public Injection<Dependency> {
+  public ProvidingInjection<Dependency> {
 
   typedef typename Key<Dependency>::Iface Iface;
   typedef typename Key<Dependency>::Ptr Ptr;
@@ -499,7 +499,7 @@ class NewInjection<Dependency, Impl(A1, A2, A3, A4, A5, A6, A7, A8, A9),
 
 public:
 
-  typedef typename Injection<Dependency>::InjectionPtr InjectionPtr;
+  typedef typename ProvidingInjection<Dependency>::InjectionPtr InjectionPtr;
 
   /**
    * Provide an Iface.
@@ -548,7 +548,7 @@ template<typename Dependency, typename Impl, typename Allocator, typename A1,
     typename A7, typename A8, typename A9, typename A10>
 class NewInjection<Dependency, Impl(A1, A2, A3, A4, A5, A6, A7, A8, A9, A10),
     Allocator>:
-  public Injection<Dependency> {
+  public ProvidingInjection<Dependency> {
 
   typedef typename Key<Dependency>::Iface Iface;
   typedef typename Key<Dependency>::Ptr Ptr;
@@ -563,7 +563,7 @@ class NewInjection<Dependency, Impl(A1, A2, A3, A4, A5, A6, A7, A8, A9, A10),
 
 public:
 
-  typedef typename Injection<Dependency>::InjectionPtr InjectionPtr;
+  typedef typename ProvidingInjection<Dependency>::InjectionPtr InjectionPtr;
 
   /**
    * Provide an Iface.
