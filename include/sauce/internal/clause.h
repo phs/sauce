@@ -11,7 +11,7 @@
 namespace sauce {
 namespace internal {
 
-class ImplicitBindings;
+struct ImplicitBindings;
 
 /**
  * The accumulated state passed between Clauses that ultimately results in a new Binding.

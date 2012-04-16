@@ -16,7 +16,7 @@ namespace sauce {
 class Modules;
 
 namespace internal {
-class ImplicitBindings;
+struct ImplicitBindings;
 class InjectorFriend;
 }
 

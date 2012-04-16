@@ -38,7 +38,7 @@ class Provider {
 
   typedef typename i::Key<Dependency>::Iface Iface;
 
-  friend class ::sauce::internal::ProviderFriend;
+  friend struct ::sauce::internal::ProviderFriend;
 
   sauce::weak_ptr<Provider<Dependency> > weak;
 
