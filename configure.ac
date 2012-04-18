@@ -1,0 +1,69 @@
+AC_INIT([Sauce],[0.0.1],[https://github.com/phs/sauce/issues],[sauce],[https://github.com/phs/sauce/])
+
+# Boilerplate
+AC_PREREQ(2.61)
+AC_CONFIG_AUX_DIR([build-aux])
+AC_CONFIG_MACRO_DIR([m4])
+AM_INIT_AUTOMAKE([1.9 -Wall -Werror foreign])
+LT_INIT
+
+# Needed programs
+AC_PROG_AWK
+AC_PROG_CXX
+AC_PROG_EGREP
+AC_PROG_LN_S
+
+AC_CHECK_PROG([DIFF],[git],[git diff --exit-code --no-index],[diff])
+AC_ARG_VAR([DIFF],[Diff command to display style violations])
+
+DX_DOT_FEATURE(ON)
+DX_PDF_FEATURE(OFF)
+DX_PS_FEATURE(OFF)
+DX_INIT_DOXYGEN(AC_PACKAGE_NAME)
+
+# Code testing coverage with gcov
+AC_ARG_ENABLE([gcov],AS_HELP_STRING([--enable-gcov], [measure coverage with gcov]))
+AC_MSG_CHECKING([for gcov])
+if test "x$enable_gcov" = "xyes"
+then
+  if test ! "x$GXX" = "xyes"
+  then
+    AC_MSG_RESULT([no])
+    AC_MSG_ERROR([gcov requires compiling with gcc])
+  fi
+  enable_gcov=yes
+  GCOV_CFLAGS="-fprofile-arcs -ftest-coverage"
+  GCOV_LDFLAGS="-fprofile-arcs -ftest-coverage"
+else
+  enable_gcov=no
+fi
+AC_MSG_RESULT([$enable_gcov])
+AM_CONDITIONAL(GCOV_ENABLED, test "x$enable_gcov" = "xyes")
+
+# Set default compilation and linking flags
+AC_SUBST([AM_CXXFLAGS],"-Wall -Wextra -Werror -ansi $GCOV_CFLAGS")
+AC_SUBST([AM_LDFLAGS],"$GCOV_LDFLAGS")
+
+# The list of all authored c++ source and header files in the project
+AC_SUBST([CC_FILES],[`( cd "$srcdir" && find include test -type f -name "*.cc" | tr '\n' ' ')`])
+AC_SUBST([H_FILES],[`( cd "$srcdir" && find include test -type f -name "*.h" | tr '\n' ' ')`])
+
+# Mark generated scripts as executable
+AC_CONFIG_COMMANDS([permission],[
+  chmod +x check-style;
+  chmod +x check-coverage;
+  chmod +x $srcdir/.git/hooks/pre-commit;
+])
+
+# Create the generated files
+AC_CONFIG_HEADERS([config.h])
+AC_CONFIG_FILES([
+  Makefile
+  Doxyfile
+  check-style
+  check-coverage
+  $srcdir/.git/hooks/pre-commit:pre-commit.in
+])
+
+# Actually create the requested files.  This must be the last line.
+AC_OUTPUT

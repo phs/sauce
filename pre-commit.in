@@ -1,0 +1,17 @@
+#!/bin/sh
+
+if test ! -f Makefile
+then
+  echo
+  echo "Error: Attempt to commit an unconfigured tree."
+  echo
+  echo "To commit, you are required to pass 'make check'.  To do that, the makefiles must"
+  echo "be created with something like ./bootstrap && ./configure"
+  echo
+  echo "Due to a limitation of this git hook, a separate build directory can't be used for"
+  echo "this purpose.  If you want to test that functionality, consider 'make distcheck'."
+  echo
+  exit 1
+fi
+
+exec make check

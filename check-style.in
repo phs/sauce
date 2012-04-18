@@ -1,0 +1,36 @@
+#! /bin/sh
+
+cd $top_srcdir
+
+# Build the binary if needed
+if test ! -r "${uncrustify}/src/uncrustify"
+then
+  ( cd "$uncrustify" && ./configure && make )
+fi
+
+# Run the style checker
+cat <<EOF | @EGREP@ -v '^$' | xargs "${uncrustify}/src/uncrustify" -c uncrustify.cfg --prefix "@builddir@" --suffix .uncrustify -l CPP
+@CC_FILES@
+@H_FILES@
+EOF
+
+cat <<EOF | @EGREP@ -v '^$' | @AWK@ '{print $1,$1}' | sed 's/$/.uncrustify/'
+@CC_FILES@
+@H_FILES@
+EOF
+
+# Check input-output pairs for differences, whine if any are found.
+cat <<EOF | @EGREP@ -v '^$' | @AWK@ '{print $1,$1}' | sed 's/$/.uncrustify/' | xargs -n 2 @DIFF@
+@CC_FILES@
+@H_FILES@
+EOF
+
+if test "$?" = "0"
+then
+  echo "No style violations found."
+else
+  echo
+  echo "Style violations found."
+  echo
+  exit 1
+fi

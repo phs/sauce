@@ -1,0 +1,44 @@
+#! /bin/sh
+
+# Overcome some object file naming idiocy by soft-linking (or copying) them
+# back to match the source files names in the root of the build directory.
+cat <<EOF | while read source_file
+@CC_FILES@
+EOF
+do
+  # Figure out how to find its mangled name
+  mangled_glob=`echo $source_file | sed 's|\([^/]*\).cc$|*\1|'`
+
+  # What would we prefer it called? Take the basename and strip off the extension.
+  desired_file=`expr //$source_file : '.*/\(.*\)' | sed 's|\.cc$||'`
+
+  # Make links/copies with a source-matching names.
+  @LN_S@ `ls $mangled_glob.o`     $desired_file.o
+  @LN_S@ `ls $mangled_glob.gcda`  $desired_file.gcda
+  @LN_S@ `ls $mangled_glob.gcno`  $desired_file.gcno
+done
+
+# Pass all source files we care about to gcov
+(cat <<EOF | sed "s|^|$top_srcdir/|" | xargs gcov
+@CC_FILES@
+EOF
+) > /dev/null
+
+# Construct the list of gcov files we want to keep
+selected=`cat <<EOF | @EGREP@ -v '^$' | sed 's|.*/\(.*\)|\1.gcov|'
+@CC_FILES@
+@H_FILES@
+EOF
+`
+
+# Purge other generated gcov files for e.g. system headers
+find . -type f -name "*.gcov" | @EGREP@ -v "$selected" | xargs rm
+
+# Purge copies of object and coverage files we created
+cat <<EOF | while read source_file
+@CC_FILES@
+EOF
+do
+  desired_file=`expr //$source_file : '.*/\(.*\)' | sed 's|\.cc$||'`
+  rm $desired_file.o $desired_file.gcda $desired_file.gcno
+done
