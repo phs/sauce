@@ -7,7 +7,7 @@ namespace test {
 /**
  * A template of tag types for mock allocators interacting with AllocateWith.
  */
-template <typename C>
+template<typename C>
 struct A {
   bool operator==(A<C>) const {
     return true;

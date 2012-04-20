@@ -57,7 +57,7 @@ check_PROGRAMS += unittests
 
 unittests_CPPFLAGS = \
   -DSAUCE_STD_TR1_SMART_PTR \
-  -I$(srcdir)/include \
+  -I$(srcdir) \
   -I$(gtest)/include \
   -I$(gmock)/include
 
