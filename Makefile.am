@@ -49,23 +49,8 @@ MAINTAINERCLEANFILES += \
   m4/lt~obsolete.m4 \
   Makefile.in
 
-# -- Doxygen --
+# -- Source and Tests --
 #
-include m4/doxygen.am
-EXTRA_DIST += Doxyfile
-
-# Only if Doxygen is configured..
-if DX_COND_doc
-
-nobase_doc_DATA = doxygen-doc/$(PACKAGE_NAME).tag doxygen-doc/*/*
-doxygen-doc/$(PACKAGE_NAME).tag: doxygen-doc
-
-# Remove it on distclean
-distclean_locals += clean-doxygen-doc
-clean-doxygen-doc:
-	rm -rf doxygen-doc
-
-endif DX_COND_doc
 
 TESTS += unittests
 check_PROGRAMS += unittests
@@ -177,6 +162,25 @@ clean-coverage:
 	find $(builddir) -type f -name "*.gcda" -o -name "*.gcno" -o -name "*.gcov" -exec rm "{}" \;
 
 endif GCOV_ENABLED
+
+# -- Doxygen --
+#
+
+include m4/doxygen.am
+EXTRA_DIST += Doxyfile
+
+# Only if Doxygen is configured..
+if DX_COND_doc
+
+nobase_doc_DATA = doxygen-doc/$(PACKAGE_NAME).tag doxygen-doc/*/*
+doxygen-doc/$(PACKAGE_NAME).tag: doxygen-doc
+
+# Remove it on distclean
+distclean_locals += clean-doxygen-doc
+clean-doxygen-doc:
+	rm -rf doxygen-doc
+
+endif DX_COND_doc
 
 # -- Local rules --
 #
