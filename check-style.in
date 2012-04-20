@@ -2,8 +2,14 @@
 
 cd $top_srcdir
 
+if test ! -r "$uncrustify"
+then
+  # Running check from a tarball, perhaps by distcheck
+  exit 0
+fi
+
 # Build the binary if needed
-if test ! -r "${uncrustify}/src/uncrustify"
+if test ! -r "$uncrustify/src/uncrustify"
 then
   ( cd "$uncrustify" && ./configure && make )
 fi

@@ -15,6 +15,7 @@ DISTCLEANFILES =
 EXTRA_DIST =
 MAINTAINERCLEANFILES =
 MOSTLYCLEANFILES =
+nobase_include_HEADERS =
 SUBDIRS =
 TESTS =
 TESTS_ENVIRONMENT =
@@ -51,6 +52,78 @@ MAINTAINERCLEANFILES += \
 
 # -- Source and Tests --
 #
+
+nobase_include_HEADERS += \
+  sauce/binder.h \
+  sauce/exceptions.h \
+  sauce/injector.h \
+  sauce/internal/base_injector.h \
+  sauce/internal/bindings.h \
+  sauce/internal/clause.h \
+  sauce/internal/disposal_deleter.h \
+  sauce/internal/implicit_bindings.h \
+  sauce/internal/injection_binding.h \
+  sauce/internal/injections/all.h \
+  sauce/internal/injections/implicit_provider_injection.h \
+  sauce/internal/injections/injector_injection.h \
+  sauce/internal/injections/new_injection.h \
+  sauce/internal/injections/new_injection.h.pump \
+  sauce/internal/injections/provider_injection.h \
+  sauce/internal/injections/providing_injection.h \
+  sauce/internal/key.h \
+  sauce/internal/locker_factory.h \
+  sauce/internal/memory/boost.h \
+  sauce/internal/memory/std.h \
+  sauce/internal/memory/tr1.h \
+  sauce/internal/opaque_binding.h \
+  sauce/internal/pending_thrower.h \
+  sauce/internal/resolved_binding.h \
+  sauce/internal/scope_cache.h \
+  sauce/internal/type_id.h \
+  sauce/memory.h \
+  sauce/modules.h \
+  sauce/named.h \
+  sauce/provider.h \
+  sauce/sauce.h \
+  sauce/scopes.h
+
+EXTRA_DIST += \
+  sauce/binder.h \
+  sauce/exceptions.h \
+  sauce/injector.h \
+  sauce/internal/base_injector.h \
+  sauce/internal/bindings.h \
+  sauce/internal/clause.h \
+  sauce/internal/disposal_deleter.h \
+  sauce/internal/implicit_bindings.h \
+  sauce/internal/injection_binding.h \
+  sauce/internal/injections/all.h \
+  sauce/internal/injections/implicit_provider_injection.h \
+  sauce/internal/injections/injector_injection.h \
+  sauce/internal/injections/new_injection.h \
+  sauce/internal/injections/new_injection.h.pump \
+  sauce/internal/injections/provider_injection.h \
+  sauce/internal/injections/providing_injection.h \
+  sauce/internal/key.h \
+  sauce/internal/locker_factory.h \
+  sauce/internal/memory/boost.h \
+  sauce/internal/memory/std.h \
+  sauce/internal/memory/tr1.h \
+  sauce/internal/opaque_binding.h \
+  sauce/internal/pending_thrower.h \
+  sauce/internal/resolved_binding.h \
+  sauce/internal/scope_cache.h \
+  sauce/internal/type_id.h \
+  sauce/memory.h \
+  sauce/modules.h \
+  sauce/named.h \
+  sauce/provider.h \
+  sauce/sauce.h \
+  sauce/scopes.h \
+  test/allocate_with.h \
+  test/allocation_test.cc \
+  test/binding_test.cc \
+  test/scope_test.cc
 
 TESTS += unittests
 check_PROGRAMS += unittests
