@@ -12,6 +12,7 @@ AC_PROG_AWK
 AC_PROG_CXX
 AC_PROG_EGREP
 AC_PROG_LN_S
+AM_PROG_CC_C_O
 
 AC_CHECK_PROG([DIFF],[git],[git diff --exit-code --no-index],[diff])
 AC_ARG_VAR([DIFF],[Diff command to display style violations])
