@@ -47,8 +47,8 @@ AC_SUBST([AM_CXXFLAGS],"-Wall -Wextra -Werror -ansi $GCOV_CFLAGS")
 AC_SUBST([AM_LDFLAGS],"$GCOV_LDFLAGS")
 
 # The list of all authored c++ source and header files in the project
-AC_SUBST([CC_FILES],[`( cd "$srcdir" && find include test -type f -name "*.cc" | tr '\n' ' ' )`])
-AC_SUBST([H_FILES],[`( cd "$srcdir" && find include test -type f -name "*.h" | tr '\n' ' ' )`])
+AC_SUBST([CC_FILES],[`( cd "$srcdir" && find sauce test -type f -name "*.cc" | tr '\n' ' ' )`])
+AC_SUBST([H_FILES],[`( cd "$srcdir" && find sauce test -type f -name "*.h" | tr '\n' ' ' )`])
 
 # Mark generated scripts as executable
 AC_CONFIG_COMMANDS([permission],[
