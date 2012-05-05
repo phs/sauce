@@ -153,6 +153,10 @@ libunittest_la_CPPFLAGS = \
   -I$(gtest) \
   -I$(gmock)
 
+# Override default compiler and linker flags
+libunittest_la_CXXFLAGS = -Wall -Wextra -Werror
+libunittest_la_LDFLAGS =
+
 # You can't extract these paths without breaking distcheck.
 libunittest_la_SOURCES = \
   vendor/gmock-1.6.0/gtest/include/gtest/gtest-death-test.h \
