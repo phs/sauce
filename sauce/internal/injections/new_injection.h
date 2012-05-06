@@ -21,6 +21,7 @@ namespace injections {
 template<typename Dependency, typename Constructor, typename Allocator>
 class NewInjection;
 
+/* *INDENT-OFF* */
 template<typename Dependency, typename Impl, typename Allocator>
 class NewInjection<Dependency, Impl(), Allocator>:
   public ProvidingInjection<Dependency> {
@@ -46,7 +47,7 @@ public:
    * also given a custom deleter, to dispose of the naked pointer with
    * dispose(Iface *).
    */
- Ptr provide(InjectionPtr injection, InjectorPtr) const {
+  Ptr provide(InjectionPtr injection, InjectorPtr) const {
     Deleter deleter(sauce::static_pointer_cast<New>(injection));
     Impl * impl = allocator.allocate(1);
     Ptr provided(new(impl) Impl(), deleter);
@@ -59,7 +60,9 @@ public:
     allocator.deallocate(impl, 1);
   }
 };
+/* *INDENT-ON* */
 
+/* *INDENT-OFF* */
 template<typename Dependency, typename Impl, typename Allocator, typename A1>
 class NewInjection<Dependency, Impl(A1), Allocator>:
   public ProvidingInjection<Dependency> {
@@ -85,7 +88,7 @@ public:
    * also given a custom deleter, to dispose of the naked pointer with
    * dispose(Iface *).
    */
- Ptr provide(InjectionPtr injection, InjectorPtr injector) const {
+  Ptr provide(InjectionPtr injection, InjectorPtr injector) const {
     typename Key<A1>::Ptr a1(this->template getHelper<A1>(injector));
     Deleter deleter(sauce::static_pointer_cast<New>(injection));
     Impl * impl = allocator.allocate(1);
@@ -103,7 +106,9 @@ public:
     allocator.deallocate(impl, 1);
   }
 };
+/* *INDENT-ON* */
 
+/* *INDENT-OFF* */
 template<typename Dependency, typename Impl, typename Allocator, typename A1,
     typename A2>
 class NewInjection<Dependency, Impl(A1, A2), Allocator>:
@@ -130,7 +135,7 @@ public:
    * also given a custom deleter, to dispose of the naked pointer with
    * dispose(Iface *).
    */
- Ptr provide(InjectionPtr injection, InjectorPtr injector) const {
+  Ptr provide(InjectionPtr injection, InjectorPtr injector) const {
     typename Key<A1>::Ptr a1(this->template getHelper<A1>(injector));
     typename Key<A2>::Ptr a2(this->template getHelper<A2>(injector));
     Deleter deleter(sauce::static_pointer_cast<New>(injection));
@@ -150,7 +155,9 @@ public:
     allocator.deallocate(impl, 1);
   }
 };
+/* *INDENT-ON* */
 
+/* *INDENT-OFF* */
 template<typename Dependency, typename Impl, typename Allocator, typename A1,
     typename A2, typename A3>
 class NewInjection<Dependency, Impl(A1, A2, A3), Allocator>:
@@ -177,7 +184,7 @@ public:
    * also given a custom deleter, to dispose of the naked pointer with
    * dispose(Iface *).
    */
- Ptr provide(InjectionPtr injection, InjectorPtr injector) const {
+  Ptr provide(InjectionPtr injection, InjectorPtr injector) const {
     typename Key<A1>::Ptr a1(this->template getHelper<A1>(injector));
     typename Key<A2>::Ptr a2(this->template getHelper<A2>(injector));
     typename Key<A3>::Ptr a3(this->template getHelper<A3>(injector));
@@ -199,7 +206,9 @@ public:
     allocator.deallocate(impl, 1);
   }
 };
+/* *INDENT-ON* */
 
+/* *INDENT-OFF* */
 template<typename Dependency, typename Impl, typename Allocator, typename A1,
     typename A2, typename A3, typename A4>
 class NewInjection<Dependency, Impl(A1, A2, A3, A4), Allocator>:
@@ -226,7 +235,7 @@ public:
    * also given a custom deleter, to dispose of the naked pointer with
    * dispose(Iface *).
    */
- Ptr provide(InjectionPtr injection, InjectorPtr injector) const {
+  Ptr provide(InjectionPtr injection, InjectorPtr injector) const {
     typename Key<A1>::Ptr a1(this->template getHelper<A1>(injector));
     typename Key<A2>::Ptr a2(this->template getHelper<A2>(injector));
     typename Key<A3>::Ptr a3(this->template getHelper<A3>(injector));
@@ -250,7 +259,9 @@ public:
     allocator.deallocate(impl, 1);
   }
 };
+/* *INDENT-ON* */
 
+/* *INDENT-OFF* */
 template<typename Dependency, typename Impl, typename Allocator, typename A1,
     typename A2, typename A3, typename A4, typename A5>
 class NewInjection<Dependency, Impl(A1, A2, A3, A4, A5), Allocator>:
@@ -277,7 +288,7 @@ public:
    * also given a custom deleter, to dispose of the naked pointer with
    * dispose(Iface *).
    */
- Ptr provide(InjectionPtr injection, InjectorPtr injector) const {
+  Ptr provide(InjectionPtr injection, InjectorPtr injector) const {
     typename Key<A1>::Ptr a1(this->template getHelper<A1>(injector));
     typename Key<A2>::Ptr a2(this->template getHelper<A2>(injector));
     typename Key<A3>::Ptr a3(this->template getHelper<A3>(injector));
@@ -303,7 +314,9 @@ public:
     allocator.deallocate(impl, 1);
   }
 };
+/* *INDENT-ON* */
 
+/* *INDENT-OFF* */
 template<typename Dependency, typename Impl, typename Allocator, typename A1,
     typename A2, typename A3, typename A4, typename A5, typename A6>
 class NewInjection<Dependency, Impl(A1, A2, A3, A4, A5, A6), Allocator>:
@@ -330,7 +343,7 @@ public:
    * also given a custom deleter, to dispose of the naked pointer with
    * dispose(Iface *).
    */
- Ptr provide(InjectionPtr injection, InjectorPtr injector) const {
+  Ptr provide(InjectionPtr injection, InjectorPtr injector) const {
     typename Key<A1>::Ptr a1(this->template getHelper<A1>(injector));
     typename Key<A2>::Ptr a2(this->template getHelper<A2>(injector));
     typename Key<A3>::Ptr a3(this->template getHelper<A3>(injector));
@@ -358,7 +371,9 @@ public:
     allocator.deallocate(impl, 1);
   }
 };
+/* *INDENT-ON* */
 
+/* *INDENT-OFF* */
 template<typename Dependency, typename Impl, typename Allocator, typename A1,
     typename A2, typename A3, typename A4, typename A5, typename A6,
     typename A7>
@@ -387,7 +402,7 @@ public:
    * also given a custom deleter, to dispose of the naked pointer with
    * dispose(Iface *).
    */
- Ptr provide(InjectionPtr injection, InjectorPtr injector) const {
+  Ptr provide(InjectionPtr injection, InjectorPtr injector) const {
     typename Key<A1>::Ptr a1(this->template getHelper<A1>(injector));
     typename Key<A2>::Ptr a2(this->template getHelper<A2>(injector));
     typename Key<A3>::Ptr a3(this->template getHelper<A3>(injector));
@@ -417,7 +432,9 @@ public:
     allocator.deallocate(impl, 1);
   }
 };
+/* *INDENT-ON* */
 
+/* *INDENT-OFF* */
 template<typename Dependency, typename Impl, typename Allocator, typename A1,
     typename A2, typename A3, typename A4, typename A5, typename A6,
     typename A7, typename A8>
@@ -446,7 +463,7 @@ public:
    * also given a custom deleter, to dispose of the naked pointer with
    * dispose(Iface *).
    */
- Ptr provide(InjectionPtr injection, InjectorPtr injector) const {
+  Ptr provide(InjectionPtr injection, InjectorPtr injector) const {
     typename Key<A1>::Ptr a1(this->template getHelper<A1>(injector));
     typename Key<A2>::Ptr a2(this->template getHelper<A2>(injector));
     typename Key<A3>::Ptr a3(this->template getHelper<A3>(injector));
@@ -478,7 +495,9 @@ public:
     allocator.deallocate(impl, 1);
   }
 };
+/* *INDENT-ON* */
 
+/* *INDENT-OFF* */
 template<typename Dependency, typename Impl, typename Allocator, typename A1,
     typename A2, typename A3, typename A4, typename A5, typename A6,
     typename A7, typename A8, typename A9>
@@ -508,7 +527,7 @@ public:
    * also given a custom deleter, to dispose of the naked pointer with
    * dispose(Iface *).
    */
- Ptr provide(InjectionPtr injection, InjectorPtr injector) const {
+  Ptr provide(InjectionPtr injection, InjectorPtr injector) const {
     typename Key<A1>::Ptr a1(this->template getHelper<A1>(injector));
     typename Key<A2>::Ptr a2(this->template getHelper<A2>(injector));
     typename Key<A3>::Ptr a3(this->template getHelper<A3>(injector));
@@ -542,7 +561,9 @@ public:
     allocator.deallocate(impl, 1);
   }
 };
+/* *INDENT-ON* */
 
+/* *INDENT-OFF* */
 template<typename Dependency, typename Impl, typename Allocator, typename A1,
     typename A2, typename A3, typename A4, typename A5, typename A6,
     typename A7, typename A8, typename A9, typename A10>
@@ -572,7 +593,7 @@ public:
    * also given a custom deleter, to dispose of the naked pointer with
    * dispose(Iface *).
    */
- Ptr provide(InjectionPtr injection, InjectorPtr injector) const {
+  Ptr provide(InjectionPtr injection, InjectorPtr injector) const {
     typename Key<A1>::Ptr a1(this->template getHelper<A1>(injector));
     typename Key<A2>::Ptr a2(this->template getHelper<A2>(injector));
     typename Key<A3>::Ptr a3(this->template getHelper<A3>(injector));
@@ -609,6 +630,7 @@ public:
     allocator.deallocate(impl, 1);
   }
 };
+/* *INDENT-ON* */
 
 }
 }

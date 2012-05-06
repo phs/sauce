@@ -34,8 +34,6 @@ then
     AC_MSG_ERROR([gcov requires compiling with gcc])
   fi
   enable_gcov=yes
-  GCOV_CFLAGS="-fprofile-arcs -ftest-coverage"
-  GCOV_LDFLAGS="-fprofile-arcs -ftest-coverage"
 else
   enable_gcov=no
 fi
@@ -43,8 +41,7 @@ AC_MSG_RESULT([$enable_gcov])
 AM_CONDITIONAL(GCOV_ENABLED, test "x$enable_gcov" = "xyes")
 
 # Set default compilation and linking flags
-AC_SUBST([AM_CXXFLAGS],"-Wall -Wextra -Werror -ansi $GCOV_CFLAGS")
-AC_SUBST([AM_LDFLAGS],"$GCOV_LDFLAGS")
+AC_SUBST([AM_CXXFLAGS],"-Wall -Wextra -Werror -ansi")
 
 # The list of all authored c++ source and header files in the project
 AC_SUBST([CC_FILES],[`( cd "$srcdir" && find sauce test -type f -name "*.cc" | tr '\n' ' ' )`])

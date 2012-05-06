@@ -2,7 +2,7 @@
 
 # Overcome some object file naming idiocy by soft-linking (or copying) them
 # back to match the source files names in the root of the build directory.
-cat <<EOF | while read source_file
+cat <<EOF | tr ' ' '\n' | @EGREP@ -v '^$' | while read source_file
 @CC_FILES@
 EOF
 do
@@ -19,13 +19,13 @@ do
 done
 
 # Pass all source files we care about to gcov
-(cat <<EOF | sed "s|^|$top_srcdir/|" | xargs gcov
+(cat <<EOF | tr ' ' '\n' | @EGREP@ -v '^$' | sed "s|^|$top_srcdir/|" | xargs gcov
 @CC_FILES@
 EOF
 ) > /dev/null
 
 # Construct the list of gcov files we want to keep
-selected=`cat <<EOF | @EGREP@ -v '^$' | sed 's|.*/\(.*\)|\1.gcov|'
+selected=`cat <<EOF | tr ' ' '\n' | @EGREP@ -v '^$' | sed 's|.*/\(.*\)|\1.gcov|'
 @CC_FILES@
 @H_FILES@
 EOF
@@ -35,7 +35,7 @@ EOF
 find . -type f -name "*.gcov" | @EGREP@ -v "$selected" | xargs rm
 
 # Purge copies of object and coverage files we created
-cat <<EOF | while read source_file
+cat <<EOF | tr ' ' '\n' | @EGREP@ -v '^$' | while read source_file
 @CC_FILES@
 EOF
 do

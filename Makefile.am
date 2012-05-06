@@ -134,6 +134,15 @@ unittests_CPPFLAGS = \
   -I$(gtest)/include \
   -I$(gmock)/include
 
+# Drop -ansi as gtest/gmock break it (as caught by cygwin)
+unittests_CXXFLAGS = -Wall -Wextra -Werror
+
+# Enable gcov if requested
+if GCOV_ENABLED
+unittests_CXXFLAGS += -fprofile-arcs -ftest-coverage
+unittests_LDFLAGS = -fprofile-arcs -ftest-coverage
+endif GCOV_ENABLED
+
 unittests_SOURCES = \
   test/allocation_test.cc \
   test/binding_test.cc \
@@ -263,7 +272,7 @@ endif DX_COND_doc
 #
 
 # Generate templated headers from their "pump" sources
-include/%: include/%.pump
+sauce/%: sauce/%.pump
 	vendor/pump.py $+
 
 # This must be the last section so that the corrosponding variables have their final values.

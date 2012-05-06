@@ -15,18 +15,18 @@ then
 fi
 
 # Run the style checker
-cat <<EOF | @EGREP@ -v '^$' | xargs "${uncrustify}/src/uncrustify" -c uncrustify.cfg --prefix "@builddir@" --suffix .uncrustify -l CPP
+cat <<EOF | tr ' ' '\n' | @EGREP@ -v '^$' | xargs "${uncrustify}/src/uncrustify" -c uncrustify.cfg --prefix "@builddir@" --suffix .uncrustify -l CPP
 @CC_FILES@
 @H_FILES@
 EOF
 
-cat <<EOF | @EGREP@ -v '^$' | @AWK@ '{print $1,$1}' | sed 's/$/.uncrustify/'
+cat <<EOF | tr ' ' '\n' | @EGREP@ -v '^$' | @AWK@ '{print $1,$1}' | sed 's/$/.uncrustify/'
 @CC_FILES@
 @H_FILES@
 EOF
 
 # Check input-output pairs for differences, whine if any are found.
-cat <<EOF | @EGREP@ -v '^$' | @AWK@ '{print $1,$1}' | sed 's/$/.uncrustify/' | xargs -n 2 @DIFF@
+cat <<EOF | tr ' ' '\n' | @EGREP@ -v '^$' | @AWK@ '{print $1,$1}' | sed 's/$/.uncrustify/' | xargs -n 2 @DIFF@
 @CC_FILES@
 @H_FILES@
 EOF

@@ -27,6 +27,7 @@ $var comma_typename_As = [[$for j [[, typename A$j]]]]
 $var As = [[$for j, [[A$j]]]]
 $var as = [[$for j, [[a$j]]]]
 
+/* *INDENT-OFF* */
 template<typename Dependency, typename Impl, typename Allocator$comma_typename_As>
 class NewInjection<Dependency, Impl($As), Allocator>:
   public ProvidingInjection<Dependency> {
@@ -53,9 +54,9 @@ public:
    * dispose(Iface *).
    */
 [[$if i==0 [[
- Ptr provide(InjectionPtr injection, InjectorPtr) const
+  Ptr provide(InjectionPtr injection, InjectorPtr) const
 ]] $else [[
- Ptr provide(InjectionPtr injection, InjectorPtr injector) const
+  Ptr provide(InjectionPtr injection, InjectorPtr injector) const
 ]]]] {
 [[$for j [[
     typename Key<A$j>::Ptr a$j(this->template getHelper<A$j>(injector));
@@ -83,6 +84,7 @@ public:
     allocator.deallocate(impl, 1);
   }
 };
+/* *INDENT-ON* */
 
 ]]
 
