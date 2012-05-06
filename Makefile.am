@@ -265,10 +265,8 @@ docpkg = $(PACKAGE_TARNAME)-doxy-$(PACKAGE_VERSION).tar.gz
 
 dist_doc_DATA += $(docpkg)
 
-$(docpkg): doxygen-doc/$(PACKAGE_TARNAME).tag
+$(docpkg): doxygen-doc
 	tar czf - doxygen-doc > $@
-
-doxygen-doc/$(PACKAGE_TARNAME).tag: doxygen-doc
 
 install_data_hooks += doxygen-install-data-hook
 doxygen-install-data-hook:
