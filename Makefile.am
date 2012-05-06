@@ -12,13 +12,16 @@ check_LTLIBRARIES =
 check_PROGRAMS =
 CLEANFILES =
 DISTCLEANFILES =
+dist_doc_DATA =
 EXTRA_DIST =
+install_data_hooks =
 MAINTAINERCLEANFILES =
 MOSTLYCLEANFILES =
 nobase_include_HEADERS =
 SUBDIRS =
 TESTS =
 TESTS_ENVIRONMENT =
+uninstall_hooks =
 
 # Instead of (over)writing local rule definitions, components are required to wrap their work in a
 # new rule and append its name to one of these. The actual local rules are at the bottom.
@@ -258,8 +261,24 @@ EXTRA_DIST += Doxyfile
 # Only if Doxygen is configured..
 if DX_COND_doc
 
-nobase_doc_DATA = doxygen-doc/$(PACKAGE_NAME).tag doxygen-doc/*/*
-doxygen-doc/$(PACKAGE_NAME).tag: doxygen-doc
+docpkg = $(PACKAGE_TARNAME)-doxy-$(PACKAGE_VERSION).tar.gz
+
+dist_doc_DATA += $(docpkg)
+
+$(docpkg): doxygen-doc/$(PACKAGE_TARNAME).tag
+	tar czf - doxygen-doc > $@
+
+doxygen-doc/$(PACKAGE_TARNAME).tag: doxygen-doc
+
+install_data_hooks += doxygen-install-data-hook
+doxygen-install-data-hook:
+	cd $(DESTDIR)$(docdir) && tar xzf $(docpkg)
+
+uninstall_hooks += doxygen-uninstall-hook
+doxygen-uninstall-hook:
+	cd $(DESTDIR)$(docdir) && rm -rf doxygen-doc
+
+DISTCLEANFILES += $(docpkg)
 
 # Remove it on distclean
 distclean_locals += clean-doxygen-doc
@@ -279,5 +298,7 @@ sauce/%: sauce/%.pump
 check-local: $(check_locals)
 clean-local: $(clean_locals)
 distclean-local: $(distclean_locals)
+install-data-hook: $(install_data_hooks)
 maintainer-clean-local: $(maintainerclean_locals)
 mostlyclean-local: $(mostlyclean_locals)
+uninstall-hook: $(uninstall_hooks)
