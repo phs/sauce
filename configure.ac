@@ -61,7 +61,6 @@ AC_CONFIG_FILES([
   Doxyfile
   check-style
   check-coverage
-  $srcdir/.git/hooks/pre-commit:pre-commit.in
 ])
 
 # Actually create the requested files.  This must be the last line.
