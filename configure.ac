@@ -52,7 +52,6 @@ AC_SUBST([H_FILES],[`( cd "$srcdir" && find sauce test -type f -name "*.h" | tr 
 AC_CONFIG_COMMANDS([permission],[
   chmod +x check-style;
   chmod +x check-coverage;
-  chmod +x $srcdir/.git/hooks/pre-commit;
 ])
 
 # Create the generated files
