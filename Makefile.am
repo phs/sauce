@@ -289,7 +289,7 @@ endif DX_COND_doc
 #
 
 # Generate templated headers from their "pump" sources
-sauce/%: sauce/%.pump
+sauce/internal/injections/new_injection.h: sauce/internal/injections/new_injection.h.pump
 	vendor/pump.py $+
 
 # This must be the last section so that the corrosponding variables have their final values.

@@ -5,9 +5,10 @@ AC_PREREQ(2.61)
 AC_CONFIG_AUX_DIR([build-aux])
 AC_CONFIG_MACRO_DIR([m4])
 AM_INIT_AUTOMAKE([1.9 -Wall -Werror foreign])
-LT_INIT
 
 # Needed programs
+m4_ifdef([AM_PROG_AR], [AM_PROG_AR])
+LT_INIT
 AC_PROG_AWK
 AC_PROG_CXX
 AC_PROG_EGREP
