@@ -156,6 +156,16 @@ struct Cow: Animal {
   std::string says() { return "Moo"; }
 };
 
+struct CowProvider: AbstractProvider<Animal> {
+  Animal * provide() {
+    return new Cow();
+  }
+
+  void dispose(Animal * cow) {
+    delete cow;
+  }
+};
+
 struct Pond {
   sauce::shared_ptr<Animal> animal;
 
@@ -166,7 +176,10 @@ struct Pond {
 void AnimalModule(Binder & binder) {
   binder.bind<Animal>().to<Cat()>();
   binder.bind<Animal>().named<LieutenantShinysides>().to<Fish()>();
-  binder.bind<Animal>().named<Meatloaf>().to<Cow()>();
+
+  // TODO
+  binder.bind<Provider<Animal> >().named<Meatloaf>().to<CowProvider()>();
+  binder.bind<Animal>().named<Meatloaf>().toProvider<Named<Provider<Animal>, Meatloaf> >();
 
   binder.bind<Pond>().to<Pond(Named<Animal, LieutenantShinysides>)>();
 }
@@ -187,9 +200,13 @@ TEST(BindingTest, shouldProvidedNamedDependencyProviders) {
   sauce::shared_ptr<Provider<Animal> > animalProvider = injector->get<Provider<Animal> >();
   EXPECT_EQ("Meow", animalProvider->get()->says());
 
-  sauce::shared_ptr<Provider<Named<Animal, LieutenantShinysides> > > namedAnimalProvider =
+  sauce::shared_ptr<Provider<Named<Animal, LieutenantShinysides> > > namedImplicitProvider =
     injector->get<Provider<Named<Animal, LieutenantShinysides> > >();
-  EXPECT_EQ("Blub blub", namedAnimalProvider->get()->says());
+  EXPECT_EQ("Blub blub", namedImplicitProvider->get()->says());
+
+  sauce::shared_ptr<Provider<Named<Animal, Meatloaf> > > namedExplicitProvider =
+    injector->get<Provider<Named<Animal, Meatloaf> > >();
+  EXPECT_EQ("Moo", namedExplicitProvider->get()->says());
 }
 
 void IncompleteNamedModule(Binder & binder) {
