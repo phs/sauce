@@ -138,7 +138,7 @@ unittests_CPPFLAGS = \
   -I$(gmock)/include
 
 # Drop -ansi as gtest/gmock break it (as caught by cygwin)
-unittests_CXXFLAGS = -Wall -Wextra -Werror
+unittests_CXXFLAGS = -Wall -Wextra -Werror $(PTHREAD_CFLAGS)
 
 # Enable gcov if requested
 if GCOV_ENABLED
