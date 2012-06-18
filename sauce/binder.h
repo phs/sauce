@@ -51,7 +51,7 @@ class ToClause: public i::Clause {
 public:
 
   template<typename Allocator>
-  AllocateFromClause<Dependency, Scope, Ctor, Allocator> allocateFrom() {
+  AllocateFromClause<Dependency, Scope, Ctor, Allocator> allocatedFrom() {
     return pass(AllocateFromClause<Dependency, Scope, Ctor, Allocator>());
   }
 };
@@ -73,7 +73,7 @@ class ToProviderClause: public i::Clause {
 public:
 
   template<typename Allocator>
-  AllocateFromClause<ProviderDependency, Scope, ProviderCtor, Allocator> allocateFrom() {
+  AllocateFromClause<ProviderDependency, Scope, ProviderCtor, Allocator> allocatedFrom() {
     return pass(AllocateFromClause<ProviderDependency, Scope, ProviderCtor, Allocator>());
   }
 };
