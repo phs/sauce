@@ -5,6 +5,7 @@
 #include <utility>
 
 #include <sauce/named.h>
+#include <sauce/provider.h>
 #include <sauce/scopes.h>
 #include <sauce/internal/bindings.h>
 #include <sauce/internal/clause.h>
