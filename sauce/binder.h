@@ -38,7 +38,7 @@ template<typename Dependency, typename Scope>
 class InClause;
 
 /**
- * Binds to a specific constructor allocating from the heap.
+ * Binds to a specific constructor, allocating from the heap.
  */
 template<typename Dependency, typename Scope, typename Ctor>
 class ToClause: public i::Clause {
@@ -57,7 +57,7 @@ public:
 };
 
 /**
- * Binds to a provider.
+ * Binds to a provider with a specific constructor, allocating from the heap.
  */
 template<typename Dependency, typename Scope, typename ProviderCtor>
 class ToProviderClause: public i::Clause {
@@ -68,6 +68,13 @@ class ToProviderClause: public i::Clause {
   void onComplete() {
     bindExtra<Scope>(inj::ProviderInjection<Dependency, ProviderDependency>());
     bind<Scope>(inj::NewInjection<ProviderDependency, ProviderCtor, std::allocator<Provider<Iface> > >());
+  }
+
+public:
+
+  template<typename Allocator>
+  AllocateFromClause<ProviderDependency, Scope, ProviderCtor, Allocator> allocateFrom() {
+    return pass(AllocateFromClause<ProviderDependency, Scope, ProviderCtor, Allocator>());
   }
 };
 
