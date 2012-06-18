@@ -62,9 +62,11 @@ public:
 template<typename Dependency, typename Scope, typename ProviderCtor>
 class ToProviderClause: public i::Clause {
   typedef typename i::Key<Dependency>::Iface Iface;
+  typedef typename i::Key<Dependency>::Name Name;
+  typedef Named<Provider<Iface>, Name> ProviderDependency;
 
   void onComplete() {
-    bind<Scope>(inj::ProviderInjection<Dependency, ProviderCtor>());
+    bind<Scope>(inj::ProviderInjection<Dependency, ProviderDependency>());
   }
 };
 
