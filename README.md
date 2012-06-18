@@ -10,7 +10,7 @@ I refer the reader to [Guice's documentation](http://code.google.com/docreader/#
 
 In Sauce, one defines _bindings_ that map interface types to implementation types.  Each binding is declared in the context of a _module_ which is used to organize and refer to collections of bindings at a time.  Modules may be function pointers, or classes providing a certain `operator()`.  Groups of modules may be used together, to avoid duplicate bindings.
 
-At runtime, one collects desired modules into a _modules_ object, which produces _injectors_.  One can then ask an injector to _provide_ a value (instance) of a desired type (again supplied as a template parameter.)  When providing a value, implicit transitive dependencies are provided as well.  All values are exchanged with shared pointers (`std`, `std::tr1` and `boost` `shared_ptr`s are supported) and the injector takes care of _disposing_ the value when the smart pointer deletes itself.
+At runtime, one collects desired modules into a _modules_ object, which produces _injectors_.  One can then ask an injector to _provide_ a value (instance) of a desired type (again supplied as a template parameter.)  When providing a value, implicit transitive dependencies are provided as well.  All values are exchanged with shared pointers (`std`, `std::tr1` and `boost::shared_ptr`s are supported) and the injector takes care of _disposing_ the value when the smart pointer deletes itself.
 
 Requesting the injector for an unbound type results in a runtime exception.
 
