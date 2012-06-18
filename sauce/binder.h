@@ -23,8 +23,6 @@ class ToClause;
  */
 template<typename Dependency, typename Scope, typename Ctor, typename Allocator>
 class AllocateFromClause: public i::Clause {
-  friend class ToClause<Dependency, Scope, Ctor>;
-
   void onComplete() {
     bind<Scope>(inj::NewInjection<Dependency, Ctor, Allocator>());
   }
@@ -46,10 +44,6 @@ template<typename Dependency, typename Scope, typename Ctor>
 class ToClause: public i::Clause {
   typedef typename i::Key<Dependency>::Iface Iface;
 
-  friend class BindClause<Iface>;
-  friend class NamedClause<Dependency>;
-  friend class InClause<Dependency, Scope>;
-
   void onComplete() {
     bind<Scope>(inj::NewInjection<Dependency, Ctor, std::allocator<Iface> >());
   }
@@ -60,7 +54,6 @@ public:
   AllocateFromClause<Dependency, Scope, Ctor, Allocator> allocateFrom() {
     return pass(AllocateFromClause<Dependency, Scope, Ctor, Allocator>());
   }
-
 };
 
 /**
@@ -69,10 +62,6 @@ public:
 template<typename Dependency, typename Scope, typename ProviderCtor>
 class ToProviderClause: public i::Clause {
   typedef typename i::Key<Dependency>::Iface Iface;
-
-  friend class BindClause<Iface>;
-  friend class NamedClause<Dependency>;
-  friend class InClause<Dependency, Scope>;
 
   void onComplete() {
     bind<Scope>(inj::ProviderInjection<Dependency, ProviderCtor>());
@@ -85,9 +74,6 @@ class ToProviderClause: public i::Clause {
 template<typename Dependency, typename Scope>
 class InClause: public i::Clause {
   typedef typename i::Key<Dependency>::Iface Iface;
-
-  friend class BindClause<Iface>;
-  friend class NamedClause<Dependency>;
 
   void onComplete() {
     throwLater(PartialBindingExceptionFor<Dependency>());
@@ -112,8 +98,6 @@ public:
 template<typename Dependency>
 class NamedClause: public i::Clause {
   typedef typename i::Key<Dependency>::Iface Iface;
-
-  friend class BindClause<Iface>;
 
   void onComplete() {
     throwLater(PartialBindingExceptionFor<Dependency>());
@@ -144,7 +128,6 @@ class Binder;
  */
 template<typename Iface>
 class BindClause: public i::Clause {
-  friend class Binder;
 
   void onComplete() {
     throwLater(PartialBindingExceptionFor<Named<Iface, Unnamed> >());
@@ -203,7 +186,6 @@ public:
     bindClause.setState(clauseState);
     return bindClause;
   }
-
 };
 
 }
