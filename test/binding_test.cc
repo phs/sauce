@@ -42,8 +42,6 @@ struct CustomBuiltProvider: AbstractProvider<CustomBuilt> {
 };
 
 void ProviderModule(Binder & binder) {
-  // TODO: One of these should be implicit, or one binding should specify both somehow
-  binder.bind<Provider<CustomBuilt> >().to<CustomBuiltProvider()>();
   binder.bind<CustomBuilt>().toProvider<CustomBuiltProvider()>();
 }
 
@@ -174,9 +172,6 @@ struct Pond {
 void AnimalModule(Binder & binder) {
   binder.bind<Animal>().to<Cat()>();
   binder.bind<Animal>().named<LieutenantShinysides>().to<Fish()>();
-
-  // TODO
-  binder.bind<Provider<Animal> >().named<Meatloaf>().to<CowProvider()>();
   binder.bind<Animal>().named<Meatloaf>().toProvider<CowProvider()>();
 
   binder.bind<Pond>().to<Pond(Named<Animal, LieutenantShinysides>)>();

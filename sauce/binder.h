@@ -66,7 +66,8 @@ class ToProviderClause: public i::Clause {
   typedef Named<Provider<Iface>, Name> ProviderDependency;
 
   void onComplete() {
-    bind<Scope>(inj::ProviderInjection<Dependency, ProviderDependency>());
+    bindExtra<Scope>(inj::ProviderInjection<Dependency, ProviderDependency>());
+    bind<Scope>(inj::NewInjection<ProviderDependency, ProviderCtor, std::allocator<Provider<Iface> > >());
   }
 };
 

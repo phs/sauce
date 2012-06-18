@@ -22,19 +22,26 @@ class ClauseState {
   Bindings<ImplicitBindings> & bindings;
   PendingThrower & pendingThrower;
   OpaqueBindingPtr pendingBinding;
+  std::vector<OpaqueBindingPtr> extraPendingBindings;
 
 public:
 
   ClauseState(Bindings<ImplicitBindings> & bindings, PendingThrower & pendingThrower):
     bindings(bindings),
     pendingThrower(pendingThrower),
-    pendingBinding() {
+    pendingBinding(),
+    extraPendingBindings() {
     pendingThrower.throwAnyPending();
   }
 
   virtual ~ClauseState() {
     if (pendingBinding.get() != NULL) {
       bindings.put(pendingBinding);
+    }
+
+    typedef std::vector<OpaqueBindingPtr>::iterator I;
+    for (I i = extraPendingBindings.begin(); i != extraPendingBindings.end(); ++i) {
+      bindings.put(*i);
     }
   }
 
@@ -43,6 +50,14 @@ public:
     typedef typename BoundInjection::Dependency Dependency;
     typename BoundInjection::InjectionPtr injection(new BoundInjection());
     pendingBinding.reset(new InjectionBinding<Dependency, Scope>(injection));
+  }
+
+  template<typename Scope, typename BoundInjection>
+  void bindExtra() {
+    typedef typename BoundInjection::Dependency Dependency;
+    typename BoundInjection::InjectionPtr injection(new BoundInjection());
+    OpaqueBindingPtr extra(new InjectionBinding<Dependency, Scope>(injection));
+    extraPendingBindings.push_back(extra);
   }
 
   template<typename Exception>
@@ -80,6 +95,11 @@ protected:
   template<typename Scope, typename BoundInjection>
   void bind(BoundInjection) {
     state->template bind<Scope, BoundInjection>();
+  }
+
+  template<typename Scope, typename BoundInjection>
+  void bindExtra(BoundInjection) {
+    state->template bindExtra<Scope, BoundInjection>();
   }
 
   template<typename Exception>
