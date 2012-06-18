@@ -223,6 +223,18 @@ EXTRA_libunittest_la_SOURCES = \
   vendor/gmock-1.6.0/src/gmock-spec-builders.cc \
   vendor/gmock-1.6.0/src/gmock.cc
 
+# Prove we're ansi compatible, even if gmock/gtest is not.
+TESTS += ansi_compilation_test
+check_PROGRAMS += ansi_compilation_test
+
+ansi_compilation_test_CPPFLAGS = \
+  -DSAUCE_STD_TR1_SMART_PTR \
+  -I$(builddir) \
+  -I$(srcdir)
+
+ansi_compilation_test_SOURCES = \
+  test/ansi_compilation_test.cc
+
 # This must be the last test, to pick up all unittest coverage statistics
 TESTS += check-style
 EXTRA_DIST += check-style

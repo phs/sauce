@@ -30,6 +30,7 @@ stamp-h*
 *.uncrustify
 .dirstamp
 .libs
+ansi_compilation_test
 doxygen-doc
 unittests
 

@@ -1,6 +1,8 @@
 #ifndef SAUCE_INTERNAL_TYPE_ID_H_
 #define SAUCE_INTERNAL_TYPE_ID_H_
 
+#include <set>
+
 #include <sauce/exceptions.h>
 
 namespace sauce {
