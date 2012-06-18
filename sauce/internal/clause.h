@@ -1,6 +1,8 @@
 #ifndef SAUCE_CLAUSE_H_
 #define SAUCE_CLAUSE_H_
 
+#include <vector>
+
 #include <sauce/exceptions.h>
 #include <sauce/memory.h>
 #include <sauce/internal/bindings.h>
@@ -19,20 +21,20 @@ struct ImplicitBindings;
 class ClauseState {
   Bindings<ImplicitBindings> & bindings;
   PendingThrower & pendingThrower;
-  OpaqueBindingPtr binding;
+  OpaqueBindingPtr pendingBinding;
 
 public:
 
   ClauseState(Bindings<ImplicitBindings> & bindings, PendingThrower & pendingThrower):
     bindings(bindings),
     pendingThrower(pendingThrower),
-    binding() {
+    pendingBinding() {
     pendingThrower.throwAnyPending();
   }
 
   virtual ~ClauseState() {
-    if (binding.get() != NULL) {
-      bindings.put(binding);
+    if (pendingBinding.get() != NULL) {
+      bindings.put(pendingBinding);
     }
   }
 
@@ -40,7 +42,7 @@ public:
   void bind() {
     typedef typename BoundInjection::Dependency Dependency;
     typename BoundInjection::InjectionPtr injection(new BoundInjection());
-    binding.reset(new InjectionBinding<Dependency, Scope>(injection));
+    pendingBinding.reset(new InjectionBinding<Dependency, Scope>(injection));
   }
 
   template<typename Exception>
