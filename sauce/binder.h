@@ -39,22 +39,6 @@ template<typename Dependency, typename Scope>
 class InClause;
 
 /**
- * Binds to a provider.
- */
-template<typename Dependency, typename Scope, typename Provider>
-class ToProviderClause: public i::Clause {
-  typedef typename i::Key<Dependency>::Iface Iface;
-
-  friend class BindClause<Iface>;
-  friend class NamedClause<Dependency>;
-  friend class InClause<Dependency, Scope>;
-
-  void onComplete() {
-    bind<Scope>(inj::ProviderInjection<Dependency, Provider>());
-  }
-};
-
-/**
  * Binds to a specific constructor allocating from the heap.
  */
 template<typename Dependency, typename Scope, typename Ctor>
@@ -79,6 +63,22 @@ public:
 };
 
 /**
+ * Binds to a provider.
+ */
+template<typename Dependency, typename Scope, typename ProviderCtor>
+class ToProviderClause: public i::Clause {
+  typedef typename i::Key<Dependency>::Iface Iface;
+
+  friend class BindClause<Iface>;
+  friend class NamedClause<Dependency>;
+  friend class InClause<Dependency, Scope>;
+
+  void onComplete() {
+    bind<Scope>(inj::ProviderInjection<Dependency, ProviderCtor>());
+  }
+};
+
+/**
  * Scopes the binding.
  */
 template<typename Dependency, typename Scope>
@@ -99,9 +99,9 @@ public:
     return pass(ToClause<Dependency, Scope, Ctor>());
   }
 
-  template<typename Provider>
-  ToProviderClause<Dependency, Scope, Provider> toProvider() {
-    return pass(ToProviderClause<Dependency, Scope, Provider>());
+  template<typename ProviderCtor>
+  ToProviderClause<Dependency, Scope, ProviderCtor> toProvider() {
+    return pass(ToProviderClause<Dependency, Scope, ProviderCtor>());
   }
 };
 
@@ -130,9 +130,9 @@ public:
     return pass(ToClause<Dependency, NoScope, Ctor>());
   }
 
-  template<typename Provider>
-  ToProviderClause<Dependency, NoScope, Provider> toProvider() {
-    return pass(ToProviderClause<Dependency, NoScope, Provider>());
+  template<typename ProviderCtor>
+  ToProviderClause<Dependency, NoScope, ProviderCtor> toProvider() {
+    return pass(ToProviderClause<Dependency, NoScope, ProviderCtor>());
   }
 };
 
@@ -166,9 +166,9 @@ public:
     return pass(ToClause<Named<Iface, Unnamed>, NoScope, Ctor>());
   }
 
-  template<typename Provider>
-  ToProviderClause<Named<Iface, Unnamed>, NoScope, Provider> toProvider() {
-    return pass(ToProviderClause<Named<Iface, Unnamed>, NoScope, Provider>());
+  template<typename ProviderCtor>
+  ToProviderClause<Named<Iface, Unnamed>, NoScope, ProviderCtor> toProvider() {
+    return pass(ToProviderClause<Named<Iface, Unnamed>, NoScope, ProviderCtor>());
   }
 };
 
