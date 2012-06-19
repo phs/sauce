@@ -60,6 +60,8 @@ public:
     extraPendingBindings.push_back(extra);
   }
 
+  void bindDependencyName(unsigned int /* position */, std::string const /* name */) {}
+
   template<typename Exception>
   void throwLater() {
     pendingThrower.template throwLater<Exception>();
@@ -100,6 +102,10 @@ protected:
   template<typename Scope, typename BoundInjection>
   void bindExtra(BoundInjection) {
     state->template bindExtra<Scope, BoundInjection>();
+  }
+
+  void bindDependencyName(unsigned int position, std::string const name) {
+    state->bindDependencyName(position, name);
   }
 
   template<typename Exception>

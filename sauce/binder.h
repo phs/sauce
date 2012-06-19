@@ -39,6 +39,11 @@ class NamingClause: public i::Clause {
 
 public:
 
+  NamingClause<Dependency, Scope, Ctor> & naming(unsigned int position, std::string const name) {
+    bindDependencyName(position, name);
+    return *this;
+  }
+
   template<typename Allocator>
   AllocateFromClause<Dependency, Scope, Ctor, Allocator> allocatedFrom() {
     return pass(AllocateFromClause<Dependency, Scope, Ctor, Allocator>());
@@ -58,9 +63,10 @@ class ToClause: public i::Clause {
 
 public:
 
-  NamingClause<Dependency, Scope, Ctor> naming(
-    unsigned int /* position */, std::string const /* name */) {
-    return pass(NamingClause<Dependency, Scope, Ctor>());
+  NamingClause<Dependency, Scope, Ctor> naming(unsigned int position, std::string const name) {
+    NamingClause<Dependency, Scope, Ctor> namingClause;
+    namingClause.naming(position, name);
+    return pass(namingClause);
   }
 
   template<typename Allocator>
@@ -86,8 +92,10 @@ class ToProviderClause: public i::Clause {
 public:
 
   NamingClause<ProviderDependency, Scope, ProviderCtor> naming(
-    unsigned int /* position */, std::string const /* name */) {
-    return pass(NamingClause<ProviderDependency, Scope, ProviderCtor>());
+    unsigned int position, std::string const name) {
+    NamingClause<ProviderDependency, Scope, ProviderCtor> namingClause;
+    namingClause.naming(position, name);
+    return pass(namingClause);
   }
 
   template<typename Allocator>
