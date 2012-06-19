@@ -211,6 +211,10 @@ struct CowProvider: AbstractProvider<Animal> {
   }
 };
 
+struct Bird: Animal {
+  std::string says() { return "Cheep cheep"; }
+};
+
 struct Pond {
   sauce::shared_ptr<Animal> animal;
 
@@ -218,12 +222,21 @@ struct Pond {
     animal(animal) {}
 };
 
+struct BirdCage {
+  sauce::shared_ptr<Animal> animal;
+
+  BirdCage(sauce::shared_ptr<Animal> animal):
+    animal(animal) {}
+};
+
 void AnimalModule(Binder & binder) {
   binder.bind<Animal>().to<Cat()>();
   binder.bind<Animal>().named<LieutenantShinysides>().to<Fish()>();
   binder.bind<Animal>().named<Meatloaf>().toProvider<CowProvider()>();
+  // binder.bind<Animal>().named("tweety").to<Bird()>();
 
   binder.bind<Pond>().to<Pond(Named<Animal, LieutenantShinysides>)>();
+  // binder.bind<BirdCage>().to<BirdCage(Animal)>().usingDependencyNamed(0, "tweety");
 }
 
 TEST(BindingTest, shouldProvidedNamedDependencies) {
@@ -232,8 +245,10 @@ TEST(BindingTest, shouldProvidedNamedDependencies) {
   EXPECT_EQ("Meow",      (injector->get<Animal>()->says()));
   EXPECT_EQ("Blub blub", (injector->get<Animal, LieutenantShinysides>()->says()));
   EXPECT_EQ("Moo",       (injector->get<Named<Animal, Meatloaf> >()->says()));
+  // EXPECT_EQ("Cheep cheep",   (injector->get<Animal>("tweety")->says()));
 
   EXPECT_EQ("Blub blub", (injector->get<Pond>()->animal->says()));
+  // EXPECT_EQ("Cheep cheep",   (injector->get<BirdCage>()->animal->says()));
 }
 
 TEST(BindingTest, shouldProvidedNamedDependencyProviders) {
