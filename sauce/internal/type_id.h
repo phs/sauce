@@ -37,7 +37,7 @@ class TypeId {
 
 protected:
 
-  TypeId(TypeSignature const & signature):
+  explicit TypeId(TypeSignature const & signature):
     signature(signature) {}
 
 public:
