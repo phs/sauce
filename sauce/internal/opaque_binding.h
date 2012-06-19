@@ -1,6 +1,9 @@
 #ifndef SAUCE_INTERNAL_OPAQUE_BINDING_H_
 #define SAUCE_INTERNAL_OPAQUE_BINDING_H_
 
+#include <string>
+#include <vector>
+
 #include <sauce/memory.h>
 #include <sauce/internal/type_id.h>
 
@@ -46,6 +49,11 @@ struct OpaqueBinding {
    * do nothing.
    */
   virtual void eagerlyProvide(OpaqueBindingPtr, sauce::shared_ptr<Injector>) const {}
+
+  /**
+   * Accept the list of dynamic dependency names this binding was created with.
+   */
+  virtual void setDynamicDependencyNames(std::vector<std::string>) {}
 
 };
 

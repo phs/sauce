@@ -90,6 +90,13 @@ class InjectionBinding:
     }
   }
 
+  /**
+   * Accept the list of dynamic dependency names this binding was created with.
+   */
+  void setDynamicDependencyNames(std::vector<std::string> dynamicDependencyNames) {
+    injection->setDynamicDependencyNames(dynamicDependencyNames);
+  }
+
 public:
 
   InjectionBinding(InjectionPtr injection):

@@ -38,6 +38,7 @@ public:
 
   virtual ~ClauseState() {
     if (pendingBinding.get() != NULL) {
+      pendingBinding->setDynamicDependencyNames(dynamicDependencyNames);
       bindings.put(pendingBinding);
     }
 

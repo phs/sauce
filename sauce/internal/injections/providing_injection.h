@@ -35,6 +35,11 @@ struct ProvidingInjection: InjectorFriend {
    */
   virtual void validateAcyclic(InjectorPtr, TypeIds &) const {}
 
+  /**
+   * Accept the list of dynamic dependency names this injection was created with.
+   */
+  virtual void setDynamicDependencyNames(std::vector<std::string>) {}
+
 };
 
 }
