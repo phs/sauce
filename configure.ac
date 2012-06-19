@@ -17,7 +17,7 @@ AC_PROG_LN_S
 AM_PROG_CC_C_O
 
 # Needed libraries
-ACX_PTHREAD     # only needed to run unit tests
+ACX_PTHREAD     # only needed to run the unit tests
 
 # Optional features
 
