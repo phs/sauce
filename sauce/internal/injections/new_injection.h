@@ -43,7 +43,7 @@ public:
 
   NewInjection():
     allocator(),
-    dynamicDependencyNames() {}
+    dynamicDependencyNames(0, unnamed()) {}
 
   /**
    * Provide an Iface.
@@ -89,7 +89,7 @@ public:
 
   NewInjection():
     allocator(),
-    dynamicDependencyNames() {}
+    dynamicDependencyNames(1, unnamed()) {}
 
   /**
    * Provide an Iface.
@@ -100,7 +100,7 @@ public:
    */
   Ptr provide(InjectionPtr injection, InjectorPtr injector) const {
     typename Key<A1>::Ptr a1(this->template getHelper<typename
-        i::Key<A1>::Normalized>(injector));
+        i::Key<A1>::Normalized>(injector, dynamicDependencyNames[0]));
     Deleter deleter(sauce::static_pointer_cast<New>(injection));
     Impl * impl = allocator.allocate(1);
     Ptr provided(new(impl) Impl(a1), deleter);
@@ -148,7 +148,7 @@ public:
 
   NewInjection():
     allocator(),
-    dynamicDependencyNames() {}
+    dynamicDependencyNames(2, unnamed()) {}
 
   /**
    * Provide an Iface.
@@ -159,9 +159,9 @@ public:
    */
   Ptr provide(InjectionPtr injection, InjectorPtr injector) const {
     typename Key<A1>::Ptr a1(this->template getHelper<typename
-        i::Key<A1>::Normalized>(injector));
+        i::Key<A1>::Normalized>(injector, dynamicDependencyNames[0]));
     typename Key<A2>::Ptr a2(this->template getHelper<typename
-        i::Key<A2>::Normalized>(injector));
+        i::Key<A2>::Normalized>(injector, dynamicDependencyNames[1]));
     Deleter deleter(sauce::static_pointer_cast<New>(injection));
     Impl * impl = allocator.allocate(1);
     Ptr provided(new(impl) Impl(a1, a2), deleter);
@@ -210,7 +210,7 @@ public:
 
   NewInjection():
     allocator(),
-    dynamicDependencyNames() {}
+    dynamicDependencyNames(3, unnamed()) {}
 
   /**
    * Provide an Iface.
@@ -221,11 +221,11 @@ public:
    */
   Ptr provide(InjectionPtr injection, InjectorPtr injector) const {
     typename Key<A1>::Ptr a1(this->template getHelper<typename
-        i::Key<A1>::Normalized>(injector));
+        i::Key<A1>::Normalized>(injector, dynamicDependencyNames[0]));
     typename Key<A2>::Ptr a2(this->template getHelper<typename
-        i::Key<A2>::Normalized>(injector));
+        i::Key<A2>::Normalized>(injector, dynamicDependencyNames[1]));
     typename Key<A3>::Ptr a3(this->template getHelper<typename
-        i::Key<A3>::Normalized>(injector));
+        i::Key<A3>::Normalized>(injector, dynamicDependencyNames[2]));
     Deleter deleter(sauce::static_pointer_cast<New>(injection));
     Impl * impl = allocator.allocate(1);
     Ptr provided(new(impl) Impl(a1, a2, a3), deleter);
@@ -275,7 +275,7 @@ public:
 
   NewInjection():
     allocator(),
-    dynamicDependencyNames() {}
+    dynamicDependencyNames(4, unnamed()) {}
 
   /**
    * Provide an Iface.
@@ -286,13 +286,13 @@ public:
    */
   Ptr provide(InjectionPtr injection, InjectorPtr injector) const {
     typename Key<A1>::Ptr a1(this->template getHelper<typename
-        i::Key<A1>::Normalized>(injector));
+        i::Key<A1>::Normalized>(injector, dynamicDependencyNames[0]));
     typename Key<A2>::Ptr a2(this->template getHelper<typename
-        i::Key<A2>::Normalized>(injector));
+        i::Key<A2>::Normalized>(injector, dynamicDependencyNames[1]));
     typename Key<A3>::Ptr a3(this->template getHelper<typename
-        i::Key<A3>::Normalized>(injector));
+        i::Key<A3>::Normalized>(injector, dynamicDependencyNames[2]));
     typename Key<A4>::Ptr a4(this->template getHelper<typename
-        i::Key<A4>::Normalized>(injector));
+        i::Key<A4>::Normalized>(injector, dynamicDependencyNames[3]));
     Deleter deleter(sauce::static_pointer_cast<New>(injection));
     Impl * impl = allocator.allocate(1);
     Ptr provided(new(impl) Impl(a1, a2, a3, a4), deleter);
@@ -343,7 +343,7 @@ public:
 
   NewInjection():
     allocator(),
-    dynamicDependencyNames() {}
+    dynamicDependencyNames(5, unnamed()) {}
 
   /**
    * Provide an Iface.
@@ -354,15 +354,15 @@ public:
    */
   Ptr provide(InjectionPtr injection, InjectorPtr injector) const {
     typename Key<A1>::Ptr a1(this->template getHelper<typename
-        i::Key<A1>::Normalized>(injector));
+        i::Key<A1>::Normalized>(injector, dynamicDependencyNames[0]));
     typename Key<A2>::Ptr a2(this->template getHelper<typename
-        i::Key<A2>::Normalized>(injector));
+        i::Key<A2>::Normalized>(injector, dynamicDependencyNames[1]));
     typename Key<A3>::Ptr a3(this->template getHelper<typename
-        i::Key<A3>::Normalized>(injector));
+        i::Key<A3>::Normalized>(injector, dynamicDependencyNames[2]));
     typename Key<A4>::Ptr a4(this->template getHelper<typename
-        i::Key<A4>::Normalized>(injector));
+        i::Key<A4>::Normalized>(injector, dynamicDependencyNames[3]));
     typename Key<A5>::Ptr a5(this->template getHelper<typename
-        i::Key<A5>::Normalized>(injector));
+        i::Key<A5>::Normalized>(injector, dynamicDependencyNames[4]));
     Deleter deleter(sauce::static_pointer_cast<New>(injection));
     Impl * impl = allocator.allocate(1);
     Ptr provided(new(impl) Impl(a1, a2, a3, a4, a5), deleter);
@@ -414,7 +414,7 @@ public:
 
   NewInjection():
     allocator(),
-    dynamicDependencyNames() {}
+    dynamicDependencyNames(6, unnamed()) {}
 
   /**
    * Provide an Iface.
@@ -425,17 +425,17 @@ public:
    */
   Ptr provide(InjectionPtr injection, InjectorPtr injector) const {
     typename Key<A1>::Ptr a1(this->template getHelper<typename
-        i::Key<A1>::Normalized>(injector));
+        i::Key<A1>::Normalized>(injector, dynamicDependencyNames[0]));
     typename Key<A2>::Ptr a2(this->template getHelper<typename
-        i::Key<A2>::Normalized>(injector));
+        i::Key<A2>::Normalized>(injector, dynamicDependencyNames[1]));
     typename Key<A3>::Ptr a3(this->template getHelper<typename
-        i::Key<A3>::Normalized>(injector));
+        i::Key<A3>::Normalized>(injector, dynamicDependencyNames[2]));
     typename Key<A4>::Ptr a4(this->template getHelper<typename
-        i::Key<A4>::Normalized>(injector));
+        i::Key<A4>::Normalized>(injector, dynamicDependencyNames[3]));
     typename Key<A5>::Ptr a5(this->template getHelper<typename
-        i::Key<A5>::Normalized>(injector));
+        i::Key<A5>::Normalized>(injector, dynamicDependencyNames[4]));
     typename Key<A6>::Ptr a6(this->template getHelper<typename
-        i::Key<A6>::Normalized>(injector));
+        i::Key<A6>::Normalized>(injector, dynamicDependencyNames[5]));
     Deleter deleter(sauce::static_pointer_cast<New>(injection));
     Impl * impl = allocator.allocate(1);
     Ptr provided(new(impl) Impl(a1, a2, a3, a4, a5, a6), deleter);
@@ -490,7 +490,7 @@ public:
 
   NewInjection():
     allocator(),
-    dynamicDependencyNames() {}
+    dynamicDependencyNames(7, unnamed()) {}
 
   /**
    * Provide an Iface.
@@ -501,19 +501,19 @@ public:
    */
   Ptr provide(InjectionPtr injection, InjectorPtr injector) const {
     typename Key<A1>::Ptr a1(this->template getHelper<typename
-        i::Key<A1>::Normalized>(injector));
+        i::Key<A1>::Normalized>(injector, dynamicDependencyNames[0]));
     typename Key<A2>::Ptr a2(this->template getHelper<typename
-        i::Key<A2>::Normalized>(injector));
+        i::Key<A2>::Normalized>(injector, dynamicDependencyNames[1]));
     typename Key<A3>::Ptr a3(this->template getHelper<typename
-        i::Key<A3>::Normalized>(injector));
+        i::Key<A3>::Normalized>(injector, dynamicDependencyNames[2]));
     typename Key<A4>::Ptr a4(this->template getHelper<typename
-        i::Key<A4>::Normalized>(injector));
+        i::Key<A4>::Normalized>(injector, dynamicDependencyNames[3]));
     typename Key<A5>::Ptr a5(this->template getHelper<typename
-        i::Key<A5>::Normalized>(injector));
+        i::Key<A5>::Normalized>(injector, dynamicDependencyNames[4]));
     typename Key<A6>::Ptr a6(this->template getHelper<typename
-        i::Key<A6>::Normalized>(injector));
+        i::Key<A6>::Normalized>(injector, dynamicDependencyNames[5]));
     typename Key<A7>::Ptr a7(this->template getHelper<typename
-        i::Key<A7>::Normalized>(injector));
+        i::Key<A7>::Normalized>(injector, dynamicDependencyNames[6]));
     Deleter deleter(sauce::static_pointer_cast<New>(injection));
     Impl * impl = allocator.allocate(1);
     Ptr provided(new(impl) Impl(a1, a2, a3, a4, a5, a6, a7), deleter);
@@ -569,7 +569,7 @@ public:
 
   NewInjection():
     allocator(),
-    dynamicDependencyNames() {}
+    dynamicDependencyNames(8, unnamed()) {}
 
   /**
    * Provide an Iface.
@@ -580,21 +580,21 @@ public:
    */
   Ptr provide(InjectionPtr injection, InjectorPtr injector) const {
     typename Key<A1>::Ptr a1(this->template getHelper<typename
-        i::Key<A1>::Normalized>(injector));
+        i::Key<A1>::Normalized>(injector, dynamicDependencyNames[0]));
     typename Key<A2>::Ptr a2(this->template getHelper<typename
-        i::Key<A2>::Normalized>(injector));
+        i::Key<A2>::Normalized>(injector, dynamicDependencyNames[1]));
     typename Key<A3>::Ptr a3(this->template getHelper<typename
-        i::Key<A3>::Normalized>(injector));
+        i::Key<A3>::Normalized>(injector, dynamicDependencyNames[2]));
     typename Key<A4>::Ptr a4(this->template getHelper<typename
-        i::Key<A4>::Normalized>(injector));
+        i::Key<A4>::Normalized>(injector, dynamicDependencyNames[3]));
     typename Key<A5>::Ptr a5(this->template getHelper<typename
-        i::Key<A5>::Normalized>(injector));
+        i::Key<A5>::Normalized>(injector, dynamicDependencyNames[4]));
     typename Key<A6>::Ptr a6(this->template getHelper<typename
-        i::Key<A6>::Normalized>(injector));
+        i::Key<A6>::Normalized>(injector, dynamicDependencyNames[5]));
     typename Key<A7>::Ptr a7(this->template getHelper<typename
-        i::Key<A7>::Normalized>(injector));
+        i::Key<A7>::Normalized>(injector, dynamicDependencyNames[6]));
     typename Key<A8>::Ptr a8(this->template getHelper<typename
-        i::Key<A8>::Normalized>(injector));
+        i::Key<A8>::Normalized>(injector, dynamicDependencyNames[7]));
     Deleter deleter(sauce::static_pointer_cast<New>(injection));
     Impl * impl = allocator.allocate(1);
     Ptr provided(new(impl) Impl(a1, a2, a3, a4, a5, a6, a7, a8), deleter);
@@ -652,7 +652,7 @@ public:
 
   NewInjection():
     allocator(),
-    dynamicDependencyNames() {}
+    dynamicDependencyNames(9, unnamed()) {}
 
   /**
    * Provide an Iface.
@@ -663,23 +663,23 @@ public:
    */
   Ptr provide(InjectionPtr injection, InjectorPtr injector) const {
     typename Key<A1>::Ptr a1(this->template getHelper<typename
-        i::Key<A1>::Normalized>(injector));
+        i::Key<A1>::Normalized>(injector, dynamicDependencyNames[0]));
     typename Key<A2>::Ptr a2(this->template getHelper<typename
-        i::Key<A2>::Normalized>(injector));
+        i::Key<A2>::Normalized>(injector, dynamicDependencyNames[1]));
     typename Key<A3>::Ptr a3(this->template getHelper<typename
-        i::Key<A3>::Normalized>(injector));
+        i::Key<A3>::Normalized>(injector, dynamicDependencyNames[2]));
     typename Key<A4>::Ptr a4(this->template getHelper<typename
-        i::Key<A4>::Normalized>(injector));
+        i::Key<A4>::Normalized>(injector, dynamicDependencyNames[3]));
     typename Key<A5>::Ptr a5(this->template getHelper<typename
-        i::Key<A5>::Normalized>(injector));
+        i::Key<A5>::Normalized>(injector, dynamicDependencyNames[4]));
     typename Key<A6>::Ptr a6(this->template getHelper<typename
-        i::Key<A6>::Normalized>(injector));
+        i::Key<A6>::Normalized>(injector, dynamicDependencyNames[5]));
     typename Key<A7>::Ptr a7(this->template getHelper<typename
-        i::Key<A7>::Normalized>(injector));
+        i::Key<A7>::Normalized>(injector, dynamicDependencyNames[6]));
     typename Key<A8>::Ptr a8(this->template getHelper<typename
-        i::Key<A8>::Normalized>(injector));
+        i::Key<A8>::Normalized>(injector, dynamicDependencyNames[7]));
     typename Key<A9>::Ptr a9(this->template getHelper<typename
-        i::Key<A9>::Normalized>(injector));
+        i::Key<A9>::Normalized>(injector, dynamicDependencyNames[8]));
     Deleter deleter(sauce::static_pointer_cast<New>(injection));
     Impl * impl = allocator.allocate(1);
     Ptr provided(new(impl) Impl(a1, a2, a3, a4, a5, a6, a7, a8, a9), deleter);
@@ -738,7 +738,7 @@ public:
 
   NewInjection():
     allocator(),
-    dynamicDependencyNames() {}
+    dynamicDependencyNames(10, unnamed()) {}
 
   /**
    * Provide an Iface.
@@ -749,25 +749,25 @@ public:
    */
   Ptr provide(InjectionPtr injection, InjectorPtr injector) const {
     typename Key<A1>::Ptr a1(this->template getHelper<typename
-        i::Key<A1>::Normalized>(injector));
+        i::Key<A1>::Normalized>(injector, dynamicDependencyNames[0]));
     typename Key<A2>::Ptr a2(this->template getHelper<typename
-        i::Key<A2>::Normalized>(injector));
+        i::Key<A2>::Normalized>(injector, dynamicDependencyNames[1]));
     typename Key<A3>::Ptr a3(this->template getHelper<typename
-        i::Key<A3>::Normalized>(injector));
+        i::Key<A3>::Normalized>(injector, dynamicDependencyNames[2]));
     typename Key<A4>::Ptr a4(this->template getHelper<typename
-        i::Key<A4>::Normalized>(injector));
+        i::Key<A4>::Normalized>(injector, dynamicDependencyNames[3]));
     typename Key<A5>::Ptr a5(this->template getHelper<typename
-        i::Key<A5>::Normalized>(injector));
+        i::Key<A5>::Normalized>(injector, dynamicDependencyNames[4]));
     typename Key<A6>::Ptr a6(this->template getHelper<typename
-        i::Key<A6>::Normalized>(injector));
+        i::Key<A6>::Normalized>(injector, dynamicDependencyNames[5]));
     typename Key<A7>::Ptr a7(this->template getHelper<typename
-        i::Key<A7>::Normalized>(injector));
+        i::Key<A7>::Normalized>(injector, dynamicDependencyNames[6]));
     typename Key<A8>::Ptr a8(this->template getHelper<typename
-        i::Key<A8>::Normalized>(injector));
+        i::Key<A8>::Normalized>(injector, dynamicDependencyNames[7]));
     typename Key<A9>::Ptr a9(this->template getHelper<typename
-        i::Key<A9>::Normalized>(injector));
+        i::Key<A9>::Normalized>(injector, dynamicDependencyNames[8]));
     typename Key<A10>::Ptr a10(this->template getHelper<typename
-        i::Key<A10>::Normalized>(injector));
+        i::Key<A10>::Normalized>(injector, dynamicDependencyNames[9]));
     Deleter deleter(sauce::static_pointer_cast<New>(injection));
     Impl * impl = allocator.allocate(1);
     Ptr provided(new(impl) Impl(a1, a2, a3, a4, a5, a6, a7, a8, a9, a10),

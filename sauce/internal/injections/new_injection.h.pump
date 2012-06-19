@@ -49,7 +49,7 @@ public:
 
   NewInjection():
     allocator(),
-    dynamicDependencyNames() {}
+    dynamicDependencyNames($i, unnamed()) {}
 
   /**
    * Provide an Iface.
@@ -64,7 +64,7 @@ public:
   Ptr provide(InjectionPtr injection, InjectorPtr injector) const
 ]]]] {
 [[$for j [[
-    typename Key<A$j>::Ptr a$j(this->template getHelper<typename i::Key<A$j>::Normalized>(injector));
+    typename Key<A$j>::Ptr a$j(this->template getHelper<typename i::Key<A$j>::Normalized>(injector, dynamicDependencyNames[$(j-1)]));
 
 ]]]]
     Deleter deleter(sauce::static_pointer_cast<New>(injection));

@@ -183,7 +183,7 @@ protected:
   }
 
   template<typename Dependency>
-  typename Key<Dependency>::Ptr getHelper(InjectorPtr injector) const {
+  typename Key<Dependency>::Ptr getHelper(InjectorPtr injector, std::string /* name */) const {
     return injector->get<Dependency>(injector);
   }
 
