@@ -236,9 +236,7 @@ void AnimalModule(Binder & binder) {
   binder.bind<Animal>().named("tweety").to<Bird()>();
 
   binder.bind<Pond>().to<Pond(Named<Animal, LieutenantShinysides>)>();
-
-  // TODO: It's yakking on BirdCage(Animal) since Animal has pure virtuals?
-  binder.bind<BirdCage>().to<BirdCage(Named<Animal, Unnamed>)>().naming(0, "tweety");
+  binder.bind<BirdCage>().to<BirdCage(Animal &)>().naming(0, "tweety");
 }
 
 TEST(BindingTest, shouldProvidedNamedDependencies) {
