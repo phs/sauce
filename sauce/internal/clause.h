@@ -62,7 +62,12 @@ public:
     extraPendingBindings.push_back(extra);
   }
 
-  void bindDynamicDependencyName(unsigned int /* position */, std::string const /* name */) {}
+  void bindDynamicDependencyName(unsigned int position, std::string const name) {
+    if (dynamicDependencyNames.size() <= position) {
+      dynamicDependencyNames.resize(position + 1, unnamed());
+    }
+    dynamicDependencyNames[position] = name;
+  }
 
   template<typename Exception>
   void throwLater() {
