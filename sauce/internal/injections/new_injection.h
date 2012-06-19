@@ -89,7 +89,8 @@ public:
    * dispose(Iface *).
    */
   Ptr provide(InjectionPtr injection, InjectorPtr injector) const {
-    typename Key<A1>::Ptr a1(this->template getHelper<A1>(injector));
+    typename Key<A1>::Ptr a1(this->template getHelper<typename
+        i::Key<A1>::Normalized>(injector));
     Deleter deleter(sauce::static_pointer_cast<New>(injection));
     Impl * impl = allocator.allocate(1);
     Ptr provided(new(impl) Impl(a1), deleter);
@@ -136,8 +137,10 @@ public:
    * dispose(Iface *).
    */
   Ptr provide(InjectionPtr injection, InjectorPtr injector) const {
-    typename Key<A1>::Ptr a1(this->template getHelper<A1>(injector));
-    typename Key<A2>::Ptr a2(this->template getHelper<A2>(injector));
+    typename Key<A1>::Ptr a1(this->template getHelper<typename
+        i::Key<A1>::Normalized>(injector));
+    typename Key<A2>::Ptr a2(this->template getHelper<typename
+        i::Key<A2>::Normalized>(injector));
     Deleter deleter(sauce::static_pointer_cast<New>(injection));
     Impl * impl = allocator.allocate(1);
     Ptr provided(new(impl) Impl(a1, a2), deleter);
@@ -185,9 +188,12 @@ public:
    * dispose(Iface *).
    */
   Ptr provide(InjectionPtr injection, InjectorPtr injector) const {
-    typename Key<A1>::Ptr a1(this->template getHelper<A1>(injector));
-    typename Key<A2>::Ptr a2(this->template getHelper<A2>(injector));
-    typename Key<A3>::Ptr a3(this->template getHelper<A3>(injector));
+    typename Key<A1>::Ptr a1(this->template getHelper<typename
+        i::Key<A1>::Normalized>(injector));
+    typename Key<A2>::Ptr a2(this->template getHelper<typename
+        i::Key<A2>::Normalized>(injector));
+    typename Key<A3>::Ptr a3(this->template getHelper<typename
+        i::Key<A3>::Normalized>(injector));
     Deleter deleter(sauce::static_pointer_cast<New>(injection));
     Impl * impl = allocator.allocate(1);
     Ptr provided(new(impl) Impl(a1, a2, a3), deleter);
@@ -236,10 +242,14 @@ public:
    * dispose(Iface *).
    */
   Ptr provide(InjectionPtr injection, InjectorPtr injector) const {
-    typename Key<A1>::Ptr a1(this->template getHelper<A1>(injector));
-    typename Key<A2>::Ptr a2(this->template getHelper<A2>(injector));
-    typename Key<A3>::Ptr a3(this->template getHelper<A3>(injector));
-    typename Key<A4>::Ptr a4(this->template getHelper<A4>(injector));
+    typename Key<A1>::Ptr a1(this->template getHelper<typename
+        i::Key<A1>::Normalized>(injector));
+    typename Key<A2>::Ptr a2(this->template getHelper<typename
+        i::Key<A2>::Normalized>(injector));
+    typename Key<A3>::Ptr a3(this->template getHelper<typename
+        i::Key<A3>::Normalized>(injector));
+    typename Key<A4>::Ptr a4(this->template getHelper<typename
+        i::Key<A4>::Normalized>(injector));
     Deleter deleter(sauce::static_pointer_cast<New>(injection));
     Impl * impl = allocator.allocate(1);
     Ptr provided(new(impl) Impl(a1, a2, a3, a4), deleter);
@@ -289,11 +299,16 @@ public:
    * dispose(Iface *).
    */
   Ptr provide(InjectionPtr injection, InjectorPtr injector) const {
-    typename Key<A1>::Ptr a1(this->template getHelper<A1>(injector));
-    typename Key<A2>::Ptr a2(this->template getHelper<A2>(injector));
-    typename Key<A3>::Ptr a3(this->template getHelper<A3>(injector));
-    typename Key<A4>::Ptr a4(this->template getHelper<A4>(injector));
-    typename Key<A5>::Ptr a5(this->template getHelper<A5>(injector));
+    typename Key<A1>::Ptr a1(this->template getHelper<typename
+        i::Key<A1>::Normalized>(injector));
+    typename Key<A2>::Ptr a2(this->template getHelper<typename
+        i::Key<A2>::Normalized>(injector));
+    typename Key<A3>::Ptr a3(this->template getHelper<typename
+        i::Key<A3>::Normalized>(injector));
+    typename Key<A4>::Ptr a4(this->template getHelper<typename
+        i::Key<A4>::Normalized>(injector));
+    typename Key<A5>::Ptr a5(this->template getHelper<typename
+        i::Key<A5>::Normalized>(injector));
     Deleter deleter(sauce::static_pointer_cast<New>(injection));
     Impl * impl = allocator.allocate(1);
     Ptr provided(new(impl) Impl(a1, a2, a3, a4, a5), deleter);
@@ -344,12 +359,18 @@ public:
    * dispose(Iface *).
    */
   Ptr provide(InjectionPtr injection, InjectorPtr injector) const {
-    typename Key<A1>::Ptr a1(this->template getHelper<A1>(injector));
-    typename Key<A2>::Ptr a2(this->template getHelper<A2>(injector));
-    typename Key<A3>::Ptr a3(this->template getHelper<A3>(injector));
-    typename Key<A4>::Ptr a4(this->template getHelper<A4>(injector));
-    typename Key<A5>::Ptr a5(this->template getHelper<A5>(injector));
-    typename Key<A6>::Ptr a6(this->template getHelper<A6>(injector));
+    typename Key<A1>::Ptr a1(this->template getHelper<typename
+        i::Key<A1>::Normalized>(injector));
+    typename Key<A2>::Ptr a2(this->template getHelper<typename
+        i::Key<A2>::Normalized>(injector));
+    typename Key<A3>::Ptr a3(this->template getHelper<typename
+        i::Key<A3>::Normalized>(injector));
+    typename Key<A4>::Ptr a4(this->template getHelper<typename
+        i::Key<A4>::Normalized>(injector));
+    typename Key<A5>::Ptr a5(this->template getHelper<typename
+        i::Key<A5>::Normalized>(injector));
+    typename Key<A6>::Ptr a6(this->template getHelper<typename
+        i::Key<A6>::Normalized>(injector));
     Deleter deleter(sauce::static_pointer_cast<New>(injection));
     Impl * impl = allocator.allocate(1);
     Ptr provided(new(impl) Impl(a1, a2, a3, a4, a5, a6), deleter);
@@ -403,13 +424,20 @@ public:
    * dispose(Iface *).
    */
   Ptr provide(InjectionPtr injection, InjectorPtr injector) const {
-    typename Key<A1>::Ptr a1(this->template getHelper<A1>(injector));
-    typename Key<A2>::Ptr a2(this->template getHelper<A2>(injector));
-    typename Key<A3>::Ptr a3(this->template getHelper<A3>(injector));
-    typename Key<A4>::Ptr a4(this->template getHelper<A4>(injector));
-    typename Key<A5>::Ptr a5(this->template getHelper<A5>(injector));
-    typename Key<A6>::Ptr a6(this->template getHelper<A6>(injector));
-    typename Key<A7>::Ptr a7(this->template getHelper<A7>(injector));
+    typename Key<A1>::Ptr a1(this->template getHelper<typename
+        i::Key<A1>::Normalized>(injector));
+    typename Key<A2>::Ptr a2(this->template getHelper<typename
+        i::Key<A2>::Normalized>(injector));
+    typename Key<A3>::Ptr a3(this->template getHelper<typename
+        i::Key<A3>::Normalized>(injector));
+    typename Key<A4>::Ptr a4(this->template getHelper<typename
+        i::Key<A4>::Normalized>(injector));
+    typename Key<A5>::Ptr a5(this->template getHelper<typename
+        i::Key<A5>::Normalized>(injector));
+    typename Key<A6>::Ptr a6(this->template getHelper<typename
+        i::Key<A6>::Normalized>(injector));
+    typename Key<A7>::Ptr a7(this->template getHelper<typename
+        i::Key<A7>::Normalized>(injector));
     Deleter deleter(sauce::static_pointer_cast<New>(injection));
     Impl * impl = allocator.allocate(1);
     Ptr provided(new(impl) Impl(a1, a2, a3, a4, a5, a6, a7), deleter);
@@ -464,14 +492,22 @@ public:
    * dispose(Iface *).
    */
   Ptr provide(InjectionPtr injection, InjectorPtr injector) const {
-    typename Key<A1>::Ptr a1(this->template getHelper<A1>(injector));
-    typename Key<A2>::Ptr a2(this->template getHelper<A2>(injector));
-    typename Key<A3>::Ptr a3(this->template getHelper<A3>(injector));
-    typename Key<A4>::Ptr a4(this->template getHelper<A4>(injector));
-    typename Key<A5>::Ptr a5(this->template getHelper<A5>(injector));
-    typename Key<A6>::Ptr a6(this->template getHelper<A6>(injector));
-    typename Key<A7>::Ptr a7(this->template getHelper<A7>(injector));
-    typename Key<A8>::Ptr a8(this->template getHelper<A8>(injector));
+    typename Key<A1>::Ptr a1(this->template getHelper<typename
+        i::Key<A1>::Normalized>(injector));
+    typename Key<A2>::Ptr a2(this->template getHelper<typename
+        i::Key<A2>::Normalized>(injector));
+    typename Key<A3>::Ptr a3(this->template getHelper<typename
+        i::Key<A3>::Normalized>(injector));
+    typename Key<A4>::Ptr a4(this->template getHelper<typename
+        i::Key<A4>::Normalized>(injector));
+    typename Key<A5>::Ptr a5(this->template getHelper<typename
+        i::Key<A5>::Normalized>(injector));
+    typename Key<A6>::Ptr a6(this->template getHelper<typename
+        i::Key<A6>::Normalized>(injector));
+    typename Key<A7>::Ptr a7(this->template getHelper<typename
+        i::Key<A7>::Normalized>(injector));
+    typename Key<A8>::Ptr a8(this->template getHelper<typename
+        i::Key<A8>::Normalized>(injector));
     Deleter deleter(sauce::static_pointer_cast<New>(injection));
     Impl * impl = allocator.allocate(1);
     Ptr provided(new(impl) Impl(a1, a2, a3, a4, a5, a6, a7, a8), deleter);
@@ -528,15 +564,24 @@ public:
    * dispose(Iface *).
    */
   Ptr provide(InjectionPtr injection, InjectorPtr injector) const {
-    typename Key<A1>::Ptr a1(this->template getHelper<A1>(injector));
-    typename Key<A2>::Ptr a2(this->template getHelper<A2>(injector));
-    typename Key<A3>::Ptr a3(this->template getHelper<A3>(injector));
-    typename Key<A4>::Ptr a4(this->template getHelper<A4>(injector));
-    typename Key<A5>::Ptr a5(this->template getHelper<A5>(injector));
-    typename Key<A6>::Ptr a6(this->template getHelper<A6>(injector));
-    typename Key<A7>::Ptr a7(this->template getHelper<A7>(injector));
-    typename Key<A8>::Ptr a8(this->template getHelper<A8>(injector));
-    typename Key<A9>::Ptr a9(this->template getHelper<A9>(injector));
+    typename Key<A1>::Ptr a1(this->template getHelper<typename
+        i::Key<A1>::Normalized>(injector));
+    typename Key<A2>::Ptr a2(this->template getHelper<typename
+        i::Key<A2>::Normalized>(injector));
+    typename Key<A3>::Ptr a3(this->template getHelper<typename
+        i::Key<A3>::Normalized>(injector));
+    typename Key<A4>::Ptr a4(this->template getHelper<typename
+        i::Key<A4>::Normalized>(injector));
+    typename Key<A5>::Ptr a5(this->template getHelper<typename
+        i::Key<A5>::Normalized>(injector));
+    typename Key<A6>::Ptr a6(this->template getHelper<typename
+        i::Key<A6>::Normalized>(injector));
+    typename Key<A7>::Ptr a7(this->template getHelper<typename
+        i::Key<A7>::Normalized>(injector));
+    typename Key<A8>::Ptr a8(this->template getHelper<typename
+        i::Key<A8>::Normalized>(injector));
+    typename Key<A9>::Ptr a9(this->template getHelper<typename
+        i::Key<A9>::Normalized>(injector));
     Deleter deleter(sauce::static_pointer_cast<New>(injection));
     Impl * impl = allocator.allocate(1);
     Ptr provided(new(impl) Impl(a1, a2, a3, a4, a5, a6, a7, a8, a9), deleter);
@@ -594,16 +639,26 @@ public:
    * dispose(Iface *).
    */
   Ptr provide(InjectionPtr injection, InjectorPtr injector) const {
-    typename Key<A1>::Ptr a1(this->template getHelper<A1>(injector));
-    typename Key<A2>::Ptr a2(this->template getHelper<A2>(injector));
-    typename Key<A3>::Ptr a3(this->template getHelper<A3>(injector));
-    typename Key<A4>::Ptr a4(this->template getHelper<A4>(injector));
-    typename Key<A5>::Ptr a5(this->template getHelper<A5>(injector));
-    typename Key<A6>::Ptr a6(this->template getHelper<A6>(injector));
-    typename Key<A7>::Ptr a7(this->template getHelper<A7>(injector));
-    typename Key<A8>::Ptr a8(this->template getHelper<A8>(injector));
-    typename Key<A9>::Ptr a9(this->template getHelper<A9>(injector));
-    typename Key<A10>::Ptr a10(this->template getHelper<A10>(injector));
+    typename Key<A1>::Ptr a1(this->template getHelper<typename
+        i::Key<A1>::Normalized>(injector));
+    typename Key<A2>::Ptr a2(this->template getHelper<typename
+        i::Key<A2>::Normalized>(injector));
+    typename Key<A3>::Ptr a3(this->template getHelper<typename
+        i::Key<A3>::Normalized>(injector));
+    typename Key<A4>::Ptr a4(this->template getHelper<typename
+        i::Key<A4>::Normalized>(injector));
+    typename Key<A5>::Ptr a5(this->template getHelper<typename
+        i::Key<A5>::Normalized>(injector));
+    typename Key<A6>::Ptr a6(this->template getHelper<typename
+        i::Key<A6>::Normalized>(injector));
+    typename Key<A7>::Ptr a7(this->template getHelper<typename
+        i::Key<A7>::Normalized>(injector));
+    typename Key<A8>::Ptr a8(this->template getHelper<typename
+        i::Key<A8>::Normalized>(injector));
+    typename Key<A9>::Ptr a9(this->template getHelper<typename
+        i::Key<A9>::Normalized>(injector));
+    typename Key<A10>::Ptr a10(this->template getHelper<typename
+        i::Key<A10>::Normalized>(injector));
     Deleter deleter(sauce::static_pointer_cast<New>(injection));
     Impl * impl = allocator.allocate(1);
     Ptr provided(new(impl) Impl(a1, a2, a3, a4, a5, a6, a7, a8, a9, a10),

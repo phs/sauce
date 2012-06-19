@@ -59,7 +59,7 @@ public:
   Ptr provide(InjectionPtr injection, InjectorPtr injector) const
 ]]]] {
 [[$for j [[
-    typename Key<A$j>::Ptr a$j(this->template getHelper<A$j>(injector));
+    typename Key<A$j>::Ptr a$j(this->template getHelper<typename i::Key<A$j>::Normalized>(injector));
 
 ]]]]
     Deleter deleter(sauce::static_pointer_cast<New>(injection));
