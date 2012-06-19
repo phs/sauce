@@ -236,7 +236,7 @@ void AnimalModule(Binder & binder) {
   binder.bind<Animal>().named("tweety").to<Bird()>();
 
   binder.bind<Pond>().to<Pond(Named<Animal, LieutenantShinysides>)>();
-  // binder.bind<BirdCage>().to<BirdCage(Animal)>().usingDependencyNamed(0, "tweety");
+  // binder.bind<BirdCage>().to<BirdCage(Animal)>().namingDependency(0, "tweety");
 }
 
 TEST(BindingTest, shouldProvidedNamedDependencies) {
