@@ -15,9 +15,6 @@
 
 namespace sauce {
 
-template<typename Dependency, typename Scope, typename Ctor>
-class ToClause;
-
 /**
  * Binds to a specific constructor and allocator.
  */
@@ -27,15 +24,6 @@ class AllocateFromClause: public i::Clause {
     bind<Scope>(inj::NewInjection<Dependency, Ctor, Allocator>());
   }
 };
-
-template<typename Iface>
-class BindClause;
-
-template<typename Dependency>
-class NamedClause;
-
-template<typename Dependency, typename Scope>
-class InClause;
 
 /**
  * Binds to a specific constructor, allocating from the heap.
@@ -130,8 +118,6 @@ public:
     return pass(ToProviderClause<Dependency, NoScope, ProviderCtor>());
   }
 };
-
-class Binder;
 
 /**
  * A builder that creates a single binding.
