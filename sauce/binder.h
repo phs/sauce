@@ -27,6 +27,25 @@ class AllocateFromClause: public i::Clause {
 };
 
 /**
+ * Assigns dynamic name requirements to the explicit dependencies of a binding.
+ */
+template<typename Dependency, typename Scope, typename Ctor>
+class NamingClause: public i::Clause {
+  typedef typename i::Key<Dependency>::Iface Iface;
+
+  void onComplete() {
+    bind<Scope>(inj::NewInjection<Dependency, Ctor, std::allocator<Iface> >());
+  }
+
+public:
+
+  template<typename Allocator>
+  AllocateFromClause<Dependency, Scope, Ctor, Allocator> allocatedFrom() {
+    return pass(AllocateFromClause<Dependency, Scope, Ctor, Allocator>());
+  }
+};
+
+/**
  * Binds to a specific constructor, allocating from the heap.
  */
 template<typename Dependency, typename Scope, typename Ctor>
@@ -38,6 +57,11 @@ class ToClause: public i::Clause {
   }
 
 public:
+
+  NamingClause<Dependency, Scope, Ctor> naming(
+    unsigned int /* position */, std::string const /* name */) {
+    return pass(NamingClause<Dependency, Scope, Ctor>());
+  }
 
   template<typename Allocator>
   AllocateFromClause<Dependency, Scope, Ctor, Allocator> allocatedFrom() {
@@ -60,6 +84,11 @@ class ToProviderClause: public i::Clause {
   }
 
 public:
+
+  NamingClause<ProviderDependency, Scope, ProviderCtor> naming(
+    unsigned int /* position */, std::string const /* name */) {
+    return pass(NamingClause<ProviderDependency, Scope, ProviderCtor>());
+  }
 
   template<typename Allocator>
   AllocateFromClause<ProviderDependency, Scope, ProviderCtor, Allocator> allocatedFrom() {
@@ -93,6 +122,10 @@ public:
 
 /**
  * Names the binding.
+ *
+ * There are two kinds of names: static and dynamic.  Static names are given by template parameter
+ * type tags.  Dynamic ones are string arguments.  Each binding can use only one kind, but bindings
+ * using both kinds can be mixed in the same module.
  */
 template<typename Dependency>
 class NamedClause: public i::Clause {
