@@ -23,6 +23,7 @@ class ClauseState {
   PendingThrower & pendingThrower;
   OpaqueBindingPtr pendingBinding;
   std::vector<OpaqueBindingPtr> extraPendingBindings;
+  std::vector<std::string> dynamicDependencyNames;
 
 public:
 
@@ -30,7 +31,8 @@ public:
     bindings(bindings),
     pendingThrower(pendingThrower),
     pendingBinding(),
-    extraPendingBindings() {
+    extraPendingBindings(),
+    dynamicDependencyNames() {
     pendingThrower.throwAnyPending();
   }
 
@@ -60,7 +62,7 @@ public:
     extraPendingBindings.push_back(extra);
   }
 
-  void bindDependencyName(unsigned int /* position */, std::string const /* name */) {}
+  void bindDynamicDependencyName(unsigned int /* position */, std::string const /* name */) {}
 
   template<typename Exception>
   void throwLater() {
@@ -104,8 +106,8 @@ protected:
     state->template bindExtra<Scope, BoundInjection>();
   }
 
-  void bindDependencyName(unsigned int position, std::string const name) {
-    state->bindDependencyName(position, name);
+  void bindDynamicDependencyName(unsigned int position, std::string const name) {
+    state->bindDynamicDependencyName(position, name);
   }
 
   template<typename Exception>

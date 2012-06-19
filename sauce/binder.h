@@ -40,7 +40,7 @@ class NamingClause: public i::Clause {
 public:
 
   NamingClause<Dependency, Scope, Ctor> & naming(unsigned int position, std::string const name) {
-    bindDependencyName(position, name);
+    bindDynamicDependencyName(position, name);
     return *this;
   }
 
