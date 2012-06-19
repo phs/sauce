@@ -1,6 +1,0 @@
-<map id="G" name="G">
-<area shape="rect" id="node2" href="$structsauce_1_1_out_of_scope_exception.html" title="Thrown when a provision is requested outside of its bound scope." alt="" coords="47,229,255,256"/>
-<area shape="rect" id="node4" href="$structsauce_1_1_exception.html" title="Base class for all sauce exceptions." alt="" coords="86,155,215,181"/>
-<area shape="rect" id="node6" title="STL class." alt="" coords="85,80,216,107"/>
-<area shape="rect" id="node8" title="STL class." alt="" coords="95,5,207,32"/>
-</map>

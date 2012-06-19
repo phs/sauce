@@ -1,5 +1,0 @@
-<map id="G" name="G">
-<area shape="rect" id="node3" href="$structsauce_1_1internal_1_1_resolved_binding.html" title="sauce::internal::ResolvedBinding\&lt; Normalized \&gt;" alt="" coords="271,5,585,32"/>
-<area shape="rect" id="node5" href="$structsauce_1_1internal_1_1_resolved_binding.html" title="A binding for an acknowledged interface." alt="" coords="267,56,589,83"/>
-<area shape="rect" id="node7" href="$classsauce_1_1internal_1_1_injection_binding.html" title="A binding that uses an Injection to satisfy dependencies." alt="" coords="637,56,955,83"/>
-</map>
