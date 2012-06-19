@@ -29,6 +29,55 @@ TEST(BindingTest, shouldProvideBoundDependenciesAndTheirProvidersToo) {
   sauce::shared_ptr<Provider<Bound> > provider = injector->get<Provider<Bound> >();
 }
 
+struct PureVirtual {
+  virtual std::string says() = 0;
+};
+
+struct PureVirtualImpl: public PureVirtual {
+  std::string says() {
+    return "impl!";
+  }
+};
+
+struct NeedsPureVirtual {
+  sauce::shared_ptr<PureVirtual> pure;
+  explicit NeedsPureVirtual(sauce::shared_ptr<PureVirtual> pure):
+    pure(pure) {}
+};
+
+void UnnamedPureVirtualModule(Binder & binder) {
+  binder.bind<PureVirtual>().to<PureVirtualImpl()>();
+  binder.bind<NeedsPureVirtual>().to<NeedsPureVirtual(PureVirtual &)>();
+}
+
+/**
+ * Ensure a work-around exists for a wart I introduce while abusing syntax.
+ *
+ * Sauce uses virtually no macros.  So, the injected signatures such as
+ * NeedsPureVirtual(PureVirtual &) above are actual language objects.  Specifically they are
+ * function types.  However, some function types are illegal, such as those that pass by value
+ * uncopyable objects (such as instances of a pure virutal interface by value.)
+ *
+ * Notice this only affects unnamed dependencies, since the Named<> type wrapper otherwise
+ * protects us.
+ *
+ * Sauce doesn't really care too much about the types of injected dependencies in this sense,
+ * since it's going to actually pass in everything as smart pointers anyway.  The choice of using
+ * bare types is a convenience to the user, to keep bindings as uncluttered as possible.
+ *
+ * Therefore, let's abuse the system a little further.  Anywhere an injected type is needed, it
+ * can named either as itself, or as a reference to itself (as in PureVirtual & above).  If Sauce
+ * sees any reference types in this way, it will simply pull the reference modifier off (via a
+ * certain template specialization) and treat it as if the & was never there.
+ *
+ * I don't feel guilty about this altering of the space of possible bound types, since (smart)
+ * pointers to reference types are illegal anyway.
+ */
+TEST(BindingTest, shouldAllowBindingUnnamedPureVirtualDependenciesByReference) {
+  sauce::shared_ptr<Injector> injector(Modules().add(&UnnamedPureVirtualModule).createInjector());
+  EXPECT_EQ("impl!", (injector->get<NeedsPureVirtual>()->pure->says()));
+}
+
 struct CustomBuilt {};
 
 struct CustomBuiltProvider: AbstractProvider<CustomBuilt> {

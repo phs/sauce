@@ -26,6 +26,17 @@ struct Key {
 };
 
 /**
+ * Template specialization when an unnamed reference is used.
+ */
+template<typename Iface_>
+struct Key<Iface_ &> {
+  typedef Iface_ Iface;
+  typedef sauce::shared_ptr<Iface> Ptr;
+  typedef Unnamed Name;
+  typedef Named<Iface, Name> Normalized;
+};
+
+/**
  * Template specialization when an actual name is used.
  */
 template<typename Iface_, typename Name_>
