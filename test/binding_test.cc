@@ -233,7 +233,7 @@ void AnimalModule(Binder & binder) {
   binder.bind<Animal>().to<Cat()>();
   binder.bind<Animal>().named<LieutenantShinysides>().to<Fish()>();
   binder.bind<Animal>().named<Meatloaf>().toProvider<CowProvider()>();
-  // binder.bind<Animal>().named("tweety").to<Bird()>();
+  binder.bind<Animal>().named("tweety").to<Bird()>();
 
   binder.bind<Pond>().to<Pond(Named<Animal, LieutenantShinysides>)>();
   // binder.bind<BirdCage>().to<BirdCage(Animal)>().usingDependencyNamed(0, "tweety");

@@ -2,6 +2,7 @@
 #define SAUCE_BINDER_H_
 
 #include <memory>
+#include <string>
 #include <utility>
 
 #include <sauce/named.h>
@@ -134,6 +135,10 @@ public:
   template<typename Name>
   NamedClause<Named<Iface, Name> > named() {
     return pass(NamedClause<Named<Iface, Name> >());
+  }
+
+  NamedClause<Named<Iface, Unnamed> > named(std::string const /* name */) {
+    return pass(NamedClause<Named<Iface, Unnamed> >());
   }
 
   template<typename Scope>
