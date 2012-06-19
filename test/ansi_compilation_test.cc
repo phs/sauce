@@ -14,6 +14,7 @@ using ::sauce::Binder;
 using ::sauce::Injector;
 using ::sauce::Modules;
 using ::sauce::Named;
+using ::sauce::Provider;
 
 struct Animal {
   virtual std::string says() = 0;
@@ -60,6 +61,14 @@ void AnimalModule(Binder & binder) {
 
 int main() {
   sauce::shared_ptr<Injector> injector(Modules().add(&AnimalModule).createInjector());
+
+  sauce::shared_ptr<Provider<Animal> > animalProvider = injector->get<Provider<Animal> >();
+
+  sauce::shared_ptr<Provider<Named<Animal, LieutenantShinysides> > > namedImplicitProvider =
+    injector->get<Provider<Named<Animal, LieutenantShinysides> > >();
+
+  sauce::shared_ptr<Provider<Named<Animal, Meatloaf> > > namedExplicitProvider =
+    injector->get<Provider<Named<Animal, Meatloaf> > >();
 
   #ifdef __STRICT_ANSI__
   return 0;
