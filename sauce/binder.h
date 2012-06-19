@@ -64,9 +64,7 @@ class ToClause: public i::Clause {
 public:
 
   NamingClause<Dependency, Scope, Ctor> naming(unsigned int position, std::string const name) {
-    NamingClause<Dependency, Scope, Ctor> namingClause;
-    namingClause.naming(position, name);
-    return pass(namingClause);
+    return pass(NamingClause<Dependency, Scope, Ctor>()).naming(position, name);
   }
 
   template<typename Allocator>
@@ -93,9 +91,7 @@ public:
 
   NamingClause<ProviderDependency, Scope, ProviderCtor> naming(
     unsigned int position, std::string const name) {
-    NamingClause<ProviderDependency, Scope, ProviderCtor> namingClause;
-    namingClause.naming(position, name);
-    return pass(namingClause);
+    return pass(NamingClause<ProviderDependency, Scope, ProviderCtor>()).naming(position, name);
   }
 
   template<typename Allocator>
