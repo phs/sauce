@@ -41,10 +41,15 @@ class NewInjection<Dependency, Impl($As), Allocator>:
   friend class DisposalDeleter<Iface, New>;
 
   mutable ImplAllocator allocator;
+  std::vector<std::string> dynamicDependencyNames;
 
 public:
 
   typedef typename ProvidingInjection<Dependency>::InjectionPtr InjectionPtr;
+
+  NewInjection():
+    allocator(),
+    dynamicDependencyNames() {}
 
   /**
    * Provide an Iface.
@@ -74,6 +79,11 @@ public:
     this->template validateAcyclicHelper<A$j>(injector, ids);
 
 ]]]]
+  }
+
+  void setDynamicDependencyNames(std::vector<std::string> const & dynamicDependencyNames) {
+    this->dynamicDependencyNames = dynamicDependencyNames;
+    this->dynamicDependencyNames.resize($i, unnamed());
   }
 
 ]]]]

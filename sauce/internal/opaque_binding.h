@@ -53,7 +53,7 @@ struct OpaqueBinding {
   /**
    * Accept the list of dynamic dependency names this binding was created with.
    */
-  virtual void setDynamicDependencyNames(std::vector<std::string>) {}
+  virtual void setDynamicDependencyNames(std::vector<std::string> const &) {}
 
 };
 

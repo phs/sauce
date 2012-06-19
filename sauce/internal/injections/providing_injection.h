@@ -38,7 +38,7 @@ struct ProvidingInjection: InjectorFriend {
   /**
    * Accept the list of dynamic dependency names this injection was created with.
    */
-  virtual void setDynamicDependencyNames(std::vector<std::string>) {}
+  virtual void setDynamicDependencyNames(std::vector<std::string> const &) {}
 
 };
 

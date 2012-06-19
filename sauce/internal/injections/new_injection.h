@@ -35,10 +35,15 @@ class NewInjection<Dependency, Impl(), Allocator>:
   friend class DisposalDeleter<Iface, New>;
 
   mutable ImplAllocator allocator;
+  std::vector<std::string> dynamicDependencyNames;
 
 public:
 
   typedef typename ProvidingInjection<Dependency>::InjectionPtr InjectionPtr;
+
+  NewInjection():
+    allocator(),
+    dynamicDependencyNames() {}
 
   /**
    * Provide an Iface.
@@ -76,10 +81,15 @@ class NewInjection<Dependency, Impl(A1), Allocator>:
   friend class DisposalDeleter<Iface, New>;
 
   mutable ImplAllocator allocator;
+  std::vector<std::string> dynamicDependencyNames;
 
 public:
 
   typedef typename ProvidingInjection<Dependency>::InjectionPtr InjectionPtr;
+
+  NewInjection():
+    allocator(),
+    dynamicDependencyNames() {}
 
   /**
    * Provide an Iface.
@@ -99,6 +109,12 @@ public:
 
   void validateAcyclic(InjectorPtr injector, TypeIds & ids) const {
     this->template validateAcyclicHelper<A1>(injector, ids);
+  }
+
+  void setDynamicDependencyNames(std::vector<std::string> const &
+      dynamicDependencyNames) {
+    this->dynamicDependencyNames = dynamicDependencyNames;
+    this->dynamicDependencyNames.resize(1, unnamed());
   }
 
   void dispose(Iface * iface) const {
@@ -124,10 +140,15 @@ class NewInjection<Dependency, Impl(A1, A2), Allocator>:
   friend class DisposalDeleter<Iface, New>;
 
   mutable ImplAllocator allocator;
+  std::vector<std::string> dynamicDependencyNames;
 
 public:
 
   typedef typename ProvidingInjection<Dependency>::InjectionPtr InjectionPtr;
+
+  NewInjection():
+    allocator(),
+    dynamicDependencyNames() {}
 
   /**
    * Provide an Iface.
@@ -150,6 +171,12 @@ public:
   void validateAcyclic(InjectorPtr injector, TypeIds & ids) const {
     this->template validateAcyclicHelper<A1>(injector, ids);
     this->template validateAcyclicHelper<A2>(injector, ids);
+  }
+
+  void setDynamicDependencyNames(std::vector<std::string> const &
+      dynamicDependencyNames) {
+    this->dynamicDependencyNames = dynamicDependencyNames;
+    this->dynamicDependencyNames.resize(2, unnamed());
   }
 
   void dispose(Iface * iface) const {
@@ -175,10 +202,15 @@ class NewInjection<Dependency, Impl(A1, A2, A3), Allocator>:
   friend class DisposalDeleter<Iface, New>;
 
   mutable ImplAllocator allocator;
+  std::vector<std::string> dynamicDependencyNames;
 
 public:
 
   typedef typename ProvidingInjection<Dependency>::InjectionPtr InjectionPtr;
+
+  NewInjection():
+    allocator(),
+    dynamicDependencyNames() {}
 
   /**
    * Provide an Iface.
@@ -206,6 +238,12 @@ public:
     this->template validateAcyclicHelper<A3>(injector, ids);
   }
 
+  void setDynamicDependencyNames(std::vector<std::string> const &
+      dynamicDependencyNames) {
+    this->dynamicDependencyNames = dynamicDependencyNames;
+    this->dynamicDependencyNames.resize(3, unnamed());
+  }
+
   void dispose(Iface * iface) const {
     Impl * impl = static_cast<Impl *>(iface);
     impl->~Impl(); // Must not throw
@@ -229,10 +267,15 @@ class NewInjection<Dependency, Impl(A1, A2, A3, A4), Allocator>:
   friend class DisposalDeleter<Iface, New>;
 
   mutable ImplAllocator allocator;
+  std::vector<std::string> dynamicDependencyNames;
 
 public:
 
   typedef typename ProvidingInjection<Dependency>::InjectionPtr InjectionPtr;
+
+  NewInjection():
+    allocator(),
+    dynamicDependencyNames() {}
 
   /**
    * Provide an Iface.
@@ -263,6 +306,12 @@ public:
     this->template validateAcyclicHelper<A4>(injector, ids);
   }
 
+  void setDynamicDependencyNames(std::vector<std::string> const &
+      dynamicDependencyNames) {
+    this->dynamicDependencyNames = dynamicDependencyNames;
+    this->dynamicDependencyNames.resize(4, unnamed());
+  }
+
   void dispose(Iface * iface) const {
     Impl * impl = static_cast<Impl *>(iface);
     impl->~Impl(); // Must not throw
@@ -286,10 +335,15 @@ class NewInjection<Dependency, Impl(A1, A2, A3, A4, A5), Allocator>:
   friend class DisposalDeleter<Iface, New>;
 
   mutable ImplAllocator allocator;
+  std::vector<std::string> dynamicDependencyNames;
 
 public:
 
   typedef typename ProvidingInjection<Dependency>::InjectionPtr InjectionPtr;
+
+  NewInjection():
+    allocator(),
+    dynamicDependencyNames() {}
 
   /**
    * Provide an Iface.
@@ -323,6 +377,12 @@ public:
     this->template validateAcyclicHelper<A5>(injector, ids);
   }
 
+  void setDynamicDependencyNames(std::vector<std::string> const &
+      dynamicDependencyNames) {
+    this->dynamicDependencyNames = dynamicDependencyNames;
+    this->dynamicDependencyNames.resize(5, unnamed());
+  }
+
   void dispose(Iface * iface) const {
     Impl * impl = static_cast<Impl *>(iface);
     impl->~Impl(); // Must not throw
@@ -346,10 +406,15 @@ class NewInjection<Dependency, Impl(A1, A2, A3, A4, A5, A6), Allocator>:
   friend class DisposalDeleter<Iface, New>;
 
   mutable ImplAllocator allocator;
+  std::vector<std::string> dynamicDependencyNames;
 
 public:
 
   typedef typename ProvidingInjection<Dependency>::InjectionPtr InjectionPtr;
+
+  NewInjection():
+    allocator(),
+    dynamicDependencyNames() {}
 
   /**
    * Provide an Iface.
@@ -386,6 +451,12 @@ public:
     this->template validateAcyclicHelper<A6>(injector, ids);
   }
 
+  void setDynamicDependencyNames(std::vector<std::string> const &
+      dynamicDependencyNames) {
+    this->dynamicDependencyNames = dynamicDependencyNames;
+    this->dynamicDependencyNames.resize(6, unnamed());
+  }
+
   void dispose(Iface * iface) const {
     Impl * impl = static_cast<Impl *>(iface);
     impl->~Impl(); // Must not throw
@@ -411,10 +482,15 @@ class NewInjection<Dependency, Impl(A1, A2, A3, A4, A5, A6, A7), Allocator>:
   friend class DisposalDeleter<Iface, New>;
 
   mutable ImplAllocator allocator;
+  std::vector<std::string> dynamicDependencyNames;
 
 public:
 
   typedef typename ProvidingInjection<Dependency>::InjectionPtr InjectionPtr;
+
+  NewInjection():
+    allocator(),
+    dynamicDependencyNames() {}
 
   /**
    * Provide an Iface.
@@ -454,6 +530,12 @@ public:
     this->template validateAcyclicHelper<A7>(injector, ids);
   }
 
+  void setDynamicDependencyNames(std::vector<std::string> const &
+      dynamicDependencyNames) {
+    this->dynamicDependencyNames = dynamicDependencyNames;
+    this->dynamicDependencyNames.resize(7, unnamed());
+  }
+
   void dispose(Iface * iface) const {
     Impl * impl = static_cast<Impl *>(iface);
     impl->~Impl(); // Must not throw
@@ -479,10 +561,15 @@ class NewInjection<Dependency, Impl(A1, A2, A3, A4, A5, A6, A7, A8), Allocator>:
   friend class DisposalDeleter<Iface, New>;
 
   mutable ImplAllocator allocator;
+  std::vector<std::string> dynamicDependencyNames;
 
 public:
 
   typedef typename ProvidingInjection<Dependency>::InjectionPtr InjectionPtr;
+
+  NewInjection():
+    allocator(),
+    dynamicDependencyNames() {}
 
   /**
    * Provide an Iface.
@@ -525,6 +612,12 @@ public:
     this->template validateAcyclicHelper<A8>(injector, ids);
   }
 
+  void setDynamicDependencyNames(std::vector<std::string> const &
+      dynamicDependencyNames) {
+    this->dynamicDependencyNames = dynamicDependencyNames;
+    this->dynamicDependencyNames.resize(8, unnamed());
+  }
+
   void dispose(Iface * iface) const {
     Impl * impl = static_cast<Impl *>(iface);
     impl->~Impl(); // Must not throw
@@ -551,10 +644,15 @@ class NewInjection<Dependency, Impl(A1, A2, A3, A4, A5, A6, A7, A8, A9),
   friend class DisposalDeleter<Iface, New>;
 
   mutable ImplAllocator allocator;
+  std::vector<std::string> dynamicDependencyNames;
 
 public:
 
   typedef typename ProvidingInjection<Dependency>::InjectionPtr InjectionPtr;
+
+  NewInjection():
+    allocator(),
+    dynamicDependencyNames() {}
 
   /**
    * Provide an Iface.
@@ -600,6 +698,12 @@ public:
     this->template validateAcyclicHelper<A9>(injector, ids);
   }
 
+  void setDynamicDependencyNames(std::vector<std::string> const &
+      dynamicDependencyNames) {
+    this->dynamicDependencyNames = dynamicDependencyNames;
+    this->dynamicDependencyNames.resize(9, unnamed());
+  }
+
   void dispose(Iface * iface) const {
     Impl * impl = static_cast<Impl *>(iface);
     impl->~Impl(); // Must not throw
@@ -626,10 +730,15 @@ class NewInjection<Dependency, Impl(A1, A2, A3, A4, A5, A6, A7, A8, A9, A10),
   friend class DisposalDeleter<Iface, New>;
 
   mutable ImplAllocator allocator;
+  std::vector<std::string> dynamicDependencyNames;
 
 public:
 
   typedef typename ProvidingInjection<Dependency>::InjectionPtr InjectionPtr;
+
+  NewInjection():
+    allocator(),
+    dynamicDependencyNames() {}
 
   /**
    * Provide an Iface.
@@ -677,6 +786,12 @@ public:
     this->template validateAcyclicHelper<A8>(injector, ids);
     this->template validateAcyclicHelper<A9>(injector, ids);
     this->template validateAcyclicHelper<A10>(injector, ids);
+  }
+
+  void setDynamicDependencyNames(std::vector<std::string> const &
+      dynamicDependencyNames) {
+    this->dynamicDependencyNames = dynamicDependencyNames;
+    this->dynamicDependencyNames.resize(10, unnamed());
   }
 
   void dispose(Iface * iface) const {
