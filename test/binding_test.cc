@@ -264,6 +264,10 @@ TEST(BindingTest, shouldProvidedNamedDependencyProviders) {
   sauce::shared_ptr<Provider<Named<Animal, Meatloaf> > > namedExplicitProvider =
     injector->get<Provider<Named<Animal, Meatloaf> > >();
   EXPECT_EQ("Moo", namedExplicitProvider->get()->says());
+
+  sauce::shared_ptr<Provider<Animal> > dynamicallyNamedProvider =
+    injector->get<Provider<Animal> >("tweety");
+  EXPECT_EQ("Cheep cheep", dynamicallyNamedProvider->get()->says());
 }
 
 void IncompleteNamedModule(Binder & binder) {
