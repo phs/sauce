@@ -69,7 +69,7 @@
 <div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;</div>
 <div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;  <span class="keyword">typedef</span> <span class="keyword">typename</span> Key&lt;Dependency&gt;::Ptr IfacePtr;</div>
 <div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;  <span class="keyword">typedef</span> <span class="keyword">typename</span> ResolvedBinding&lt;Dependency&gt;::BindingPtr BindingPtr;</div>
-<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;  <span class="keyword">typedef</span> <span class="keyword">typename</span> <a class="code" href="structsauce_1_1internal_1_1injections_1_1_providing_injection.html" title="A strategy for satisfying provisions for the given interface.">inj::ProvidingInjection&lt;Dependency&gt;::InjectionPtr</a> InjectionPtr;</div>
+<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;  <span class="keyword">typedef</span> <span class="keyword">typename</span> <a class="code" href="classsauce_1_1internal_1_1injections_1_1_providing_injection.html" title="A strategy for satisfying provisions for the given interface.">inj::ProvidingInjection&lt;Dependency&gt;::InjectionPtr</a> InjectionPtr;</div>
 <div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;</div>
 <div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;  InjectionPtr injection;</div>
 <div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;</div>
@@ -96,33 +96,45 @@
 <div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;    <span class="keywordflow">return</span> smartPointer;</div>
 <div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;  }</div>
 <div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;</div>
-<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;  <span class="keywordtype">void</span> validateAcyclic(InjectorPtr injector, TypeIds &amp; ids)<span class="keyword"> const </span>{</div>
-<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;    injection-&gt;validateAcyclic(injector, ids);</div>
+<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;  <span class="keywordtype">void</span> validateAcyclic(InjectorPtr injector, TypeIds &amp; ids, std::string name)<span class="keyword"> const </span>{</div>
+<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;    injection-&gt;validateAcyclic(injector, ids, name);</div>
 <div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;  }</div>
 <div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;</div>
 <div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160;  <span class="keywordtype">void</span> eagerlyProvide(OpaqueBindingPtr opaque, InjectorPtr injector)<span class="keyword"> const </span>{</div>
 <div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160;    <span class="keywordflow">if</span> (getScopeKey() != typeIdOf&lt;NoScope&gt;()) {</div>
 <div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160;      BindingPtr binding = resolve&lt;Dependency&gt;(opaque);</div>
 <div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160;      TypeIds ids;</div>
-<div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160;      validateAcyclic(injector, ids);</div>
+<div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160;      validateAcyclic(injector, ids, binding-&gt;getName());</div>
 <div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160;      <span class="keyword">get</span>(binding, injector);</div>
 <div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160;    }</div>
 <div class="line"><a name="l00091"></a><span class="lineno">   91</span>&#160;  }</div>
 <div class="line"><a name="l00092"></a><span class="lineno">   92</span>&#160;</div>
-<div class="line"><a name="l00093"></a><span class="lineno">   93</span>&#160;<span class="keyword">public</span>:</div>
-<div class="line"><a name="l00094"></a><span class="lineno">   94</span>&#160;</div>
-<div class="line"><a name="l00095"></a><span class="lineno">   95</span>&#160;  <a class="code" href="classsauce_1_1internal_1_1_injection_binding.html" title="A binding that uses injections to satisfy dependencies.">InjectionBinding</a>(InjectionPtr injection):</div>
-<div class="line"><a name="l00096"></a><span class="lineno">   96</span>&#160;    injection(injection) {}</div>
-<div class="line"><a name="l00097"></a><span class="lineno">   97</span>&#160;</div>
-<div class="line"><a name="l00098"></a><span class="lineno">   98</span>&#160;};</div>
+<div class="line"><a name="l00096"></a><span class="lineno">   96</span>&#160;  <span class="keywordtype">void</span> setDynamicDependencyNames(std::vector&lt;std::string&gt; <span class="keyword">const</span> &amp; dynamicDependencyNames) {</div>
+<div class="line"><a name="l00097"></a><span class="lineno">   97</span>&#160;    injection-&gt;setDynamicDependencyNames(dynamicDependencyNames);</div>
+<div class="line"><a name="l00098"></a><span class="lineno">   98</span>&#160;  }</div>
 <div class="line"><a name="l00099"></a><span class="lineno">   99</span>&#160;</div>
-<div class="line"><a name="l00100"></a><span class="lineno">  100</span>&#160;}</div>
+<div class="line"><a name="l00100"></a><span class="lineno">  100</span>&#160;<span class="keyword">public</span>:</div>
 <div class="line"><a name="l00101"></a><span class="lineno">  101</span>&#160;</div>
-<div class="line"><a name="l00102"></a><span class="lineno">  102</span>&#160;<span class="keyword">namespace </span>i = ::sauce::internal;</div>
-<div class="line"><a name="l00103"></a><span class="lineno">  103</span>&#160;</div>
-<div class="line"><a name="l00104"></a><span class="lineno">  104</span>&#160;}</div>
-<div class="line"><a name="l00105"></a><span class="lineno">  105</span>&#160;</div>
-<div class="line"><a name="l00106"></a><span class="lineno">  106</span>&#160;<span class="preprocessor">#endif // SAUCE_INTERNAL_INJECTION_BINDING_H_</span></div>
+<div class="line"><a name="l00102"></a><span class="lineno">  102</span>&#160;  <a class="code" href="classsauce_1_1internal_1_1_injection_binding.html" title="A binding that uses injections to satisfy dependencies.">InjectionBinding</a>(InjectionPtr injection):</div>
+<div class="line"><a name="l00103"></a><span class="lineno">  103</span>&#160;    injection(injection) {}</div>
+<div class="line"><a name="l00104"></a><span class="lineno">  104</span>&#160;</div>
+<div class="line"><a name="l00108"></a><span class="lineno"><a class="code" href="classsauce_1_1internal_1_1_injection_binding.html#a4a3c79bd489e5e57ed8ea630bef070e9">  108</a></span>&#160;  std::string <a class="code" href="classsauce_1_1internal_1_1_injection_binding.html#a4a3c79bd489e5e57ed8ea630bef070e9" title="The dynamic name of this binding.">getName</a>()<span class="keyword"> const </span>{</div>
+<div class="line"><a name="l00109"></a><span class="lineno">  109</span>&#160;    <span class="keywordflow">return</span> injection-&gt;getName();</div>
+<div class="line"><a name="l00110"></a><span class="lineno">  110</span>&#160;  }</div>
+<div class="line"><a name="l00111"></a><span class="lineno">  111</span>&#160;</div>
+<div class="line"><a name="l00115"></a><span class="lineno"><a class="code" href="classsauce_1_1internal_1_1_injection_binding.html#ad772bbd18f30bcfac12748827c3f09f5">  115</a></span>&#160;  <span class="keywordtype">void</span> <a class="code" href="classsauce_1_1internal_1_1_injection_binding.html#ad772bbd18f30bcfac12748827c3f09f5" title="Set the dynamic name of this binding.">setName</a>(std::string name) {</div>
+<div class="line"><a name="l00116"></a><span class="lineno">  116</span>&#160;    injection-&gt;setName(name);</div>
+<div class="line"><a name="l00117"></a><span class="lineno">  117</span>&#160;  }</div>
+<div class="line"><a name="l00118"></a><span class="lineno">  118</span>&#160;</div>
+<div class="line"><a name="l00119"></a><span class="lineno">  119</span>&#160;};</div>
+<div class="line"><a name="l00120"></a><span class="lineno">  120</span>&#160;</div>
+<div class="line"><a name="l00121"></a><span class="lineno">  121</span>&#160;}</div>
+<div class="line"><a name="l00122"></a><span class="lineno">  122</span>&#160;</div>
+<div class="line"><a name="l00123"></a><span class="lineno">  123</span>&#160;<span class="keyword">namespace </span>i = ::sauce::internal;</div>
+<div class="line"><a name="l00124"></a><span class="lineno">  124</span>&#160;</div>
+<div class="line"><a name="l00125"></a><span class="lineno">  125</span>&#160;}</div>
+<div class="line"><a name="l00126"></a><span class="lineno">  126</span>&#160;</div>
+<div class="line"><a name="l00127"></a><span class="lineno">  127</span>&#160;<span class="preprocessor">#endif // SAUCE_INTERNAL_INJECTION_BINDING_H_</span></div>
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>

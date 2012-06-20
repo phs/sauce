@@ -75,11 +75,11 @@
 <div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;  <span class="keyword">friend</span> <span class="keyword">class </span><a class="code" href="classsauce_1_1internal_1_1_base_injector.html">BaseInjector</a>&lt;ImplicitBindings&gt;;</div>
 <div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;</div>
 <div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;  TypeIds &amp; ids;</div>
-<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;  <a class="code" href="classsauce_1_1internal_1_1_type_id.html" title="A TypeSignature equipped with specific helper methods dealing in the hidden type.">TypeId</a> id;</div>
+<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;  NamedTypeId id;</div>
 <div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;</div>
-<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;  <a class="code" href="classsauce_1_1internal_1_1_circular_dependency_guard.html" title="Detects circular dependencies on behalf of injectors.">CircularDependencyGuard</a>(TypeIds &amp; ids):</div>
+<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;  <a class="code" href="classsauce_1_1internal_1_1_circular_dependency_guard.html" title="Detects circular dependencies on behalf of injectors.">CircularDependencyGuard</a>(TypeIds &amp; ids, std::string name):</div>
 <div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;    ids(ids),</div>
-<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;    id(typeIdOf&lt;Dependency&gt;()) {</div>
+<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;    id(namedTypeIdOf&lt;Dependency&gt;(name)) {</div>
 <div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;    TypeIds::iterator i = ids.find(<span class="keywordtype">id</span>);</div>
 <div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;    <span class="keywordflow">if</span> (i == ids.end()) {</div>
 <div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;      ids.insert(i, <span class="keywordtype">id</span>);</div>
@@ -96,23 +96,23 @@
 <div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;<span class="keyword">template</span>&lt;<span class="keyword">typename</span> ImplicitBindings, <span class="keyword">typename</span> Dependency&gt;</div>
 <div class="line"><a name="l00055"></a><span class="lineno"><a class="code" href="structsauce_1_1internal_1_1_get_decorator.html">   55</a></span>&#160;<span class="keyword">struct </span><a class="code" href="structsauce_1_1internal_1_1_get_decorator.html" title="Calls Bindings::get on behalf of BaseInjector.">GetDecorator</a>: <a class="code" href="structsauce_1_1internal_1_1_provider_friend.html" title="A friend of the Provider base type.">ProviderFriend</a> {</div>
 <div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;  <span class="keyword">typedef</span> <span class="keyword">typename</span> Key&lt;Dependency&gt;::Ptr Ptr;</div>
-<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;  <span class="keyword">typedef</span> <span class="keyword">typename</span> <a class="code" href="classsauce_1_1_named.html" title="Wrap dependency requests with Named to choose one of several named alternatives.">Key&lt;Dependency&gt;::Normalized</a> <a class="code" href="classsauce_1_1_named.html" title="Wrap dependency requests with Named to choose one of several named alternatives.">Normalized</a>;</div>
+<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;  <span class="keyword">typedef</span> <span class="keyword">typename</span> <a class="code" href="classsauce_1_1_named.html" title="Wrap dependency requests with Named to choose one of several (statically) named alternatives.">Key&lt;Dependency&gt;::Normalized</a> <a class="code" href="classsauce_1_1_named.html" title="Wrap dependency requests with Named to choose one of several (statically) named alternatives.">Normalized</a>;</div>
 <div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;  <span class="keyword">typedef</span> sauce::shared_ptr&lt;Injector&gt; InjectorPtr;</div>
 <div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;</div>
-<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;  Ptr <span class="keyword">get</span>(<a class="code" href="classsauce_1_1internal_1_1_bindings.html" title="A container for bindings.">Bindings&lt;ImplicitBindings&gt;</a> <span class="keyword">const</span> &amp; bindings, InjectorPtr injector) {</div>
-<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;    <span class="keywordflow">return</span> bindings.template get&lt;Normalized&gt;(injector);</div>
+<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;  Ptr <span class="keyword">get</span>(<a class="code" href="classsauce_1_1internal_1_1_bindings.html" title="A container for bindings.">Bindings&lt;ImplicitBindings&gt;</a> <span class="keyword">const</span> &amp; bindings, InjectorPtr injector, std::string name) {</div>
+<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;    <span class="keywordflow">return</span> bindings.template get&lt;Normalized&gt;(injector, name);</div>
 <div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;  }</div>
 <div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;};</div>
 <div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;</div>
 <div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;<span class="keyword">template</span>&lt;<span class="keyword">typename</span> ImplicitBindings, <span class="keyword">typename</span> Prov<span class="keywordtype">id</span>edDependency, <span class="keyword">typename</span> Name&gt;</div>
-<div class="line"><a name="l00071"></a><span class="lineno"><a class="code" href="structsauce_1_1internal_1_1_get_decorator_3_01_implicit_bindings_00_01_named_3_01_provider_3_01_2bd1789f15c1abf4bb77f9fe019a26cd.html">   71</a></span>&#160;<span class="keyword">struct </span><a class="code" href="structsauce_1_1internal_1_1_get_decorator.html" title="Calls Bindings::get on behalf of BaseInjector.">GetDecorator</a>&lt;<a class="code" href="structsauce_1_1internal_1_1_implicit_bindings.html" title="Attempts to supply a Binding when none is found for a dependency.">ImplicitBindings</a>, <a class="code" href="classsauce_1_1_named.html" title="Wrap dependency requests with Named to choose one of several named alternatives.">Named</a>&lt;<a class="code" href="classsauce_1_1_provider.html" title="An interface for including custom factories in an Injector.">Provider</a>&lt;ProvidedDependency&gt;, Name&gt; &gt;: <a class="code" href="structsauce_1_1internal_1_1_provider_friend.html" title="A friend of the Provider base type.">ProviderFriend</a> {</div>
-<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;  <span class="keyword">typedef</span> <a class="code" href="classsauce_1_1_named.html" title="Wrap dependency requests with Named to choose one of several named alternatives.">Named&lt;Provider&lt;ProvidedDependency&gt;</a>, Name&gt; <a class="code" href="classsauce_1_1_named.html" title="Wrap dependency requests with Named to choose one of several named alternatives.">Dependency</a>;</div>
+<div class="line"><a name="l00071"></a><span class="lineno"><a class="code" href="structsauce_1_1internal_1_1_get_decorator_3_01_implicit_bindings_00_01_named_3_01_provider_3_01_2bd1789f15c1abf4bb77f9fe019a26cd.html">   71</a></span>&#160;<span class="keyword">struct </span><a class="code" href="structsauce_1_1internal_1_1_get_decorator.html" title="Calls Bindings::get on behalf of BaseInjector.">GetDecorator</a>&lt;<a class="code" href="structsauce_1_1internal_1_1_implicit_bindings.html" title="Attempts to supply a Binding when none is found for a dependency.">ImplicitBindings</a>, <a class="code" href="classsauce_1_1_named.html" title="Wrap dependency requests with Named to choose one of several (statically) named alternatives.">Named</a>&lt;<a class="code" href="classsauce_1_1_provider.html" title="An interface for including custom factories in an Injector.">Provider</a>&lt;ProvidedDependency&gt;, Name&gt; &gt;: <a class="code" href="structsauce_1_1internal_1_1_provider_friend.html" title="A friend of the Provider base type.">ProviderFriend</a> {</div>
+<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;  <span class="keyword">typedef</span> <a class="code" href="classsauce_1_1_named.html" title="Wrap dependency requests with Named to choose one of several (statically) named alternatives.">Named&lt;Provider&lt;ProvidedDependency&gt;</a>, Name&gt; <a class="code" href="classsauce_1_1_named.html" title="Wrap dependency requests with Named to choose one of several (statically) named alternatives.">Dependency</a>;</div>
 <div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;  <span class="keyword">typedef</span> <span class="keyword">typename</span> Key&lt;Dependency&gt;::Ptr Ptr;</div>
-<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;  <span class="keyword">typedef</span> <span class="keyword">typename</span> <a class="code" href="classsauce_1_1_named.html" title="Wrap dependency requests with Named to choose one of several named alternatives.">Key&lt;Dependency&gt;::Normalized</a> <a class="code" href="classsauce_1_1_named.html" title="Wrap dependency requests with Named to choose one of several named alternatives.">Normalized</a>;</div>
+<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;  <span class="keyword">typedef</span> <span class="keyword">typename</span> <a class="code" href="classsauce_1_1_named.html" title="Wrap dependency requests with Named to choose one of several (statically) named alternatives.">Key&lt;Dependency&gt;::Normalized</a> <a class="code" href="classsauce_1_1_named.html" title="Wrap dependency requests with Named to choose one of several (statically) named alternatives.">Normalized</a>;</div>
 <div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;  <span class="keyword">typedef</span> sauce::shared_ptr&lt;Injector&gt; InjectorPtr;</div>
 <div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;</div>
-<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;  Ptr <span class="keyword">get</span>(<a class="code" href="classsauce_1_1internal_1_1_bindings.html" title="A container for bindings.">Bindings&lt;ImplicitBindings&gt;</a> <span class="keyword">const</span> &amp; bindings, InjectorPtr injector) {</div>
-<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;    Ptr ptr = bindings.template get&lt;Normalized&gt;(injector);</div>
+<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;  Ptr <span class="keyword">get</span>(<a class="code" href="classsauce_1_1internal_1_1_bindings.html" title="A container for bindings.">Bindings&lt;ImplicitBindings&gt;</a> <span class="keyword">const</span> &amp; bindings, InjectorPtr injector, std::string name) {</div>
+<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;    Ptr ptr = bindings.template get&lt;Normalized&gt;(injector, name);</div>
 <div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;    setSelf&lt;ProvidedDependency, Name&gt;(ptr);</div>
 <div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;    <span class="keywordflow">return</span> ptr;</div>
 <div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;  }</div>
@@ -134,37 +134,39 @@
 <div class="line"><a name="l00097"></a><span class="lineno">   97</span>&#160;<span class="keyword">public</span>:</div>
 <div class="line"><a name="l00098"></a><span class="lineno">   98</span>&#160;</div>
 <div class="line"><a name="l00099"></a><span class="lineno">   99</span>&#160;  <span class="keyword">template</span>&lt;<span class="keyword">typename</span> Dependency&gt;</div>
-<div class="line"><a name="l00100"></a><span class="lineno">  100</span>&#160;  <span class="keywordtype">void</span> validateAcyclic(sauce::shared_ptr&lt;Injector&gt; injector, TypeIds &amp; ids)<span class="keyword"> const </span>{</div>
-<div class="line"><a name="l00101"></a><span class="lineno">  101</span>&#160;    <span class="keyword">typedef</span> <span class="keyword">typename</span> <a class="code" href="classsauce_1_1_named.html" title="Wrap dependency requests with Named to choose one of several named alternatives.">Key&lt;Dependency&gt;::Normalized</a> Normalized;</div>
-<div class="line"><a name="l00102"></a><span class="lineno">  102</span>&#160;    <a class="code" href="classsauce_1_1internal_1_1_circular_dependency_guard.html" title="Detects circular dependencies on behalf of injectors.">CircularDependencyGuard&lt;ImplicitBindings, Normalized&gt;</a> guard(ids);</div>
-<div class="line"><a name="l00103"></a><span class="lineno">  103</span>&#160;    bindings.validateAcyclic&lt;Normalized&gt;(injector, ids);</div>
-<div class="line"><a name="l00104"></a><span class="lineno">  104</span>&#160;  }</div>
-<div class="line"><a name="l00105"></a><span class="lineno">  105</span>&#160;</div>
-<div class="line"><a name="l00106"></a><span class="lineno">  106</span>&#160;  <span class="keyword">template</span>&lt;<span class="keyword">typename</span> Dependency&gt;</div>
-<div class="line"><a name="l00107"></a><span class="lineno">  107</span>&#160;  <span class="keyword">typename</span> Key&lt;Dependency&gt;::Ptr <span class="keyword">get</span>(sauce::shared_ptr&lt;Injector&gt; injector) <span class="keyword">const</span> {</div>
-<div class="line"><a name="l00108"></a><span class="lineno">  108</span>&#160;    <span class="keyword">typedef</span> <span class="keyword">typename</span> <a class="code" href="classsauce_1_1_named.html" title="Wrap dependency requests with Named to choose one of several named alternatives.">Key&lt;Dependency&gt;::Normalized</a> Normalized;</div>
-<div class="line"><a name="l00109"></a><span class="lineno">  109</span>&#160;    <a class="code" href="structsauce_1_1internal_1_1_get_decorator.html" title="Calls Bindings::get on behalf of BaseInjector.">GetDecorator&lt;ImplicitBindings, Normalized&gt;</a> getter;</div>
-<div class="line"><a name="l00110"></a><span class="lineno">  110</span>&#160;    <span class="keywordflow">return</span> getter.get(bindings, injector);</div>
-<div class="line"><a name="l00111"></a><span class="lineno">  111</span>&#160;  }</div>
-<div class="line"><a name="l00112"></a><span class="lineno">  112</span>&#160;</div>
-<div class="line"><a name="l00113"></a><span class="lineno">  113</span>&#160;  <span class="keyword">template</span>&lt;<span class="keyword">typename</span> Scope&gt;</div>
-<div class="line"><a name="l00114"></a><span class="lineno">  114</span>&#160;  <span class="keywordtype">void</span> eagerlyProvide(sauce::shared_ptr&lt;Injector&gt; injector)<span class="keyword"> const </span>{</div>
-<div class="line"><a name="l00115"></a><span class="lineno">  115</span>&#160;    bindings.eagerlyProvide&lt;Scope&gt;(injector);</div>
-<div class="line"><a name="l00116"></a><span class="lineno">  116</span>&#160;  }</div>
-<div class="line"><a name="l00117"></a><span class="lineno">  117</span>&#160;</div>
-<div class="line"><a name="l00121"></a><span class="lineno"><a class="code" href="classsauce_1_1internal_1_1_base_injector.html#a10391f6b6167d89af6c27c64f87a58f8">  121</a></span>&#160;  sauce::auto_ptr&lt;Lock&gt; <a class="code" href="classsauce_1_1internal_1_1_base_injector.html#a10391f6b6167d89af6c27c64f87a58f8" title="Create an RAII synchronization lock.">acquireLock</a>() {</div>
-<div class="line"><a name="l00122"></a><span class="lineno">  122</span>&#160;    sauce::auto_ptr&lt;Lock&gt; lock = lockFactory-&gt;createLock();</div>
-<div class="line"><a name="l00123"></a><span class="lineno">  123</span>&#160;    <span class="keywordflow">return</span> lock;</div>
-<div class="line"><a name="l00124"></a><span class="lineno">  124</span>&#160;  }</div>
-<div class="line"><a name="l00125"></a><span class="lineno">  125</span>&#160;};</div>
-<div class="line"><a name="l00126"></a><span class="lineno">  126</span>&#160;</div>
-<div class="line"><a name="l00127"></a><span class="lineno">  127</span>&#160;}</div>
+<div class="line"><a name="l00100"></a><span class="lineno">  100</span>&#160;  <span class="keywordtype">void</span> validateAcyclic(</div>
+<div class="line"><a name="l00101"></a><span class="lineno">  101</span>&#160;    sauce::shared_ptr&lt;Injector&gt; injector, TypeIds &amp; ids, std::string name)<span class="keyword"> const </span>{</div>
+<div class="line"><a name="l00102"></a><span class="lineno">  102</span>&#160;    <span class="keyword">typedef</span> <span class="keyword">typename</span> <a class="code" href="classsauce_1_1_named.html" title="Wrap dependency requests with Named to choose one of several (statically) named alternatives.">Key&lt;Dependency&gt;::Normalized</a> Normalized;</div>
+<div class="line"><a name="l00103"></a><span class="lineno">  103</span>&#160;    <a class="code" href="classsauce_1_1internal_1_1_circular_dependency_guard.html" title="Detects circular dependencies on behalf of injectors.">CircularDependencyGuard&lt;ImplicitBindings, Normalized&gt;</a> guard(ids, name);</div>
+<div class="line"><a name="l00104"></a><span class="lineno">  104</span>&#160;    bindings.validateAcyclic&lt;Normalized&gt;(injector, ids, name);</div>
+<div class="line"><a name="l00105"></a><span class="lineno">  105</span>&#160;  }</div>
+<div class="line"><a name="l00106"></a><span class="lineno">  106</span>&#160;</div>
+<div class="line"><a name="l00107"></a><span class="lineno">  107</span>&#160;  <span class="keyword">template</span>&lt;<span class="keyword">typename</span> Dependency&gt;</div>
+<div class="line"><a name="l00108"></a><span class="lineno">  108</span>&#160;  <span class="keyword">typename</span> Key&lt;Dependency&gt;::Ptr <span class="keyword">get</span>(</div>
+<div class="line"><a name="l00109"></a><span class="lineno">  109</span>&#160;    sauce::shared_ptr&lt;Injector&gt; injector, std::string name) <span class="keyword">const</span> {</div>
+<div class="line"><a name="l00110"></a><span class="lineno">  110</span>&#160;    <span class="keyword">typedef</span> <span class="keyword">typename</span> <a class="code" href="classsauce_1_1_named.html" title="Wrap dependency requests with Named to choose one of several (statically) named alternatives.">Key&lt;Dependency&gt;::Normalized</a> Normalized;</div>
+<div class="line"><a name="l00111"></a><span class="lineno">  111</span>&#160;    <a class="code" href="structsauce_1_1internal_1_1_get_decorator.html" title="Calls Bindings::get on behalf of BaseInjector.">GetDecorator&lt;ImplicitBindings, Normalized&gt;</a> getter;</div>
+<div class="line"><a name="l00112"></a><span class="lineno">  112</span>&#160;    <span class="keywordflow">return</span> getter.get(bindings, injector, name);</div>
+<div class="line"><a name="l00113"></a><span class="lineno">  113</span>&#160;  }</div>
+<div class="line"><a name="l00114"></a><span class="lineno">  114</span>&#160;</div>
+<div class="line"><a name="l00115"></a><span class="lineno">  115</span>&#160;  <span class="keyword">template</span>&lt;<span class="keyword">typename</span> Scope&gt;</div>
+<div class="line"><a name="l00116"></a><span class="lineno">  116</span>&#160;  <span class="keywordtype">void</span> eagerlyProvide(sauce::shared_ptr&lt;Injector&gt; injector)<span class="keyword"> const </span>{</div>
+<div class="line"><a name="l00117"></a><span class="lineno">  117</span>&#160;    bindings.eagerlyProvide&lt;Scope&gt;(injector);</div>
+<div class="line"><a name="l00118"></a><span class="lineno">  118</span>&#160;  }</div>
+<div class="line"><a name="l00119"></a><span class="lineno">  119</span>&#160;</div>
+<div class="line"><a name="l00123"></a><span class="lineno"><a class="code" href="classsauce_1_1internal_1_1_base_injector.html#a10391f6b6167d89af6c27c64f87a58f8">  123</a></span>&#160;  sauce::auto_ptr&lt;Lock&gt; <a class="code" href="classsauce_1_1internal_1_1_base_injector.html#a10391f6b6167d89af6c27c64f87a58f8" title="Create an RAII synchronization lock.">acquireLock</a>() {</div>
+<div class="line"><a name="l00124"></a><span class="lineno">  124</span>&#160;    sauce::auto_ptr&lt;Lock&gt; lock = lockFactory-&gt;createLock();</div>
+<div class="line"><a name="l00125"></a><span class="lineno">  125</span>&#160;    <span class="keywordflow">return</span> lock;</div>
+<div class="line"><a name="l00126"></a><span class="lineno">  126</span>&#160;  }</div>
+<div class="line"><a name="l00127"></a><span class="lineno">  127</span>&#160;};</div>
 <div class="line"><a name="l00128"></a><span class="lineno">  128</span>&#160;</div>
-<div class="line"><a name="l00129"></a><span class="lineno">  129</span>&#160;<span class="keyword">namespace </span>i = ::sauce::internal;</div>
+<div class="line"><a name="l00129"></a><span class="lineno">  129</span>&#160;}</div>
 <div class="line"><a name="l00130"></a><span class="lineno">  130</span>&#160;</div>
-<div class="line"><a name="l00131"></a><span class="lineno">  131</span>&#160;}</div>
+<div class="line"><a name="l00131"></a><span class="lineno">  131</span>&#160;<span class="keyword">namespace </span>i = ::sauce::internal;</div>
 <div class="line"><a name="l00132"></a><span class="lineno">  132</span>&#160;</div>
-<div class="line"><a name="l00133"></a><span class="lineno">  133</span>&#160;<span class="preprocessor">#endif // SAUCE_INTERNAL_BASE_INJECTOR_H_</span></div>
+<div class="line"><a name="l00133"></a><span class="lineno">  133</span>&#160;}</div>
+<div class="line"><a name="l00134"></a><span class="lineno">  134</span>&#160;</div>
+<div class="line"><a name="l00135"></a><span class="lineno">  135</span>&#160;<span class="preprocessor">#endif // SAUCE_INTERNAL_BASE_INJECTOR_H_</span></div>
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
