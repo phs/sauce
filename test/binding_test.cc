@@ -270,6 +270,23 @@ TEST(BindingTest, shouldProvidedNamedDependencyProviders) {
   EXPECT_EQ("Cheep cheep", dynamicallyNamedProvider->get()->says());
 }
 
+void BirdDynamicModule(Binder & binder) {
+  binder.bind<Animal>().named("tweety").to<Bird()>();
+}
+
+void CatDynamicModule(Binder & binder) {
+  binder.bind<Animal>().named("sylvester").to<Cat()>();
+}
+
+TEST(BindingTest, shouldProvidedDynamicallyNamedDependenciesAcrossModules) {
+  Modules modules;
+  modules.add(&BirdDynamicModule).add(&CatDynamicModule);
+  sauce::shared_ptr<Injector> injector(modules.createInjector());
+
+  EXPECT_EQ("Cheep cheep", (injector->get<Animal>("tweety")->says()));
+  EXPECT_EQ("Meow", (injector->get<Animal>("sylvester")->says()));
+}
+
 void IncompleteNamedModule(Binder & binder) {
   binder.bind<IncompletelyBound>().named<LieutenantShinysides>() /* to ...? */;
 }
