@@ -38,6 +38,11 @@ struct OpaqueBinding {
   virtual std::string getName() const = 0;
 
   /**
+   * Set the dynamic name of this binding.
+   */
+  virtual void setName(std::string) = 0;
+
+  /**
    * The NamedTypeId of the (hidden) provided interface.
    */
   virtual NamedTypeId getKey() const = 0;

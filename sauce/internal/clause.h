@@ -1,10 +1,12 @@
 #ifndef SAUCE_CLAUSE_H_
 #define SAUCE_CLAUSE_H_
 
+#include <string>
 #include <vector>
 
 #include <sauce/exceptions.h>
 #include <sauce/memory.h>
+#include <sauce/named.h>
 #include <sauce/internal/bindings.h>
 #include <sauce/internal/pending_thrower.h>
 #include <sauce/internal/opaque_binding.h>
@@ -23,6 +25,7 @@ class ClauseState {
   PendingThrower & pendingThrower;
   OpaqueBindingPtr pendingBinding;
   std::vector<OpaqueBindingPtr> extraPendingBindings;
+  std::string dynamicName;
   std::vector<std::string> dynamicDependencyNames;
 
 public:
@@ -32,12 +35,14 @@ public:
     pendingThrower(pendingThrower),
     pendingBinding(),
     extraPendingBindings(),
+    dynamicName(unnamed()),
     dynamicDependencyNames() {
     pendingThrower.throwAnyPending();
   }
 
   virtual ~ClauseState() {
     if (pendingBinding.get() != NULL) {
+      pendingBinding->setName(dynamicName);
       pendingBinding->setDynamicDependencyNames(dynamicDependencyNames);
       bindings.put(pendingBinding);
     }
@@ -61,6 +66,10 @@ public:
     typename BoundInjection::InjectionPtr injection(new BoundInjection());
     OpaqueBindingPtr extra(new InjectionBinding<Dependency, Scope>(injection));
     extraPendingBindings.push_back(extra);
+  }
+
+  void setDynamicName(std::string const name) {
+    this->dynamicName = name;
   }
 
   void bindDynamicDependencyName(unsigned int position, std::string const name) {
@@ -110,6 +119,10 @@ protected:
   template<typename Scope, typename BoundInjection>
   void bindExtra(BoundInjection) {
     state->template bindExtra<Scope, BoundInjection>();
+  }
+
+  void setDynamicName(std::string const name) {
+    state->setDynamicName(name);
   }
 
   void bindDynamicDependencyName(unsigned int position, std::string const name) {
