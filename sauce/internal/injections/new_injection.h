@@ -107,8 +107,9 @@ public:
     return provided;
   }
 
-  void validateAcyclic(InjectorPtr injector, TypeIds & ids) const {
-    this->template validateAcyclicHelper<A1>(injector, ids);
+  void validateAcyclic(InjectorPtr injector, TypeIds & ids,
+      std::string name) const {
+    this->template validateAcyclicHelper<A1>(injector, ids, name);
   }
 
   void setDynamicDependencyNames(std::vector<std::string> const &
@@ -168,9 +169,10 @@ public:
     return provided;
   }
 
-  void validateAcyclic(InjectorPtr injector, TypeIds & ids) const {
-    this->template validateAcyclicHelper<A1>(injector, ids);
-    this->template validateAcyclicHelper<A2>(injector, ids);
+  void validateAcyclic(InjectorPtr injector, TypeIds & ids,
+      std::string name) const {
+    this->template validateAcyclicHelper<A1>(injector, ids, name);
+    this->template validateAcyclicHelper<A2>(injector, ids, name);
   }
 
   void setDynamicDependencyNames(std::vector<std::string> const &
@@ -232,10 +234,11 @@ public:
     return provided;
   }
 
-  void validateAcyclic(InjectorPtr injector, TypeIds & ids) const {
-    this->template validateAcyclicHelper<A1>(injector, ids);
-    this->template validateAcyclicHelper<A2>(injector, ids);
-    this->template validateAcyclicHelper<A3>(injector, ids);
+  void validateAcyclic(InjectorPtr injector, TypeIds & ids,
+      std::string name) const {
+    this->template validateAcyclicHelper<A1>(injector, ids, name);
+    this->template validateAcyclicHelper<A2>(injector, ids, name);
+    this->template validateAcyclicHelper<A3>(injector, ids, name);
   }
 
   void setDynamicDependencyNames(std::vector<std::string> const &
@@ -299,11 +302,12 @@ public:
     return provided;
   }
 
-  void validateAcyclic(InjectorPtr injector, TypeIds & ids) const {
-    this->template validateAcyclicHelper<A1>(injector, ids);
-    this->template validateAcyclicHelper<A2>(injector, ids);
-    this->template validateAcyclicHelper<A3>(injector, ids);
-    this->template validateAcyclicHelper<A4>(injector, ids);
+  void validateAcyclic(InjectorPtr injector, TypeIds & ids,
+      std::string name) const {
+    this->template validateAcyclicHelper<A1>(injector, ids, name);
+    this->template validateAcyclicHelper<A2>(injector, ids, name);
+    this->template validateAcyclicHelper<A3>(injector, ids, name);
+    this->template validateAcyclicHelper<A4>(injector, ids, name);
   }
 
   void setDynamicDependencyNames(std::vector<std::string> const &
@@ -369,12 +373,13 @@ public:
     return provided;
   }
 
-  void validateAcyclic(InjectorPtr injector, TypeIds & ids) const {
-    this->template validateAcyclicHelper<A1>(injector, ids);
-    this->template validateAcyclicHelper<A2>(injector, ids);
-    this->template validateAcyclicHelper<A3>(injector, ids);
-    this->template validateAcyclicHelper<A4>(injector, ids);
-    this->template validateAcyclicHelper<A5>(injector, ids);
+  void validateAcyclic(InjectorPtr injector, TypeIds & ids,
+      std::string name) const {
+    this->template validateAcyclicHelper<A1>(injector, ids, name);
+    this->template validateAcyclicHelper<A2>(injector, ids, name);
+    this->template validateAcyclicHelper<A3>(injector, ids, name);
+    this->template validateAcyclicHelper<A4>(injector, ids, name);
+    this->template validateAcyclicHelper<A5>(injector, ids, name);
   }
 
   void setDynamicDependencyNames(std::vector<std::string> const &
@@ -442,13 +447,14 @@ public:
     return provided;
   }
 
-  void validateAcyclic(InjectorPtr injector, TypeIds & ids) const {
-    this->template validateAcyclicHelper<A1>(injector, ids);
-    this->template validateAcyclicHelper<A2>(injector, ids);
-    this->template validateAcyclicHelper<A3>(injector, ids);
-    this->template validateAcyclicHelper<A4>(injector, ids);
-    this->template validateAcyclicHelper<A5>(injector, ids);
-    this->template validateAcyclicHelper<A6>(injector, ids);
+  void validateAcyclic(InjectorPtr injector, TypeIds & ids,
+      std::string name) const {
+    this->template validateAcyclicHelper<A1>(injector, ids, name);
+    this->template validateAcyclicHelper<A2>(injector, ids, name);
+    this->template validateAcyclicHelper<A3>(injector, ids, name);
+    this->template validateAcyclicHelper<A4>(injector, ids, name);
+    this->template validateAcyclicHelper<A5>(injector, ids, name);
+    this->template validateAcyclicHelper<A6>(injector, ids, name);
   }
 
   void setDynamicDependencyNames(std::vector<std::string> const &
@@ -520,14 +526,15 @@ public:
     return provided;
   }
 
-  void validateAcyclic(InjectorPtr injector, TypeIds & ids) const {
-    this->template validateAcyclicHelper<A1>(injector, ids);
-    this->template validateAcyclicHelper<A2>(injector, ids);
-    this->template validateAcyclicHelper<A3>(injector, ids);
-    this->template validateAcyclicHelper<A4>(injector, ids);
-    this->template validateAcyclicHelper<A5>(injector, ids);
-    this->template validateAcyclicHelper<A6>(injector, ids);
-    this->template validateAcyclicHelper<A7>(injector, ids);
+  void validateAcyclic(InjectorPtr injector, TypeIds & ids,
+      std::string name) const {
+    this->template validateAcyclicHelper<A1>(injector, ids, name);
+    this->template validateAcyclicHelper<A2>(injector, ids, name);
+    this->template validateAcyclicHelper<A3>(injector, ids, name);
+    this->template validateAcyclicHelper<A4>(injector, ids, name);
+    this->template validateAcyclicHelper<A5>(injector, ids, name);
+    this->template validateAcyclicHelper<A6>(injector, ids, name);
+    this->template validateAcyclicHelper<A7>(injector, ids, name);
   }
 
   void setDynamicDependencyNames(std::vector<std::string> const &
@@ -601,15 +608,16 @@ public:
     return provided;
   }
 
-  void validateAcyclic(InjectorPtr injector, TypeIds & ids) const {
-    this->template validateAcyclicHelper<A1>(injector, ids);
-    this->template validateAcyclicHelper<A2>(injector, ids);
-    this->template validateAcyclicHelper<A3>(injector, ids);
-    this->template validateAcyclicHelper<A4>(injector, ids);
-    this->template validateAcyclicHelper<A5>(injector, ids);
-    this->template validateAcyclicHelper<A6>(injector, ids);
-    this->template validateAcyclicHelper<A7>(injector, ids);
-    this->template validateAcyclicHelper<A8>(injector, ids);
+  void validateAcyclic(InjectorPtr injector, TypeIds & ids,
+      std::string name) const {
+    this->template validateAcyclicHelper<A1>(injector, ids, name);
+    this->template validateAcyclicHelper<A2>(injector, ids, name);
+    this->template validateAcyclicHelper<A3>(injector, ids, name);
+    this->template validateAcyclicHelper<A4>(injector, ids, name);
+    this->template validateAcyclicHelper<A5>(injector, ids, name);
+    this->template validateAcyclicHelper<A6>(injector, ids, name);
+    this->template validateAcyclicHelper<A7>(injector, ids, name);
+    this->template validateAcyclicHelper<A8>(injector, ids, name);
   }
 
   void setDynamicDependencyNames(std::vector<std::string> const &
@@ -686,16 +694,17 @@ public:
     return provided;
   }
 
-  void validateAcyclic(InjectorPtr injector, TypeIds & ids) const {
-    this->template validateAcyclicHelper<A1>(injector, ids);
-    this->template validateAcyclicHelper<A2>(injector, ids);
-    this->template validateAcyclicHelper<A3>(injector, ids);
-    this->template validateAcyclicHelper<A4>(injector, ids);
-    this->template validateAcyclicHelper<A5>(injector, ids);
-    this->template validateAcyclicHelper<A6>(injector, ids);
-    this->template validateAcyclicHelper<A7>(injector, ids);
-    this->template validateAcyclicHelper<A8>(injector, ids);
-    this->template validateAcyclicHelper<A9>(injector, ids);
+  void validateAcyclic(InjectorPtr injector, TypeIds & ids,
+      std::string name) const {
+    this->template validateAcyclicHelper<A1>(injector, ids, name);
+    this->template validateAcyclicHelper<A2>(injector, ids, name);
+    this->template validateAcyclicHelper<A3>(injector, ids, name);
+    this->template validateAcyclicHelper<A4>(injector, ids, name);
+    this->template validateAcyclicHelper<A5>(injector, ids, name);
+    this->template validateAcyclicHelper<A6>(injector, ids, name);
+    this->template validateAcyclicHelper<A7>(injector, ids, name);
+    this->template validateAcyclicHelper<A8>(injector, ids, name);
+    this->template validateAcyclicHelper<A9>(injector, ids, name);
   }
 
   void setDynamicDependencyNames(std::vector<std::string> const &
@@ -775,17 +784,18 @@ public:
     return provided;
   }
 
-  void validateAcyclic(InjectorPtr injector, TypeIds & ids) const {
-    this->template validateAcyclicHelper<A1>(injector, ids);
-    this->template validateAcyclicHelper<A2>(injector, ids);
-    this->template validateAcyclicHelper<A3>(injector, ids);
-    this->template validateAcyclicHelper<A4>(injector, ids);
-    this->template validateAcyclicHelper<A5>(injector, ids);
-    this->template validateAcyclicHelper<A6>(injector, ids);
-    this->template validateAcyclicHelper<A7>(injector, ids);
-    this->template validateAcyclicHelper<A8>(injector, ids);
-    this->template validateAcyclicHelper<A9>(injector, ids);
-    this->template validateAcyclicHelper<A10>(injector, ids);
+  void validateAcyclic(InjectorPtr injector, TypeIds & ids,
+      std::string name) const {
+    this->template validateAcyclicHelper<A1>(injector, ids, name);
+    this->template validateAcyclicHelper<A2>(injector, ids, name);
+    this->template validateAcyclicHelper<A3>(injector, ids, name);
+    this->template validateAcyclicHelper<A4>(injector, ids, name);
+    this->template validateAcyclicHelper<A5>(injector, ids, name);
+    this->template validateAcyclicHelper<A6>(injector, ids, name);
+    this->template validateAcyclicHelper<A7>(injector, ids, name);
+    this->template validateAcyclicHelper<A8>(injector, ids, name);
+    this->template validateAcyclicHelper<A9>(injector, ids, name);
+    this->template validateAcyclicHelper<A10>(injector, ids, name);
   }
 
   void setDynamicDependencyNames(std::vector<std::string> const &

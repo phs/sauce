@@ -57,11 +57,11 @@ class Injector {
   }
 
   template<typename Dependency>
-  void validateAcyclic(sauce::shared_ptr<Injector> injector, i::TypeIds & ids) {
+  void validateAcyclic(sauce::shared_ptr<Injector> injector, i::TypeIds & ids, std::string name) {
     if (base.get() == NULL) {
-      next->validateAcyclic<Dependency>(injector, ids);
+      next->validateAcyclic<Dependency>(injector, ids, name);
     } else {
-      base->validateAcyclic<Dependency>(injector, ids);
+      base->validateAcyclic<Dependency>(injector, ids, name);
     }
   }
 
@@ -86,11 +86,11 @@ class Injector {
   }
 
   template<typename Scope>
-  void eagerlyProvide(sauce::shared_ptr<Injector> injector) {
+  void eagerlyProvide(sauce::shared_ptr<Injector> injector, std::string name) {
     if (base.get() == NULL) {
-      next->eagerlyProvide<Scope>(injector);
+      next->eagerlyProvide<Scope>(injector, name);
     } else {
-      base->eagerlyProvide<Scope>(injector);
+      base->eagerlyProvide<Scope>(injector, name);
     }
   }
 
@@ -136,8 +136,7 @@ public:
     // TODO: SFINAE up proof that only one of static or dynamic naming is used.
     sauce::auto_ptr<i::Lock> lock = acquireLock();
     i::TypeIds ids;
-    // TODO: Use dynamic names when validating acyclic deps?
-    validateAcyclic<Normalized>(getSelf(), ids);
+    validateAcyclic<Normalized>(getSelf(), ids, name);
     return get<Normalized>(getSelf(), name);
   }
 
@@ -166,9 +165,9 @@ public:
   }
 
   template<typename Scope>
-  void eagerlyProvide() {
+  void eagerlyProvide(std::string name = unnamed()) {
     sauce::auto_ptr<i::Lock> lock = acquireLock();
-    eagerlyProvide<Scope>(getSelf());
+    eagerlyProvide<Scope>(getSelf(), name);
   }
 
 };
@@ -180,10 +179,9 @@ typedef sauce::shared_ptr<Injector> InjectorPtr;
 class InjectorFriend {
 protected:
 
-  // TODO: name parameter?
   template<typename Dependency>
-  void validateAcyclicHelper(InjectorPtr injector, TypeIds & ids) const {
-    injector->validateAcyclic<Dependency>(injector, ids);
+  void validateAcyclicHelper(InjectorPtr injector, TypeIds & ids, std::string name) const {
+    injector->validateAcyclic<Dependency>(injector, ids, name);
   }
 
   template<typename Dependency>

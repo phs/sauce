@@ -28,11 +28,11 @@ class CircularDependencyGuard {
   friend class BaseInjector<ImplicitBindings>;
 
   TypeIds & ids;
-  TypeId id;
+  NamedTypeId id;
 
-  CircularDependencyGuard(TypeIds & ids):
+  CircularDependencyGuard(TypeIds & ids, std::string name):
     ids(ids),
-    id(typeIdOf<Dependency>()) {
+    id(namedTypeIdOf<Dependency>(name)) {
     TypeIds::iterator i = ids.find(id);
     if (i == ids.end()) {
       ids.insert(i, id);
@@ -97,10 +97,11 @@ class BaseInjector {
 public:
 
   template<typename Dependency>
-  void validateAcyclic(sauce::shared_ptr<Injector> injector, TypeIds & ids) const {
+  void validateAcyclic(
+    sauce::shared_ptr<Injector> injector, TypeIds & ids, std::string name) const {
     typedef typename Key<Dependency>::Normalized Normalized;
-    CircularDependencyGuard<ImplicitBindings, Normalized> guard(ids);
-    bindings.validateAcyclic<Normalized>(injector, ids);
+    CircularDependencyGuard<ImplicitBindings, Normalized> guard(ids, name);
+    bindings.validateAcyclic<Normalized>(injector, ids, name);
   }
 
   template<typename Dependency>
@@ -112,8 +113,8 @@ public:
   }
 
   template<typename Scope>
-  void eagerlyProvide(sauce::shared_ptr<Injector> injector) const {
-    bindings.eagerlyProvide<Scope>(injector);
+  void eagerlyProvide(sauce::shared_ptr<Injector> injector, std::string name) const {
+    bindings.eagerlyProvide<Scope>(injector, name);
   }
 
   /**

@@ -33,7 +33,7 @@ struct ProvidingInjection: InjectorFriend {
    * This is Tarjan's algorithm using the call stack.  When a cycle is detected a
    * CircularDependencyException is thrown.
    */
-  virtual void validateAcyclic(InjectorPtr, TypeIds &) const {}
+  virtual void validateAcyclic(InjectorPtr, TypeIds &, std::string) const {}
 
   /**
    * Accept the list of dynamic dependency names this injection was created with.

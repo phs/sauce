@@ -85,8 +85,9 @@ public:
   }
 
   template<typename Dependency>
-  void validateAcyclic(sauce::shared_ptr<Injector> injector, TypeIds & ids) const {
-    getBinding<Dependency>()->validateAcyclic(injector, ids);
+  void validateAcyclic(
+    sauce::shared_ptr<Injector> injector, TypeIds & ids, std::string name) const {
+    getBinding<Dependency>()->validateAcyclic(injector, ids, name);
   }
 
   /**
@@ -103,14 +104,14 @@ public:
   }
 
   template<typename Scope>
-  void eagerlyProvide(sauce::shared_ptr<Injector> injector) const {
+  void eagerlyProvide(sauce::shared_ptr<Injector> injector, std::string name) const {
     TypeId scopeKey = typeIdOf<Scope>();
     ScopeMap::const_iterator i = scopeMap.lower_bound(scopeKey);
     ScopeMap::const_iterator end = scopeMap.upper_bound(scopeKey);
 
     for (; i != end; ++i) {
       OpaqueBindingPtr const & binding = i->second;
-      binding->eagerlyProvide(binding, injector);
+      binding->eagerlyProvide(binding, injector, name);
     }
   }
 };

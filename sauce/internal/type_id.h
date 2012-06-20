@@ -2,6 +2,8 @@
 #define SAUCE_INTERNAL_TYPE_ID_H_
 
 #include <set>
+#include <string>
+#include <utility>
 
 #include <sauce/exceptions.h>
 
@@ -91,9 +93,22 @@ TypeId typeIdOf() {
 }
 
 /**
- * A set of type ids.
+ * A type id with a (dynamic) name.
  */
-typedef std::set<TypeId> TypeIds;
+typedef std::pair<TypeId, std::string> NamedTypeId;
+
+/**
+ * How one gets NamedTypeIds.
+ */
+template<typename Type>
+NamedTypeId namedTypeIdOf(std::string name) {
+  return std::make_pair(typeIdOf<Type>(), name);
+}
+
+/**
+ * A set of named type ids.
+ */
+typedef std::set<NamedTypeId> TypeIds;
 
 }
 

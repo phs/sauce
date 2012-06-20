@@ -34,7 +34,7 @@ struct ResolvedBinding: public OpaqueBinding {
    * This is Tarjan's algorithm using the call stack.  When a cycle is detected a
    * CircularDependencyException is thrown.
    */
-  virtual void validateAcyclic(sauce::shared_ptr<Injector>, TypeIds &) const {}
+  virtual void validateAcyclic(sauce::shared_ptr<Injector>, TypeIds &, std::string) const {}
 
   /**
    * Get an Iface, using the given injector to provide dependencies.
