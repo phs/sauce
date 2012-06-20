@@ -31,7 +31,6 @@ stamp-h*
 .dirstamp
 .libs
 ansi_compilation_test
-doxygen-doc
 unittests
 
 # m4 stuff

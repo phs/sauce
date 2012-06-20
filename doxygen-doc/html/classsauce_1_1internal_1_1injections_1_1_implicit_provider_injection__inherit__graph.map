@@ -1,0 +1,5 @@
+<map id="G" name="G">
+<area shape="rect" id="node2" href="$structsauce_1_1internal_1_1injections_1_1_providing_injection.html" title="sauce::internal::injections\l::ProvidingInjection\&lt; Named\l\&lt; Provider\&lt; Dependency \&gt;, Name \&gt; \&gt;" alt="" coords="214,5,460,65"/>
+<area shape="rect" id="node4" href="$classsauce_1_1internal_1_1_injector_friend.html" title="sauce::internal::Injector\lFriend" alt="" coords="6,13,165,57"/>
+<area shape="rect" id="node6" href="$structsauce_1_1internal_1_1_provider_friend.html" title="A friend of the Provider base type." alt="" coords="255,89,420,133"/>
+</map>
