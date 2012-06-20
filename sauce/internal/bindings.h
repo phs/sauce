@@ -95,7 +95,9 @@ public:
    * If no binding is found, the implicit bindings are checked.
    */
   template<typename Dependency>
-  typename Key<Dependency>::Ptr get(sauce::shared_ptr<Injector> injector) const {
+  typename Key<Dependency>::Ptr get(
+    sauce::shared_ptr<Injector> injector, std::string /* name */) const {
+    // TODO: name
     sauce::shared_ptr<ResolvedBinding<Dependency> > binding(getBinding<Dependency>());
     return binding->get(binding, injector);
   }

@@ -57,8 +57,8 @@ struct GetDecorator: ProviderFriend {
   typedef typename Key<Dependency>::Normalized Normalized;
   typedef sauce::shared_ptr<Injector> InjectorPtr;
 
-  Ptr get(Bindings<ImplicitBindings> const & bindings, InjectorPtr injector) {
-    return bindings.template get<Normalized>(injector);
+  Ptr get(Bindings<ImplicitBindings> const & bindings, InjectorPtr injector, std::string name) {
+    return bindings.template get<Normalized>(injector, name);
   }
 };
 
@@ -74,8 +74,8 @@ struct GetDecorator<ImplicitBindings, Named<Provider<ProvidedDependency>, Name> 
   typedef typename Key<Dependency>::Normalized Normalized;
   typedef sauce::shared_ptr<Injector> InjectorPtr;
 
-  Ptr get(Bindings<ImplicitBindings> const & bindings, InjectorPtr injector) {
-    Ptr ptr = bindings.template get<Normalized>(injector);
+  Ptr get(Bindings<ImplicitBindings> const & bindings, InjectorPtr injector, std::string name) {
+    Ptr ptr = bindings.template get<Normalized>(injector, name);
     setSelf<ProvidedDependency, Name>(ptr);
     return ptr;
   }
@@ -104,10 +104,11 @@ public:
   }
 
   template<typename Dependency>
-  typename Key<Dependency>::Ptr get(sauce::shared_ptr<Injector> injector) const {
+  typename Key<Dependency>::Ptr get(
+    sauce::shared_ptr<Injector> injector, std::string name) const {
     typedef typename Key<Dependency>::Normalized Normalized;
     GetDecorator<ImplicitBindings, Normalized> getter;
-    return getter.get(bindings, injector);
+    return getter.get(bindings, injector, name);
   }
 
   template<typename Scope>

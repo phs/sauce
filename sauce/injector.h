@@ -2,6 +2,7 @@
 #define SAUCE_INJECTOR_H_
 
 #include <cassert>
+#include <string>
 
 #include <sauce/memory.h>
 #include <sauce/named.h>
@@ -65,11 +66,11 @@ class Injector {
   }
 
   template<typename Dependency>
-  typename i::Key<Dependency>::Ptr get(sauce::shared_ptr<Injector> injector) {
+  typename i::Key<Dependency>::Ptr get(sauce::shared_ptr<Injector> injector, std::string name) {
     if (base.get() == NULL) {
-      return next->get<Dependency>(injector);
+      return next->get<Dependency>(injector, name);
     } else {
-      return base->get<Dependency>(injector);
+      return base->get<Dependency>(injector, name);
     }
   }
 
@@ -130,17 +131,19 @@ class Injector {
 public:
 
   template<typename Dependency>
-  typename i::Key<Dependency>::Ptr get() {
+  typename i::Key<Dependency>::Ptr get(std::string name = unnamed()) {
     typedef typename i::Key<Dependency>::Normalized Normalized;
+    // TODO: SFINAE up proof that only one of static or dynamic naming is used.
     sauce::auto_ptr<i::Lock> lock = acquireLock();
     i::TypeIds ids;
+    // TODO: Use dynamic names when validating acyclic deps?
     validateAcyclic<Normalized>(getSelf(), ids);
-    return get<Normalized>(getSelf());
+    return get<Normalized>(getSelf(), name);
   }
 
   template<typename Iface, typename Name>
-  typename i::Key<Named<Iface, Name> >::Ptr get() {
-    return get<Named<Iface, Name> >();
+  typename i::Key<Named<Iface, Name> >::Ptr get(std::string name = unnamed()) {
+    return get<Named<Iface, Name> >(name);
   }
 
   template<typename Scope>
@@ -177,21 +180,24 @@ typedef sauce::shared_ptr<Injector> InjectorPtr;
 class InjectorFriend {
 protected:
 
+  // TODO: name parameter?
   template<typename Dependency>
   void validateAcyclicHelper(InjectorPtr injector, TypeIds & ids) const {
     injector->validateAcyclic<Dependency>(injector, ids);
   }
 
   template<typename Dependency>
-  typename Key<Dependency>::Ptr getHelper(InjectorPtr injector, std::string /* name */) const {
-    return injector->get<Dependency>(injector);
+  typename Key<Dependency>::Ptr getHelper(InjectorPtr injector, std::string name) const {
+    return injector->get<Dependency>(injector, name);
   }
 
+  // TODO: name parameter?
   template<typename Dependency>
   void cache(InjectorPtr injector, typename Key<Dependency>::Ptr pointer, i::TypeId scope) const {
     injector->template cache<Dependency>(pointer, scope);
   }
 
+  // TODO: name parameter?
   template<typename Dependency>
   bool probe(InjectorPtr injector, typename Key<Dependency>::Ptr & out, i::TypeId scope) const {
     return injector->template probe<Dependency>(out, scope);
