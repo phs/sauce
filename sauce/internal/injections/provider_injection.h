@@ -24,7 +24,7 @@ struct ProviderInjection: public ProvidingInjection<Dependency> {
   }
 
   typename Key<Dependency>::Ptr provide(InjectionPtr, InjectorPtr injector) const {
-    return this->template getHelper<Provider>(injector, "")->get();
+    return this->template getHelper<Provider>(injector, unnamed())->get(); // TODO
   }
 };
 

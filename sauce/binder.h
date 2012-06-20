@@ -174,7 +174,8 @@ public:
     return pass(NamedClause<Named<Iface, Name> >());
   }
 
-  NamedClause<Named<Iface, Unnamed> > named(std::string const /* name */) {
+  NamedClause<Named<Iface, Unnamed> > named(std::string const name) {
+    setDynamicName(name);
     return pass(NamedClause<Named<Iface, Unnamed> >());
   }
 
