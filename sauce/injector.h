@@ -133,7 +133,6 @@ public:
   template<typename Dependency>
   typename i::Key<Dependency>::Ptr get(std::string name = unnamed()) {
     typedef typename i::Key<Dependency>::Normalized Normalized;
-    // TODO: SFINAE up proof that only one of static or dynamic naming is used.
     sauce::auto_ptr<i::Lock> lock = acquireLock();
     i::TypeIds ids;
     validateAcyclic<Normalized>(getSelf(), ids, name);
