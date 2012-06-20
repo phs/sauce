@@ -73,7 +73,7 @@ public:
   sauce::shared_ptr<ResolvedBinding<Dependency> > getBinding(std::string name) const {
     sauce::shared_ptr<ResolvedBinding<Dependency> > binding;
 
-    BindingMap::const_iterator i = bindingMap.find(namedTypeIdOf<Dependency>(unnamed())); // TODO
+    BindingMap::const_iterator i = bindingMap.find(namedTypeIdOf<Dependency>(name));
     if (i == bindingMap.end()) {
       ImplicitBindings implicitBindings;
       binding = implicitBindings.get<Dependency>(*this, name);

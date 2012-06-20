@@ -245,10 +245,10 @@ TEST(BindingTest, shouldProvidedNamedDependencies) {
   EXPECT_EQ("Meow",      (injector->get<Animal>()->says()));
   EXPECT_EQ("Blub blub", (injector->get<Animal, LieutenantShinysides>()->says()));
   EXPECT_EQ("Moo",       (injector->get<Named<Animal, Meatloaf> >()->says()));
-  // EXPECT_EQ("Cheep cheep",   (injector->get<Animal>("tweety")->says()));
+  EXPECT_EQ("Cheep cheep",   (injector->get<Animal>("tweety")->says()));
 
   EXPECT_EQ("Blub blub", (injector->get<Pond>()->animal->says()));
-  // EXPECT_EQ("Cheep cheep",   (injector->get<BirdCage>()->animal->says()));
+  EXPECT_EQ("Cheep cheep",   (injector->get<BirdCage>()->animal->says()));
 }
 
 TEST(BindingTest, shouldProvidedNamedDependencyProviders) {

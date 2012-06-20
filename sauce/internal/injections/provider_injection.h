@@ -23,8 +23,8 @@ struct ProviderInjection: public ProvidingInjection<Dependency> {
     this->template validateAcyclicHelper<Provider>(injector, ids, name);
   }
 
-  typename Key<Dependency>::Ptr provide(InjectionPtr, InjectorPtr injector) const {
-    return this->template getHelper<Provider>(injector, unnamed())->get(); // TODO
+  typename Key<Dependency>::Ptr provide(InjectionPtr injection, InjectorPtr injector) const {
+    return this->template getHelper<Provider>(injector, injection->getName())->get();
   }
 };
 

@@ -6,7 +6,7 @@
 namespace sauce {
 
 /**
- * Wrap dependency requests with Named to choose one of several named alternatives.
+ * Wrap dependency requests with Named to choose one of several (statically) named alternatives.
  */
 template<typename Iface, typename Name>
 class Named {};
