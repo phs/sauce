@@ -19,16 +19,29 @@ namespace internal {
  * A binding for an acknowledged interface.
  */
 template<typename Dependency>
-struct ResolvedBinding: public OpaqueBinding {
+class ResolvedBinding: public OpaqueBinding {
+  std::string name;
+
+public:
 
   typedef typename Key<Dependency>::Ptr IfacePtr;
   typedef sauce::shared_ptr<ResolvedBinding<Dependency> > BindingPtr;
+
+  ResolvedBinding():
+    name(unnamed()) {}
 
   /**
    * The dynamic name of this binding.
    */
   std::string getName() const {
-    return unnamed(); // TODO
+    return name;
+  }
+
+  /**
+   * Set the dynamic name of this binding.
+   */
+  void setName(std::string name) {
+    this->name = name;
   }
 
   /**
