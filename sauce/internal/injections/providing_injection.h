@@ -1,8 +1,11 @@
 #ifndef SAUCE_INTERNAL_INJECTIONS_PROVIDING_INJECTION_H_
 #define SAUCE_INTERNAL_INJECTIONS_PROVIDING_INJECTION_H_
 
+#include <string>
+
 #include <sauce/injector.h>
 #include <sauce/memory.h>
+#include <sauce/named.h>
 #include <sauce/internal/key.h>
 #include <sauce/internal/type_id.h>
 
@@ -14,11 +17,31 @@ namespace injections {
  * A strategy for satisfying provisions for the given interface.
  */
 template<typename Dependency_>
-struct ProvidingInjection: InjectorFriend {
+class ProvidingInjection: public InjectorFriend {
+  std::string name;
+
+public:
 
   typedef typename Key<Dependency_>::Normalized Dependency;
   typedef sauce::shared_ptr<ProvidingInjection<Dependency> > InjectionPtr;
   typedef typename Key<Dependency>::Ptr IfacePtr;
+
+  ProvidingInjection():
+    name(unnamed()) {}
+
+  /**
+   * The dynamic name of this binding.
+   */
+  std::string getName() const {
+    return name;
+  }
+
+  /**
+   * Set the dynamic name of this binding.
+   */
+  void setName(std::string name) {
+    this->name = name;
+  }
 
   /**
    * Provide an Iface.

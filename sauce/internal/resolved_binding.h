@@ -1,8 +1,6 @@
 #ifndef SAUCE_INTERNAL_RESOLVED_BINDING_H_
 #define SAUCE_INTERNAL_RESOLVED_BINDING_H_
 
-#include <string>
-
 #include <sauce/memory.h>
 #include <sauce/named.h>
 #include <sauce/internal/key.h>
@@ -19,30 +17,10 @@ namespace internal {
  * A binding for an acknowledged interface.
  */
 template<typename Dependency>
-class ResolvedBinding: public OpaqueBinding {
-  std::string name;
-
-public:
+struct ResolvedBinding: public OpaqueBinding {
 
   typedef typename Key<Dependency>::Ptr IfacePtr;
   typedef sauce::shared_ptr<ResolvedBinding<Dependency> > BindingPtr;
-
-  ResolvedBinding():
-    name(unnamed()) {}
-
-  /**
-   * The dynamic name of this binding.
-   */
-  std::string getName() const {
-    return name;
-  }
-
-  /**
-   * Set the dynamic name of this binding.
-   */
-  void setName(std::string name) {
-    this->name = name;
-  }
 
   /**
    * The TypeId of the Dependency template parameter.

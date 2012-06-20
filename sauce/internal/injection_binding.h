@@ -102,6 +102,20 @@ public:
   InjectionBinding(InjectionPtr injection):
     injection(injection) {}
 
+  /**
+   * The dynamic name of this binding.
+   */
+  std::string getName() const {
+    return injection->getName();
+  }
+
+  /**
+   * Set the dynamic name of this binding.
+   */
+  void setName(std::string name) {
+    injection->setName(name);
+  }
+
 };
 
 }
