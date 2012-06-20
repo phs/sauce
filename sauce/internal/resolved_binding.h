@@ -1,7 +1,10 @@
 #ifndef SAUCE_INTERNAL_RESOLVED_BINDING_H_
 #define SAUCE_INTERNAL_RESOLVED_BINDING_H_
 
+#include <string>
+
 #include <sauce/memory.h>
+#include <sauce/named.h>
 #include <sauce/internal/key.h>
 #include <sauce/internal/type_id.h>
 #include <sauce/internal/opaque_binding.h>
@@ -20,6 +23,13 @@ struct ResolvedBinding: public OpaqueBinding {
 
   typedef typename Key<Dependency>::Ptr IfacePtr;
   typedef sauce::shared_ptr<ResolvedBinding<Dependency> > BindingPtr;
+
+  /**
+   * The dynamic name of this binding.
+   */
+  std::string getName() const {
+    return unnamed(); // TODO
+  }
 
   /**
    * The TypeId of the Dependency template parameter.

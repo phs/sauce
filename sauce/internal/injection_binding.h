@@ -85,7 +85,7 @@ class InjectionBinding:
     if (getScopeKey() != typeIdOf<NoScope>()) {
       BindingPtr binding = resolve<Dependency>(opaque);
       TypeIds ids;
-      validateAcyclic(injector, ids, unnamed()); // TODO binding->getName() once it exists
+      validateAcyclic(injector, ids, binding->getName());
       get(binding, injector);
     }
   }
