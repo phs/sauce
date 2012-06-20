@@ -58,12 +58,12 @@ struct OpaqueBinding {
    * Instead, cache the instance in its appropriate scope, if any.  If the binding is not scoped,
    * do nothing.
    */
-  virtual void eagerlyProvide(OpaqueBindingPtr, sauce::shared_ptr<Injector>) const {}
+  virtual void eagerlyProvide(OpaqueBindingPtr, sauce::shared_ptr<Injector>) const = 0;
 
   /**
    * Accept the list of dynamic dependency names this binding was created with.
    */
-  virtual void setDynamicDependencyNames(std::vector<std::string> const &) {}
+  virtual void setDynamicDependencyNames(std::vector<std::string> const &) = 0;
 
 };
 
