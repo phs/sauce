@@ -137,7 +137,7 @@ struct HasSetter: public HasBound {
 
 void SetterModule(Binder & binder) {
   binder.bind<Bound>().in<SingletonScope>().to<Bound()>();
-  // binder.bind<HasBound>().to<HasSetter()>().toMethod(&HasSetter::setBound);
+  // binder.bind<HasBound>().to<HasSetter()>().toMethod(&HasSetter::setBound); // TODO
 }
 
 TEST(BindingTest, shouldInjectBoundSetters) {
