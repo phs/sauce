@@ -71,7 +71,7 @@ class InjectionBinding:
    * This is Tarjan's algorithm using the call stack.  When a cycle is detected a
    * CircularDependencyException is thrown.
    */
-  void validateAcyclic(InjectorPtr injector, TypeIds & ids, std::string name) const {
+  void validateAcyclic(InjectorPtr injector, TypeIds & ids, std::string const name) const {
     injection->validateAcyclic(injector, ids, name);
   }
 
@@ -112,7 +112,7 @@ public:
   /**
    * Set the dynamic name of this binding.
    */
-  void setName(std::string name) {
+  void setName(std::string const name) {
     injection->setName(name);
   }
 

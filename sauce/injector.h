@@ -57,7 +57,8 @@ class Injector {
   }
 
   template<typename Dependency>
-  void validateAcyclic(sauce::shared_ptr<Injector> injector, i::TypeIds & ids, std::string name) {
+  void validateAcyclic(
+    sauce::shared_ptr<Injector> injector, i::TypeIds & ids, std::string const name) {
     if (base.get() == NULL) {
       next->validateAcyclic<Dependency>(injector, ids, name);
     } else {
@@ -66,7 +67,8 @@ class Injector {
   }
 
   template<typename Dependency>
-  typename i::Key<Dependency>::Ptr get(sauce::shared_ptr<Injector> injector, std::string name) {
+  typename i::Key<Dependency>::Ptr get(
+    sauce::shared_ptr<Injector> injector, std::string const name) {
     if (base.get() == NULL) {
       return next->get<Dependency>(injector, name);
     } else {
@@ -131,7 +133,7 @@ class Injector {
 public:
 
   template<typename Dependency>
-  typename i::Key<Dependency>::Ptr get(std::string name = unnamed()) {
+  typename i::Key<Dependency>::Ptr get(std::string const name = unnamed()) {
     typedef typename i::Key<Dependency>::Normalized Normalized;
     sauce::auto_ptr<i::Lock> lock = acquireLock();
     i::TypeIds ids;
@@ -140,7 +142,7 @@ public:
   }
 
   template<typename Iface, typename Name>
-  typename i::Key<Named<Iface, Name> >::Ptr get(std::string name = unnamed()) {
+  typename i::Key<Named<Iface, Name> >::Ptr get(std::string const name = unnamed()) {
     return get<Named<Iface, Name> >(name);
   }
 
@@ -179,12 +181,12 @@ class InjectorFriend {
 protected:
 
   template<typename Dependency>
-  void validateAcyclicHelper(InjectorPtr injector, TypeIds & ids, std::string name) const {
+  void validateAcyclicHelper(InjectorPtr injector, TypeIds & ids, std::string const name) const {
     injector->validateAcyclic<Dependency>(injector, ids, name);
   }
 
   template<typename Dependency>
-  typename Key<Dependency>::Ptr getHelper(InjectorPtr injector, std::string name) const {
+  typename Key<Dependency>::Ptr getHelper(InjectorPtr injector, std::string const name) const {
     return injector->get<Dependency>(injector, name);
   }
 

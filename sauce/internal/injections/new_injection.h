@@ -108,7 +108,7 @@ public:
   }
 
   void validateAcyclic(InjectorPtr injector, TypeIds & ids,
-      std::string name) const {
+      std::string const name) const {
     this->template validateAcyclicHelper<A1>(injector, ids, name);
   }
 
@@ -170,7 +170,7 @@ public:
   }
 
   void validateAcyclic(InjectorPtr injector, TypeIds & ids,
-      std::string name) const {
+      std::string const name) const {
     this->template validateAcyclicHelper<A1>(injector, ids, name);
     this->template validateAcyclicHelper<A2>(injector, ids, name);
   }
@@ -235,7 +235,7 @@ public:
   }
 
   void validateAcyclic(InjectorPtr injector, TypeIds & ids,
-      std::string name) const {
+      std::string const name) const {
     this->template validateAcyclicHelper<A1>(injector, ids, name);
     this->template validateAcyclicHelper<A2>(injector, ids, name);
     this->template validateAcyclicHelper<A3>(injector, ids, name);
@@ -303,7 +303,7 @@ public:
   }
 
   void validateAcyclic(InjectorPtr injector, TypeIds & ids,
-      std::string name) const {
+      std::string const name) const {
     this->template validateAcyclicHelper<A1>(injector, ids, name);
     this->template validateAcyclicHelper<A2>(injector, ids, name);
     this->template validateAcyclicHelper<A3>(injector, ids, name);
@@ -374,7 +374,7 @@ public:
   }
 
   void validateAcyclic(InjectorPtr injector, TypeIds & ids,
-      std::string name) const {
+      std::string const name) const {
     this->template validateAcyclicHelper<A1>(injector, ids, name);
     this->template validateAcyclicHelper<A2>(injector, ids, name);
     this->template validateAcyclicHelper<A3>(injector, ids, name);
@@ -448,7 +448,7 @@ public:
   }
 
   void validateAcyclic(InjectorPtr injector, TypeIds & ids,
-      std::string name) const {
+      std::string const name) const {
     this->template validateAcyclicHelper<A1>(injector, ids, name);
     this->template validateAcyclicHelper<A2>(injector, ids, name);
     this->template validateAcyclicHelper<A3>(injector, ids, name);
@@ -527,7 +527,7 @@ public:
   }
 
   void validateAcyclic(InjectorPtr injector, TypeIds & ids,
-      std::string name) const {
+      std::string const name) const {
     this->template validateAcyclicHelper<A1>(injector, ids, name);
     this->template validateAcyclicHelper<A2>(injector, ids, name);
     this->template validateAcyclicHelper<A3>(injector, ids, name);
@@ -609,7 +609,7 @@ public:
   }
 
   void validateAcyclic(InjectorPtr injector, TypeIds & ids,
-      std::string name) const {
+      std::string const name) const {
     this->template validateAcyclicHelper<A1>(injector, ids, name);
     this->template validateAcyclicHelper<A2>(injector, ids, name);
     this->template validateAcyclicHelper<A3>(injector, ids, name);
@@ -695,7 +695,7 @@ public:
   }
 
   void validateAcyclic(InjectorPtr injector, TypeIds & ids,
-      std::string name) const {
+      std::string const name) const {
     this->template validateAcyclicHelper<A1>(injector, ids, name);
     this->template validateAcyclicHelper<A2>(injector, ids, name);
     this->template validateAcyclicHelper<A3>(injector, ids, name);
@@ -785,7 +785,7 @@ public:
   }
 
   void validateAcyclic(InjectorPtr injector, TypeIds & ids,
-      std::string name) const {
+      std::string const name) const {
     this->template validateAcyclicHelper<A1>(injector, ids, name);
     this->template validateAcyclicHelper<A2>(injector, ids, name);
     this->template validateAcyclicHelper<A3>(injector, ids, name);

@@ -30,7 +30,7 @@ class CircularDependencyGuard {
   TypeIds & ids;
   NamedTypeId id;
 
-  CircularDependencyGuard(TypeIds & ids, std::string name):
+  CircularDependencyGuard(TypeIds & ids, std::string const name):
     ids(ids),
     id(namedTypeIdOf<Dependency>(name)) {
     TypeIds::iterator i = ids.find(id);
@@ -55,9 +55,10 @@ template<typename ImplicitBindings, typename Dependency>
 struct GetDecorator: ProviderFriend {
   typedef typename Key<Dependency>::Ptr Ptr;
   typedef typename Key<Dependency>::Normalized Normalized;
+  typedef Bindings<ImplicitBindings> Bindings_;
   typedef sauce::shared_ptr<Injector> InjectorPtr;
 
-  Ptr get(Bindings<ImplicitBindings> const & bindings, InjectorPtr injector, std::string name) {
+  Ptr get(Bindings_ const & bindings, InjectorPtr injector, std::string const name) {
     return bindings.template get<Normalized>(injector, name);
   }
 };
@@ -72,9 +73,10 @@ struct GetDecorator<ImplicitBindings, Named<Provider<ProvidedDependency>, Name> 
   typedef Named<Provider<ProvidedDependency>, Name> Dependency;
   typedef typename Key<Dependency>::Ptr Ptr;
   typedef typename Key<Dependency>::Normalized Normalized;
+  typedef Bindings<ImplicitBindings> Bindings_;
   typedef sauce::shared_ptr<Injector> InjectorPtr;
 
-  Ptr get(Bindings<ImplicitBindings> const & bindings, InjectorPtr injector, std::string name) {
+  Ptr get(Bindings_ const & bindings, InjectorPtr injector, std::string const name) {
     Ptr ptr = bindings.template get<Normalized>(injector, name);
     setSelf<ProvidedDependency, Name>(ptr);
     return ptr;
@@ -98,7 +100,7 @@ public:
 
   template<typename Dependency>
   void validateAcyclic(
-    sauce::shared_ptr<Injector> injector, TypeIds & ids, std::string name) const {
+    sauce::shared_ptr<Injector> injector, TypeIds & ids, std::string const name) const {
     typedef typename Key<Dependency>::Normalized Normalized;
     CircularDependencyGuard<ImplicitBindings, Normalized> guard(ids, name);
     bindings.validateAcyclic<Normalized>(injector, ids, name);
@@ -106,7 +108,7 @@ public:
 
   template<typename Dependency>
   typename Key<Dependency>::Ptr get(
-    sauce::shared_ptr<Injector> injector, std::string name) const {
+    sauce::shared_ptr<Injector> injector, std::string const name) const {
     typedef typename Key<Dependency>::Normalized Normalized;
     GetDecorator<ImplicitBindings, Normalized> getter;
     return getter.get(bindings, injector, name);

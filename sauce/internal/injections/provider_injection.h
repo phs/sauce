@@ -19,7 +19,7 @@ template<typename Dependency, typename Provider>
 struct ProviderInjection: public ProvidingInjection<Dependency> {
   typedef typename ProvidingInjection<Dependency>::InjectionPtr InjectionPtr;
 
-  void validateAcyclic(InjectorPtr injector, TypeIds & ids, std::string name) const {
+  void validateAcyclic(InjectorPtr injector, TypeIds & ids, std::string const name) const {
     this->template validateAcyclicHelper<Provider>(injector, ids, name);
   }
 

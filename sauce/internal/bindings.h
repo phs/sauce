@@ -70,7 +70,7 @@ public:
   }
 
   template<typename Dependency>
-  sauce::shared_ptr<ResolvedBinding<Dependency> > getBinding(std::string name) const {
+  sauce::shared_ptr<ResolvedBinding<Dependency> > getBinding(std::string const name) const {
     sauce::shared_ptr<ResolvedBinding<Dependency> > binding;
 
     BindingMap::const_iterator i = bindingMap.find(namedTypeIdOf<Dependency>(name));
@@ -86,7 +86,7 @@ public:
 
   template<typename Dependency>
   void validateAcyclic(
-    sauce::shared_ptr<Injector> injector, TypeIds & ids, std::string name) const {
+    sauce::shared_ptr<Injector> injector, TypeIds & ids, std::string const name) const {
     getBinding<Dependency>(name)->validateAcyclic(injector, ids, name);
   }
 
@@ -97,7 +97,7 @@ public:
    */
   template<typename Dependency>
   typename Key<Dependency>::Ptr get(
-    sauce::shared_ptr<Injector> injector, std::string name) const {
+    sauce::shared_ptr<Injector> injector, std::string const name) const {
     sauce::shared_ptr<ResolvedBinding<Dependency> > binding(getBinding<Dependency>(name));
     return binding->get(binding, injector);
   }

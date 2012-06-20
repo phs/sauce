@@ -101,7 +101,7 @@ typedef std::pair<TypeId, std::string> NamedTypeId;
  * How one gets NamedTypeIds.
  */
 template<typename Type>
-NamedTypeId namedTypeIdOf(std::string name) {
+NamedTypeId namedTypeIdOf(std::string const name) {
   return std::make_pair(typeIdOf<Type>(), name);
 }
 

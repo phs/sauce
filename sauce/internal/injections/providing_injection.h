@@ -39,7 +39,7 @@ public:
   /**
    * Set the dynamic name of this binding.
    */
-  void setName(std::string name) {
+  void setName(std::string const name) {
     this->name = name;
   }
 

@@ -74,7 +74,7 @@ public:
   }
 [[$if i>0 [[
 
-  void validateAcyclic(InjectorPtr injector, TypeIds & ids, std::string name) const {
+  void validateAcyclic(InjectorPtr injector, TypeIds & ids, std::string const name) const {
 [[$for j [[
     this->template validateAcyclicHelper<A$j>(injector, ids, name);
 
