@@ -34,8 +34,8 @@ struct ResolvedBinding: public OpaqueBinding {
   /**
    * The TypeId of the Dependency template parameter.
    */
-  TypeId getKey() const {
-    return typeIdOf<Dependency>();
+  NamedTypeId getKey() const {
+    return namedTypeIdOf<Dependency>(getName());
   }
 
   /**

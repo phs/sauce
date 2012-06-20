@@ -26,7 +26,7 @@ namespace internal {
  */
 template<typename Dependency>
 sauce::shared_ptr<ResolvedBinding<Dependency> > resolve(OpaqueBindingPtr binding) {
-  assert((typeIdOf<Dependency>()) == binding->getKey());
+  assert((namedTypeIdOf<Dependency>(binding->getName())) == binding->getKey());
   return sauce::static_pointer_cast<ResolvedBinding<Dependency> >(binding);
 }
 
@@ -48,7 +48,7 @@ sauce::shared_ptr<ResolvedBinding<Dependency> > resolve(OpaqueBindingPtr binding
  */
 template<typename ImplicitBindings>
 class Bindings {
-  typedef std::map<TypeId, OpaqueBindingPtr> BindingMap;
+  typedef std::map<NamedTypeId, OpaqueBindingPtr> BindingMap;
   typedef std::multimap<TypeId, OpaqueBindingPtr> ScopeMap;
 
   BindingMap bindingMap;
@@ -73,7 +73,7 @@ public:
   sauce::shared_ptr<ResolvedBinding<Dependency> > getBinding(std::string name) const {
     sauce::shared_ptr<ResolvedBinding<Dependency> > binding;
 
-    BindingMap::const_iterator i = bindingMap.find(typeIdOf<Dependency>());
+    BindingMap::const_iterator i = bindingMap.find(namedTypeIdOf<Dependency>(unnamed())); // TODO
     if (i == bindingMap.end()) {
       ImplicitBindings implicitBindings;
       binding = implicitBindings.get<Dependency>(*this, name);

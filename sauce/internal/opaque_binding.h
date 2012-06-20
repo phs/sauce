@@ -33,9 +33,14 @@ typedef sauce::shared_ptr<OpaqueBinding> OpaqueBindingPtr;
 struct OpaqueBinding {
 
   /**
-   * The TypeId of the (hidden) provided interface.
+   * The dynamic name of this binding.
    */
-  virtual TypeId getKey() const = 0;
+  virtual std::string getName() const = 0;
+
+  /**
+   * The NamedTypeId of the (hidden) provided interface.
+   */
+  virtual NamedTypeId getKey() const = 0;
 
   /**
    * The TypeId of the (hidden) scope.
