@@ -18,8 +18,8 @@ struct Exception: std::runtime_error {
  * Thrown when a binding cannot be found.
  */
 struct UnboundException: Exception {
-  UnboundException():
-    Exception("Request for unbound interface.") {}
+  UnboundException(std::string name):
+    Exception("Request for unbound interface " + name + ".") {}
 };
 
 /**
@@ -27,7 +27,7 @@ struct UnboundException: Exception {
  */
 template<typename Dependency>
 struct UnboundExceptionFor: UnboundException {
-  UnboundExceptionFor(): UnboundException() {}
+  UnboundExceptionFor(std::string name): UnboundException(name) {}
 };
 
 /**

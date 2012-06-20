@@ -70,13 +70,13 @@ public:
   }
 
   template<typename Dependency>
-  sauce::shared_ptr<ResolvedBinding<Dependency> > getBinding(std::string /* name */) const {
+  sauce::shared_ptr<ResolvedBinding<Dependency> > getBinding(std::string name) const {
     sauce::shared_ptr<ResolvedBinding<Dependency> > binding;
 
     BindingMap::const_iterator i = bindingMap.find(typeIdOf<Dependency>());
     if (i == bindingMap.end()) {
       ImplicitBindings implicitBindings;
-      binding = implicitBindings.get<Dependency>(*this, unnamed()); // TODO
+      binding = implicitBindings.get<Dependency>(*this, name);
     } else {
       binding = resolve<Dependency>(i->second);
     }

@@ -39,8 +39,8 @@ struct ImplicitBinding {
   /**
    * Attempt to supply a (unknown) Binding at provision time.
    */
-  static BindingPtr get(ConcreteBindings const &, std::string) {
-    throw UnboundExceptionFor<Dependency>();
+  static BindingPtr get(ConcreteBindings const &, std::string name) {
+    throw UnboundExceptionFor<Dependency>(name);
   }
 
 };
