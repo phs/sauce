@@ -32,7 +32,7 @@ Unlike Guice, Sauce expects the developer to enter and eagerly provide scopes ex
 
 ## Further Reading ##
 
-* [API Reference](http://phs.github.com/sauce/doc/api/classes.html)
+* [API Reference](http://phs.github.com/sauce/doxygen-doc/html/)
 
 ## Wishlist ##
 
