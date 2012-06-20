@@ -81,11 +81,11 @@ class InjectionBinding:
    * Instead, cache the instance in its appropriate scope, if any.  If the injection is not scoped,
    * do nothing.
    */
-  void eagerlyProvide(OpaqueBindingPtr opaque, InjectorPtr injector, std::string name) const {
+  void eagerlyProvide(OpaqueBindingPtr opaque, InjectorPtr injector) const {
     if (getScopeKey() != typeIdOf<NoScope>()) {
       BindingPtr binding = resolve<Dependency>(opaque);
       TypeIds ids;
-      validateAcyclic(injector, ids, name);
+      validateAcyclic(injector, ids, unnamed()); // TODO binding->getName() once it exists
       get(binding, injector);
     }
   }

@@ -113,8 +113,8 @@ public:
   }
 
   template<typename Scope>
-  void eagerlyProvide(sauce::shared_ptr<Injector> injector, std::string name) const {
-    bindings.eagerlyProvide<Scope>(injector, name);
+  void eagerlyProvide(sauce::shared_ptr<Injector> injector) const {
+    bindings.eagerlyProvide<Scope>(injector);
   }
 
   /**
