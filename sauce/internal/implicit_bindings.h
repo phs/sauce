@@ -66,8 +66,10 @@ struct ImplicitBindings {
  */
 template<>
 struct ImplicitBinding<Named<Injector, Unnamed> >: ImplicitBindingTraits<inj::InjectorInjection> {
-  static BindingPtr get(ConcreteBindings const &, std::string) {
-    // TODO: barf unless name == unnamed()?
+  static BindingPtr get(ConcreteBindings const &, std::string name) {
+    if (name != unnamed()) {
+      throw UnboundExceptionFor<Named<Injector, Unnamed> >(name);
+    }
     InjectionPtr injection(new ImplicitInjection());
     BindingPtr binding(new InjectionBinding<Dependency, NoScope>(injection));
     return binding;
