@@ -1,6 +1,8 @@
 #ifndef SAUCE_INTERNAL_IMPLICIT_BINDINGS_H_
 #define SAUCE_INTERNAL_IMPLICIT_BINDINGS_H_
 
+#include <string>
+
 #include <sauce/exceptions.h>
 #include <sauce/injector.h>
 #include <sauce/memory.h>
@@ -37,7 +39,7 @@ struct ImplicitBinding {
   /**
    * Attempt to supply a (unknown) Binding at provision time.
    */
-  static BindingPtr get(ConcreteBindings const &) {
+  static BindingPtr get(ConcreteBindings const &, std::string) {
     throw UnboundExceptionFor<Dependency>();
   }
 
@@ -52,8 +54,9 @@ struct ImplicitBindings {
    * Attempt to supply a (unknown) Binding at provision time.
    */
   template<typename Dependency>
-  sauce::shared_ptr<ResolvedBinding<Dependency> > get(ConcreteBindings const & bindings) const {
-    return ImplicitBinding<Dependency>::get(bindings);
+  sauce::shared_ptr<ResolvedBinding<Dependency> > get(
+    ConcreteBindings const & bindings, std::string name) const {
+    return ImplicitBinding<Dependency>::get(bindings, name);
   }
 
 };
@@ -63,7 +66,8 @@ struct ImplicitBindings {
  */
 template<>
 struct ImplicitBinding<Named<Injector, Unnamed> >: ImplicitBindingTraits<inj::InjectorInjection> {
-  static BindingPtr get(ConcreteBindings const &) {
+  static BindingPtr get(ConcreteBindings const &, std::string) {
+    // TODO: barf unless name == unnamed()?
     InjectionPtr injection(new ImplicitInjection());
     BindingPtr binding(new InjectionBinding<Dependency, NoScope>(injection));
     return binding;
@@ -81,11 +85,11 @@ struct ImplicitBinding<Named<Provider<ProvidedDependency>, Name> > {
   typedef typename Traits::InjectionPtr InjectionPtr;
   typedef typename Traits::BindingPtr BindingPtr;
 
-  static BindingPtr get(ConcreteBindings const & bindings) {
+  static BindingPtr get(ConcreteBindings const & bindings, std::string name) {
     typedef typename Key<ProvidedDependency>::Normalized Normalized;
     typedef typename ResolvedBinding<Normalized>::BindingPtr ProvidedBindingPtr;
 
-    ProvidedBindingPtr providedBinding(bindings.getBinding<Normalized>());
+    ProvidedBindingPtr providedBinding(bindings.getBinding<Normalized>(name));
     InjectionPtr injection(new ImplicitInjection(providedBinding));
     BindingPtr binding(new InjectionBinding<Dependency, NoScope>(injection));
     return binding;
