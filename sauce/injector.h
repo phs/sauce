@@ -189,13 +189,11 @@ protected:
     return injector->get<Dependency>(injector, name);
   }
 
-  // TODO: name parameter?
   template<typename Dependency>
   void cache(InjectorPtr injector, typename Key<Dependency>::Ptr pointer, i::TypeId scope) const {
     injector->template cache<Dependency>(pointer, scope);
   }
 
-  // TODO: name parameter?
   template<typename Dependency>
   bool probe(InjectorPtr injector, typename Key<Dependency>::Ptr & out, i::TypeId scope) const {
     return injector->template probe<Dependency>(out, scope);
