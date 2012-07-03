@@ -1,10 +1,9 @@
 #ifndef SAUCE_INTERNAL_BINDINGS_H_
 #define SAUCE_INTERNAL_BINDINGS_H_
 
+#include <cassert>
 #include <map>
 #include <utility>
-
-#include <cassert>
 
 #include <sauce/exceptions.h>
 #include <sauce/memory.h>
