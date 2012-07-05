@@ -96,13 +96,13 @@
 <div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;  }</div>
 <div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;</div>
 <div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;  <span class="keyword">template</span>&lt;<span class="keyword">typename</span> Dependency&gt;</div>
-<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;  sauce::shared_ptr&lt;ResolvedBinding&lt;Dependency&gt; &gt; getBinding(std::string name)<span class="keyword"> const </span>{</div>
+<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;  sauce::shared_ptr&lt;ResolvedBinding&lt;Dependency&gt; &gt; getBinding(std::string <span class="keyword">const</span> name)<span class="keyword"> const </span>{</div>
 <div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;    sauce::shared_ptr&lt;ResolvedBinding&lt;Dependency&gt; &gt; binding;</div>
 <div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;</div>
 <div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;    BindingMap::const_iterator i = bindingMap.find(namedTypeIdOf&lt;Dependency&gt;(name));</div>
 <div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;    <span class="keywordflow">if</span> (i == bindingMap.end()) {</div>
 <div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;      <a class="code" href="structsauce_1_1internal_1_1_implicit_bindings.html" title="Attempts to supply a Binding when none is found for a dependency.">ImplicitBindings</a> implicitBindings;</div>
-<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;      binding = implicitBindings.<a class="code" href="structsauce_1_1internal_1_1_implicit_bindings.html#a730e1336cca46654ee1395a4905940ef" title="Attempt to supply a (unknown) Binding at provision time.">get</a>&lt;Dependency&gt;(*<span class="keyword">this</span>, name);</div>
+<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;      binding = implicitBindings.<a class="code" href="structsauce_1_1internal_1_1_implicit_bindings.html#a2ab32c0258b8150fa3f769869f17a9b1" title="Attempt to supply a (unknown) Binding at provision time.">get</a>&lt;Dependency&gt;(*<span class="keyword">this</span>, name);</div>
 <div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;    } <span class="keywordflow">else</span> {</div>
 <div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;      binding = resolve&lt;Dependency&gt;(i-&gt;second);</div>
 <div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;    }</div>
@@ -112,13 +112,13 @@
 <div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160;</div>
 <div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160;  <span class="keyword">template</span>&lt;<span class="keyword">typename</span> Dependency&gt;</div>
 <div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160;  <span class="keywordtype">void</span> validateAcyclic(</div>
-<div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160;    sauce::shared_ptr&lt;Injector&gt; injector, TypeIds &amp; ids, std::string name)<span class="keyword"> const </span>{</div>
+<div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160;    sauce::shared_ptr&lt;Injector&gt; injector, TypeIds &amp; ids, std::string <span class="keyword">const</span> name)<span class="keyword"> const </span>{</div>
 <div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160;    getBinding&lt;Dependency&gt;(name)-&gt;validateAcyclic(injector, ids, name);</div>
 <div class="line"><a name="l00091"></a><span class="lineno">   91</span>&#160;  }</div>
 <div class="line"><a name="l00092"></a><span class="lineno">   92</span>&#160;</div>
 <div class="line"><a name="l00098"></a><span class="lineno">   98</span>&#160;  <span class="keyword">template</span>&lt;<span class="keyword">typename</span> Dependency&gt;</div>
-<div class="line"><a name="l00099"></a><span class="lineno"><a class="code" href="classsauce_1_1internal_1_1_bindings.html#a10ad2de602c72c0a3062fac1f3d8a9d8">   99</a></span>&#160;  <span class="keyword">typename</span> Key&lt;Dependency&gt;::Ptr <span class="keyword">get</span>(</div>
-<div class="line"><a name="l00100"></a><span class="lineno">  100</span>&#160;    sauce::shared_ptr&lt;Injector&gt; injector, std::string name) <span class="keyword">const</span> {</div>
+<div class="line"><a name="l00099"></a><span class="lineno"><a class="code" href="classsauce_1_1internal_1_1_bindings.html#a7bd8d3a1fc4a9624f6deb00da0639efe">   99</a></span>&#160;  <span class="keyword">typename</span> Key&lt;Dependency&gt;::Ptr <span class="keyword">get</span>(</div>
+<div class="line"><a name="l00100"></a><span class="lineno">  100</span>&#160;    sauce::shared_ptr&lt;Injector&gt; injector, std::string <span class="keyword">const</span> name) <span class="keyword">const</span> {</div>
 <div class="line"><a name="l00101"></a><span class="lineno">  101</span>&#160;    sauce::shared_ptr&lt;ResolvedBinding&lt;Dependency&gt; &gt; binding(getBinding&lt;Dependency&gt;(name));</div>
 <div class="line"><a name="l00102"></a><span class="lineno">  102</span>&#160;    <span class="keywordflow">return</span> binding-&gt;get(binding, injector);</div>
 <div class="line"><a name="l00103"></a><span class="lineno">  103</span>&#160;  }</div>
