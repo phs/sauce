@@ -22,7 +22,7 @@ namespace sauce {
 template<typename Dependency, typename Scope, typename Ctor, typename Allocator>
 class AllocateFromClause: public i::Clause {
   void onComplete() {
-    bind<Scope>(inj::NewInjection<Dependency, Ctor, Allocator>());
+    bind<Scope>(inj::NewInjection<Dependency, Scope, Ctor, Allocator>());
   }
 };
 
@@ -34,7 +34,7 @@ class NamingClause: public i::Clause {
   typedef typename i::Key<Dependency>::Iface Iface;
 
   void onComplete() {
-    bind<Scope>(inj::NewInjection<Dependency, Ctor, std::allocator<Iface> >());
+    bind<Scope>(inj::NewInjection<Dependency, Scope, Ctor, std::allocator<Iface> >());
   }
 
 public:
@@ -58,7 +58,7 @@ class ToClause: public i::Clause {
   typedef typename i::Key<Dependency>::Iface Iface;
 
   void onComplete() {
-    bind<Scope>(inj::NewInjection<Dependency, Ctor, std::allocator<Iface> >());
+    bind<Scope>(inj::NewInjection<Dependency, Scope, Ctor, std::allocator<Iface> >());
   }
 
 public:
@@ -83,8 +83,8 @@ class ToProviderClause: public i::Clause {
   typedef Named<Provider<Iface>, Name> ProviderDependency;
 
   void onComplete() {
-    bindExtra<Scope>(inj::ProviderInjection<Dependency, ProviderDependency>());
-    bind<Scope>(inj::NewInjection<ProviderDependency, ProviderCtor, std::allocator<Provider<Iface> > >());
+    bindExtra<Scope>(inj::ProviderInjection<Dependency, Scope, ProviderDependency>());
+    bind<Scope>(inj::NewInjection<ProviderDependency, Scope, ProviderCtor, std::allocator<Provider<Iface> > >());
   }
 
 public:

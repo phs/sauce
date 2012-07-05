@@ -16,14 +16,14 @@ namespace injections {
 /**
  * A strategy for satisfying provisions for the given interface.
  */
-template<typename Dependency_>
+template<typename Dependency_, typename Scope>
 class ProvidingInjection: public InjectorFriend {
   std::string name;
 
 public:
 
   typedef typename Key<Dependency_>::Normalized Dependency;
-  typedef sauce::shared_ptr<ProvidingInjection<Dependency> > InjectionPtr;
+  typedef sauce::shared_ptr<ProvidingInjection<Dependency, Scope> > InjectionPtr;
   typedef typename Key<Dependency>::Ptr IfacePtr;
 
   ProvidingInjection():

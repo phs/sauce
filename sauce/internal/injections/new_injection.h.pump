@@ -17,8 +17,10 @@ namespace sauce {
 namespace internal {
 namespace injections {
 
-template<typename Dependency, typename Constructor, typename Allocator>
+/* *INDENT-OFF* */
+template<typename Dependency, typename Scope, typename Constructor, typename Allocator>
 class NewInjection;
+/* *INDENT-ON* */
 
 $range i 0..n
 $for i [[
@@ -28,14 +30,14 @@ $var As = [[$for j, [[A$j]]]]
 $var as = [[$for j, [[a$j]]]]
 
 /* *INDENT-OFF* */
-template<typename Dependency, typename Impl, typename Allocator$comma_typename_As>
-class NewInjection<Dependency, Impl($As), Allocator>:
-  public ProvidingInjection<Dependency> {
+template<typename Dependency, typename Scope, typename Impl, typename Allocator$comma_typename_As>
+class NewInjection<Dependency, Scope, Impl($As), Allocator>:
+  public ProvidingInjection<Dependency, Scope> {
 
   typedef typename Key<Dependency>::Iface Iface;
   typedef typename Key<Dependency>::Ptr Ptr;
   typedef typename Allocator::template rebind<Impl>::other ImplAllocator;
-  typedef NewInjection<Dependency, Impl($As), Allocator> New;
+  typedef NewInjection<Dependency, Scope, Impl($As), Allocator> New;
   typedef DisposalDeleter<Iface, New> Deleter;
 
   friend class DisposalDeleter<Iface, New>;
@@ -45,7 +47,7 @@ class NewInjection<Dependency, Impl($As), Allocator>:
 
 public:
 
-  typedef typename ProvidingInjection<Dependency>::InjectionPtr InjectionPtr;
+  typedef typename ProvidingInjection<Dependency, Scope>::InjectionPtr InjectionPtr;
 
   NewInjection():
     allocator(),

@@ -15,9 +15,10 @@ namespace injections {
 /**
  * An injection that provides from the configured provider.
  */
-template<typename Dependency, typename Provider>
-struct ProviderInjection: public ProvidingInjection<Dependency> {
-  typedef typename ProvidingInjection<Dependency>::InjectionPtr InjectionPtr;
+template<typename Dependency, typename Scope, typename Provider>
+class ProviderInjection: public ProvidingInjection<Dependency, Scope> {
+public:
+  typedef typename ProvidingInjection<Dependency, Scope>::InjectionPtr InjectionPtr;
 
   void validateAcyclic(InjectorPtr injector, TypeIds & ids, std::string const name) const {
     this->template validateAcyclicHelper<Provider>(injector, ids, name);

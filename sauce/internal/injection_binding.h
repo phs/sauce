@@ -22,7 +22,7 @@ class InjectionBinding:
 
   typedef typename Key<Dependency>::Ptr IfacePtr;
   typedef typename ResolvedBinding<Dependency>::BindingPtr BindingPtr;
-  typedef typename inj::ProvidingInjection<Dependency>::InjectionPtr InjectionPtr;
+  typedef typename inj::ProvidingInjection<Dependency, Scope>::InjectionPtr InjectionPtr;
 
   InjectionPtr injection;
 

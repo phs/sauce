@@ -18,18 +18,21 @@ namespace sauce {
 namespace internal {
 namespace injections {
 
-template<typename Dependency, typename Constructor, typename Allocator>
+/* *INDENT-OFF* */
+template<typename Dependency, typename Scope, typename Constructor,
+    typename Allocator>
 class NewInjection;
+/* *INDENT-ON* */
 
 /* *INDENT-OFF* */
-template<typename Dependency, typename Impl, typename Allocator>
-class NewInjection<Dependency, Impl(), Allocator>:
-  public ProvidingInjection<Dependency> {
+template<typename Dependency, typename Scope, typename Impl, typename Allocator>
+class NewInjection<Dependency, Scope, Impl(), Allocator>:
+  public ProvidingInjection<Dependency, Scope> {
 
   typedef typename Key<Dependency>::Iface Iface;
   typedef typename Key<Dependency>::Ptr Ptr;
   typedef typename Allocator::template rebind<Impl>::other ImplAllocator;
-  typedef NewInjection<Dependency, Impl(), Allocator> New;
+  typedef NewInjection<Dependency, Scope, Impl(), Allocator> New;
   typedef DisposalDeleter<Iface, New> Deleter;
 
   friend class DisposalDeleter<Iface, New>;
@@ -39,7 +42,8 @@ class NewInjection<Dependency, Impl(), Allocator>:
 
 public:
 
-  typedef typename ProvidingInjection<Dependency>::InjectionPtr InjectionPtr;
+  typedef typename ProvidingInjection<Dependency,
+      Scope>::InjectionPtr InjectionPtr;
 
   NewInjection():
     allocator(),
@@ -68,14 +72,15 @@ public:
 /* *INDENT-ON* */
 
 /* *INDENT-OFF* */
-template<typename Dependency, typename Impl, typename Allocator, typename A1>
-class NewInjection<Dependency, Impl(A1), Allocator>:
-  public ProvidingInjection<Dependency> {
+template<typename Dependency, typename Scope, typename Impl,
+    typename Allocator, typename A1>
+class NewInjection<Dependency, Scope, Impl(A1), Allocator>:
+  public ProvidingInjection<Dependency, Scope> {
 
   typedef typename Key<Dependency>::Iface Iface;
   typedef typename Key<Dependency>::Ptr Ptr;
   typedef typename Allocator::template rebind<Impl>::other ImplAllocator;
-  typedef NewInjection<Dependency, Impl(A1), Allocator> New;
+  typedef NewInjection<Dependency, Scope, Impl(A1), Allocator> New;
   typedef DisposalDeleter<Iface, New> Deleter;
 
   friend class DisposalDeleter<Iface, New>;
@@ -85,7 +90,8 @@ class NewInjection<Dependency, Impl(A1), Allocator>:
 
 public:
 
-  typedef typename ProvidingInjection<Dependency>::InjectionPtr InjectionPtr;
+  typedef typename ProvidingInjection<Dependency,
+      Scope>::InjectionPtr InjectionPtr;
 
   NewInjection():
     allocator(),
@@ -127,15 +133,15 @@ public:
 /* *INDENT-ON* */
 
 /* *INDENT-OFF* */
-template<typename Dependency, typename Impl, typename Allocator, typename A1,
-    typename A2>
-class NewInjection<Dependency, Impl(A1, A2), Allocator>:
-  public ProvidingInjection<Dependency> {
+template<typename Dependency, typename Scope, typename Impl,
+    typename Allocator, typename A1, typename A2>
+class NewInjection<Dependency, Scope, Impl(A1, A2), Allocator>:
+  public ProvidingInjection<Dependency, Scope> {
 
   typedef typename Key<Dependency>::Iface Iface;
   typedef typename Key<Dependency>::Ptr Ptr;
   typedef typename Allocator::template rebind<Impl>::other ImplAllocator;
-  typedef NewInjection<Dependency, Impl(A1, A2), Allocator> New;
+  typedef NewInjection<Dependency, Scope, Impl(A1, A2), Allocator> New;
   typedef DisposalDeleter<Iface, New> Deleter;
 
   friend class DisposalDeleter<Iface, New>;
@@ -145,7 +151,8 @@ class NewInjection<Dependency, Impl(A1, A2), Allocator>:
 
 public:
 
-  typedef typename ProvidingInjection<Dependency>::InjectionPtr InjectionPtr;
+  typedef typename ProvidingInjection<Dependency,
+      Scope>::InjectionPtr InjectionPtr;
 
   NewInjection():
     allocator(),
@@ -190,15 +197,15 @@ public:
 /* *INDENT-ON* */
 
 /* *INDENT-OFF* */
-template<typename Dependency, typename Impl, typename Allocator, typename A1,
-    typename A2, typename A3>
-class NewInjection<Dependency, Impl(A1, A2, A3), Allocator>:
-  public ProvidingInjection<Dependency> {
+template<typename Dependency, typename Scope, typename Impl,
+    typename Allocator, typename A1, typename A2, typename A3>
+class NewInjection<Dependency, Scope, Impl(A1, A2, A3), Allocator>:
+  public ProvidingInjection<Dependency, Scope> {
 
   typedef typename Key<Dependency>::Iface Iface;
   typedef typename Key<Dependency>::Ptr Ptr;
   typedef typename Allocator::template rebind<Impl>::other ImplAllocator;
-  typedef NewInjection<Dependency, Impl(A1, A2, A3), Allocator> New;
+  typedef NewInjection<Dependency, Scope, Impl(A1, A2, A3), Allocator> New;
   typedef DisposalDeleter<Iface, New> Deleter;
 
   friend class DisposalDeleter<Iface, New>;
@@ -208,7 +215,8 @@ class NewInjection<Dependency, Impl(A1, A2, A3), Allocator>:
 
 public:
 
-  typedef typename ProvidingInjection<Dependency>::InjectionPtr InjectionPtr;
+  typedef typename ProvidingInjection<Dependency,
+      Scope>::InjectionPtr InjectionPtr;
 
   NewInjection():
     allocator(),
@@ -256,15 +264,15 @@ public:
 /* *INDENT-ON* */
 
 /* *INDENT-OFF* */
-template<typename Dependency, typename Impl, typename Allocator, typename A1,
-    typename A2, typename A3, typename A4>
-class NewInjection<Dependency, Impl(A1, A2, A3, A4), Allocator>:
-  public ProvidingInjection<Dependency> {
+template<typename Dependency, typename Scope, typename Impl,
+    typename Allocator, typename A1, typename A2, typename A3, typename A4>
+class NewInjection<Dependency, Scope, Impl(A1, A2, A3, A4), Allocator>:
+  public ProvidingInjection<Dependency, Scope> {
 
   typedef typename Key<Dependency>::Iface Iface;
   typedef typename Key<Dependency>::Ptr Ptr;
   typedef typename Allocator::template rebind<Impl>::other ImplAllocator;
-  typedef NewInjection<Dependency, Impl(A1, A2, A3, A4), Allocator> New;
+  typedef NewInjection<Dependency, Scope, Impl(A1, A2, A3, A4), Allocator> New;
   typedef DisposalDeleter<Iface, New> Deleter;
 
   friend class DisposalDeleter<Iface, New>;
@@ -274,7 +282,8 @@ class NewInjection<Dependency, Impl(A1, A2, A3, A4), Allocator>:
 
 public:
 
-  typedef typename ProvidingInjection<Dependency>::InjectionPtr InjectionPtr;
+  typedef typename ProvidingInjection<Dependency,
+      Scope>::InjectionPtr InjectionPtr;
 
   NewInjection():
     allocator(),
@@ -325,15 +334,17 @@ public:
 /* *INDENT-ON* */
 
 /* *INDENT-OFF* */
-template<typename Dependency, typename Impl, typename Allocator, typename A1,
-    typename A2, typename A3, typename A4, typename A5>
-class NewInjection<Dependency, Impl(A1, A2, A3, A4, A5), Allocator>:
-  public ProvidingInjection<Dependency> {
+template<typename Dependency, typename Scope, typename Impl,
+    typename Allocator, typename A1, typename A2, typename A3, typename A4,
+    typename A5>
+class NewInjection<Dependency, Scope, Impl(A1, A2, A3, A4, A5), Allocator>:
+  public ProvidingInjection<Dependency, Scope> {
 
   typedef typename Key<Dependency>::Iface Iface;
   typedef typename Key<Dependency>::Ptr Ptr;
   typedef typename Allocator::template rebind<Impl>::other ImplAllocator;
-  typedef NewInjection<Dependency, Impl(A1, A2, A3, A4, A5), Allocator> New;
+  typedef NewInjection<Dependency, Scope, Impl(A1, A2, A3, A4, A5),
+      Allocator> New;
   typedef DisposalDeleter<Iface, New> Deleter;
 
   friend class DisposalDeleter<Iface, New>;
@@ -343,7 +354,8 @@ class NewInjection<Dependency, Impl(A1, A2, A3, A4, A5), Allocator>:
 
 public:
 
-  typedef typename ProvidingInjection<Dependency>::InjectionPtr InjectionPtr;
+  typedef typename ProvidingInjection<Dependency,
+      Scope>::InjectionPtr InjectionPtr;
 
   NewInjection():
     allocator(),
@@ -397,15 +409,17 @@ public:
 /* *INDENT-ON* */
 
 /* *INDENT-OFF* */
-template<typename Dependency, typename Impl, typename Allocator, typename A1,
-    typename A2, typename A3, typename A4, typename A5, typename A6>
-class NewInjection<Dependency, Impl(A1, A2, A3, A4, A5, A6), Allocator>:
-  public ProvidingInjection<Dependency> {
+template<typename Dependency, typename Scope, typename Impl,
+    typename Allocator, typename A1, typename A2, typename A3, typename A4,
+    typename A5, typename A6>
+class NewInjection<Dependency, Scope, Impl(A1, A2, A3, A4, A5, A6), Allocator>:
+  public ProvidingInjection<Dependency, Scope> {
 
   typedef typename Key<Dependency>::Iface Iface;
   typedef typename Key<Dependency>::Ptr Ptr;
   typedef typename Allocator::template rebind<Impl>::other ImplAllocator;
-  typedef NewInjection<Dependency, Impl(A1, A2, A3, A4, A5, A6), Allocator> New;
+  typedef NewInjection<Dependency, Scope, Impl(A1, A2, A3, A4, A5, A6),
+      Allocator> New;
   typedef DisposalDeleter<Iface, New> Deleter;
 
   friend class DisposalDeleter<Iface, New>;
@@ -415,7 +429,8 @@ class NewInjection<Dependency, Impl(A1, A2, A3, A4, A5, A6), Allocator>:
 
 public:
 
-  typedef typename ProvidingInjection<Dependency>::InjectionPtr InjectionPtr;
+  typedef typename ProvidingInjection<Dependency,
+      Scope>::InjectionPtr InjectionPtr;
 
   NewInjection():
     allocator(),
@@ -472,16 +487,17 @@ public:
 /* *INDENT-ON* */
 
 /* *INDENT-OFF* */
-template<typename Dependency, typename Impl, typename Allocator, typename A1,
-    typename A2, typename A3, typename A4, typename A5, typename A6,
-    typename A7>
-class NewInjection<Dependency, Impl(A1, A2, A3, A4, A5, A6, A7), Allocator>:
-  public ProvidingInjection<Dependency> {
+template<typename Dependency, typename Scope, typename Impl,
+    typename Allocator, typename A1, typename A2, typename A3, typename A4,
+    typename A5, typename A6, typename A7>
+class NewInjection<Dependency, Scope, Impl(A1, A2, A3, A4, A5, A6, A7),
+    Allocator>:
+  public ProvidingInjection<Dependency, Scope> {
 
   typedef typename Key<Dependency>::Iface Iface;
   typedef typename Key<Dependency>::Ptr Ptr;
   typedef typename Allocator::template rebind<Impl>::other ImplAllocator;
-  typedef NewInjection<Dependency, Impl(A1, A2, A3, A4, A5, A6, A7),
+  typedef NewInjection<Dependency, Scope, Impl(A1, A2, A3, A4, A5, A6, A7),
       Allocator> New;
   typedef DisposalDeleter<Iface, New> Deleter;
 
@@ -492,7 +508,8 @@ class NewInjection<Dependency, Impl(A1, A2, A3, A4, A5, A6, A7), Allocator>:
 
 public:
 
-  typedef typename ProvidingInjection<Dependency>::InjectionPtr InjectionPtr;
+  typedef typename ProvidingInjection<Dependency,
+      Scope>::InjectionPtr InjectionPtr;
 
   NewInjection():
     allocator(),
@@ -552,16 +569,17 @@ public:
 /* *INDENT-ON* */
 
 /* *INDENT-OFF* */
-template<typename Dependency, typename Impl, typename Allocator, typename A1,
-    typename A2, typename A3, typename A4, typename A5, typename A6,
-    typename A7, typename A8>
-class NewInjection<Dependency, Impl(A1, A2, A3, A4, A5, A6, A7, A8), Allocator>:
-  public ProvidingInjection<Dependency> {
+template<typename Dependency, typename Scope, typename Impl,
+    typename Allocator, typename A1, typename A2, typename A3, typename A4,
+    typename A5, typename A6, typename A7, typename A8>
+class NewInjection<Dependency, Scope, Impl(A1, A2, A3, A4, A5, A6, A7, A8),
+    Allocator>:
+  public ProvidingInjection<Dependency, Scope> {
 
   typedef typename Key<Dependency>::Iface Iface;
   typedef typename Key<Dependency>::Ptr Ptr;
   typedef typename Allocator::template rebind<Impl>::other ImplAllocator;
-  typedef NewInjection<Dependency, Impl(A1, A2, A3, A4, A5, A6, A7, A8),
+  typedef NewInjection<Dependency, Scope, Impl(A1, A2, A3, A4, A5, A6, A7, A8),
       Allocator> New;
   typedef DisposalDeleter<Iface, New> Deleter;
 
@@ -572,7 +590,8 @@ class NewInjection<Dependency, Impl(A1, A2, A3, A4, A5, A6, A7, A8), Allocator>:
 
 public:
 
-  typedef typename ProvidingInjection<Dependency>::InjectionPtr InjectionPtr;
+  typedef typename ProvidingInjection<Dependency,
+      Scope>::InjectionPtr InjectionPtr;
 
   NewInjection():
     allocator(),
@@ -635,18 +654,18 @@ public:
 /* *INDENT-ON* */
 
 /* *INDENT-OFF* */
-template<typename Dependency, typename Impl, typename Allocator, typename A1,
-    typename A2, typename A3, typename A4, typename A5, typename A6,
-    typename A7, typename A8, typename A9>
-class NewInjection<Dependency, Impl(A1, A2, A3, A4, A5, A6, A7, A8, A9),
+template<typename Dependency, typename Scope, typename Impl,
+    typename Allocator, typename A1, typename A2, typename A3, typename A4,
+    typename A5, typename A6, typename A7, typename A8, typename A9>
+class NewInjection<Dependency, Scope, Impl(A1, A2, A3, A4, A5, A6, A7, A8, A9),
     Allocator>:
-  public ProvidingInjection<Dependency> {
+  public ProvidingInjection<Dependency, Scope> {
 
   typedef typename Key<Dependency>::Iface Iface;
   typedef typename Key<Dependency>::Ptr Ptr;
   typedef typename Allocator::template rebind<Impl>::other ImplAllocator;
-  typedef NewInjection<Dependency, Impl(A1, A2, A3, A4, A5, A6, A7, A8, A9),
-      Allocator> New;
+  typedef NewInjection<Dependency, Scope, Impl(A1, A2, A3, A4, A5, A6, A7, A8,
+      A9), Allocator> New;
   typedef DisposalDeleter<Iface, New> Deleter;
 
   friend class DisposalDeleter<Iface, New>;
@@ -656,7 +675,8 @@ class NewInjection<Dependency, Impl(A1, A2, A3, A4, A5, A6, A7, A8, A9),
 
 public:
 
-  typedef typename ProvidingInjection<Dependency>::InjectionPtr InjectionPtr;
+  typedef typename ProvidingInjection<Dependency,
+      Scope>::InjectionPtr InjectionPtr;
 
   NewInjection():
     allocator(),
@@ -722,18 +742,19 @@ public:
 /* *INDENT-ON* */
 
 /* *INDENT-OFF* */
-template<typename Dependency, typename Impl, typename Allocator, typename A1,
-    typename A2, typename A3, typename A4, typename A5, typename A6,
-    typename A7, typename A8, typename A9, typename A10>
-class NewInjection<Dependency, Impl(A1, A2, A3, A4, A5, A6, A7, A8, A9, A10),
-    Allocator>:
-  public ProvidingInjection<Dependency> {
+template<typename Dependency, typename Scope, typename Impl,
+    typename Allocator, typename A1, typename A2, typename A3, typename A4,
+    typename A5, typename A6, typename A7, typename A8, typename A9,
+    typename A10>
+class NewInjection<Dependency, Scope, Impl(A1, A2, A3, A4, A5, A6, A7, A8, A9,
+    A10), Allocator>:
+  public ProvidingInjection<Dependency, Scope> {
 
   typedef typename Key<Dependency>::Iface Iface;
   typedef typename Key<Dependency>::Ptr Ptr;
   typedef typename Allocator::template rebind<Impl>::other ImplAllocator;
-  typedef NewInjection<Dependency, Impl(A1, A2, A3, A4, A5, A6, A7, A8, A9,
-      A10), Allocator> New;
+  typedef NewInjection<Dependency, Scope, Impl(A1, A2, A3, A4, A5, A6, A7, A8,
+      A9, A10), Allocator> New;
   typedef DisposalDeleter<Iface, New> Deleter;
 
   friend class DisposalDeleter<Iface, New>;
@@ -743,7 +764,8 @@ class NewInjection<Dependency, Impl(A1, A2, A3, A4, A5, A6, A7, A8, A9, A10),
 
 public:
 
-  typedef typename ProvidingInjection<Dependency>::InjectionPtr InjectionPtr;
+  typedef typename ProvidingInjection<Dependency,
+      Scope>::InjectionPtr InjectionPtr;
 
   NewInjection():
     allocator(),
