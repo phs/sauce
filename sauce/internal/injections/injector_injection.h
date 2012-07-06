@@ -34,4 +34,4 @@ namespace inj = ::sauce::internal::injections;
 
 }
 
-#endif // SAUCE_INTERNAL_INJECTIONS_NAKED_INJECTION_H_
+#endif // SAUCE_INTERNAL_INJECTIONS_INJECTOR_INJECTION_H_
