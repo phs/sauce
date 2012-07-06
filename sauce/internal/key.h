@@ -13,7 +13,7 @@ namespace internal {
 template<typename Iface_>
 struct Key {
   typedef Iface_ Iface;
-  typedef sauce::shared_ptr<Iface> Ptr;
+  typedef sauce::shared_ptr<Iface_> Ptr;
   typedef Unnamed Name;
 
   /**
@@ -22,7 +22,7 @@ struct Key {
    * They are logically equivalent, but have different TypeIds.  Where it is ambiguous, we use
    * the normalized version.
    */
-  typedef Named<Iface, Name> Normalized;
+  typedef Named<Iface_, Unnamed> Normalized;
 };
 
 /**
@@ -31,9 +31,9 @@ struct Key {
 template<typename Iface_>
 struct Key<Iface_ &> {
   typedef Iface_ Iface;
-  typedef sauce::shared_ptr<Iface> Ptr;
+  typedef sauce::shared_ptr<Iface_> Ptr;
   typedef Unnamed Name;
-  typedef Named<Iface, Name> Normalized;
+  typedef Named<Iface_, Unnamed> Normalized;
 };
 
 /**
@@ -42,9 +42,9 @@ struct Key<Iface_ &> {
 template<typename Iface_, typename Name_>
 struct Key<Named<Iface_, Name_> > {
   typedef Iface_ Iface;
-  typedef sauce::shared_ptr<Iface> Ptr;
+  typedef sauce::shared_ptr<Iface_> Ptr;
   typedef Name_ Name;
-  typedef Named<Iface, Name> Normalized;
+  typedef Named<Iface_, Name_> Normalized;
 };
 
 }

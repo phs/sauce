@@ -23,8 +23,8 @@ class ProvidingInjection: public InjectorFriend {
 public:
 
   typedef typename Key<Dependency_>::Normalized Dependency;
-  typedef sauce::shared_ptr<ProvidingInjection<Dependency, Scope> > InjectionPtr;
-  typedef typename Key<Dependency>::Ptr IfacePtr;
+  typedef sauce::shared_ptr<ProvidingInjection<Dependency_, Scope> > InjectionPtr;
+  typedef typename Key<Dependency_>::Ptr IfacePtr;
 
   ProvidingInjection():
     name(unnamed()) {}
