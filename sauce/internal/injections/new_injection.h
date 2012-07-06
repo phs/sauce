@@ -44,6 +44,7 @@ public:
 
   typedef typename ProvidingInjection<Dependency,
       Scope>::InjectionPtr InjectionPtr;
+  typedef typename ResolvedBinding<Dependency>::BindingPtr BindingPtr;
 
   NewInjection():
     allocator(),
@@ -56,8 +57,10 @@ public:
    * also given a custom deleter, to dispose of the naked pointer with
    * dispose(Iface *).
    */
-  Ptr provide(InjectionPtr injection, InjectorPtr) const {
-    Deleter deleter(sauce::static_pointer_cast<New>(injection));
+  Ptr provide(BindingPtr binding, InjectorPtr) const {
+    Deleter deleter(sauce::static_pointer_cast<New>(
+      static_cast<InjectionBinding<Dependency,
+          Scope> *>(binding.get())->injection));
     Impl * impl = allocator.allocate(1);
     Ptr provided(new(impl) Impl(), deleter);
     return provided;
@@ -92,6 +95,7 @@ public:
 
   typedef typename ProvidingInjection<Dependency,
       Scope>::InjectionPtr InjectionPtr;
+  typedef typename ResolvedBinding<Dependency>::BindingPtr BindingPtr;
 
   NewInjection():
     allocator(),
@@ -104,10 +108,12 @@ public:
    * also given a custom deleter, to dispose of the naked pointer with
    * dispose(Iface *).
    */
-  Ptr provide(InjectionPtr injection, InjectorPtr injector) const {
+  Ptr provide(BindingPtr binding, InjectorPtr injector) const {
     typename Key<A1>::Ptr a1(this->template getHelper<typename
         i::Key<A1>::Normalized>(injector, dynamicDependencyNames[0]));
-    Deleter deleter(sauce::static_pointer_cast<New>(injection));
+    Deleter deleter(sauce::static_pointer_cast<New>(
+      static_cast<InjectionBinding<Dependency,
+          Scope> *>(binding.get())->injection));
     Impl * impl = allocator.allocate(1);
     Ptr provided(new(impl) Impl(a1), deleter);
     return provided;
@@ -153,6 +159,7 @@ public:
 
   typedef typename ProvidingInjection<Dependency,
       Scope>::InjectionPtr InjectionPtr;
+  typedef typename ResolvedBinding<Dependency>::BindingPtr BindingPtr;
 
   NewInjection():
     allocator(),
@@ -165,12 +172,14 @@ public:
    * also given a custom deleter, to dispose of the naked pointer with
    * dispose(Iface *).
    */
-  Ptr provide(InjectionPtr injection, InjectorPtr injector) const {
+  Ptr provide(BindingPtr binding, InjectorPtr injector) const {
     typename Key<A1>::Ptr a1(this->template getHelper<typename
         i::Key<A1>::Normalized>(injector, dynamicDependencyNames[0]));
     typename Key<A2>::Ptr a2(this->template getHelper<typename
         i::Key<A2>::Normalized>(injector, dynamicDependencyNames[1]));
-    Deleter deleter(sauce::static_pointer_cast<New>(injection));
+    Deleter deleter(sauce::static_pointer_cast<New>(
+      static_cast<InjectionBinding<Dependency,
+          Scope> *>(binding.get())->injection));
     Impl * impl = allocator.allocate(1);
     Ptr provided(new(impl) Impl(a1, a2), deleter);
     return provided;
@@ -217,6 +226,7 @@ public:
 
   typedef typename ProvidingInjection<Dependency,
       Scope>::InjectionPtr InjectionPtr;
+  typedef typename ResolvedBinding<Dependency>::BindingPtr BindingPtr;
 
   NewInjection():
     allocator(),
@@ -229,14 +239,16 @@ public:
    * also given a custom deleter, to dispose of the naked pointer with
    * dispose(Iface *).
    */
-  Ptr provide(InjectionPtr injection, InjectorPtr injector) const {
+  Ptr provide(BindingPtr binding, InjectorPtr injector) const {
     typename Key<A1>::Ptr a1(this->template getHelper<typename
         i::Key<A1>::Normalized>(injector, dynamicDependencyNames[0]));
     typename Key<A2>::Ptr a2(this->template getHelper<typename
         i::Key<A2>::Normalized>(injector, dynamicDependencyNames[1]));
     typename Key<A3>::Ptr a3(this->template getHelper<typename
         i::Key<A3>::Normalized>(injector, dynamicDependencyNames[2]));
-    Deleter deleter(sauce::static_pointer_cast<New>(injection));
+    Deleter deleter(sauce::static_pointer_cast<New>(
+      static_cast<InjectionBinding<Dependency,
+          Scope> *>(binding.get())->injection));
     Impl * impl = allocator.allocate(1);
     Ptr provided(new(impl) Impl(a1, a2, a3), deleter);
     return provided;
@@ -284,6 +296,7 @@ public:
 
   typedef typename ProvidingInjection<Dependency,
       Scope>::InjectionPtr InjectionPtr;
+  typedef typename ResolvedBinding<Dependency>::BindingPtr BindingPtr;
 
   NewInjection():
     allocator(),
@@ -296,7 +309,7 @@ public:
    * also given a custom deleter, to dispose of the naked pointer with
    * dispose(Iface *).
    */
-  Ptr provide(InjectionPtr injection, InjectorPtr injector) const {
+  Ptr provide(BindingPtr binding, InjectorPtr injector) const {
     typename Key<A1>::Ptr a1(this->template getHelper<typename
         i::Key<A1>::Normalized>(injector, dynamicDependencyNames[0]));
     typename Key<A2>::Ptr a2(this->template getHelper<typename
@@ -305,7 +318,9 @@ public:
         i::Key<A3>::Normalized>(injector, dynamicDependencyNames[2]));
     typename Key<A4>::Ptr a4(this->template getHelper<typename
         i::Key<A4>::Normalized>(injector, dynamicDependencyNames[3]));
-    Deleter deleter(sauce::static_pointer_cast<New>(injection));
+    Deleter deleter(sauce::static_pointer_cast<New>(
+      static_cast<InjectionBinding<Dependency,
+          Scope> *>(binding.get())->injection));
     Impl * impl = allocator.allocate(1);
     Ptr provided(new(impl) Impl(a1, a2, a3, a4), deleter);
     return provided;
@@ -356,6 +371,7 @@ public:
 
   typedef typename ProvidingInjection<Dependency,
       Scope>::InjectionPtr InjectionPtr;
+  typedef typename ResolvedBinding<Dependency>::BindingPtr BindingPtr;
 
   NewInjection():
     allocator(),
@@ -368,7 +384,7 @@ public:
    * also given a custom deleter, to dispose of the naked pointer with
    * dispose(Iface *).
    */
-  Ptr provide(InjectionPtr injection, InjectorPtr injector) const {
+  Ptr provide(BindingPtr binding, InjectorPtr injector) const {
     typename Key<A1>::Ptr a1(this->template getHelper<typename
         i::Key<A1>::Normalized>(injector, dynamicDependencyNames[0]));
     typename Key<A2>::Ptr a2(this->template getHelper<typename
@@ -379,7 +395,9 @@ public:
         i::Key<A4>::Normalized>(injector, dynamicDependencyNames[3]));
     typename Key<A5>::Ptr a5(this->template getHelper<typename
         i::Key<A5>::Normalized>(injector, dynamicDependencyNames[4]));
-    Deleter deleter(sauce::static_pointer_cast<New>(injection));
+    Deleter deleter(sauce::static_pointer_cast<New>(
+      static_cast<InjectionBinding<Dependency,
+          Scope> *>(binding.get())->injection));
     Impl * impl = allocator.allocate(1);
     Ptr provided(new(impl) Impl(a1, a2, a3, a4, a5), deleter);
     return provided;
@@ -431,6 +449,7 @@ public:
 
   typedef typename ProvidingInjection<Dependency,
       Scope>::InjectionPtr InjectionPtr;
+  typedef typename ResolvedBinding<Dependency>::BindingPtr BindingPtr;
 
   NewInjection():
     allocator(),
@@ -443,7 +462,7 @@ public:
    * also given a custom deleter, to dispose of the naked pointer with
    * dispose(Iface *).
    */
-  Ptr provide(InjectionPtr injection, InjectorPtr injector) const {
+  Ptr provide(BindingPtr binding, InjectorPtr injector) const {
     typename Key<A1>::Ptr a1(this->template getHelper<typename
         i::Key<A1>::Normalized>(injector, dynamicDependencyNames[0]));
     typename Key<A2>::Ptr a2(this->template getHelper<typename
@@ -456,7 +475,9 @@ public:
         i::Key<A5>::Normalized>(injector, dynamicDependencyNames[4]));
     typename Key<A6>::Ptr a6(this->template getHelper<typename
         i::Key<A6>::Normalized>(injector, dynamicDependencyNames[5]));
-    Deleter deleter(sauce::static_pointer_cast<New>(injection));
+    Deleter deleter(sauce::static_pointer_cast<New>(
+      static_cast<InjectionBinding<Dependency,
+          Scope> *>(binding.get())->injection));
     Impl * impl = allocator.allocate(1);
     Ptr provided(new(impl) Impl(a1, a2, a3, a4, a5, a6), deleter);
     return provided;
@@ -510,6 +531,7 @@ public:
 
   typedef typename ProvidingInjection<Dependency,
       Scope>::InjectionPtr InjectionPtr;
+  typedef typename ResolvedBinding<Dependency>::BindingPtr BindingPtr;
 
   NewInjection():
     allocator(),
@@ -522,7 +544,7 @@ public:
    * also given a custom deleter, to dispose of the naked pointer with
    * dispose(Iface *).
    */
-  Ptr provide(InjectionPtr injection, InjectorPtr injector) const {
+  Ptr provide(BindingPtr binding, InjectorPtr injector) const {
     typename Key<A1>::Ptr a1(this->template getHelper<typename
         i::Key<A1>::Normalized>(injector, dynamicDependencyNames[0]));
     typename Key<A2>::Ptr a2(this->template getHelper<typename
@@ -537,7 +559,9 @@ public:
         i::Key<A6>::Normalized>(injector, dynamicDependencyNames[5]));
     typename Key<A7>::Ptr a7(this->template getHelper<typename
         i::Key<A7>::Normalized>(injector, dynamicDependencyNames[6]));
-    Deleter deleter(sauce::static_pointer_cast<New>(injection));
+    Deleter deleter(sauce::static_pointer_cast<New>(
+      static_cast<InjectionBinding<Dependency,
+          Scope> *>(binding.get())->injection));
     Impl * impl = allocator.allocate(1);
     Ptr provided(new(impl) Impl(a1, a2, a3, a4, a5, a6, a7), deleter);
     return provided;
@@ -592,6 +616,7 @@ public:
 
   typedef typename ProvidingInjection<Dependency,
       Scope>::InjectionPtr InjectionPtr;
+  typedef typename ResolvedBinding<Dependency>::BindingPtr BindingPtr;
 
   NewInjection():
     allocator(),
@@ -604,7 +629,7 @@ public:
    * also given a custom deleter, to dispose of the naked pointer with
    * dispose(Iface *).
    */
-  Ptr provide(InjectionPtr injection, InjectorPtr injector) const {
+  Ptr provide(BindingPtr binding, InjectorPtr injector) const {
     typename Key<A1>::Ptr a1(this->template getHelper<typename
         i::Key<A1>::Normalized>(injector, dynamicDependencyNames[0]));
     typename Key<A2>::Ptr a2(this->template getHelper<typename
@@ -621,7 +646,9 @@ public:
         i::Key<A7>::Normalized>(injector, dynamicDependencyNames[6]));
     typename Key<A8>::Ptr a8(this->template getHelper<typename
         i::Key<A8>::Normalized>(injector, dynamicDependencyNames[7]));
-    Deleter deleter(sauce::static_pointer_cast<New>(injection));
+    Deleter deleter(sauce::static_pointer_cast<New>(
+      static_cast<InjectionBinding<Dependency,
+          Scope> *>(binding.get())->injection));
     Impl * impl = allocator.allocate(1);
     Ptr provided(new(impl) Impl(a1, a2, a3, a4, a5, a6, a7, a8), deleter);
     return provided;
@@ -677,6 +704,7 @@ public:
 
   typedef typename ProvidingInjection<Dependency,
       Scope>::InjectionPtr InjectionPtr;
+  typedef typename ResolvedBinding<Dependency>::BindingPtr BindingPtr;
 
   NewInjection():
     allocator(),
@@ -689,7 +717,7 @@ public:
    * also given a custom deleter, to dispose of the naked pointer with
    * dispose(Iface *).
    */
-  Ptr provide(InjectionPtr injection, InjectorPtr injector) const {
+  Ptr provide(BindingPtr binding, InjectorPtr injector) const {
     typename Key<A1>::Ptr a1(this->template getHelper<typename
         i::Key<A1>::Normalized>(injector, dynamicDependencyNames[0]));
     typename Key<A2>::Ptr a2(this->template getHelper<typename
@@ -708,7 +736,9 @@ public:
         i::Key<A8>::Normalized>(injector, dynamicDependencyNames[7]));
     typename Key<A9>::Ptr a9(this->template getHelper<typename
         i::Key<A9>::Normalized>(injector, dynamicDependencyNames[8]));
-    Deleter deleter(sauce::static_pointer_cast<New>(injection));
+    Deleter deleter(sauce::static_pointer_cast<New>(
+      static_cast<InjectionBinding<Dependency,
+          Scope> *>(binding.get())->injection));
     Impl * impl = allocator.allocate(1);
     Ptr provided(new(impl) Impl(a1, a2, a3, a4, a5, a6, a7, a8, a9), deleter);
     return provided;
@@ -766,6 +796,7 @@ public:
 
   typedef typename ProvidingInjection<Dependency,
       Scope>::InjectionPtr InjectionPtr;
+  typedef typename ResolvedBinding<Dependency>::BindingPtr BindingPtr;
 
   NewInjection():
     allocator(),
@@ -778,7 +809,7 @@ public:
    * also given a custom deleter, to dispose of the naked pointer with
    * dispose(Iface *).
    */
-  Ptr provide(InjectionPtr injection, InjectorPtr injector) const {
+  Ptr provide(BindingPtr binding, InjectorPtr injector) const {
     typename Key<A1>::Ptr a1(this->template getHelper<typename
         i::Key<A1>::Normalized>(injector, dynamicDependencyNames[0]));
     typename Key<A2>::Ptr a2(this->template getHelper<typename
@@ -799,7 +830,9 @@ public:
         i::Key<A9>::Normalized>(injector, dynamicDependencyNames[8]));
     typename Key<A10>::Ptr a10(this->template getHelper<typename
         i::Key<A10>::Normalized>(injector, dynamicDependencyNames[9]));
-    Deleter deleter(sauce::static_pointer_cast<New>(injection));
+    Deleter deleter(sauce::static_pointer_cast<New>(
+      static_cast<InjectionBinding<Dependency,
+          Scope> *>(binding.get())->injection));
     Impl * impl = allocator.allocate(1);
     Ptr provided(new(impl) Impl(a1, a2, a3, a4, a5, a6, a7, a8, a9, a10),
         deleter);

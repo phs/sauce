@@ -19,13 +19,16 @@ template<typename Dependency, typename Scope, typename Provider>
 class ProviderInjection: public ProvidingInjection<Dependency, Scope> {
 public:
   typedef typename ProvidingInjection<Dependency, Scope>::InjectionPtr InjectionPtr;
+  typedef typename ResolvedBinding<Dependency>::BindingPtr BindingPtr;
 
   void validateAcyclic(InjectorPtr injector, TypeIds & ids, std::string const name) const {
     this->template validateAcyclicHelper<Provider>(injector, ids, name);
   }
 
-  typename Key<Dependency>::Ptr provide(InjectionPtr injection, InjectorPtr injector) const {
-    return this->template getHelper<Provider>(injector, injection->getName())->get();
+  typename Key<Dependency>::Ptr provide(BindingPtr binding, InjectorPtr injector) const {
+    InjectionBinding<Dependency, Scope> * raw =
+      static_cast<InjectionBinding<Dependency, Scope> *>(binding.get());
+    return this->template getHelper<Provider>(injector, raw->injection->getName())->get();
   }
 };
 

@@ -7,6 +7,7 @@
 #include <sauce/memory.h>
 #include <sauce/named.h>
 #include <sauce/internal/key.h>
+#include <sauce/internal/resolved_binding.h>
 #include <sauce/internal/type_id.h>
 
 namespace sauce {
@@ -25,6 +26,7 @@ public:
   typedef typename Key<Dependency_>::Normalized Dependency;
   typedef sauce::shared_ptr<ProvidingInjection<Dependency_, Scope> > InjectionPtr;
   typedef typename Key<Dependency_>::Ptr IfacePtr;
+  typedef typename ResolvedBinding<Dependency_>::BindingPtr BindingPtr;
 
   ProvidingInjection():
     name(unnamed()) {}
@@ -48,7 +50,7 @@ public:
    *
    * The strategy used is left to derived types.
    */
-  virtual IfacePtr provide(InjectionPtr, InjectorPtr) const = 0;
+  virtual IfacePtr provide(BindingPtr, InjectorPtr) const = 0;
 
   /**
    * Establish that further dependencies do not introduce cycles with ones already accumulated.

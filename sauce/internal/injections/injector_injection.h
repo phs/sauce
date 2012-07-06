@@ -21,7 +21,7 @@ public:
    *
    * Just return the passed injector.
    */
-  InjectorPtr provide(InjectionPtr, InjectorPtr injector) const {
+  InjectorPtr provide(BindingPtr, InjectorPtr injector) const {
     return injector;
   }
 };

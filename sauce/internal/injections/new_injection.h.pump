@@ -48,6 +48,7 @@ class NewInjection<Dependency, Scope, Impl($As), Allocator>:
 public:
 
   typedef typename ProvidingInjection<Dependency, Scope>::InjectionPtr InjectionPtr;
+  typedef typename ResolvedBinding<Dependency>::BindingPtr BindingPtr;
 
   NewInjection():
     allocator(),
@@ -61,15 +62,16 @@ public:
    * dispose(Iface *).
    */
 [[$if i==0 [[
-  Ptr provide(InjectionPtr injection, InjectorPtr) const
+  Ptr provide(BindingPtr binding, InjectorPtr) const
 ]] $else [[
-  Ptr provide(InjectionPtr injection, InjectorPtr injector) const
+  Ptr provide(BindingPtr binding, InjectorPtr injector) const
 ]]]] {
 [[$for j [[
     typename Key<A$j>::Ptr a$j(this->template getHelper<typename i::Key<A$j>::Normalized>(injector, dynamicDependencyNames[$(j-1)]));
 
 ]]]]
-    Deleter deleter(sauce::static_pointer_cast<New>(injection));
+    Deleter deleter(sauce::static_pointer_cast<New>(
+      static_cast<InjectionBinding<Dependency, Scope> *>(binding.get())->injection));
     Impl * impl = allocator.allocate(1);
     Ptr provided(new(impl) Impl($as), deleter);
     return provided;

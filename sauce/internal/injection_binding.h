@@ -24,7 +24,9 @@ class InjectionBinding:
   typedef typename ResolvedBinding<Dependency>::BindingPtr BindingPtr;
   typedef typename inj::ProvidingInjection<Dependency, Scope>::InjectionPtr InjectionPtr;
 
+public:
   InjectionPtr injection;
+private:
 
   /**
    * The TypeId of the Scope template parameter.
@@ -38,9 +40,8 @@ class InjectionBinding:
    *
    * The strategy used is left to derived types.
    */
-  IfacePtr provide(BindingPtr, InjectorPtr injector) const {
-    // Don't ditch BindingPtr, you'll want it for setter injection
-    return injection->provide(injection, injector);
+  IfacePtr provide(BindingPtr binding, InjectorPtr injector) const {
+    return injection->provide(binding, injector);
   }
 
   /**
