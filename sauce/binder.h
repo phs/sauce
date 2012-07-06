@@ -17,6 +17,22 @@
 namespace sauce {
 
 /**
+ * Binds to a specific method on an already-provided instance.
+ */
+template<typename Method>
+class SettingClause: public i::Clause {
+  Method method;
+
+  void onComplete() {}
+
+public:
+
+  SettingClause(Method method):
+    method(method) {}
+
+};
+
+/**
  * Assigns dynamic name requirements to the explicit dependencies of a binding.
  */
 class NamingClause: public i::Clause {
@@ -27,6 +43,11 @@ public:
   NamingClause & naming(unsigned int position, std::string const name) {
     bindDynamicDependencyName(position, name);
     return *this;
+  }
+
+  template<typename Method>
+  SettingClause<Method> setting(Method method) {
+    return pass(SettingClause<Method>(method));
   }
 };
 
@@ -43,6 +64,11 @@ public:
 
   NamingClause naming(unsigned int position, std::string const name) {
     return pass(NamingClause()).naming(position, name);
+  }
+
+  template<typename Method>
+  SettingClause<Method> setting(Method method) {
+    return pass(SettingClause<Method>(method));
   }
 };
 
@@ -66,6 +92,11 @@ public:
 
   NamingClause naming(unsigned int position, std::string const name) {
     return pass(NamingClause()).naming(position, name);
+  }
+
+  template<typename Method>
+  SettingClause<Method> setting(Method method) {
+    return pass(SettingClause<Method>(method));
   }
 };
 
@@ -92,6 +123,11 @@ public:
 
   NamingClause naming(unsigned int position, std::string const name) {
     return pass(NamingClause()).naming(position, name);
+  }
+
+  template<typename Method>
+  SettingClause<Method> setting(Method method) {
+    return pass(SettingClause<Method>(method));
   }
 };
 

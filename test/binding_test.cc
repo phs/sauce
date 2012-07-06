@@ -137,13 +137,14 @@ struct HasSetter: public HasBound {
 
 void SetterModule(Binder & binder) {
   binder.bind<Bound>().in<SingletonScope>().to<Bound()>();
-  // binder.bind<HasBound>().to<HasSetter()>().toMethod(&HasSetter::setBound); // TODO
+  binder.bind<HasBound>().to<HasSetter()>().setting(&HasSetter::setBound);
 }
 
 TEST(BindingTest, shouldInjectBoundSetters) {
   sauce::shared_ptr<Injector> injector(Modules().add(&SetterModule).createInjector());
   sauce::shared_ptr<Bound> bound = injector->get<Bound>();
-  // ASSERT_EQ(bound, injector->get<HasBound>()->getBound()); // Equal since Bound is a singleton
+  // Equal since Bound is a singleton
+  // ASSERT_EQ(bound, injector->get<HasBound>()->getBound()); // TODO
 }
 
 struct Dog;
