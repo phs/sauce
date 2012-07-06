@@ -17,6 +17,20 @@
 namespace sauce {
 
 /**
+ * Assigns dynamic name requirements to the explicit dependencies of a binding.
+ */
+class NamingClause: public i::Clause {
+  void onComplete() {}
+
+public:
+
+  NamingClause & naming(unsigned int position, std::string const name) {
+    bindDynamicDependencyName(position, name);
+    return *this;
+  }
+};
+
+/**
  * Binds to a specific constructor and allocator.
  */
 template<typename Dependency, typename Scope, typename Ctor, typename Allocator>
@@ -24,29 +38,11 @@ class AllocateFromClause: public i::Clause {
   void onComplete() {
     bind<Scope>(inj::NewInjection<Dependency, Scope, Ctor, Allocator>());
   }
-};
-
-/**
- * Assigns dynamic name requirements to the explicit dependencies of a binding.
- */
-template<typename Dependency, typename Scope, typename Ctor>
-class NamingClause: public i::Clause {
-  typedef typename i::Key<Dependency>::Iface Iface;
-
-  void onComplete() {
-    bind<Scope>(inj::NewInjection<Dependency, Scope, Ctor, std::allocator<Iface> >());
-  }
 
 public:
 
-  NamingClause<Dependency, Scope, Ctor> & naming(unsigned int position, std::string const name) {
-    bindDynamicDependencyName(position, name);
-    return *this;
-  }
-
-  template<typename Allocator>
-  AllocateFromClause<Dependency, Scope, Ctor, Allocator> allocatedFrom() {
-    return pass(AllocateFromClause<Dependency, Scope, Ctor, Allocator>());
+  NamingClause naming(unsigned int position, std::string const name) {
+    return pass(NamingClause()).naming(position, name);
   }
 };
 
@@ -63,13 +59,13 @@ class ToClause: public i::Clause {
 
 public:
 
-  NamingClause<Dependency, Scope, Ctor> naming(unsigned int position, std::string const name) {
-    return pass(NamingClause<Dependency, Scope, Ctor>()).naming(position, name);
-  }
-
   template<typename Allocator>
   AllocateFromClause<Dependency, Scope, Ctor, Allocator> allocatedFrom() {
     return pass(AllocateFromClause<Dependency, Scope, Ctor, Allocator>());
+  }
+
+  NamingClause naming(unsigned int position, std::string const name) {
+    return pass(NamingClause()).naming(position, name);
   }
 };
 
@@ -89,14 +85,13 @@ class ToProviderClause: public i::Clause {
 
 public:
 
-  NamingClause<ProviderDependency, Scope, ProviderCtor> naming(
-    unsigned int position, std::string const name) {
-    return pass(NamingClause<ProviderDependency, Scope, ProviderCtor>()).naming(position, name);
-  }
-
   template<typename Allocator>
   AllocateFromClause<ProviderDependency, Scope, ProviderCtor, Allocator> allocatedFrom() {
     return pass(AllocateFromClause<ProviderDependency, Scope, ProviderCtor, Allocator>());
+  }
+
+  NamingClause naming(unsigned int position, std::string const name) {
+    return pass(NamingClause()).naming(position, name);
   }
 };
 
