@@ -68,13 +68,13 @@ public:
     }
   }
 
-  template<typename Scope, typename BoundInjection>
+  template<typename BoundInjection>
   void bind() {
     assert(!finalizedProvision);
     pendingBinding.reset(new BoundInjection());
   }
 
-  template<typename Scope, typename BoundInjection>
+  template<typename BoundInjection>
   void bindExtra() {
     OpaqueBindingPtr extra(new BoundInjection());
     extraPendingBindings.push_back(extra);
@@ -137,14 +137,14 @@ protected:
     onComplete();
   }
 
-  template<typename Scope, typename BoundInjection>
+  template<typename BoundInjection>
   void bind(BoundInjection) {
-    state->template bind<Scope, BoundInjection>();
+    state->template bind<BoundInjection>();
   }
 
-  template<typename Scope, typename BoundInjection>
+  template<typename BoundInjection>
   void bindExtra(BoundInjection) {
-    state->template bindExtra<Scope, BoundInjection>();
+    state->template bindExtra<BoundInjection>();
   }
 
   void setDynamicName(std::string const name) {
@@ -196,14 +196,14 @@ protected:
     onComplete();
   }
 
-  template<typename Scope, typename BoundInjection>
+  template<typename BoundInjection>
   void bind(BoundInjection) {
-    state->template bind<Scope, BoundInjection>();
+    state->template bind<BoundInjection>();
   }
 
-  template<typename Scope, typename BoundInjection>
+  template<typename BoundInjection>
   void bindExtra(BoundInjection) {
-    state->template bindExtra<Scope, BoundInjection>();
+    state->template bindExtra<BoundInjection>();
   }
 
   void setDynamicName(std::string const name) {
