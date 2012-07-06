@@ -96,7 +96,7 @@ public:
     pendingThrower.template throwLater<Exception>();
   }
 
-  void clear() {
+  void clearException() {
     pendingThrower.clear();
   }
 };
@@ -118,7 +118,7 @@ protected:
 
   template<typename Next>
   Next pass(Next next) {
-    state->clear();
+    state->clearException();
     next.setState(state);
     return next;
   }
