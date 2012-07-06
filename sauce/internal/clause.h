@@ -106,17 +106,17 @@ typedef sauce::shared_ptr<ClauseState> ClauseStatePtr;
 /**
  * Base class for parts of the fluent binding API.
  */
-class Clause {
+class InitialClause {
   ClauseStatePtr state;
 
   virtual void onComplete() = 0;
 
 protected:
 
-  Clause():
+  InitialClause():
     state() {}
 
-  Clause(ClauseStatePtr state):
+  InitialClause(ClauseStatePtr state):
     state(state) {}
 
   template<typename Next>

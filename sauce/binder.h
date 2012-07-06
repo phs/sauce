@@ -20,7 +20,7 @@ namespace sauce {
  * Binds to a specific method on an already-provided instance.
  */
 template<typename Method>
-class SettingClause: public i::Clause {
+class SettingClause: public i::InitialClause {
   Method method;
 
   void onComplete() {}
@@ -35,7 +35,7 @@ public:
 /**
  * Assigns dynamic name requirements to the explicit dependencies of a binding.
  */
-class NamingClause: public i::Clause {
+class NamingClause: public i::InitialClause {
   void onComplete() {}
 
 public:
@@ -55,7 +55,7 @@ public:
  * Binds to a specific constructor and allocator.
  */
 template<typename Dependency, typename Scope, typename Ctor, typename Allocator>
-class AllocateFromClause: public i::Clause {
+class AllocateFromClause: public i::InitialClause {
   void onComplete() {
     bind<Scope>(inj::NewInjection<Dependency, Scope, Ctor, Allocator>());
   }
@@ -76,7 +76,7 @@ public:
  * Binds to a specific constructor, allocating from the heap.
  */
 template<typename Dependency, typename Scope, typename Ctor>
-class ToClause: public i::Clause {
+class ToClause: public i::InitialClause {
   typedef typename i::Key<Dependency>::Iface Iface;
 
   void onComplete() {
@@ -104,7 +104,7 @@ public:
  * Binds to a provider with a specific constructor, allocating from the heap.
  */
 template<typename Dependency, typename Scope, typename ProviderCtor>
-class ToProviderClause: public i::Clause {
+class ToProviderClause: public i::InitialClause {
   typedef typename i::Key<Dependency>::Iface Iface;
   typedef typename i::Key<Dependency>::Name Name;
   typedef Named<Provider<Iface>, Name> ProviderDependency;
@@ -135,7 +135,7 @@ public:
  * Scopes the binding.
  */
 template<typename Dependency, typename Scope>
-class InClause: public i::Clause {
+class InClause: public i::InitialClause {
   typedef typename i::Key<Dependency>::Iface Iface;
 
   void onComplete() {
@@ -163,7 +163,7 @@ public:
  * using both kinds can be mixed in the same module.
  */
 template<typename Dependency>
-class NamedClause: public i::Clause {
+class NamedClause: public i::InitialClause {
   typedef typename i::Key<Dependency>::Iface Iface;
 
   void onComplete() {
@@ -194,14 +194,14 @@ class Binder;
  * A builder that creates a single binding.
  */
 template<typename Iface>
-class BindClause: public i::Clause {
+class BindClause: public i::InitialClause {
 
   void onComplete() {
     throwLater(PartialBindingExceptionFor<Named<Iface, Unnamed> >());
   }
 
   BindClause(i::ClauseStatePtr state):
-    i::Clause(state) {
+    i::InitialClause(state) {
     onComplete();
   }
 
