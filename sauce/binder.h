@@ -188,6 +188,8 @@ public:
   }
 };
 
+class Binder;
+
 /**
  * A builder that creates a single binding.
  */
@@ -197,6 +199,13 @@ class BindClause: public i::Clause {
   void onComplete() {
     throwLater(PartialBindingExceptionFor<Named<Iface, Unnamed> >());
   }
+
+  BindClause(i::ClauseStatePtr state):
+    i::Clause(state) {
+    onComplete();
+  }
+
+  friend class Binder;
 
 public:
 
@@ -252,8 +261,7 @@ public:
   template<typename Iface>
   BindClause<Iface> bind() {
     i::ClauseStatePtr clauseState(new i::ClauseState(bindings, *this));
-    BindClause<Iface> bindClause;
-    bindClause.setState(clauseState);
+    BindClause<Iface> bindClause(clauseState);
     return bindClause;
   }
 };

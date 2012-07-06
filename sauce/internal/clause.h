@@ -116,11 +116,19 @@ protected:
   Clause():
     state() {}
 
+  Clause(ClauseStatePtr state):
+    state(state) {}
+
   template<typename Next>
   Next pass(Next next) {
-    state->clearException();
     next.setState(state);
     return next;
+  }
+
+  void setState(ClauseStatePtr state) {
+    state->clearException();
+    this->state = state;
+    onComplete();
   }
 
   template<typename Scope, typename BoundInjection>
@@ -144,13 +152,6 @@ protected:
   template<typename Exception>
   void throwLater(Exception) {
     state->template throwLater<Exception>();
-  }
-
-public:
-
-  void setState(ClauseStatePtr state) {
-    this->state = state;
-    onComplete();
   }
 };
 
