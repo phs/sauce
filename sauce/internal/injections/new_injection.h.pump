@@ -70,8 +70,7 @@ public:
     typename Key<A$j>::Ptr a$j(this->template getHelper<typename i::Key<A$j>::Normalized>(injector, dynamicDependencyNames[$(j-1)]));
 
 ]]]]
-    Deleter deleter(sauce::static_pointer_cast<New>(
-      static_cast<InjectionBinding<Dependency, Scope> *>(binding.get())->injection));
+    Deleter deleter(sauce::static_pointer_cast<New>(binding));
     Impl * impl = allocator.allocate(1);
     Ptr provided(new(impl) Impl($as), deleter);
     return provided;

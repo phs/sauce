@@ -70,8 +70,7 @@ struct ImplicitBinding<Named<Injector, Unnamed> >: ImplicitBindingTraits<inj::In
     if (name != unnamed()) {
       throw UnboundExceptionFor<Named<Injector, Unnamed> >(name);
     }
-    InjectionPtr injection(new ImplicitInjection());
-    BindingPtr binding(new InjectionBinding<Dependency, NoScope>(injection));
+    BindingPtr binding(new ImplicitInjection());
     return binding;
   }
 };
@@ -92,8 +91,7 @@ struct ImplicitBinding<Named<Provider<ProvidedDependency>, Name> > {
     typedef typename ResolvedBinding<Normalized>::BindingPtr ProvidedBindingPtr;
 
     ProvidedBindingPtr providedBinding(bindings.getBinding<Normalized>(name));
-    InjectionPtr injection(new ImplicitInjection(providedBinding));
-    BindingPtr binding(new InjectionBinding<Dependency, NoScope>(injection));
+    BindingPtr binding(new ImplicitInjection(providedBinding));
     return binding;
   }
 };

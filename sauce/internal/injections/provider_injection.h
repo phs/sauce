@@ -26,9 +26,7 @@ public:
   }
 
   typename Key<Dependency>::Ptr provide(BindingPtr binding, InjectorPtr injector) const {
-    InjectionBinding<Dependency, Scope> * raw =
-      static_cast<InjectionBinding<Dependency, Scope> *>(binding.get());
-    return this->template getHelper<Provider>(injector, raw->injection->getName())->get();
+    return this->template getHelper<Provider>(injector, binding->getName())->get();
   }
 };
 

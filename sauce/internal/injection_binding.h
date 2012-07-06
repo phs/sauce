@@ -1,9 +1,11 @@
 #ifndef SAUCE_INTERNAL_INJECTION_BINDING_H_
 #define SAUCE_INTERNAL_INJECTION_BINDING_H_
 
+#include <string>
+
 #include <sauce/injector.h>
 #include <sauce/memory.h>
-#include <sauce/internal/injections/providing_injection.h>
+#include <sauce/named.h>
 #include <sauce/internal/key.h>
 #include <sauce/internal/opaque_binding.h>
 #include <sauce/internal/resolved_binding.h>
@@ -22,11 +24,8 @@ class InjectionBinding:
 
   typedef typename Key<Dependency>::Ptr IfacePtr;
   typedef typename ResolvedBinding<Dependency>::BindingPtr BindingPtr;
-  typedef typename inj::ProvidingInjection<Dependency, Scope>::InjectionPtr InjectionPtr;
 
-public:
-  InjectionPtr injection;
-private:
+  std::string name;
 
   /**
    * The TypeId of the Scope template parameter.
@@ -40,9 +39,7 @@ private:
    *
    * The strategy used is left to derived types.
    */
-  IfacePtr provide(BindingPtr binding, InjectorPtr injector) const {
-    return injection->provide(binding, injector);
-  }
+  virtual IfacePtr provide(BindingPtr, InjectorPtr) const = 0;
 
   /**
    * Provide an Iface.
@@ -72,9 +69,7 @@ private:
    * This is Tarjan's algorithm using the call stack.  When a cycle is detected a
    * CircularDependencyException is thrown.
    */
-  void validateAcyclic(InjectorPtr injector, TypeIds & ids, std::string const name) const {
-    injection->validateAcyclic(injector, ids, name);
-  }
+  virtual void validateAcyclic(InjectorPtr, TypeIds &, std::string) const {}
 
   /**
    * Provide, but do not return an Iface.
@@ -92,29 +87,27 @@ private:
   }
 
   /**
-   * Accept the list of dynamic dependency names this binding was created with.
+   * Accept the list of dynamic dependency names this injection was created with.
    */
-  void setDynamicDependencyNames(std::vector<std::string> const & dynamicDependencyNames) {
-    injection->setDynamicDependencyNames(dynamicDependencyNames);
-  }
+  virtual void setDynamicDependencyNames(std::vector<std::string> const &) {}
 
 public:
 
-  InjectionBinding(InjectionPtr injection):
-    injection(injection) {}
+  InjectionBinding():
+    name(unnamed()) {}
 
   /**
    * The dynamic name of this binding.
    */
   std::string getName() const {
-    return injection->getName();
+    return name;
   }
 
   /**
    * Set the dynamic name of this binding.
    */
   void setName(std::string const name) {
-    injection->setName(name);
+    this->name = name;
   }
 
 };

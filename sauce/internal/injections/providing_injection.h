@@ -1,14 +1,11 @@
 #ifndef SAUCE_INTERNAL_INJECTIONS_PROVIDING_INJECTION_H_
 #define SAUCE_INTERNAL_INJECTIONS_PROVIDING_INJECTION_H_
 
-#include <string>
-
 #include <sauce/injector.h>
 #include <sauce/memory.h>
-#include <sauce/named.h>
 #include <sauce/internal/key.h>
+#include <sauce/internal/injection_binding.h>
 #include <sauce/internal/resolved_binding.h>
-#include <sauce/internal/type_id.h>
 
 namespace sauce {
 namespace internal {
@@ -18,9 +15,7 @@ namespace injections {
  * A strategy for satisfying provisions for the given interface.
  */
 template<typename Dependency_, typename Scope>
-class ProvidingInjection: public InjectorFriend {
-  std::string name;
-
+class ProvidingInjection: public InjectionBinding<Dependency_, Scope> {
 public:
 
   typedef typename Key<Dependency_>::Normalized Dependency;
@@ -29,41 +24,7 @@ public:
   typedef typename ResolvedBinding<Dependency_>::BindingPtr BindingPtr;
 
   ProvidingInjection():
-    name(unnamed()) {}
-
-  /**
-   * The dynamic name of this binding.
-   */
-  std::string getName() const {
-    return name;
-  }
-
-  /**
-   * Set the dynamic name of this binding.
-   */
-  void setName(std::string const name) {
-    this->name = name;
-  }
-
-  /**
-   * Provide an Iface.
-   *
-   * The strategy used is left to derived types.
-   */
-  virtual IfacePtr provide(BindingPtr, InjectorPtr) const = 0;
-
-  /**
-   * Establish that further dependencies do not introduce cycles with ones already accumulated.
-   *
-   * This is Tarjan's algorithm using the call stack.  When a cycle is detected a
-   * CircularDependencyException is thrown.
-   */
-  virtual void validateAcyclic(InjectorPtr, TypeIds &, std::string) const {}
-
-  /**
-   * Accept the list of dynamic dependency names this injection was created with.
-   */
-  virtual void setDynamicDependencyNames(std::vector<std::string> const &) {}
+    InjectionBinding<Dependency_, Scope>() {}
 
 };
 

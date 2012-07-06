@@ -10,7 +10,6 @@
 #include <sauce/internal/bindings.h>
 #include <sauce/internal/pending_thrower.h>
 #include <sauce/internal/opaque_binding.h>
-#include <sauce/internal/injection_binding.h>
 
 namespace sauce {
 namespace internal {
@@ -55,16 +54,12 @@ public:
 
   template<typename Scope, typename BoundInjection>
   void bind() {
-    typedef typename BoundInjection::Dependency Dependency;
-    typename BoundInjection::InjectionPtr injection(new BoundInjection());
-    pendingBinding.reset(new InjectionBinding<Dependency, Scope>(injection));
+    pendingBinding.reset(new BoundInjection());
   }
 
   template<typename Scope, typename BoundInjection>
   void bindExtra() {
-    typedef typename BoundInjection::Dependency Dependency;
-    typename BoundInjection::InjectionPtr injection(new BoundInjection());
-    OpaqueBindingPtr extra(new InjectionBinding<Dependency, Scope>(injection));
+    OpaqueBindingPtr extra(new BoundInjection());
     extraPendingBindings.push_back(extra);
   }
 
