@@ -19,8 +19,8 @@ namespace sauce {
 /**
  * Binds to a specific method on an already-provided instance.
  */
-template<typename Method>
-class SettingClause: public i::InitialClause {
+template<typename Dependency, typename Method>
+class SettingClause: public i::FinalClause<Dependency, int> {
   Method method;
 
   void onComplete() {}
@@ -35,19 +35,20 @@ public:
 /**
  * Assigns dynamic name requirements to the explicit dependencies of a binding.
  */
-class NamingClause: public i::InitialClause {
+template<typename Dependency>
+class NamingClause: public i::FinalClause<Dependency, int> {
   void onComplete() {}
 
 public:
 
-  NamingClause & naming(unsigned int position, std::string const name) {
-    bindDynamicDependencyName(position, name);
+  NamingClause<Dependency> & naming(unsigned int position, std::string const name) {
+    this->bindDynamicDependencyName(position, name);
     return *this;
   }
 
   template<typename Method>
-  SettingClause<Method> setting(Method method) {
-    return pass(SettingClause<Method>(method));
+  SettingClause<Dependency, Method> setting(Method method) {
+    return pass(SettingClause<Dependency, Method>(method));
   }
 };
 
@@ -55,20 +56,20 @@ public:
  * Binds to a specific constructor and allocator.
  */
 template<typename Dependency, typename Scope, typename Ctor, typename Allocator>
-class AllocateFromClause: public i::InitialClause {
+class AllocateFromClause: public i::FinalClause<Dependency, int> {
   void onComplete() {
-    bind<Scope>(inj::NewInjection<Dependency, Scope, Ctor, Allocator>());
+    this->template bind<Scope>(inj::NewInjection<Dependency, Scope, Ctor, Allocator>());
   }
 
 public:
 
-  NamingClause naming(unsigned int position, std::string const name) {
-    return pass(NamingClause()).naming(position, name);
+  NamingClause<Dependency> naming(unsigned int position, std::string const name) {
+    return pass(NamingClause<Dependency>()).naming(position, name);
   }
 
   template<typename Method>
-  SettingClause<Method> setting(Method method) {
-    return pass(SettingClause<Method>(method));
+  SettingClause<Dependency, Method> setting(Method method) {
+    return pass(SettingClause<Dependency, Method>(method));
   }
 };
 
@@ -76,11 +77,11 @@ public:
  * Binds to a specific constructor, allocating from the heap.
  */
 template<typename Dependency, typename Scope, typename Ctor>
-class ToClause: public i::InitialClause {
+class ToClause: public i::FinalClause<Dependency, int> {
   typedef typename i::Key<Dependency>::Iface Iface;
 
   void onComplete() {
-    bind<Scope>(inj::NewInjection<Dependency, Scope, Ctor, std::allocator<Iface> >());
+    this->template bind<Scope>(inj::NewInjection<Dependency, Scope, Ctor, std::allocator<Iface> >());
   }
 
 public:
@@ -90,13 +91,13 @@ public:
     return pass(AllocateFromClause<Dependency, Scope, Ctor, Allocator>());
   }
 
-  NamingClause naming(unsigned int position, std::string const name) {
-    return pass(NamingClause()).naming(position, name);
+  NamingClause<Dependency> naming(unsigned int position, std::string const name) {
+    return pass(NamingClause<Dependency>()).naming(position, name);
   }
 
   template<typename Method>
-  SettingClause<Method> setting(Method method) {
-    return pass(SettingClause<Method>(method));
+  SettingClause<Dependency, Method> setting(Method method) {
+    return pass(SettingClause<Dependency, Method>(method));
   }
 };
 
@@ -104,14 +105,14 @@ public:
  * Binds to a provider with a specific constructor, allocating from the heap.
  */
 template<typename Dependency, typename Scope, typename ProviderCtor>
-class ToProviderClause: public i::InitialClause {
+class ToProviderClause: public i::FinalClause<Dependency, int> {
   typedef typename i::Key<Dependency>::Iface Iface;
   typedef typename i::Key<Dependency>::Name Name;
   typedef Named<Provider<Iface>, Name> ProviderDependency;
 
   void onComplete() {
-    bindExtra<Scope>(inj::ProviderInjection<Dependency, Scope, ProviderDependency>());
-    bind<Scope>(inj::NewInjection<ProviderDependency, Scope, ProviderCtor, std::allocator<Provider<Iface> > >());
+    this->template bindExtra<Scope>(inj::ProviderInjection<Dependency, Scope, ProviderDependency>());
+    this->template bind<Scope>(inj::NewInjection<ProviderDependency, Scope, ProviderCtor, std::allocator<Provider<Iface> > >());
   }
 
 public:
@@ -121,13 +122,13 @@ public:
     return pass(AllocateFromClause<ProviderDependency, Scope, ProviderCtor, Allocator>());
   }
 
-  NamingClause naming(unsigned int position, std::string const name) {
-    return pass(NamingClause()).naming(position, name);
+  NamingClause<Dependency> naming(unsigned int position, std::string const name) {
+    return pass(NamingClause<Dependency>()).naming(position, name);
   }
 
   template<typename Method>
-  SettingClause<Method> setting(Method method) {
-    return pass(SettingClause<Method>(method));
+  SettingClause<Dependency, Method> setting(Method method) {
+    return pass(SettingClause<Dependency, Method>(method));
   }
 };
 
@@ -135,7 +136,7 @@ public:
  * Scopes the binding.
  */
 template<typename Dependency, typename Scope>
-class InClause: public i::InitialClause {
+class InClause: public i::InitialClause<Dependency> {
   typedef typename i::Key<Dependency>::Iface Iface;
 
   void onComplete() {
@@ -163,7 +164,7 @@ public:
  * using both kinds can be mixed in the same module.
  */
 template<typename Dependency>
-class NamedClause: public i::InitialClause {
+class NamedClause: public i::InitialClause<Dependency> {
   typedef typename i::Key<Dependency>::Iface Iface;
 
   void onComplete() {
@@ -194,14 +195,14 @@ class Binder;
  * A builder that creates a single binding.
  */
 template<typename Iface>
-class BindClause: public i::InitialClause {
+class BindClause: public i::InitialClause<Named<Iface, Unnamed> > {
 
   void onComplete() {
     throwLater(PartialBindingExceptionFor<Named<Iface, Unnamed> >());
   }
 
   BindClause(i::ClauseStatePtr state):
-    i::InitialClause(state) {
+    i::InitialClause<Named<Iface, Unnamed> >(state) {
     onComplete();
   }
 
@@ -215,7 +216,7 @@ public:
   }
 
   NamedClause<Named<Iface, Unnamed> > named(std::string const name) {
-    setDynamicName(name);
+    this->setDynamicName(name);
     return pass(NamedClause<Named<Iface, Unnamed> >());
   }
 

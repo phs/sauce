@@ -104,9 +104,15 @@ public:
 typedef sauce::shared_ptr<ClauseState> ClauseStatePtr;
 
 /**
- * Base class for parts of the fluent binding API.
+ * Base class for initial parts of the fluent binding API.
+ *
+ * An initial clause is what all binding sentences begin with, but do not contain enough information to yet create
+ * bindings.  When they do, a transition to a FinalClause occurs.
  */
+template<typename Dependency>
 class InitialClause {
+  friend class InitialClause<Named<typename Key<Dependency>::Iface, Unnamed> >;
+
   ClauseStatePtr state;
 
   virtual void onComplete() = 0;
@@ -117,6 +123,65 @@ protected:
     state() {}
 
   InitialClause(ClauseStatePtr state):
+    state(state) {}
+
+  template<typename Next>
+  Next pass(Next next) {
+    next.setState(state);
+    return next;
+  }
+
+  void setState(ClauseStatePtr state) {
+    state->clearException();
+    this->state = state;
+    onComplete();
+  }
+
+  template<typename Scope, typename BoundInjection>
+  void bind(BoundInjection) {
+    state->template bind<Scope, BoundInjection>();
+  }
+
+  template<typename Scope, typename BoundInjection>
+  void bindExtra(BoundInjection) {
+    state->template bindExtra<Scope, BoundInjection>();
+  }
+
+  void setDynamicName(std::string const name) {
+    state->setDynamicName(name);
+  }
+
+  void bindDynamicDependencyName(unsigned int position, std::string const name) {
+    state->bindDynamicDependencyName(position, name);
+  }
+
+  template<typename Exception>
+  void throwLater(Exception) {
+    state->template throwLater<Exception>();
+  }
+};
+
+/**
+ * Base class for final parts of the fluent binding API.
+ *
+ * A final clause is not necessarily the last in its binding sentence, but will only be followed by other final
+ * clauses.  They contain enough state to create the user's chosen bindings, but still offer the possibility of
+ * further customization.
+ */
+template<typename Dependency, typename Impl>
+class FinalClause {
+  ClauseStatePtr state;
+
+  virtual void onComplete() = 0;
+
+  friend class InitialClause<Dependency>;
+
+protected:
+
+  FinalClause():
+    state() {}
+
+  FinalClause(ClauseStatePtr state):
     state(state) {}
 
   template<typename Next>
