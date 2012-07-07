@@ -186,17 +186,8 @@ protected:
     state->template bindExtra<BoundInjection>();
   }
 
-  void setDynamicName(std::string const name) {
-    state->setDynamicName(name);
-  }
-
   void bindDynamicDependencyName(unsigned int position, std::string const name) {
     state->bindDynamicDependencyName(position, name);
-  }
-
-  template<typename Exception>
-  void throwLater(Exception) {
-    state->template throwLater<Exception>();
   }
 
 public:
