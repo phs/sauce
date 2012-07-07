@@ -37,9 +37,6 @@ struct ProviderFriend {
  */
 template<typename Dependency>
 class Provider {
-
-  typedef typename i::Key<Dependency>::Iface Iface;
-
   friend struct ::sauce::internal::ProviderFriend;
 
   sauce::weak_ptr<Provider<Dependency> > weak;
@@ -59,11 +56,12 @@ protected:
 
 public:
 
+  typedef typename i::Key<Dependency>::Iface Iface;
+
   /**
    * Provide an Iface.
    */
   virtual sauce::shared_ptr<Iface> get() = 0;
-
 };
 
 /**

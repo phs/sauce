@@ -190,12 +190,6 @@ protected:
     return next;
   }
 
-  void setState(ClauseStatePtr state) {
-    state->clearException();
-    this->state = state;
-    onComplete();
-  }
-
   template<typename BoundInjection>
   void bind(BoundInjection) {
     state->template bind<BoundInjection>();
@@ -217,6 +211,14 @@ protected:
   template<typename Exception>
   void throwLater(Exception) {
     state->template throwLater<Exception>();
+  }
+
+public:
+
+  void setState(ClauseStatePtr state) {
+    state->clearException();
+    this->state = state;
+    onComplete();
   }
 };
 

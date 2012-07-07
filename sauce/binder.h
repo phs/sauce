@@ -104,11 +104,11 @@ public:
 /**
  * Binds to a provider with a specific constructor, allocating from the heap.
  */
-template<typename Dependency, typename Scope, typename ProviderCtor>
-class ToProviderClause: public i::FinalClause<Dependency, int> {
-  typedef typename i::Key<Dependency>::Iface Iface;
-  typedef typename i::Key<Dependency>::Name Name;
-  typedef Named<Provider<Iface>, Name> ProviderDependency;
+template<typename ProviderDependency, typename Scope, typename ProviderCtor>
+class ToProviderClause: public i::FinalClause<ProviderDependency, int> {
+  typedef typename i::Key<ProviderDependency>::Iface::Iface Iface;
+  typedef typename i::Key<ProviderDependency>::Name Name;
+  typedef Named<Iface, Name> Dependency;
 
   void onComplete() {
     this->bindExtra(inj::ProviderInjection<Dependency, Scope, ProviderDependency>());
@@ -122,13 +122,13 @@ public:
     return pass(AllocateFromClause<ProviderDependency, Scope, ProviderCtor, Allocator>());
   }
 
-  NamingClause<Dependency> naming(unsigned int position, std::string const name) {
-    return pass(NamingClause<Dependency>()).naming(position, name);
+  NamingClause<ProviderDependency> naming(unsigned int position, std::string const name) {
+    return pass(NamingClause<ProviderDependency>()).naming(position, name);
   }
 
   template<typename Method>
-  SettingClause<Dependency, Method> setting(Method method) {
-    return pass(SettingClause<Dependency, Method>(method));
+  SettingClause<ProviderDependency, Method> setting(Method method) {
+    return pass(SettingClause<ProviderDependency, Method>(method));
   }
 };
 
@@ -138,6 +138,8 @@ public:
 template<typename Dependency, typename Scope>
 class InClause: public i::InitialClause<Dependency> {
   typedef typename i::Key<Dependency>::Iface Iface;
+  typedef typename i::Key<Dependency>::Name Name;
+  typedef Named<Provider<Iface>, Name> ProviderDependency;
 
   void onComplete() {
     throwLater(PartialBindingExceptionFor<Dependency>());
@@ -151,8 +153,8 @@ public:
   }
 
   template<typename ProviderCtor>
-  ToProviderClause<Dependency, Scope, ProviderCtor> toProvider() {
-    return pass(ToProviderClause<Dependency, Scope, ProviderCtor>());
+  ToProviderClause<ProviderDependency, Scope, ProviderCtor> toProvider() {
+    return pass(ToProviderClause<ProviderDependency, Scope, ProviderCtor>());
   }
 };
 
@@ -166,6 +168,8 @@ public:
 template<typename Dependency>
 class NamedClause: public i::InitialClause<Dependency> {
   typedef typename i::Key<Dependency>::Iface Iface;
+  typedef typename i::Key<Dependency>::Name Name;
+  typedef Named<Provider<Iface>, Name> ProviderDependency;
 
   void onComplete() {
     throwLater(PartialBindingExceptionFor<Dependency>());
@@ -184,8 +188,8 @@ public:
   }
 
   template<typename ProviderCtor>
-  ToProviderClause<Dependency, NoScope, ProviderCtor> toProvider() {
-    return pass(ToProviderClause<Dependency, NoScope, ProviderCtor>());
+  ToProviderClause<ProviderDependency, NoScope, ProviderCtor> toProvider() {
+    return pass(ToProviderClause<ProviderDependency, NoScope, ProviderCtor>());
   }
 };
 
@@ -196,6 +200,7 @@ class Binder;
  */
 template<typename Iface>
 class BindClause: public i::InitialClause<Named<Iface, Unnamed> > {
+  typedef Named<Provider<Iface>, Unnamed> ProviderDependency;
 
   void onComplete() {
     throwLater(PartialBindingExceptionFor<Named<Iface, Unnamed> >());
@@ -231,8 +236,8 @@ public:
   }
 
   template<typename ProviderCtor>
-  ToProviderClause<Named<Iface, Unnamed>, NoScope, ProviderCtor> toProvider() {
-    return pass(ToProviderClause<Named<Iface, Unnamed>, NoScope, ProviderCtor>());
+  ToProviderClause<ProviderDependency, NoScope, ProviderCtor> toProvider() {
+    return pass(ToProviderClause<ProviderDependency, NoScope, ProviderCtor>());
   }
 };
 
