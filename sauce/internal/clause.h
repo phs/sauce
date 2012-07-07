@@ -137,22 +137,8 @@ protected:
     onComplete();
   }
 
-  template<typename BoundInjection>
-  void bind(BoundInjection) {
-    state->template bind<BoundInjection>();
-  }
-
-  template<typename BoundInjection>
-  void bindExtra(BoundInjection) {
-    state->template bindExtra<BoundInjection>();
-  }
-
   void setDynamicName(std::string const name) {
     state->setDynamicName(name);
-  }
-
-  void bindDynamicDependencyName(unsigned int position, std::string const name) {
-    state->bindDynamicDependencyName(position, name);
   }
 
   template<typename Exception>
