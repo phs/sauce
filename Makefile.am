@@ -126,7 +126,8 @@ EXTRA_DIST += \
   test/allocate_with.h \
   test/allocation_test.cc \
   test/binding_test.cc \
-  test/scope_test.cc
+  test/scope_test.cc \
+  test/tutorial_test.cc
 
 TESTS += unittests
 check_PROGRAMS += unittests
@@ -149,7 +150,8 @@ endif GCOV_ENABLED
 unittests_SOURCES = \
   test/allocation_test.cc \
   test/binding_test.cc \
-  test/scope_test.cc
+  test/scope_test.cc \
+  test/tutorial_test.cc
 
 unittests_LDADD = \
   $(builddir)/libunittest.la
