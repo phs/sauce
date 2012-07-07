@@ -19,8 +19,8 @@ namespace sauce {
 /**
  * Binds to a specific method on an already-provided instance.
  */
-template<typename Dependency, typename Method>
-class SettingClause: public i::FinalClause<Dependency, int> {
+template<typename Dependency, typename Scope, typename Ctor, typename Allocator, typename Method>
+class SettingClause: public i::FinalClause<Dependency, Scope, Ctor, Allocator> {
   Method method;
 
   void onComplete() {}
@@ -35,20 +35,20 @@ public:
 /**
  * Assigns dynamic name requirements to the explicit dependencies of a binding.
  */
-template<typename Dependency>
-class NamingClause: public i::FinalClause<Dependency, int> {
+template<typename Dependency, typename Scope, typename Ctor, typename Allocator>
+class NamingClause: public i::FinalClause<Dependency, Scope, Ctor, Allocator> {
   void onComplete() {}
 
 public:
 
-  NamingClause<Dependency> & naming(unsigned int position, std::string const name) {
+  NamingClause<Dependency, Scope, Ctor, Allocator> & naming(unsigned int position, std::string const name) {
     this->bindDynamicDependencyName(position, name);
     return *this;
   }
 
   template<typename Method>
-  SettingClause<Dependency, Method> setting(Method method) {
-    return pass(SettingClause<Dependency, Method>(method));
+  SettingClause<Dependency, Scope, Ctor, Allocator, Method> setting(Method method) {
+    return pass(SettingClause<Dependency, Scope, Ctor, Allocator, Method>(method));
   }
 };
 
@@ -56,20 +56,20 @@ public:
  * Binds to a specific constructor and allocator.
  */
 template<typename Dependency, typename Scope, typename Ctor, typename Allocator>
-class AllocateFromClause: public i::FinalClause<Dependency, int> {
+class AllocateFromClause: public i::FinalClause<Dependency, Scope, Ctor, Allocator> {
   void onComplete() {
     this->bind(inj::NewInjection<Dependency, Scope, Ctor, Allocator>());
   }
 
 public:
 
-  NamingClause<Dependency> naming(unsigned int position, std::string const name) {
-    return pass(NamingClause<Dependency>()).naming(position, name);
+  NamingClause<Dependency, Scope, Ctor, Allocator> naming(unsigned int position, std::string const name) {
+    return pass(NamingClause<Dependency, Scope, Ctor, Allocator>()).naming(position, name);
   }
 
   template<typename Method>
-  SettingClause<Dependency, Method> setting(Method method) {
-    return pass(SettingClause<Dependency, Method>(method));
+  SettingClause<Dependency, Scope, Ctor, Allocator, Method> setting(Method method) {
+    return pass(SettingClause<Dependency, Scope, Ctor, Allocator, Method>(method));
   }
 };
 
@@ -77,11 +77,11 @@ public:
  * Binds to a specific constructor, allocating from the heap.
  */
 template<typename Dependency, typename Scope, typename Ctor>
-class ToClause: public i::FinalClause<Dependency, int> {
+class ToClause: public i::FinalClause<Dependency, Scope, Ctor, std::allocator<int> > {
   typedef typename i::Key<Dependency>::Iface Iface;
 
   void onComplete() {
-    this->bind(inj::NewInjection<Dependency, Scope, Ctor, std::allocator<Iface> >());
+    this->bind(inj::NewInjection<Dependency, Scope, Ctor, std::allocator<int> >());
   }
 
 public:
@@ -91,13 +91,13 @@ public:
     return pass(AllocateFromClause<Dependency, Scope, Ctor, Allocator>());
   }
 
-  NamingClause<Dependency> naming(unsigned int position, std::string const name) {
-    return pass(NamingClause<Dependency>()).naming(position, name);
+  NamingClause<Dependency, Scope, Ctor, std::allocator<int> > naming(unsigned int position, std::string const name) {
+    return pass(NamingClause<Dependency, Scope, Ctor, std::allocator<int> >()).naming(position, name);
   }
 
   template<typename Method>
-  SettingClause<Dependency, Method> setting(Method method) {
-    return pass(SettingClause<Dependency, Method>(method));
+  SettingClause<Dependency, Scope, Ctor, std::allocator<int>, Method> setting(Method method) {
+    return pass(SettingClause<Dependency, Scope, Ctor, std::allocator<int>, Method>(method));
   }
 };
 
@@ -105,14 +105,15 @@ public:
  * Binds to a provider with a specific constructor, allocating from the heap.
  */
 template<typename ProviderDependency, typename Scope, typename ProviderCtor>
-class ToProviderClause: public i::FinalClause<ProviderDependency, int> {
+class ToProviderClause: public i::FinalClause<ProviderDependency, Scope, ProviderCtor, std::allocator<int> > {
+
   typedef typename i::Key<ProviderDependency>::Iface::Iface Iface;
   typedef typename i::Key<ProviderDependency>::Name Name;
   typedef Named<Iface, Name> Dependency;
 
   void onComplete() {
     this->bindExtra(inj::ProviderInjection<Dependency, Scope, ProviderDependency>());
-    this->bind(inj::NewInjection<ProviderDependency, Scope, ProviderCtor, std::allocator<Provider<Iface> > >());
+    this->bind(inj::NewInjection<ProviderDependency, Scope, ProviderCtor, std::allocator<int> >());
   }
 
 public:
@@ -122,13 +123,14 @@ public:
     return pass(AllocateFromClause<ProviderDependency, Scope, ProviderCtor, Allocator>());
   }
 
-  NamingClause<ProviderDependency> naming(unsigned int position, std::string const name) {
-    return pass(NamingClause<ProviderDependency>()).naming(position, name);
+  NamingClause<ProviderDependency, Scope, ProviderCtor, std::allocator<int> > naming(
+    unsigned int position, std::string const name) {
+    return pass(NamingClause<ProviderDependency, Scope, ProviderCtor, std::allocator<int> >()).naming(position, name);
   }
 
   template<typename Method>
-  SettingClause<ProviderDependency, Method> setting(Method method) {
-    return pass(SettingClause<ProviderDependency, Method>(method));
+  SettingClause<ProviderDependency, Scope, ProviderCtor, std::allocator<int>, Method> setting(Method method) {
+    return pass(SettingClause<ProviderDependency, Scope, ProviderCtor, std::allocator<int>, Method>(method));
   }
 };
 

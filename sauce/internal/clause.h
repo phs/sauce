@@ -154,7 +154,7 @@ protected:
  * clauses.  They contain enough state to create the user's chosen bindings, but still offer the possibility of
  * further customization.
  */
-template<typename Dependency, typename Impl>
+template<typename Dependency, typename Scope, typename Ctor, typename Allocator>
 class FinalClause {
   ClauseStatePtr state;
 
