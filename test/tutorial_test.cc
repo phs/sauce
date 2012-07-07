@@ -23,11 +23,76 @@ namespace test {
  *
  * Since the point of the technique is to keep components decoupled and unaware of each other, a real application would
  * likely spread its components out across many headers and compilation units.  This poses no problem for sauce, but
- * for clarity everything in this example is contained in this suite.  Comments are included where suggested file
- * breaks might occur.
+ * for clarity everything in this example is contained in this suite.  Comments indicate where suggested file breaks
+ * might occur.
  */
 
-TEST(TutorialTest, shouldExist) {
+// ********************************************************************************************************************
+// orm.h
+
+/**
+ * This is not part of the pizza application proper, but is a library used by the application author to manage access
+ * to the database.  It does so by materializing rows as application objects in memory, hiding details (like SQL) from
+ * the application author.
+ */
+
+// ********************************************************************************************************************
+// routes.h
+
+/**
+ * This too is a library used by the application author, now to declare how incoming requests are mapped to the
+ * controllers that serve them.
+ */
+
+// ********************************************************************************************************************
+// clock.h
+
+/**
+ * This library just exposes the local clock, allowing the application author to sample timestamps.
+ */
+
+// ********************************************************************************************************************
+// order_model.h
+
+/**
+ * A pizza order being processed.
+ */
+
+// ********************************************************************************************************************
+// place_controller.h
+
+/**
+ * Handles requests to place an order.
+ */
+
+// ********************************************************************************************************************
+// status_controller.h
+
+/**
+ * Handles requests regarding an order's status.
+ */
+
+// ********************************************************************************************************************
+// place_controller_test.cc
+
+/**
+ * The unit test suite for PlaceController, demonstrating how to inject mocks or stubs.
+ */
+
+// ********************************************************************************************************************
+// production_module.cc
+
+/**
+ * The sauce module, written by the application author, that specifies the bindings used when running in production.
+ */
+
+// ********************************************************************************************************************
+// main.cc
+
+/**
+ * The entry point of the application, and where sauce injects dependencies.
+ */
+TEST(TutorialTest, main) { // Let's pretend this is main()
   ASSERT_TRUE(true);
 }
 
