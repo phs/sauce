@@ -9,6 +9,7 @@
 #include <sauce/memory.h>
 #include <sauce/named.h>
 #include <sauce/internal/bindings.h>
+#include <sauce/internal/injections/all.h>
 #include <sauce/internal/pending_thrower.h>
 #include <sauce/internal/opaque_binding.h>
 
@@ -176,8 +177,8 @@ protected:
     return next;
   }
 
-  template<typename BoundInjection>
-  void bind(BoundInjection) {
+  void bind() {
+    typedef inj::NewInjection<Dependency, Scope, Ctor, Allocator> BoundInjection;
     state->template bind<BoundInjection>();
   }
 

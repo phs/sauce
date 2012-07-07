@@ -58,7 +58,7 @@ public:
 template<typename Dependency, typename Scope, typename Ctor, typename Allocator>
 class AllocateFromClause: public i::FinalClause<Dependency, Scope, Ctor, Allocator> {
   void onComplete() {
-    this->bind(inj::NewInjection<Dependency, Scope, Ctor, Allocator>());
+    this->bind();
   }
 
 public:
@@ -81,7 +81,7 @@ class ToClause: public i::FinalClause<Dependency, Scope, Ctor, std::allocator<in
   typedef typename i::Key<Dependency>::Iface Iface;
 
   void onComplete() {
-    this->bind(inj::NewInjection<Dependency, Scope, Ctor, std::allocator<int> >());
+    this->bind();
   }
 
 public:
@@ -113,7 +113,7 @@ class ToProviderClause: public i::FinalClause<ProviderDependency, Scope, Provide
 
   void onComplete() {
     this->bindExtra(inj::ProviderInjection<Dependency, Scope, ProviderDependency>());
-    this->bind(inj::NewInjection<ProviderDependency, Scope, ProviderCtor, std::allocator<int> >());
+    this->bind();
   }
 
 public:
