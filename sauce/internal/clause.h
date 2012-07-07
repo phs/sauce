@@ -116,9 +116,11 @@ class InitialClause {
 
   ClauseStatePtr state;
 
-  virtual void onComplete() = 0;
-
 protected:
+
+  void onComplete() {
+    throwLater(PartialBindingExceptionFor<Dependency>());
+  }
 
   InitialClause():
     state() {}

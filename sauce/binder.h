@@ -143,10 +143,6 @@ class InClause: public i::InitialClause<Dependency> {
   typedef typename i::Key<Dependency>::Name Name;
   typedef Named<Provider<Iface>, Name> ProviderDependency;
 
-  void onComplete() {
-    throwLater(PartialBindingExceptionFor<Dependency>());
-  }
-
 public:
 
   template<typename Ctor>
@@ -172,10 +168,6 @@ class NamedClause: public i::InitialClause<Dependency> {
   typedef typename i::Key<Dependency>::Iface Iface;
   typedef typename i::Key<Dependency>::Name Name;
   typedef Named<Provider<Iface>, Name> ProviderDependency;
-
-  void onComplete() {
-    throwLater(PartialBindingExceptionFor<Dependency>());
-  }
 
 public:
 
@@ -204,13 +196,9 @@ template<typename Iface>
 class BindClause: public i::InitialClause<Named<Iface, Unnamed> > {
   typedef Named<Provider<Iface>, Unnamed> ProviderDependency;
 
-  void onComplete() {
-    throwLater(PartialBindingExceptionFor<Named<Iface, Unnamed> >());
-  }
-
   BindClause(i::ClauseStatePtr state):
     i::InitialClause<Named<Iface, Unnamed> >(state) {
-    onComplete();
+    this->onComplete();
   }
 
   friend class Binder;
