@@ -14,10 +14,8 @@ namespace test {
  * use, the focus here is on clarity and documentation.
  *
  * Suppose we are creating a web application allowing a Mom & Pop pizza parlour to accept orders online.  Customers can
- * choose toppings, sauce (ha!) and crust, specify take-out or delivery (giving an address as needed) and later inspect
- * the progress of their order.  An employee at the store uses a similar interface to declare when an order has
- * started, left for delivery, etc.  This application runs in a three-tier architecture of a web server backed by app
- * processes talking to a single relational database.
+ * place orders and later inspect order status.  This application runs in a three-tier architecture of a web server
+ * backed by app processes talking to a single relational database.
  *
  * Even in this simple application there is complexity to manage, which can be addressed by following the MVC pattern.
  * Vanilla MVC articulates a useful separation of concerns and wraps each in an object.  However it is silent about how
