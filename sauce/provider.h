@@ -32,6 +32,8 @@ struct ProviderFriend {
 
 /**
  * An interface for including custom factories in an Injector.
+ *
+ * TODO: It would really be great if this could be reduced to a template concept..
  */
 template<typename Dependency>
 class Provider {

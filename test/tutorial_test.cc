@@ -1,5 +1,7 @@
+#include <map>
 #include <string>
 #include <utility>
+#include <vector>
 
 #include <gtest/gtest.h>
 
@@ -33,23 +35,148 @@ namespace test {
 
 /**
  * This is not part of the pizza application proper, but is a library used by the application author to manage access
- * to the database.  It does so by materializing rows as application objects in memory, hiding details (like SQL) from
- * the application author.
+ * to the database.
  */
+
+using sauce::AbstractProvider;
+
+typedef std::vector<std::map<std::string, std::string> > ResultSet;
+
+/**
+ * An interface to a SQL store.
+ */
+struct Database {
+  virtual ResultSet query(std::string) = 0;
+  virtual bool mutate(std::string) = 0;
+};
+
+typedef std::vector<std::string> ValidationErrors;
+
+/**
+ * Parent type of ORM-managed models.
+ */
+struct Model {
+  bool validate(ValidationErrors &) const { return true; }
+};
+
+/**
+ * A persisted collection of models.
+ *
+ * Notice it depends on having access to a Database, which it received by injection.  Typically the ORM would have its
+ * own way to communicate this, but I might as well show some things off.
+ */
+template<typename ModelType>
+struct Table {
+  typedef typename ModelType::Key Key;
+
+  sauce::shared_ptr<Database> database;
+
+  /**
+   * Dependencies injected by sauce are always passes as smart pointers.  The template sauce::shared_ptr is an alias
+   * for one of the standard shared_ptr implementations.
+   */
+  Table(sauce::shared_ptr<Database> database):
+    database(database) {}
+
+  bool create(Key & key, ModelType const & model) {
+    if (database->mutate("INSERT ...")) {
+      key = 17; // = fetchPrimaryKey(); /* etc */
+      return true;
+    } else {
+      return false;
+    }
+  }
+
+  ModelType read(Key const) {}
+  bool update(Key const, ModelType const &) { return true; }
+  bool destroy(Key const) { return true; }
+};
+
+typedef std::string ConnectionURI;
+
+/**
+ * A Database exposed over a TCP connection.
+ */
+struct RemoteDatabase: public Database {
+  RemoteDatabase(ConnectionURI) {}
+  ResultSet query(std::string) { return ResultSet(); }
+  bool mutate(std::string) { return true; }
+};
+
+/**
+ * A provider for creating (connections to) databases.
+ *
+ * Providers are factories that produce instances of the templated type (Database here.)  The application author can
+ * create them and subsequently declare them to sauce to use custom creation logic.
+ *
+ * Once this provider is bound in a module (below), whenever sauce needs a Database (perhaps while constructing a Table
+ * like above) it will ask this class.
+ *
+ * AbstractProvider is a convenience class the application author can derive from to make a typical provider easily.
+ * The provide() and dispose() methods create and destroy raw interface pointers in whatever way the application author
+ * sees fit.  Sauce will ensure (by a smart pointer deleter) that raw pointers returned by provide() are eventually
+ * passed to dispose on clean up.
+ *
+ * There is a simpler Provider<Iface> interface one may extend from as well.  It doesn't supply smart pointer deleter
+ * semantics, but gives the application developer more freedom.
+ */
+class RemoteDatabaseProvider: public AbstractProvider<Database> {
+  /**
+   * Provide a naked Database pointer, doing whatever initialization that may be necessary.
+   */
+  Database * provide() {
+    ConnectionURI uri = "mysql://..."; // = config.getConnectionURI();
+    return new RemoteDatabase(uri);
+  }
+
+  /**
+   * Dispose of a Database pointer returned by provide().
+   */
+  void dispose(Database * database) {
+    RemoteDatabase * remoteDatabase = static_cast<RemoteDatabase *>(database);
+    // mysqlCloseConnection(remoteDatabase->socket);
+    delete remoteDatabase;
+  }
+};
+
+typedef std::string Filename;
+
+/**
+ * A Database exposed as a flat file.
+ */
+struct FlatFileDatabase: public Database {
+  FlatFileDatabase(Filename) {}
+  ResultSet query(std::string) { return ResultSet(); }
+  bool mutate(std::string) { return true; }
+};
+
+/**
+ * Another Database provider, this time for flat file dbs.
+ *
+ * We'll use this to demonstrate multiple bindings for the same interface.
+ */
+class FlatFileDatabaseProvider: public AbstractProvider<Database> {
+  Database * provide() {
+    return new FlatFileDatabase("sqlite://...");
+  }
+
+  void dispose(Database * database) {
+    delete database;
+  }
+};
 
 // ********************************************************************************************************************
 // web.h
 
-using sauce::Injector;
-using sauce::AbstractProvider;
-using sauce::Provider;
-
 /**
- * This is a library to supplying url routing, controller-related interfaces and Application to tie it together.
+ * This is a library to supplying url routing, controller-related interfaces and an Application to tie it together.
  *
  * This example uses sauce also as a type registry for controllers, as a way of showing off implicit injector injection
  * and the dynamic name feature.
  */
+
+using sauce::Injector;
+using sauce::Provider;
 
 // Have some interfaces.
 struct Request {};
@@ -78,8 +205,8 @@ struct Router {
    * Accept a Request and produce a Controller suitable to serve it.
    */
   sauce::shared_ptr<Controller> route(sauce::shared_ptr<Request>) {
-    // Without writing an actual router, let's just pretend the first matching RequestPattern is mapped to "place".
-    std::string selectedController = "place"; // = firstMatch(request);
+    // Without writing an actual router, let's just pretend the first matching RequestPattern is mapped to "status".
+    std::string selectedController = "status"; // = firstMatch(request);
 
     /**
      * We now have the task of taking a (essentially arbitrary) string and producing the controller it names.  Sauce
@@ -192,6 +319,13 @@ struct MyRouter: public Router {
 /**
  * A pizza order being processed.
  */
+struct Order: public Model {
+  typedef int Key;
+
+  std::string getStatus() {
+    return "Mmm, cheesy!";
+  }
+};
 
 // ********************************************************************************************************************
 // controllers.h
@@ -207,6 +341,11 @@ struct PlaceController: public Controller {
  * Handles requests regarding an order's status.
  */
 struct StatusController: public Controller {
+  // TODO: why can't I inject Table<Order> ?
+  // sauce::shared_ptr<Table<Order> > orders;
+  // StatusController(sauce::shared_ptr<Table<Order> > orders):
+  //   orders(orders) {}
+
   void serve(sauce::shared_ptr<Request>, sauce::shared_ptr<Response>) {}
 };
 
@@ -249,10 +388,15 @@ void MockModule(Binder & binder) {
 }
 
 // ********************************************************************************************************************
-// production_module.cc
+// modules.cc
 
 using sauce::AbstractModule;
 using sauce::Provider;
+
+/**
+ * A type tag used as a static name, see below.
+ */
+struct Local {};
 
 /**
  * The sauce module, written by the application author, that specifies the bindings used when running in production.
@@ -282,19 +426,37 @@ class ProductionModule: public AbstractModule {
     bind<Router>().to<MyRouter(Injector)>();
 
     /**
+     * Here we bind a user-supplied provider; notice the toProvider<>() call instead of to<>().
+     *
+     * This also implicitly binds Provider<Database> to RemoteDatabaseProvider; requests for such a provider will be
+     * satisified with RemoteDatabaseProvider.
+     */
+    bind<Database>().toProvider<RemoteDatabaseProvider()>();
+
+    /**
+     * Bind another provider to the Database interface.
+     *
      * Bindings can be named.  The same interface can be bound multiple times, so long as the bindings have different
      * names.  When requesting an injection, either by Injector::get or as a dependency of another binding, a name can
      * be specified to select amongst the alternative bindings.
      *
-     * Names come in two flavors.  Dynamic names are opaque standard strings, where static names are type decorators:
-     * instead of "bind<Controller>()" one says "bind<Named<Controller, ArbitraryTypeTag> >()".
+     * Note that the previous binding wasn't given a name: it's effective name is sauce::Unnamed.  Likewise bindings
+     * given no dynamic name (see below) use the string returned by sauce::unnamed().
      *
+     * Any given binding can have either a static name or a dynamic one, but not both.  Bindings sharing a single
+     * interface can mix and match amongst themselves as they please (but this may get confusing.)
+     */
+    bind<Database>().named<Local>().toProvider<FlatFileDatabaseProvider()>();
+
+    /**
      * Bind the two controllers under dynamic names (see Router above for an example of selecting between them.)
      */
+    // TODO: would be nice if "to<PlaceController>()" was equivalent to "to<PlaceController()>()"..
     bind<Controller>().named("place").to<PlaceController()>();
-
-    // TODO: would be nice if "to<StatusController>()" was equivalent to "to<StatusController()>()"..
     bind<Controller>().named("status").to<StatusController()>();
+    // TODO: bind<Controller>().named("status").to<StatusController(Table<Order>)>();
+
+    bind<Table<Order> >().to<Table<Order>(Database &)>();
   }
 };
 
