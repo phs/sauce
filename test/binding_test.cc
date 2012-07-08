@@ -287,6 +287,20 @@ TEST(BindingTest, shouldProvidedDynamicallyNamedDependenciesAcrossModules) {
   EXPECT_EQ("Meow", (injector->get<Animal>("sylvester")->says()));
 }
 
+void DynamicallyNamedBindingWithADependencyModule(Binder & binder) {
+  binder.bind<Animal>().to<Bird()>();
+  binder.bind<BirdCage>().named("golden").to<BirdCage(Animal &)>();
+}
+
+TEST(BindingTest, shouldProvideDynamicallyNamedRequestsThatHaveDependencies) {
+  Modules modules;
+  modules.add(&DynamicallyNamedBindingWithADependencyModule);
+  sauce::shared_ptr<Injector> injector(modules.createInjector());
+
+  // This does *not* throw UnboundException
+  // injector->get<BirdCage>("golden"); // TODO
+}
+
 void IncompleteNamedModule(Binder & binder) {
   binder.bind<IncompletelyBound>().named<LieutenantShinysides>() /* to ...? */;
 }
