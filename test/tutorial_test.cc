@@ -88,7 +88,7 @@ struct Request {};
 struct Response {};
 
 struct Controller {
-  virtual void serve(Request, Response) = 0;
+  virtual void serve(sauce::shared_ptr<Request>, sauce::shared_ptr<Response>) = 0;
 };
 
 typedef std::string RequestPattern;
@@ -109,7 +109,7 @@ struct Router {
   /**
    * Accept a Request and produce a Controller suitable to serve it.
    */
-  sauce::shared_ptr<Controller> route(Request) {
+  sauce::shared_ptr<Controller> route(sauce::shared_ptr<Request>) {
     // Without writing an actual router, let's just pretend the first matching RequestPattern is mapped to "place".
     std::string selectedController = "place"; // = firstMatch(request);
 
@@ -147,6 +147,7 @@ struct Acceptor {
  */
 struct FCGIAcceptor: public Acceptor {
   RequestResponsePair accept() {
+    // fcgiAccept(...);
     sauce::shared_ptr<Request> request(new Request());
     sauce::shared_ptr<Response> response(new Response());
     return std::make_pair(request, response);
@@ -179,7 +180,33 @@ class FCGIAcceptorProvider: public AbstractProvider<Acceptor> {
   }
 };
 
-class Application {};
+/**
+ * An application encapsulates the request cycle of single-threaded app worker.
+ */
+struct Application {
+  sauce::shared_ptr<Acceptor> acceptor;
+  sauce::shared_ptr<Router> router;
+
+  Application(sauce::shared_ptr<Acceptor> acceptor,
+              sauce::shared_ptr<Router> router):
+    acceptor(acceptor),
+    router(router) {}
+
+  void run() {
+    while (true) {
+      serveOne();
+    }
+  }
+
+  void serveOne() {
+    RequestResponsePair requestResponse = acceptor->accept();
+    sauce::shared_ptr<Request> request = requestResponse.first;
+    sauce::shared_ptr<Response> response = requestResponse.second;
+
+    sauce::shared_ptr<Controller> controller = router->route(request);
+    controller->serve(request, response);
+  }
+};
 
 // ********************************************************************************************************************
 // routes.h
@@ -213,14 +240,14 @@ struct MyRouter: public Router {
  * Handles requests to place an order.
  */
 struct PlaceController: public Controller {
-  void serve(Request, Response) {}
+  void serve(sauce::shared_ptr<Request>, sauce::shared_ptr<Response>) {}
 };
 
 /**
  * Handles requests regarding an order's status.
  */
 struct StatusController: public Controller {
-  void serve(Request, Response) {}
+  void serve(sauce::shared_ptr<Request>, sauce::shared_ptr<Response>) {}
 };
 
 // ********************************************************************************************************************
@@ -323,7 +350,25 @@ class ProductionModule: public AbstractModule {
  * Modules can work cooperatively, and can be sourced from different compilation units (or dlsym'd libraries, etc.)
  */
 class FrameworkModule: public AbstractModule {
-  void configure() {}
+  void configure() {
+    /**
+     * Here's an example of binding a provider.
+     */
+    bind<Acceptor>().toProvider<FCGIAcceptorProvider()>();
+
+    /**
+     * It's not required to have a separate interface; here we bind Application to its own constructor.
+     *
+     * Notice that the injected types are references.  This side-steps a problem with how sauce abuses the type system.
+     * Specifically, since Acceptor and Router each contain pure-virtual methods, they can't be passed by value.  This
+     * implies it's illegal to even formulate a function type that would do so.
+     *
+     * Note sauce never really was going to pass by value: it uses smart pointers for everything.  The value parameter
+     * syntax just happens to be less cluttered.  When this results in an illegal function type, a reference may be
+     * used instead; sauce will just strip it off (and smart pointers to references don't make sense anyway.)
+     */
+    bind<Application>().to<Application(Acceptor &, Router &)>();
+  }
 };
 
 // ********************************************************************************************************************
@@ -345,12 +390,18 @@ TEST(TutorialTest, main) { // Let's pretend this is main()
   modules.add(FrameworkModule());
 
   /**
-   * After desired modules are added, use createInjector() to get an injector itself.  It is returned as a
-   * sauce::shared_ptr, which is just an alias for std::shared_ptr (though std::tr1 and boost smart pointers can be
-   * used, if the SAUCE_STD_TR1_SMART_PTR or SAUCE_BOOST_SMART_PTR preprocessor symbols are defined.)
+   * After desired modules are added, use createInjector() to get an injector itself.
    *
+   * It is returned as a sauce::shared_ptr, which is just an alias for std::shared_ptr (though std::tr1 and boost smart
+   * pointers can be used, if the SAUCE_STD_TR1_SMART_PTR or SAUCE_BOOST_SMART_PTR preprocessor symbols are defined.)
    */
   sauce::shared_ptr<Injector> injector = modules.createInjector();
+
+  /**
+   * We're now free to ask the injector to supply various interfaces.  Let's create an Application and serve a request.
+   */
+  sauce::shared_ptr<Application> application = injector->get<Application>();
+  application->serveOne();
 
   ASSERT_TRUE(true);
 }
