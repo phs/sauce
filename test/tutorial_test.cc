@@ -74,6 +74,7 @@ struct SystemClock: public Clock {
 // web.h
 
 using sauce::Injector;
+using sauce::AbstractProvider;
 
 /**
  * This is a library to supplying url routing, controller-related interfaces and Application to tie it together.
@@ -126,6 +127,55 @@ struct Router {
      * Here, we use it to select the desired controller; the name (which is always a std::string) is passed to get().
      */
     return injector->get<Controller>(selectedController);
+  }
+};
+
+typedef std::pair<sauce::shared_ptr<Request>, sauce::shared_ptr<Response> > RequestResponsePair;
+
+/**
+ * Receives new request, response pairs from the web server.
+ */
+struct Acceptor {
+  /**
+   * Block until a request to process arrives.
+   */
+  virtual RequestResponsePair accept() = 0;
+};
+
+/**
+ * An Acceptor supposedly driven by a local FCGI environment.
+ */
+struct FCGIAcceptor: public Acceptor {
+  RequestResponsePair accept() {
+    sauce::shared_ptr<Request> request(new Request());
+    sauce::shared_ptr<Response> response(new Response());
+    return std::make_pair(request, response);
+  }
+};
+
+/**
+ * A Provider for FCGIAcceptors.
+ *
+ * Since a FCGIAcceptor (supposedly) an adapter into a foreign toolkit, it needs to be initialized in a strange way
+ * (specifically, the FCGI toolkit's way.)  Still, we'd like to use FCGIAcceptors when satisfying the dependencies of
+ * other types.  Sauce answers this need with providers, which are user-supplied factories for the bound interface.
+ *
+ * There are two ways to make a provider.  One can extend the Provider<Iface> interface directly and supply a
+ * sauce::shared_ptr<Iface> get() method, or one can extend AbstractProvider.
+ *
+ * AbstractProvider implements get in terms of a user-supplied Iface * provide() method.  The added convenience comes
+ * as a custom smart pointer deleter, which passes the raw pointer along to a user-supplied dispose(Iface *).
+ */
+class FCGIAcceptorProvider: public AbstractProvider<Acceptor> {
+  Acceptor * provide() {
+    Acceptor * acceptor = new FCGIAcceptor();
+    // fcgiInitialize(acceptor);
+    return acceptor;
+  }
+
+  void dispose(Acceptor * acceptor) {
+    // fcgiDestroy(acceptor);
+    delete acceptor;
   }
 };
 
