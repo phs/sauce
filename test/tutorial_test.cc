@@ -40,37 +40,6 @@ namespace test {
  */
 
 // ********************************************************************************************************************
-// clock.h
-
-/**
- * This is a library that exposes the local clock, allowing the application author to sample timestamps.
- *
- * Mocking a clock for testing is a typical chore for temporal code; we will demonstrate doing this with sauce below.
- */
-
-typedef int Timestamp;
-
-struct Clock {
-  virtual Timestamp timestamp() = 0;
-};
-
-/**
- * "Real" clock implementation.
- *
- * Returned timestamps are taken from a counter that is bumped on each call to suggest an actual clock.
- */
-struct SystemClock: public Clock {
-  Timestamp currentTime;
-
-  SystemClock():
-    currentTime(0) {}
-
-  Timestamp timestamp() {
-    return currentTime++;
-  }
-};
-
-// ********************************************************************************************************************
 // web.h
 
 using sauce::Injector;
@@ -252,12 +221,6 @@ struct StatusController: public Controller {
 
 using sauce::Binder;
 
-struct StubClock: public Clock {
-  Timestamp timestamp() {
-    return 0;
-  }
-};
-
 struct StubRequest: public Request {};
 struct StubResponse: public Response {};
 
@@ -275,16 +238,15 @@ void MockModule(Binder & binder) {
   /**
    * The result of bind() (an intermediate with an annoyingly complex type) is invoked in turn.
    *
-   * Here, to<StubClock()>() says that requests for the interface Clock should be satisfied with instances of the
-   * StubClock concrete type.
+   * Here, to<StubRequest()>() says that requests for the interface Request should be satisfied with instances of the
+   * StubRequest concrete type.
    *
-   * StubClock() is actually a function type.  This is how we specify which constructor to use.  If the chosen
+   * StubRequest() is actually a function type.  This is how we specify which constructor to use.  If the chosen
    * constructor takes arguments, they are treated as dependencies and satisfied first.
    */
-  binder.bind<Clock>().to<StubClock()>();
-
-  // A few more
   binder.bind<Request>().to<StubRequest()>();
+
+  // Here's another
   binder.bind<Response>().to<StubResponse()>();
 }
 
@@ -308,8 +270,6 @@ class ProductionModule: public AbstractModule {
     /**
      * Here there is no Binder, we just call bind<Iface>() directly.
      */
-    // TODO: would be nice if "to<SystemClock>()" was equivalent to "to<SystemClock()>()", just an obtuse error now..
-    bind<Clock>().to<SystemClock()>();
 
     /**
      * MyRouter depends on having access to the injector itself but no injector is bound, nor is it obvious how to
@@ -334,6 +294,8 @@ class ProductionModule: public AbstractModule {
      * Bind the two controllers under dynamic names (see Router above for an example of selecting between them.)
      */
     bind<Controller>().named("place").to<PlaceController()>();
+
+    // TODO: would be nice if "to<StatusController>()" was equivalent to "to<StatusController()>()"..
     bind<Controller>().named("status").to<StatusController()>();
   }
 };
