@@ -1,3 +1,6 @@
+#include <string>
+#include <utility>
+
 #include <gtest/gtest.h>
 
 #include <sauce/sauce.h>
@@ -37,30 +40,16 @@ namespace test {
  */
 
 // ********************************************************************************************************************
-// web.h
-
-/**
- * This too is a library used by the application author, now to declare how incoming requests are mapped to the
- * controllers that serve them.
- */
-
-// ********************************************************************************************************************
 // clock.h
 
 /**
- * This library just exposes the local clock, allowing the application author to sample timestamps.
+ * This is a library that exposes the local clock, allowing the application author to sample timestamps.
  *
  * Mocking a clock for testing is a typical chore for temporal code; we will demonstrate doing this with sauce below.
  */
 
-// Seconds since the epoch.
 typedef int Timestamp;
 
-/**
- * The clock interface.
- *
- * Typically this (and an adapter for the system clock) is supplied by the application or framework author.
- */
 struct Clock {
   virtual Timestamp timestamp() = 0;
 };
@@ -82,17 +71,89 @@ struct SystemClock: public Clock {
 };
 
 // ********************************************************************************************************************
-// order_model.h
+// web.h
+
+using sauce::Injector;
 
 /**
- * A pizza order being processed.
+ * This is a library to supplying url routing, controller-related interfaces and Application to tie it together.
+ *
+ * This example uses sauce also as a type registry for controllers, as a way of showing off implicit injector injection
+ * and the dynamic name feature.
  */
+
+// Have some interfaces.
+struct Request {};
+struct Response {};
+
+struct Controller {
+  virtual void serve(Request, Response) = 0;
+};
+
+typedef std::string RequestPattern;
+
+struct Router {
+  sauce::shared_ptr<Injector> injector;
+
+  /**
+   * Notice that a Router depends on having an injector itself, which sauce satisfies even though no injector is
+   * explicitly bound.
+   */
+  Router(sauce::shared_ptr<Injector> injector):
+    injector(injector) {}
+
+  void map(RequestPattern, std::string /* controllerName */) {} // One could imagine this building up a pattern index.
+  virtual void wire() = 0;                                      // Override to supposedly declare routes.
+
+  /**
+   * Accept a Request and produce a Controller suitable to serve it.
+   */
+  sauce::shared_ptr<Controller> route(Request) {
+    // Without writing an actual router, let's just pretend the first matching RequestPattern is mapped to "place".
+    std::string selectedController = "place"; // = firstMatch(request);
+
+    /**
+     * We now have the task of taking a (essentially arbitrary) string and producing the controller it names.  Sauce
+     * would be the ideal way to assemble the chosen Controller, but it's not clear how to tell sauce which one we
+     * want.
+     *
+     * The dynamic naming feature helps us here.  First, observe (below) that all controllers are bound, under the same
+     * interface type (Controller) but with different string names.  Being fixed only at binding time, these names are
+     * called "dynamic" names (as opposed to "static" names, which are type tags.)  Dynamic names let us make a
+     * selection from known possibilities at runtime.  Specifically, they can enable a configuration-driven plugin
+     * framework, which is the one thing static dependency names can't do.
+     *
+     * Here, we use it to select the desired controller; the name (which is always a std::string) is passed to get().
+     */
+    return injector->get<Controller>(selectedController);
+  }
+};
+
+class Application {};
 
 // ********************************************************************************************************************
 // routes.h
 
 /**
- * Mappings between url patterns and controllers, supplied by the application author, in our ficticuous framework.
+ * Here are the application author-supplied mappings between url patterns and controllers in our ficticuous framework.
+ */
+
+struct MyRouter: public Router {
+  // TODO: Setter injection would allow us to expose an inherited setter, instead of delegating in the constructor.
+  MyRouter(sauce::shared_ptr<Injector> injector):
+    Router(injector) {}
+
+  void wire() {
+    map("/orders/new(/.*)?", "place");
+    map("/status", "status");
+  }
+};
+
+// ********************************************************************************************************************
+// order_model.h
+
+/**
+ * A pizza order being processed.
  */
 
 // ********************************************************************************************************************
@@ -101,6 +162,9 @@ struct SystemClock: public Clock {
 /**
  * Handles requests to place an order.
  */
+struct PlaceController: public Controller {
+  void serve(Request, Response) {}
+};
 
 // ********************************************************************************************************************
 // status_controller.h
@@ -108,6 +172,9 @@ struct SystemClock: public Clock {
 /**
  * Handles requests regarding an order's status.
  */
+struct StatusController: public Controller {
+  void serve(Request, Response) {}
+};
 
 // ********************************************************************************************************************
 // place_controller_test.cc
@@ -123,6 +190,9 @@ struct StubClock: public Clock {
     return 0;
   }
 };
+
+struct StubRequest: public Request {};
+struct StubResponse: public Response {};
 
 /**
  * The sauce module, written by the application author, that specifies bindings for this unit test suite.
@@ -145,6 +215,10 @@ void MockModule(Binder & binder) {
    * constructor takes arguments, they are treated as dependencies and satisfied first.
    */
   binder.bind<Clock>().to<StubClock()>();
+
+  // A few more
+  binder.bind<Request>().to<StubRequest()>();
+  binder.bind<Response>().to<StubResponse()>();
 }
 
 // ********************************************************************************************************************
@@ -163,9 +237,46 @@ using sauce::AbstractModule;
  */
 class ProductionModule: public AbstractModule {
   void configure() {
-    // Here there is no Binder, we just call bind<Iface>() directly.
+    /**
+     * Here there is no Binder, we just call bind<Iface>() directly.
+     */
+    // TODO: would be nice if "to<SystemClock>()" was equivalent to "to<SystemClock()>()", just an obtuse error now..
     bind<Clock>().to<SystemClock()>();
+
+    /**
+     * MyRouter depends on having access to the injector itself but no injector is bound, nor is it obvious how to
+     * declare such a binding.  Sauce addresses this with an "implicit" binding: requests for the injector are
+     * ultimately satisfied with the same injector that the initial e.g. get() call was made to.
+     *
+     * As an aside, it's generally considered bad practice to rely on this feature heavily, since it obscures what the
+     * real dependencies are.  Here, the Router only wants access to Controllers bound with various dynamic names, but
+     * inspecting the module alone can't tell us that: all we can see is it could request anything.  Still, the feature
+     * has its uses.
+     */
+    bind<Router>().to<MyRouter(Injector)>();
+
+    /**
+     * Bindings can be named.  The same interface can be bound multiple times, so long as the bindings have different
+     * names.  When requesting an injection, either by Injector::get or as a dependency of another binding, a name can
+     * be specified to select amongst the alternative bindings.
+     *
+     * Names come in two flavors.  Dynamic names are opaque standard strings, where static names are type decorators:
+     * instead of "bind<Controller>()" one says "bind<Named<Controller, ArbitraryTypeTag> >()".
+     *
+     * Bind the two controllers under dynamic names (see Router above for an example of selecting between them.)
+     */
+    bind<Controller>().named("place").to<PlaceController()>();
+    bind<Controller>().named("status").to<StatusController()>();
   }
+};
+
+/**
+ * The sauce module, written by the framework author, that specifies the bindings used when running in production.
+ *
+ * Modules can work cooperatively, and can be sourced from different compilation units (or dlsym'd libraries, etc.)
+ */
+class FrameworkModule: public AbstractModule {
+  void configure() {}
 };
 
 // ********************************************************************************************************************
@@ -184,6 +295,7 @@ TEST(TutorialTest, main) { // Let's pretend this is main()
    */
   Modules modules;
   modules.add(ProductionModule());
+  modules.add(FrameworkModule());
 
   /**
    * After desired modules are added, use createInjector() to get an injector itself.  It is returned as a
