@@ -150,14 +150,14 @@ struct MyRouter: public Router {
 };
 
 // ********************************************************************************************************************
-// order_model.h
+// models.h
 
 /**
  * A pizza order being processed.
  */
 
 // ********************************************************************************************************************
-// place_controller.h
+// controllers.h
 
 /**
  * Handles requests to place an order.
@@ -165,9 +165,6 @@ struct MyRouter: public Router {
 struct PlaceController: public Controller {
   void serve(Request, Response) {}
 };
-
-// ********************************************************************************************************************
-// status_controller.h
 
 /**
  * Handles requests regarding an order's status.
