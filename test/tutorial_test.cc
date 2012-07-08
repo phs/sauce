@@ -75,6 +75,7 @@ struct SystemClock: public Clock {
 
 using sauce::Injector;
 using sauce::AbstractProvider;
+using sauce::Provider;
 
 /**
  * This is a library to supplying url routing, controller-related interfaces and Application to tie it together.
@@ -144,39 +145,31 @@ struct Acceptor {
 
 /**
  * An Acceptor supposedly driven by a local FCGI environment.
+ *
+ * FCGIAcceptor requires two injected dependencies, a provider for requests and one for responses.  A provider is a
+ * factory that allows one to request instances of the provided type (request or response) on demand.  It allows the
+ * application developer to declare a dependency on a type without committed to how many instances of that type are
+ * needed.
+ *
+ * Since our acceptor is responsible for producing requests (with paired responses) waiting to be served, it needs an
+ * unlimited number of them.  However it doesn't want to be resposible for all the assembly details of making a
+ * request, it just wants an opportunity to modify it before it gets handed to the router.  An injected provider fits
+ * this need well.
  */
 struct FCGIAcceptor: public Acceptor {
+  sauce::shared_ptr<Provider<Request> > requestProvider;
+  sauce::shared_ptr<Provider<Response> > responseProvider;
+
+  FCGIAcceptor(sauce::shared_ptr<Provider<Request> > requestProvider,
+               sauce::shared_ptr<Provider<Response> > responseProvider):
+    requestProvider(requestProvider),
+    responseProvider(responseProvider) {}
+
   RequestResponsePair accept() {
-    // fcgiAccept(...);
-    sauce::shared_ptr<Request> request(new Request());
-    sauce::shared_ptr<Response> response(new Response());
+    sauce::shared_ptr<Request> request = requestProvider->get();
+    sauce::shared_ptr<Response> response = responseProvider->get();
+    // fcgiAccept(&request.socket, &response.socket);
     return std::make_pair(request, response);
-  }
-};
-
-/**
- * A Provider for FCGIAcceptors.
- *
- * Since a FCGIAcceptor (supposedly) an adapter into a foreign toolkit, it needs to be initialized in a strange way
- * (specifically, the FCGI toolkit's way.)  Still, we'd like to use FCGIAcceptors when satisfying the dependencies of
- * other types.  Sauce answers this need with providers, which are user-supplied factories for the bound interface.
- *
- * There are two ways to make a provider.  One can extend the Provider<Iface> interface directly and supply a
- * sauce::shared_ptr<Iface> get() method, or one can extend AbstractProvider.
- *
- * AbstractProvider implements get in terms of a user-supplied Iface * provide() method.  The added convenience comes
- * as a custom smart pointer deleter, which passes the raw pointer along to a user-supplied dispose(Iface *).
- */
-class FCGIAcceptorProvider: public AbstractProvider<Acceptor> {
-  Acceptor * provide() {
-    Acceptor * acceptor = new FCGIAcceptor();
-    // fcgiInitialize(acceptor);
-    return acceptor;
-  }
-
-  void dispose(Acceptor * acceptor) {
-    // fcgiDestroy(acceptor);
-    delete acceptor;
   }
 };
 
@@ -299,6 +292,7 @@ void MockModule(Binder & binder) {
 // production_module.cc
 
 using sauce::AbstractModule;
+using sauce::Provider;
 
 /**
  * The sauce module, written by the application author, that specifies the bindings used when running in production.
@@ -352,13 +346,12 @@ class ProductionModule: public AbstractModule {
 class FrameworkModule: public AbstractModule {
   void configure() {
     /**
-     * Here's an example of binding a provider.
+     * It's not required to have a separate interface; here we bind types to their own constructor.
      */
-    bind<Acceptor>().toProvider<FCGIAcceptorProvider()>();
+    bind<Request>().to<Request()>();
+    bind<Response>().to<Response()>();
 
     /**
-     * It's not required to have a separate interface; here we bind Application to its own constructor.
-     *
      * Notice that the injected types are references.  This side-steps a problem with how sauce abuses the type system.
      * Specifically, since Acceptor and Router each contain pure-virtual methods, they can't be passed by value.  This
      * implies it's illegal to even formulate a function type that would do so.
@@ -368,6 +361,13 @@ class FrameworkModule: public AbstractModule {
      * used instead; sauce will just strip it off (and smart pointers to references don't make sense anyway.)
      */
     bind<Application>().to<Application(Acceptor &, Router &)>();
+
+    /**
+     * Notice we never bound a Provider<Request>, but only a Request.  This is an example of an implicit binding that
+     * sauce supplies.  Since it knows how to make requests, it can synthesize a provider that makes them in the same
+     * way.
+     */
+    bind<Acceptor>().to<FCGIAcceptor(Provider<Request> &, Provider<Response> &)>();
   }
 };
 
