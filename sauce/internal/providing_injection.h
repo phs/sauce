@@ -17,10 +17,7 @@ template<typename Dependency_, typename Scope>
 class ProvidingInjection: public Binding<Dependency_, Scope> {
 public:
 
-  typedef typename Key<Dependency_>::Normalized Dependency;
   typedef sauce::shared_ptr<ProvidingInjection<Dependency_, Scope> > InjectionPtr;
-  typedef typename Key<Dependency_>::Ptr IfacePtr;
-  typedef typename ResolvedBinding<Dependency_>::BindingPtr BindingPtr;
 
   ProvidingInjection():
     Binding<Dependency_, Scope>() {}

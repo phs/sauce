@@ -17,13 +17,15 @@ namespace internal {
 /**
  * The base class of all actual binding implementations.
  */
-template<typename Dependency, typename Scope>
-class Binding:
-  public ResolvedBinding<Dependency>,
-  public InjectorFriend {
+template<typename Dependency_, typename Scope>
+class Binding: public ResolvedBinding<Dependency_>, public InjectorFriend {
+public:
 
+  typedef typename Key<Dependency_>::Normalized Dependency;
   typedef typename Key<Dependency>::Ptr IfacePtr;
   typedef typename ResolvedBinding<Dependency>::BindingPtr BindingPtr;
+
+private:
 
   std::string name;
 
