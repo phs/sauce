@@ -9,7 +9,6 @@ $var n = 10  $$ The maximum arity we support.
 #include <sauce/named.h>
 #include <sauce/provider.h>
 #include <sauce/internal/binding.h>
-#include <sauce/internal/providing_injection.h>
 #include <sauce/internal/key.h>
 #include <sauce/internal/type_id.h>
 
@@ -24,7 +23,7 @@ $var specializationParameters = [[$if includeParens==1 [[<Dependency, Scope, Imp
 /* *INDENT-OFF* */
 template<typename Dependency, typename Scope, typename Impl, typename Allocator>
 class NewInjection$specializationParameters:
-  public ProvidingInjection<Dependency, Scope> {
+  public Binding<Dependency, Scope> {
 
   typedef typename Key<Dependency>::Iface Iface;
   typedef typename Key<Dependency>::Ptr Ptr;
@@ -81,7 +80,7 @@ $var as = [[$for j, [[a$j]]]]
 /* *INDENT-OFF* */
 template<typename Dependency, typename Scope, typename Impl, typename Allocator$comma_typename_As>
 class NewInjection<Dependency, Scope, Impl($As), Allocator>:
-  public ProvidingInjection<Dependency, Scope> {
+  public Binding<Dependency, Scope> {
 
   typedef typename Key<Dependency>::Iface Iface;
   typedef typename Key<Dependency>::Ptr Ptr;

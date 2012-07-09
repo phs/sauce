@@ -3,7 +3,7 @@
 
 #include <sauce/injector.h>
 #include <sauce/memory.h>
-#include <sauce/internal/providing_injection.h>
+#include <sauce/internal/binding.h>
 #include <sauce/internal/key.h>
 
 namespace sauce {
@@ -12,7 +12,7 @@ namespace internal {
 /**
  * An injection that provides the injector itself.
  */
-class InjectorInjection: public ProvidingInjection<Key<Injector>::Normalized, NoScope> {
+class InjectorInjection: public Binding<Key<Injector>::Normalized, NoScope> {
 
   void validateAcyclic(InjectorPtr, TypeIds &) const {}
 

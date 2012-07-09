@@ -14,10 +14,10 @@ namespace internal {
  * A strategy for satisfying provisions for the given interface.
  */
 template<typename Dependency_, typename Scope>
-class ProvidingInjection: public Binding<Dependency_, Scope> {
+class Binding: public Binding<Dependency_, Scope> {
 public:
 
-  ProvidingInjection():
+  Binding():
     Binding<Dependency_, Scope>() {}
 
 };
