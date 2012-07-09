@@ -87,7 +87,7 @@ struct Table {
     }
   }
 
-  ModelType read(Key const) {}
+  ModelType read(Key const) { return ModelType(); }
   bool update(Key const, ModelType const &) { return true; }
   bool destroy(Key const) { return true; }
 };
@@ -346,7 +346,12 @@ struct StatusController: public Controller {
   StatusController(sauce::shared_ptr<Table<Order> > orders):
     orders(orders) {}
 
-  void serve(sauce::shared_ptr<Request>, sauce::shared_ptr<Response>) {}
+  void serve(sauce::shared_ptr<Request>, sauce::shared_ptr<Response>) {
+    Table<Order>::Key key = 17; // = request->getParam();
+    Order order = orders->read(key);
+    std::string status = order.getStatus();
+    // response->write(status);
+  }
 };
 
 // ********************************************************************************************************************
