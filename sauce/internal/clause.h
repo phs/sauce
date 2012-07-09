@@ -69,14 +69,16 @@ public:
     }
   }
 
-  template<typename Bound>
+  template<typename Dependency, typename Scope, typename Ctor, typename Allocator>
   void bindNew() {
     assert(!finalizedProvision);
+    typedef i::NewBinding<Dependency, Scope, Ctor, Allocator> Bound;
     pendingBinding.reset(new Bound());
   }
 
-  template<typename Bound>
+  template<typename Dependency, typename Scope, typename Provider>
   void bindProvider() {
+    typedef i::ProviderBinding<Dependency, Scope, Provider> Bound;
     providerBinding.reset(new Bound());
   }
 
@@ -177,16 +179,14 @@ protected:
   }
 
   void bindNew() {
-    typedef i::NewBinding<Dependency, Scope, Ctor, Allocator> Bound;
-    state->template bindNew<Bound>();
+    state->template bindNew<Dependency, Scope, Ctor, Allocator>();
   }
 
   void bindProvider() {
     typedef typename i::Key<Dependency>::Iface::Iface Iface;
     typedef typename i::Key<Dependency>::Name Name;
     typedef Named<Iface, Name> ProvidedDependency;
-    typedef i::ProviderBinding<ProvidedDependency, Scope, Dependency> Bound;
-    state->template bindProvider<Bound>();
+    state->template bindProvider<ProvidedDependency, Scope, Dependency>();
   }
 
   void bindDynamicDependencyName(unsigned int position, std::string const name) {
