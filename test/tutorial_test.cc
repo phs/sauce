@@ -391,6 +391,7 @@ void MockModule(Binder & binder) {
 // modules.cc
 
 using sauce::AbstractModule;
+using sauce::Named;
 using sauce::Provider;
 
 /**
@@ -459,7 +460,12 @@ class ProductionModule: public AbstractModule {
      */
     bind<Controller>().named("place").to<PlaceController>();
 
-    bind<Table<Order> >().to<Table<Order>(Database &)>();
+    /**
+     * Use the orders table from the flat file database.  When declaring dependencies, choose a static name by wrapping
+     * it, along with the desired type, in Named<Iface, Name>.  This applies also when using the injector directly:
+     * injector->get<Named<Database, Local> >();
+     */
+    bind<Table<Order> >().to<Table<Order>(Named<Database, Local>)>();
   }
 };
 
