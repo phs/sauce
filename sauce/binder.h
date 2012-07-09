@@ -26,8 +26,6 @@ template<typename Dependency, typename Scope, typename Ctor, typename Allocator,
 class SettingClause: public i::FinalClause<Dependency, Scope, Ctor, Allocator> {
   Method method;
 
-  void onComplete() {}
-
 public:
 
   SettingClause(Method method):
@@ -40,8 +38,6 @@ public:
  */
 template<typename Dependency, typename Scope, typename Ctor, typename Allocator>
 class NamingClause: public i::FinalClause<Dependency, Scope, Ctor, Allocator> {
-  void onComplete() {}
-
 public:
 
   NamingClause<Dependency, Scope, Ctor, Allocator> & naming(unsigned int position, std::string const name) {
@@ -60,8 +56,6 @@ public:
  */
 template<typename Dependency, typename Scope, typename Ctor, typename Allocator>
 class AllocateFromClause: public i::FinalClause<Dependency, Scope, Ctor, Allocator> {
-  void onComplete() {}
-
 public:
 
   NamingClause<Dependency, Scope, Ctor, Allocator> naming(unsigned int position, std::string const name) {
@@ -80,8 +74,6 @@ public:
 template<typename Dependency, typename Scope, typename Ctor>
 class ToClause: public i::FinalClause<Dependency, Scope, Ctor, std::allocator<int> > {
   typedef typename i::Key<Dependency>::Iface Iface;
-
-  void onComplete() {}
 
 public:
 
@@ -105,8 +97,6 @@ public:
  */
 template<typename ProviderDependency, typename Scope, typename ProviderCtor>
 class ToProviderClause: public i::FinalClause<ProviderDependency, Scope, ProviderCtor, std::allocator<int> > {
-
-  void onComplete() {}
 
 public:
 

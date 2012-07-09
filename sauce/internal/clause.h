@@ -183,8 +183,6 @@ template<typename Dependency, typename Scope, typename Ctor, typename Allocator>
 class FinalClause {
   ClauseStatePtr state;
 
-  virtual void onComplete() = 0;
-
   friend class InitialClause<Dependency>;
 
 protected:
@@ -214,7 +212,6 @@ public:
   void setState(ClauseStatePtr state) {
     state->clearException();
     this->state = state;
-    onComplete();
     this->bindNew();
   }
 };
