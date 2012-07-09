@@ -199,6 +199,7 @@ public:
     state->clearException();
     this->state = state;
     onComplete();
+    this->bindNew();
   }
 };
 
