@@ -185,12 +185,11 @@ protected:
     state->template bind<BoundInjection>();
   }
 
-  template<typename ProviderDependency>
   void bindExtra() {
-    typedef typename i::Key<ProviderDependency>::Iface::Iface Iface;
-    typedef typename i::Key<ProviderDependency>::Name Name;
-    typedef Named<Iface, Name> Dependency;
-    typedef i::ProviderBinding<Dependency, Scope, ProviderDependency> BoundInjection;
+    typedef typename i::Key<Dependency>::Iface::Iface Iface;
+    typedef typename i::Key<Dependency>::Name Name;
+    typedef Named<Iface, Name> ProvidedDependency;
+    typedef i::ProviderBinding<ProvidedDependency, Scope, Dependency> BoundInjection;
     state->template bindExtra<BoundInjection>();
   }
 
