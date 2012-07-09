@@ -17,6 +17,33 @@
 namespace sauce {
 namespace internal {
 
+// TODO This is only detecting the presence of an Iface typedef.
+// Far better would be checking for a sauce::shared_ptr<Iface> get() member function.
+// Provider wants some cleanup first.
+template<typename Dependency, typename Scope, typename Ctor, typename Allocator>
+class ProviderBindingCreator {
+  template<typename T>
+  OpaqueBindingPtr createIfDependencyIsAProvider(...) {
+    return OpaqueBindingPtr();
+  }
+
+  template<typename T>
+  OpaqueBindingPtr createIfDependencyIsAProvider(typename i::Key<T>::Iface::Iface *) {
+    typedef typename i::Key<Dependency>::Iface Provider;
+    typedef typename Provider::Iface Iface;
+    typedef typename i::Key<Dependency>::Name Name;
+    typedef Named<Iface, Name> ProvidedDependency;
+
+    return OpaqueBindingPtr(new i::ProviderBinding<ProvidedDependency, Scope, Dependency>());
+  }
+
+public:
+
+  OpaqueBindingPtr create() {
+    return createIfDependencyIsAProvider<Dependency>(0);
+  }
+};
+
 struct ImplicitBindings;
 
 /**
@@ -73,11 +100,14 @@ public:
   void bindNew() {
     assert(!finalizedProvision);
     pendingBinding.reset(new i::NewBinding<Dependency, Scope, Ctor, Allocator>());
+
+    ProviderBindingCreator<Dependency, Scope, Ctor, Allocator> creator;
+    providerBinding = creator.create();
   }
 
   template<typename Dependency, typename Scope, typename Provider>
   void bindProvider() {
-    providerBinding.reset(new i::ProviderBinding<Dependency, Scope, Provider>());
+    // providerBinding.reset(new i::ProviderBinding<Dependency, Scope, Provider>());
   }
 
   void setDynamicName(std::string const name) {
