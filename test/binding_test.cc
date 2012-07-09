@@ -29,6 +29,18 @@ TEST(BindingTest, shouldProvideBoundDependenciesAndTheirProvidersToo) {
   sauce::shared_ptr<Provider<Bound> > provider = injector->get<Provider<Bound> >();
 }
 
+void ForgotTheParensModule(Binder & binder) {
+  binder.bind<Bound>().to<Bound()>();
+  // binder.bind<Bound>().to<Bound>(); // TODO
+}
+
+TEST(BindingTest, shouldInterpretNonFunctionTypesAsNoArgumentConstructors) {
+  sauce::shared_ptr<Injector> injector(Modules().add(&ForgotTheParensModule).createInjector());
+
+  sauce::shared_ptr<Bound> bound = injector->get<Bound>();
+  sauce::shared_ptr<Provider<Bound> > provider = injector->get<Provider<Bound> >();
+}
+
 struct PureVirtual {
   virtual std::string says() = 0;
 };
