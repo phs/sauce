@@ -44,6 +44,27 @@ class NewInjection<Dependency, Scope, Impl($As), Allocator>:
 
   mutable ImplAllocator allocator;
   std::vector<std::string> dynamicDependencyNames;
+[[$if i>0 [[
+
+  void validateAcyclic(InjectorPtr injector, TypeIds & ids) const {
+[[$for j [[
+    this->template validateAcyclicHelper<A$j>(injector, ids, dynamicDependencyNames[$(j-1)]);
+
+]]]]
+  }
+
+  void setDynamicDependencyNames(std::vector<std::string> const & dynamicDependencyNames) {
+    this->dynamicDependencyNames = dynamicDependencyNames;
+    this->dynamicDependencyNames.resize($i, unnamed());
+  }
+
+]] $else [[
+
+  void validateAcyclic(InjectorPtr, TypeIds &) const {}
+
+  void setDynamicDependencyNames(std::vector<std::string> const &) {}
+
+]]]]
 
 public:
 
@@ -75,21 +96,6 @@ public:
     Ptr provided(new(impl) Impl($as), deleter);
     return provided;
   }
-[[$if i>0 [[
-
-  void validateAcyclic(InjectorPtr injector, TypeIds & ids, std::string const name) const {
-[[$for j [[
-    this->template validateAcyclicHelper<A$j>(injector, ids, name);
-
-]]]]
-  }
-
-  void setDynamicDependencyNames(std::vector<std::string> const & dynamicDependencyNames) {
-    this->dynamicDependencyNames = dynamicDependencyNames;
-    this->dynamicDependencyNames.resize($i, unnamed());
-  }
-
-]]]]
 
   void dispose(Iface * iface) const {
     Impl * impl = static_cast<Impl *>(iface);

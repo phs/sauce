@@ -40,6 +40,10 @@ class NewInjection<Dependency, Scope, Impl(), Allocator>:
   mutable ImplAllocator allocator;
   std::vector<std::string> dynamicDependencyNames;
 
+  void validateAcyclic(InjectorPtr, TypeIds &) const {}
+
+  void setDynamicDependencyNames(std::vector<std::string> const &) {}
+
 public:
 
   typedef typename ProvidingInjection<Dependency,
@@ -89,6 +93,17 @@ class NewInjection<Dependency, Scope, Impl(A1), Allocator>:
   mutable ImplAllocator allocator;
   std::vector<std::string> dynamicDependencyNames;
 
+  void validateAcyclic(InjectorPtr injector, TypeIds & ids) const {
+    this->template validateAcyclicHelper<A1>(injector, ids,
+        dynamicDependencyNames[0]);
+  }
+
+  void setDynamicDependencyNames(std::vector<std::string> const &
+      dynamicDependencyNames) {
+    this->dynamicDependencyNames = dynamicDependencyNames;
+    this->dynamicDependencyNames.resize(1, unnamed());
+  }
+
 public:
 
   typedef typename ProvidingInjection<Dependency,
@@ -115,17 +130,6 @@ public:
     return provided;
   }
 
-  void validateAcyclic(InjectorPtr injector, TypeIds & ids,
-      std::string const name) const {
-    this->template validateAcyclicHelper<A1>(injector, ids, name);
-  }
-
-  void setDynamicDependencyNames(std::vector<std::string> const &
-      dynamicDependencyNames) {
-    this->dynamicDependencyNames = dynamicDependencyNames;
-    this->dynamicDependencyNames.resize(1, unnamed());
-  }
-
   void dispose(Iface * iface) const {
     Impl * impl = static_cast<Impl *>(iface);
     impl->~Impl(); // Must not throw
@@ -150,6 +154,19 @@ class NewInjection<Dependency, Scope, Impl(A1, A2), Allocator>:
 
   mutable ImplAllocator allocator;
   std::vector<std::string> dynamicDependencyNames;
+
+  void validateAcyclic(InjectorPtr injector, TypeIds & ids) const {
+    this->template validateAcyclicHelper<A1>(injector, ids,
+        dynamicDependencyNames[0]);
+    this->template validateAcyclicHelper<A2>(injector, ids,
+        dynamicDependencyNames[1]);
+  }
+
+  void setDynamicDependencyNames(std::vector<std::string> const &
+      dynamicDependencyNames) {
+    this->dynamicDependencyNames = dynamicDependencyNames;
+    this->dynamicDependencyNames.resize(2, unnamed());
+  }
 
 public:
 
@@ -179,18 +196,6 @@ public:
     return provided;
   }
 
-  void validateAcyclic(InjectorPtr injector, TypeIds & ids,
-      std::string const name) const {
-    this->template validateAcyclicHelper<A1>(injector, ids, name);
-    this->template validateAcyclicHelper<A2>(injector, ids, name);
-  }
-
-  void setDynamicDependencyNames(std::vector<std::string> const &
-      dynamicDependencyNames) {
-    this->dynamicDependencyNames = dynamicDependencyNames;
-    this->dynamicDependencyNames.resize(2, unnamed());
-  }
-
   void dispose(Iface * iface) const {
     Impl * impl = static_cast<Impl *>(iface);
     impl->~Impl(); // Must not throw
@@ -215,6 +220,21 @@ class NewInjection<Dependency, Scope, Impl(A1, A2, A3), Allocator>:
 
   mutable ImplAllocator allocator;
   std::vector<std::string> dynamicDependencyNames;
+
+  void validateAcyclic(InjectorPtr injector, TypeIds & ids) const {
+    this->template validateAcyclicHelper<A1>(injector, ids,
+        dynamicDependencyNames[0]);
+    this->template validateAcyclicHelper<A2>(injector, ids,
+        dynamicDependencyNames[1]);
+    this->template validateAcyclicHelper<A3>(injector, ids,
+        dynamicDependencyNames[2]);
+  }
+
+  void setDynamicDependencyNames(std::vector<std::string> const &
+      dynamicDependencyNames) {
+    this->dynamicDependencyNames = dynamicDependencyNames;
+    this->dynamicDependencyNames.resize(3, unnamed());
+  }
 
 public:
 
@@ -246,19 +266,6 @@ public:
     return provided;
   }
 
-  void validateAcyclic(InjectorPtr injector, TypeIds & ids,
-      std::string const name) const {
-    this->template validateAcyclicHelper<A1>(injector, ids, name);
-    this->template validateAcyclicHelper<A2>(injector, ids, name);
-    this->template validateAcyclicHelper<A3>(injector, ids, name);
-  }
-
-  void setDynamicDependencyNames(std::vector<std::string> const &
-      dynamicDependencyNames) {
-    this->dynamicDependencyNames = dynamicDependencyNames;
-    this->dynamicDependencyNames.resize(3, unnamed());
-  }
-
   void dispose(Iface * iface) const {
     Impl * impl = static_cast<Impl *>(iface);
     impl->~Impl(); // Must not throw
@@ -283,6 +290,23 @@ class NewInjection<Dependency, Scope, Impl(A1, A2, A3, A4), Allocator>:
 
   mutable ImplAllocator allocator;
   std::vector<std::string> dynamicDependencyNames;
+
+  void validateAcyclic(InjectorPtr injector, TypeIds & ids) const {
+    this->template validateAcyclicHelper<A1>(injector, ids,
+        dynamicDependencyNames[0]);
+    this->template validateAcyclicHelper<A2>(injector, ids,
+        dynamicDependencyNames[1]);
+    this->template validateAcyclicHelper<A3>(injector, ids,
+        dynamicDependencyNames[2]);
+    this->template validateAcyclicHelper<A4>(injector, ids,
+        dynamicDependencyNames[3]);
+  }
+
+  void setDynamicDependencyNames(std::vector<std::string> const &
+      dynamicDependencyNames) {
+    this->dynamicDependencyNames = dynamicDependencyNames;
+    this->dynamicDependencyNames.resize(4, unnamed());
+  }
 
 public:
 
@@ -316,20 +340,6 @@ public:
     return provided;
   }
 
-  void validateAcyclic(InjectorPtr injector, TypeIds & ids,
-      std::string const name) const {
-    this->template validateAcyclicHelper<A1>(injector, ids, name);
-    this->template validateAcyclicHelper<A2>(injector, ids, name);
-    this->template validateAcyclicHelper<A3>(injector, ids, name);
-    this->template validateAcyclicHelper<A4>(injector, ids, name);
-  }
-
-  void setDynamicDependencyNames(std::vector<std::string> const &
-      dynamicDependencyNames) {
-    this->dynamicDependencyNames = dynamicDependencyNames;
-    this->dynamicDependencyNames.resize(4, unnamed());
-  }
-
   void dispose(Iface * iface) const {
     Impl * impl = static_cast<Impl *>(iface);
     impl->~Impl(); // Must not throw
@@ -356,6 +366,25 @@ class NewInjection<Dependency, Scope, Impl(A1, A2, A3, A4, A5), Allocator>:
 
   mutable ImplAllocator allocator;
   std::vector<std::string> dynamicDependencyNames;
+
+  void validateAcyclic(InjectorPtr injector, TypeIds & ids) const {
+    this->template validateAcyclicHelper<A1>(injector, ids,
+        dynamicDependencyNames[0]);
+    this->template validateAcyclicHelper<A2>(injector, ids,
+        dynamicDependencyNames[1]);
+    this->template validateAcyclicHelper<A3>(injector, ids,
+        dynamicDependencyNames[2]);
+    this->template validateAcyclicHelper<A4>(injector, ids,
+        dynamicDependencyNames[3]);
+    this->template validateAcyclicHelper<A5>(injector, ids,
+        dynamicDependencyNames[4]);
+  }
+
+  void setDynamicDependencyNames(std::vector<std::string> const &
+      dynamicDependencyNames) {
+    this->dynamicDependencyNames = dynamicDependencyNames;
+    this->dynamicDependencyNames.resize(5, unnamed());
+  }
 
 public:
 
@@ -391,21 +420,6 @@ public:
     return provided;
   }
 
-  void validateAcyclic(InjectorPtr injector, TypeIds & ids,
-      std::string const name) const {
-    this->template validateAcyclicHelper<A1>(injector, ids, name);
-    this->template validateAcyclicHelper<A2>(injector, ids, name);
-    this->template validateAcyclicHelper<A3>(injector, ids, name);
-    this->template validateAcyclicHelper<A4>(injector, ids, name);
-    this->template validateAcyclicHelper<A5>(injector, ids, name);
-  }
-
-  void setDynamicDependencyNames(std::vector<std::string> const &
-      dynamicDependencyNames) {
-    this->dynamicDependencyNames = dynamicDependencyNames;
-    this->dynamicDependencyNames.resize(5, unnamed());
-  }
-
   void dispose(Iface * iface) const {
     Impl * impl = static_cast<Impl *>(iface);
     impl->~Impl(); // Must not throw
@@ -432,6 +446,27 @@ class NewInjection<Dependency, Scope, Impl(A1, A2, A3, A4, A5, A6), Allocator>:
 
   mutable ImplAllocator allocator;
   std::vector<std::string> dynamicDependencyNames;
+
+  void validateAcyclic(InjectorPtr injector, TypeIds & ids) const {
+    this->template validateAcyclicHelper<A1>(injector, ids,
+        dynamicDependencyNames[0]);
+    this->template validateAcyclicHelper<A2>(injector, ids,
+        dynamicDependencyNames[1]);
+    this->template validateAcyclicHelper<A3>(injector, ids,
+        dynamicDependencyNames[2]);
+    this->template validateAcyclicHelper<A4>(injector, ids,
+        dynamicDependencyNames[3]);
+    this->template validateAcyclicHelper<A5>(injector, ids,
+        dynamicDependencyNames[4]);
+    this->template validateAcyclicHelper<A6>(injector, ids,
+        dynamicDependencyNames[5]);
+  }
+
+  void setDynamicDependencyNames(std::vector<std::string> const &
+      dynamicDependencyNames) {
+    this->dynamicDependencyNames = dynamicDependencyNames;
+    this->dynamicDependencyNames.resize(6, unnamed());
+  }
 
 public:
 
@@ -469,22 +504,6 @@ public:
     return provided;
   }
 
-  void validateAcyclic(InjectorPtr injector, TypeIds & ids,
-      std::string const name) const {
-    this->template validateAcyclicHelper<A1>(injector, ids, name);
-    this->template validateAcyclicHelper<A2>(injector, ids, name);
-    this->template validateAcyclicHelper<A3>(injector, ids, name);
-    this->template validateAcyclicHelper<A4>(injector, ids, name);
-    this->template validateAcyclicHelper<A5>(injector, ids, name);
-    this->template validateAcyclicHelper<A6>(injector, ids, name);
-  }
-
-  void setDynamicDependencyNames(std::vector<std::string> const &
-      dynamicDependencyNames) {
-    this->dynamicDependencyNames = dynamicDependencyNames;
-    this->dynamicDependencyNames.resize(6, unnamed());
-  }
-
   void dispose(Iface * iface) const {
     Impl * impl = static_cast<Impl *>(iface);
     impl->~Impl(); // Must not throw
@@ -512,6 +531,29 @@ class NewInjection<Dependency, Scope, Impl(A1, A2, A3, A4, A5, A6, A7),
 
   mutable ImplAllocator allocator;
   std::vector<std::string> dynamicDependencyNames;
+
+  void validateAcyclic(InjectorPtr injector, TypeIds & ids) const {
+    this->template validateAcyclicHelper<A1>(injector, ids,
+        dynamicDependencyNames[0]);
+    this->template validateAcyclicHelper<A2>(injector, ids,
+        dynamicDependencyNames[1]);
+    this->template validateAcyclicHelper<A3>(injector, ids,
+        dynamicDependencyNames[2]);
+    this->template validateAcyclicHelper<A4>(injector, ids,
+        dynamicDependencyNames[3]);
+    this->template validateAcyclicHelper<A5>(injector, ids,
+        dynamicDependencyNames[4]);
+    this->template validateAcyclicHelper<A6>(injector, ids,
+        dynamicDependencyNames[5]);
+    this->template validateAcyclicHelper<A7>(injector, ids,
+        dynamicDependencyNames[6]);
+  }
+
+  void setDynamicDependencyNames(std::vector<std::string> const &
+      dynamicDependencyNames) {
+    this->dynamicDependencyNames = dynamicDependencyNames;
+    this->dynamicDependencyNames.resize(7, unnamed());
+  }
 
 public:
 
@@ -551,23 +593,6 @@ public:
     return provided;
   }
 
-  void validateAcyclic(InjectorPtr injector, TypeIds & ids,
-      std::string const name) const {
-    this->template validateAcyclicHelper<A1>(injector, ids, name);
-    this->template validateAcyclicHelper<A2>(injector, ids, name);
-    this->template validateAcyclicHelper<A3>(injector, ids, name);
-    this->template validateAcyclicHelper<A4>(injector, ids, name);
-    this->template validateAcyclicHelper<A5>(injector, ids, name);
-    this->template validateAcyclicHelper<A6>(injector, ids, name);
-    this->template validateAcyclicHelper<A7>(injector, ids, name);
-  }
-
-  void setDynamicDependencyNames(std::vector<std::string> const &
-      dynamicDependencyNames) {
-    this->dynamicDependencyNames = dynamicDependencyNames;
-    this->dynamicDependencyNames.resize(7, unnamed());
-  }
-
   void dispose(Iface * iface) const {
     Impl * impl = static_cast<Impl *>(iface);
     impl->~Impl(); // Must not throw
@@ -595,6 +620,31 @@ class NewInjection<Dependency, Scope, Impl(A1, A2, A3, A4, A5, A6, A7, A8),
 
   mutable ImplAllocator allocator;
   std::vector<std::string> dynamicDependencyNames;
+
+  void validateAcyclic(InjectorPtr injector, TypeIds & ids) const {
+    this->template validateAcyclicHelper<A1>(injector, ids,
+        dynamicDependencyNames[0]);
+    this->template validateAcyclicHelper<A2>(injector, ids,
+        dynamicDependencyNames[1]);
+    this->template validateAcyclicHelper<A3>(injector, ids,
+        dynamicDependencyNames[2]);
+    this->template validateAcyclicHelper<A4>(injector, ids,
+        dynamicDependencyNames[3]);
+    this->template validateAcyclicHelper<A5>(injector, ids,
+        dynamicDependencyNames[4]);
+    this->template validateAcyclicHelper<A6>(injector, ids,
+        dynamicDependencyNames[5]);
+    this->template validateAcyclicHelper<A7>(injector, ids,
+        dynamicDependencyNames[6]);
+    this->template validateAcyclicHelper<A8>(injector, ids,
+        dynamicDependencyNames[7]);
+  }
+
+  void setDynamicDependencyNames(std::vector<std::string> const &
+      dynamicDependencyNames) {
+    this->dynamicDependencyNames = dynamicDependencyNames;
+    this->dynamicDependencyNames.resize(8, unnamed());
+  }
 
 public:
 
@@ -636,24 +686,6 @@ public:
     return provided;
   }
 
-  void validateAcyclic(InjectorPtr injector, TypeIds & ids,
-      std::string const name) const {
-    this->template validateAcyclicHelper<A1>(injector, ids, name);
-    this->template validateAcyclicHelper<A2>(injector, ids, name);
-    this->template validateAcyclicHelper<A3>(injector, ids, name);
-    this->template validateAcyclicHelper<A4>(injector, ids, name);
-    this->template validateAcyclicHelper<A5>(injector, ids, name);
-    this->template validateAcyclicHelper<A6>(injector, ids, name);
-    this->template validateAcyclicHelper<A7>(injector, ids, name);
-    this->template validateAcyclicHelper<A8>(injector, ids, name);
-  }
-
-  void setDynamicDependencyNames(std::vector<std::string> const &
-      dynamicDependencyNames) {
-    this->dynamicDependencyNames = dynamicDependencyNames;
-    this->dynamicDependencyNames.resize(8, unnamed());
-  }
-
   void dispose(Iface * iface) const {
     Impl * impl = static_cast<Impl *>(iface);
     impl->~Impl(); // Must not throw
@@ -681,6 +713,33 @@ class NewInjection<Dependency, Scope, Impl(A1, A2, A3, A4, A5, A6, A7, A8, A9),
 
   mutable ImplAllocator allocator;
   std::vector<std::string> dynamicDependencyNames;
+
+  void validateAcyclic(InjectorPtr injector, TypeIds & ids) const {
+    this->template validateAcyclicHelper<A1>(injector, ids,
+        dynamicDependencyNames[0]);
+    this->template validateAcyclicHelper<A2>(injector, ids,
+        dynamicDependencyNames[1]);
+    this->template validateAcyclicHelper<A3>(injector, ids,
+        dynamicDependencyNames[2]);
+    this->template validateAcyclicHelper<A4>(injector, ids,
+        dynamicDependencyNames[3]);
+    this->template validateAcyclicHelper<A5>(injector, ids,
+        dynamicDependencyNames[4]);
+    this->template validateAcyclicHelper<A6>(injector, ids,
+        dynamicDependencyNames[5]);
+    this->template validateAcyclicHelper<A7>(injector, ids,
+        dynamicDependencyNames[6]);
+    this->template validateAcyclicHelper<A8>(injector, ids,
+        dynamicDependencyNames[7]);
+    this->template validateAcyclicHelper<A9>(injector, ids,
+        dynamicDependencyNames[8]);
+  }
+
+  void setDynamicDependencyNames(std::vector<std::string> const &
+      dynamicDependencyNames) {
+    this->dynamicDependencyNames = dynamicDependencyNames;
+    this->dynamicDependencyNames.resize(9, unnamed());
+  }
 
 public:
 
@@ -724,25 +783,6 @@ public:
     return provided;
   }
 
-  void validateAcyclic(InjectorPtr injector, TypeIds & ids,
-      std::string const name) const {
-    this->template validateAcyclicHelper<A1>(injector, ids, name);
-    this->template validateAcyclicHelper<A2>(injector, ids, name);
-    this->template validateAcyclicHelper<A3>(injector, ids, name);
-    this->template validateAcyclicHelper<A4>(injector, ids, name);
-    this->template validateAcyclicHelper<A5>(injector, ids, name);
-    this->template validateAcyclicHelper<A6>(injector, ids, name);
-    this->template validateAcyclicHelper<A7>(injector, ids, name);
-    this->template validateAcyclicHelper<A8>(injector, ids, name);
-    this->template validateAcyclicHelper<A9>(injector, ids, name);
-  }
-
-  void setDynamicDependencyNames(std::vector<std::string> const &
-      dynamicDependencyNames) {
-    this->dynamicDependencyNames = dynamicDependencyNames;
-    this->dynamicDependencyNames.resize(9, unnamed());
-  }
-
   void dispose(Iface * iface) const {
     Impl * impl = static_cast<Impl *>(iface);
     impl->~Impl(); // Must not throw
@@ -771,6 +811,35 @@ class NewInjection<Dependency, Scope, Impl(A1, A2, A3, A4, A5, A6, A7, A8, A9,
 
   mutable ImplAllocator allocator;
   std::vector<std::string> dynamicDependencyNames;
+
+  void validateAcyclic(InjectorPtr injector, TypeIds & ids) const {
+    this->template validateAcyclicHelper<A1>(injector, ids,
+        dynamicDependencyNames[0]);
+    this->template validateAcyclicHelper<A2>(injector, ids,
+        dynamicDependencyNames[1]);
+    this->template validateAcyclicHelper<A3>(injector, ids,
+        dynamicDependencyNames[2]);
+    this->template validateAcyclicHelper<A4>(injector, ids,
+        dynamicDependencyNames[3]);
+    this->template validateAcyclicHelper<A5>(injector, ids,
+        dynamicDependencyNames[4]);
+    this->template validateAcyclicHelper<A6>(injector, ids,
+        dynamicDependencyNames[5]);
+    this->template validateAcyclicHelper<A7>(injector, ids,
+        dynamicDependencyNames[6]);
+    this->template validateAcyclicHelper<A8>(injector, ids,
+        dynamicDependencyNames[7]);
+    this->template validateAcyclicHelper<A9>(injector, ids,
+        dynamicDependencyNames[8]);
+    this->template validateAcyclicHelper<A10>(injector, ids,
+        dynamicDependencyNames[9]);
+  }
+
+  void setDynamicDependencyNames(std::vector<std::string> const &
+      dynamicDependencyNames) {
+    this->dynamicDependencyNames = dynamicDependencyNames;
+    this->dynamicDependencyNames.resize(10, unnamed());
+  }
 
 public:
 
@@ -815,26 +884,6 @@ public:
     Ptr provided(new(impl) Impl(a1, a2, a3, a4, a5, a6, a7, a8, a9, a10),
         deleter);
     return provided;
-  }
-
-  void validateAcyclic(InjectorPtr injector, TypeIds & ids,
-      std::string const name) const {
-    this->template validateAcyclicHelper<A1>(injector, ids, name);
-    this->template validateAcyclicHelper<A2>(injector, ids, name);
-    this->template validateAcyclicHelper<A3>(injector, ids, name);
-    this->template validateAcyclicHelper<A4>(injector, ids, name);
-    this->template validateAcyclicHelper<A5>(injector, ids, name);
-    this->template validateAcyclicHelper<A6>(injector, ids, name);
-    this->template validateAcyclicHelper<A7>(injector, ids, name);
-    this->template validateAcyclicHelper<A8>(injector, ids, name);
-    this->template validateAcyclicHelper<A9>(injector, ids, name);
-    this->template validateAcyclicHelper<A10>(injector, ids, name);
-  }
-
-  void setDynamicDependencyNames(std::vector<std::string> const &
-      dynamicDependencyNames) {
-    this->dynamicDependencyNames = dynamicDependencyNames;
-    this->dynamicDependencyNames.resize(10, unnamed());
   }
 
   void dispose(Iface * iface) const {

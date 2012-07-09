@@ -86,7 +86,7 @@ public:
   template<typename Dependency>
   void validateAcyclic(
     sauce::shared_ptr<Injector> injector, TypeIds & ids, std::string const name) const {
-    getBinding<Dependency>(name)->validateAcyclic(injector, ids, name);
+    getBinding<Dependency>(name)->validateAcyclic(injector, ids);
   }
 
   /**

@@ -14,6 +14,9 @@ namespace injections {
  * An injection that provides the injector itself.
  */
 class InjectorInjection: public ProvidingInjection<Key<Injector>::Normalized, NoScope> {
+
+  void validateAcyclic(InjectorPtr, TypeIds &) const {}
+
 public:
 
   /**
@@ -24,6 +27,7 @@ public:
   InjectorPtr provide(BindingPtr, InjectorPtr injector) const {
     return injector;
   }
+
 };
 
 }

@@ -57,6 +57,8 @@ class ImplicitProviderInjection:
 
   ProvidedBindingPtr providedBinding;
 
+  void validateAcyclic(InjectorPtr, TypeIds &) const {}
+
 public:
 
   typedef typename ProvidingInjection<ProviderDependency, NoScope>::InjectionPtr InjectionPtr;

@@ -21,8 +21,8 @@ public:
   typedef typename ProvidingInjection<Dependency, Scope>::InjectionPtr InjectionPtr;
   typedef typename ResolvedBinding<Dependency>::BindingPtr BindingPtr;
 
-  void validateAcyclic(InjectorPtr injector, TypeIds & ids, std::string const name) const {
-    this->template validateAcyclicHelper<Provider>(injector, ids, name);
+  void validateAcyclic(InjectorPtr injector, TypeIds & ids) const {
+    this->template validateAcyclicHelper<Provider>(injector, ids, this->getName());
   }
 
   typename Key<Dependency>::Ptr provide(BindingPtr binding, InjectorPtr injector) const {

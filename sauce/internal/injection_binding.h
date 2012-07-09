@@ -69,7 +69,7 @@ class InjectionBinding:
    * This is Tarjan's algorithm using the call stack.  When a cycle is detected a
    * CircularDependencyException is thrown.
    */
-  virtual void validateAcyclic(InjectorPtr, TypeIds &, std::string) const {}
+  virtual void validateAcyclic(InjectorPtr, TypeIds &) const = 0;
 
   /**
    * Provide, but do not return an Iface.
@@ -81,7 +81,7 @@ class InjectionBinding:
     if (getScopeKey() != typeIdOf<NoScope>()) {
       BindingPtr binding = resolve<Dependency>(opaque);
       TypeIds ids;
-      validateAcyclic(injector, ids, binding->getName());
+      validateAcyclic(injector, ids);
       get(binding, injector);
     }
   }
