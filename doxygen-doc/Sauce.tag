@@ -3500,14 +3500,14 @@
     <file>clause.h</file>
     <file>disposal_deleter.h</file>
     <file>implicit_bindings.h</file>
-    <file>implicit_provider_injection.h</file>
-    <file>injector_injection.h</file>
+    <file>implicit_provider_binding.h</file>
+    <file>injector_binding.h</file>
     <file>key.h</file>
     <file>locker_factory.h</file>
-    <file>new_injection.h</file>
+    <file>new_binding.h</file>
     <file>opaque_binding.h</file>
     <file>pending_thrower.h</file>
-    <file>provider_injection.h</file>
+    <file>provider_binding.h</file>
     <file>resolved_binding.h</file>
     <file>scope_cache.h</file>
     <file>type_id.h</file>

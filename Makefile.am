@@ -67,11 +67,11 @@ nobase_include_HEADERS += \
   sauce/internal/implicit_bindings.h \
   sauce/internal/binding.h \
   sauce/internal/all.h \
-  sauce/internal/implicit_provider_injection.h \
-  sauce/internal/injector_injection.h \
-  sauce/internal/new_injection.h \
-  sauce/internal/new_injection.h.pump \
-  sauce/internal/provider_injection.h \
+  sauce/internal/implicit_provider_binding.h \
+  sauce/internal/injector_binding.h \
+  sauce/internal/new_binding.h \
+  sauce/internal/new_binding.h.pump \
+  sauce/internal/provider_binding.h \
   sauce/internal/key.h \
   sauce/internal/locker_factory.h \
   sauce/internal/memory/boost.h \
@@ -100,11 +100,11 @@ EXTRA_DIST += \
   sauce/internal/implicit_bindings.h \
   sauce/internal/binding.h \
   sauce/internal/all.h \
-  sauce/internal/implicit_provider_injection.h \
-  sauce/internal/injector_injection.h \
-  sauce/internal/new_injection.h \
-  sauce/internal/new_injection.h.pump \
-  sauce/internal/provider_injection.h \
+  sauce/internal/implicit_provider_binding.h \
+  sauce/internal/injector_binding.h \
+  sauce/internal/new_binding.h \
+  sauce/internal/new_binding.h.pump \
+  sauce/internal/provider_binding.h \
   sauce/internal/key.h \
   sauce/internal/locker_factory.h \
   sauce/internal/memory/boost.h \
@@ -301,7 +301,7 @@ endif DX_COND_doc
 #
 
 # Generate templated headers from their "pump" sources
-sauce/internal/new_injection.h: sauce/internal/new_injection.h.pump
+sauce/internal/new_binding.h: sauce/internal/new_binding.h.pump
 	vendor/pump.py $+
 
 # This must be the last section so that the corrosponding variables have their final values.
