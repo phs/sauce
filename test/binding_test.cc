@@ -298,8 +298,8 @@ TEST(BindingTest, shouldProvideDynamicallyNamedRequestsThatHaveDependencies) {
   modules.add(&DynamicallyNamedBindingWithADependencyModule);
   sauce::shared_ptr<Injector> injector(modules.createInjector());
 
-  // This does *not* throw UnboundException
-  // injector->get<BirdCage>("golden"); // TODO
+  // This does *not* throw UnboundException (this is a regression test.)
+  injector->get<BirdCage>("golden");
 }
 
 void IncompleteNamedModule(Binder & binder) {
