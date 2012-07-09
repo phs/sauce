@@ -12,7 +12,6 @@
 
 namespace sauce {
 namespace internal {
-namespace injections {
 
 template<typename Dependency, typename Name>
 class ImplicitProviderInjection;
@@ -77,10 +76,8 @@ public:
 };
 
 }
-}
 
 namespace i = ::sauce::internal;
-namespace inj = ::sauce::internal::injections;
 
 }
 

@@ -15,7 +15,6 @@ $var n = 10  $$ The maximum arity we support.
 
 namespace sauce {
 namespace internal {
-namespace injections {
 
 $range includeParens 0..1
 $for includeParens [[
@@ -146,10 +145,8 @@ public:
 ]]
 
 }
-}
 
 namespace i = ::sauce::internal;
-namespace inj = ::sauce::internal::injections;
 
 }
 

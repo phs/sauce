@@ -8,7 +8,6 @@
 
 namespace sauce {
 namespace internal {
-namespace injections {
 
 /**
  * An injection that provides the injector itself.
@@ -31,10 +30,8 @@ public:
 };
 
 }
-}
 
 namespace i = ::sauce::internal;
-namespace inj = ::sauce::internal::injections;
 
 }
 

@@ -10,7 +10,6 @@
 
 namespace sauce {
 namespace internal {
-namespace injections {
 
 /**
  * An injection that provides from the configured provider.
@@ -31,10 +30,8 @@ public:
 };
 
 }
-}
 
 namespace i = ::sauce::internal;
-namespace inj = ::sauce::internal::injections;
 
 }
 

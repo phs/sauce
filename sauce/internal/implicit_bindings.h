@@ -65,7 +65,7 @@ struct ImplicitBindings {
  * The implicit Injector binding.
  */
 template<>
-struct ImplicitBinding<Named<Injector, Unnamed> >: ImplicitBindingTraits<inj::InjectorInjection> {
+struct ImplicitBinding<Named<Injector, Unnamed> >: ImplicitBindingTraits<i::InjectorInjection> {
   static BindingPtr get(ConcreteBindings const &, std::string const name) {
     if (name != unnamed()) {
       throw UnboundExceptionFor<Named<Injector, Unnamed> >(name);
@@ -80,7 +80,7 @@ struct ImplicitBinding<Named<Injector, Unnamed> >: ImplicitBindingTraits<inj::In
  */
 template<typename ProvidedDependency, typename Name>
 struct ImplicitBinding<Named<Provider<ProvidedDependency>, Name> > {
-  typedef ImplicitBindingTraits<inj::ImplicitProviderInjection<ProvidedDependency, Name> > Traits;
+  typedef ImplicitBindingTraits<i::ImplicitProviderInjection<ProvidedDependency, Name> > Traits;
   typedef typename Traits::ImplicitInjection ImplicitInjection;
   typedef typename Traits::Dependency Dependency;
   typedef typename Traits::InjectionPtr InjectionPtr;

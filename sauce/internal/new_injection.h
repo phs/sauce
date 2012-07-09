@@ -16,7 +16,6 @@
 
 namespace sauce {
 namespace internal {
-namespace injections {
 
 /* *INDENT-OFF* */
 template<typename Dependency, typename Scope, typename Impl, typename Allocator>
@@ -839,10 +838,8 @@ public:
 /* *INDENT-ON* */
 
 }
-}
 
 namespace i = ::sauce::internal;
-namespace inj = ::sauce::internal::injections;
 
 }
 
