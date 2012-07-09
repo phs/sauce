@@ -12,7 +12,7 @@ namespace internal {
 /**
  * An injection that provides the injector itself.
  */
-class InjectorInjection: public Binding<Key<Injector>::Normalized, NoScope> {
+class InjectorBinding: public Binding<Key<Injector>::Normalized, NoScope> {
 
   void validateAcyclic(InjectorPtr, TypeIds &) const {}
 

@@ -22,13 +22,13 @@ $var specializationParameters = [[$if includeParens==1 [[<Dependency, Scope, Imp
 
 /* *INDENT-OFF* */
 template<typename Dependency, typename Scope, typename Impl, typename Allocator>
-class NewInjection$specializationParameters:
+class NewBinding$specializationParameters:
   public Binding<Dependency, Scope> {
 
   typedef typename Key<Dependency>::Iface Iface;
   typedef typename Key<Dependency>::Ptr Ptr;
   typedef typename Allocator::template rebind<Impl>::other ImplAllocator;
-  typedef NewInjection<Dependency, Scope, Impl$parens, Allocator> New;
+  typedef NewBinding<Dependency, Scope, Impl$parens, Allocator> New;
   typedef DisposalDeleter<Iface, New> Deleter;
 
   friend class DisposalDeleter<Iface, New>;
@@ -43,7 +43,7 @@ public:
 
   typedef typename ResolvedBinding<Dependency>::BindingPtr BindingPtr;
 
-  NewInjection():
+  NewBinding():
     allocator() {}
 
   /**
@@ -79,13 +79,13 @@ $var as = [[$for j, [[a$j]]]]
 
 /* *INDENT-OFF* */
 template<typename Dependency, typename Scope, typename Impl, typename Allocator$comma_typename_As>
-class NewInjection<Dependency, Scope, Impl($As), Allocator>:
+class NewBinding<Dependency, Scope, Impl($As), Allocator>:
   public Binding<Dependency, Scope> {
 
   typedef typename Key<Dependency>::Iface Iface;
   typedef typename Key<Dependency>::Ptr Ptr;
   typedef typename Allocator::template rebind<Impl>::other ImplAllocator;
-  typedef NewInjection<Dependency, Scope, Impl($As), Allocator> New;
+  typedef NewBinding<Dependency, Scope, Impl($As), Allocator> New;
   typedef DisposalDeleter<Iface, New> Deleter;
 
   friend class DisposalDeleter<Iface, New>;
@@ -109,7 +109,7 @@ public:
 
   typedef typename ResolvedBinding<Dependency>::BindingPtr BindingPtr;
 
-  NewInjection():
+  NewBinding():
     allocator(),
     dynamicDependencyNames($i, unnamed()) {}
 

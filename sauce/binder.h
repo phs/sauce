@@ -112,7 +112,7 @@ class ToProviderClause: public i::FinalClause<ProviderDependency, Scope, Provide
   typedef Named<Iface, Name> Dependency;
 
   void onComplete() {
-    this->bindExtra(i::ProviderInjection<Dependency, Scope, ProviderDependency>());
+    this->bindExtra(i::ProviderBinding<Dependency, Scope, ProviderDependency>());
     this->bind();
   }
 

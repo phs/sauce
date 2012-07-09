@@ -180,7 +180,7 @@ protected:
   }
 
   void bind() {
-    typedef i::NewInjection<Dependency, Scope, Ctor, Allocator> BoundInjection;
+    typedef i::NewBinding<Dependency, Scope, Ctor, Allocator> BoundInjection;
     state->template bind<BoundInjection>();
   }
 

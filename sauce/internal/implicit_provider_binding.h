@@ -14,7 +14,7 @@ namespace sauce {
 namespace internal {
 
 template<typename Dependency, typename Name>
-class ImplicitProviderInjection;
+class ImplicitProviderBinding;
 
 /**
  * A Provider for an explicitly-bound Dependency.
@@ -27,7 +27,7 @@ class ImplicitProvider: public Provider<Dependency> {
   BindingPtr binding;
   InjectorPtr injector;
 
-  friend class ImplicitProviderInjection<Dependency, Name>;
+  friend class ImplicitProviderBinding<Dependency, Name>;
 
   ImplicitProvider(BindingPtr binding, InjectorPtr injector):
     Provider<Dependency>(),
@@ -45,7 +45,7 @@ public:
  * An injection that provides Providers for an already-bound dependency.
  */
 template<typename Dependency, typename Name>
-class ImplicitProviderInjection:
+class ImplicitProviderBinding:
   public Binding<Named<Provider<Dependency>, Name>, NoScope>,
   public ProviderFriend {
 
@@ -62,7 +62,7 @@ public:
 
   typedef typename ResolvedBinding<ProviderDependency>::BindingPtr BindingPtr;
 
-  ImplicitProviderInjection(ProvidedBindingPtr providedBinding):
+  ImplicitProviderBinding(ProvidedBindingPtr providedBinding):
     Binding<Named<Provider<Dependency>, Name>, NoScope>(),
     ProviderFriend(),
     providedBinding(providedBinding) {}

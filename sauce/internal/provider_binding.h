@@ -15,7 +15,7 @@ namespace internal {
  * An injection that provides from the configured provider.
  */
 template<typename Dependency, typename Scope, typename Provider>
-class ProviderInjection: public Binding<Dependency, Scope> {
+class ProviderBinding: public Binding<Dependency, Scope> {
 public:
   typedef typename ResolvedBinding<Dependency>::BindingPtr BindingPtr;
 
