@@ -3493,7 +3493,6 @@
     <path>/Users/phil/code/sauce/sauce/internal/</path>
     <filename>dir_be47d98664d676f0a5d32321a98a37c8.html</filename>
     <dir>sauce/internal/memory/</dir>
-    <file>all.h</file>
     <file>base_injector.h</file>
     <file>binding.h</file>
     <file>bindings.h</file>

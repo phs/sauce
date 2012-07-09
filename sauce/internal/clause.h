@@ -9,9 +9,10 @@
 #include <sauce/memory.h>
 #include <sauce/named.h>
 #include <sauce/internal/bindings.h>
-#include <sauce/internal/all.h>
-#include <sauce/internal/pending_thrower.h>
+#include <sauce/internal/new_binding.h>
 #include <sauce/internal/opaque_binding.h>
+#include <sauce/internal/pending_thrower.h>
+#include <sauce/internal/provider_binding.h>
 
 namespace sauce {
 namespace internal {

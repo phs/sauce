@@ -66,7 +66,6 @@ nobase_include_HEADERS += \
   sauce/internal/disposal_deleter.h \
   sauce/internal/implicit_bindings.h \
   sauce/internal/binding.h \
-  sauce/internal/all.h \
   sauce/internal/implicit_provider_binding.h \
   sauce/internal/injector_binding.h \
   sauce/internal/new_binding.h \
@@ -99,7 +98,6 @@ EXTRA_DIST += \
   sauce/internal/disposal_deleter.h \
   sauce/internal/implicit_bindings.h \
   sauce/internal/binding.h \
-  sauce/internal/all.h \
   sauce/internal/implicit_provider_binding.h \
   sauce/internal/injector_binding.h \
   sauce/internal/new_binding.h \
