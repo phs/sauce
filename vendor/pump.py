@@ -30,6 +30,8 @@
 # OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 # This file was taken from gmock-1.5.0
+# The following modifications have been made:
+#   * MAX_LINE_WIDTH = 80 was extracted.
 
 """pump v0.1 - Pretty Useful for Meta Programming.
 
@@ -86,6 +88,7 @@ TOKEN_TABLE = [
     (re.compile(r'\]\]\n?'), ']]'),
     ]
 
+MAX_LINE_WIDTH = 80
 
 class Cursor:
   """Represents a position (line and column) in a text file."""
@@ -718,7 +721,7 @@ def WrapComment(line, output):
     output.append(before_comment)
     indent = len(before_comment) - len(before_comment.lstrip())
   prefix = indent*' ' + '// '
-  max_len = 80 - len(prefix)
+  max_len = MAX_LINE_WIDTH - len(prefix)
   comment = line[loc + 2:].strip()
   segs = [seg for seg in re.split(r'(\w+\W*)', comment) if seg != '']
   cur_line = ''
@@ -736,7 +739,7 @@ def WrapComment(line, output):
 def WrapCode(line, line_concat, output):
   indent = len(line) - len(line.lstrip())
   prefix = indent*' '  # Prefix of the current line
-  max_len = 80 - indent - len(line_concat)  # Maximum length of the current line
+  max_len = MAX_LINE_WIDTH - indent - len(line_concat)  # Maximum length of the current line
   new_prefix = prefix + 4*' '  # Prefix of a continuation line
   new_max_len = max_len - 4  # Maximum length of a continuation line
   # Prefers to wrap a line after a ',' or ';'.
@@ -778,7 +781,7 @@ def IsHeaderGuardOrInclude(line):
 
 def WrapLongLine(line, output):
   line = line.rstrip()
-  if len(line) <= 80:
+  if len(line) <= MAX_LINE_WIDTH:
     output.append(line)
   elif IsComment(line):
     if IsHeaderGuardOrInclude(line):
