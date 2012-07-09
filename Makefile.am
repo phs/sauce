@@ -72,7 +72,6 @@ nobase_include_HEADERS += \
   sauce/internal/new_injection.h \
   sauce/internal/new_injection.h.pump \
   sauce/internal/provider_injection.h \
-  sauce/internal/providing_injection.h \
   sauce/internal/key.h \
   sauce/internal/locker_factory.h \
   sauce/internal/memory/boost.h \
@@ -106,7 +105,6 @@ EXTRA_DIST += \
   sauce/internal/new_injection.h \
   sauce/internal/new_injection.h.pump \
   sauce/internal/provider_injection.h \
-  sauce/internal/providing_injection.h \
   sauce/internal/key.h \
   sauce/internal/locker_factory.h \
   sauce/internal/memory/boost.h \

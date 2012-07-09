@@ -122,7 +122,7 @@
 , <a class="el" href="structsauce_1_1internal_1_1_resolved_binding.html#a7ff0341fe08ae52a0f03a35ad6dd3c79">sauce::internal::ResolvedBinding&lt; Dependency &gt;</a>
 </li>
 <li>getName()
-: <a class="el" href="classsauce_1_1internal_1_1_binding.html#ab8e8116e7e5cf5112d6d19decdb5315a">sauce::internal::Binding&lt; Dependency, Scope &gt;</a>
+: <a class="el" href="classsauce_1_1internal_1_1_binding.html#ae7bf0f08a99b2346aca54988a13bad99">sauce::internal::Binding&lt; Dependency_, Scope &gt;</a>
 , <a class="el" href="structsauce_1_1internal_1_1_opaque_binding.html#aa22bfd5e4d4459c2e3379ab6802d0285">sauce::internal::OpaqueBinding</a>
 </li>
 <li>getScopeKey()
@@ -154,20 +154,21 @@
 
 <h3><a class="anchor" id="index_p"></a>- p -</h3><ul>
 <li>provide()
-: <a class="el" href="classsauce_1_1internal_1_1_injector_injection.html#a77119aa0cacaddffa8cdf71b6557ff60">sauce::internal::InjectorInjection</a>
-, <a class="el" href="classsauce_1_1internal_1_1_new_injection.html#ae27611bf4518e41ba0e4b6807abac4b3">sauce::internal::NewInjection&lt; Dependency, Scope, Impl, Allocator &gt;</a>
-, <a class="el" href="classsauce_1_1internal_1_1_new_injection_3_01_dependency_00_01_scope_00_01_impl_07_a1_08_00_01_allocator_01_4.html#a7627d6f5bca1681a7c5ff5795feb82aa">sauce::internal::NewInjection&lt; Dependency, Scope, Impl(A1), Allocator &gt;</a>
+: <a class="el" href="classsauce_1_1internal_1_1_implicit_provider_injection.html#a6492260ccfa41b805b92a364fa54c3aa">sauce::internal::ImplicitProviderInjection&lt; Dependency, Name &gt;</a>
+, <a class="el" href="classsauce_1_1internal_1_1_injector_injection.html#a77119aa0cacaddffa8cdf71b6557ff60">sauce::internal::InjectorInjection</a>
+, <a class="el" href="classsauce_1_1internal_1_1_new_injection_3_01_dependency_00_01_scope_00_01_impl_07_08_00_01_allocator_01_4.html#a4afab62ae858843b46656e7e7b30b508">sauce::internal::NewInjection&lt; Dependency, Scope, Impl(), Allocator &gt;</a>
 , <a class="el" href="classsauce_1_1internal_1_1_provider_injection.html#a42143188f14f39712485d03226d0d314">sauce::internal::ProviderInjection&lt; Dependency, Scope, Provider &gt;</a>
 , <a class="el" href="classsauce_1_1internal_1_1_new_injection_3_01_dependency_00_01_scope_00_01_impl_07_a1_00_01_a2_05a2023df50b7c9de9b8e631879c77bba.html#a363fb3b371c445f6670c12d0f4147648">sauce::internal::NewInjection&lt; Dependency, Scope, Impl(A1, A2, A3, A4, A5, A6, A7, A8, A9, A10), Allocator &gt;</a>
 , <a class="el" href="classsauce_1_1internal_1_1_new_injection_3_01_dependency_00_01_scope_00_01_impl_07_a1_00_01_a2_06c7952b911b07320514a7eec9df86e99.html#a14fe356b9ce975a57c4743fb821721e8">sauce::internal::NewInjection&lt; Dependency, Scope, Impl(A1, A2, A3, A4, A5, A6, A7, A8, A9), Allocator &gt;</a>
 , <a class="el" href="classsauce_1_1internal_1_1_new_injection_3_01_dependency_00_01_scope_00_01_impl_07_a1_00_01_a2_0c34a1a8bb22a048816dba2ff6ea71f43.html#abdcde244a04fff958f8f5f7ef91631d3">sauce::internal::NewInjection&lt; Dependency, Scope, Impl(A1, A2, A3, A4, A5, A6, A7, A8), Allocator &gt;</a>
 , <a class="el" href="classsauce_1_1internal_1_1_new_injection_3_01_dependency_00_01_scope_00_01_impl_07_a1_00_01_a2_05fa36adfdc1a66770fce7aac54ca1bd5.html#a2692c9d691d848c5865e0d65a2891e2b">sauce::internal::NewInjection&lt; Dependency, Scope, Impl(A1, A2, A3, A4, A5, A6, A7), Allocator &gt;</a>
-, <a class="el" href="classsauce_1_1internal_1_1_new_injection_3_01_dependency_00_01_scope_00_01_impl_07_a1_00_01_a2_08b58f6ffef76cde3ada2780a99c763bb.html#ac634e376ef9dc77ae60d0b642182851a">sauce::internal::NewInjection&lt; Dependency, Scope, Impl(A1, A2, A3, A4, A5), Allocator &gt;</a>
 , <a class="el" href="classsauce_1_1internal_1_1_new_injection_3_01_dependency_00_01_scope_00_01_impl_07_a1_00_01_a2_049e2ee55855e789a8ae19d05a544ed4f.html#a9d40cef47650578478590af2ac2c926f">sauce::internal::NewInjection&lt; Dependency, Scope, Impl(A1, A2, A3, A4, A5, A6), Allocator &gt;</a>
 , <a class="el" href="classsauce_1_1internal_1_1_new_injection_3_01_dependency_00_01_scope_00_01_impl_07_a1_00_01_a2_0dbb764aa71d636e5cb0da0d618691035.html#a1f05db25076c311e1a9602c971630b8d">sauce::internal::NewInjection&lt; Dependency, Scope, Impl(A1, A2, A3, A4), Allocator &gt;</a>
+, <a class="el" href="classsauce_1_1internal_1_1_new_injection_3_01_dependency_00_01_scope_00_01_impl_07_a1_00_01_a2_08b58f6ffef76cde3ada2780a99c763bb.html#ac634e376ef9dc77ae60d0b642182851a">sauce::internal::NewInjection&lt; Dependency, Scope, Impl(A1, A2, A3, A4, A5), Allocator &gt;</a>
 , <a class="el" href="classsauce_1_1internal_1_1_new_injection_3_01_dependency_00_01_scope_00_01_impl_07_a1_00_01_a2_00_01_a3_08_00_01_allocator_01_4.html#a9d98a0ee281e4d85392fab561e879b59">sauce::internal::NewInjection&lt; Dependency, Scope, Impl(A1, A2, A3), Allocator &gt;</a>
 , <a class="el" href="classsauce_1_1internal_1_1_new_injection_3_01_dependency_00_01_scope_00_01_impl_07_a1_00_01_a2_08_00_01_allocator_01_4.html#aba09e83cbc6c4cad2cbac5358252cc31">sauce::internal::NewInjection&lt; Dependency, Scope, Impl(A1, A2), Allocator &gt;</a>
-, <a class="el" href="classsauce_1_1internal_1_1_new_injection_3_01_dependency_00_01_scope_00_01_impl_07_08_00_01_allocator_01_4.html#a4afab62ae858843b46656e7e7b30b508">sauce::internal::NewInjection&lt; Dependency, Scope, Impl(), Allocator &gt;</a>
+, <a class="el" href="classsauce_1_1internal_1_1_new_injection_3_01_dependency_00_01_scope_00_01_impl_07_a1_08_00_01_allocator_01_4.html#a7627d6f5bca1681a7c5ff5795feb82aa">sauce::internal::NewInjection&lt; Dependency, Scope, Impl(A1), Allocator &gt;</a>
+, <a class="el" href="classsauce_1_1internal_1_1_new_injection.html#ae27611bf4518e41ba0e4b6807abac4b3">sauce::internal::NewInjection&lt; Dependency, Scope, Impl, Allocator &gt;</a>
 </li>
 <li>put()
 : <a class="el" href="classsauce_1_1internal_1_1_bindings.html#aa0ca489e85131a5f772f02752e4af4e5">sauce::internal::Bindings&lt; ImplicitBindings &gt;</a>
@@ -182,7 +183,7 @@
 </li>
 <li>setName()
 : <a class="el" href="structsauce_1_1internal_1_1_opaque_binding.html#aebbd72acc376d0f4733e51a13f94db99">sauce::internal::OpaqueBinding</a>
-, <a class="el" href="classsauce_1_1internal_1_1_binding.html#af62e7eebe2f188cd2660a9163d2e1dbd">sauce::internal::Binding&lt; Dependency, Scope &gt;</a>
+, <a class="el" href="classsauce_1_1internal_1_1_binding.html#a195b6fc17905a087a72fb6c515736254">sauce::internal::Binding&lt; Dependency_, Scope &gt;</a>
 </li>
 </ul>
 
