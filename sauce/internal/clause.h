@@ -26,7 +26,7 @@ class ClauseState {
   Bindings<ImplicitBindings> & bindings;
   PendingThrower & pendingThrower;
   OpaqueBindingPtr pendingBinding;
-  std::vector<OpaqueBindingPtr> extraPendingBindings;
+  OpaqueBindingPtr providerBinding;
   std::string dynamicName;
   std::vector<std::string> dynamicDependencyNames;
   bool finalizedProvision;
@@ -50,7 +50,7 @@ public:
     bindings(bindings),
     pendingThrower(pendingThrower),
     pendingBinding(),
-    extraPendingBindings(),
+    providerBinding(),
     dynamicName(unnamed()),
     dynamicDependencyNames(),
     finalizedProvision(false) {
@@ -64,22 +64,20 @@ public:
       bindings.put(pendingBinding);
     }
 
-    typedef std::vector<OpaqueBindingPtr>::iterator I;
-    for (I i = extraPendingBindings.begin(); i != extraPendingBindings.end(); ++i) {
-      bindings.put(*i);
+    if (providerBinding.get() != NULL) {
+      bindings.put(providerBinding);
     }
   }
 
-  template<typename BoundInjection>
+  template<typename Bound>
   void bind() {
     assert(!finalizedProvision);
-    pendingBinding.reset(new BoundInjection());
+    pendingBinding.reset(new Bound());
   }
 
-  template<typename BoundInjection>
-  void bindExtra() {
-    OpaqueBindingPtr extra(new BoundInjection());
-    extraPendingBindings.push_back(extra);
+  template<typename Bound>
+  void bindProvider() {
+    providerBinding.reset(new Bound());
   }
 
   void setDynamicName(std::string const name) {
@@ -181,16 +179,16 @@ protected:
   }
 
   void bind() {
-    typedef i::NewBinding<Dependency, Scope, Ctor, Allocator> BoundInjection;
-    state->template bind<BoundInjection>();
+    typedef i::NewBinding<Dependency, Scope, Ctor, Allocator> Bound;
+    state->template bind<Bound>();
   }
 
-  void bindExtra() {
+  void bindProvider() {
     typedef typename i::Key<Dependency>::Iface::Iface Iface;
     typedef typename i::Key<Dependency>::Name Name;
     typedef Named<Iface, Name> ProvidedDependency;
-    typedef i::ProviderBinding<ProvidedDependency, Scope, Dependency> BoundInjection;
-    state->template bindExtra<BoundInjection>();
+    typedef i::ProviderBinding<ProvidedDependency, Scope, Dependency> Bound;
+    state->template bindProvider<Bound>();
   }
 
   void bindDynamicDependencyName(unsigned int position, std::string const name) {
