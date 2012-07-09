@@ -110,12 +110,8 @@ public:
 template<typename ProviderDependency, typename Scope, typename ProviderCtor>
 class ToProviderClause: public i::FinalClause<ProviderDependency, Scope, ProviderCtor, std::allocator<int> > {
 
-  typedef typename i::Key<ProviderDependency>::Iface::Iface Iface;
-  typedef typename i::Key<ProviderDependency>::Name Name;
-  typedef Named<Iface, Name> Dependency;
-
   void onComplete() {
-    this->bindExtra(i::ProviderBinding<Dependency, Scope, ProviderDependency>());
+    this->template bindExtra<ProviderDependency>();
     this->bind();
   }
 
