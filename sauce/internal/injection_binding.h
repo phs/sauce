@@ -15,10 +15,10 @@ namespace sauce {
 namespace internal {
 
 /**
- * A binding that uses injections to satisfy dependencies.
+ * The base class of all actual binding implementations.
  */
 template<typename Dependency, typename Scope>
-class InjectionBinding:
+class Binding:
   public ResolvedBinding<Dependency>,
   public InjectorFriend {
 
@@ -93,7 +93,7 @@ class InjectionBinding:
 
 public:
 
-  InjectionBinding():
+  Binding():
     name(unnamed()) {}
 
   /**

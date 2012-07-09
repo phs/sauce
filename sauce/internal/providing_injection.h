@@ -14,7 +14,7 @@ namespace internal {
  * A strategy for satisfying provisions for the given interface.
  */
 template<typename Dependency_, typename Scope>
-class ProvidingInjection: public InjectionBinding<Dependency_, Scope> {
+class ProvidingInjection: public Binding<Dependency_, Scope> {
 public:
 
   typedef typename Key<Dependency_>::Normalized Dependency;
@@ -23,7 +23,7 @@ public:
   typedef typename ResolvedBinding<Dependency_>::BindingPtr BindingPtr;
 
   ProvidingInjection():
-    InjectionBinding<Dependency_, Scope>() {}
+    Binding<Dependency_, Scope>() {}
 
 };
 
