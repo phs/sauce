@@ -106,9 +106,7 @@ public:
 template<typename ProviderDependency, typename Scope, typename ProviderCtor>
 class ToProviderClause: public i::FinalClause<ProviderDependency, Scope, ProviderCtor, std::allocator<int> > {
 
-  void onComplete() {
-    this->bindProvider();
-  }
+  void onComplete() {}
 
 public:
 

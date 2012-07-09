@@ -105,11 +105,6 @@ public:
     providerBinding = creator.create();
   }
 
-  template<typename Dependency, typename Scope, typename Provider>
-  void bindProvider() {
-    // providerBinding.reset(new i::ProviderBinding<Dependency, Scope, Provider>());
-  }
-
   void setDynamicName(std::string const name) {
     this->dynamicName = name;
   }
@@ -208,13 +203,6 @@ protected:
 
   void bindNew() {
     state->template bindNew<Dependency, Scope, Ctor, Allocator>();
-  }
-
-  void bindProvider() {
-    typedef typename i::Key<Dependency>::Iface::Iface Iface;
-    typedef typename i::Key<Dependency>::Name Name;
-    typedef Named<Iface, Name> ProvidedDependency;
-    state->template bindProvider<ProvidedDependency, Scope, Dependency>();
   }
 
   void bindDynamicDependencyName(unsigned int position, std::string const name) {
