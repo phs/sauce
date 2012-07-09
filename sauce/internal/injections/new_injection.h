@@ -38,7 +38,6 @@ class NewInjection<Dependency, Scope, Impl(), Allocator>:
   friend class DisposalDeleter<Iface, New>;
 
   mutable ImplAllocator allocator;
-  std::vector<std::string> dynamicDependencyNames;
 
   void validateAcyclic(InjectorPtr, TypeIds &) const {}
 
@@ -51,8 +50,7 @@ public:
   typedef typename ResolvedBinding<Dependency>::BindingPtr BindingPtr;
 
   NewInjection():
-    allocator(),
-    dynamicDependencyNames(0, unnamed()) {}
+    allocator() {}
 
   /**
    * Provide an Iface.
