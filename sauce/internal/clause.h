@@ -72,14 +72,12 @@ public:
   template<typename Dependency, typename Scope, typename Ctor, typename Allocator>
   void bindNew() {
     assert(!finalizedProvision);
-    typedef i::NewBinding<Dependency, Scope, Ctor, Allocator> Bound;
-    pendingBinding.reset(new Bound());
+    pendingBinding.reset(new i::NewBinding<Dependency, Scope, Ctor, Allocator>());
   }
 
   template<typename Dependency, typename Scope, typename Provider>
   void bindProvider() {
-    typedef i::ProviderBinding<Dependency, Scope, Provider> Bound;
-    providerBinding.reset(new Bound());
+    providerBinding.reset(new i::ProviderBinding<Dependency, Scope, Provider>());
   }
 
   void setDynamicName(std::string const name) {
