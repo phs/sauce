@@ -25,7 +25,6 @@ template<typename ImplicitInjection_>
 struct ImplicitBindingTraits {
   typedef ImplicitInjection_ ImplicitInjection;
   typedef typename ImplicitInjection::Dependency Dependency;
-  typedef typename ImplicitInjection::InjectionPtr InjectionPtr;
   typedef typename ResolvedBinding<Dependency>::BindingPtr BindingPtr;
 };
 
@@ -83,7 +82,6 @@ struct ImplicitBinding<Named<Provider<ProvidedDependency>, Name> > {
   typedef ImplicitBindingTraits<i::ImplicitProviderInjection<ProvidedDependency, Name> > Traits;
   typedef typename Traits::ImplicitInjection ImplicitInjection;
   typedef typename Traits::Dependency Dependency;
-  typedef typename Traits::InjectionPtr InjectionPtr;
   typedef typename Traits::BindingPtr BindingPtr;
 
   static BindingPtr get(ConcreteBindings const & bindings, std::string const name) {

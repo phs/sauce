@@ -60,7 +60,6 @@ class ImplicitProviderInjection:
 
 public:
 
-  typedef typename ProvidingInjection<ProviderDependency, NoScope>::InjectionPtr InjectionPtr;
   typedef typename ResolvedBinding<ProviderDependency>::BindingPtr BindingPtr;
 
   ImplicitProviderInjection(ProvidedBindingPtr providedBinding):

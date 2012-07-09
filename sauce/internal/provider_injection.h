@@ -17,7 +17,6 @@ namespace internal {
 template<typename Dependency, typename Scope, typename Provider>
 class ProviderInjection: public ProvidingInjection<Dependency, Scope> {
 public:
-  typedef typename ProvidingInjection<Dependency, Scope>::InjectionPtr InjectionPtr;
   typedef typename ResolvedBinding<Dependency>::BindingPtr BindingPtr;
 
   void validateAcyclic(InjectorPtr injector, TypeIds & ids) const {

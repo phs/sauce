@@ -17,8 +17,6 @@ template<typename Dependency_, typename Scope>
 class ProvidingInjection: public Binding<Dependency_, Scope> {
 public:
 
-  typedef sauce::shared_ptr<ProvidingInjection<Dependency_, Scope> > InjectionPtr;
-
   ProvidingInjection():
     Binding<Dependency_, Scope>() {}
 

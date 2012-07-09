@@ -42,7 +42,6 @@ class NewInjection$specializationParameters:
 
 public:
 
-  typedef typename ProvidingInjection<Dependency, Scope>::InjectionPtr InjectionPtr;
   typedef typename ResolvedBinding<Dependency>::BindingPtr BindingPtr;
 
   NewInjection():
@@ -109,7 +108,6 @@ class NewInjection<Dependency, Scope, Impl($As), Allocator>:
 
 public:
 
-  typedef typename ProvidingInjection<Dependency, Scope>::InjectionPtr InjectionPtr;
   typedef typename ResolvedBinding<Dependency>::BindingPtr BindingPtr;
 
   NewInjection():

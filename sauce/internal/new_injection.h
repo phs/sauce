@@ -38,7 +38,6 @@ class NewInjection:
 
 public:
 
-  typedef typename ProvidingInjection<Dependency, Scope>::InjectionPtr InjectionPtr;
   typedef typename ResolvedBinding<Dependency>::BindingPtr BindingPtr;
 
   NewInjection():
@@ -87,7 +86,6 @@ class NewInjection<Dependency, Scope, Impl(), Allocator>:
 
 public:
 
-  typedef typename ProvidingInjection<Dependency, Scope>::InjectionPtr InjectionPtr;
   typedef typename ResolvedBinding<Dependency>::BindingPtr BindingPtr;
 
   NewInjection():
@@ -142,7 +140,6 @@ class NewInjection<Dependency, Scope, Impl(A1), Allocator>:
 
 public:
 
-  typedef typename ProvidingInjection<Dependency, Scope>::InjectionPtr InjectionPtr;
   typedef typename ResolvedBinding<Dependency>::BindingPtr BindingPtr;
 
   NewInjection():
@@ -201,7 +198,6 @@ class NewInjection<Dependency, Scope, Impl(A1, A2), Allocator>:
 
 public:
 
-  typedef typename ProvidingInjection<Dependency, Scope>::InjectionPtr InjectionPtr;
   typedef typename ResolvedBinding<Dependency>::BindingPtr BindingPtr;
 
   NewInjection():
@@ -263,7 +259,6 @@ class NewInjection<Dependency, Scope, Impl(A1, A2, A3), Allocator>:
 
 public:
 
-  typedef typename ProvidingInjection<Dependency, Scope>::InjectionPtr InjectionPtr;
   typedef typename ResolvedBinding<Dependency>::BindingPtr BindingPtr;
 
   NewInjection():
@@ -329,7 +324,6 @@ class NewInjection<Dependency, Scope, Impl(A1, A2, A3, A4), Allocator>:
 
 public:
 
-  typedef typename ProvidingInjection<Dependency, Scope>::InjectionPtr InjectionPtr;
   typedef typename ResolvedBinding<Dependency>::BindingPtr BindingPtr;
 
   NewInjection():
@@ -398,7 +392,6 @@ class NewInjection<Dependency, Scope, Impl(A1, A2, A3, A4, A5), Allocator>:
 
 public:
 
-  typedef typename ProvidingInjection<Dependency, Scope>::InjectionPtr InjectionPtr;
   typedef typename ResolvedBinding<Dependency>::BindingPtr BindingPtr;
 
   NewInjection():
@@ -470,7 +463,6 @@ class NewInjection<Dependency, Scope, Impl(A1, A2, A3, A4, A5, A6), Allocator>:
 
 public:
 
-  typedef typename ProvidingInjection<Dependency, Scope>::InjectionPtr InjectionPtr;
   typedef typename ResolvedBinding<Dependency>::BindingPtr BindingPtr;
 
   NewInjection():
@@ -545,7 +537,6 @@ class NewInjection<Dependency, Scope, Impl(A1, A2, A3, A4, A5, A6, A7), Allocato
 
 public:
 
-  typedef typename ProvidingInjection<Dependency, Scope>::InjectionPtr InjectionPtr;
   typedef typename ResolvedBinding<Dependency>::BindingPtr BindingPtr;
 
   NewInjection():
@@ -623,7 +614,6 @@ class NewInjection<Dependency, Scope, Impl(A1, A2, A3, A4, A5, A6, A7, A8), Allo
 
 public:
 
-  typedef typename ProvidingInjection<Dependency, Scope>::InjectionPtr InjectionPtr;
   typedef typename ResolvedBinding<Dependency>::BindingPtr BindingPtr;
 
   NewInjection():
@@ -704,7 +694,6 @@ class NewInjection<Dependency, Scope, Impl(A1, A2, A3, A4, A5, A6, A7, A8, A9), 
 
 public:
 
-  typedef typename ProvidingInjection<Dependency, Scope>::InjectionPtr InjectionPtr;
   typedef typename ResolvedBinding<Dependency>::BindingPtr BindingPtr;
 
   NewInjection():
@@ -788,7 +777,6 @@ class NewInjection<Dependency, Scope, Impl(A1, A2, A3, A4, A5, A6, A7, A8, A9, A
 
 public:
 
-  typedef typename ProvidingInjection<Dependency, Scope>::InjectionPtr InjectionPtr;
   typedef typename ResolvedBinding<Dependency>::BindingPtr BindingPtr;
 
   NewInjection():
