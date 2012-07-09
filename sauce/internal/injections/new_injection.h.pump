@@ -17,20 +17,20 @@ namespace sauce {
 namespace internal {
 namespace injections {
 
-/* *INDENT-OFF* */
-template<typename Dependency, typename Scope, typename Constructor, typename Allocator>
-class NewInjection;
-/* *INDENT-ON* */
+$range includeParens 0..1
+$for includeParens [[
+$var parens = [[$if includeParens==1 [[()]]]]
+$var specializationParameters = [[$if includeParens==1 [[<Dependency, Scope, Impl(), Allocator>]]]]
 
 /* *INDENT-OFF* */
 template<typename Dependency, typename Scope, typename Impl, typename Allocator>
-class NewInjection<Dependency, Scope, Impl(), Allocator>:
+class NewInjection$specializationParameters:
   public ProvidingInjection<Dependency, Scope> {
 
   typedef typename Key<Dependency>::Iface Iface;
   typedef typename Key<Dependency>::Ptr Ptr;
   typedef typename Allocator::template rebind<Impl>::other ImplAllocator;
-  typedef NewInjection<Dependency, Scope, Impl(), Allocator> New;
+  typedef NewInjection<Dependency, Scope, Impl$parens, Allocator> New;
   typedef DisposalDeleter<Iface, New> Deleter;
 
   friend class DisposalDeleter<Iface, New>;
@@ -70,6 +70,8 @@ public:
   }
 };
 /* *INDENT-ON* */
+
+]]
 
 $range i 1..n
 $for i [[

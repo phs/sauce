@@ -30,8 +30,7 @@ TEST(BindingTest, shouldProvideBoundDependenciesAndTheirProvidersToo) {
 }
 
 void ForgotTheParensModule(Binder & binder) {
-  binder.bind<Bound>().to<Bound()>();
-  // binder.bind<Bound>().to<Bound>(); // TODO
+  binder.bind<Bound>().to<Bound>();
 }
 
 TEST(BindingTest, shouldInterpretNonFunctionTypesAsNoArgumentConstructors) {

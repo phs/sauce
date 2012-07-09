@@ -19,8 +19,52 @@ namespace internal {
 namespace injections {
 
 /* *INDENT-OFF* */
-template<typename Dependency, typename Scope, typename Constructor, typename Allocator>
-class NewInjection;
+template<typename Dependency, typename Scope, typename Impl, typename Allocator>
+class NewInjection:
+  public ProvidingInjection<Dependency, Scope> {
+
+  typedef typename Key<Dependency>::Iface Iface;
+  typedef typename Key<Dependency>::Ptr Ptr;
+  typedef typename Allocator::template rebind<Impl>::other ImplAllocator;
+  typedef NewInjection<Dependency, Scope, Impl, Allocator> New;
+  typedef DisposalDeleter<Iface, New> Deleter;
+
+  friend class DisposalDeleter<Iface, New>;
+
+  mutable ImplAllocator allocator;
+
+  void validateAcyclic(InjectorPtr, TypeIds &) const {}
+
+  void setDynamicDependencyNames(std::vector<std::string> const &) {}
+
+public:
+
+  typedef typename ProvidingInjection<Dependency, Scope>::InjectionPtr InjectionPtr;
+  typedef typename ResolvedBinding<Dependency>::BindingPtr BindingPtr;
+
+  NewInjection():
+    allocator() {}
+
+  /**
+   * Provide an Iface.
+   *
+   * A naked instance pointer is allocated and wrapped in a shared_ptr.  It is
+   * also given a custom deleter, to dispose of the naked pointer with
+   * dispose(Iface *).
+   */
+  Ptr provide(BindingPtr binding, InjectorPtr) const {
+    Deleter deleter(sauce::static_pointer_cast<New>(binding));
+    Impl * impl = allocator.allocate(1);
+    Ptr provided(new(impl) Impl(), deleter);
+    return provided;
+  }
+
+  void dispose(Iface * iface) const {
+    Impl * impl = static_cast<Impl *>(iface);
+    impl->~Impl(); // Must not throw
+    allocator.deallocate(impl, 1);
+  }
+};
 /* *INDENT-ON* */
 
 /* *INDENT-OFF* */
