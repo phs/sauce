@@ -451,9 +451,13 @@ class ProductionModule: public AbstractModule {
     /**
      * Bind the two controllers under dynamic names (see Router above for an example of selecting between them.)
      */
-    // TODO: would be nice if "to<PlaceController>()" was equivalent to "to<PlaceController()>()"..
-    bind<Controller>().named("place").to<PlaceController()>();
     bind<Controller>().named("status").to<StatusController(Table<Order>)>();
+
+    /**
+     * Bind another controller.  Also, notice we bind to PlaceController, not PlaceController().  If a function type is
+     * not passed, the default constructor is assumed.
+     */
+    bind<Controller>().named("place").to<PlaceController>();
 
     bind<Table<Order> >().to<Table<Order>(Database &)>();
   }
