@@ -1,5 +1,5 @@
 <map id="G" name="G">
 <area shape="rect" id="node3" href="$structsauce_1_1internal_1_1_get_decorator.html" title="Calls Bindings::get on behalf of BaseInjector." alt="" coords="220,5,439,49"/>
 <area shape="rect" id="node5" href="$structsauce_1_1internal_1_1_get_decorator_3_01_implicit_bindings_00_01_named_3_01_provider_3_01_2bd1789f15c1abf4bb77f9fe019a26cd.html" title="A specialization that gives provided Providers a self smart ptr." alt="" coords="219,73,440,149"/>
-<area shape="rect" id="node7" href="$classsauce_1_1internal_1_1_implicit_provider_injection.html" title="An injection that provides Providers for an already&#45;bound dependency." alt="" coords="224,173,434,233"/>
+<area shape="rect" id="node7" href="$classsauce_1_1internal_1_1_implicit_provider_binding.html" title="An injection that provides Providers for an already&#45;bound dependency." alt="" coords="227,173,432,233"/>
 </map>

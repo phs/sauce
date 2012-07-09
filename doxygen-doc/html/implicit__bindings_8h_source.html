@@ -59,9 +59,9 @@
 <div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;<span class="preprocessor">#include &lt;sauce/provider.h&gt;</span></div>
 <div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;<span class="preprocessor">#include &lt;sauce/scopes.h&gt;</span></div>
 <div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;<span class="preprocessor">#include &lt;sauce/internal/resolved_binding.h&gt;</span></div>
-<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;<span class="preprocessor">#include &lt;sauce/internal/injection_binding.h&gt;</span></div>
+<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;<span class="preprocessor">#include &lt;sauce/internal/binding.h&gt;</span></div>
 <div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;<span class="preprocessor">#include &lt;sauce/internal/bindings.h&gt;</span></div>
-<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;<span class="preprocessor">#include &lt;sauce/internal/injections/all.h&gt;</span></div>
+<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;<span class="preprocessor">#include &lt;sauce/internal/all.h&gt;</span></div>
 <div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;<span class="preprocessor">#include &lt;sauce/internal/key.h&gt;</span></div>
 <div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;</div>
 <div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;<span class="keyword">namespace </span>sauce {</div>
@@ -75,68 +75,64 @@
 <div class="line"><a name="l00025"></a><span class="lineno"><a class="code" href="structsauce_1_1internal_1_1_implicit_binding_traits.html">   25</a></span>&#160;<span class="keyword">struct </span><a class="code" href="structsauce_1_1internal_1_1_implicit_binding_traits.html">ImplicitBindingTraits</a> {</div>
 <div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;  <span class="keyword">typedef</span> ImplicitInjection_ ImplicitInjection;</div>
 <div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;  <span class="keyword">typedef</span> <span class="keyword">typename</span> ImplicitInjection::Dependency Dependency;</div>
-<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;  <span class="keyword">typedef</span> <span class="keyword">typename</span> ImplicitInjection::InjectionPtr InjectionPtr;</div>
-<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;  <span class="keyword">typedef</span> <span class="keyword">typename</span> ResolvedBinding&lt;Dependency&gt;::BindingPtr BindingPtr;</div>
-<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;};</div>
-<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;</div>
-<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;<span class="keyword">template</span>&lt;<span class="keyword">typename</span> Dependency&gt;</div>
-<div class="line"><a name="l00036"></a><span class="lineno"><a class="code" href="structsauce_1_1internal_1_1_implicit_binding.html">   36</a></span>&#160;<span class="keyword">struct </span><a class="code" href="structsauce_1_1internal_1_1_implicit_binding.html" title="Attempts to supply a Binding when the given Dependency is not found.">ImplicitBinding</a> {</div>
-<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;  <span class="keyword">typedef</span> sauce::shared_ptr&lt;ResolvedBinding&lt;Dependency&gt; &gt; BindingPtr;</div>
-<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;</div>
-<div class="line"><a name="l00042"></a><span class="lineno"><a class="code" href="structsauce_1_1internal_1_1_implicit_binding.html#ace9c9f0d406d3427b0351bdcc3da4176">   42</a></span>&#160;  <span class="keyword">static</span> BindingPtr <span class="keyword">get</span>(<a class="code" href="classsauce_1_1internal_1_1_bindings.html" title="A container for bindings.">ConcreteBindings</a> <span class="keyword">const</span> &amp;, std::string <span class="keyword">const</span> name) {</div>
-<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;    <span class="keywordflow">throw</span> <a class="code" href="structsauce_1_1_unbound_exception_for.html" title="Thrown when a binding cannot be found for the given interface.">UnboundExceptionFor&lt;Dependency&gt;</a>(name);</div>
-<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;  }</div>
-<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;</div>
-<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;};</div>
-<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;</div>
-<div class="line"><a name="l00051"></a><span class="lineno"><a class="code" href="structsauce_1_1internal_1_1_implicit_bindings.html">   51</a></span>&#160;<span class="keyword">struct </span><a class="code" href="structsauce_1_1internal_1_1_implicit_bindings.html" title="Attempts to supply a Binding when none is found for a dependency.">ImplicitBindings</a> {</div>
-<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;</div>
-<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;  <span class="keyword">template</span>&lt;<span class="keyword">typename</span> Dependency&gt;</div>
-<div class="line"><a name="l00057"></a><span class="lineno"><a class="code" href="structsauce_1_1internal_1_1_implicit_bindings.html#a2ab32c0258b8150fa3f769869f17a9b1">   57</a></span>&#160;  sauce::shared_ptr&lt;ResolvedBinding&lt;Dependency&gt; &gt; <span class="keyword">get</span>(</div>
-<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;    <a class="code" href="classsauce_1_1internal_1_1_bindings.html" title="A container for bindings.">ConcreteBindings</a> <span class="keyword">const</span> &amp; bindings, std::string <span class="keyword">const</span> name) <span class="keyword">const</span> {</div>
-<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;    <span class="keywordflow">return</span> <a class="code" href="structsauce_1_1internal_1_1_implicit_bindings.html#a2ab32c0258b8150fa3f769869f17a9b1" title="Attempt to supply a (unknown) Binding at provision time.">ImplicitBinding&lt;Dependency&gt;::get</a>(bindings, name);</div>
-<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;  }</div>
-<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;</div>
-<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;};</div>
-<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;</div>
-<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;<span class="keyword">template</span>&lt;&gt;</div>
-<div class="line"><a name="l00068"></a><span class="lineno"><a class="code" href="structsauce_1_1internal_1_1_implicit_binding_3_01_named_3_01_injector_00_01_unnamed_01_4_01_4.html">   68</a></span>&#160;<span class="keyword">struct </span><a class="code" href="structsauce_1_1internal_1_1_implicit_binding.html" title="Attempts to supply a Binding when the given Dependency is not found.">ImplicitBinding</a>&lt;<a class="code" href="classsauce_1_1_named.html" title="Wrap dependency requests with Named to choose one of several (statically) named alternatives.">Named</a>&lt;<a class="code" href="classsauce_1_1_injector.html">Injector</a>, <a class="code" href="classsauce_1_1_unnamed.html" title="The name of all statically unnamed dependencies.">Unnamed</a>&gt; &gt;: <a class="code" href="structsauce_1_1internal_1_1_implicit_binding_traits.html">ImplicitBindingTraits</a>&lt;inj::InjectorBinding&gt; {</div>
-<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;  <span class="keyword">static</span> BindingPtr <span class="keyword">get</span>(<a class="code" href="classsauce_1_1internal_1_1_bindings.html" title="A container for bindings.">ConcreteBindings</a> <span class="keyword">const</span> &amp;, std::string <span class="keyword">const</span> name) {</div>
-<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;    <span class="keywordflow">if</span> (name != unnamed()) {</div>
-<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;      <span class="keywordflow">throw</span> <a class="code" href="structsauce_1_1_unbound_exception_for.html" title="Thrown when a binding cannot be found for the given interface.">UnboundExceptionFor&lt;Named&lt;Injector, Unnamed&gt;</a> &gt;(name);</div>
-<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;    }</div>
-<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;    InjectionPtr injection(<span class="keyword">new</span> <a class="code" href="structsauce_1_1internal_1_1injections_1_1_injector_injection.html" title="An injection that provides the injector itself.">ImplicitInjection</a>());</div>
-<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;    BindingPtr binding(<span class="keyword">new</span> <a class="code" href="classsauce_1_1internal_1_1_injection_binding.html" title="A binding that uses injections to satisfy dependencies.">InjectionBinding&lt;Dependency, NoScope&gt;</a>(injection));</div>
-<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;    <span class="keywordflow">return</span> binding;</div>
-<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;  }</div>
-<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;};</div>
-<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;</div>
-<div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;<span class="keyword">template</span>&lt;<span class="keyword">typename</span> Prov<span class="keywordtype">id</span>edDependency, <span class="keyword">typename</span> Name&gt;</div>
-<div class="line"><a name="l00083"></a><span class="lineno"><a class="code" href="structsauce_1_1internal_1_1_implicit_binding_3_01_named_3_01_provider_3_01_provided_dependency_01_4_00_01_name_01_4_01_4.html">   83</a></span>&#160;<span class="keyword">struct </span><a class="code" href="structsauce_1_1internal_1_1_implicit_binding.html" title="Attempts to supply a Binding when the given Dependency is not found.">ImplicitBinding</a>&lt;<a class="code" href="classsauce_1_1_named.html" title="Wrap dependency requests with Named to choose one of several (statically) named alternatives.">Named</a>&lt;<a class="code" href="classsauce_1_1_provider.html" title="An interface for including custom factories in an Injector.">Provider</a>&lt;ProvidedDependency&gt;, Name&gt; &gt; {</div>
-<div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160;  <span class="keyword">typedef</span> <a class="code" href="structsauce_1_1internal_1_1_implicit_binding_traits.html">ImplicitBindingTraits&lt;inj::ImplicitProviderBinding&lt;ProvidedDependency, Name&gt;</a> &gt; <a class="code" href="structsauce_1_1internal_1_1_implicit_binding_traits.html">Traits</a>;</div>
-<div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160;  <span class="keyword">typedef</span> <span class="keyword">typename</span> Traits::ImplicitInjection ImplicitInjection;</div>
-<div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160;  <span class="keyword">typedef</span> <span class="keyword">typename</span> Traits::Dependency Dependency;</div>
-<div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160;  <span class="keyword">typedef</span> <span class="keyword">typename</span> Traits::InjectionPtr InjectionPtr;</div>
-<div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160;  <span class="keyword">typedef</span> <span class="keyword">typename</span> Traits::BindingPtr BindingPtr;</div>
-<div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160;</div>
-<div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160;  <span class="keyword">static</span> BindingPtr <span class="keyword">get</span>(<a class="code" href="classsauce_1_1internal_1_1_bindings.html" title="A container for bindings.">ConcreteBindings</a> <span class="keyword">const</span> &amp; bindings, std::string <span class="keyword">const</span> name) {</div>
-<div class="line"><a name="l00091"></a><span class="lineno">   91</span>&#160;    <span class="keyword">typedef</span> <span class="keyword">typename</span> <a class="code" href="classsauce_1_1_named.html" title="Wrap dependency requests with Named to choose one of several (statically) named alternatives.">Key&lt;ProvidedDependency&gt;::Normalized</a> Normalized;</div>
-<div class="line"><a name="l00092"></a><span class="lineno">   92</span>&#160;    <span class="keyword">typedef</span> <span class="keyword">typename</span> <a class="code" href="structsauce_1_1internal_1_1_resolved_binding.html" title="A binding for an acknowledged interface.">ResolvedBinding&lt;Normalized&gt;::BindingPtr</a> ProvidedBindingPtr;</div>
-<div class="line"><a name="l00093"></a><span class="lineno">   93</span>&#160;</div>
-<div class="line"><a name="l00094"></a><span class="lineno">   94</span>&#160;    ProvidedBindingPtr providedBinding(bindings.getBinding&lt;Normalized&gt;(name));</div>
-<div class="line"><a name="l00095"></a><span class="lineno">   95</span>&#160;    InjectionPtr injection(<span class="keyword">new</span> ImplicitInjection(providedBinding));</div>
-<div class="line"><a name="l00096"></a><span class="lineno">   96</span>&#160;    BindingPtr binding(<span class="keyword">new</span> <a class="code" href="classsauce_1_1internal_1_1_injection_binding.html" title="A binding that uses injections to satisfy dependencies.">InjectionBinding&lt;Dependency, NoScope&gt;</a>(injection));</div>
-<div class="line"><a name="l00097"></a><span class="lineno">   97</span>&#160;    <span class="keywordflow">return</span> binding;</div>
-<div class="line"><a name="l00098"></a><span class="lineno">   98</span>&#160;  }</div>
-<div class="line"><a name="l00099"></a><span class="lineno">   99</span>&#160;};</div>
+<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;  <span class="keyword">typedef</span> <span class="keyword">typename</span> ResolvedBinding&lt;Dependency&gt;::BindingPtr BindingPtr;</div>
+<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;};</div>
+<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;</div>
+<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;<span class="keyword">template</span>&lt;<span class="keyword">typename</span> Dependency&gt;</div>
+<div class="line"><a name="l00035"></a><span class="lineno"><a class="code" href="structsauce_1_1internal_1_1_implicit_binding.html">   35</a></span>&#160;<span class="keyword">struct </span><a class="code" href="structsauce_1_1internal_1_1_implicit_binding.html" title="Attempts to supply a Binding when the given Dependency is not found.">ImplicitBinding</a> {</div>
+<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;  <span class="keyword">typedef</span> sauce::shared_ptr&lt;ResolvedBinding&lt;Dependency&gt; &gt; BindingPtr;</div>
+<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;</div>
+<div class="line"><a name="l00041"></a><span class="lineno"><a class="code" href="structsauce_1_1internal_1_1_implicit_binding.html#ace9c9f0d406d3427b0351bdcc3da4176">   41</a></span>&#160;  <span class="keyword">static</span> BindingPtr <span class="keyword">get</span>(<a class="code" href="classsauce_1_1internal_1_1_bindings.html" title="A container for bindings.">ConcreteBindings</a> <span class="keyword">const</span> &amp;, std::string <span class="keyword">const</span> name) {</div>
+<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;    <span class="keywordflow">throw</span> <a class="code" href="structsauce_1_1_unbound_exception_for.html" title="Thrown when a binding cannot be found for the given interface.">UnboundExceptionFor&lt;Dependency&gt;</a>(name);</div>
+<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;  }</div>
+<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;</div>
+<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;};</div>
+<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;</div>
+<div class="line"><a name="l00050"></a><span class="lineno"><a class="code" href="structsauce_1_1internal_1_1_implicit_bindings.html">   50</a></span>&#160;<span class="keyword">struct </span><a class="code" href="structsauce_1_1internal_1_1_implicit_bindings.html" title="Attempts to supply a Binding when none is found for a dependency.">ImplicitBindings</a> {</div>
+<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;</div>
+<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;  <span class="keyword">template</span>&lt;<span class="keyword">typename</span> Dependency&gt;</div>
+<div class="line"><a name="l00056"></a><span class="lineno"><a class="code" href="structsauce_1_1internal_1_1_implicit_bindings.html#a2ab32c0258b8150fa3f769869f17a9b1">   56</a></span>&#160;  sauce::shared_ptr&lt;ResolvedBinding&lt;Dependency&gt; &gt; <span class="keyword">get</span>(</div>
+<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;    <a class="code" href="classsauce_1_1internal_1_1_bindings.html" title="A container for bindings.">ConcreteBindings</a> <span class="keyword">const</span> &amp; bindings, std::string <span class="keyword">const</span> name) <span class="keyword">const</span> {</div>
+<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;    <span class="keywordflow">return</span> <a class="code" href="structsauce_1_1internal_1_1_implicit_bindings.html#a2ab32c0258b8150fa3f769869f17a9b1" title="Attempt to supply a (unknown) Binding at provision time.">ImplicitBinding&lt;Dependency&gt;::get</a>(bindings, name);</div>
+<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;  }</div>
+<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;</div>
+<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;};</div>
+<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;</div>
+<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;<span class="keyword">template</span>&lt;&gt;</div>
+<div class="line"><a name="l00067"></a><span class="lineno"><a class="code" href="structsauce_1_1internal_1_1_implicit_binding_3_01_named_3_01_injector_00_01_unnamed_01_4_01_4.html">   67</a></span>&#160;<span class="keyword">struct </span><a class="code" href="structsauce_1_1internal_1_1_implicit_binding.html" title="Attempts to supply a Binding when the given Dependency is not found.">ImplicitBinding</a>&lt;<a class="code" href="classsauce_1_1_named.html" title="Wrap dependency requests with Named to choose one of several (statically) named alternatives.">Named</a>&lt;<a class="code" href="classsauce_1_1_injector.html">Injector</a>, <a class="code" href="classsauce_1_1_unnamed.html" title="The name of all statically unnamed dependencies.">Unnamed</a>&gt; &gt;: <a class="code" href="structsauce_1_1internal_1_1_implicit_binding_traits.html">ImplicitBindingTraits</a>&lt;i::InjectorBinding&gt; {</div>
+<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;  <span class="keyword">static</span> BindingPtr <span class="keyword">get</span>(<a class="code" href="classsauce_1_1internal_1_1_bindings.html" title="A container for bindings.">ConcreteBindings</a> <span class="keyword">const</span> &amp;, std::string <span class="keyword">const</span> name) {</div>
+<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;    <span class="keywordflow">if</span> (name != unnamed()) {</div>
+<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;      <span class="keywordflow">throw</span> <a class="code" href="structsauce_1_1_unbound_exception_for.html" title="Thrown when a binding cannot be found for the given interface.">UnboundExceptionFor&lt;Named&lt;Injector, Unnamed&gt;</a> &gt;(name);</div>
+<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;    }</div>
+<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;    BindingPtr binding(<span class="keyword">new</span> <a class="code" href="classsauce_1_1internal_1_1_injector_binding.html" title="An injection that provides the injector itself.">ImplicitInjection</a>());</div>
+<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;    <span class="keywordflow">return</span> binding;</div>
+<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;  }</div>
+<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;};</div>
+<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;</div>
+<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;<span class="keyword">template</span>&lt;<span class="keyword">typename</span> Prov<span class="keywordtype">id</span>edDependency, <span class="keyword">typename</span> Name&gt;</div>
+<div class="line"><a name="l00081"></a><span class="lineno"><a class="code" href="structsauce_1_1internal_1_1_implicit_binding_3_01_named_3_01_provider_3_01_provided_dependency_01_4_00_01_name_01_4_01_4.html">   81</a></span>&#160;<span class="keyword">struct </span><a class="code" href="structsauce_1_1internal_1_1_implicit_binding.html" title="Attempts to supply a Binding when the given Dependency is not found.">ImplicitBinding</a>&lt;<a class="code" href="classsauce_1_1_named.html" title="Wrap dependency requests with Named to choose one of several (statically) named alternatives.">Named</a>&lt;<a class="code" href="classsauce_1_1_provider.html" title="An interface for including custom factories in an Injector.">Provider</a>&lt;ProvidedDependency&gt;, Name&gt; &gt; {</div>
+<div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;  <span class="keyword">typedef</span> <a class="code" href="structsauce_1_1internal_1_1_implicit_binding_traits.html">ImplicitBindingTraits&lt;i::ImplicitProviderBinding&lt;ProvidedDependency, Name&gt;</a> &gt; <a class="code" href="structsauce_1_1internal_1_1_implicit_binding_traits.html">Traits</a>;</div>
+<div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160;  <span class="keyword">typedef</span> <span class="keyword">typename</span> Traits::ImplicitInjection ImplicitInjection;</div>
+<div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160;  <span class="keyword">typedef</span> <span class="keyword">typename</span> Traits::Dependency Dependency;</div>
+<div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160;  <span class="keyword">typedef</span> <span class="keyword">typename</span> Traits::BindingPtr BindingPtr;</div>
+<div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160;</div>
+<div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160;  <span class="keyword">static</span> BindingPtr <span class="keyword">get</span>(<a class="code" href="classsauce_1_1internal_1_1_bindings.html" title="A container for bindings.">ConcreteBindings</a> <span class="keyword">const</span> &amp; bindings, std::string <span class="keyword">const</span> name) {</div>
+<div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160;    <span class="keyword">typedef</span> <span class="keyword">typename</span> <a class="code" href="classsauce_1_1_named.html" title="Wrap dependency requests with Named to choose one of several (statically) named alternatives.">Key&lt;ProvidedDependency&gt;::Normalized</a> Normalized;</div>
+<div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160;    <span class="keyword">typedef</span> <span class="keyword">typename</span> <a class="code" href="structsauce_1_1internal_1_1_resolved_binding.html" title="A binding for an acknowledged interface.">ResolvedBinding&lt;Normalized&gt;::BindingPtr</a> ProvidedBindingPtr;</div>
+<div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160;</div>
+<div class="line"><a name="l00091"></a><span class="lineno">   91</span>&#160;    ProvidedBindingPtr providedBinding(bindings.getBinding&lt;Normalized&gt;(name));</div>
+<div class="line"><a name="l00092"></a><span class="lineno">   92</span>&#160;    BindingPtr binding(<span class="keyword">new</span> ImplicitInjection(providedBinding));</div>
+<div class="line"><a name="l00093"></a><span class="lineno">   93</span>&#160;    <span class="keywordflow">return</span> binding;</div>
+<div class="line"><a name="l00094"></a><span class="lineno">   94</span>&#160;  }</div>
+<div class="line"><a name="l00095"></a><span class="lineno">   95</span>&#160;};</div>
+<div class="line"><a name="l00096"></a><span class="lineno">   96</span>&#160;</div>
+<div class="line"><a name="l00097"></a><span class="lineno">   97</span>&#160;}</div>
+<div class="line"><a name="l00098"></a><span class="lineno">   98</span>&#160;</div>
+<div class="line"><a name="l00099"></a><span class="lineno">   99</span>&#160;<span class="keyword">namespace </span>i = ::sauce::internal;</div>
 <div class="line"><a name="l00100"></a><span class="lineno">  100</span>&#160;</div>
 <div class="line"><a name="l00101"></a><span class="lineno">  101</span>&#160;}</div>
 <div class="line"><a name="l00102"></a><span class="lineno">  102</span>&#160;</div>
-<div class="line"><a name="l00103"></a><span class="lineno">  103</span>&#160;<span class="keyword">namespace </span>i = ::sauce::internal;</div>
-<div class="line"><a name="l00104"></a><span class="lineno">  104</span>&#160;</div>
-<div class="line"><a name="l00105"></a><span class="lineno">  105</span>&#160;}</div>
-<div class="line"><a name="l00106"></a><span class="lineno">  106</span>&#160;</div>
-<div class="line"><a name="l00107"></a><span class="lineno">  107</span>&#160;<span class="preprocessor">#endif // SAUCE_INTERNAL_IMPLICIT_BINDINGS_H_</span></div>
+<div class="line"><a name="l00103"></a><span class="lineno">  103</span>&#160;<span class="preprocessor">#endif // SAUCE_INTERNAL_IMPLICIT_BINDINGS_H_</span></div>
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
