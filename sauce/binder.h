@@ -196,9 +196,7 @@ class BindClause: public i::InitialClause<Named<Iface, Unnamed> > {
   typedef Named<Provider<Iface>, Unnamed> ProviderDependency;
 
   BindClause(i::ClauseStatePtr state):
-    i::InitialClause<Named<Iface, Unnamed> >(state) {
-    this->onComplete();
-  }
+    i::InitialClause<Named<Iface, Unnamed> >(state) {}
 
   friend class Binder;
 

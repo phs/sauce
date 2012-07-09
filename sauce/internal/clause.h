@@ -117,15 +117,13 @@ class InitialClause {
 
 protected:
 
-  void onComplete() {
-    throwLater(PartialBindingExceptionFor<Dependency>());
-  }
-
   InitialClause():
     state() {}
 
   InitialClause(ClauseStatePtr state):
-    state(state) {}
+    state(state) {
+    throwLater(PartialBindingExceptionFor<Dependency>());
+  }
 
   template<typename Next>
   Next pass(Next next) {
@@ -136,7 +134,7 @@ protected:
   void setState(ClauseStatePtr state) {
     state->clearException();
     this->state = state;
-    onComplete();
+    throwLater(PartialBindingExceptionFor<Dependency>());
   }
 
   void setDynamicName(std::string const name) {
