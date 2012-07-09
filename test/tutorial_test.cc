@@ -341,10 +341,10 @@ struct PlaceController: public Controller {
  * Handles requests regarding an order's status.
  */
 struct StatusController: public Controller {
-  // TODO: why can't I inject Table<Order> ?
-  // sauce::shared_ptr<Table<Order> > orders;
-  // StatusController(sauce::shared_ptr<Table<Order> > orders):
-  //   orders(orders) {}
+  sauce::shared_ptr<Table<Order> > orders;
+
+  StatusController(sauce::shared_ptr<Table<Order> > orders):
+    orders(orders) {}
 
   void serve(sauce::shared_ptr<Request>, sauce::shared_ptr<Response>) {}
 };
@@ -453,8 +453,7 @@ class ProductionModule: public AbstractModule {
      */
     // TODO: would be nice if "to<PlaceController>()" was equivalent to "to<PlaceController()>()"..
     bind<Controller>().named("place").to<PlaceController()>();
-    bind<Controller>().named("status").to<StatusController()>();
-    // TODO: bind<Controller>().named("status").to<StatusController(Table<Order>)>();
+    bind<Controller>().named("status").to<StatusController(Table<Order>)>();
 
     bind<Table<Order> >().to<Table<Order>(Database &)>();
   }
