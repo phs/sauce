@@ -1,3 +1,4 @@
 <map id="G" name="G">
-<area shape="rect" id="node1" href="$structsauce_1_1internal_1_1_implicit_binding.html" title="Attempts to supply a Binding when the given Dependency is not found." alt="" coords="6,5,170,49"/>
+<area shape="rect" id="node1" href="$classsauce_1_1internal_1_1_final_clause.html" title="sauce::internal::FinalClause\l\&lt; Dependency, Scope, Ctor,\l std::allocator\&lt; int \&gt; \&gt;" alt="" coords="6,5,194,65"/>
+<area shape="rect" id="node3" href="$classsauce_1_1_to_clause.html" title="Binds to a specific constructor, allocating from the heap." alt="" coords="244,13,452,57"/>
 </map>

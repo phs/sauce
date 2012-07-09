@@ -1,10 +1,3 @@
 <map id="G" name="G">
-<area shape="rect" id="node1" href="$classsauce_1_1internal_1_1_clause.html" title="Base class for parts of the fluent binding API." alt="" coords="6,233,162,261"/>
-<area shape="rect" id="node3" href="$classsauce_1_1_allocate_from_clause.html" title="Binds to a specific constructor and allocator." alt="" coords="222,5,410,65"/>
-<area shape="rect" id="node5" href="$classsauce_1_1_bind_clause.html" title="A builder that creates a single binding." alt="" coords="246,89,386,133"/>
-<area shape="rect" id="node7" href="$classsauce_1_1_in_clause.html" title="Scopes the binding." alt="" coords="213,157,419,201"/>
-<area shape="rect" id="node9" href="$classsauce_1_1_named_clause.html" title="Names the binding." alt="" coords="242,225,390,269"/>
-<area shape="rect" id="node11" href="$classsauce_1_1_naming_clause.html" title="Assigns dynamic name requirements to the explicit dependencies of a binding." alt="" coords="238,293,394,353"/>
-<area shape="rect" id="node13" href="$classsauce_1_1_to_clause.html" title="Binds to a specific constructor, allocating from the heap." alt="" coords="212,377,420,421"/>
-<area shape="rect" id="node15" href="$classsauce_1_1_to_provider_clause.html" title="Binds to a provider with a specific constructor, allocating from the heap." alt="" coords="212,445,420,505"/>
+<area shape="rect" id="node1" href="$classsauce_1_1internal_1_1_clause_state.html" title="The accumulated state passed between Clauses that ultimately results in a new Binding." alt="" coords="6,5,194,33"/>
 </map>

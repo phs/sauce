@@ -11,7 +11,7 @@
 #include <sauce/internal/resolved_binding.h>
 #include <sauce/internal/injection_binding.h>
 #include <sauce/internal/bindings.h>
-#include <sauce/internal/injections/all.h>
+#include <sauce/internal/all.h>
 #include <sauce/internal/key.h>
 
 namespace sauce {

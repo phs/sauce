@@ -1,3 +1,5 @@
 <map id="G" name="G">
-<area shape="rect" id="node1" href="$classsauce_1_1_unnamed.html" title="The name of all statically unnamed dependencies." alt="" coords="6,5,128,33"/>
+<area shape="rect" id="node1" href="$classsauce_1_1_provider.html" title="An interface for including custom factories in an Injector." alt="" coords="6,51,218,79"/>
+<area shape="rect" id="node3" href="$classsauce_1_1_abstract_provider.html" title="An interface for including custom factories in an Injector." alt="" coords="291,5,453,49"/>
+<area shape="rect" id="node5" href="$classsauce_1_1internal_1_1injections_1_1_implicit_provider.html" title="A Provider for an explicitly&#45;bound Dependency." alt="" coords="268,73,476,133"/>
 </map>

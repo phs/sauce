@@ -1,0 +1,7 @@
+<map id="G" name="G">
+<area shape="rect" id="node2" href="$classsauce_1_1internal_1_1injections_1_1_providing_injection.html" title="sauce::internal::injections\l::ProvidingInjection\&lt; Dependency,\l Scope \&gt;" alt="" coords="91,270,313,330"/>
+<area shape="rect" id="node4" href="$classsauce_1_1internal_1_1_injection_binding.html" title="A binding that uses injections to satisfy dependencies." alt="" coords="99,177,305,221"/>
+<area shape="rect" id="node6" href="$structsauce_1_1internal_1_1_resolved_binding.html" title="A binding for an acknowledged interface." alt="" coords="22,83,193,127"/>
+<area shape="rect" id="node8" href="$structsauce_1_1internal_1_1_opaque_binding.html" title="An opaque binding." alt="" coords="4,6,211,34"/>
+<area shape="rect" id="node10" href="$classsauce_1_1internal_1_1_injector_friend.html" title="sauce::internal::Injector\lFriend" alt="" coords="218,83,376,127"/>
+</map>

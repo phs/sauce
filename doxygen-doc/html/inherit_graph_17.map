@@ -1,5 +1,4 @@
 <map id="G" name="G">
-<area shape="rect" id="node1" href="$structsauce_1_1internal_1_1_lock.html" title="An RAII wrapper to hide locker details." alt="" coords="6,43,149,71"/>
-<area shape="rect" id="node3" href="$classsauce_1_1internal_1_1_locker_lock.html" title="An adapter to hide the type of the given Locker." alt="" coords="198,5,381,49"/>
-<area shape="rect" id="node5" href="$structsauce_1_1internal_1_1_null_lock.html" title="Not a lock at all, but used when no synchronization is configured." alt="" coords="206,73,373,101"/>
+<area shape="rect" id="node1" href="$classsauce_1_1internal_1_1_initial_clause.html" title="sauce::internal::Initial\lClause\&lt; Named\&lt; Iface,\l Unnamed \&gt; \&gt;" alt="" coords="6,5,167,65"/>
+<area shape="rect" id="node3" href="$classsauce_1_1_bind_clause.html" title="A builder that creates a single binding." alt="" coords="217,13,357,57"/>
 </map>

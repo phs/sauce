@@ -10,7 +10,7 @@
 #include <sauce/scopes.h>
 #include <sauce/internal/bindings.h>
 #include <sauce/internal/clause.h>
-#include <sauce/internal/injections/all.h>
+#include <sauce/internal/all.h>
 #include <sauce/internal/key.h>
 #include <sauce/internal/pending_thrower.h>
 

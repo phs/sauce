@@ -1,3 +1,6 @@
 <map id="G" name="G">
-<area shape="rect" id="node1" href="$classsauce_1_1internal_1_1_disposal_deleter.html" title="A smart pointer deleter that diposes with the given disposal." alt="" coords="6,5,181,49"/>
+<area shape="rect" id="node1" href="$classsauce_1_1internal_1_1_final_clause.html" title="Base class for final parts of the fluent binding API." alt="" coords="6,89,194,149"/>
+<area shape="rect" id="node3" href="$classsauce_1_1_allocate_from_clause.html" title="Binds to a specific constructor and allocator." alt="" coords="244,5,431,65"/>
+<area shape="rect" id="node5" href="$classsauce_1_1_naming_clause.html" title="Assigns dynamic name requirements to the explicit dependencies of a binding." alt="" coords="260,89,415,149"/>
+<area shape="rect" id="node7" href="$classsauce_1_1_setting_clause.html" title="Binds to a specific method on an already&#45;provided instance." alt="" coords="252,173,423,233"/>
 </map>

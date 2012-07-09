@@ -66,13 +66,13 @@ nobase_include_HEADERS += \
   sauce/internal/disposal_deleter.h \
   sauce/internal/implicit_bindings.h \
   sauce/internal/injection_binding.h \
-  sauce/internal/injections/all.h \
-  sauce/internal/injections/implicit_provider_injection.h \
-  sauce/internal/injections/injector_injection.h \
-  sauce/internal/injections/new_injection.h \
-  sauce/internal/injections/new_injection.h.pump \
-  sauce/internal/injections/provider_injection.h \
-  sauce/internal/injections/providing_injection.h \
+  sauce/internal/all.h \
+  sauce/internal/implicit_provider_injection.h \
+  sauce/internal/injector_injection.h \
+  sauce/internal/new_injection.h \
+  sauce/internal/new_injection.h.pump \
+  sauce/internal/provider_injection.h \
+  sauce/internal/providing_injection.h \
   sauce/internal/key.h \
   sauce/internal/locker_factory.h \
   sauce/internal/memory/boost.h \
@@ -100,13 +100,13 @@ EXTRA_DIST += \
   sauce/internal/disposal_deleter.h \
   sauce/internal/implicit_bindings.h \
   sauce/internal/injection_binding.h \
-  sauce/internal/injections/all.h \
-  sauce/internal/injections/implicit_provider_injection.h \
-  sauce/internal/injections/injector_injection.h \
-  sauce/internal/injections/new_injection.h \
-  sauce/internal/injections/new_injection.h.pump \
-  sauce/internal/injections/provider_injection.h \
-  sauce/internal/injections/providing_injection.h \
+  sauce/internal/all.h \
+  sauce/internal/implicit_provider_injection.h \
+  sauce/internal/injector_injection.h \
+  sauce/internal/new_injection.h \
+  sauce/internal/new_injection.h.pump \
+  sauce/internal/provider_injection.h \
+  sauce/internal/providing_injection.h \
   sauce/internal/key.h \
   sauce/internal/locker_factory.h \
   sauce/internal/memory/boost.h \
@@ -303,7 +303,7 @@ endif DX_COND_doc
 #
 
 # Generate templated headers from their "pump" sources
-sauce/internal/injections/new_injection.h: sauce/internal/injections/new_injection.h.pump
+sauce/internal/new_injection.h: sauce/internal/new_injection.h.pump
 	vendor/pump.py $+
 
 # This must be the last section so that the corrosponding variables have their final values.
