@@ -355,44 +355,6 @@ struct StatusController: public Controller {
 };
 
 // ********************************************************************************************************************
-// place_controller_test.cc
-
-/**
- * The unit test suite for PlaceController, demonstrating how to inject mocks or stubs.
- */
-
-using sauce::Binder;
-
-struct StubRequest: public Request {};
-struct StubResponse: public Response {};
-
-/**
- * The sauce module, written by the application author, that specifies bindings for this unit test suite.
- *
- * Modules are collections of bindings, which tell sauce how interface requests should be satisfied.  The application
- * author tells sauce about bindings with a "fluent" API exposed either by the passed Binder or inherited from
- * AbstractModule (see below.)
- *
- * Each binding begins with a call to bind, passing the interface to be bound as a template parameter.  Further chained
- * calls declare what concrete implementation should be used, and customize how to make or find it.
- */
-void MockModule(Binder & binder) {
-  /**
-   * The result of bind() (an intermediate with an annoyingly complex type) is invoked in turn.
-   *
-   * Here, to<StubRequest()>() says that requests for the interface Request should be satisfied with instances of the
-   * StubRequest concrete type.
-   *
-   * StubRequest() is actually a function type.  This is how we specify which constructor to use.  If the chosen
-   * constructor takes arguments, they are treated as dependencies and satisfied first.
-   */
-  binder.bind<Request>().to<StubRequest()>();
-
-  // Here's another
-  binder.bind<Response>().to<StubResponse()>();
-}
-
-// ********************************************************************************************************************
 // modules.cc
 
 using sauce::AbstractModule;
@@ -405,20 +367,62 @@ using sauce::Provider;
 struct Local {};
 
 /**
+ * The sauce module, written by the framework author, that specifies the bindings used when running in production.
+ *
+ * Modules can work cooperatively, and can be sourced from different compilation units (or dlsym'd libraries, etc.)
+ */
+class FrameworkModule: public AbstractModule {
+  void configure() {
+    /**
+     * The result of bind() (an intermediate with an annoyingly complex type) is invoked in turn.
+     *
+     * Here, to<Request()>() says that requests for the interface Request should be satisfied with instances of the
+     * Request concrete type.  (It's not required to have a separate interface.)
+     *
+     * Request() is actually a function type.  This is how we specify which constructor to use.  If the chosen
+     * constructor takes arguments, they are treated as dependencies and are satisfied first.
+     */
+    bind<Request>().to<Request()>();
+    bind<Response>().to<Response()>();
+
+    /**
+     * Notice that the injected types are references.  This side-steps a problem with how sauce abuses the type system.
+     * Specifically, since Acceptor and Router each contain pure-virtual methods, they can't be passed by value.  This
+     * implies it's illegal to even formulate a function type that would do so.
+     *
+     * Note sauce never really was going to pass by value: it uses smart pointers for everything.  The value parameter
+     * syntax just happens to be less cluttered.  When this results in an illegal function type, a reference may be
+     * used instead; sauce will just strip it off (and smart pointers to references don't make sense anyway.)
+     */
+    bind<Application>().to<Application(Acceptor &, Router &)>();
+
+    /**
+     * Notice we never bound a Provider<Request>, but only a Request.  This is an example of an implicit binding that
+     * sauce supplies.  Since it knows how to make requests, it can synthesize a provider that makes them in the same
+     * way.
+     */
+    bind<Acceptor>().to<FCGIAcceptor(Provider<Request> &, Provider<Response> &)>();
+  }
+};
+
+/**
  * The sauce module, written by the application author, that specifies the bindings used when running in production.
  *
- * Concretely, a module is either a void (Binder &) function as above, or a class deriving from AbstractModule as is
- * the case here. (Technically any type providing a void operator()(Binder & binder) will do.)
+ * Modules are collections of bindings, which tell sauce how interface requests should be satisfied.  The application
+ * author tells sauce about bindings with a "fluent" API exposed either by the passed Binder or inherited from
+ * AbstractModule (see below.)
+ *
+ * Each binding begins with a call to bind, passing the interface to be bound as a template parameter.  Further chained
+ * calls declare what concrete implementation should be used, and customize how to make or find it.
+ *
+ * Concretely, a module is either a void (Binder &) function, or a class deriving from AbstractModule as is the case
+ * here. (Technically any type providing a void operator()(Binder & binder) will do.)
  *
  * The difference is just sugar: the AbstractModule doesn't need to prefix bindings with "binder." while the function
  * is conceptually simpler and more concrete.
  */
 class ProductionModule: public AbstractModule {
   void configure() {
-    /**
-     * Here there is no Binder, we just call bind<Iface>() directly.
-     */
-
     /**
      * MyRouter depends on having access to the injector itself but no injector is bound, nor is it obvious how to
      * declare such a binding.  Sauce addresses this with an "implicit" binding: requests for the injector are
@@ -471,39 +475,6 @@ class ProductionModule: public AbstractModule {
      * injector->get<Named<Database, Local> >();
      */
     bind<Table<Order> >().to<Table<Order>(Named<Database, Local>)>();
-  }
-};
-
-/**
- * The sauce module, written by the framework author, that specifies the bindings used when running in production.
- *
- * Modules can work cooperatively, and can be sourced from different compilation units (or dlsym'd libraries, etc.)
- */
-class FrameworkModule: public AbstractModule {
-  void configure() {
-    /**
-     * It's not required to have a separate interface; here we bind types to their own constructor.
-     */
-    bind<Request>().to<Request()>();
-    bind<Response>().to<Response()>();
-
-    /**
-     * Notice that the injected types are references.  This side-steps a problem with how sauce abuses the type system.
-     * Specifically, since Acceptor and Router each contain pure-virtual methods, they can't be passed by value.  This
-     * implies it's illegal to even formulate a function type that would do so.
-     *
-     * Note sauce never really was going to pass by value: it uses smart pointers for everything.  The value parameter
-     * syntax just happens to be less cluttered.  When this results in an illegal function type, a reference may be
-     * used instead; sauce will just strip it off (and smart pointers to references don't make sense anyway.)
-     */
-    bind<Application>().to<Application(Acceptor &, Router &)>();
-
-    /**
-     * Notice we never bound a Provider<Request>, but only a Request.  This is an example of an implicit binding that
-     * sauce supplies.  Since it knows how to make requests, it can synthesize a provider that makes them in the same
-     * way.
-     */
-    bind<Acceptor>().to<FCGIAcceptor(Provider<Request> &, Provider<Response> &)>();
   }
 };
 
