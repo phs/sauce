@@ -1130,6 +1130,84 @@
     </member>
   </compound>
   <compound kind="class">
+    <name>sauce::internal::Binding</name>
+    <filename>classsauce_1_1internal_1_1_binding.html</filename>
+    <templarg>Dependency</templarg>
+    <templarg>Scope</templarg>
+    <base>sauce::internal::ResolvedBinding</base>
+    <base>sauce::internal::InjectorFriend</base>
+    <member kind="function">
+      <type>std::string</type>
+      <name>getName</name>
+      <anchorfile>classsauce_1_1internal_1_1_binding.html</anchorfile>
+      <anchor>ab8e8116e7e5cf5112d6d19decdb5315a</anchor>
+      <arglist>() const </arglist>
+    </member>
+    <member kind="function">
+      <type>void</type>
+      <name>setName</name>
+      <anchorfile>classsauce_1_1internal_1_1_binding.html</anchorfile>
+      <anchor>af62e7eebe2f188cd2660a9163d2e1dbd</anchor>
+      <arglist>(std::string const name)</arglist>
+    </member>
+    <member kind="function">
+      <type>NamedTypeId</type>
+      <name>getKey</name>
+      <anchorfile>structsauce_1_1internal_1_1_resolved_binding.html</anchorfile>
+      <anchor>a7ff0341fe08ae52a0f03a35ad6dd3c79</anchor>
+      <arglist>() const </arglist>
+    </member>
+    <member kind="function" virtualness="pure">
+      <type>virtual void</type>
+      <name>validateAcyclic</name>
+      <anchorfile>structsauce_1_1internal_1_1_resolved_binding.html</anchorfile>
+      <anchor>a503de5fe9cb4996db536f6f6d6d486be</anchor>
+      <arglist>(sauce::shared_ptr&lt; Injector &gt;, TypeIds &amp;) const =0</arglist>
+    </member>
+    <member kind="function" virtualness="pure">
+      <type>virtual IfacePtr</type>
+      <name>get</name>
+      <anchorfile>structsauce_1_1internal_1_1_resolved_binding.html</anchorfile>
+      <anchor>a06fb04d3ee1d8d42d7f93f20a205ff25</anchor>
+      <arglist>(BindingPtr, sauce::shared_ptr&lt; Injector &gt;) const =0</arglist>
+    </member>
+    <member kind="function" virtualness="pure">
+      <type>virtual void</type>
+      <name>eagerlyProvide</name>
+      <anchorfile>structsauce_1_1internal_1_1_opaque_binding.html</anchorfile>
+      <anchor>a9cbe103bedc3ea77c5edef5f30a4d74c</anchor>
+      <arglist>(OpaqueBindingPtr, sauce::shared_ptr&lt; Injector &gt;) const =0</arglist>
+    </member>
+    <member kind="function" protection="protected">
+      <type>void</type>
+      <name>validateAcyclicHelper</name>
+      <anchorfile>classsauce_1_1internal_1_1_injector_friend.html</anchorfile>
+      <anchor>a4a2343d76ae48ae8b6bdda2494e9f9a9</anchor>
+      <arglist>(InjectorPtr injector, TypeIds &amp;ids, std::string const name) const </arglist>
+    </member>
+    <member kind="function" protection="protected">
+      <type>Key&lt; Dependency &gt;::Ptr</type>
+      <name>getHelper</name>
+      <anchorfile>classsauce_1_1internal_1_1_injector_friend.html</anchorfile>
+      <anchor>a03ee99cad37f969f3cfe3a6ca33724e0</anchor>
+      <arglist>(InjectorPtr injector, std::string const name) const </arglist>
+    </member>
+    <member kind="function" protection="protected">
+      <type>void</type>
+      <name>cache</name>
+      <anchorfile>classsauce_1_1internal_1_1_injector_friend.html</anchorfile>
+      <anchor>ade3dae24aba63755f841cc0a5f414620</anchor>
+      <arglist>(InjectorPtr injector, typename Key&lt; Dependency &gt;::Ptr pointer, i::TypeId scope) const </arglist>
+    </member>
+    <member kind="function" protection="protected">
+      <type>bool</type>
+      <name>probe</name>
+      <anchorfile>classsauce_1_1internal_1_1_injector_friend.html</anchorfile>
+      <anchor>a90c25459558bfe86e4bb59e12137718b</anchor>
+      <arglist>(InjectorPtr injector, typename Key&lt; Dependency &gt;::Ptr &amp;out, i::TypeId scope) const </arglist>
+    </member>
+  </compound>
+  <compound kind="class">
     <name>sauce::internal::Bindings</name>
     <filename>classsauce_1_1internal_1_1_bindings.html</filename>
     <templarg>ImplicitBindings</templarg>
@@ -1594,84 +1672,6 @@
       <anchorfile>structsauce_1_1internal_1_1_provider_friend.html</anchorfile>
       <anchor>a335c721a6d2c83e11d8498dada73d4c6</anchor>
       <arglist>(typename Key&lt; Named&lt; Provider&lt; ProvidedDependency &gt;, Name &gt; &gt;::Ptr ptr) const </arglist>
-    </member>
-  </compound>
-  <compound kind="class">
-    <name>sauce::internal::InjectionBinding</name>
-    <filename>classsauce_1_1internal_1_1_injection_binding.html</filename>
-    <templarg>Dependency</templarg>
-    <templarg>Scope</templarg>
-    <base>sauce::internal::ResolvedBinding</base>
-    <base>sauce::internal::InjectorFriend</base>
-    <member kind="function">
-      <type>std::string</type>
-      <name>getName</name>
-      <anchorfile>classsauce_1_1internal_1_1_injection_binding.html</anchorfile>
-      <anchor>a4a3c79bd489e5e57ed8ea630bef070e9</anchor>
-      <arglist>() const </arglist>
-    </member>
-    <member kind="function">
-      <type>void</type>
-      <name>setName</name>
-      <anchorfile>classsauce_1_1internal_1_1_injection_binding.html</anchorfile>
-      <anchor>a1b8f3c4f86982d7e80a32e3cd00dfa5c</anchor>
-      <arglist>(std::string const name)</arglist>
-    </member>
-    <member kind="function">
-      <type>NamedTypeId</type>
-      <name>getKey</name>
-      <anchorfile>structsauce_1_1internal_1_1_resolved_binding.html</anchorfile>
-      <anchor>a7ff0341fe08ae52a0f03a35ad6dd3c79</anchor>
-      <arglist>() const </arglist>
-    </member>
-    <member kind="function" virtualness="pure">
-      <type>virtual void</type>
-      <name>validateAcyclic</name>
-      <anchorfile>structsauce_1_1internal_1_1_resolved_binding.html</anchorfile>
-      <anchor>a503de5fe9cb4996db536f6f6d6d486be</anchor>
-      <arglist>(sauce::shared_ptr&lt; Injector &gt;, TypeIds &amp;) const =0</arglist>
-    </member>
-    <member kind="function" virtualness="pure">
-      <type>virtual IfacePtr</type>
-      <name>get</name>
-      <anchorfile>structsauce_1_1internal_1_1_resolved_binding.html</anchorfile>
-      <anchor>a06fb04d3ee1d8d42d7f93f20a205ff25</anchor>
-      <arglist>(BindingPtr, sauce::shared_ptr&lt; Injector &gt;) const =0</arglist>
-    </member>
-    <member kind="function" virtualness="pure">
-      <type>virtual void</type>
-      <name>eagerlyProvide</name>
-      <anchorfile>structsauce_1_1internal_1_1_opaque_binding.html</anchorfile>
-      <anchor>a9cbe103bedc3ea77c5edef5f30a4d74c</anchor>
-      <arglist>(OpaqueBindingPtr, sauce::shared_ptr&lt; Injector &gt;) const =0</arglist>
-    </member>
-    <member kind="function" protection="protected">
-      <type>void</type>
-      <name>validateAcyclicHelper</name>
-      <anchorfile>classsauce_1_1internal_1_1_injector_friend.html</anchorfile>
-      <anchor>a4a2343d76ae48ae8b6bdda2494e9f9a9</anchor>
-      <arglist>(InjectorPtr injector, TypeIds &amp;ids, std::string const name) const </arglist>
-    </member>
-    <member kind="function" protection="protected">
-      <type>Key&lt; Dependency &gt;::Ptr</type>
-      <name>getHelper</name>
-      <anchorfile>classsauce_1_1internal_1_1_injector_friend.html</anchorfile>
-      <anchor>a03ee99cad37f969f3cfe3a6ca33724e0</anchor>
-      <arglist>(InjectorPtr injector, std::string const name) const </arglist>
-    </member>
-    <member kind="function" protection="protected">
-      <type>void</type>
-      <name>cache</name>
-      <anchorfile>classsauce_1_1internal_1_1_injector_friend.html</anchorfile>
-      <anchor>ade3dae24aba63755f841cc0a5f414620</anchor>
-      <arglist>(InjectorPtr injector, typename Key&lt; Dependency &gt;::Ptr pointer, i::TypeId scope) const </arglist>
-    </member>
-    <member kind="function" protection="protected">
-      <type>bool</type>
-      <name>probe</name>
-      <anchorfile>classsauce_1_1internal_1_1_injector_friend.html</anchorfile>
-      <anchor>a90c25459558bfe86e4bb59e12137718b</anchor>
-      <arglist>(InjectorPtr injector, typename Key&lt; Dependency &gt;::Ptr &amp;out, i::TypeId scope) const </arglist>
     </member>
   </compound>
   <compound kind="class">
@@ -2757,7 +2757,7 @@
     <filename>classsauce_1_1internal_1_1_providing_injection.html</filename>
     <templarg>Dependency_</templarg>
     <templarg>Scope</templarg>
-    <base>InjectionBinding&lt; Dependency_, Scope &gt;</base>
+    <base>Binding&lt; Dependency_, Scope &gt;</base>
     <member kind="typedef">
       <type>Key&lt; Dependency_ &gt;::Normalized</type>
       <name>Dependency</name>
@@ -2789,15 +2789,15 @@
     <member kind="function">
       <type>std::string</type>
       <name>getName</name>
-      <anchorfile>classsauce_1_1internal_1_1_injection_binding.html</anchorfile>
-      <anchor>a4a3c79bd489e5e57ed8ea630bef070e9</anchor>
+      <anchorfile>classsauce_1_1internal_1_1_binding.html</anchorfile>
+      <anchor>ab8e8116e7e5cf5112d6d19decdb5315a</anchor>
       <arglist>() const</arglist>
     </member>
     <member kind="function">
       <type>void</type>
       <name>setName</name>
-      <anchorfile>classsauce_1_1internal_1_1_injection_binding.html</anchorfile>
-      <anchor>a1b8f3c4f86982d7e80a32e3cd00dfa5c</anchor>
+      <anchorfile>classsauce_1_1internal_1_1_binding.html</anchorfile>
+      <anchor>af62e7eebe2f188cd2660a9163d2e1dbd</anchor>
       <arglist>(std::string const name)</arglist>
     </member>
     <member kind="function">
@@ -3047,12 +3047,12 @@
     <dir>sauce/internal/memory/</dir>
     <file>all.h</file>
     <file>base_injector.h</file>
+    <file>binding.h</file>
     <file>bindings.h</file>
     <file>clause.h</file>
     <file>disposal_deleter.h</file>
     <file>implicit_bindings.h</file>
     <file>implicit_provider_injection.h</file>
-    <file>injection_binding.h</file>
     <file>injector_injection.h</file>
     <file>key.h</file>
     <file>locker_factory.h</file>

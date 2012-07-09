@@ -54,14 +54,14 @@
 <div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;<span class="preprocessor">#include &lt;sauce/injector.h&gt;</span></div>
 <div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;<span class="preprocessor">#include &lt;sauce/memory.h&gt;</span></div>
 <div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;<span class="preprocessor">#include &lt;sauce/internal/key.h&gt;</span></div>
-<div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;<span class="preprocessor">#include &lt;sauce/internal/injection_binding.h&gt;</span></div>
+<div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;<span class="preprocessor">#include &lt;sauce/internal/binding.h&gt;</span></div>
 <div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;<span class="preprocessor">#include &lt;sauce/internal/resolved_binding.h&gt;</span></div>
 <div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;</div>
 <div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;<span class="keyword">namespace </span>sauce {</div>
 <div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;<span class="keyword">namespace </span>internal {</div>
 <div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;</div>
 <div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;<span class="keyword">template</span>&lt;<span class="keyword">typename</span> Dependency_, <span class="keyword">typename</span> Scope&gt;</div>
-<div class="line"><a name="l00017"></a><span class="lineno"><a class="code" href="classsauce_1_1internal_1_1_providing_injection.html">   17</a></span>&#160;<span class="keyword">class </span><a class="code" href="classsauce_1_1internal_1_1_providing_injection.html" title="A strategy for satisfying provisions for the given interface.">ProvidingInjection</a>: <span class="keyword">public</span> <a class="code" href="classsauce_1_1internal_1_1_injection_binding.html" title="A binding that uses injections to satisfy dependencies.">InjectionBinding</a>&lt;Dependency_, Scope&gt; {</div>
+<div class="line"><a name="l00017"></a><span class="lineno"><a class="code" href="classsauce_1_1internal_1_1_providing_injection.html">   17</a></span>&#160;<span class="keyword">class </span><a class="code" href="classsauce_1_1internal_1_1_providing_injection.html" title="A strategy for satisfying provisions for the given interface.">ProvidingInjection</a>: <span class="keyword">public</span> <a class="code" href="classsauce_1_1internal_1_1_binding.html" title="The base class of all actual binding implementations.">Binding</a>&lt;Dependency_, Scope&gt; {</div>
 <div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;<span class="keyword">public</span>:</div>
 <div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;</div>
 <div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;  <span class="keyword">typedef</span> <span class="keyword">typename</span> <a class="code" href="classsauce_1_1_named.html" title="Wrap dependency requests with Named to choose one of several (statically) named alternatives.">Key&lt;Dependency_&gt;::Normalized</a> <a class="code" href="classsauce_1_1_named.html" title="Wrap dependency requests with Named to choose one of several (statically) named alternatives.">Dependency</a>;</div>
@@ -70,7 +70,7 @@
 <div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;  <span class="keyword">typedef</span> <span class="keyword">typename</span> <a class="code" href="structsauce_1_1internal_1_1_resolved_binding.html" title="A binding for an acknowledged interface.">ResolvedBinding&lt;Dependency_&gt;::BindingPtr</a> BindingPtr;</div>
 <div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;</div>
 <div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;  <a class="code" href="classsauce_1_1internal_1_1_providing_injection.html" title="A strategy for satisfying provisions for the given interface.">ProvidingInjection</a>():</div>
-<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;    <a class="code" href="classsauce_1_1internal_1_1_injection_binding.html">InjectionBinding&lt;Dependency_, Scope&gt;</a>() {}</div>
+<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;    <a class="code" href="classsauce_1_1internal_1_1_binding.html">Binding&lt;Dependency_, Scope&gt;</a>() {}</div>
 <div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;</div>
 <div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;};</div>
 <div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;</div>

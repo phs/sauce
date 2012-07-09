@@ -1,5 +1,5 @@
-#ifndef SAUCE_INTERNAL_INJECTION_BINDING_H_
-#define SAUCE_INTERNAL_INJECTION_BINDING_H_
+#ifndef SAUCE_INTERNAL_BINDING_H_
+#define SAUCE_INTERNAL_BINDING_H_
 
 #include <string>
 
@@ -118,4 +118,4 @@ namespace i = ::sauce::internal;
 
 }
 
-#endif // SAUCE_INTERNAL_INJECTION_BINDING_H_
+#endif // SAUCE_INTERNAL_BINDING_H_

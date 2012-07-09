@@ -2,14 +2,14 @@
 //     pump.py new_injection.h.pump
 // DO NOT EDIT BY HAND!!!
 
-#ifndef SAUCE_INTERNAL_INJECTIONS_NEW_INJECTION_H_
-#define SAUCE_INTERNAL_INJECTIONS_NEW_INJECTION_H_
+#ifndef SAUCE_INTERNAL_NEW_INJECTION_H_
+#define SAUCE_INTERNAL_NEW_INJECTION_H_
 
 #include <sauce/injector.h>
 #include <sauce/memory.h>
 #include <sauce/named.h>
 #include <sauce/provider.h>
-#include <sauce/internal/injection_binding.h>
+#include <sauce/internal/binding.h>
 #include <sauce/internal/providing_injection.h>
 #include <sauce/internal/key.h>
 #include <sauce/internal/type_id.h>
@@ -843,4 +843,4 @@ namespace i = ::sauce::internal;
 
 }
 
-#endif // SAUCE_INTERNAL_INJECTIONS_NEW_INJECTION_H_
+#endif // SAUCE_INTERNAL_NEW_INJECTION_H_

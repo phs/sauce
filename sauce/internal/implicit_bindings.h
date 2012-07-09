@@ -9,7 +9,7 @@
 #include <sauce/provider.h>
 #include <sauce/scopes.h>
 #include <sauce/internal/resolved_binding.h>
-#include <sauce/internal/injection_binding.h>
+#include <sauce/internal/binding.h>
 #include <sauce/internal/bindings.h>
 #include <sauce/internal/all.h>
 #include <sauce/internal/key.h>

@@ -8,7 +8,7 @@ $var n = 10  $$ The maximum arity we support.
 #include <sauce/memory.h>
 #include <sauce/named.h>
 #include <sauce/provider.h>
-#include <sauce/internal/injection_binding.h>
+#include <sauce/internal/binding.h>
 #include <sauce/internal/providing_injection.h>
 #include <sauce/internal/key.h>
 #include <sauce/internal/type_id.h>

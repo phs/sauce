@@ -63,14 +63,14 @@ Inheritance diagram for sauce::internal::ProviderInjection&lt; Dependency, Scope
 <div class="dyncontent">
 <div class="center"><img src="classsauce_1_1internal_1_1_provider_injection__inherit__graph.png" border="0" usemap="#sauce_1_1internal_1_1_provider_injection_3_01_dependency_00_01_scope_00_01_provider_01_4_inherit__map" alt="Inheritance graph"/></div>
 <map name="sauce_1_1internal_1_1_provider_injection_3_01_dependency_00_01_scope_00_01_provider_01_4_inherit__map" id="sauce_1_1internal_1_1_provider_injection_3_01_dependency_00_01_scope_00_01_provider_01_4_inherit__map">
-<area shape="rect" id="node2" href="classsauce_1_1internal_1_1_providing_injection.html" title="sauce::internal::Providing\lInjection\&lt; Dependency,\l Scope \&gt;" alt="" coords="117,270,288,330"/><area shape="rect" id="node4" href="classsauce_1_1internal_1_1_injection_binding.html" title="A binding that uses injections to satisfy dependencies." alt="" coords="99,177,305,221"/><area shape="rect" id="node6" href="structsauce_1_1internal_1_1_resolved_binding.html" title="A binding for an acknowledged interface." alt="" coords="22,83,193,127"/><area shape="rect" id="node8" href="structsauce_1_1internal_1_1_opaque_binding.html" title="An opaque binding." alt="" coords="4,6,211,34"/><area shape="rect" id="node10" href="classsauce_1_1internal_1_1_injector_friend.html" title="sauce::internal::Injector\lFriend" alt="" coords="218,83,376,127"/></map>
+<area shape="rect" id="node2" href="classsauce_1_1internal_1_1_providing_injection.html" title="sauce::internal::Providing\lInjection\&lt; Dependency,\l Scope \&gt;" alt="" coords="117,270,288,330"/><area shape="rect" id="node4" href="classsauce_1_1internal_1_1_binding.html" title="The base class of all actual binding implementations." alt="" coords="121,177,284,221"/><area shape="rect" id="node6" href="structsauce_1_1internal_1_1_resolved_binding.html" title="A binding for an acknowledged interface." alt="" coords="22,83,193,127"/><area shape="rect" id="node8" href="structsauce_1_1internal_1_1_opaque_binding.html" title="An opaque binding." alt="" coords="4,6,211,34"/><area shape="rect" id="node10" href="classsauce_1_1internal_1_1_injector_friend.html" title="sauce::internal::Injector\lFriend" alt="" coords="218,83,376,127"/></map>
 <center><span class="legend">[<a href="graph_legend.html">legend</a>]</span></center></div>
 <div class="dynheader">
 Collaboration diagram for sauce::internal::ProviderInjection&lt; Dependency, Scope, Provider &gt;:</div>
 <div class="dyncontent">
 <div class="center"><img src="classsauce_1_1internal_1_1_provider_injection__coll__graph.png" border="0" usemap="#sauce_1_1internal_1_1_provider_injection_3_01_dependency_00_01_scope_00_01_provider_01_4_coll__map" alt="Collaboration graph"/></div>
 <map name="sauce_1_1internal_1_1_provider_injection_3_01_dependency_00_01_scope_00_01_provider_01_4_coll__map" id="sauce_1_1internal_1_1_provider_injection_3_01_dependency_00_01_scope_00_01_provider_01_4_coll__map">
-<area shape="rect" id="node2" href="classsauce_1_1internal_1_1_providing_injection.html" title="sauce::internal::Providing\lInjection\&lt; Dependency,\l Scope \&gt;" alt="" coords="117,270,288,330"/><area shape="rect" id="node4" href="classsauce_1_1internal_1_1_injection_binding.html" title="A binding that uses injections to satisfy dependencies." alt="" coords="99,177,305,221"/><area shape="rect" id="node6" href="structsauce_1_1internal_1_1_resolved_binding.html" title="A binding for an acknowledged interface." alt="" coords="22,83,193,127"/><area shape="rect" id="node8" href="structsauce_1_1internal_1_1_opaque_binding.html" title="An opaque binding." alt="" coords="4,6,211,34"/><area shape="rect" id="node10" href="classsauce_1_1internal_1_1_injector_friend.html" title="sauce::internal::Injector\lFriend" alt="" coords="218,83,376,127"/></map>
+<area shape="rect" id="node2" href="classsauce_1_1internal_1_1_providing_injection.html" title="sauce::internal::Providing\lInjection\&lt; Dependency,\l Scope \&gt;" alt="" coords="117,270,288,330"/><area shape="rect" id="node4" href="classsauce_1_1internal_1_1_binding.html" title="The base class of all actual binding implementations." alt="" coords="121,177,284,221"/><area shape="rect" id="node6" href="structsauce_1_1internal_1_1_resolved_binding.html" title="A binding for an acknowledged interface." alt="" coords="22,83,193,127"/><area shape="rect" id="node8" href="structsauce_1_1internal_1_1_opaque_binding.html" title="An opaque binding." alt="" coords="4,6,211,34"/><area shape="rect" id="node10" href="classsauce_1_1internal_1_1_injector_friend.html" title="sauce::internal::Injector\lFriend" alt="" coords="218,83,376,127"/></map>
 <center><span class="legend">[<a href="graph_legend.html">legend</a>]</span></center></div>
 
 <p><a href="classsauce_1_1internal_1_1_provider_injection-members.html">List of all members.</a></p>
@@ -141,7 +141,7 @@ template&lt;typename Dependency , typename Scope , typename Provider &gt; </div>
 <p>Provide an Iface. </p>
 <p>The strategy used is left to derived types. </p>
 
-<p>Implements <a class="el" href="classsauce_1_1internal_1_1_injection_binding.html">sauce::internal::InjectionBinding&lt; Dependency, Scope &gt;</a>.</p>
+<p>Implements <a class="el" href="classsauce_1_1internal_1_1_binding.html">sauce::internal::Binding&lt; Dependency, Scope &gt;</a>.</p>
 <div class="fragment"><div class="line">                                                                                      {</div>
 <div class="line">    <span class="keywordflow">return</span> this-&gt;<span class="keyword">template</span> getHelper&lt;Provider&gt;(injector, binding-&gt;getName())-&gt;<span class="keyword">get</span>();</div>
 <div class="line">  }</div>
@@ -185,9 +185,9 @@ template&lt;typename Dependency , typename Scope , typename Provider &gt; </div>
 <p>Establish that further dependencies do not introduce cycles with ones already accumulated. </p>
 <p>This is Tarjan's algorithm using the call stack. When a cycle is detected a <a class="el" href="structsauce_1_1_circular_dependency_exception.html" title="Thrown when a dependency cycle is found.">CircularDependencyException</a> is thrown. </p>
 
-<p>Implements <a class="el" href="classsauce_1_1internal_1_1_injection_binding.html">sauce::internal::InjectionBinding&lt; Dependency, Scope &gt;</a>.</p>
+<p>Implements <a class="el" href="classsauce_1_1internal_1_1_binding.html">sauce::internal::Binding&lt; Dependency, Scope &gt;</a>.</p>
 <div class="fragment"><div class="line">                                                                  {</div>
-<div class="line">    this-&gt;<span class="keyword">template</span> validateAcyclicHelper&lt;Provider&gt;(injector, ids, this-&gt;<a class="code" href="classsauce_1_1internal_1_1_injection_binding.html#a4a3c79bd489e5e57ed8ea630bef070e9" title="The dynamic name of this binding.">getName</a>());</div>
+<div class="line">    this-&gt;<span class="keyword">template</span> validateAcyclicHelper&lt;Provider&gt;(injector, ids, this-&gt;<a class="code" href="classsauce_1_1internal_1_1_binding.html#ab8e8116e7e5cf5112d6d19decdb5315a" title="The dynamic name of this binding.">getName</a>());</div>
 <div class="line">  }</div>
 </div><!-- fragment -->
 <p><div class="dynheader">
@@ -195,7 +195,7 @@ Here is the call graph for this function:</div>
 <div class="dyncontent">
 <div class="center"><img src="classsauce_1_1internal_1_1_provider_injection_a5ff58e50de78514ae150a1058ad182fc_cgraph.png" border="0" usemap="#classsauce_1_1internal_1_1_provider_injection_a5ff58e50de78514ae150a1058ad182fc_cgraph" alt=""/></div>
 <map name="classsauce_1_1internal_1_1_provider_injection_a5ff58e50de78514ae150a1058ad182fc_cgraph" id="classsauce_1_1internal_1_1_provider_injection_a5ff58e50de78514ae150a1058ad182fc_cgraph">
-<area shape="rect" id="node3" href="classsauce_1_1internal_1_1_injection_binding.html#a4a3c79bd489e5e57ed8ea630bef070e9" title="The dynamic name of this binding." alt="" coords="219,5,384,49"/></map>
+<area shape="rect" id="node3" href="classsauce_1_1internal_1_1_binding.html#ab8e8116e7e5cf5112d6d19decdb5315a" title="The dynamic name of this binding." alt="" coords="219,5,379,49"/></map>
 </div>
 </p>
 

@@ -4,7 +4,7 @@
 #include <sauce/injector.h>
 #include <sauce/memory.h>
 #include <sauce/internal/key.h>
-#include <sauce/internal/injection_binding.h>
+#include <sauce/internal/binding.h>
 #include <sauce/internal/resolved_binding.h>
 
 namespace sauce {
