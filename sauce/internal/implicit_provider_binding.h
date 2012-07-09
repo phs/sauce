@@ -46,8 +46,7 @@ public:
  */
 template<typename Dependency, typename Name>
 class ImplicitProviderBinding:
-  public Binding<Named<Provider<Dependency>, Name>, NoScope>,
-  public ProviderFriend {
+  public Binding<Named<Provider<Dependency>, Name>, NoScope> {
 
   typedef typename Key<Dependency>::Normalized Normalized;
   typedef typename ResolvedBinding<Normalized>::BindingPtr ProvidedBindingPtr;
@@ -64,12 +63,10 @@ public:
 
   ImplicitProviderBinding(ProvidedBindingPtr providedBinding):
     Binding<Named<Provider<Dependency>, Name>, NoScope>(),
-    ProviderFriend(),
     providedBinding(providedBinding) {}
 
   ProviderPtr provide(BindingPtr, InjectorPtr injector) const {
     ProviderPtr provider(new ImplicitProvider<Dependency, Name>(providedBinding, injector));
-    setSelf<Dependency, Name>(provider);
     return provider;
   }
 };
