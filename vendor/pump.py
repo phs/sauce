@@ -32,6 +32,7 @@
 # This file was taken from gmock-1.5.0
 # The following modifications have been made:
 #   * MAX_LINE_WIDTH = 80 was extracted.
+#   * MAX_LINE_WIDTH was set to 120.
 
 """pump v0.1 - Pretty Useful for Meta Programming.
 
@@ -88,7 +89,7 @@ TOKEN_TABLE = [
     (re.compile(r'\]\]\n?'), ']]'),
     ]
 
-MAX_LINE_WIDTH = 80
+MAX_LINE_WIDTH = 120
 
 class Cursor:
   """Represents a position (line and column) in a text file."""

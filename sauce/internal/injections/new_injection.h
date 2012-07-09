@@ -19,8 +19,7 @@ namespace internal {
 namespace injections {
 
 /* *INDENT-OFF* */
-template<typename Dependency, typename Scope, typename Constructor,
-    typename Allocator>
+template<typename Dependency, typename Scope, typename Constructor, typename Allocator>
 class NewInjection;
 /* *INDENT-ON* */
 
@@ -45,8 +44,7 @@ class NewInjection<Dependency, Scope, Impl(), Allocator>:
 
 public:
 
-  typedef typename ProvidingInjection<Dependency,
-      Scope>::InjectionPtr InjectionPtr;
+  typedef typename ProvidingInjection<Dependency, Scope>::InjectionPtr InjectionPtr;
   typedef typename ResolvedBinding<Dependency>::BindingPtr BindingPtr;
 
   NewInjection():
@@ -75,8 +73,7 @@ public:
 /* *INDENT-ON* */
 
 /* *INDENT-OFF* */
-template<typename Dependency, typename Scope, typename Impl,
-    typename Allocator, typename A1>
+template<typename Dependency, typename Scope, typename Impl, typename Allocator, typename A1>
 class NewInjection<Dependency, Scope, Impl(A1), Allocator>:
   public ProvidingInjection<Dependency, Scope> {
 
@@ -92,20 +89,17 @@ class NewInjection<Dependency, Scope, Impl(A1), Allocator>:
   std::vector<std::string> dynamicDependencyNames;
 
   void validateAcyclic(InjectorPtr injector, TypeIds & ids) const {
-    this->template validateAcyclicHelper<A1>(injector, ids,
-        dynamicDependencyNames[0]);
+    this->template validateAcyclicHelper<A1>(injector, ids, dynamicDependencyNames[0]);
   }
 
-  void setDynamicDependencyNames(std::vector<std::string> const &
-      dynamicDependencyNames) {
+  void setDynamicDependencyNames(std::vector<std::string> const & dynamicDependencyNames) {
     this->dynamicDependencyNames = dynamicDependencyNames;
     this->dynamicDependencyNames.resize(1, unnamed());
   }
 
 public:
 
-  typedef typename ProvidingInjection<Dependency,
-      Scope>::InjectionPtr InjectionPtr;
+  typedef typename ProvidingInjection<Dependency, Scope>::InjectionPtr InjectionPtr;
   typedef typename ResolvedBinding<Dependency>::BindingPtr BindingPtr;
 
   NewInjection():
@@ -120,8 +114,8 @@ public:
    * dispose(Iface *).
    */
   Ptr provide(BindingPtr binding, InjectorPtr injector) const {
-    typename Key<A1>::Ptr a1(this->template getHelper<typename
-        i::Key<A1>::Normalized>(injector, dynamicDependencyNames[0]));
+    typename Key<A1>::Ptr a1(this->template getHelper<typename i::Key<A1>::Normalized>(injector,
+        dynamicDependencyNames[0]));
     Deleter deleter(sauce::static_pointer_cast<New>(binding));
     Impl * impl = allocator.allocate(1);
     Ptr provided(new(impl) Impl(a1), deleter);
@@ -137,8 +131,7 @@ public:
 /* *INDENT-ON* */
 
 /* *INDENT-OFF* */
-template<typename Dependency, typename Scope, typename Impl,
-    typename Allocator, typename A1, typename A2>
+template<typename Dependency, typename Scope, typename Impl, typename Allocator, typename A1, typename A2>
 class NewInjection<Dependency, Scope, Impl(A1, A2), Allocator>:
   public ProvidingInjection<Dependency, Scope> {
 
@@ -154,22 +147,18 @@ class NewInjection<Dependency, Scope, Impl(A1, A2), Allocator>:
   std::vector<std::string> dynamicDependencyNames;
 
   void validateAcyclic(InjectorPtr injector, TypeIds & ids) const {
-    this->template validateAcyclicHelper<A1>(injector, ids,
-        dynamicDependencyNames[0]);
-    this->template validateAcyclicHelper<A2>(injector, ids,
-        dynamicDependencyNames[1]);
+    this->template validateAcyclicHelper<A1>(injector, ids, dynamicDependencyNames[0]);
+    this->template validateAcyclicHelper<A2>(injector, ids, dynamicDependencyNames[1]);
   }
 
-  void setDynamicDependencyNames(std::vector<std::string> const &
-      dynamicDependencyNames) {
+  void setDynamicDependencyNames(std::vector<std::string> const & dynamicDependencyNames) {
     this->dynamicDependencyNames = dynamicDependencyNames;
     this->dynamicDependencyNames.resize(2, unnamed());
   }
 
 public:
 
-  typedef typename ProvidingInjection<Dependency,
-      Scope>::InjectionPtr InjectionPtr;
+  typedef typename ProvidingInjection<Dependency, Scope>::InjectionPtr InjectionPtr;
   typedef typename ResolvedBinding<Dependency>::BindingPtr BindingPtr;
 
   NewInjection():
@@ -184,10 +173,10 @@ public:
    * dispose(Iface *).
    */
   Ptr provide(BindingPtr binding, InjectorPtr injector) const {
-    typename Key<A1>::Ptr a1(this->template getHelper<typename
-        i::Key<A1>::Normalized>(injector, dynamicDependencyNames[0]));
-    typename Key<A2>::Ptr a2(this->template getHelper<typename
-        i::Key<A2>::Normalized>(injector, dynamicDependencyNames[1]));
+    typename Key<A1>::Ptr a1(this->template getHelper<typename i::Key<A1>::Normalized>(injector,
+        dynamicDependencyNames[0]));
+    typename Key<A2>::Ptr a2(this->template getHelper<typename i::Key<A2>::Normalized>(injector,
+        dynamicDependencyNames[1]));
     Deleter deleter(sauce::static_pointer_cast<New>(binding));
     Impl * impl = allocator.allocate(1);
     Ptr provided(new(impl) Impl(a1, a2), deleter);
@@ -203,8 +192,7 @@ public:
 /* *INDENT-ON* */
 
 /* *INDENT-OFF* */
-template<typename Dependency, typename Scope, typename Impl,
-    typename Allocator, typename A1, typename A2, typename A3>
+template<typename Dependency, typename Scope, typename Impl, typename Allocator, typename A1, typename A2, typename A3>
 class NewInjection<Dependency, Scope, Impl(A1, A2, A3), Allocator>:
   public ProvidingInjection<Dependency, Scope> {
 
@@ -220,24 +208,19 @@ class NewInjection<Dependency, Scope, Impl(A1, A2, A3), Allocator>:
   std::vector<std::string> dynamicDependencyNames;
 
   void validateAcyclic(InjectorPtr injector, TypeIds & ids) const {
-    this->template validateAcyclicHelper<A1>(injector, ids,
-        dynamicDependencyNames[0]);
-    this->template validateAcyclicHelper<A2>(injector, ids,
-        dynamicDependencyNames[1]);
-    this->template validateAcyclicHelper<A3>(injector, ids,
-        dynamicDependencyNames[2]);
+    this->template validateAcyclicHelper<A1>(injector, ids, dynamicDependencyNames[0]);
+    this->template validateAcyclicHelper<A2>(injector, ids, dynamicDependencyNames[1]);
+    this->template validateAcyclicHelper<A3>(injector, ids, dynamicDependencyNames[2]);
   }
 
-  void setDynamicDependencyNames(std::vector<std::string> const &
-      dynamicDependencyNames) {
+  void setDynamicDependencyNames(std::vector<std::string> const & dynamicDependencyNames) {
     this->dynamicDependencyNames = dynamicDependencyNames;
     this->dynamicDependencyNames.resize(3, unnamed());
   }
 
 public:
 
-  typedef typename ProvidingInjection<Dependency,
-      Scope>::InjectionPtr InjectionPtr;
+  typedef typename ProvidingInjection<Dependency, Scope>::InjectionPtr InjectionPtr;
   typedef typename ResolvedBinding<Dependency>::BindingPtr BindingPtr;
 
   NewInjection():
@@ -252,12 +235,12 @@ public:
    * dispose(Iface *).
    */
   Ptr provide(BindingPtr binding, InjectorPtr injector) const {
-    typename Key<A1>::Ptr a1(this->template getHelper<typename
-        i::Key<A1>::Normalized>(injector, dynamicDependencyNames[0]));
-    typename Key<A2>::Ptr a2(this->template getHelper<typename
-        i::Key<A2>::Normalized>(injector, dynamicDependencyNames[1]));
-    typename Key<A3>::Ptr a3(this->template getHelper<typename
-        i::Key<A3>::Normalized>(injector, dynamicDependencyNames[2]));
+    typename Key<A1>::Ptr a1(this->template getHelper<typename i::Key<A1>::Normalized>(injector,
+        dynamicDependencyNames[0]));
+    typename Key<A2>::Ptr a2(this->template getHelper<typename i::Key<A2>::Normalized>(injector,
+        dynamicDependencyNames[1]));
+    typename Key<A3>::Ptr a3(this->template getHelper<typename i::Key<A3>::Normalized>(injector,
+        dynamicDependencyNames[2]));
     Deleter deleter(sauce::static_pointer_cast<New>(binding));
     Impl * impl = allocator.allocate(1);
     Ptr provided(new(impl) Impl(a1, a2, a3), deleter);
@@ -273,8 +256,8 @@ public:
 /* *INDENT-ON* */
 
 /* *INDENT-OFF* */
-template<typename Dependency, typename Scope, typename Impl,
-    typename Allocator, typename A1, typename A2, typename A3, typename A4>
+template<typename Dependency, typename Scope, typename Impl, typename Allocator, typename A1, typename A2, typename A3,
+    typename A4>
 class NewInjection<Dependency, Scope, Impl(A1, A2, A3, A4), Allocator>:
   public ProvidingInjection<Dependency, Scope> {
 
@@ -290,26 +273,20 @@ class NewInjection<Dependency, Scope, Impl(A1, A2, A3, A4), Allocator>:
   std::vector<std::string> dynamicDependencyNames;
 
   void validateAcyclic(InjectorPtr injector, TypeIds & ids) const {
-    this->template validateAcyclicHelper<A1>(injector, ids,
-        dynamicDependencyNames[0]);
-    this->template validateAcyclicHelper<A2>(injector, ids,
-        dynamicDependencyNames[1]);
-    this->template validateAcyclicHelper<A3>(injector, ids,
-        dynamicDependencyNames[2]);
-    this->template validateAcyclicHelper<A4>(injector, ids,
-        dynamicDependencyNames[3]);
+    this->template validateAcyclicHelper<A1>(injector, ids, dynamicDependencyNames[0]);
+    this->template validateAcyclicHelper<A2>(injector, ids, dynamicDependencyNames[1]);
+    this->template validateAcyclicHelper<A3>(injector, ids, dynamicDependencyNames[2]);
+    this->template validateAcyclicHelper<A4>(injector, ids, dynamicDependencyNames[3]);
   }
 
-  void setDynamicDependencyNames(std::vector<std::string> const &
-      dynamicDependencyNames) {
+  void setDynamicDependencyNames(std::vector<std::string> const & dynamicDependencyNames) {
     this->dynamicDependencyNames = dynamicDependencyNames;
     this->dynamicDependencyNames.resize(4, unnamed());
   }
 
 public:
 
-  typedef typename ProvidingInjection<Dependency,
-      Scope>::InjectionPtr InjectionPtr;
+  typedef typename ProvidingInjection<Dependency, Scope>::InjectionPtr InjectionPtr;
   typedef typename ResolvedBinding<Dependency>::BindingPtr BindingPtr;
 
   NewInjection():
@@ -324,14 +301,14 @@ public:
    * dispose(Iface *).
    */
   Ptr provide(BindingPtr binding, InjectorPtr injector) const {
-    typename Key<A1>::Ptr a1(this->template getHelper<typename
-        i::Key<A1>::Normalized>(injector, dynamicDependencyNames[0]));
-    typename Key<A2>::Ptr a2(this->template getHelper<typename
-        i::Key<A2>::Normalized>(injector, dynamicDependencyNames[1]));
-    typename Key<A3>::Ptr a3(this->template getHelper<typename
-        i::Key<A3>::Normalized>(injector, dynamicDependencyNames[2]));
-    typename Key<A4>::Ptr a4(this->template getHelper<typename
-        i::Key<A4>::Normalized>(injector, dynamicDependencyNames[3]));
+    typename Key<A1>::Ptr a1(this->template getHelper<typename i::Key<A1>::Normalized>(injector,
+        dynamicDependencyNames[0]));
+    typename Key<A2>::Ptr a2(this->template getHelper<typename i::Key<A2>::Normalized>(injector,
+        dynamicDependencyNames[1]));
+    typename Key<A3>::Ptr a3(this->template getHelper<typename i::Key<A3>::Normalized>(injector,
+        dynamicDependencyNames[2]));
+    typename Key<A4>::Ptr a4(this->template getHelper<typename i::Key<A4>::Normalized>(injector,
+        dynamicDependencyNames[3]));
     Deleter deleter(sauce::static_pointer_cast<New>(binding));
     Impl * impl = allocator.allocate(1);
     Ptr provided(new(impl) Impl(a1, a2, a3, a4), deleter);
@@ -347,17 +324,15 @@ public:
 /* *INDENT-ON* */
 
 /* *INDENT-OFF* */
-template<typename Dependency, typename Scope, typename Impl,
-    typename Allocator, typename A1, typename A2, typename A3, typename A4,
-    typename A5>
+template<typename Dependency, typename Scope, typename Impl, typename Allocator, typename A1, typename A2, typename A3,
+    typename A4, typename A5>
 class NewInjection<Dependency, Scope, Impl(A1, A2, A3, A4, A5), Allocator>:
   public ProvidingInjection<Dependency, Scope> {
 
   typedef typename Key<Dependency>::Iface Iface;
   typedef typename Key<Dependency>::Ptr Ptr;
   typedef typename Allocator::template rebind<Impl>::other ImplAllocator;
-  typedef NewInjection<Dependency, Scope, Impl(A1, A2, A3, A4, A5),
-      Allocator> New;
+  typedef NewInjection<Dependency, Scope, Impl(A1, A2, A3, A4, A5), Allocator> New;
   typedef DisposalDeleter<Iface, New> Deleter;
 
   friend class DisposalDeleter<Iface, New>;
@@ -366,28 +341,21 @@ class NewInjection<Dependency, Scope, Impl(A1, A2, A3, A4, A5), Allocator>:
   std::vector<std::string> dynamicDependencyNames;
 
   void validateAcyclic(InjectorPtr injector, TypeIds & ids) const {
-    this->template validateAcyclicHelper<A1>(injector, ids,
-        dynamicDependencyNames[0]);
-    this->template validateAcyclicHelper<A2>(injector, ids,
-        dynamicDependencyNames[1]);
-    this->template validateAcyclicHelper<A3>(injector, ids,
-        dynamicDependencyNames[2]);
-    this->template validateAcyclicHelper<A4>(injector, ids,
-        dynamicDependencyNames[3]);
-    this->template validateAcyclicHelper<A5>(injector, ids,
-        dynamicDependencyNames[4]);
+    this->template validateAcyclicHelper<A1>(injector, ids, dynamicDependencyNames[0]);
+    this->template validateAcyclicHelper<A2>(injector, ids, dynamicDependencyNames[1]);
+    this->template validateAcyclicHelper<A3>(injector, ids, dynamicDependencyNames[2]);
+    this->template validateAcyclicHelper<A4>(injector, ids, dynamicDependencyNames[3]);
+    this->template validateAcyclicHelper<A5>(injector, ids, dynamicDependencyNames[4]);
   }
 
-  void setDynamicDependencyNames(std::vector<std::string> const &
-      dynamicDependencyNames) {
+  void setDynamicDependencyNames(std::vector<std::string> const & dynamicDependencyNames) {
     this->dynamicDependencyNames = dynamicDependencyNames;
     this->dynamicDependencyNames.resize(5, unnamed());
   }
 
 public:
 
-  typedef typename ProvidingInjection<Dependency,
-      Scope>::InjectionPtr InjectionPtr;
+  typedef typename ProvidingInjection<Dependency, Scope>::InjectionPtr InjectionPtr;
   typedef typename ResolvedBinding<Dependency>::BindingPtr BindingPtr;
 
   NewInjection():
@@ -402,16 +370,16 @@ public:
    * dispose(Iface *).
    */
   Ptr provide(BindingPtr binding, InjectorPtr injector) const {
-    typename Key<A1>::Ptr a1(this->template getHelper<typename
-        i::Key<A1>::Normalized>(injector, dynamicDependencyNames[0]));
-    typename Key<A2>::Ptr a2(this->template getHelper<typename
-        i::Key<A2>::Normalized>(injector, dynamicDependencyNames[1]));
-    typename Key<A3>::Ptr a3(this->template getHelper<typename
-        i::Key<A3>::Normalized>(injector, dynamicDependencyNames[2]));
-    typename Key<A4>::Ptr a4(this->template getHelper<typename
-        i::Key<A4>::Normalized>(injector, dynamicDependencyNames[3]));
-    typename Key<A5>::Ptr a5(this->template getHelper<typename
-        i::Key<A5>::Normalized>(injector, dynamicDependencyNames[4]));
+    typename Key<A1>::Ptr a1(this->template getHelper<typename i::Key<A1>::Normalized>(injector,
+        dynamicDependencyNames[0]));
+    typename Key<A2>::Ptr a2(this->template getHelper<typename i::Key<A2>::Normalized>(injector,
+        dynamicDependencyNames[1]));
+    typename Key<A3>::Ptr a3(this->template getHelper<typename i::Key<A3>::Normalized>(injector,
+        dynamicDependencyNames[2]));
+    typename Key<A4>::Ptr a4(this->template getHelper<typename i::Key<A4>::Normalized>(injector,
+        dynamicDependencyNames[3]));
+    typename Key<A5>::Ptr a5(this->template getHelper<typename i::Key<A5>::Normalized>(injector,
+        dynamicDependencyNames[4]));
     Deleter deleter(sauce::static_pointer_cast<New>(binding));
     Impl * impl = allocator.allocate(1);
     Ptr provided(new(impl) Impl(a1, a2, a3, a4, a5), deleter);
@@ -427,17 +395,15 @@ public:
 /* *INDENT-ON* */
 
 /* *INDENT-OFF* */
-template<typename Dependency, typename Scope, typename Impl,
-    typename Allocator, typename A1, typename A2, typename A3, typename A4,
-    typename A5, typename A6>
+template<typename Dependency, typename Scope, typename Impl, typename Allocator, typename A1, typename A2, typename A3,
+    typename A4, typename A5, typename A6>
 class NewInjection<Dependency, Scope, Impl(A1, A2, A3, A4, A5, A6), Allocator>:
   public ProvidingInjection<Dependency, Scope> {
 
   typedef typename Key<Dependency>::Iface Iface;
   typedef typename Key<Dependency>::Ptr Ptr;
   typedef typename Allocator::template rebind<Impl>::other ImplAllocator;
-  typedef NewInjection<Dependency, Scope, Impl(A1, A2, A3, A4, A5, A6),
-      Allocator> New;
+  typedef NewInjection<Dependency, Scope, Impl(A1, A2, A3, A4, A5, A6), Allocator> New;
   typedef DisposalDeleter<Iface, New> Deleter;
 
   friend class DisposalDeleter<Iface, New>;
@@ -446,30 +412,22 @@ class NewInjection<Dependency, Scope, Impl(A1, A2, A3, A4, A5, A6), Allocator>:
   std::vector<std::string> dynamicDependencyNames;
 
   void validateAcyclic(InjectorPtr injector, TypeIds & ids) const {
-    this->template validateAcyclicHelper<A1>(injector, ids,
-        dynamicDependencyNames[0]);
-    this->template validateAcyclicHelper<A2>(injector, ids,
-        dynamicDependencyNames[1]);
-    this->template validateAcyclicHelper<A3>(injector, ids,
-        dynamicDependencyNames[2]);
-    this->template validateAcyclicHelper<A4>(injector, ids,
-        dynamicDependencyNames[3]);
-    this->template validateAcyclicHelper<A5>(injector, ids,
-        dynamicDependencyNames[4]);
-    this->template validateAcyclicHelper<A6>(injector, ids,
-        dynamicDependencyNames[5]);
+    this->template validateAcyclicHelper<A1>(injector, ids, dynamicDependencyNames[0]);
+    this->template validateAcyclicHelper<A2>(injector, ids, dynamicDependencyNames[1]);
+    this->template validateAcyclicHelper<A3>(injector, ids, dynamicDependencyNames[2]);
+    this->template validateAcyclicHelper<A4>(injector, ids, dynamicDependencyNames[3]);
+    this->template validateAcyclicHelper<A5>(injector, ids, dynamicDependencyNames[4]);
+    this->template validateAcyclicHelper<A6>(injector, ids, dynamicDependencyNames[5]);
   }
 
-  void setDynamicDependencyNames(std::vector<std::string> const &
-      dynamicDependencyNames) {
+  void setDynamicDependencyNames(std::vector<std::string> const & dynamicDependencyNames) {
     this->dynamicDependencyNames = dynamicDependencyNames;
     this->dynamicDependencyNames.resize(6, unnamed());
   }
 
 public:
 
-  typedef typename ProvidingInjection<Dependency,
-      Scope>::InjectionPtr InjectionPtr;
+  typedef typename ProvidingInjection<Dependency, Scope>::InjectionPtr InjectionPtr;
   typedef typename ResolvedBinding<Dependency>::BindingPtr BindingPtr;
 
   NewInjection():
@@ -484,18 +442,18 @@ public:
    * dispose(Iface *).
    */
   Ptr provide(BindingPtr binding, InjectorPtr injector) const {
-    typename Key<A1>::Ptr a1(this->template getHelper<typename
-        i::Key<A1>::Normalized>(injector, dynamicDependencyNames[0]));
-    typename Key<A2>::Ptr a2(this->template getHelper<typename
-        i::Key<A2>::Normalized>(injector, dynamicDependencyNames[1]));
-    typename Key<A3>::Ptr a3(this->template getHelper<typename
-        i::Key<A3>::Normalized>(injector, dynamicDependencyNames[2]));
-    typename Key<A4>::Ptr a4(this->template getHelper<typename
-        i::Key<A4>::Normalized>(injector, dynamicDependencyNames[3]));
-    typename Key<A5>::Ptr a5(this->template getHelper<typename
-        i::Key<A5>::Normalized>(injector, dynamicDependencyNames[4]));
-    typename Key<A6>::Ptr a6(this->template getHelper<typename
-        i::Key<A6>::Normalized>(injector, dynamicDependencyNames[5]));
+    typename Key<A1>::Ptr a1(this->template getHelper<typename i::Key<A1>::Normalized>(injector,
+        dynamicDependencyNames[0]));
+    typename Key<A2>::Ptr a2(this->template getHelper<typename i::Key<A2>::Normalized>(injector,
+        dynamicDependencyNames[1]));
+    typename Key<A3>::Ptr a3(this->template getHelper<typename i::Key<A3>::Normalized>(injector,
+        dynamicDependencyNames[2]));
+    typename Key<A4>::Ptr a4(this->template getHelper<typename i::Key<A4>::Normalized>(injector,
+        dynamicDependencyNames[3]));
+    typename Key<A5>::Ptr a5(this->template getHelper<typename i::Key<A5>::Normalized>(injector,
+        dynamicDependencyNames[4]));
+    typename Key<A6>::Ptr a6(this->template getHelper<typename i::Key<A6>::Normalized>(injector,
+        dynamicDependencyNames[5]));
     Deleter deleter(sauce::static_pointer_cast<New>(binding));
     Impl * impl = allocator.allocate(1);
     Ptr provided(new(impl) Impl(a1, a2, a3, a4, a5, a6), deleter);
@@ -511,18 +469,15 @@ public:
 /* *INDENT-ON* */
 
 /* *INDENT-OFF* */
-template<typename Dependency, typename Scope, typename Impl,
-    typename Allocator, typename A1, typename A2, typename A3, typename A4,
-    typename A5, typename A6, typename A7>
-class NewInjection<Dependency, Scope, Impl(A1, A2, A3, A4, A5, A6, A7),
-    Allocator>:
+template<typename Dependency, typename Scope, typename Impl, typename Allocator, typename A1, typename A2, typename A3,
+    typename A4, typename A5, typename A6, typename A7>
+class NewInjection<Dependency, Scope, Impl(A1, A2, A3, A4, A5, A6, A7), Allocator>:
   public ProvidingInjection<Dependency, Scope> {
 
   typedef typename Key<Dependency>::Iface Iface;
   typedef typename Key<Dependency>::Ptr Ptr;
   typedef typename Allocator::template rebind<Impl>::other ImplAllocator;
-  typedef NewInjection<Dependency, Scope, Impl(A1, A2, A3, A4, A5, A6, A7),
-      Allocator> New;
+  typedef NewInjection<Dependency, Scope, Impl(A1, A2, A3, A4, A5, A6, A7), Allocator> New;
   typedef DisposalDeleter<Iface, New> Deleter;
 
   friend class DisposalDeleter<Iface, New>;
@@ -531,32 +486,23 @@ class NewInjection<Dependency, Scope, Impl(A1, A2, A3, A4, A5, A6, A7),
   std::vector<std::string> dynamicDependencyNames;
 
   void validateAcyclic(InjectorPtr injector, TypeIds & ids) const {
-    this->template validateAcyclicHelper<A1>(injector, ids,
-        dynamicDependencyNames[0]);
-    this->template validateAcyclicHelper<A2>(injector, ids,
-        dynamicDependencyNames[1]);
-    this->template validateAcyclicHelper<A3>(injector, ids,
-        dynamicDependencyNames[2]);
-    this->template validateAcyclicHelper<A4>(injector, ids,
-        dynamicDependencyNames[3]);
-    this->template validateAcyclicHelper<A5>(injector, ids,
-        dynamicDependencyNames[4]);
-    this->template validateAcyclicHelper<A6>(injector, ids,
-        dynamicDependencyNames[5]);
-    this->template validateAcyclicHelper<A7>(injector, ids,
-        dynamicDependencyNames[6]);
+    this->template validateAcyclicHelper<A1>(injector, ids, dynamicDependencyNames[0]);
+    this->template validateAcyclicHelper<A2>(injector, ids, dynamicDependencyNames[1]);
+    this->template validateAcyclicHelper<A3>(injector, ids, dynamicDependencyNames[2]);
+    this->template validateAcyclicHelper<A4>(injector, ids, dynamicDependencyNames[3]);
+    this->template validateAcyclicHelper<A5>(injector, ids, dynamicDependencyNames[4]);
+    this->template validateAcyclicHelper<A6>(injector, ids, dynamicDependencyNames[5]);
+    this->template validateAcyclicHelper<A7>(injector, ids, dynamicDependencyNames[6]);
   }
 
-  void setDynamicDependencyNames(std::vector<std::string> const &
-      dynamicDependencyNames) {
+  void setDynamicDependencyNames(std::vector<std::string> const & dynamicDependencyNames) {
     this->dynamicDependencyNames = dynamicDependencyNames;
     this->dynamicDependencyNames.resize(7, unnamed());
   }
 
 public:
 
-  typedef typename ProvidingInjection<Dependency,
-      Scope>::InjectionPtr InjectionPtr;
+  typedef typename ProvidingInjection<Dependency, Scope>::InjectionPtr InjectionPtr;
   typedef typename ResolvedBinding<Dependency>::BindingPtr BindingPtr;
 
   NewInjection():
@@ -571,20 +517,20 @@ public:
    * dispose(Iface *).
    */
   Ptr provide(BindingPtr binding, InjectorPtr injector) const {
-    typename Key<A1>::Ptr a1(this->template getHelper<typename
-        i::Key<A1>::Normalized>(injector, dynamicDependencyNames[0]));
-    typename Key<A2>::Ptr a2(this->template getHelper<typename
-        i::Key<A2>::Normalized>(injector, dynamicDependencyNames[1]));
-    typename Key<A3>::Ptr a3(this->template getHelper<typename
-        i::Key<A3>::Normalized>(injector, dynamicDependencyNames[2]));
-    typename Key<A4>::Ptr a4(this->template getHelper<typename
-        i::Key<A4>::Normalized>(injector, dynamicDependencyNames[3]));
-    typename Key<A5>::Ptr a5(this->template getHelper<typename
-        i::Key<A5>::Normalized>(injector, dynamicDependencyNames[4]));
-    typename Key<A6>::Ptr a6(this->template getHelper<typename
-        i::Key<A6>::Normalized>(injector, dynamicDependencyNames[5]));
-    typename Key<A7>::Ptr a7(this->template getHelper<typename
-        i::Key<A7>::Normalized>(injector, dynamicDependencyNames[6]));
+    typename Key<A1>::Ptr a1(this->template getHelper<typename i::Key<A1>::Normalized>(injector,
+        dynamicDependencyNames[0]));
+    typename Key<A2>::Ptr a2(this->template getHelper<typename i::Key<A2>::Normalized>(injector,
+        dynamicDependencyNames[1]));
+    typename Key<A3>::Ptr a3(this->template getHelper<typename i::Key<A3>::Normalized>(injector,
+        dynamicDependencyNames[2]));
+    typename Key<A4>::Ptr a4(this->template getHelper<typename i::Key<A4>::Normalized>(injector,
+        dynamicDependencyNames[3]));
+    typename Key<A5>::Ptr a5(this->template getHelper<typename i::Key<A5>::Normalized>(injector,
+        dynamicDependencyNames[4]));
+    typename Key<A6>::Ptr a6(this->template getHelper<typename i::Key<A6>::Normalized>(injector,
+        dynamicDependencyNames[5]));
+    typename Key<A7>::Ptr a7(this->template getHelper<typename i::Key<A7>::Normalized>(injector,
+        dynamicDependencyNames[6]));
     Deleter deleter(sauce::static_pointer_cast<New>(binding));
     Impl * impl = allocator.allocate(1);
     Ptr provided(new(impl) Impl(a1, a2, a3, a4, a5, a6, a7), deleter);
@@ -600,18 +546,15 @@ public:
 /* *INDENT-ON* */
 
 /* *INDENT-OFF* */
-template<typename Dependency, typename Scope, typename Impl,
-    typename Allocator, typename A1, typename A2, typename A3, typename A4,
-    typename A5, typename A6, typename A7, typename A8>
-class NewInjection<Dependency, Scope, Impl(A1, A2, A3, A4, A5, A6, A7, A8),
-    Allocator>:
+template<typename Dependency, typename Scope, typename Impl, typename Allocator, typename A1, typename A2, typename A3,
+    typename A4, typename A5, typename A6, typename A7, typename A8>
+class NewInjection<Dependency, Scope, Impl(A1, A2, A3, A4, A5, A6, A7, A8), Allocator>:
   public ProvidingInjection<Dependency, Scope> {
 
   typedef typename Key<Dependency>::Iface Iface;
   typedef typename Key<Dependency>::Ptr Ptr;
   typedef typename Allocator::template rebind<Impl>::other ImplAllocator;
-  typedef NewInjection<Dependency, Scope, Impl(A1, A2, A3, A4, A5, A6, A7, A8),
-      Allocator> New;
+  typedef NewInjection<Dependency, Scope, Impl(A1, A2, A3, A4, A5, A6, A7, A8), Allocator> New;
   typedef DisposalDeleter<Iface, New> Deleter;
 
   friend class DisposalDeleter<Iface, New>;
@@ -620,34 +563,24 @@ class NewInjection<Dependency, Scope, Impl(A1, A2, A3, A4, A5, A6, A7, A8),
   std::vector<std::string> dynamicDependencyNames;
 
   void validateAcyclic(InjectorPtr injector, TypeIds & ids) const {
-    this->template validateAcyclicHelper<A1>(injector, ids,
-        dynamicDependencyNames[0]);
-    this->template validateAcyclicHelper<A2>(injector, ids,
-        dynamicDependencyNames[1]);
-    this->template validateAcyclicHelper<A3>(injector, ids,
-        dynamicDependencyNames[2]);
-    this->template validateAcyclicHelper<A4>(injector, ids,
-        dynamicDependencyNames[3]);
-    this->template validateAcyclicHelper<A5>(injector, ids,
-        dynamicDependencyNames[4]);
-    this->template validateAcyclicHelper<A6>(injector, ids,
-        dynamicDependencyNames[5]);
-    this->template validateAcyclicHelper<A7>(injector, ids,
-        dynamicDependencyNames[6]);
-    this->template validateAcyclicHelper<A8>(injector, ids,
-        dynamicDependencyNames[7]);
+    this->template validateAcyclicHelper<A1>(injector, ids, dynamicDependencyNames[0]);
+    this->template validateAcyclicHelper<A2>(injector, ids, dynamicDependencyNames[1]);
+    this->template validateAcyclicHelper<A3>(injector, ids, dynamicDependencyNames[2]);
+    this->template validateAcyclicHelper<A4>(injector, ids, dynamicDependencyNames[3]);
+    this->template validateAcyclicHelper<A5>(injector, ids, dynamicDependencyNames[4]);
+    this->template validateAcyclicHelper<A6>(injector, ids, dynamicDependencyNames[5]);
+    this->template validateAcyclicHelper<A7>(injector, ids, dynamicDependencyNames[6]);
+    this->template validateAcyclicHelper<A8>(injector, ids, dynamicDependencyNames[7]);
   }
 
-  void setDynamicDependencyNames(std::vector<std::string> const &
-      dynamicDependencyNames) {
+  void setDynamicDependencyNames(std::vector<std::string> const & dynamicDependencyNames) {
     this->dynamicDependencyNames = dynamicDependencyNames;
     this->dynamicDependencyNames.resize(8, unnamed());
   }
 
 public:
 
-  typedef typename ProvidingInjection<Dependency,
-      Scope>::InjectionPtr InjectionPtr;
+  typedef typename ProvidingInjection<Dependency, Scope>::InjectionPtr InjectionPtr;
   typedef typename ResolvedBinding<Dependency>::BindingPtr BindingPtr;
 
   NewInjection():
@@ -662,22 +595,22 @@ public:
    * dispose(Iface *).
    */
   Ptr provide(BindingPtr binding, InjectorPtr injector) const {
-    typename Key<A1>::Ptr a1(this->template getHelper<typename
-        i::Key<A1>::Normalized>(injector, dynamicDependencyNames[0]));
-    typename Key<A2>::Ptr a2(this->template getHelper<typename
-        i::Key<A2>::Normalized>(injector, dynamicDependencyNames[1]));
-    typename Key<A3>::Ptr a3(this->template getHelper<typename
-        i::Key<A3>::Normalized>(injector, dynamicDependencyNames[2]));
-    typename Key<A4>::Ptr a4(this->template getHelper<typename
-        i::Key<A4>::Normalized>(injector, dynamicDependencyNames[3]));
-    typename Key<A5>::Ptr a5(this->template getHelper<typename
-        i::Key<A5>::Normalized>(injector, dynamicDependencyNames[4]));
-    typename Key<A6>::Ptr a6(this->template getHelper<typename
-        i::Key<A6>::Normalized>(injector, dynamicDependencyNames[5]));
-    typename Key<A7>::Ptr a7(this->template getHelper<typename
-        i::Key<A7>::Normalized>(injector, dynamicDependencyNames[6]));
-    typename Key<A8>::Ptr a8(this->template getHelper<typename
-        i::Key<A8>::Normalized>(injector, dynamicDependencyNames[7]));
+    typename Key<A1>::Ptr a1(this->template getHelper<typename i::Key<A1>::Normalized>(injector,
+        dynamicDependencyNames[0]));
+    typename Key<A2>::Ptr a2(this->template getHelper<typename i::Key<A2>::Normalized>(injector,
+        dynamicDependencyNames[1]));
+    typename Key<A3>::Ptr a3(this->template getHelper<typename i::Key<A3>::Normalized>(injector,
+        dynamicDependencyNames[2]));
+    typename Key<A4>::Ptr a4(this->template getHelper<typename i::Key<A4>::Normalized>(injector,
+        dynamicDependencyNames[3]));
+    typename Key<A5>::Ptr a5(this->template getHelper<typename i::Key<A5>::Normalized>(injector,
+        dynamicDependencyNames[4]));
+    typename Key<A6>::Ptr a6(this->template getHelper<typename i::Key<A6>::Normalized>(injector,
+        dynamicDependencyNames[5]));
+    typename Key<A7>::Ptr a7(this->template getHelper<typename i::Key<A7>::Normalized>(injector,
+        dynamicDependencyNames[6]));
+    typename Key<A8>::Ptr a8(this->template getHelper<typename i::Key<A8>::Normalized>(injector,
+        dynamicDependencyNames[7]));
     Deleter deleter(sauce::static_pointer_cast<New>(binding));
     Impl * impl = allocator.allocate(1);
     Ptr provided(new(impl) Impl(a1, a2, a3, a4, a5, a6, a7, a8), deleter);
@@ -693,18 +626,15 @@ public:
 /* *INDENT-ON* */
 
 /* *INDENT-OFF* */
-template<typename Dependency, typename Scope, typename Impl,
-    typename Allocator, typename A1, typename A2, typename A3, typename A4,
-    typename A5, typename A6, typename A7, typename A8, typename A9>
-class NewInjection<Dependency, Scope, Impl(A1, A2, A3, A4, A5, A6, A7, A8, A9),
-    Allocator>:
+template<typename Dependency, typename Scope, typename Impl, typename Allocator, typename A1, typename A2, typename A3,
+    typename A4, typename A5, typename A6, typename A7, typename A8, typename A9>
+class NewInjection<Dependency, Scope, Impl(A1, A2, A3, A4, A5, A6, A7, A8, A9), Allocator>:
   public ProvidingInjection<Dependency, Scope> {
 
   typedef typename Key<Dependency>::Iface Iface;
   typedef typename Key<Dependency>::Ptr Ptr;
   typedef typename Allocator::template rebind<Impl>::other ImplAllocator;
-  typedef NewInjection<Dependency, Scope, Impl(A1, A2, A3, A4, A5, A6, A7, A8,
-      A9), Allocator> New;
+  typedef NewInjection<Dependency, Scope, Impl(A1, A2, A3, A4, A5, A6, A7, A8, A9), Allocator> New;
   typedef DisposalDeleter<Iface, New> Deleter;
 
   friend class DisposalDeleter<Iface, New>;
@@ -713,36 +643,25 @@ class NewInjection<Dependency, Scope, Impl(A1, A2, A3, A4, A5, A6, A7, A8, A9),
   std::vector<std::string> dynamicDependencyNames;
 
   void validateAcyclic(InjectorPtr injector, TypeIds & ids) const {
-    this->template validateAcyclicHelper<A1>(injector, ids,
-        dynamicDependencyNames[0]);
-    this->template validateAcyclicHelper<A2>(injector, ids,
-        dynamicDependencyNames[1]);
-    this->template validateAcyclicHelper<A3>(injector, ids,
-        dynamicDependencyNames[2]);
-    this->template validateAcyclicHelper<A4>(injector, ids,
-        dynamicDependencyNames[3]);
-    this->template validateAcyclicHelper<A5>(injector, ids,
-        dynamicDependencyNames[4]);
-    this->template validateAcyclicHelper<A6>(injector, ids,
-        dynamicDependencyNames[5]);
-    this->template validateAcyclicHelper<A7>(injector, ids,
-        dynamicDependencyNames[6]);
-    this->template validateAcyclicHelper<A8>(injector, ids,
-        dynamicDependencyNames[7]);
-    this->template validateAcyclicHelper<A9>(injector, ids,
-        dynamicDependencyNames[8]);
+    this->template validateAcyclicHelper<A1>(injector, ids, dynamicDependencyNames[0]);
+    this->template validateAcyclicHelper<A2>(injector, ids, dynamicDependencyNames[1]);
+    this->template validateAcyclicHelper<A3>(injector, ids, dynamicDependencyNames[2]);
+    this->template validateAcyclicHelper<A4>(injector, ids, dynamicDependencyNames[3]);
+    this->template validateAcyclicHelper<A5>(injector, ids, dynamicDependencyNames[4]);
+    this->template validateAcyclicHelper<A6>(injector, ids, dynamicDependencyNames[5]);
+    this->template validateAcyclicHelper<A7>(injector, ids, dynamicDependencyNames[6]);
+    this->template validateAcyclicHelper<A8>(injector, ids, dynamicDependencyNames[7]);
+    this->template validateAcyclicHelper<A9>(injector, ids, dynamicDependencyNames[8]);
   }
 
-  void setDynamicDependencyNames(std::vector<std::string> const &
-      dynamicDependencyNames) {
+  void setDynamicDependencyNames(std::vector<std::string> const & dynamicDependencyNames) {
     this->dynamicDependencyNames = dynamicDependencyNames;
     this->dynamicDependencyNames.resize(9, unnamed());
   }
 
 public:
 
-  typedef typename ProvidingInjection<Dependency,
-      Scope>::InjectionPtr InjectionPtr;
+  typedef typename ProvidingInjection<Dependency, Scope>::InjectionPtr InjectionPtr;
   typedef typename ResolvedBinding<Dependency>::BindingPtr BindingPtr;
 
   NewInjection():
@@ -757,24 +676,24 @@ public:
    * dispose(Iface *).
    */
   Ptr provide(BindingPtr binding, InjectorPtr injector) const {
-    typename Key<A1>::Ptr a1(this->template getHelper<typename
-        i::Key<A1>::Normalized>(injector, dynamicDependencyNames[0]));
-    typename Key<A2>::Ptr a2(this->template getHelper<typename
-        i::Key<A2>::Normalized>(injector, dynamicDependencyNames[1]));
-    typename Key<A3>::Ptr a3(this->template getHelper<typename
-        i::Key<A3>::Normalized>(injector, dynamicDependencyNames[2]));
-    typename Key<A4>::Ptr a4(this->template getHelper<typename
-        i::Key<A4>::Normalized>(injector, dynamicDependencyNames[3]));
-    typename Key<A5>::Ptr a5(this->template getHelper<typename
-        i::Key<A5>::Normalized>(injector, dynamicDependencyNames[4]));
-    typename Key<A6>::Ptr a6(this->template getHelper<typename
-        i::Key<A6>::Normalized>(injector, dynamicDependencyNames[5]));
-    typename Key<A7>::Ptr a7(this->template getHelper<typename
-        i::Key<A7>::Normalized>(injector, dynamicDependencyNames[6]));
-    typename Key<A8>::Ptr a8(this->template getHelper<typename
-        i::Key<A8>::Normalized>(injector, dynamicDependencyNames[7]));
-    typename Key<A9>::Ptr a9(this->template getHelper<typename
-        i::Key<A9>::Normalized>(injector, dynamicDependencyNames[8]));
+    typename Key<A1>::Ptr a1(this->template getHelper<typename i::Key<A1>::Normalized>(injector,
+        dynamicDependencyNames[0]));
+    typename Key<A2>::Ptr a2(this->template getHelper<typename i::Key<A2>::Normalized>(injector,
+        dynamicDependencyNames[1]));
+    typename Key<A3>::Ptr a3(this->template getHelper<typename i::Key<A3>::Normalized>(injector,
+        dynamicDependencyNames[2]));
+    typename Key<A4>::Ptr a4(this->template getHelper<typename i::Key<A4>::Normalized>(injector,
+        dynamicDependencyNames[3]));
+    typename Key<A5>::Ptr a5(this->template getHelper<typename i::Key<A5>::Normalized>(injector,
+        dynamicDependencyNames[4]));
+    typename Key<A6>::Ptr a6(this->template getHelper<typename i::Key<A6>::Normalized>(injector,
+        dynamicDependencyNames[5]));
+    typename Key<A7>::Ptr a7(this->template getHelper<typename i::Key<A7>::Normalized>(injector,
+        dynamicDependencyNames[6]));
+    typename Key<A8>::Ptr a8(this->template getHelper<typename i::Key<A8>::Normalized>(injector,
+        dynamicDependencyNames[7]));
+    typename Key<A9>::Ptr a9(this->template getHelper<typename i::Key<A9>::Normalized>(injector,
+        dynamicDependencyNames[8]));
     Deleter deleter(sauce::static_pointer_cast<New>(binding));
     Impl * impl = allocator.allocate(1);
     Ptr provided(new(impl) Impl(a1, a2, a3, a4, a5, a6, a7, a8, a9), deleter);
@@ -790,19 +709,15 @@ public:
 /* *INDENT-ON* */
 
 /* *INDENT-OFF* */
-template<typename Dependency, typename Scope, typename Impl,
-    typename Allocator, typename A1, typename A2, typename A3, typename A4,
-    typename A5, typename A6, typename A7, typename A8, typename A9,
-    typename A10>
-class NewInjection<Dependency, Scope, Impl(A1, A2, A3, A4, A5, A6, A7, A8, A9,
-    A10), Allocator>:
+template<typename Dependency, typename Scope, typename Impl, typename Allocator, typename A1, typename A2, typename A3,
+    typename A4, typename A5, typename A6, typename A7, typename A8, typename A9, typename A10>
+class NewInjection<Dependency, Scope, Impl(A1, A2, A3, A4, A5, A6, A7, A8, A9, A10), Allocator>:
   public ProvidingInjection<Dependency, Scope> {
 
   typedef typename Key<Dependency>::Iface Iface;
   typedef typename Key<Dependency>::Ptr Ptr;
   typedef typename Allocator::template rebind<Impl>::other ImplAllocator;
-  typedef NewInjection<Dependency, Scope, Impl(A1, A2, A3, A4, A5, A6, A7, A8,
-      A9, A10), Allocator> New;
+  typedef NewInjection<Dependency, Scope, Impl(A1, A2, A3, A4, A5, A6, A7, A8, A9, A10), Allocator> New;
   typedef DisposalDeleter<Iface, New> Deleter;
 
   friend class DisposalDeleter<Iface, New>;
@@ -811,38 +726,26 @@ class NewInjection<Dependency, Scope, Impl(A1, A2, A3, A4, A5, A6, A7, A8, A9,
   std::vector<std::string> dynamicDependencyNames;
 
   void validateAcyclic(InjectorPtr injector, TypeIds & ids) const {
-    this->template validateAcyclicHelper<A1>(injector, ids,
-        dynamicDependencyNames[0]);
-    this->template validateAcyclicHelper<A2>(injector, ids,
-        dynamicDependencyNames[1]);
-    this->template validateAcyclicHelper<A3>(injector, ids,
-        dynamicDependencyNames[2]);
-    this->template validateAcyclicHelper<A4>(injector, ids,
-        dynamicDependencyNames[3]);
-    this->template validateAcyclicHelper<A5>(injector, ids,
-        dynamicDependencyNames[4]);
-    this->template validateAcyclicHelper<A6>(injector, ids,
-        dynamicDependencyNames[5]);
-    this->template validateAcyclicHelper<A7>(injector, ids,
-        dynamicDependencyNames[6]);
-    this->template validateAcyclicHelper<A8>(injector, ids,
-        dynamicDependencyNames[7]);
-    this->template validateAcyclicHelper<A9>(injector, ids,
-        dynamicDependencyNames[8]);
-    this->template validateAcyclicHelper<A10>(injector, ids,
-        dynamicDependencyNames[9]);
+    this->template validateAcyclicHelper<A1>(injector, ids, dynamicDependencyNames[0]);
+    this->template validateAcyclicHelper<A2>(injector, ids, dynamicDependencyNames[1]);
+    this->template validateAcyclicHelper<A3>(injector, ids, dynamicDependencyNames[2]);
+    this->template validateAcyclicHelper<A4>(injector, ids, dynamicDependencyNames[3]);
+    this->template validateAcyclicHelper<A5>(injector, ids, dynamicDependencyNames[4]);
+    this->template validateAcyclicHelper<A6>(injector, ids, dynamicDependencyNames[5]);
+    this->template validateAcyclicHelper<A7>(injector, ids, dynamicDependencyNames[6]);
+    this->template validateAcyclicHelper<A8>(injector, ids, dynamicDependencyNames[7]);
+    this->template validateAcyclicHelper<A9>(injector, ids, dynamicDependencyNames[8]);
+    this->template validateAcyclicHelper<A10>(injector, ids, dynamicDependencyNames[9]);
   }
 
-  void setDynamicDependencyNames(std::vector<std::string> const &
-      dynamicDependencyNames) {
+  void setDynamicDependencyNames(std::vector<std::string> const & dynamicDependencyNames) {
     this->dynamicDependencyNames = dynamicDependencyNames;
     this->dynamicDependencyNames.resize(10, unnamed());
   }
 
 public:
 
-  typedef typename ProvidingInjection<Dependency,
-      Scope>::InjectionPtr InjectionPtr;
+  typedef typename ProvidingInjection<Dependency, Scope>::InjectionPtr InjectionPtr;
   typedef typename ResolvedBinding<Dependency>::BindingPtr BindingPtr;
 
   NewInjection():
@@ -857,30 +760,29 @@ public:
    * dispose(Iface *).
    */
   Ptr provide(BindingPtr binding, InjectorPtr injector) const {
-    typename Key<A1>::Ptr a1(this->template getHelper<typename
-        i::Key<A1>::Normalized>(injector, dynamicDependencyNames[0]));
-    typename Key<A2>::Ptr a2(this->template getHelper<typename
-        i::Key<A2>::Normalized>(injector, dynamicDependencyNames[1]));
-    typename Key<A3>::Ptr a3(this->template getHelper<typename
-        i::Key<A3>::Normalized>(injector, dynamicDependencyNames[2]));
-    typename Key<A4>::Ptr a4(this->template getHelper<typename
-        i::Key<A4>::Normalized>(injector, dynamicDependencyNames[3]));
-    typename Key<A5>::Ptr a5(this->template getHelper<typename
-        i::Key<A5>::Normalized>(injector, dynamicDependencyNames[4]));
-    typename Key<A6>::Ptr a6(this->template getHelper<typename
-        i::Key<A6>::Normalized>(injector, dynamicDependencyNames[5]));
-    typename Key<A7>::Ptr a7(this->template getHelper<typename
-        i::Key<A7>::Normalized>(injector, dynamicDependencyNames[6]));
-    typename Key<A8>::Ptr a8(this->template getHelper<typename
-        i::Key<A8>::Normalized>(injector, dynamicDependencyNames[7]));
-    typename Key<A9>::Ptr a9(this->template getHelper<typename
-        i::Key<A9>::Normalized>(injector, dynamicDependencyNames[8]));
-    typename Key<A10>::Ptr a10(this->template getHelper<typename
-        i::Key<A10>::Normalized>(injector, dynamicDependencyNames[9]));
+    typename Key<A1>::Ptr a1(this->template getHelper<typename i::Key<A1>::Normalized>(injector,
+        dynamicDependencyNames[0]));
+    typename Key<A2>::Ptr a2(this->template getHelper<typename i::Key<A2>::Normalized>(injector,
+        dynamicDependencyNames[1]));
+    typename Key<A3>::Ptr a3(this->template getHelper<typename i::Key<A3>::Normalized>(injector,
+        dynamicDependencyNames[2]));
+    typename Key<A4>::Ptr a4(this->template getHelper<typename i::Key<A4>::Normalized>(injector,
+        dynamicDependencyNames[3]));
+    typename Key<A5>::Ptr a5(this->template getHelper<typename i::Key<A5>::Normalized>(injector,
+        dynamicDependencyNames[4]));
+    typename Key<A6>::Ptr a6(this->template getHelper<typename i::Key<A6>::Normalized>(injector,
+        dynamicDependencyNames[5]));
+    typename Key<A7>::Ptr a7(this->template getHelper<typename i::Key<A7>::Normalized>(injector,
+        dynamicDependencyNames[6]));
+    typename Key<A8>::Ptr a8(this->template getHelper<typename i::Key<A8>::Normalized>(injector,
+        dynamicDependencyNames[7]));
+    typename Key<A9>::Ptr a9(this->template getHelper<typename i::Key<A9>::Normalized>(injector,
+        dynamicDependencyNames[8]));
+    typename Key<A10>::Ptr a10(this->template getHelper<typename i::Key<A10>::Normalized>(injector,
+        dynamicDependencyNames[9]));
     Deleter deleter(sauce::static_pointer_cast<New>(binding));
     Impl * impl = allocator.allocate(1);
-    Ptr provided(new(impl) Impl(a1, a2, a3, a4, a5, a6, a7, a8, a9, a10),
-        deleter);
+    Ptr provided(new(impl) Impl(a1, a2, a3, a4, a5, a6, a7, a8, a9, a10), deleter);
     return provided;
   }
 
