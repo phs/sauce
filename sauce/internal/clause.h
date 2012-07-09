@@ -70,7 +70,7 @@ public:
   }
 
   template<typename Bound>
-  void bind() {
+  void bindNew() {
     assert(!finalizedProvision);
     pendingBinding.reset(new Bound());
   }
@@ -178,9 +178,9 @@ protected:
     return next;
   }
 
-  void bind() {
+  void bindNew() {
     typedef i::NewBinding<Dependency, Scope, Ctor, Allocator> Bound;
-    state->template bind<Bound>();
+    state->template bindNew<Bound>();
   }
 
   void bindProvider() {
