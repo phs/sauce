@@ -97,7 +97,7 @@ public:
   }
 
   template<typename Dependency, typename Scope, typename Ctor, typename Allocator>
-  void bindNew() {
+  void bind() {
     assert(!finalizedProvision);
     pendingBinding.reset(new i::NewBinding<Dependency, Scope, Ctor, Allocator>());
 
@@ -199,10 +199,6 @@ protected:
     return next;
   }
 
-  void bindNew() {
-    state->template bindNew<Dependency, Scope, Ctor, Allocator>();
-  }
-
   void bindDynamicDependencyName(unsigned int position, std::string const name) {
     state->bindDynamicDependencyName(position, name);
   }
@@ -212,7 +208,7 @@ public:
   void setState(ClauseStatePtr state) {
     state->clearException();
     this->state = state;
-    this->bindNew();
+    this->state->template bind<Dependency, Scope, Ctor, Allocator>();
   }
 };
 
