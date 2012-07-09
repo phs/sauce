@@ -1,8 +1,0 @@
-<map id="G" name="G">
-<area shape="rect" id="node2" href="$classsauce_1_1internal_1_1injections_1_1_providing_injection.html" title="sauce::internal::injections\l::ProvidingInjection\&lt; Named\l\&lt; Provider\&lt; Dependency \&gt;, Name\l \&gt;, NoScope \&gt;" alt="" coords="792,37,1016,113"/>
-<area shape="rect" id="node4" href="$classsauce_1_1internal_1_1_injection_binding.html" title="sauce::internal::Injection\lBinding\&lt; Named\&lt; Provider\l\&lt; Dependency \&gt;, Name \&gt;, NoScope \&gt;" alt="" coords="496,45,744,105"/>
-<area shape="rect" id="node6" href="$structsauce_1_1internal_1_1_resolved_binding.html" title="sauce::internal::Resolved\lBinding\&lt; Named\&lt; Provider\l\&lt; Dependency \&gt;, Name \&gt; \&gt;" alt="" coords="262,6,447,66"/>
-<area shape="rect" id="node8" href="$structsauce_1_1internal_1_1_opaque_binding.html" title="An opaque binding." alt="" coords="6,22,213,50"/>
-<area shape="rect" id="node10" href="$classsauce_1_1internal_1_1_injector_friend.html" title="sauce::internal::Injector\lFriend" alt="" coords="275,90,434,134"/>
-<area shape="rect" id="node12" href="$structsauce_1_1internal_1_1_provider_friend.html" title="A friend of the Provider base type." alt="" coords="821,137,987,181"/>
-</map>

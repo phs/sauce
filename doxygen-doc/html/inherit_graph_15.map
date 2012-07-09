@@ -1,4 +1,3 @@
 <map id="G" name="G">
-<area shape="rect" id="node1" href="$structsauce_1_1internal_1_1_implicit_binding_traits.html" title="sauce::internal::Implicit\lBindingTraits\&lt; inj::InjectorInjection \&gt;" alt="" coords="6,13,242,57"/>
-<area shape="rect" id="node3" href="$structsauce_1_1internal_1_1_implicit_binding_3_01_named_3_01_injector_00_01_unnamed_01_4_01_4.html" title="The implicit Injector binding." alt="" coords="291,5,469,65"/>
+<area shape="rect" id="node1" href="$structsauce_1_1internal_1_1_implicit_binding_traits.html" title="sauce::internal::Implicit\lBindingTraits\&lt; ImplicitInjection_ \&gt;" alt="" coords="6,5,226,49"/>
 </map>

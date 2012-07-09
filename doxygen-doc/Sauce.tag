@@ -1419,7 +1419,7 @@
   <compound kind="struct">
     <name>sauce::internal::ImplicitBinding&lt; Named&lt; Injector, Unnamed &gt; &gt;</name>
     <filename>structsauce_1_1internal_1_1_implicit_binding_3_01_named_3_01_injector_00_01_unnamed_01_4_01_4.html</filename>
-    <base>ImplicitBindingTraits&lt; inj::InjectorInjection &gt;</base>
+    <base>ImplicitBindingTraits&lt; i::InjectorInjection &gt;</base>
     <member kind="function" static="yes">
       <type>static BindingPtr</type>
       <name>get</name>
@@ -1428,7 +1428,7 @@
       <arglist>(ConcreteBindings const &amp;, std::string const name)</arglist>
     </member>
     <member kind="typedef">
-      <type>inj::InjectorInjection</type>
+      <type>i::InjectorInjection</type>
       <name>ImplicitInjection</name>
       <anchorfile>structsauce_1_1internal_1_1_implicit_binding_traits.html</anchorfile>
       <anchor>aed02dc891ebd9164751032501f4b6ff0</anchor>
@@ -1462,10 +1462,10 @@
     <templarg></templarg>
     <templarg></templarg>
     <member kind="typedef">
-      <type>ImplicitBindingTraits&lt; inj::ImplicitProviderInjection&lt; ProvidedDependency, Name &gt; &gt;</type>
+      <type>ImplicitBindingTraits&lt; i::ImplicitProviderInjection&lt; ProvidedDependency, Name &gt; &gt;</type>
       <name>Traits</name>
       <anchorfile>structsauce_1_1internal_1_1_implicit_binding_3_01_named_3_01_provider_3_01_provided_dependency_01_4_00_01_name_01_4_01_4.html</anchorfile>
-      <anchor>aa633d4fe4bfb029b58a377d99b62901b</anchor>
+      <anchor>a478d113b2b1546df6d745ba14b920cbb</anchor>
       <arglist></arglist>
     </member>
     <member kind="typedef">
@@ -1502,6 +1502,98 @@
       <anchorfile>structsauce_1_1internal_1_1_implicit_binding_3_01_named_3_01_provider_3_01_provided_dependency_01_4_00_01_name_01_4_01_4.html</anchorfile>
       <anchor>a272b5b01e1e47ee1423d0183b270ee0a</anchor>
       <arglist>(ConcreteBindings const &amp;bindings, std::string const name)</arglist>
+    </member>
+  </compound>
+  <compound kind="class">
+    <name>sauce::internal::ImplicitProvider</name>
+    <filename>classsauce_1_1internal_1_1_implicit_provider.html</filename>
+    <templarg></templarg>
+    <templarg></templarg>
+    <base>sauce::Provider</base>
+    <member kind="function">
+      <type>Key&lt; Dependency &gt;::Ptr</type>
+      <name>get</name>
+      <anchorfile>classsauce_1_1internal_1_1_implicit_provider.html</anchorfile>
+      <anchor>af5a3f7e0ce487716bd095897bf86e508</anchor>
+      <arglist>()</arglist>
+    </member>
+    <member kind="friend" protection="private">
+      <type>friend class</type>
+      <name>ImplicitProviderInjection&lt; Dependency, Name &gt;</name>
+      <anchorfile>classsauce_1_1internal_1_1_implicit_provider.html</anchorfile>
+      <anchor>a4e4a8fdc3e83c34a74904df2955ac4f1</anchor>
+      <arglist></arglist>
+    </member>
+    <member kind="typedef">
+      <type>i::Key&lt; Dependency &gt;::Iface</type>
+      <name>Iface</name>
+      <anchorfile>classsauce_1_1_provider.html</anchorfile>
+      <anchor>abfe43c0ceeb19745314767fd84ae9d9f</anchor>
+      <arglist></arglist>
+    </member>
+    <member kind="function" protection="protected">
+      <type>sauce::shared_ptr&lt; Provider&lt; Dependency &gt; &gt;</type>
+      <name>getSelf</name>
+      <anchorfile>classsauce_1_1_provider.html</anchorfile>
+      <anchor>a9fac62da0c899b2b8ae4a55dc22c5b90</anchor>
+      <arglist>() const </arglist>
+    </member>
+  </compound>
+  <compound kind="class">
+    <name>sauce::internal::ImplicitProviderInjection</name>
+    <filename>classsauce_1_1internal_1_1_implicit_provider_injection.html</filename>
+    <templarg></templarg>
+    <templarg></templarg>
+    <base>ProvidingInjection&lt; Named&lt; Provider&lt; Dependency &gt;, Name &gt;, NoScope &gt;</base>
+    <base>sauce::internal::ProviderFriend</base>
+    <member kind="typedef">
+      <type>ProvidingInjection&lt; ProviderDependency, NoScope &gt;::InjectionPtr</type>
+      <name>InjectionPtr</name>
+      <anchorfile>classsauce_1_1internal_1_1_implicit_provider_injection.html</anchorfile>
+      <anchor>a06069cbdf2b31ee3556810f4425d53ad</anchor>
+      <arglist></arglist>
+    </member>
+    <member kind="typedef">
+      <type>ResolvedBinding&lt; ProviderDependency &gt;::BindingPtr</type>
+      <name>BindingPtr</name>
+      <anchorfile>classsauce_1_1internal_1_1_implicit_provider_injection.html</anchorfile>
+      <anchor>a450c76a00083b49a2adb9f263b048641</anchor>
+      <arglist></arglist>
+    </member>
+    <member kind="typedef">
+      <type>Key&lt; Named&lt; Provider&lt; Dependency &gt;, Name &gt; &gt;::Normalized</type>
+      <name>Dependency</name>
+      <anchorfile>classsauce_1_1internal_1_1_providing_injection.html</anchorfile>
+      <anchor>ae6d56c50528f35ccdd7d9c787805b37f</anchor>
+      <arglist></arglist>
+    </member>
+    <member kind="typedef">
+      <type>Key&lt; Named&lt; Provider&lt; Dependency &gt;, Name &gt; &gt;::Ptr</type>
+      <name>IfacePtr</name>
+      <anchorfile>classsauce_1_1internal_1_1_providing_injection.html</anchorfile>
+      <anchor>a79f5bb01c25fe8be538cfc8d75e77178</anchor>
+      <arglist></arglist>
+    </member>
+    <member kind="function">
+      <type></type>
+      <name>ImplicitProviderInjection</name>
+      <anchorfile>classsauce_1_1internal_1_1_implicit_provider_injection.html</anchorfile>
+      <anchor>af69edb83a4688d2bf205b316100e7a19</anchor>
+      <arglist>(ProvidedBindingPtr providedBinding)</arglist>
+    </member>
+    <member kind="function">
+      <type>ProviderPtr</type>
+      <name>provide</name>
+      <anchorfile>classsauce_1_1internal_1_1_implicit_provider_injection.html</anchorfile>
+      <anchor>a6492260ccfa41b805b92a364fa54c3aa</anchor>
+      <arglist>(BindingPtr, InjectorPtr injector) const </arglist>
+    </member>
+    <member kind="function">
+      <type>void</type>
+      <name>setSelf</name>
+      <anchorfile>structsauce_1_1internal_1_1_provider_friend.html</anchorfile>
+      <anchor>a335c721a6d2c83e11d8498dada73d4c6</anchor>
+      <arglist>(typename Key&lt; Named&lt; Provider&lt; ProvidedDependency &gt;, Name &gt; &gt;::Ptr ptr) const </arglist>
     </member>
   </compound>
   <compound kind="class">
@@ -1580,6 +1672,46 @@
       <anchorfile>classsauce_1_1internal_1_1_injector_friend.html</anchorfile>
       <anchor>a90c25459558bfe86e4bb59e12137718b</anchor>
       <arglist>(InjectorPtr injector, typename Key&lt; Dependency &gt;::Ptr &amp;out, i::TypeId scope) const </arglist>
+    </member>
+  </compound>
+  <compound kind="class">
+    <name>sauce::internal::InjectorInjection</name>
+    <filename>classsauce_1_1internal_1_1_injector_injection.html</filename>
+    <base>ProvidingInjection&lt; Key&lt; Injector &gt;::Normalized, NoScope &gt;</base>
+    <member kind="function">
+      <type>InjectorPtr</type>
+      <name>provide</name>
+      <anchorfile>classsauce_1_1internal_1_1_injector_injection.html</anchorfile>
+      <anchor>a77119aa0cacaddffa8cdf71b6557ff60</anchor>
+      <arglist>(BindingPtr, InjectorPtr injector) const </arglist>
+    </member>
+    <member kind="typedef">
+      <type>Key&lt; Key&lt; Injector &gt;::Normalized &gt;::Normalized</type>
+      <name>Dependency</name>
+      <anchorfile>classsauce_1_1internal_1_1_providing_injection.html</anchorfile>
+      <anchor>ae6d56c50528f35ccdd7d9c787805b37f</anchor>
+      <arglist></arglist>
+    </member>
+    <member kind="typedef">
+      <type>sauce::shared_ptr&lt; ProvidingInjection&lt; Key&lt; Injector &gt;::Normalized, NoScope &gt; &gt;</type>
+      <name>InjectionPtr</name>
+      <anchorfile>classsauce_1_1internal_1_1_providing_injection.html</anchorfile>
+      <anchor>a14977f94bdc5542ef8b4ed768ea919a7</anchor>
+      <arglist></arglist>
+    </member>
+    <member kind="typedef">
+      <type>Key&lt; Key&lt; Injector &gt;::Normalized &gt;::Ptr</type>
+      <name>IfacePtr</name>
+      <anchorfile>classsauce_1_1internal_1_1_providing_injection.html</anchorfile>
+      <anchor>a79f5bb01c25fe8be538cfc8d75e77178</anchor>
+      <arglist></arglist>
+    </member>
+    <member kind="typedef">
+      <type>ResolvedBinding&lt; Key&lt; Injector &gt;::Normalized &gt;::BindingPtr</type>
+      <name>BindingPtr</name>
+      <anchorfile>classsauce_1_1internal_1_1_providing_injection.html</anchorfile>
+      <anchor>aabe33c40471b33d3c5abad364cc8e00c</anchor>
+      <arglist></arglist>
     </member>
   </compound>
   <compound kind="struct">
@@ -1748,6 +1880,757 @@
       <arglist>()</arglist>
     </member>
   </compound>
+  <compound kind="class">
+    <name>sauce::internal::NewInjection</name>
+    <filename>classsauce_1_1internal_1_1_new_injection.html</filename>
+    <templarg></templarg>
+    <templarg></templarg>
+    <templarg></templarg>
+    <templarg></templarg>
+    <base>ProvidingInjection&lt; Dependency, Scope &gt;</base>
+    <member kind="typedef">
+      <type>ProvidingInjection&lt; Dependency, Scope &gt;::InjectionPtr</type>
+      <name>InjectionPtr</name>
+      <anchorfile>classsauce_1_1internal_1_1_new_injection.html</anchorfile>
+      <anchor>ada47d4a06310748d9a79a3f5b1ff6dbd</anchor>
+      <arglist></arglist>
+    </member>
+    <member kind="typedef">
+      <type>ResolvedBinding&lt; Dependency &gt;::BindingPtr</type>
+      <name>BindingPtr</name>
+      <anchorfile>classsauce_1_1internal_1_1_new_injection.html</anchorfile>
+      <anchor>a8dc565cf82f93811b497772482e6b405</anchor>
+      <arglist></arglist>
+    </member>
+    <member kind="typedef">
+      <type>Key&lt; Dependency &gt;::Normalized</type>
+      <name>Dependency</name>
+      <anchorfile>classsauce_1_1internal_1_1_providing_injection.html</anchorfile>
+      <anchor>ae6d56c50528f35ccdd7d9c787805b37f</anchor>
+      <arglist></arglist>
+    </member>
+    <member kind="typedef">
+      <type>Key&lt; Dependency &gt;::Ptr</type>
+      <name>IfacePtr</name>
+      <anchorfile>classsauce_1_1internal_1_1_providing_injection.html</anchorfile>
+      <anchor>a79f5bb01c25fe8be538cfc8d75e77178</anchor>
+      <arglist></arglist>
+    </member>
+    <member kind="function">
+      <type>Ptr</type>
+      <name>provide</name>
+      <anchorfile>classsauce_1_1internal_1_1_new_injection.html</anchorfile>
+      <anchor>ae27611bf4518e41ba0e4b6807abac4b3</anchor>
+      <arglist>(BindingPtr binding, InjectorPtr) const </arglist>
+    </member>
+    <member kind="function">
+      <type>void</type>
+      <name>dispose</name>
+      <anchorfile>classsauce_1_1internal_1_1_new_injection.html</anchorfile>
+      <anchor>a7a2308dfee3a6f7a07f5d3a1261b4c6a</anchor>
+      <arglist>(Iface *iface) const </arglist>
+    </member>
+    <member kind="friend" protection="private">
+      <type>friend class</type>
+      <name>DisposalDeleter&lt; Iface, New &gt;</name>
+      <anchorfile>classsauce_1_1internal_1_1_new_injection.html</anchorfile>
+      <anchor>a95cb0df2fe9c298eb93a4d28a7eaf1b2</anchor>
+      <arglist></arglist>
+    </member>
+  </compound>
+  <compound kind="class">
+    <name>sauce::internal::NewInjection&lt; Dependency, Scope, Impl(), Allocator &gt;</name>
+    <filename>classsauce_1_1internal_1_1_new_injection_3_01_dependency_00_01_scope_00_01_impl_07_08_00_01_allocator_01_4.html</filename>
+    <templarg></templarg>
+    <templarg></templarg>
+    <templarg></templarg>
+    <templarg></templarg>
+    <base>ProvidingInjection&lt; Dependency, Scope &gt;</base>
+    <member kind="typedef">
+      <type>ProvidingInjection&lt; Dependency, Scope &gt;::InjectionPtr</type>
+      <name>InjectionPtr</name>
+      <anchorfile>classsauce_1_1internal_1_1_new_injection_3_01_dependency_00_01_scope_00_01_impl_07_08_00_01_allocator_01_4.html</anchorfile>
+      <anchor>a7b006cdf4fe606893c335b6ab0d7bb44</anchor>
+      <arglist></arglist>
+    </member>
+    <member kind="typedef">
+      <type>ResolvedBinding&lt; Dependency &gt;::BindingPtr</type>
+      <name>BindingPtr</name>
+      <anchorfile>classsauce_1_1internal_1_1_new_injection_3_01_dependency_00_01_scope_00_01_impl_07_08_00_01_allocator_01_4.html</anchorfile>
+      <anchor>ac68e7b2e494588478786b1b1b24ecc93</anchor>
+      <arglist></arglist>
+    </member>
+    <member kind="typedef">
+      <type>Key&lt; Dependency &gt;::Normalized</type>
+      <name>Dependency</name>
+      <anchorfile>classsauce_1_1internal_1_1_providing_injection.html</anchorfile>
+      <anchor>ae6d56c50528f35ccdd7d9c787805b37f</anchor>
+      <arglist></arglist>
+    </member>
+    <member kind="typedef">
+      <type>Key&lt; Dependency &gt;::Ptr</type>
+      <name>IfacePtr</name>
+      <anchorfile>classsauce_1_1internal_1_1_providing_injection.html</anchorfile>
+      <anchor>a79f5bb01c25fe8be538cfc8d75e77178</anchor>
+      <arglist></arglist>
+    </member>
+    <member kind="function">
+      <type>Ptr</type>
+      <name>provide</name>
+      <anchorfile>classsauce_1_1internal_1_1_new_injection_3_01_dependency_00_01_scope_00_01_impl_07_08_00_01_allocator_01_4.html</anchorfile>
+      <anchor>a4afab62ae858843b46656e7e7b30b508</anchor>
+      <arglist>(BindingPtr binding, InjectorPtr) const </arglist>
+    </member>
+    <member kind="function">
+      <type>void</type>
+      <name>dispose</name>
+      <anchorfile>classsauce_1_1internal_1_1_new_injection_3_01_dependency_00_01_scope_00_01_impl_07_08_00_01_allocator_01_4.html</anchorfile>
+      <anchor>a10d5f509864ee845496a4c36c65a7a68</anchor>
+      <arglist>(Iface *iface) const </arglist>
+    </member>
+    <member kind="friend" protection="private">
+      <type>friend class</type>
+      <name>DisposalDeleter&lt; Iface, New &gt;</name>
+      <anchorfile>classsauce_1_1internal_1_1_new_injection_3_01_dependency_00_01_scope_00_01_impl_07_08_00_01_allocator_01_4.html</anchorfile>
+      <anchor>a95cb0df2fe9c298eb93a4d28a7eaf1b2</anchor>
+      <arglist></arglist>
+    </member>
+  </compound>
+  <compound kind="class">
+    <name>sauce::internal::NewInjection&lt; Dependency, Scope, Impl(A1), Allocator &gt;</name>
+    <filename>classsauce_1_1internal_1_1_new_injection_3_01_dependency_00_01_scope_00_01_impl_07_a1_08_00_01_allocator_01_4.html</filename>
+    <templarg></templarg>
+    <templarg></templarg>
+    <templarg></templarg>
+    <templarg></templarg>
+    <templarg></templarg>
+    <base>ProvidingInjection&lt; Dependency, Scope &gt;</base>
+    <member kind="typedef">
+      <type>ProvidingInjection&lt; Dependency, Scope &gt;::InjectionPtr</type>
+      <name>InjectionPtr</name>
+      <anchorfile>classsauce_1_1internal_1_1_new_injection_3_01_dependency_00_01_scope_00_01_impl_07_a1_08_00_01_allocator_01_4.html</anchorfile>
+      <anchor>a907f18b5e8a50681dc4741512c5ed5e7</anchor>
+      <arglist></arglist>
+    </member>
+    <member kind="typedef">
+      <type>ResolvedBinding&lt; Dependency &gt;::BindingPtr</type>
+      <name>BindingPtr</name>
+      <anchorfile>classsauce_1_1internal_1_1_new_injection_3_01_dependency_00_01_scope_00_01_impl_07_a1_08_00_01_allocator_01_4.html</anchorfile>
+      <anchor>a5478fbf6a95c7610f36583270c07470f</anchor>
+      <arglist></arglist>
+    </member>
+    <member kind="typedef">
+      <type>Key&lt; Dependency &gt;::Normalized</type>
+      <name>Dependency</name>
+      <anchorfile>classsauce_1_1internal_1_1_providing_injection.html</anchorfile>
+      <anchor>ae6d56c50528f35ccdd7d9c787805b37f</anchor>
+      <arglist></arglist>
+    </member>
+    <member kind="typedef">
+      <type>Key&lt; Dependency &gt;::Ptr</type>
+      <name>IfacePtr</name>
+      <anchorfile>classsauce_1_1internal_1_1_providing_injection.html</anchorfile>
+      <anchor>a79f5bb01c25fe8be538cfc8d75e77178</anchor>
+      <arglist></arglist>
+    </member>
+    <member kind="function">
+      <type>Ptr</type>
+      <name>provide</name>
+      <anchorfile>classsauce_1_1internal_1_1_new_injection_3_01_dependency_00_01_scope_00_01_impl_07_a1_08_00_01_allocator_01_4.html</anchorfile>
+      <anchor>a7627d6f5bca1681a7c5ff5795feb82aa</anchor>
+      <arglist>(BindingPtr binding, InjectorPtr injector) const </arglist>
+    </member>
+    <member kind="function">
+      <type>void</type>
+      <name>dispose</name>
+      <anchorfile>classsauce_1_1internal_1_1_new_injection_3_01_dependency_00_01_scope_00_01_impl_07_a1_08_00_01_allocator_01_4.html</anchorfile>
+      <anchor>a01351b621c8b6fb7dc09af08d0a1ff29</anchor>
+      <arglist>(Iface *iface) const </arglist>
+    </member>
+    <member kind="friend" protection="private">
+      <type>friend class</type>
+      <name>DisposalDeleter&lt; Iface, New &gt;</name>
+      <anchorfile>classsauce_1_1internal_1_1_new_injection_3_01_dependency_00_01_scope_00_01_impl_07_a1_08_00_01_allocator_01_4.html</anchorfile>
+      <anchor>a95cb0df2fe9c298eb93a4d28a7eaf1b2</anchor>
+      <arglist></arglist>
+    </member>
+  </compound>
+  <compound kind="class">
+    <name>sauce::internal::NewInjection&lt; Dependency, Scope, Impl(A1, A2), Allocator &gt;</name>
+    <filename>classsauce_1_1internal_1_1_new_injection_3_01_dependency_00_01_scope_00_01_impl_07_a1_00_01_a2_08_00_01_allocator_01_4.html</filename>
+    <templarg></templarg>
+    <templarg></templarg>
+    <templarg></templarg>
+    <templarg></templarg>
+    <templarg></templarg>
+    <templarg></templarg>
+    <base>ProvidingInjection&lt; Dependency, Scope &gt;</base>
+    <member kind="typedef">
+      <type>ProvidingInjection&lt; Dependency, Scope &gt;::InjectionPtr</type>
+      <name>InjectionPtr</name>
+      <anchorfile>classsauce_1_1internal_1_1_new_injection_3_01_dependency_00_01_scope_00_01_impl_07_a1_00_01_a2_08_00_01_allocator_01_4.html</anchorfile>
+      <anchor>a5b7703f2019e98a379c199aa72596ce0</anchor>
+      <arglist></arglist>
+    </member>
+    <member kind="typedef">
+      <type>ResolvedBinding&lt; Dependency &gt;::BindingPtr</type>
+      <name>BindingPtr</name>
+      <anchorfile>classsauce_1_1internal_1_1_new_injection_3_01_dependency_00_01_scope_00_01_impl_07_a1_00_01_a2_08_00_01_allocator_01_4.html</anchorfile>
+      <anchor>a33438d861e5e1c3994beac809ff2bf8d</anchor>
+      <arglist></arglist>
+    </member>
+    <member kind="typedef">
+      <type>Key&lt; Dependency &gt;::Normalized</type>
+      <name>Dependency</name>
+      <anchorfile>classsauce_1_1internal_1_1_providing_injection.html</anchorfile>
+      <anchor>ae6d56c50528f35ccdd7d9c787805b37f</anchor>
+      <arglist></arglist>
+    </member>
+    <member kind="typedef">
+      <type>Key&lt; Dependency &gt;::Ptr</type>
+      <name>IfacePtr</name>
+      <anchorfile>classsauce_1_1internal_1_1_providing_injection.html</anchorfile>
+      <anchor>a79f5bb01c25fe8be538cfc8d75e77178</anchor>
+      <arglist></arglist>
+    </member>
+    <member kind="function">
+      <type>Ptr</type>
+      <name>provide</name>
+      <anchorfile>classsauce_1_1internal_1_1_new_injection_3_01_dependency_00_01_scope_00_01_impl_07_a1_00_01_a2_08_00_01_allocator_01_4.html</anchorfile>
+      <anchor>aba09e83cbc6c4cad2cbac5358252cc31</anchor>
+      <arglist>(BindingPtr binding, InjectorPtr injector) const </arglist>
+    </member>
+    <member kind="function">
+      <type>void</type>
+      <name>dispose</name>
+      <anchorfile>classsauce_1_1internal_1_1_new_injection_3_01_dependency_00_01_scope_00_01_impl_07_a1_00_01_a2_08_00_01_allocator_01_4.html</anchorfile>
+      <anchor>a0dcec45af280aaf642ba44f7625c4041</anchor>
+      <arglist>(Iface *iface) const </arglist>
+    </member>
+    <member kind="friend" protection="private">
+      <type>friend class</type>
+      <name>DisposalDeleter&lt; Iface, New &gt;</name>
+      <anchorfile>classsauce_1_1internal_1_1_new_injection_3_01_dependency_00_01_scope_00_01_impl_07_a1_00_01_a2_08_00_01_allocator_01_4.html</anchorfile>
+      <anchor>a95cb0df2fe9c298eb93a4d28a7eaf1b2</anchor>
+      <arglist></arglist>
+    </member>
+  </compound>
+  <compound kind="class">
+    <name>sauce::internal::NewInjection&lt; Dependency, Scope, Impl(A1, A2, A3), Allocator &gt;</name>
+    <filename>classsauce_1_1internal_1_1_new_injection_3_01_dependency_00_01_scope_00_01_impl_07_a1_00_01_a2_00_01_a3_08_00_01_allocator_01_4.html</filename>
+    <templarg></templarg>
+    <templarg></templarg>
+    <templarg></templarg>
+    <templarg></templarg>
+    <templarg></templarg>
+    <templarg></templarg>
+    <templarg></templarg>
+    <base>ProvidingInjection&lt; Dependency, Scope &gt;</base>
+    <member kind="typedef">
+      <type>ProvidingInjection&lt; Dependency, Scope &gt;::InjectionPtr</type>
+      <name>InjectionPtr</name>
+      <anchorfile>classsauce_1_1internal_1_1_new_injection_3_01_dependency_00_01_scope_00_01_impl_07_a1_00_01_a2_00_01_a3_08_00_01_allocator_01_4.html</anchorfile>
+      <anchor>a08ea2130f30d657d485c4319fb7b1e9b</anchor>
+      <arglist></arglist>
+    </member>
+    <member kind="typedef">
+      <type>ResolvedBinding&lt; Dependency &gt;::BindingPtr</type>
+      <name>BindingPtr</name>
+      <anchorfile>classsauce_1_1internal_1_1_new_injection_3_01_dependency_00_01_scope_00_01_impl_07_a1_00_01_a2_00_01_a3_08_00_01_allocator_01_4.html</anchorfile>
+      <anchor>a84029e2d575dd115e1def67e5efa9903</anchor>
+      <arglist></arglist>
+    </member>
+    <member kind="typedef">
+      <type>Key&lt; Dependency &gt;::Normalized</type>
+      <name>Dependency</name>
+      <anchorfile>classsauce_1_1internal_1_1_providing_injection.html</anchorfile>
+      <anchor>ae6d56c50528f35ccdd7d9c787805b37f</anchor>
+      <arglist></arglist>
+    </member>
+    <member kind="typedef">
+      <type>Key&lt; Dependency &gt;::Ptr</type>
+      <name>IfacePtr</name>
+      <anchorfile>classsauce_1_1internal_1_1_providing_injection.html</anchorfile>
+      <anchor>a79f5bb01c25fe8be538cfc8d75e77178</anchor>
+      <arglist></arglist>
+    </member>
+    <member kind="function">
+      <type>Ptr</type>
+      <name>provide</name>
+      <anchorfile>classsauce_1_1internal_1_1_new_injection_3_01_dependency_00_01_scope_00_01_impl_07_a1_00_01_a2_00_01_a3_08_00_01_allocator_01_4.html</anchorfile>
+      <anchor>a9d98a0ee281e4d85392fab561e879b59</anchor>
+      <arglist>(BindingPtr binding, InjectorPtr injector) const </arglist>
+    </member>
+    <member kind="function">
+      <type>void</type>
+      <name>dispose</name>
+      <anchorfile>classsauce_1_1internal_1_1_new_injection_3_01_dependency_00_01_scope_00_01_impl_07_a1_00_01_a2_00_01_a3_08_00_01_allocator_01_4.html</anchorfile>
+      <anchor>ab78174b59a914701a6c908e9310092a8</anchor>
+      <arglist>(Iface *iface) const </arglist>
+    </member>
+    <member kind="friend" protection="private">
+      <type>friend class</type>
+      <name>DisposalDeleter&lt; Iface, New &gt;</name>
+      <anchorfile>classsauce_1_1internal_1_1_new_injection_3_01_dependency_00_01_scope_00_01_impl_07_a1_00_01_a2_00_01_a3_08_00_01_allocator_01_4.html</anchorfile>
+      <anchor>a95cb0df2fe9c298eb93a4d28a7eaf1b2</anchor>
+      <arglist></arglist>
+    </member>
+  </compound>
+  <compound kind="class">
+    <name>sauce::internal::NewInjection&lt; Dependency, Scope, Impl(A1, A2, A3, A4), Allocator &gt;</name>
+    <filename>classsauce_1_1internal_1_1_new_injection_3_01_dependency_00_01_scope_00_01_impl_07_a1_00_01_a2_0dbb764aa71d636e5cb0da0d618691035.html</filename>
+    <templarg></templarg>
+    <templarg></templarg>
+    <templarg></templarg>
+    <templarg></templarg>
+    <templarg></templarg>
+    <templarg></templarg>
+    <templarg></templarg>
+    <templarg></templarg>
+    <base>ProvidingInjection&lt; Dependency, Scope &gt;</base>
+    <member kind="typedef">
+      <type>ProvidingInjection&lt; Dependency, Scope &gt;::InjectionPtr</type>
+      <name>InjectionPtr</name>
+      <anchorfile>classsauce_1_1internal_1_1_new_injection_3_01_dependency_00_01_scope_00_01_impl_07_a1_00_01_a2_0dbb764aa71d636e5cb0da0d618691035.html</anchorfile>
+      <anchor>a2cadacdbc0599801f354404c068b8484</anchor>
+      <arglist></arglist>
+    </member>
+    <member kind="typedef">
+      <type>ResolvedBinding&lt; Dependency &gt;::BindingPtr</type>
+      <name>BindingPtr</name>
+      <anchorfile>classsauce_1_1internal_1_1_new_injection_3_01_dependency_00_01_scope_00_01_impl_07_a1_00_01_a2_0dbb764aa71d636e5cb0da0d618691035.html</anchorfile>
+      <anchor>a5c0f9f920ff6650886c7405181f1f73e</anchor>
+      <arglist></arglist>
+    </member>
+    <member kind="typedef">
+      <type>Key&lt; Dependency &gt;::Normalized</type>
+      <name>Dependency</name>
+      <anchorfile>classsauce_1_1internal_1_1_providing_injection.html</anchorfile>
+      <anchor>ae6d56c50528f35ccdd7d9c787805b37f</anchor>
+      <arglist></arglist>
+    </member>
+    <member kind="typedef">
+      <type>Key&lt; Dependency &gt;::Ptr</type>
+      <name>IfacePtr</name>
+      <anchorfile>classsauce_1_1internal_1_1_providing_injection.html</anchorfile>
+      <anchor>a79f5bb01c25fe8be538cfc8d75e77178</anchor>
+      <arglist></arglist>
+    </member>
+    <member kind="function">
+      <type>Ptr</type>
+      <name>provide</name>
+      <anchorfile>classsauce_1_1internal_1_1_new_injection_3_01_dependency_00_01_scope_00_01_impl_07_a1_00_01_a2_0dbb764aa71d636e5cb0da0d618691035.html</anchorfile>
+      <anchor>a1f05db25076c311e1a9602c971630b8d</anchor>
+      <arglist>(BindingPtr binding, InjectorPtr injector) const </arglist>
+    </member>
+    <member kind="function">
+      <type>void</type>
+      <name>dispose</name>
+      <anchorfile>classsauce_1_1internal_1_1_new_injection_3_01_dependency_00_01_scope_00_01_impl_07_a1_00_01_a2_0dbb764aa71d636e5cb0da0d618691035.html</anchorfile>
+      <anchor>aaa06e1c18da8d470a15ce42e4074f649</anchor>
+      <arglist>(Iface *iface) const </arglist>
+    </member>
+    <member kind="friend" protection="private">
+      <type>friend class</type>
+      <name>DisposalDeleter&lt; Iface, New &gt;</name>
+      <anchorfile>classsauce_1_1internal_1_1_new_injection_3_01_dependency_00_01_scope_00_01_impl_07_a1_00_01_a2_0dbb764aa71d636e5cb0da0d618691035.html</anchorfile>
+      <anchor>a95cb0df2fe9c298eb93a4d28a7eaf1b2</anchor>
+      <arglist></arglist>
+    </member>
+  </compound>
+  <compound kind="class">
+    <name>sauce::internal::NewInjection&lt; Dependency, Scope, Impl(A1, A2, A3, A4, A5), Allocator &gt;</name>
+    <filename>classsauce_1_1internal_1_1_new_injection_3_01_dependency_00_01_scope_00_01_impl_07_a1_00_01_a2_08b58f6ffef76cde3ada2780a99c763bb.html</filename>
+    <templarg></templarg>
+    <templarg></templarg>
+    <templarg></templarg>
+    <templarg></templarg>
+    <templarg></templarg>
+    <templarg></templarg>
+    <templarg></templarg>
+    <templarg></templarg>
+    <templarg></templarg>
+    <base>ProvidingInjection&lt; Dependency, Scope &gt;</base>
+    <member kind="typedef">
+      <type>ProvidingInjection&lt; Dependency, Scope &gt;::InjectionPtr</type>
+      <name>InjectionPtr</name>
+      <anchorfile>classsauce_1_1internal_1_1_new_injection_3_01_dependency_00_01_scope_00_01_impl_07_a1_00_01_a2_08b58f6ffef76cde3ada2780a99c763bb.html</anchorfile>
+      <anchor>abc313ea85f46e559a995a981520b85a3</anchor>
+      <arglist></arglist>
+    </member>
+    <member kind="typedef">
+      <type>ResolvedBinding&lt; Dependency &gt;::BindingPtr</type>
+      <name>BindingPtr</name>
+      <anchorfile>classsauce_1_1internal_1_1_new_injection_3_01_dependency_00_01_scope_00_01_impl_07_a1_00_01_a2_08b58f6ffef76cde3ada2780a99c763bb.html</anchorfile>
+      <anchor>aa3e1809710bcddee0eda45e8535a7e8c</anchor>
+      <arglist></arglist>
+    </member>
+    <member kind="typedef">
+      <type>Key&lt; Dependency &gt;::Normalized</type>
+      <name>Dependency</name>
+      <anchorfile>classsauce_1_1internal_1_1_providing_injection.html</anchorfile>
+      <anchor>ae6d56c50528f35ccdd7d9c787805b37f</anchor>
+      <arglist></arglist>
+    </member>
+    <member kind="typedef">
+      <type>Key&lt; Dependency &gt;::Ptr</type>
+      <name>IfacePtr</name>
+      <anchorfile>classsauce_1_1internal_1_1_providing_injection.html</anchorfile>
+      <anchor>a79f5bb01c25fe8be538cfc8d75e77178</anchor>
+      <arglist></arglist>
+    </member>
+    <member kind="function">
+      <type>Ptr</type>
+      <name>provide</name>
+      <anchorfile>classsauce_1_1internal_1_1_new_injection_3_01_dependency_00_01_scope_00_01_impl_07_a1_00_01_a2_08b58f6ffef76cde3ada2780a99c763bb.html</anchorfile>
+      <anchor>ac634e376ef9dc77ae60d0b642182851a</anchor>
+      <arglist>(BindingPtr binding, InjectorPtr injector) const </arglist>
+    </member>
+    <member kind="function">
+      <type>void</type>
+      <name>dispose</name>
+      <anchorfile>classsauce_1_1internal_1_1_new_injection_3_01_dependency_00_01_scope_00_01_impl_07_a1_00_01_a2_08b58f6ffef76cde3ada2780a99c763bb.html</anchorfile>
+      <anchor>aac6de550aaae9d1a5ee3e1d40f9edfaf</anchor>
+      <arglist>(Iface *iface) const </arglist>
+    </member>
+    <member kind="friend" protection="private">
+      <type>friend class</type>
+      <name>DisposalDeleter&lt; Iface, New &gt;</name>
+      <anchorfile>classsauce_1_1internal_1_1_new_injection_3_01_dependency_00_01_scope_00_01_impl_07_a1_00_01_a2_08b58f6ffef76cde3ada2780a99c763bb.html</anchorfile>
+      <anchor>a95cb0df2fe9c298eb93a4d28a7eaf1b2</anchor>
+      <arglist></arglist>
+    </member>
+  </compound>
+  <compound kind="class">
+    <name>sauce::internal::NewInjection&lt; Dependency, Scope, Impl(A1, A2, A3, A4, A5, A6), Allocator &gt;</name>
+    <filename>classsauce_1_1internal_1_1_new_injection_3_01_dependency_00_01_scope_00_01_impl_07_a1_00_01_a2_049e2ee55855e789a8ae19d05a544ed4f.html</filename>
+    <templarg></templarg>
+    <templarg></templarg>
+    <templarg></templarg>
+    <templarg></templarg>
+    <templarg></templarg>
+    <templarg></templarg>
+    <templarg></templarg>
+    <templarg></templarg>
+    <templarg></templarg>
+    <templarg></templarg>
+    <base>ProvidingInjection&lt; Dependency, Scope &gt;</base>
+    <member kind="typedef">
+      <type>ProvidingInjection&lt; Dependency, Scope &gt;::InjectionPtr</type>
+      <name>InjectionPtr</name>
+      <anchorfile>classsauce_1_1internal_1_1_new_injection_3_01_dependency_00_01_scope_00_01_impl_07_a1_00_01_a2_049e2ee55855e789a8ae19d05a544ed4f.html</anchorfile>
+      <anchor>a107f429f2ad29aba4c588b5d0c535115</anchor>
+      <arglist></arglist>
+    </member>
+    <member kind="typedef">
+      <type>ResolvedBinding&lt; Dependency &gt;::BindingPtr</type>
+      <name>BindingPtr</name>
+      <anchorfile>classsauce_1_1internal_1_1_new_injection_3_01_dependency_00_01_scope_00_01_impl_07_a1_00_01_a2_049e2ee55855e789a8ae19d05a544ed4f.html</anchorfile>
+      <anchor>a708879875061fc56fcead71d25cb9327</anchor>
+      <arglist></arglist>
+    </member>
+    <member kind="typedef">
+      <type>Key&lt; Dependency &gt;::Normalized</type>
+      <name>Dependency</name>
+      <anchorfile>classsauce_1_1internal_1_1_providing_injection.html</anchorfile>
+      <anchor>ae6d56c50528f35ccdd7d9c787805b37f</anchor>
+      <arglist></arglist>
+    </member>
+    <member kind="typedef">
+      <type>Key&lt; Dependency &gt;::Ptr</type>
+      <name>IfacePtr</name>
+      <anchorfile>classsauce_1_1internal_1_1_providing_injection.html</anchorfile>
+      <anchor>a79f5bb01c25fe8be538cfc8d75e77178</anchor>
+      <arglist></arglist>
+    </member>
+    <member kind="function">
+      <type>Ptr</type>
+      <name>provide</name>
+      <anchorfile>classsauce_1_1internal_1_1_new_injection_3_01_dependency_00_01_scope_00_01_impl_07_a1_00_01_a2_049e2ee55855e789a8ae19d05a544ed4f.html</anchorfile>
+      <anchor>a9d40cef47650578478590af2ac2c926f</anchor>
+      <arglist>(BindingPtr binding, InjectorPtr injector) const </arglist>
+    </member>
+    <member kind="function">
+      <type>void</type>
+      <name>dispose</name>
+      <anchorfile>classsauce_1_1internal_1_1_new_injection_3_01_dependency_00_01_scope_00_01_impl_07_a1_00_01_a2_049e2ee55855e789a8ae19d05a544ed4f.html</anchorfile>
+      <anchor>aa5665d9c2637f189945fa4627a2b0b47</anchor>
+      <arglist>(Iface *iface) const </arglist>
+    </member>
+    <member kind="friend" protection="private">
+      <type>friend class</type>
+      <name>DisposalDeleter&lt; Iface, New &gt;</name>
+      <anchorfile>classsauce_1_1internal_1_1_new_injection_3_01_dependency_00_01_scope_00_01_impl_07_a1_00_01_a2_049e2ee55855e789a8ae19d05a544ed4f.html</anchorfile>
+      <anchor>a95cb0df2fe9c298eb93a4d28a7eaf1b2</anchor>
+      <arglist></arglist>
+    </member>
+  </compound>
+  <compound kind="class">
+    <name>sauce::internal::NewInjection&lt; Dependency, Scope, Impl(A1, A2, A3, A4, A5, A6, A7), Allocator &gt;</name>
+    <filename>classsauce_1_1internal_1_1_new_injection_3_01_dependency_00_01_scope_00_01_impl_07_a1_00_01_a2_05fa36adfdc1a66770fce7aac54ca1bd5.html</filename>
+    <templarg></templarg>
+    <templarg></templarg>
+    <templarg></templarg>
+    <templarg></templarg>
+    <templarg></templarg>
+    <templarg></templarg>
+    <templarg></templarg>
+    <templarg></templarg>
+    <templarg></templarg>
+    <templarg></templarg>
+    <templarg></templarg>
+    <base>ProvidingInjection&lt; Dependency, Scope &gt;</base>
+    <member kind="typedef">
+      <type>ProvidingInjection&lt; Dependency, Scope &gt;::InjectionPtr</type>
+      <name>InjectionPtr</name>
+      <anchorfile>classsauce_1_1internal_1_1_new_injection_3_01_dependency_00_01_scope_00_01_impl_07_a1_00_01_a2_05fa36adfdc1a66770fce7aac54ca1bd5.html</anchorfile>
+      <anchor>a1c853e32693d4ab5a4db2135f5d3be4d</anchor>
+      <arglist></arglist>
+    </member>
+    <member kind="typedef">
+      <type>ResolvedBinding&lt; Dependency &gt;::BindingPtr</type>
+      <name>BindingPtr</name>
+      <anchorfile>classsauce_1_1internal_1_1_new_injection_3_01_dependency_00_01_scope_00_01_impl_07_a1_00_01_a2_05fa36adfdc1a66770fce7aac54ca1bd5.html</anchorfile>
+      <anchor>aff0146a1d48d3883c788ef9bf9daa39d</anchor>
+      <arglist></arglist>
+    </member>
+    <member kind="typedef">
+      <type>Key&lt; Dependency &gt;::Normalized</type>
+      <name>Dependency</name>
+      <anchorfile>classsauce_1_1internal_1_1_providing_injection.html</anchorfile>
+      <anchor>ae6d56c50528f35ccdd7d9c787805b37f</anchor>
+      <arglist></arglist>
+    </member>
+    <member kind="typedef">
+      <type>Key&lt; Dependency &gt;::Ptr</type>
+      <name>IfacePtr</name>
+      <anchorfile>classsauce_1_1internal_1_1_providing_injection.html</anchorfile>
+      <anchor>a79f5bb01c25fe8be538cfc8d75e77178</anchor>
+      <arglist></arglist>
+    </member>
+    <member kind="function">
+      <type>Ptr</type>
+      <name>provide</name>
+      <anchorfile>classsauce_1_1internal_1_1_new_injection_3_01_dependency_00_01_scope_00_01_impl_07_a1_00_01_a2_05fa36adfdc1a66770fce7aac54ca1bd5.html</anchorfile>
+      <anchor>a2692c9d691d848c5865e0d65a2891e2b</anchor>
+      <arglist>(BindingPtr binding, InjectorPtr injector) const </arglist>
+    </member>
+    <member kind="function">
+      <type>void</type>
+      <name>dispose</name>
+      <anchorfile>classsauce_1_1internal_1_1_new_injection_3_01_dependency_00_01_scope_00_01_impl_07_a1_00_01_a2_05fa36adfdc1a66770fce7aac54ca1bd5.html</anchorfile>
+      <anchor>a4ca13b467a26889a8e632dacb3f7a175</anchor>
+      <arglist>(Iface *iface) const </arglist>
+    </member>
+    <member kind="friend" protection="private">
+      <type>friend class</type>
+      <name>DisposalDeleter&lt; Iface, New &gt;</name>
+      <anchorfile>classsauce_1_1internal_1_1_new_injection_3_01_dependency_00_01_scope_00_01_impl_07_a1_00_01_a2_05fa36adfdc1a66770fce7aac54ca1bd5.html</anchorfile>
+      <anchor>a95cb0df2fe9c298eb93a4d28a7eaf1b2</anchor>
+      <arglist></arglist>
+    </member>
+  </compound>
+  <compound kind="class">
+    <name>sauce::internal::NewInjection&lt; Dependency, Scope, Impl(A1, A2, A3, A4, A5, A6, A7, A8), Allocator &gt;</name>
+    <filename>classsauce_1_1internal_1_1_new_injection_3_01_dependency_00_01_scope_00_01_impl_07_a1_00_01_a2_0c34a1a8bb22a048816dba2ff6ea71f43.html</filename>
+    <templarg></templarg>
+    <templarg></templarg>
+    <templarg></templarg>
+    <templarg></templarg>
+    <templarg></templarg>
+    <templarg></templarg>
+    <templarg></templarg>
+    <templarg></templarg>
+    <templarg></templarg>
+    <templarg></templarg>
+    <templarg></templarg>
+    <templarg></templarg>
+    <base>ProvidingInjection&lt; Dependency, Scope &gt;</base>
+    <member kind="typedef">
+      <type>ProvidingInjection&lt; Dependency, Scope &gt;::InjectionPtr</type>
+      <name>InjectionPtr</name>
+      <anchorfile>classsauce_1_1internal_1_1_new_injection_3_01_dependency_00_01_scope_00_01_impl_07_a1_00_01_a2_0c34a1a8bb22a048816dba2ff6ea71f43.html</anchorfile>
+      <anchor>a9d189660dcfdc8a4c5ec51be65799ce2</anchor>
+      <arglist></arglist>
+    </member>
+    <member kind="typedef">
+      <type>ResolvedBinding&lt; Dependency &gt;::BindingPtr</type>
+      <name>BindingPtr</name>
+      <anchorfile>classsauce_1_1internal_1_1_new_injection_3_01_dependency_00_01_scope_00_01_impl_07_a1_00_01_a2_0c34a1a8bb22a048816dba2ff6ea71f43.html</anchorfile>
+      <anchor>a580fc9f7d8b8a0a2640b38a3b16cc17f</anchor>
+      <arglist></arglist>
+    </member>
+    <member kind="typedef">
+      <type>Key&lt; Dependency &gt;::Normalized</type>
+      <name>Dependency</name>
+      <anchorfile>classsauce_1_1internal_1_1_providing_injection.html</anchorfile>
+      <anchor>ae6d56c50528f35ccdd7d9c787805b37f</anchor>
+      <arglist></arglist>
+    </member>
+    <member kind="typedef">
+      <type>Key&lt; Dependency &gt;::Ptr</type>
+      <name>IfacePtr</name>
+      <anchorfile>classsauce_1_1internal_1_1_providing_injection.html</anchorfile>
+      <anchor>a79f5bb01c25fe8be538cfc8d75e77178</anchor>
+      <arglist></arglist>
+    </member>
+    <member kind="function">
+      <type>Ptr</type>
+      <name>provide</name>
+      <anchorfile>classsauce_1_1internal_1_1_new_injection_3_01_dependency_00_01_scope_00_01_impl_07_a1_00_01_a2_0c34a1a8bb22a048816dba2ff6ea71f43.html</anchorfile>
+      <anchor>abdcde244a04fff958f8f5f7ef91631d3</anchor>
+      <arglist>(BindingPtr binding, InjectorPtr injector) const </arglist>
+    </member>
+    <member kind="function">
+      <type>void</type>
+      <name>dispose</name>
+      <anchorfile>classsauce_1_1internal_1_1_new_injection_3_01_dependency_00_01_scope_00_01_impl_07_a1_00_01_a2_0c34a1a8bb22a048816dba2ff6ea71f43.html</anchorfile>
+      <anchor>a4a9d0e3d5e92a340049f0df158cea274</anchor>
+      <arglist>(Iface *iface) const </arglist>
+    </member>
+    <member kind="friend" protection="private">
+      <type>friend class</type>
+      <name>DisposalDeleter&lt; Iface, New &gt;</name>
+      <anchorfile>classsauce_1_1internal_1_1_new_injection_3_01_dependency_00_01_scope_00_01_impl_07_a1_00_01_a2_0c34a1a8bb22a048816dba2ff6ea71f43.html</anchorfile>
+      <anchor>a95cb0df2fe9c298eb93a4d28a7eaf1b2</anchor>
+      <arglist></arglist>
+    </member>
+  </compound>
+  <compound kind="class">
+    <name>sauce::internal::NewInjection&lt; Dependency, Scope, Impl(A1, A2, A3, A4, A5, A6, A7, A8, A9), Allocator &gt;</name>
+    <filename>classsauce_1_1internal_1_1_new_injection_3_01_dependency_00_01_scope_00_01_impl_07_a1_00_01_a2_06c7952b911b07320514a7eec9df86e99.html</filename>
+    <templarg></templarg>
+    <templarg></templarg>
+    <templarg></templarg>
+    <templarg></templarg>
+    <templarg></templarg>
+    <templarg></templarg>
+    <templarg></templarg>
+    <templarg></templarg>
+    <templarg></templarg>
+    <templarg></templarg>
+    <templarg></templarg>
+    <templarg></templarg>
+    <templarg></templarg>
+    <base>ProvidingInjection&lt; Dependency, Scope &gt;</base>
+    <member kind="typedef">
+      <type>ProvidingInjection&lt; Dependency, Scope &gt;::InjectionPtr</type>
+      <name>InjectionPtr</name>
+      <anchorfile>classsauce_1_1internal_1_1_new_injection_3_01_dependency_00_01_scope_00_01_impl_07_a1_00_01_a2_06c7952b911b07320514a7eec9df86e99.html</anchorfile>
+      <anchor>a1ed1064099784887a0ec38b3fe92011c</anchor>
+      <arglist></arglist>
+    </member>
+    <member kind="typedef">
+      <type>ResolvedBinding&lt; Dependency &gt;::BindingPtr</type>
+      <name>BindingPtr</name>
+      <anchorfile>classsauce_1_1internal_1_1_new_injection_3_01_dependency_00_01_scope_00_01_impl_07_a1_00_01_a2_06c7952b911b07320514a7eec9df86e99.html</anchorfile>
+      <anchor>a11e8aed78c9984d5462e26d4b0f33fae</anchor>
+      <arglist></arglist>
+    </member>
+    <member kind="typedef">
+      <type>Key&lt; Dependency &gt;::Normalized</type>
+      <name>Dependency</name>
+      <anchorfile>classsauce_1_1internal_1_1_providing_injection.html</anchorfile>
+      <anchor>ae6d56c50528f35ccdd7d9c787805b37f</anchor>
+      <arglist></arglist>
+    </member>
+    <member kind="typedef">
+      <type>Key&lt; Dependency &gt;::Ptr</type>
+      <name>IfacePtr</name>
+      <anchorfile>classsauce_1_1internal_1_1_providing_injection.html</anchorfile>
+      <anchor>a79f5bb01c25fe8be538cfc8d75e77178</anchor>
+      <arglist></arglist>
+    </member>
+    <member kind="function">
+      <type>Ptr</type>
+      <name>provide</name>
+      <anchorfile>classsauce_1_1internal_1_1_new_injection_3_01_dependency_00_01_scope_00_01_impl_07_a1_00_01_a2_06c7952b911b07320514a7eec9df86e99.html</anchorfile>
+      <anchor>a14fe356b9ce975a57c4743fb821721e8</anchor>
+      <arglist>(BindingPtr binding, InjectorPtr injector) const </arglist>
+    </member>
+    <member kind="function">
+      <type>void</type>
+      <name>dispose</name>
+      <anchorfile>classsauce_1_1internal_1_1_new_injection_3_01_dependency_00_01_scope_00_01_impl_07_a1_00_01_a2_06c7952b911b07320514a7eec9df86e99.html</anchorfile>
+      <anchor>ae7bcbc990eb8e5d903859ffe33b7ac61</anchor>
+      <arglist>(Iface *iface) const </arglist>
+    </member>
+    <member kind="friend" protection="private">
+      <type>friend class</type>
+      <name>DisposalDeleter&lt; Iface, New &gt;</name>
+      <anchorfile>classsauce_1_1internal_1_1_new_injection_3_01_dependency_00_01_scope_00_01_impl_07_a1_00_01_a2_06c7952b911b07320514a7eec9df86e99.html</anchorfile>
+      <anchor>a95cb0df2fe9c298eb93a4d28a7eaf1b2</anchor>
+      <arglist></arglist>
+    </member>
+  </compound>
+  <compound kind="class">
+    <name>sauce::internal::NewInjection&lt; Dependency, Scope, Impl(A1, A2, A3, A4, A5, A6, A7, A8, A9, A10), Allocator &gt;</name>
+    <filename>classsauce_1_1internal_1_1_new_injection_3_01_dependency_00_01_scope_00_01_impl_07_a1_00_01_a2_05a2023df50b7c9de9b8e631879c77bba.html</filename>
+    <templarg></templarg>
+    <templarg></templarg>
+    <templarg></templarg>
+    <templarg></templarg>
+    <templarg></templarg>
+    <templarg></templarg>
+    <templarg></templarg>
+    <templarg></templarg>
+    <templarg></templarg>
+    <templarg></templarg>
+    <templarg></templarg>
+    <templarg></templarg>
+    <templarg></templarg>
+    <templarg></templarg>
+    <base>ProvidingInjection&lt; Dependency, Scope &gt;</base>
+    <member kind="typedef">
+      <type>ProvidingInjection&lt; Dependency, Scope &gt;::InjectionPtr</type>
+      <name>InjectionPtr</name>
+      <anchorfile>classsauce_1_1internal_1_1_new_injection_3_01_dependency_00_01_scope_00_01_impl_07_a1_00_01_a2_05a2023df50b7c9de9b8e631879c77bba.html</anchorfile>
+      <anchor>a865eb30d2ab1a19927793002d1f0a4aa</anchor>
+      <arglist></arglist>
+    </member>
+    <member kind="typedef">
+      <type>ResolvedBinding&lt; Dependency &gt;::BindingPtr</type>
+      <name>BindingPtr</name>
+      <anchorfile>classsauce_1_1internal_1_1_new_injection_3_01_dependency_00_01_scope_00_01_impl_07_a1_00_01_a2_05a2023df50b7c9de9b8e631879c77bba.html</anchorfile>
+      <anchor>a6ff94aead21595574fb66300e406c126</anchor>
+      <arglist></arglist>
+    </member>
+    <member kind="typedef">
+      <type>Key&lt; Dependency &gt;::Normalized</type>
+      <name>Dependency</name>
+      <anchorfile>classsauce_1_1internal_1_1_providing_injection.html</anchorfile>
+      <anchor>ae6d56c50528f35ccdd7d9c787805b37f</anchor>
+      <arglist></arglist>
+    </member>
+    <member kind="typedef">
+      <type>Key&lt; Dependency &gt;::Ptr</type>
+      <name>IfacePtr</name>
+      <anchorfile>classsauce_1_1internal_1_1_providing_injection.html</anchorfile>
+      <anchor>a79f5bb01c25fe8be538cfc8d75e77178</anchor>
+      <arglist></arglist>
+    </member>
+    <member kind="function">
+      <type>Ptr</type>
+      <name>provide</name>
+      <anchorfile>classsauce_1_1internal_1_1_new_injection_3_01_dependency_00_01_scope_00_01_impl_07_a1_00_01_a2_05a2023df50b7c9de9b8e631879c77bba.html</anchorfile>
+      <anchor>a363fb3b371c445f6670c12d0f4147648</anchor>
+      <arglist>(BindingPtr binding, InjectorPtr injector) const </arglist>
+    </member>
+    <member kind="function">
+      <type>void</type>
+      <name>dispose</name>
+      <anchorfile>classsauce_1_1internal_1_1_new_injection_3_01_dependency_00_01_scope_00_01_impl_07_a1_00_01_a2_05a2023df50b7c9de9b8e631879c77bba.html</anchorfile>
+      <anchor>a59eeda60360bdf8515d367f546a04a8d</anchor>
+      <arglist>(Iface *iface) const </arglist>
+    </member>
+    <member kind="friend" protection="private">
+      <type>friend class</type>
+      <name>DisposalDeleter&lt; Iface, New &gt;</name>
+      <anchorfile>classsauce_1_1internal_1_1_new_injection_3_01_dependency_00_01_scope_00_01_impl_07_a1_00_01_a2_05a2023df50b7c9de9b8e631879c77bba.html</anchorfile>
+      <anchor>a95cb0df2fe9c298eb93a4d28a7eaf1b2</anchor>
+      <arglist></arglist>
+    </member>
+  </compound>
   <compound kind="struct">
     <name>sauce::internal::OpaqueBinding</name>
     <filename>structsauce_1_1internal_1_1_opaque_binding.html</filename>
@@ -1817,6 +2700,133 @@
       <anchorfile>classsauce_1_1internal_1_1_pending_thrower.html</anchorfile>
       <anchor>a6419d1831ceae6ceb70502c4a6c16a8d</anchor>
       <arglist>()</arglist>
+    </member>
+  </compound>
+  <compound kind="class">
+    <name>sauce::internal::ProviderInjection</name>
+    <filename>classsauce_1_1internal_1_1_provider_injection.html</filename>
+    <templarg></templarg>
+    <templarg></templarg>
+    <templarg></templarg>
+    <base>ProvidingInjection&lt; Dependency, Scope &gt;</base>
+    <member kind="typedef">
+      <type>ProvidingInjection&lt; Dependency, Scope &gt;::InjectionPtr</type>
+      <name>InjectionPtr</name>
+      <anchorfile>classsauce_1_1internal_1_1_provider_injection.html</anchorfile>
+      <anchor>a25fb596d0cf6ef7984c625deaefb6358</anchor>
+      <arglist></arglist>
+    </member>
+    <member kind="typedef">
+      <type>ResolvedBinding&lt; Dependency &gt;::BindingPtr</type>
+      <name>BindingPtr</name>
+      <anchorfile>classsauce_1_1internal_1_1_provider_injection.html</anchorfile>
+      <anchor>aea5bd86ea88d704606b73e142d644614</anchor>
+      <arglist></arglist>
+    </member>
+    <member kind="typedef">
+      <type>Key&lt; Dependency &gt;::Normalized</type>
+      <name>Dependency</name>
+      <anchorfile>classsauce_1_1internal_1_1_providing_injection.html</anchorfile>
+      <anchor>ae6d56c50528f35ccdd7d9c787805b37f</anchor>
+      <arglist></arglist>
+    </member>
+    <member kind="typedef">
+      <type>Key&lt; Dependency &gt;::Ptr</type>
+      <name>IfacePtr</name>
+      <anchorfile>classsauce_1_1internal_1_1_providing_injection.html</anchorfile>
+      <anchor>a79f5bb01c25fe8be538cfc8d75e77178</anchor>
+      <arglist></arglist>
+    </member>
+    <member kind="function">
+      <type>void</type>
+      <name>validateAcyclic</name>
+      <anchorfile>classsauce_1_1internal_1_1_provider_injection.html</anchorfile>
+      <anchor>a5ff58e50de78514ae150a1058ad182fc</anchor>
+      <arglist>(InjectorPtr injector, TypeIds &amp;ids) const </arglist>
+    </member>
+    <member kind="function">
+      <type>Key&lt; Dependency &gt;::Ptr</type>
+      <name>provide</name>
+      <anchorfile>classsauce_1_1internal_1_1_provider_injection.html</anchorfile>
+      <anchor>a42143188f14f39712485d03226d0d314</anchor>
+      <arglist>(BindingPtr binding, InjectorPtr injector) const </arglist>
+    </member>
+  </compound>
+  <compound kind="class">
+    <name>sauce::internal::ProvidingInjection</name>
+    <filename>classsauce_1_1internal_1_1_providing_injection.html</filename>
+    <templarg>Dependency_</templarg>
+    <templarg>Scope</templarg>
+    <base>InjectionBinding&lt; Dependency_, Scope &gt;</base>
+    <member kind="typedef">
+      <type>Key&lt; Dependency_ &gt;::Normalized</type>
+      <name>Dependency</name>
+      <anchorfile>classsauce_1_1internal_1_1_providing_injection.html</anchorfile>
+      <anchor>ae6d56c50528f35ccdd7d9c787805b37f</anchor>
+      <arglist></arglist>
+    </member>
+    <member kind="typedef">
+      <type>sauce::shared_ptr&lt; ProvidingInjection&lt; Dependency_, Scope &gt; &gt;</type>
+      <name>InjectionPtr</name>
+      <anchorfile>classsauce_1_1internal_1_1_providing_injection.html</anchorfile>
+      <anchor>a14977f94bdc5542ef8b4ed768ea919a7</anchor>
+      <arglist></arglist>
+    </member>
+    <member kind="typedef">
+      <type>Key&lt; Dependency_ &gt;::Ptr</type>
+      <name>IfacePtr</name>
+      <anchorfile>classsauce_1_1internal_1_1_providing_injection.html</anchorfile>
+      <anchor>a79f5bb01c25fe8be538cfc8d75e77178</anchor>
+      <arglist></arglist>
+    </member>
+    <member kind="typedef">
+      <type>ResolvedBinding&lt; Dependency_ &gt;::BindingPtr</type>
+      <name>BindingPtr</name>
+      <anchorfile>classsauce_1_1internal_1_1_providing_injection.html</anchorfile>
+      <anchor>aabe33c40471b33d3c5abad364cc8e00c</anchor>
+      <arglist></arglist>
+    </member>
+    <member kind="function">
+      <type>std::string</type>
+      <name>getName</name>
+      <anchorfile>classsauce_1_1internal_1_1_injection_binding.html</anchorfile>
+      <anchor>a4a3c79bd489e5e57ed8ea630bef070e9</anchor>
+      <arglist>() const</arglist>
+    </member>
+    <member kind="function">
+      <type>void</type>
+      <name>setName</name>
+      <anchorfile>classsauce_1_1internal_1_1_injection_binding.html</anchorfile>
+      <anchor>a1b8f3c4f86982d7e80a32e3cd00dfa5c</anchor>
+      <arglist>(std::string const name)</arglist>
+    </member>
+    <member kind="function">
+      <type>NamedTypeId</type>
+      <name>getKey</name>
+      <anchorfile>structsauce_1_1internal_1_1_resolved_binding.html</anchorfile>
+      <anchor>a7ff0341fe08ae52a0f03a35ad6dd3c79</anchor>
+      <arglist>() const</arglist>
+    </member>
+    <member kind="function" virtualness="pure">
+      <type>virtual void</type>
+      <name>validateAcyclic</name>
+      <anchorfile>structsauce_1_1internal_1_1_resolved_binding.html</anchorfile>
+      <anchor>a503de5fe9cb4996db536f6f6d6d486be</anchor>
+      <arglist>(sauce::shared_ptr&lt; Injector &gt;, TypeIds &amp;) const =0</arglist>
+    </member>
+    <member kind="function" virtualness="pure">
+      <type>virtual IfacePtr</type>
+      <name>get</name>
+      <anchorfile>structsauce_1_1internal_1_1_resolved_binding.html</anchorfile>
+      <anchor>a06fb04d3ee1d8d42d7f93f20a205ff25</anchor>
+      <arglist>(BindingPtr, sauce::shared_ptr&lt; Injector &gt;) const =0</arglist>
+    </member>
+    <member kind="function" virtualness="pure">
+      <type>virtual void</type>
+      <name>eagerlyProvide</name>
+      <anchorfile>structsauce_1_1internal_1_1_opaque_binding.html</anchorfile>
+      <anchor>a9cbe103bedc3ea77c5edef5f30a4d74c</anchor>
+      <arglist>(OpaqueBindingPtr, sauce::shared_ptr&lt; Injector &gt;) const =0</arglist>
     </member>
   </compound>
   <compound kind="struct">
@@ -2030,1016 +3040,6 @@
       <arglist>(typename Key&lt; Named&lt; Provider&lt; ProvidedDependency &gt;, Name &gt; &gt;::Ptr ptr) const </arglist>
     </member>
   </compound>
-  <compound kind="class">
-    <name>sauce::internal::injections::ImplicitProvider</name>
-    <filename>classsauce_1_1internal_1_1injections_1_1_implicit_provider.html</filename>
-    <templarg></templarg>
-    <templarg></templarg>
-    <base>sauce::Provider</base>
-    <member kind="function">
-      <type>Key&lt; Dependency &gt;::Ptr</type>
-      <name>get</name>
-      <anchorfile>classsauce_1_1internal_1_1injections_1_1_implicit_provider.html</anchorfile>
-      <anchor>a023bc52cd1c112ea408c26c6cb17a53b</anchor>
-      <arglist>()</arglist>
-    </member>
-    <member kind="friend" protection="private">
-      <type>friend class</type>
-      <name>ImplicitProviderInjection&lt; Dependency, Name &gt;</name>
-      <anchorfile>classsauce_1_1internal_1_1injections_1_1_implicit_provider.html</anchorfile>
-      <anchor>a4e4a8fdc3e83c34a74904df2955ac4f1</anchor>
-      <arglist></arglist>
-    </member>
-    <member kind="typedef">
-      <type>i::Key&lt; Dependency &gt;::Iface</type>
-      <name>Iface</name>
-      <anchorfile>classsauce_1_1_provider.html</anchorfile>
-      <anchor>abfe43c0ceeb19745314767fd84ae9d9f</anchor>
-      <arglist></arglist>
-    </member>
-    <member kind="function" protection="protected">
-      <type>sauce::shared_ptr&lt; Provider&lt; Dependency &gt; &gt;</type>
-      <name>getSelf</name>
-      <anchorfile>classsauce_1_1_provider.html</anchorfile>
-      <anchor>a9fac62da0c899b2b8ae4a55dc22c5b90</anchor>
-      <arglist>() const </arglist>
-    </member>
-  </compound>
-  <compound kind="class">
-    <name>sauce::internal::injections::ImplicitProviderInjection</name>
-    <filename>classsauce_1_1internal_1_1injections_1_1_implicit_provider_injection.html</filename>
-    <templarg></templarg>
-    <templarg></templarg>
-    <base>ProvidingInjection&lt; Named&lt; Provider&lt; Dependency &gt;, Name &gt;, NoScope &gt;</base>
-    <base>sauce::internal::ProviderFriend</base>
-    <member kind="typedef">
-      <type>ProvidingInjection&lt; ProviderDependency, NoScope &gt;::InjectionPtr</type>
-      <name>InjectionPtr</name>
-      <anchorfile>classsauce_1_1internal_1_1injections_1_1_implicit_provider_injection.html</anchorfile>
-      <anchor>af54aff86fcf7a5a4cd2d037c58d46442</anchor>
-      <arglist></arglist>
-    </member>
-    <member kind="typedef">
-      <type>ResolvedBinding&lt; ProviderDependency &gt;::BindingPtr</type>
-      <name>BindingPtr</name>
-      <anchorfile>classsauce_1_1internal_1_1injections_1_1_implicit_provider_injection.html</anchorfile>
-      <anchor>a24698300a7082048d00046615b68f54e</anchor>
-      <arglist></arglist>
-    </member>
-    <member kind="typedef">
-      <type>Key&lt; Named&lt; Provider&lt; Dependency &gt;, Name &gt; &gt;::Normalized</type>
-      <name>Dependency</name>
-      <anchorfile>classsauce_1_1internal_1_1injections_1_1_providing_injection.html</anchorfile>
-      <anchor>a7bbe93fb54fa80ac1d5bb70379415dcd</anchor>
-      <arglist></arglist>
-    </member>
-    <member kind="typedef">
-      <type>Key&lt; Named&lt; Provider&lt; Dependency &gt;, Name &gt; &gt;::Ptr</type>
-      <name>IfacePtr</name>
-      <anchorfile>classsauce_1_1internal_1_1injections_1_1_providing_injection.html</anchorfile>
-      <anchor>a59c27c9ec1b19c6b687c2ad8b047f996</anchor>
-      <arglist></arglist>
-    </member>
-    <member kind="function">
-      <type></type>
-      <name>ImplicitProviderInjection</name>
-      <anchorfile>classsauce_1_1internal_1_1injections_1_1_implicit_provider_injection.html</anchorfile>
-      <anchor>a427510085eae89ffd4a668bf7a59d564</anchor>
-      <arglist>(ProvidedBindingPtr providedBinding)</arglist>
-    </member>
-    <member kind="function">
-      <type>ProviderPtr</type>
-      <name>provide</name>
-      <anchorfile>classsauce_1_1internal_1_1injections_1_1_implicit_provider_injection.html</anchorfile>
-      <anchor>a720f159a6c2bc8de754e09e7c252dee9</anchor>
-      <arglist>(BindingPtr, InjectorPtr injector) const </arglist>
-    </member>
-    <member kind="function">
-      <type>void</type>
-      <name>setSelf</name>
-      <anchorfile>structsauce_1_1internal_1_1_provider_friend.html</anchorfile>
-      <anchor>a335c721a6d2c83e11d8498dada73d4c6</anchor>
-      <arglist>(typename Key&lt; Named&lt; Provider&lt; ProvidedDependency &gt;, Name &gt; &gt;::Ptr ptr) const </arglist>
-    </member>
-  </compound>
-  <compound kind="class">
-    <name>sauce::internal::injections::InjectorInjection</name>
-    <filename>classsauce_1_1internal_1_1injections_1_1_injector_injection.html</filename>
-    <base>ProvidingInjection&lt; Key&lt; Injector &gt;::Normalized, NoScope &gt;</base>
-    <member kind="function">
-      <type>InjectorPtr</type>
-      <name>provide</name>
-      <anchorfile>classsauce_1_1internal_1_1injections_1_1_injector_injection.html</anchorfile>
-      <anchor>ad3153ffc57f5089e207247f987ae3dca</anchor>
-      <arglist>(BindingPtr, InjectorPtr injector) const </arglist>
-    </member>
-    <member kind="typedef">
-      <type>Key&lt; Key&lt; Injector &gt;::Normalized &gt;::Normalized</type>
-      <name>Dependency</name>
-      <anchorfile>classsauce_1_1internal_1_1injections_1_1_providing_injection.html</anchorfile>
-      <anchor>a7bbe93fb54fa80ac1d5bb70379415dcd</anchor>
-      <arglist></arglist>
-    </member>
-    <member kind="typedef">
-      <type>sauce::shared_ptr&lt; ProvidingInjection&lt; Key&lt; Injector &gt;::Normalized, NoScope &gt; &gt;</type>
-      <name>InjectionPtr</name>
-      <anchorfile>classsauce_1_1internal_1_1injections_1_1_providing_injection.html</anchorfile>
-      <anchor>ac14ff85d4ba1360a9ee64c761c483926</anchor>
-      <arglist></arglist>
-    </member>
-    <member kind="typedef">
-      <type>Key&lt; Key&lt; Injector &gt;::Normalized &gt;::Ptr</type>
-      <name>IfacePtr</name>
-      <anchorfile>classsauce_1_1internal_1_1injections_1_1_providing_injection.html</anchorfile>
-      <anchor>a59c27c9ec1b19c6b687c2ad8b047f996</anchor>
-      <arglist></arglist>
-    </member>
-    <member kind="typedef">
-      <type>ResolvedBinding&lt; Key&lt; Injector &gt;::Normalized &gt;::BindingPtr</type>
-      <name>BindingPtr</name>
-      <anchorfile>classsauce_1_1internal_1_1injections_1_1_providing_injection.html</anchorfile>
-      <anchor>adb9ca644032ceb6932ec3ff61403d123</anchor>
-      <arglist></arglist>
-    </member>
-  </compound>
-  <compound kind="class">
-    <name>sauce::internal::injections::NewInjection</name>
-    <filename>classsauce_1_1internal_1_1injections_1_1_new_injection.html</filename>
-    <templarg></templarg>
-    <templarg></templarg>
-    <templarg></templarg>
-    <templarg></templarg>
-    <base>ProvidingInjection&lt; Dependency, Scope &gt;</base>
-    <member kind="typedef">
-      <type>ProvidingInjection&lt; Dependency, Scope &gt;::InjectionPtr</type>
-      <name>InjectionPtr</name>
-      <anchorfile>classsauce_1_1internal_1_1injections_1_1_new_injection.html</anchorfile>
-      <anchor>abee0c8b1991f0446cacaa2b45d17c7f4</anchor>
-      <arglist></arglist>
-    </member>
-    <member kind="typedef">
-      <type>ResolvedBinding&lt; Dependency &gt;::BindingPtr</type>
-      <name>BindingPtr</name>
-      <anchorfile>classsauce_1_1internal_1_1injections_1_1_new_injection.html</anchorfile>
-      <anchor>a2966f89c6931d93c66e9157347089769</anchor>
-      <arglist></arglist>
-    </member>
-    <member kind="typedef">
-      <type>Key&lt; Dependency &gt;::Normalized</type>
-      <name>Dependency</name>
-      <anchorfile>classsauce_1_1internal_1_1injections_1_1_providing_injection.html</anchorfile>
-      <anchor>a7bbe93fb54fa80ac1d5bb70379415dcd</anchor>
-      <arglist></arglist>
-    </member>
-    <member kind="typedef">
-      <type>Key&lt; Dependency &gt;::Ptr</type>
-      <name>IfacePtr</name>
-      <anchorfile>classsauce_1_1internal_1_1injections_1_1_providing_injection.html</anchorfile>
-      <anchor>a59c27c9ec1b19c6b687c2ad8b047f996</anchor>
-      <arglist></arglist>
-    </member>
-    <member kind="function">
-      <type>Ptr</type>
-      <name>provide</name>
-      <anchorfile>classsauce_1_1internal_1_1injections_1_1_new_injection.html</anchorfile>
-      <anchor>a862a00a1e1005215cc8102e81d3c9a8b</anchor>
-      <arglist>(BindingPtr binding, InjectorPtr) const </arglist>
-    </member>
-    <member kind="function">
-      <type>void</type>
-      <name>dispose</name>
-      <anchorfile>classsauce_1_1internal_1_1injections_1_1_new_injection.html</anchorfile>
-      <anchor>aa40dc9b035adcc2d0e86f0db4da14991</anchor>
-      <arglist>(Iface *iface) const </arglist>
-    </member>
-    <member kind="friend" protection="private">
-      <type>friend class</type>
-      <name>DisposalDeleter&lt; Iface, New &gt;</name>
-      <anchorfile>classsauce_1_1internal_1_1injections_1_1_new_injection.html</anchorfile>
-      <anchor>a95cb0df2fe9c298eb93a4d28a7eaf1b2</anchor>
-      <arglist></arglist>
-    </member>
-  </compound>
-  <compound kind="class">
-    <name>sauce::internal::injections::NewInjection&lt; Dependency, Scope, Impl(), Allocator &gt;</name>
-    <filename>classsauce_1_1internal_1_1injections_1_1_new_injection_3_01_dependency_00_01_scope_00_01_impl_07_08_00_01_allocator_01_4.html</filename>
-    <templarg></templarg>
-    <templarg></templarg>
-    <templarg></templarg>
-    <templarg></templarg>
-    <base>ProvidingInjection&lt; Dependency, Scope &gt;</base>
-    <member kind="typedef">
-      <type>ProvidingInjection&lt; Dependency, Scope &gt;::InjectionPtr</type>
-      <name>InjectionPtr</name>
-      <anchorfile>classsauce_1_1internal_1_1injections_1_1_new_injection_3_01_dependency_00_01_scope_00_01_impl_07_08_00_01_allocator_01_4.html</anchorfile>
-      <anchor>a9d8c39184298a3104c57fd9d36588829</anchor>
-      <arglist></arglist>
-    </member>
-    <member kind="typedef">
-      <type>ResolvedBinding&lt; Dependency &gt;::BindingPtr</type>
-      <name>BindingPtr</name>
-      <anchorfile>classsauce_1_1internal_1_1injections_1_1_new_injection_3_01_dependency_00_01_scope_00_01_impl_07_08_00_01_allocator_01_4.html</anchorfile>
-      <anchor>aaa9aacba34d5b0ec58094206b76b4fcc</anchor>
-      <arglist></arglist>
-    </member>
-    <member kind="typedef">
-      <type>Key&lt; Dependency &gt;::Normalized</type>
-      <name>Dependency</name>
-      <anchorfile>classsauce_1_1internal_1_1injections_1_1_providing_injection.html</anchorfile>
-      <anchor>a7bbe93fb54fa80ac1d5bb70379415dcd</anchor>
-      <arglist></arglist>
-    </member>
-    <member kind="typedef">
-      <type>Key&lt; Dependency &gt;::Ptr</type>
-      <name>IfacePtr</name>
-      <anchorfile>classsauce_1_1internal_1_1injections_1_1_providing_injection.html</anchorfile>
-      <anchor>a59c27c9ec1b19c6b687c2ad8b047f996</anchor>
-      <arglist></arglist>
-    </member>
-    <member kind="function">
-      <type>Ptr</type>
-      <name>provide</name>
-      <anchorfile>classsauce_1_1internal_1_1injections_1_1_new_injection_3_01_dependency_00_01_scope_00_01_impl_07_08_00_01_allocator_01_4.html</anchorfile>
-      <anchor>a9c9688c85214e7776b554d24ca4cad41</anchor>
-      <arglist>(BindingPtr binding, InjectorPtr) const </arglist>
-    </member>
-    <member kind="function">
-      <type>void</type>
-      <name>dispose</name>
-      <anchorfile>classsauce_1_1internal_1_1injections_1_1_new_injection_3_01_dependency_00_01_scope_00_01_impl_07_08_00_01_allocator_01_4.html</anchorfile>
-      <anchor>ac31ce6a28cd85b2be0f6b9fd914845a9</anchor>
-      <arglist>(Iface *iface) const </arglist>
-    </member>
-    <member kind="friend" protection="private">
-      <type>friend class</type>
-      <name>DisposalDeleter&lt; Iface, New &gt;</name>
-      <anchorfile>classsauce_1_1internal_1_1injections_1_1_new_injection_3_01_dependency_00_01_scope_00_01_impl_07_08_00_01_allocator_01_4.html</anchorfile>
-      <anchor>a95cb0df2fe9c298eb93a4d28a7eaf1b2</anchor>
-      <arglist></arglist>
-    </member>
-  </compound>
-  <compound kind="class">
-    <name>sauce::internal::injections::NewInjection&lt; Dependency, Scope, Impl(A1), Allocator &gt;</name>
-    <filename>classsauce_1_1internal_1_1injections_1_1_new_injection_3_01_dependency_00_01_scope_00_01_impl_07_a1_08_00_01_allocator_01_4.html</filename>
-    <templarg></templarg>
-    <templarg></templarg>
-    <templarg></templarg>
-    <templarg></templarg>
-    <templarg></templarg>
-    <base>ProvidingInjection&lt; Dependency, Scope &gt;</base>
-    <member kind="typedef">
-      <type>ProvidingInjection&lt; Dependency, Scope &gt;::InjectionPtr</type>
-      <name>InjectionPtr</name>
-      <anchorfile>classsauce_1_1internal_1_1injections_1_1_new_injection_3_01_dependency_00_01_scope_00_01_impl_07_a1_08_00_01_allocator_01_4.html</anchorfile>
-      <anchor>a9622f0925393fe03db1f2706dcf3dbbe</anchor>
-      <arglist></arglist>
-    </member>
-    <member kind="typedef">
-      <type>ResolvedBinding&lt; Dependency &gt;::BindingPtr</type>
-      <name>BindingPtr</name>
-      <anchorfile>classsauce_1_1internal_1_1injections_1_1_new_injection_3_01_dependency_00_01_scope_00_01_impl_07_a1_08_00_01_allocator_01_4.html</anchorfile>
-      <anchor>a87f4c2d72edb7548d9d9dd0b610ef8eb</anchor>
-      <arglist></arglist>
-    </member>
-    <member kind="typedef">
-      <type>Key&lt; Dependency &gt;::Normalized</type>
-      <name>Dependency</name>
-      <anchorfile>classsauce_1_1internal_1_1injections_1_1_providing_injection.html</anchorfile>
-      <anchor>a7bbe93fb54fa80ac1d5bb70379415dcd</anchor>
-      <arglist></arglist>
-    </member>
-    <member kind="typedef">
-      <type>Key&lt; Dependency &gt;::Ptr</type>
-      <name>IfacePtr</name>
-      <anchorfile>classsauce_1_1internal_1_1injections_1_1_providing_injection.html</anchorfile>
-      <anchor>a59c27c9ec1b19c6b687c2ad8b047f996</anchor>
-      <arglist></arglist>
-    </member>
-    <member kind="function">
-      <type>Ptr</type>
-      <name>provide</name>
-      <anchorfile>classsauce_1_1internal_1_1injections_1_1_new_injection_3_01_dependency_00_01_scope_00_01_impl_07_a1_08_00_01_allocator_01_4.html</anchorfile>
-      <anchor>a94d86c2bd69de9ab709be13d5a12ed4e</anchor>
-      <arglist>(BindingPtr binding, InjectorPtr injector) const </arglist>
-    </member>
-    <member kind="function">
-      <type>void</type>
-      <name>dispose</name>
-      <anchorfile>classsauce_1_1internal_1_1injections_1_1_new_injection_3_01_dependency_00_01_scope_00_01_impl_07_a1_08_00_01_allocator_01_4.html</anchorfile>
-      <anchor>aaf6375979b23c9e2cf18a329499b1be8</anchor>
-      <arglist>(Iface *iface) const </arglist>
-    </member>
-    <member kind="friend" protection="private">
-      <type>friend class</type>
-      <name>DisposalDeleter&lt; Iface, New &gt;</name>
-      <anchorfile>classsauce_1_1internal_1_1injections_1_1_new_injection_3_01_dependency_00_01_scope_00_01_impl_07_a1_08_00_01_allocator_01_4.html</anchorfile>
-      <anchor>a95cb0df2fe9c298eb93a4d28a7eaf1b2</anchor>
-      <arglist></arglist>
-    </member>
-  </compound>
-  <compound kind="class">
-    <name>sauce::internal::injections::NewInjection&lt; Dependency, Scope, Impl(A1, A2), Allocator &gt;</name>
-    <filename>classsauce_1_1internal_1_1injections_1_1_new_injection_3_01_dependency_00_01_scope_00_01_impl_07191e838401c13a1bc4dd9c043e0a676b.html</filename>
-    <templarg></templarg>
-    <templarg></templarg>
-    <templarg></templarg>
-    <templarg></templarg>
-    <templarg></templarg>
-    <templarg></templarg>
-    <base>ProvidingInjection&lt; Dependency, Scope &gt;</base>
-    <member kind="typedef">
-      <type>ProvidingInjection&lt; Dependency, Scope &gt;::InjectionPtr</type>
-      <name>InjectionPtr</name>
-      <anchorfile>classsauce_1_1internal_1_1injections_1_1_new_injection_3_01_dependency_00_01_scope_00_01_impl_07191e838401c13a1bc4dd9c043e0a676b.html</anchorfile>
-      <anchor>adbf8a64daac46a2c556305ef81c3bacc</anchor>
-      <arglist></arglist>
-    </member>
-    <member kind="typedef">
-      <type>ResolvedBinding&lt; Dependency &gt;::BindingPtr</type>
-      <name>BindingPtr</name>
-      <anchorfile>classsauce_1_1internal_1_1injections_1_1_new_injection_3_01_dependency_00_01_scope_00_01_impl_07191e838401c13a1bc4dd9c043e0a676b.html</anchorfile>
-      <anchor>a568dbca462353d08a924339004c5ef2e</anchor>
-      <arglist></arglist>
-    </member>
-    <member kind="typedef">
-      <type>Key&lt; Dependency &gt;::Normalized</type>
-      <name>Dependency</name>
-      <anchorfile>classsauce_1_1internal_1_1injections_1_1_providing_injection.html</anchorfile>
-      <anchor>a7bbe93fb54fa80ac1d5bb70379415dcd</anchor>
-      <arglist></arglist>
-    </member>
-    <member kind="typedef">
-      <type>Key&lt; Dependency &gt;::Ptr</type>
-      <name>IfacePtr</name>
-      <anchorfile>classsauce_1_1internal_1_1injections_1_1_providing_injection.html</anchorfile>
-      <anchor>a59c27c9ec1b19c6b687c2ad8b047f996</anchor>
-      <arglist></arglist>
-    </member>
-    <member kind="function">
-      <type>Ptr</type>
-      <name>provide</name>
-      <anchorfile>classsauce_1_1internal_1_1injections_1_1_new_injection_3_01_dependency_00_01_scope_00_01_impl_07191e838401c13a1bc4dd9c043e0a676b.html</anchorfile>
-      <anchor>af4495ae0a8c44e20fa65cd4639d3e434</anchor>
-      <arglist>(BindingPtr binding, InjectorPtr injector) const </arglist>
-    </member>
-    <member kind="function">
-      <type>void</type>
-      <name>dispose</name>
-      <anchorfile>classsauce_1_1internal_1_1injections_1_1_new_injection_3_01_dependency_00_01_scope_00_01_impl_07191e838401c13a1bc4dd9c043e0a676b.html</anchorfile>
-      <anchor>a2a7ac19e33a29146a22c8ea69a3b5db6</anchor>
-      <arglist>(Iface *iface) const </arglist>
-    </member>
-    <member kind="friend" protection="private">
-      <type>friend class</type>
-      <name>DisposalDeleter&lt; Iface, New &gt;</name>
-      <anchorfile>classsauce_1_1internal_1_1injections_1_1_new_injection_3_01_dependency_00_01_scope_00_01_impl_07191e838401c13a1bc4dd9c043e0a676b.html</anchorfile>
-      <anchor>a95cb0df2fe9c298eb93a4d28a7eaf1b2</anchor>
-      <arglist></arglist>
-    </member>
-  </compound>
-  <compound kind="class">
-    <name>sauce::internal::injections::NewInjection&lt; Dependency, Scope, Impl(A1, A2, A3), Allocator &gt;</name>
-    <filename>classsauce_1_1internal_1_1injections_1_1_new_injection_3_01_dependency_00_01_scope_00_01_impl_074262ffa79a82d79670bd622dfe32dd68.html</filename>
-    <templarg></templarg>
-    <templarg></templarg>
-    <templarg></templarg>
-    <templarg></templarg>
-    <templarg></templarg>
-    <templarg></templarg>
-    <templarg></templarg>
-    <base>ProvidingInjection&lt; Dependency, Scope &gt;</base>
-    <member kind="typedef">
-      <type>ProvidingInjection&lt; Dependency, Scope &gt;::InjectionPtr</type>
-      <name>InjectionPtr</name>
-      <anchorfile>classsauce_1_1internal_1_1injections_1_1_new_injection_3_01_dependency_00_01_scope_00_01_impl_074262ffa79a82d79670bd622dfe32dd68.html</anchorfile>
-      <anchor>a7ca2c1c5506d32201867161ff1ad68fb</anchor>
-      <arglist></arglist>
-    </member>
-    <member kind="typedef">
-      <type>ResolvedBinding&lt; Dependency &gt;::BindingPtr</type>
-      <name>BindingPtr</name>
-      <anchorfile>classsauce_1_1internal_1_1injections_1_1_new_injection_3_01_dependency_00_01_scope_00_01_impl_074262ffa79a82d79670bd622dfe32dd68.html</anchorfile>
-      <anchor>aec1f2b3f5c93a287b2e9b85216f7c0a2</anchor>
-      <arglist></arglist>
-    </member>
-    <member kind="typedef">
-      <type>Key&lt; Dependency &gt;::Normalized</type>
-      <name>Dependency</name>
-      <anchorfile>classsauce_1_1internal_1_1injections_1_1_providing_injection.html</anchorfile>
-      <anchor>a7bbe93fb54fa80ac1d5bb70379415dcd</anchor>
-      <arglist></arglist>
-    </member>
-    <member kind="typedef">
-      <type>Key&lt; Dependency &gt;::Ptr</type>
-      <name>IfacePtr</name>
-      <anchorfile>classsauce_1_1internal_1_1injections_1_1_providing_injection.html</anchorfile>
-      <anchor>a59c27c9ec1b19c6b687c2ad8b047f996</anchor>
-      <arglist></arglist>
-    </member>
-    <member kind="function">
-      <type>Ptr</type>
-      <name>provide</name>
-      <anchorfile>classsauce_1_1internal_1_1injections_1_1_new_injection_3_01_dependency_00_01_scope_00_01_impl_074262ffa79a82d79670bd622dfe32dd68.html</anchorfile>
-      <anchor>a17cbf94da6d8f0f8a684f568192b5774</anchor>
-      <arglist>(BindingPtr binding, InjectorPtr injector) const </arglist>
-    </member>
-    <member kind="function">
-      <type>void</type>
-      <name>dispose</name>
-      <anchorfile>classsauce_1_1internal_1_1injections_1_1_new_injection_3_01_dependency_00_01_scope_00_01_impl_074262ffa79a82d79670bd622dfe32dd68.html</anchorfile>
-      <anchor>a03a6396cd047f9287b7d4d636a9511a5</anchor>
-      <arglist>(Iface *iface) const </arglist>
-    </member>
-    <member kind="friend" protection="private">
-      <type>friend class</type>
-      <name>DisposalDeleter&lt; Iface, New &gt;</name>
-      <anchorfile>classsauce_1_1internal_1_1injections_1_1_new_injection_3_01_dependency_00_01_scope_00_01_impl_074262ffa79a82d79670bd622dfe32dd68.html</anchorfile>
-      <anchor>a95cb0df2fe9c298eb93a4d28a7eaf1b2</anchor>
-      <arglist></arglist>
-    </member>
-  </compound>
-  <compound kind="class">
-    <name>sauce::internal::injections::NewInjection&lt; Dependency, Scope, Impl(A1, A2, A3, A4), Allocator &gt;</name>
-    <filename>classsauce_1_1internal_1_1injections_1_1_new_injection_3_01_dependency_00_01_scope_00_01_impl_07bb963fccf0d3050fa7f7102f63a54119.html</filename>
-    <templarg></templarg>
-    <templarg></templarg>
-    <templarg></templarg>
-    <templarg></templarg>
-    <templarg></templarg>
-    <templarg></templarg>
-    <templarg></templarg>
-    <templarg></templarg>
-    <base>ProvidingInjection&lt; Dependency, Scope &gt;</base>
-    <member kind="typedef">
-      <type>ProvidingInjection&lt; Dependency, Scope &gt;::InjectionPtr</type>
-      <name>InjectionPtr</name>
-      <anchorfile>classsauce_1_1internal_1_1injections_1_1_new_injection_3_01_dependency_00_01_scope_00_01_impl_07bb963fccf0d3050fa7f7102f63a54119.html</anchorfile>
-      <anchor>a1f7343568a758b748364389104c0f009</anchor>
-      <arglist></arglist>
-    </member>
-    <member kind="typedef">
-      <type>ResolvedBinding&lt; Dependency &gt;::BindingPtr</type>
-      <name>BindingPtr</name>
-      <anchorfile>classsauce_1_1internal_1_1injections_1_1_new_injection_3_01_dependency_00_01_scope_00_01_impl_07bb963fccf0d3050fa7f7102f63a54119.html</anchorfile>
-      <anchor>a953b028074cacffdc4e054e1218f07f7</anchor>
-      <arglist></arglist>
-    </member>
-    <member kind="typedef">
-      <type>Key&lt; Dependency &gt;::Normalized</type>
-      <name>Dependency</name>
-      <anchorfile>classsauce_1_1internal_1_1injections_1_1_providing_injection.html</anchorfile>
-      <anchor>a7bbe93fb54fa80ac1d5bb70379415dcd</anchor>
-      <arglist></arglist>
-    </member>
-    <member kind="typedef">
-      <type>Key&lt; Dependency &gt;::Ptr</type>
-      <name>IfacePtr</name>
-      <anchorfile>classsauce_1_1internal_1_1injections_1_1_providing_injection.html</anchorfile>
-      <anchor>a59c27c9ec1b19c6b687c2ad8b047f996</anchor>
-      <arglist></arglist>
-    </member>
-    <member kind="function">
-      <type>Ptr</type>
-      <name>provide</name>
-      <anchorfile>classsauce_1_1internal_1_1injections_1_1_new_injection_3_01_dependency_00_01_scope_00_01_impl_07bb963fccf0d3050fa7f7102f63a54119.html</anchorfile>
-      <anchor>adbd2875220b89fce1189803fc425e43a</anchor>
-      <arglist>(BindingPtr binding, InjectorPtr injector) const </arglist>
-    </member>
-    <member kind="function">
-      <type>void</type>
-      <name>dispose</name>
-      <anchorfile>classsauce_1_1internal_1_1injections_1_1_new_injection_3_01_dependency_00_01_scope_00_01_impl_07bb963fccf0d3050fa7f7102f63a54119.html</anchorfile>
-      <anchor>a41eb1653caf762929a88826525674a6a</anchor>
-      <arglist>(Iface *iface) const </arglist>
-    </member>
-    <member kind="friend" protection="private">
-      <type>friend class</type>
-      <name>DisposalDeleter&lt; Iface, New &gt;</name>
-      <anchorfile>classsauce_1_1internal_1_1injections_1_1_new_injection_3_01_dependency_00_01_scope_00_01_impl_07bb963fccf0d3050fa7f7102f63a54119.html</anchorfile>
-      <anchor>a95cb0df2fe9c298eb93a4d28a7eaf1b2</anchor>
-      <arglist></arglist>
-    </member>
-  </compound>
-  <compound kind="class">
-    <name>sauce::internal::injections::NewInjection&lt; Dependency, Scope, Impl(A1, A2, A3, A4, A5), Allocator &gt;</name>
-    <filename>classsauce_1_1internal_1_1injections_1_1_new_injection_3_01_dependency_00_01_scope_00_01_impl_071908acd10e8fdd0f372095eaed0070ef.html</filename>
-    <templarg></templarg>
-    <templarg></templarg>
-    <templarg></templarg>
-    <templarg></templarg>
-    <templarg></templarg>
-    <templarg></templarg>
-    <templarg></templarg>
-    <templarg></templarg>
-    <templarg></templarg>
-    <base>ProvidingInjection&lt; Dependency, Scope &gt;</base>
-    <member kind="typedef">
-      <type>ProvidingInjection&lt; Dependency, Scope &gt;::InjectionPtr</type>
-      <name>InjectionPtr</name>
-      <anchorfile>classsauce_1_1internal_1_1injections_1_1_new_injection_3_01_dependency_00_01_scope_00_01_impl_071908acd10e8fdd0f372095eaed0070ef.html</anchorfile>
-      <anchor>a04c77023632a13a37689026e67903e3b</anchor>
-      <arglist></arglist>
-    </member>
-    <member kind="typedef">
-      <type>ResolvedBinding&lt; Dependency &gt;::BindingPtr</type>
-      <name>BindingPtr</name>
-      <anchorfile>classsauce_1_1internal_1_1injections_1_1_new_injection_3_01_dependency_00_01_scope_00_01_impl_071908acd10e8fdd0f372095eaed0070ef.html</anchorfile>
-      <anchor>a5f4fb6ed03b845e9c4a11d21eadd1cef</anchor>
-      <arglist></arglist>
-    </member>
-    <member kind="typedef">
-      <type>Key&lt; Dependency &gt;::Normalized</type>
-      <name>Dependency</name>
-      <anchorfile>classsauce_1_1internal_1_1injections_1_1_providing_injection.html</anchorfile>
-      <anchor>a7bbe93fb54fa80ac1d5bb70379415dcd</anchor>
-      <arglist></arglist>
-    </member>
-    <member kind="typedef">
-      <type>Key&lt; Dependency &gt;::Ptr</type>
-      <name>IfacePtr</name>
-      <anchorfile>classsauce_1_1internal_1_1injections_1_1_providing_injection.html</anchorfile>
-      <anchor>a59c27c9ec1b19c6b687c2ad8b047f996</anchor>
-      <arglist></arglist>
-    </member>
-    <member kind="function">
-      <type>Ptr</type>
-      <name>provide</name>
-      <anchorfile>classsauce_1_1internal_1_1injections_1_1_new_injection_3_01_dependency_00_01_scope_00_01_impl_071908acd10e8fdd0f372095eaed0070ef.html</anchorfile>
-      <anchor>a2865005efb297be5a09c7226cbcb76a1</anchor>
-      <arglist>(BindingPtr binding, InjectorPtr injector) const </arglist>
-    </member>
-    <member kind="function">
-      <type>void</type>
-      <name>dispose</name>
-      <anchorfile>classsauce_1_1internal_1_1injections_1_1_new_injection_3_01_dependency_00_01_scope_00_01_impl_071908acd10e8fdd0f372095eaed0070ef.html</anchorfile>
-      <anchor>ad08b9495138d866d6a6362e12ecdd2bc</anchor>
-      <arglist>(Iface *iface) const </arglist>
-    </member>
-    <member kind="friend" protection="private">
-      <type>friend class</type>
-      <name>DisposalDeleter&lt; Iface, New &gt;</name>
-      <anchorfile>classsauce_1_1internal_1_1injections_1_1_new_injection_3_01_dependency_00_01_scope_00_01_impl_071908acd10e8fdd0f372095eaed0070ef.html</anchorfile>
-      <anchor>a95cb0df2fe9c298eb93a4d28a7eaf1b2</anchor>
-      <arglist></arglist>
-    </member>
-  </compound>
-  <compound kind="class">
-    <name>sauce::internal::injections::NewInjection&lt; Dependency, Scope, Impl(A1, A2, A3, A4, A5, A6), Allocator &gt;</name>
-    <filename>classsauce_1_1internal_1_1injections_1_1_new_injection_3_01_dependency_00_01_scope_00_01_impl_077527869ad5be06f2cf3666032c5790cf.html</filename>
-    <templarg></templarg>
-    <templarg></templarg>
-    <templarg></templarg>
-    <templarg></templarg>
-    <templarg></templarg>
-    <templarg></templarg>
-    <templarg></templarg>
-    <templarg></templarg>
-    <templarg></templarg>
-    <templarg></templarg>
-    <base>ProvidingInjection&lt; Dependency, Scope &gt;</base>
-    <member kind="typedef">
-      <type>ProvidingInjection&lt; Dependency, Scope &gt;::InjectionPtr</type>
-      <name>InjectionPtr</name>
-      <anchorfile>classsauce_1_1internal_1_1injections_1_1_new_injection_3_01_dependency_00_01_scope_00_01_impl_077527869ad5be06f2cf3666032c5790cf.html</anchorfile>
-      <anchor>ac755960ee1e0fdd35dabf6035b819559</anchor>
-      <arglist></arglist>
-    </member>
-    <member kind="typedef">
-      <type>ResolvedBinding&lt; Dependency &gt;::BindingPtr</type>
-      <name>BindingPtr</name>
-      <anchorfile>classsauce_1_1internal_1_1injections_1_1_new_injection_3_01_dependency_00_01_scope_00_01_impl_077527869ad5be06f2cf3666032c5790cf.html</anchorfile>
-      <anchor>a122db198b1ba2277b7f9b584a12d7e12</anchor>
-      <arglist></arglist>
-    </member>
-    <member kind="typedef">
-      <type>Key&lt; Dependency &gt;::Normalized</type>
-      <name>Dependency</name>
-      <anchorfile>classsauce_1_1internal_1_1injections_1_1_providing_injection.html</anchorfile>
-      <anchor>a7bbe93fb54fa80ac1d5bb70379415dcd</anchor>
-      <arglist></arglist>
-    </member>
-    <member kind="typedef">
-      <type>Key&lt; Dependency &gt;::Ptr</type>
-      <name>IfacePtr</name>
-      <anchorfile>classsauce_1_1internal_1_1injections_1_1_providing_injection.html</anchorfile>
-      <anchor>a59c27c9ec1b19c6b687c2ad8b047f996</anchor>
-      <arglist></arglist>
-    </member>
-    <member kind="function">
-      <type>Ptr</type>
-      <name>provide</name>
-      <anchorfile>classsauce_1_1internal_1_1injections_1_1_new_injection_3_01_dependency_00_01_scope_00_01_impl_077527869ad5be06f2cf3666032c5790cf.html</anchorfile>
-      <anchor>aef7ad9bf3cd7196dbeba4734289960c2</anchor>
-      <arglist>(BindingPtr binding, InjectorPtr injector) const </arglist>
-    </member>
-    <member kind="function">
-      <type>void</type>
-      <name>dispose</name>
-      <anchorfile>classsauce_1_1internal_1_1injections_1_1_new_injection_3_01_dependency_00_01_scope_00_01_impl_077527869ad5be06f2cf3666032c5790cf.html</anchorfile>
-      <anchor>afe1ba37316fb0b38b5555469c50e84e4</anchor>
-      <arglist>(Iface *iface) const </arglist>
-    </member>
-    <member kind="friend" protection="private">
-      <type>friend class</type>
-      <name>DisposalDeleter&lt; Iface, New &gt;</name>
-      <anchorfile>classsauce_1_1internal_1_1injections_1_1_new_injection_3_01_dependency_00_01_scope_00_01_impl_077527869ad5be06f2cf3666032c5790cf.html</anchorfile>
-      <anchor>a95cb0df2fe9c298eb93a4d28a7eaf1b2</anchor>
-      <arglist></arglist>
-    </member>
-  </compound>
-  <compound kind="class">
-    <name>sauce::internal::injections::NewInjection&lt; Dependency, Scope, Impl(A1, A2, A3, A4, A5, A6, A7), Allocator &gt;</name>
-    <filename>classsauce_1_1internal_1_1injections_1_1_new_injection_3_01_dependency_00_01_scope_00_01_impl_0715f14239cd01ef78330aed67c6dfc664.html</filename>
-    <templarg></templarg>
-    <templarg></templarg>
-    <templarg></templarg>
-    <templarg></templarg>
-    <templarg></templarg>
-    <templarg></templarg>
-    <templarg></templarg>
-    <templarg></templarg>
-    <templarg></templarg>
-    <templarg></templarg>
-    <templarg></templarg>
-    <base>ProvidingInjection&lt; Dependency, Scope &gt;</base>
-    <member kind="typedef">
-      <type>ProvidingInjection&lt; Dependency, Scope &gt;::InjectionPtr</type>
-      <name>InjectionPtr</name>
-      <anchorfile>classsauce_1_1internal_1_1injections_1_1_new_injection_3_01_dependency_00_01_scope_00_01_impl_0715f14239cd01ef78330aed67c6dfc664.html</anchorfile>
-      <anchor>aa1f0d6fb50274357c2b84f3d8c90e554</anchor>
-      <arglist></arglist>
-    </member>
-    <member kind="typedef">
-      <type>ResolvedBinding&lt; Dependency &gt;::BindingPtr</type>
-      <name>BindingPtr</name>
-      <anchorfile>classsauce_1_1internal_1_1injections_1_1_new_injection_3_01_dependency_00_01_scope_00_01_impl_0715f14239cd01ef78330aed67c6dfc664.html</anchorfile>
-      <anchor>a55e18d3a3ee472f699ac06075e8c34f5</anchor>
-      <arglist></arglist>
-    </member>
-    <member kind="typedef">
-      <type>Key&lt; Dependency &gt;::Normalized</type>
-      <name>Dependency</name>
-      <anchorfile>classsauce_1_1internal_1_1injections_1_1_providing_injection.html</anchorfile>
-      <anchor>a7bbe93fb54fa80ac1d5bb70379415dcd</anchor>
-      <arglist></arglist>
-    </member>
-    <member kind="typedef">
-      <type>Key&lt; Dependency &gt;::Ptr</type>
-      <name>IfacePtr</name>
-      <anchorfile>classsauce_1_1internal_1_1injections_1_1_providing_injection.html</anchorfile>
-      <anchor>a59c27c9ec1b19c6b687c2ad8b047f996</anchor>
-      <arglist></arglist>
-    </member>
-    <member kind="function">
-      <type>Ptr</type>
-      <name>provide</name>
-      <anchorfile>classsauce_1_1internal_1_1injections_1_1_new_injection_3_01_dependency_00_01_scope_00_01_impl_0715f14239cd01ef78330aed67c6dfc664.html</anchorfile>
-      <anchor>a17f4be2fa9a6b799b3b40ff3c4f2a09b</anchor>
-      <arglist>(BindingPtr binding, InjectorPtr injector) const </arglist>
-    </member>
-    <member kind="function">
-      <type>void</type>
-      <name>dispose</name>
-      <anchorfile>classsauce_1_1internal_1_1injections_1_1_new_injection_3_01_dependency_00_01_scope_00_01_impl_0715f14239cd01ef78330aed67c6dfc664.html</anchorfile>
-      <anchor>a0aa9c778ab0d47628d0ad695ee0f61d3</anchor>
-      <arglist>(Iface *iface) const </arglist>
-    </member>
-    <member kind="friend" protection="private">
-      <type>friend class</type>
-      <name>DisposalDeleter&lt; Iface, New &gt;</name>
-      <anchorfile>classsauce_1_1internal_1_1injections_1_1_new_injection_3_01_dependency_00_01_scope_00_01_impl_0715f14239cd01ef78330aed67c6dfc664.html</anchorfile>
-      <anchor>a95cb0df2fe9c298eb93a4d28a7eaf1b2</anchor>
-      <arglist></arglist>
-    </member>
-  </compound>
-  <compound kind="class">
-    <name>sauce::internal::injections::NewInjection&lt; Dependency, Scope, Impl(A1, A2, A3, A4, A5, A6, A7, A8), Allocator &gt;</name>
-    <filename>classsauce_1_1internal_1_1injections_1_1_new_injection_3_01_dependency_00_01_scope_00_01_impl_07dce429b3f469160eaf57c6423b9b4eca.html</filename>
-    <templarg></templarg>
-    <templarg></templarg>
-    <templarg></templarg>
-    <templarg></templarg>
-    <templarg></templarg>
-    <templarg></templarg>
-    <templarg></templarg>
-    <templarg></templarg>
-    <templarg></templarg>
-    <templarg></templarg>
-    <templarg></templarg>
-    <templarg></templarg>
-    <base>ProvidingInjection&lt; Dependency, Scope &gt;</base>
-    <member kind="typedef">
-      <type>ProvidingInjection&lt; Dependency, Scope &gt;::InjectionPtr</type>
-      <name>InjectionPtr</name>
-      <anchorfile>classsauce_1_1internal_1_1injections_1_1_new_injection_3_01_dependency_00_01_scope_00_01_impl_07dce429b3f469160eaf57c6423b9b4eca.html</anchorfile>
-      <anchor>a1f9acf288b06a6dd20676a8c9f68c215</anchor>
-      <arglist></arglist>
-    </member>
-    <member kind="typedef">
-      <type>ResolvedBinding&lt; Dependency &gt;::BindingPtr</type>
-      <name>BindingPtr</name>
-      <anchorfile>classsauce_1_1internal_1_1injections_1_1_new_injection_3_01_dependency_00_01_scope_00_01_impl_07dce429b3f469160eaf57c6423b9b4eca.html</anchorfile>
-      <anchor>a5c66e9246b8993ea99b5c1bac2e8252e</anchor>
-      <arglist></arglist>
-    </member>
-    <member kind="typedef">
-      <type>Key&lt; Dependency &gt;::Normalized</type>
-      <name>Dependency</name>
-      <anchorfile>classsauce_1_1internal_1_1injections_1_1_providing_injection.html</anchorfile>
-      <anchor>a7bbe93fb54fa80ac1d5bb70379415dcd</anchor>
-      <arglist></arglist>
-    </member>
-    <member kind="typedef">
-      <type>Key&lt; Dependency &gt;::Ptr</type>
-      <name>IfacePtr</name>
-      <anchorfile>classsauce_1_1internal_1_1injections_1_1_providing_injection.html</anchorfile>
-      <anchor>a59c27c9ec1b19c6b687c2ad8b047f996</anchor>
-      <arglist></arglist>
-    </member>
-    <member kind="function">
-      <type>Ptr</type>
-      <name>provide</name>
-      <anchorfile>classsauce_1_1internal_1_1injections_1_1_new_injection_3_01_dependency_00_01_scope_00_01_impl_07dce429b3f469160eaf57c6423b9b4eca.html</anchorfile>
-      <anchor>a2625bf52c472c6bbbfb544489c7fa682</anchor>
-      <arglist>(BindingPtr binding, InjectorPtr injector) const </arglist>
-    </member>
-    <member kind="function">
-      <type>void</type>
-      <name>dispose</name>
-      <anchorfile>classsauce_1_1internal_1_1injections_1_1_new_injection_3_01_dependency_00_01_scope_00_01_impl_07dce429b3f469160eaf57c6423b9b4eca.html</anchorfile>
-      <anchor>acd6ea5fef55b0d4bad651efb1da908ff</anchor>
-      <arglist>(Iface *iface) const </arglist>
-    </member>
-    <member kind="friend" protection="private">
-      <type>friend class</type>
-      <name>DisposalDeleter&lt; Iface, New &gt;</name>
-      <anchorfile>classsauce_1_1internal_1_1injections_1_1_new_injection_3_01_dependency_00_01_scope_00_01_impl_07dce429b3f469160eaf57c6423b9b4eca.html</anchorfile>
-      <anchor>a95cb0df2fe9c298eb93a4d28a7eaf1b2</anchor>
-      <arglist></arglist>
-    </member>
-  </compound>
-  <compound kind="class">
-    <name>sauce::internal::injections::NewInjection&lt; Dependency, Scope, Impl(A1, A2, A3, A4, A5, A6, A7, A8, A9), Allocator &gt;</name>
-    <filename>classsauce_1_1internal_1_1injections_1_1_new_injection_3_01_dependency_00_01_scope_00_01_impl_0784ab63af80542567a254d7f55e55ec62.html</filename>
-    <templarg></templarg>
-    <templarg></templarg>
-    <templarg></templarg>
-    <templarg></templarg>
-    <templarg></templarg>
-    <templarg></templarg>
-    <templarg></templarg>
-    <templarg></templarg>
-    <templarg></templarg>
-    <templarg></templarg>
-    <templarg></templarg>
-    <templarg></templarg>
-    <templarg></templarg>
-    <base>ProvidingInjection&lt; Dependency, Scope &gt;</base>
-    <member kind="typedef">
-      <type>ProvidingInjection&lt; Dependency, Scope &gt;::InjectionPtr</type>
-      <name>InjectionPtr</name>
-      <anchorfile>classsauce_1_1internal_1_1injections_1_1_new_injection_3_01_dependency_00_01_scope_00_01_impl_0784ab63af80542567a254d7f55e55ec62.html</anchorfile>
-      <anchor>a0458acf2d90021dc00132e138e33888e</anchor>
-      <arglist></arglist>
-    </member>
-    <member kind="typedef">
-      <type>ResolvedBinding&lt; Dependency &gt;::BindingPtr</type>
-      <name>BindingPtr</name>
-      <anchorfile>classsauce_1_1internal_1_1injections_1_1_new_injection_3_01_dependency_00_01_scope_00_01_impl_0784ab63af80542567a254d7f55e55ec62.html</anchorfile>
-      <anchor>ab88c169c482c107532f4bea9fdc586d7</anchor>
-      <arglist></arglist>
-    </member>
-    <member kind="typedef">
-      <type>Key&lt; Dependency &gt;::Normalized</type>
-      <name>Dependency</name>
-      <anchorfile>classsauce_1_1internal_1_1injections_1_1_providing_injection.html</anchorfile>
-      <anchor>a7bbe93fb54fa80ac1d5bb70379415dcd</anchor>
-      <arglist></arglist>
-    </member>
-    <member kind="typedef">
-      <type>Key&lt; Dependency &gt;::Ptr</type>
-      <name>IfacePtr</name>
-      <anchorfile>classsauce_1_1internal_1_1injections_1_1_providing_injection.html</anchorfile>
-      <anchor>a59c27c9ec1b19c6b687c2ad8b047f996</anchor>
-      <arglist></arglist>
-    </member>
-    <member kind="function">
-      <type>Ptr</type>
-      <name>provide</name>
-      <anchorfile>classsauce_1_1internal_1_1injections_1_1_new_injection_3_01_dependency_00_01_scope_00_01_impl_0784ab63af80542567a254d7f55e55ec62.html</anchorfile>
-      <anchor>a842ba0712749e5abf52780526e6983dc</anchor>
-      <arglist>(BindingPtr binding, InjectorPtr injector) const </arglist>
-    </member>
-    <member kind="function">
-      <type>void</type>
-      <name>dispose</name>
-      <anchorfile>classsauce_1_1internal_1_1injections_1_1_new_injection_3_01_dependency_00_01_scope_00_01_impl_0784ab63af80542567a254d7f55e55ec62.html</anchorfile>
-      <anchor>ae6383ab79a212c9a5d19abca2652e1a9</anchor>
-      <arglist>(Iface *iface) const </arglist>
-    </member>
-    <member kind="friend" protection="private">
-      <type>friend class</type>
-      <name>DisposalDeleter&lt; Iface, New &gt;</name>
-      <anchorfile>classsauce_1_1internal_1_1injections_1_1_new_injection_3_01_dependency_00_01_scope_00_01_impl_0784ab63af80542567a254d7f55e55ec62.html</anchorfile>
-      <anchor>a95cb0df2fe9c298eb93a4d28a7eaf1b2</anchor>
-      <arglist></arglist>
-    </member>
-  </compound>
-  <compound kind="class">
-    <name>sauce::internal::injections::NewInjection&lt; Dependency, Scope, Impl(A1, A2, A3, A4, A5, A6, A7, A8, A9, A10), Allocator &gt;</name>
-    <filename>classsauce_1_1internal_1_1injections_1_1_new_injection_3_01_dependency_00_01_scope_00_01_impl_07e4c0fb09585bbba440a59387f0b470ef.html</filename>
-    <templarg></templarg>
-    <templarg></templarg>
-    <templarg></templarg>
-    <templarg></templarg>
-    <templarg></templarg>
-    <templarg></templarg>
-    <templarg></templarg>
-    <templarg></templarg>
-    <templarg></templarg>
-    <templarg></templarg>
-    <templarg></templarg>
-    <templarg></templarg>
-    <templarg></templarg>
-    <templarg></templarg>
-    <base>ProvidingInjection&lt; Dependency, Scope &gt;</base>
-    <member kind="typedef">
-      <type>ProvidingInjection&lt; Dependency, Scope &gt;::InjectionPtr</type>
-      <name>InjectionPtr</name>
-      <anchorfile>classsauce_1_1internal_1_1injections_1_1_new_injection_3_01_dependency_00_01_scope_00_01_impl_07e4c0fb09585bbba440a59387f0b470ef.html</anchorfile>
-      <anchor>af4ab59872b8c4a18b4abb0ff2b950476</anchor>
-      <arglist></arglist>
-    </member>
-    <member kind="typedef">
-      <type>ResolvedBinding&lt; Dependency &gt;::BindingPtr</type>
-      <name>BindingPtr</name>
-      <anchorfile>classsauce_1_1internal_1_1injections_1_1_new_injection_3_01_dependency_00_01_scope_00_01_impl_07e4c0fb09585bbba440a59387f0b470ef.html</anchorfile>
-      <anchor>a3ac86c2ac62d271572336e64acdb746f</anchor>
-      <arglist></arglist>
-    </member>
-    <member kind="typedef">
-      <type>Key&lt; Dependency &gt;::Normalized</type>
-      <name>Dependency</name>
-      <anchorfile>classsauce_1_1internal_1_1injections_1_1_providing_injection.html</anchorfile>
-      <anchor>a7bbe93fb54fa80ac1d5bb70379415dcd</anchor>
-      <arglist></arglist>
-    </member>
-    <member kind="typedef">
-      <type>Key&lt; Dependency &gt;::Ptr</type>
-      <name>IfacePtr</name>
-      <anchorfile>classsauce_1_1internal_1_1injections_1_1_providing_injection.html</anchorfile>
-      <anchor>a59c27c9ec1b19c6b687c2ad8b047f996</anchor>
-      <arglist></arglist>
-    </member>
-    <member kind="function">
-      <type>Ptr</type>
-      <name>provide</name>
-      <anchorfile>classsauce_1_1internal_1_1injections_1_1_new_injection_3_01_dependency_00_01_scope_00_01_impl_07e4c0fb09585bbba440a59387f0b470ef.html</anchorfile>
-      <anchor>af58c768727c964d587251e72556dad83</anchor>
-      <arglist>(BindingPtr binding, InjectorPtr injector) const </arglist>
-    </member>
-    <member kind="function">
-      <type>void</type>
-      <name>dispose</name>
-      <anchorfile>classsauce_1_1internal_1_1injections_1_1_new_injection_3_01_dependency_00_01_scope_00_01_impl_07e4c0fb09585bbba440a59387f0b470ef.html</anchorfile>
-      <anchor>a144923a2ce1528b89716b28beea65f58</anchor>
-      <arglist>(Iface *iface) const </arglist>
-    </member>
-    <member kind="friend" protection="private">
-      <type>friend class</type>
-      <name>DisposalDeleter&lt; Iface, New &gt;</name>
-      <anchorfile>classsauce_1_1internal_1_1injections_1_1_new_injection_3_01_dependency_00_01_scope_00_01_impl_07e4c0fb09585bbba440a59387f0b470ef.html</anchorfile>
-      <anchor>a95cb0df2fe9c298eb93a4d28a7eaf1b2</anchor>
-      <arglist></arglist>
-    </member>
-  </compound>
-  <compound kind="class">
-    <name>sauce::internal::injections::ProviderInjection</name>
-    <filename>classsauce_1_1internal_1_1injections_1_1_provider_injection.html</filename>
-    <templarg></templarg>
-    <templarg></templarg>
-    <templarg></templarg>
-    <base>ProvidingInjection&lt; Dependency, Scope &gt;</base>
-    <member kind="typedef">
-      <type>ProvidingInjection&lt; Dependency, Scope &gt;::InjectionPtr</type>
-      <name>InjectionPtr</name>
-      <anchorfile>classsauce_1_1internal_1_1injections_1_1_provider_injection.html</anchorfile>
-      <anchor>a0f5d150f8d6576fbdc34e0687f7f17bb</anchor>
-      <arglist></arglist>
-    </member>
-    <member kind="typedef">
-      <type>ResolvedBinding&lt; Dependency &gt;::BindingPtr</type>
-      <name>BindingPtr</name>
-      <anchorfile>classsauce_1_1internal_1_1injections_1_1_provider_injection.html</anchorfile>
-      <anchor>aa339766daeca00494b66b490fb8ba3ad</anchor>
-      <arglist></arglist>
-    </member>
-    <member kind="typedef">
-      <type>Key&lt; Dependency &gt;::Normalized</type>
-      <name>Dependency</name>
-      <anchorfile>classsauce_1_1internal_1_1injections_1_1_providing_injection.html</anchorfile>
-      <anchor>a7bbe93fb54fa80ac1d5bb70379415dcd</anchor>
-      <arglist></arglist>
-    </member>
-    <member kind="typedef">
-      <type>Key&lt; Dependency &gt;::Ptr</type>
-      <name>IfacePtr</name>
-      <anchorfile>classsauce_1_1internal_1_1injections_1_1_providing_injection.html</anchorfile>
-      <anchor>a59c27c9ec1b19c6b687c2ad8b047f996</anchor>
-      <arglist></arglist>
-    </member>
-    <member kind="function">
-      <type>void</type>
-      <name>validateAcyclic</name>
-      <anchorfile>classsauce_1_1internal_1_1injections_1_1_provider_injection.html</anchorfile>
-      <anchor>a76738af6e6e2cc4dd5ecb9b07bb29658</anchor>
-      <arglist>(InjectorPtr injector, TypeIds &amp;ids) const </arglist>
-    </member>
-    <member kind="function">
-      <type>Key&lt; Dependency &gt;::Ptr</type>
-      <name>provide</name>
-      <anchorfile>classsauce_1_1internal_1_1injections_1_1_provider_injection.html</anchorfile>
-      <anchor>aaa26c7906de08a35aa576121288e2288</anchor>
-      <arglist>(BindingPtr binding, InjectorPtr injector) const </arglist>
-    </member>
-  </compound>
-  <compound kind="class">
-    <name>sauce::internal::injections::ProvidingInjection</name>
-    <filename>classsauce_1_1internal_1_1injections_1_1_providing_injection.html</filename>
-    <templarg>Dependency_</templarg>
-    <templarg>Scope</templarg>
-    <base>InjectionBinding&lt; Dependency_, Scope &gt;</base>
-    <member kind="typedef">
-      <type>Key&lt; Dependency_ &gt;::Normalized</type>
-      <name>Dependency</name>
-      <anchorfile>classsauce_1_1internal_1_1injections_1_1_providing_injection.html</anchorfile>
-      <anchor>a7bbe93fb54fa80ac1d5bb70379415dcd</anchor>
-      <arglist></arglist>
-    </member>
-    <member kind="typedef">
-      <type>sauce::shared_ptr&lt; ProvidingInjection&lt; Dependency_, Scope &gt; &gt;</type>
-      <name>InjectionPtr</name>
-      <anchorfile>classsauce_1_1internal_1_1injections_1_1_providing_injection.html</anchorfile>
-      <anchor>ac14ff85d4ba1360a9ee64c761c483926</anchor>
-      <arglist></arglist>
-    </member>
-    <member kind="typedef">
-      <type>Key&lt; Dependency_ &gt;::Ptr</type>
-      <name>IfacePtr</name>
-      <anchorfile>classsauce_1_1internal_1_1injections_1_1_providing_injection.html</anchorfile>
-      <anchor>a59c27c9ec1b19c6b687c2ad8b047f996</anchor>
-      <arglist></arglist>
-    </member>
-    <member kind="typedef">
-      <type>ResolvedBinding&lt; Dependency_ &gt;::BindingPtr</type>
-      <name>BindingPtr</name>
-      <anchorfile>classsauce_1_1internal_1_1injections_1_1_providing_injection.html</anchorfile>
-      <anchor>adb9ca644032ceb6932ec3ff61403d123</anchor>
-      <arglist></arglist>
-    </member>
-    <member kind="function">
-      <type>std::string</type>
-      <name>getName</name>
-      <anchorfile>classsauce_1_1internal_1_1_injection_binding.html</anchorfile>
-      <anchor>a4a3c79bd489e5e57ed8ea630bef070e9</anchor>
-      <arglist>() const</arglist>
-    </member>
-    <member kind="function">
-      <type>void</type>
-      <name>setName</name>
-      <anchorfile>classsauce_1_1internal_1_1_injection_binding.html</anchorfile>
-      <anchor>a1b8f3c4f86982d7e80a32e3cd00dfa5c</anchor>
-      <arglist>(std::string const name)</arglist>
-    </member>
-    <member kind="function">
-      <type>NamedTypeId</type>
-      <name>getKey</name>
-      <anchorfile>structsauce_1_1internal_1_1_resolved_binding.html</anchorfile>
-      <anchor>a7ff0341fe08ae52a0f03a35ad6dd3c79</anchor>
-      <arglist>() const</arglist>
-    </member>
-    <member kind="function" virtualness="pure">
-      <type>virtual void</type>
-      <name>validateAcyclic</name>
-      <anchorfile>structsauce_1_1internal_1_1_resolved_binding.html</anchorfile>
-      <anchor>a503de5fe9cb4996db536f6f6d6d486be</anchor>
-      <arglist>(sauce::shared_ptr&lt; Injector &gt;, TypeIds &amp;) const =0</arglist>
-    </member>
-    <member kind="function" virtualness="pure">
-      <type>virtual IfacePtr</type>
-      <name>get</name>
-      <anchorfile>structsauce_1_1internal_1_1_resolved_binding.html</anchorfile>
-      <anchor>a06fb04d3ee1d8d42d7f93f20a205ff25</anchor>
-      <arglist>(BindingPtr, sauce::shared_ptr&lt; Injector &gt;) const =0</arglist>
-    </member>
-    <member kind="function" virtualness="pure">
-      <type>virtual void</type>
-      <name>eagerlyProvide</name>
-      <anchorfile>structsauce_1_1internal_1_1_opaque_binding.html</anchorfile>
-      <anchor>a9cbe103bedc3ea77c5edef5f30a4d74c</anchor>
-      <arglist>(OpaqueBindingPtr, sauce::shared_ptr&lt; Injector &gt;) const =0</arglist>
-    </member>
-  </compound>
   <compound kind="dir">
     <name>sauce/internal/</name>
     <path>/Users/phil/code/sauce/sauce/internal/</path>
@@ -3079,6 +3079,7 @@
     <filename>dir_fbd01e54bcee7d521bf3ffbb4e509f79.html</filename>
     <dir>sauce/internal/</dir>
     <file>binder.h</file>
+    <file>config.h</file>
     <file>exceptions.h</file>
     <file>injector.h</file>
     <file>memory.h</file>

@@ -60,7 +60,7 @@ AC_CONFIG_COMMANDS([permission],[
 ])
 
 # Create the generated files
-AC_CONFIG_HEADERS([config.h])
+AC_CONFIG_HEADERS([sauce/config.h])
 AC_CONFIG_FILES([
   Makefile
   Doxyfile

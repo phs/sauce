@@ -1,7 +1,0 @@
-<map id="G" name="G">
-<area shape="rect" id="node2" href="$classsauce_1_1internal_1_1injections_1_1_providing_injection.html" title="sauce::internal::injections\l::ProvidingInjection\&lt; Key\l\&lt; Injector \&gt;::Normalized,\l NoScope \&gt;" alt="" coords="709,35,880,111"/>
-<area shape="rect" id="node4" href="$classsauce_1_1internal_1_1_injection_binding.html" title="sauce::internal::Injection\lBinding\&lt; Key\&lt; Injector\l \&gt;::Normalized, NoScope \&gt;" alt="" coords="480,43,661,103"/>
-<area shape="rect" id="node6" href="$structsauce_1_1internal_1_1_resolved_binding.html" title="sauce::internal::Resolved\lBinding\&lt; Key\&lt; Injector\l \&gt;::Normalized \&gt;" alt="" coords="261,5,432,65"/>
-<area shape="rect" id="node8" href="$structsauce_1_1internal_1_1_opaque_binding.html" title="An opaque binding." alt="" coords="6,21,213,49"/>
-<area shape="rect" id="node10" href="$classsauce_1_1internal_1_1_injector_friend.html" title="sauce::internal::Injector\lFriend" alt="" coords="267,89,426,133"/>
-</map>
