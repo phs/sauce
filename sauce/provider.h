@@ -14,22 +14,6 @@ class Injector;
 template<typename Dependency>
 class Provider;
 
-namespace internal {
-
-/**
- * A friend of the Provider base type.
- *
- * Enables inheritors to give a Provider its own smart pointer.
- */
-struct ProviderFriend {
-  template<typename ProvidedDependency, typename Name>
-  void setSelf(typename Key<Named<Provider<ProvidedDependency>, Name> >::Ptr ptr) const {
-    ptr->setSelf(ptr);
-  }
-};
-
-}
-
 /**
  * An interface for including custom factories in an Injector.
  *
@@ -37,8 +21,6 @@ struct ProviderFriend {
  */
 template<typename Dependency>
 class Provider {
-  friend struct ::sauce::internal::ProviderFriend;
-
   sauce::weak_ptr<Provider<Dependency> > weak;
 
 protected:

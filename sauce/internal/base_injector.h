@@ -52,7 +52,7 @@ class CircularDependencyGuard {
  * It's a separate type to afford template specialization, something a method can't do.
  */
 template<typename ImplicitBindings, typename Dependency>
-struct GetDecorator: ProviderFriend {
+struct GetDecorator {
   typedef typename Key<Dependency>::Ptr Ptr;
   typedef typename Key<Dependency>::Normalized Normalized;
   typedef Bindings<ImplicitBindings> Bindings_;
@@ -69,7 +69,7 @@ struct GetDecorator: ProviderFriend {
  * Doing so enables them to safely create smart pointer deleters.
  */
 template<typename ImplicitBindings, typename ProvidedDependency, typename Name>
-struct GetDecorator<ImplicitBindings, Named<Provider<ProvidedDependency>, Name> >: ProviderFriend {
+struct GetDecorator<ImplicitBindings, Named<Provider<ProvidedDependency>, Name> > {
   typedef Named<Provider<ProvidedDependency>, Name> Dependency;
   typedef typename Key<Dependency>::Ptr Ptr;
   typedef typename Key<Dependency>::Normalized Normalized;
