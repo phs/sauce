@@ -13,25 +13,31 @@ namespace internal {
  */
 template<typename T>
 class SelfInjector {
+  struct Guard {
+    void setSelf(sauce::weak_ptr<T>) {}
+  };
+
+  struct WithGuard: public T, public Guard {};
+
   typedef sauce::shared_ptr<T> Ptr;
-  typedef void (T::* SetterMethod)(sauce::weak_ptr<T>);
+  typedef void (Guard::* NoMethod)(sauce::weak_ptr<T>);
 
   template<typename U, U>
   struct EqualTypes;
 
-  template<typename DoesNotRequestSelf>
-  void setSelfIfRequested(Ptr, ...) {}
-
   template<typename RequestsSelf>
-  void setSelfIfRequested(Ptr ptr, EqualTypes<SetterMethod, & RequestsSelf::setSelf> *) {
+  void setSelfIfRequested(Ptr ptr, ...) {
     sauce::weak_ptr<T> weak(ptr);
     ptr->setSelf(weak);
   }
 
+  template<typename DoesNotRequestSelf>
+  void setSelfIfRequested(Ptr, EqualTypes<NoMethod, & DoesNotRequestSelf::setSelf> *) {}
+
 public:
 
   void setSelf(Ptr ptr) {
-    setSelfIfRequested<T>(ptr, 0);
+    setSelfIfRequested<WithGuard>(ptr, 0);
   }
 };
 
