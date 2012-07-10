@@ -38,6 +38,8 @@ TEST(BindingTest, shouldInterpretNonFunctionTypesAsNoArgumentConstructors) {
 
   sauce::shared_ptr<Bound> bound = injector->get<Bound>();
   sauce::shared_ptr<Provider<Bound> > provider = injector->get<Provider<Bound> >();
+
+  // TODO make this work for explicit providers as well.
 }
 
 struct PureVirtual {
@@ -350,6 +352,26 @@ void SelfInterestedModule(Binder & binder) {
 
 TEST(BindingTest, shouldInjectSelfWeakPointersAutomaticallyIfSetterExists) {
   sauce::shared_ptr<Injector> injector(Modules().add(&SelfInterestedModule).createInjector());
+  sauce::shared_ptr<SelfInterested> selfInterested = injector->get<SelfInterested>();
+  ASSERT_EQ(selfInterested, selfInterested->self.lock());
+}
+
+struct SelfInterestedProvider: public AbstractProvider<SelfInterested> {
+  SelfInterested * provide() {
+    return new SelfInterested();
+  }
+
+  void dispose(SelfInterested * selfInterested) {
+    delete selfInterested;
+  }
+};
+
+void SelfInterestedProviderModule(Binder & binder) {
+  binder.bind<SelfInterested>().toProvider<SelfInterestedProvider()>();
+}
+
+TEST(BindingTest, shouldInjectSelfWeakPointersFromProviders) {
+  sauce::shared_ptr<Injector> injector(Modules().add(&SelfInterestedProviderModule).createInjector());
   sauce::shared_ptr<SelfInterested> selfInterested = injector->get<SelfInterested>();
   ASSERT_EQ(selfInterested, selfInterested->self.lock());
 }
