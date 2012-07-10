@@ -384,7 +384,7 @@ TEST(BindingTest, shouldInjectSelfWeakPointersIfOnlyOnConcreteTypeKnownToBinding
   sauce::shared_ptr<Injector> injector(Modules().add(&SecretlySelfInterestedModule).createInjector());
   sauce::shared_ptr<Bound> secretlySelfInterested = injector->get<Bound>();
   sauce::shared_ptr<SelfInterested> selfInterested = static_pointer_cast<SelfInterested>(secretlySelfInterested);
-  // ASSERT_EQ(selfInterested, selfInterested->self.lock()); // TODO
+  ASSERT_EQ(selfInterested, selfInterested->self.lock());
 }
 
 }
