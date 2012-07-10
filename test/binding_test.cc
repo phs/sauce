@@ -335,7 +335,7 @@ TEST(BindingTest, shouldThrowExceptionOnPartialScopedBinding) {
     ::sauce::PartialBindingException);
 }
 
-struct SelfInterested {
+struct SelfInterested: public Bound {
   sauce::weak_ptr<SelfInterested> self;
 
   SelfInterested():
@@ -374,6 +374,17 @@ TEST(BindingTest, shouldInjectSelfWeakPointersFromProviders) {
   sauce::shared_ptr<Injector> injector(Modules().add(&SelfInterestedProviderModule).createInjector());
   sauce::shared_ptr<SelfInterested> selfInterested = injector->get<SelfInterested>();
   ASSERT_EQ(selfInterested, selfInterested->self.lock());
+}
+
+void SecretlySelfInterestedModule(Binder & binder) {
+  binder.bind<Bound>().to<SelfInterested>();
+}
+
+TEST(BindingTest, shouldInjectSelfWeakPointersIfOnlyOnConcreteTypeKnownToBinding) {
+  sauce::shared_ptr<Injector> injector(Modules().add(&SecretlySelfInterestedModule).createInjector());
+  sauce::shared_ptr<Bound> secretlySelfInterested = injector->get<Bound>();
+  sauce::shared_ptr<SelfInterested> selfInterested = static_pointer_cast<SelfInterested>(secretlySelfInterested);
+  // ASSERT_EQ(selfInterested, selfInterested->self.lock()); // TODO
 }
 
 }
