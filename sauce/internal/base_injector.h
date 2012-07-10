@@ -85,6 +85,36 @@ public:
   }
 };
 
+/**
+ * If Dependency requests injection of its own pointer, do so.
+ *
+ * An interface Iface requests this by exposing void injectSelf(sauce::weak_ptr<Iface>), detected by SFINAE.
+ */
+template<typename Dependency>
+class SelfInjector {
+  typedef typename Key<Dependency>::Iface Iface;
+  typedef typename Key<Dependency>::Ptr Ptr;
+  typedef void (Iface::* SetterMethod)(sauce::weak_ptr<Iface>);
+
+  template<typename T, T>
+  struct EqualTypes;
+
+  template<typename DoesNotRequestSelf>
+  void injectSelfIfRequested(Ptr, ...) {}
+
+  template<typename RequestsSelf>
+  void injectSelfIfRequested(Ptr ptr, EqualTypes<SetterMethod, & RequestsSelf::injectSelf> *) {
+    sauce::weak_ptr<Iface> weak(ptr);
+    ptr->injectSelf(weak);
+  }
+
+public:
+
+  void injectSelf(Ptr ptr) {
+    injectSelfIfRequested<Iface>(ptr, 0);
+  }
+};
+
 template<typename ImplicitBindings>
 class BaseInjector {
   typedef sauce::auto_ptr<LockFactory> LockFactoryPtr;
@@ -109,11 +139,15 @@ public:
   }
 
   template<typename Dependency>
-  typename Key<Dependency>::Ptr get(
-    sauce::shared_ptr<Injector> injector, std::string const name) const {
+  typename Key<Dependency>::Ptr get(sauce::shared_ptr<Injector> injector, std::string const name) const {
     typedef typename Key<Dependency>::Normalized Normalized;
-    GetDecorator<ImplicitBindings, Normalized> getter;
-    return getter.get(bindings, injector, name);
+    typedef typename Key<Dependency>::Ptr Ptr;
+    // GetDecorator<ImplicitBindings, Normalized> getter;
+    // return getter.get(bindings, injector, name);
+    Ptr ptr(bindings.template get<Normalized>(injector, name));
+    SelfInjector<Normalized> selfInjector;
+    selfInjector.injectSelf(ptr);
+    return ptr;
   }
 
   template<typename Scope>

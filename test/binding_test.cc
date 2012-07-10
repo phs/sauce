@@ -339,7 +339,7 @@ struct SelfInterested {
   SelfInterested():
     self() {}
 
-  void setSelf(sauce::weak_ptr<SelfInterested> self) {
+  void injectSelf(sauce::weak_ptr<SelfInterested> self) {
     this->self = self;
   }
 };
@@ -351,7 +351,7 @@ void SelfInterestedModule(Binder & binder) {
 TEST(BindingTest, shouldInjectSelfWeakPointersAutomaticallyIfSetterExists) {
   sauce::shared_ptr<Injector> injector(Modules().add(&SelfInterestedModule).createInjector());
   sauce::shared_ptr<SelfInterested> selfInterested = injector->get<SelfInterested>();
-  // ASSERT_EQ(selfInterested, selfInterested->self.lock()); // TODO
+  ASSERT_EQ(selfInterested, selfInterested->self.lock());
 }
 
 }
