@@ -61,25 +61,26 @@ nobase_include_HEADERS += \
   sauce/exceptions.h \
   sauce/injector.h \
   sauce/internal/base_injector.h \
+  sauce/internal/binding.h \
   sauce/internal/bindings.h \
   sauce/internal/clause.h \
   sauce/internal/disposal_deleter.h \
   sauce/internal/implicit_bindings.h \
-  sauce/internal/binding.h \
   sauce/internal/implicit_provider_binding.h \
   sauce/internal/injector_binding.h \
-  sauce/internal/new_binding.h \
-  sauce/internal/new_binding.h.pump \
-  sauce/internal/provider_binding.h \
   sauce/internal/key.h \
   sauce/internal/locker_factory.h \
   sauce/internal/memory/boost.h \
   sauce/internal/memory/std.h \
   sauce/internal/memory/tr1.h \
+  sauce/internal/new_binding.h \
+  sauce/internal/new_binding.h.pump \
   sauce/internal/opaque_binding.h \
   sauce/internal/pending_thrower.h \
+  sauce/internal/provider_binding.h \
   sauce/internal/resolved_binding.h \
   sauce/internal/scope_cache.h \
+  sauce/internal/self_injector.h \
   sauce/internal/type_id.h \
   sauce/memory.h \
   sauce/modules.h \
@@ -93,25 +94,26 @@ EXTRA_DIST += \
   sauce/exceptions.h \
   sauce/injector.h \
   sauce/internal/base_injector.h \
+  sauce/internal/binding.h \
   sauce/internal/bindings.h \
   sauce/internal/clause.h \
   sauce/internal/disposal_deleter.h \
   sauce/internal/implicit_bindings.h \
-  sauce/internal/binding.h \
   sauce/internal/implicit_provider_binding.h \
   sauce/internal/injector_binding.h \
-  sauce/internal/new_binding.h \
-  sauce/internal/new_binding.h.pump \
-  sauce/internal/provider_binding.h \
   sauce/internal/key.h \
   sauce/internal/locker_factory.h \
   sauce/internal/memory/boost.h \
   sauce/internal/memory/std.h \
   sauce/internal/memory/tr1.h \
+  sauce/internal/new_binding.h \
+  sauce/internal/new_binding.h.pump \
   sauce/internal/opaque_binding.h \
   sauce/internal/pending_thrower.h \
+  sauce/internal/provider_binding.h \
   sauce/internal/resolved_binding.h \
   sauce/internal/scope_cache.h \
+  sauce/internal/self_injector.h \
   sauce/internal/type_id.h \
   sauce/memory.h \
   sauce/modules.h \

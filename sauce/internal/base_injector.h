@@ -8,6 +8,7 @@
 #include <sauce/internal/bindings.h>
 #include <sauce/internal/key.h>
 #include <sauce/internal/locker_factory.h>
+#include <sauce/internal/self_injector.h>
 #include <sauce/internal/type_id.h>
 
 namespace sauce {
@@ -43,35 +44,6 @@ class CircularDependencyGuard {
 
   ~CircularDependencyGuard() {
     ids.erase(id);
-  }
-};
-
-/**
- * If Dependency requests injection of its own pointer, do so.
- *
- * An interface Iface requests this by exposing void setSelf(sauce::weak_ptr<Iface>), detected by SFINAE.
- */
-template<typename T>
-class SelfInjector {
-  typedef sauce::shared_ptr<T> Ptr;
-  typedef void (T::* SetterMethod)(sauce::weak_ptr<T>);
-
-  template<typename U, U>
-  struct EqualTypes;
-
-  template<typename DoesNotRequestSelf>
-  void setSelfIfRequested(Ptr, ...) {}
-
-  template<typename RequestsSelf>
-  void setSelfIfRequested(Ptr ptr, EqualTypes<SetterMethod, & RequestsSelf::setSelf> *) {
-    sauce::weak_ptr<T> weak(ptr);
-    ptr->setSelf(weak);
-  }
-
-public:
-
-  void setSelf(Ptr ptr) {
-    setSelfIfRequested<T>(ptr, 0);
   }
 };
 
