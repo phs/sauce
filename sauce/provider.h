@@ -28,7 +28,7 @@ public:
   /**
    * Provide an Iface.
    */
-  virtual sauce::shared_ptr<Iface> get() = 0;
+  virtual sauce::shared_ptr<typename i::Key<Dependency>::Iface> get() = 0;
 };
 
 /**
