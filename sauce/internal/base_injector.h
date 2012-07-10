@@ -51,13 +51,12 @@ class CircularDependencyGuard {
  *
  * An interface Iface requests this by exposing void setSelf(sauce::weak_ptr<Iface>), detected by SFINAE.
  */
-template<typename Dependency>
+template<typename T>
 class SelfInjector {
-  typedef typename Key<Dependency>::Iface Iface;
-  typedef typename Key<Dependency>::Ptr Ptr;
-  typedef void (Iface::* SetterMethod)(sauce::weak_ptr<Iface>);
+  typedef sauce::shared_ptr<T> Ptr;
+  typedef void (T::* SetterMethod)(sauce::weak_ptr<T>);
 
-  template<typename T, T>
+  template<typename U, U>
   struct EqualTypes;
 
   template<typename DoesNotRequestSelf>
@@ -65,14 +64,14 @@ class SelfInjector {
 
   template<typename RequestsSelf>
   void setSelfIfRequested(Ptr ptr, EqualTypes<SetterMethod, & RequestsSelf::setSelf> *) {
-    sauce::weak_ptr<Iface> weak(ptr);
+    sauce::weak_ptr<T> weak(ptr);
     ptr->setSelf(weak);
   }
 
 public:
 
   void setSelf(Ptr ptr) {
-    setSelfIfRequested<Iface>(ptr, 0);
+    setSelfIfRequested<T>(ptr, 0);
   }
 };
 
@@ -102,9 +101,10 @@ public:
   template<typename Dependency>
   typename Key<Dependency>::Ptr get(sauce::shared_ptr<Injector> injector, std::string const name) const {
     typedef typename Key<Dependency>::Normalized Normalized;
+    typedef typename Key<Dependency>::Iface Iface;
     typedef typename Key<Dependency>::Ptr Ptr;
     Ptr ptr(bindings.template get<Normalized>(injector, name));
-    SelfInjector<Normalized> selfInjector;
+    SelfInjector<Iface> selfInjector;
     selfInjector.setSelf(ptr);
     return ptr;
   }
