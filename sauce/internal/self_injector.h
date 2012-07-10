@@ -1,6 +1,11 @@
 #ifndef SAUCE_INTERNAL_SELF_INJECTOR_H_
 #define SAUCE_INTERNAL_SELF_INJECTOR_H_
 
+#include <sauce/memory.h>
+
+namespace sauce {
+namespace internal {
+
 /**
  * If a type requests injection of its own smart pointer, do so.
  *
@@ -29,5 +34,11 @@ public:
     setSelfIfRequested<T>(ptr, 0);
   }
 };
+
+}
+
+namespace i = ::sauce::internal;
+
+}
 
 #endif // SAUCE_INTERNAL_SELF_INJECTOR_H_
