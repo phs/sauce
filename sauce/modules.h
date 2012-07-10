@@ -81,7 +81,7 @@ class Modules {
     sauce::shared_ptr<i::BaseInjector<i::ImplicitBindings> > base(
       new i::BaseInjector<i::ImplicitBindings>(bindings, lockFactory));
     sauce::shared_ptr<Injector> injector(new Injector(base));
-    injector->setSelf(injector);
+    injector->setSelfPtr(injector);
     return injector;
   }
 

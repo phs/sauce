@@ -45,7 +45,7 @@ class Injector {
     next(),
     base(base) {}
 
-  void setSelf(sauce::shared_ptr<Injector> shared) {
+  void setSelfPtr(sauce::shared_ptr<Injector> shared) {
     assert(shared.get() == this);
     weak = shared;
   }
@@ -153,7 +153,7 @@ public:
     }
 
     sauce::shared_ptr<Injector> scoped(new Injector(i::typeIdOf<Scope>(), getSelf()));
-    scoped->setSelf(scoped);
+    scoped->setSelfPtr(scoped);
     return scoped;
   }
 

@@ -33,7 +33,7 @@ protected:
 
 public:
 
-  void injectSelf(sauce::weak_ptr<Provider<Dependency> > weak) {
+  void setSelf(sauce::weak_ptr<Provider<Dependency> > weak) {
     assert(weak.lock().get() == this);
     this->weak = weak;
   }

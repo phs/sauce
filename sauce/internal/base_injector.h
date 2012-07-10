@@ -49,7 +49,7 @@ class CircularDependencyGuard {
 /**
  * If Dependency requests injection of its own pointer, do so.
  *
- * An interface Iface requests this by exposing void injectSelf(sauce::weak_ptr<Iface>), detected by SFINAE.
+ * An interface Iface requests this by exposing void setSelf(sauce::weak_ptr<Iface>), detected by SFINAE.
  */
 template<typename Dependency>
 class SelfInjector {
@@ -61,18 +61,18 @@ class SelfInjector {
   struct EqualTypes;
 
   template<typename DoesNotRequestSelf>
-  void injectSelfIfRequested(Ptr, ...) {}
+  void setSelfIfRequested(Ptr, ...) {}
 
   template<typename RequestsSelf>
-  void injectSelfIfRequested(Ptr ptr, EqualTypes<SetterMethod, & RequestsSelf::injectSelf> *) {
+  void setSelfIfRequested(Ptr ptr, EqualTypes<SetterMethod, & RequestsSelf::setSelf> *) {
     sauce::weak_ptr<Iface> weak(ptr);
-    ptr->injectSelf(weak);
+    ptr->setSelf(weak);
   }
 
 public:
 
-  void injectSelf(Ptr ptr) {
-    injectSelfIfRequested<Iface>(ptr, 0);
+  void setSelf(Ptr ptr) {
+    setSelfIfRequested<Iface>(ptr, 0);
   }
 };
 
@@ -105,7 +105,7 @@ public:
     typedef typename Key<Dependency>::Ptr Ptr;
     Ptr ptr(bindings.template get<Normalized>(injector, name));
     SelfInjector<Normalized> selfInjector;
-    selfInjector.injectSelf(ptr);
+    selfInjector.setSelf(ptr);
     return ptr;
   }
 

@@ -339,7 +339,7 @@ struct SelfInterested {
   SelfInterested():
     self() {}
 
-  void injectSelf(sauce::weak_ptr<SelfInterested> self) {
+  void setSelf(sauce::weak_ptr<SelfInterested> self) {
     this->self = self;
   }
 };
