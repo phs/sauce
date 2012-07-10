@@ -355,16 +355,16 @@ void SelfInterestedModule(Binder & binder) {
   binder.bind<SonOfSelfInterested>().to<SonOfSelfInterested>();
 }
 
-TEST(BindingTest, shouldInjectSelfWeakPointersIfRequestsSelfInjectionTypedefExists) {
+TEST(BindingTest, shouldInjectSelfWeakPointersIfSpecialTypedefExists) {
   sauce::shared_ptr<Injector> injector(Modules().add(&SelfInterestedModule).createInjector());
   sauce::shared_ptr<SelfInterested> selfInterested = injector->get<SelfInterested>();
   ASSERT_EQ(selfInterested, selfInterested->self.lock());
 }
 
-TEST(BindingTest, shouldInjectSelfWeakPointersAutomaticallyIfSetterIsInherited) {
+TEST(BindingTest, shouldInjectSelfWeakPointersAutomaticallyIfSpecialTypedefIsInherited) {
   sauce::shared_ptr<Injector> injector(Modules().add(&SelfInterestedModule).createInjector());
   sauce::shared_ptr<SonOfSelfInterested> son = injector->get<SonOfSelfInterested>();
-  // ASSERT_EQ(son, son->self.lock()); // TODO
+  ASSERT_EQ(son, son->self.lock());
 }
 
 struct SelfInterestedProvider: public AbstractProvider<SelfInterested> {
