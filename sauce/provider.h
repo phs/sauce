@@ -33,9 +33,9 @@ protected:
 
 public:
 
-  void setSelf(sauce::shared_ptr<Provider<Dependency> > shared) {
-    assert(shared.get() == this);
-    weak = shared;
+  void setSelf(sauce::weak_ptr<Provider<Dependency> > weak) {
+    assert(weak.lock().get() == this);
+    this->weak = weak;
   }
 
   typedef typename i::Key<Dependency>::Iface Iface;
