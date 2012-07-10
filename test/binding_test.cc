@@ -341,8 +341,18 @@ struct SelfInterested: public Bound {
   SelfInterested():
     self() {}
 
+  /**
+   * The existence of this typedef indicates SelfInterested wants a self-pointer injected.
+   */
   typedef SelfInterested RequestsSelfInjection;
 
+  /**
+   * This is the setter that the self-pointer is injected with.
+   *
+   * If the typedef exists but the setter does not, it is a compile error.
+   *
+   * Notice the weak_ptr is over the type idenfied by RequestsSelfInjection.
+   */
   void setSelf(sauce::weak_ptr<SelfInterested> self) {
     this->self = self;
   }
