@@ -41,11 +41,6 @@ class Provider {
 
   sauce::weak_ptr<Provider<Dependency> > weak;
 
-  void setSelf(sauce::shared_ptr<Provider<Dependency> > shared) {
-    assert(shared.get() == this);
-    weak = shared;
-  }
-
 protected:
 
   sauce::shared_ptr<Provider<Dependency> > getSelf() const {
@@ -55,6 +50,11 @@ protected:
   }
 
 public:
+
+  void setSelf(sauce::shared_ptr<Provider<Dependency> > shared) {
+    assert(shared.get() == this);
+    weak = shared;
+  }
 
   typedef typename i::Key<Dependency>::Iface Iface;
 

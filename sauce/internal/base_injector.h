@@ -78,7 +78,7 @@ struct GetDecorator<ImplicitBindings, Named<Provider<ProvidedDependency>, Name> 
 
   Ptr get(Bindings_ const & bindings, InjectorPtr injector, std::string const name) {
     Ptr ptr = bindings.template get<Normalized>(injector, name);
-    setSelf<ProvidedDependency, Name>(ptr);
+    ptr->setSelf(ptr);
     return ptr;
   }
 };
