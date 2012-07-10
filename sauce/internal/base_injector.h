@@ -47,45 +47,6 @@ class CircularDependencyGuard {
 };
 
 /**
- * Calls Bindings::get on behalf of BaseInjector.
- *
- * It's a separate type to afford template specialization, something a method can't do.
- */
-template<typename ImplicitBindings, typename Dependency>
-class GetDecorator {
-public:
-  typedef typename Key<Dependency>::Ptr Ptr;
-  typedef typename Key<Dependency>::Normalized Normalized;
-  typedef Bindings<ImplicitBindings> Bindings_;
-  typedef sauce::shared_ptr<Injector> InjectorPtr;
-
-  Ptr get(Bindings_ const & bindings, InjectorPtr injector, std::string const name) {
-    return bindings.template get<Normalized>(injector, name);
-  }
-};
-
-/**
- * A specialization that gives provided Providers a self smart ptr.
- *
- * Doing so enables them to safely create smart pointer deleters.
- */
-template<typename ImplicitBindings, typename ProvidedDependency, typename Name>
-class GetDecorator<ImplicitBindings, Named<Provider<ProvidedDependency>, Name> > {
-public:
-  typedef Named<Provider<ProvidedDependency>, Name> Dependency;
-  typedef typename Key<Dependency>::Ptr Ptr;
-  typedef typename Key<Dependency>::Normalized Normalized;
-  typedef Bindings<ImplicitBindings> Bindings_;
-  typedef sauce::shared_ptr<Injector> InjectorPtr;
-
-  Ptr get(Bindings_ const & bindings, InjectorPtr injector, std::string const name) {
-    Ptr ptr = bindings.template get<Normalized>(injector, name);
-    ptr->setSelf(ptr);
-    return ptr;
-  }
-};
-
-/**
  * If Dependency requests injection of its own pointer, do so.
  *
  * An interface Iface requests this by exposing void injectSelf(sauce::weak_ptr<Iface>), detected by SFINAE.
@@ -142,8 +103,6 @@ public:
   typename Key<Dependency>::Ptr get(sauce::shared_ptr<Injector> injector, std::string const name) const {
     typedef typename Key<Dependency>::Normalized Normalized;
     typedef typename Key<Dependency>::Ptr Ptr;
-    // GetDecorator<ImplicitBindings, Normalized> getter;
-    // return getter.get(bindings, injector, name);
     Ptr ptr(bindings.template get<Normalized>(injector, name));
     SelfInjector<Normalized> selfInjector;
     selfInjector.injectSelf(ptr);
