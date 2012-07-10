@@ -70,6 +70,8 @@ class AbstractProvider: public Provider<Dependency> {
 
 public:
 
+  typedef Provider<Dependency> RequestsSelfInjection;
+
   /**
    * Provide an Iface.
    *

@@ -9,35 +9,26 @@ namespace internal {
 /**
  * If a type requests injection of its own smart pointer, do so.
  *
- * An interface Iface requests this by exposing void setSelf(sauce::weak_ptr<Iface>), detected by SFINAE.
+ * A type requests self-injection by defining the RequestsSelfInjection typedef.  If this typedef is present,
+ * void setSelf(sauce::weak_ptr<RequestsSelfInjection>) must be defined and will be passes a self weak pointer.
  */
 template<typename T>
 class SelfInjector {
-  struct Guard {
-    void setSelf(sauce::weak_ptr<T>) {}
-  };
-
-  struct WithGuard: public T, public Guard {};
-
   typedef sauce::shared_ptr<T> Ptr;
-  typedef void (Guard::* NoMethod)(sauce::weak_ptr<T>);
 
-  template<typename U, U>
-  struct EqualTypes;
+  template<typename DoesNotRequest>
+  void setSelfIfRequested(Ptr, ...) {}
 
-  template<typename RequestsSelf>
-  void setSelfIfRequested(Ptr ptr, ...) {
-    sauce::weak_ptr<T> weak(ptr);
+  template<typename Requests>
+  void setSelfIfRequested(Ptr ptr, typename Requests::RequestsSelfInjection *) {
+    sauce::weak_ptr<typename Requests::RequestsSelfInjection> weak(ptr);
     ptr->setSelf(weak);
   }
-
-  template<typename DoesNotRequestSelf>
-  void setSelfIfRequested(Ptr, EqualTypes<NoMethod, & DoesNotRequestSelf::setSelf> *) {}
 
 public:
 
   void setSelf(Ptr ptr) {
-    setSelfIfRequested<WithGuard>(ptr, 0);
+    setSelfIfRequested<T>(ptr, 0);
   }
 };
 
