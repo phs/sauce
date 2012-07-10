@@ -1,6 +1,18 @@
 <?xml version='1.0' encoding='UTF-8' standalone='yes' ?>
 <tagfile>
   <compound kind="class">
+    <name>SelfInjector</name>
+    <filename>class_self_injector.html</filename>
+    <templarg>T</templarg>
+    <member kind="function">
+      <type>void</type>
+      <name>setSelf</name>
+      <anchorfile>class_self_injector.html</anchorfile>
+      <anchor>a4f6a5d097b0f24ab4e4a1b830d90b8d8</anchor>
+      <arglist>(Ptr ptr)</arglist>
+    </member>
+  </compound>
+  <compound kind="class">
     <name>sauce::SettingClause</name>
     <filename>classsauce_1_1_setting_clause.html</filename>
     <templarg></templarg>
@@ -36,20 +48,6 @@
       <anchorfile>classsauce_1_1internal_1_1_final_clause.html</anchorfile>
       <anchor>a45f561024722fb62635433458471ad4e</anchor>
       <arglist>(Next next)</arglist>
-    </member>
-    <member kind="function" protection="protected">
-      <type>void</type>
-      <name>bind</name>
-      <anchorfile>classsauce_1_1internal_1_1_final_clause.html</anchorfile>
-      <anchor>a36344543b017d215f0f11afcbe22e852</anchor>
-      <arglist>()</arglist>
-    </member>
-    <member kind="function" protection="protected">
-      <type>void</type>
-      <name>bindExtra</name>
-      <anchorfile>classsauce_1_1internal_1_1_final_clause.html</anchorfile>
-      <anchor>a53e5cfdafa278b6c4a108040500bb6a4</anchor>
-      <arglist>(BoundInjection)</arglist>
     </member>
     <member kind="function" protection="protected">
       <type>void</type>
@@ -104,20 +102,6 @@
     </member>
     <member kind="function" protection="protected">
       <type>void</type>
-      <name>bind</name>
-      <anchorfile>classsauce_1_1internal_1_1_final_clause.html</anchorfile>
-      <anchor>a36344543b017d215f0f11afcbe22e852</anchor>
-      <arglist>()</arglist>
-    </member>
-    <member kind="function" protection="protected">
-      <type>void</type>
-      <name>bindExtra</name>
-      <anchorfile>classsauce_1_1internal_1_1_final_clause.html</anchorfile>
-      <anchor>a53e5cfdafa278b6c4a108040500bb6a4</anchor>
-      <arglist>(BoundInjection)</arglist>
-    </member>
-    <member kind="function" protection="protected">
-      <type>void</type>
       <name>bindDynamicDependencyName</name>
       <anchorfile>classsauce_1_1internal_1_1_final_clause.html</anchorfile>
       <anchor>aa333cb17528b9dbf8e38a72b82bcca83</anchor>
@@ -166,20 +150,6 @@
       <anchorfile>classsauce_1_1internal_1_1_final_clause.html</anchorfile>
       <anchor>a45f561024722fb62635433458471ad4e</anchor>
       <arglist>(Next next)</arglist>
-    </member>
-    <member kind="function" protection="protected">
-      <type>void</type>
-      <name>bind</name>
-      <anchorfile>classsauce_1_1internal_1_1_final_clause.html</anchorfile>
-      <anchor>a36344543b017d215f0f11afcbe22e852</anchor>
-      <arglist>()</arglist>
-    </member>
-    <member kind="function" protection="protected">
-      <type>void</type>
-      <name>bindExtra</name>
-      <anchorfile>classsauce_1_1internal_1_1_final_clause.html</anchorfile>
-      <anchor>a53e5cfdafa278b6c4a108040500bb6a4</anchor>
-      <arglist>(BoundInjection)</arglist>
     </member>
     <member kind="function" protection="protected">
       <type>void</type>
@@ -240,20 +210,6 @@
     </member>
     <member kind="function" protection="protected">
       <type>void</type>
-      <name>bind</name>
-      <anchorfile>classsauce_1_1internal_1_1_final_clause.html</anchorfile>
-      <anchor>a36344543b017d215f0f11afcbe22e852</anchor>
-      <arglist>()</arglist>
-    </member>
-    <member kind="function" protection="protected">
-      <type>void</type>
-      <name>bindExtra</name>
-      <anchorfile>classsauce_1_1internal_1_1_final_clause.html</anchorfile>
-      <anchor>a53e5cfdafa278b6c4a108040500bb6a4</anchor>
-      <arglist>(BoundInjection)</arglist>
-    </member>
-    <member kind="function" protection="protected">
-      <type>void</type>
       <name>bindDynamicDependencyName</name>
       <anchorfile>classsauce_1_1internal_1_1_final_clause.html</anchorfile>
       <anchor>aa333cb17528b9dbf8e38a72b82bcca83</anchor>
@@ -311,20 +267,6 @@
     </member>
     <member kind="function" protection="protected">
       <type>void</type>
-      <name>bind</name>
-      <anchorfile>classsauce_1_1internal_1_1_final_clause.html</anchorfile>
-      <anchor>a36344543b017d215f0f11afcbe22e852</anchor>
-      <arglist>()</arglist>
-    </member>
-    <member kind="function" protection="protected">
-      <type>void</type>
-      <name>bindExtra</name>
-      <anchorfile>classsauce_1_1internal_1_1_final_clause.html</anchorfile>
-      <anchor>a53e5cfdafa278b6c4a108040500bb6a4</anchor>
-      <arglist>(BoundInjection)</arglist>
-    </member>
-    <member kind="function" protection="protected">
-      <type>void</type>
       <name>bindDynamicDependencyName</name>
       <anchorfile>classsauce_1_1internal_1_1_final_clause.html</anchorfile>
       <anchor>aa333cb17528b9dbf8e38a72b82bcca83</anchor>
@@ -349,13 +291,6 @@
       <name>toProvider</name>
       <anchorfile>classsauce_1_1_in_clause.html</anchorfile>
       <anchor>a45a06d51c604a6f70692adc88ed45c74</anchor>
-      <arglist>()</arglist>
-    </member>
-    <member kind="function" protection="protected">
-      <type>void</type>
-      <name>onComplete</name>
-      <anchorfile>classsauce_1_1internal_1_1_initial_clause.html</anchorfile>
-      <anchor>a06750baf1f99773b73f856cedeccec1b</anchor>
       <arglist>()</arglist>
     </member>
     <member kind="function" protection="protected">
@@ -418,13 +353,6 @@
       <name>toProvider</name>
       <anchorfile>classsauce_1_1_named_clause.html</anchorfile>
       <anchor>a534b20a8726ef96b69249290f56759fd</anchor>
-      <arglist>()</arglist>
-    </member>
-    <member kind="function" protection="protected">
-      <type>void</type>
-      <name>onComplete</name>
-      <anchorfile>classsauce_1_1internal_1_1_initial_clause.html</anchorfile>
-      <anchor>a06750baf1f99773b73f856cedeccec1b</anchor>
       <arglist>()</arglist>
     </member>
     <member kind="function" protection="protected">
@@ -509,13 +437,6 @@
       <anchorfile>classsauce_1_1_bind_clause.html</anchorfile>
       <anchor>ac1477f45573f7be56ec13bb35c0041b9</anchor>
       <arglist></arglist>
-    </member>
-    <member kind="function" protection="protected">
-      <type>void</type>
-      <name>onComplete</name>
-      <anchorfile>classsauce_1_1internal_1_1_initial_clause.html</anchorfile>
-      <anchor>a06750baf1f99773b73f856cedeccec1b</anchor>
-      <arglist>()</arglist>
     </member>
     <member kind="function" protection="protected">
       <type></type>
@@ -873,6 +794,13 @@
       <anchor>abfe43c0ceeb19745314767fd84ae9d9f</anchor>
       <arglist></arglist>
     </member>
+    <member kind="function">
+      <type>void</type>
+      <name>setSelf</name>
+      <anchorfile>classsauce_1_1_provider.html</anchorfile>
+      <anchor>ad52b193be1e5efecf29fa27bb3eab610</anchor>
+      <arglist>(sauce::weak_ptr&lt; Provider&lt; Dependency &gt; &gt; weak)</arglist>
+    </member>
     <member kind="function" virtualness="pure">
       <type>virtual sauce::shared_ptr&lt; Iface &gt;</type>
       <name>get</name>
@@ -887,13 +815,6 @@
       <anchor>a9fac62da0c899b2b8ae4a55dc22c5b90</anchor>
       <arglist>() const </arglist>
     </member>
-    <member kind="friend">
-      <type>friend struct</type>
-      <name>::sauce::internal::ProviderFriend</name>
-      <anchorfile>classsauce_1_1_provider.html</anchorfile>
-      <anchor>a3906d3c8cf401f08c6fcfbafaa1d2d99</anchor>
-      <arglist></arglist>
-    </member>
   </compound>
   <compound kind="class">
     <name>sauce::AbstractProvider</name>
@@ -906,6 +827,13 @@
       <anchorfile>classsauce_1_1_abstract_provider.html</anchorfile>
       <anchor>a3a11110c10e8d92c8e8fc8bf87ae7609</anchor>
       <arglist>()</arglist>
+    </member>
+    <member kind="function">
+      <type>void</type>
+      <name>setSelf</name>
+      <anchorfile>classsauce_1_1_provider.html</anchorfile>
+      <anchor>ad52b193be1e5efecf29fa27bb3eab610</anchor>
+      <arglist>(sauce::weak_ptr&lt; Provider&lt; Dependency &gt; &gt; weak)</arglist>
     </member>
     <member kind="friend">
       <type>friend class</type>
@@ -981,112 +909,6 @@
       <anchorfile>classsauce_1_1internal_1_1_circular_dependency_guard.html</anchorfile>
       <anchor>ac62d4188f75bca4e9df07c2f1785ede2</anchor>
       <arglist></arglist>
-    </member>
-  </compound>
-  <compound kind="struct">
-    <name>sauce::internal::GetDecorator</name>
-    <filename>structsauce_1_1internal_1_1_get_decorator.html</filename>
-    <templarg>ImplicitBindings</templarg>
-    <templarg>Dependency</templarg>
-    <base>sauce::internal::ProviderFriend</base>
-    <member kind="typedef">
-      <type>Key&lt; Dependency &gt;::Ptr</type>
-      <name>Ptr</name>
-      <anchorfile>structsauce_1_1internal_1_1_get_decorator.html</anchorfile>
-      <anchor>a84cd26e9885cc0fa31642ca5695e13d9</anchor>
-      <arglist></arglist>
-    </member>
-    <member kind="typedef">
-      <type>Key&lt; Dependency &gt;::Normalized</type>
-      <name>Normalized</name>
-      <anchorfile>structsauce_1_1internal_1_1_get_decorator.html</anchorfile>
-      <anchor>ad3ce10f9e4449f9e1464e7a5e2f801ae</anchor>
-      <arglist></arglist>
-    </member>
-    <member kind="typedef">
-      <type>Bindings&lt; ImplicitBindings &gt;</type>
-      <name>Bindings_</name>
-      <anchorfile>structsauce_1_1internal_1_1_get_decorator.html</anchorfile>
-      <anchor>a383d908aa770cbc953b3aa8e5c742dc9</anchor>
-      <arglist></arglist>
-    </member>
-    <member kind="typedef">
-      <type>sauce::shared_ptr&lt; Injector &gt;</type>
-      <name>InjectorPtr</name>
-      <anchorfile>structsauce_1_1internal_1_1_get_decorator.html</anchorfile>
-      <anchor>a7373df69b8226dabd3160df92d726d77</anchor>
-      <arglist></arglist>
-    </member>
-    <member kind="function">
-      <type>Ptr</type>
-      <name>get</name>
-      <anchorfile>structsauce_1_1internal_1_1_get_decorator.html</anchorfile>
-      <anchor>a25c60904ff15951af1eda7f2cf342324</anchor>
-      <arglist>(Bindings_ const &amp;bindings, InjectorPtr injector, std::string const name)</arglist>
-    </member>
-    <member kind="function">
-      <type>void</type>
-      <name>setSelf</name>
-      <anchorfile>structsauce_1_1internal_1_1_provider_friend.html</anchorfile>
-      <anchor>a335c721a6d2c83e11d8498dada73d4c6</anchor>
-      <arglist>(typename Key&lt; Named&lt; Provider&lt; ProvidedDependency &gt;, Name &gt; &gt;::Ptr ptr) const </arglist>
-    </member>
-  </compound>
-  <compound kind="struct">
-    <name>sauce::internal::GetDecorator&lt; ImplicitBindings, Named&lt; Provider&lt; ProvidedDependency &gt;, Name &gt; &gt;</name>
-    <filename>structsauce_1_1internal_1_1_get_decorator_3_01_implicit_bindings_00_01_named_3_01_provider_3_01_2bd1789f15c1abf4bb77f9fe019a26cd.html</filename>
-    <templarg></templarg>
-    <templarg></templarg>
-    <templarg></templarg>
-    <base>sauce::internal::ProviderFriend</base>
-    <member kind="typedef">
-      <type>Named&lt; Provider&lt; ProvidedDependency &gt;, Name &gt;</type>
-      <name>Dependency</name>
-      <anchorfile>structsauce_1_1internal_1_1_get_decorator_3_01_implicit_bindings_00_01_named_3_01_provider_3_01_2bd1789f15c1abf4bb77f9fe019a26cd.html</anchorfile>
-      <anchor>a5ced44ba5e314629d9f3f892d7e5ef00</anchor>
-      <arglist></arglist>
-    </member>
-    <member kind="typedef">
-      <type>Key&lt; Dependency &gt;::Ptr</type>
-      <name>Ptr</name>
-      <anchorfile>structsauce_1_1internal_1_1_get_decorator_3_01_implicit_bindings_00_01_named_3_01_provider_3_01_2bd1789f15c1abf4bb77f9fe019a26cd.html</anchorfile>
-      <anchor>a716da49b4146fb80ea3f57f934b56a61</anchor>
-      <arglist></arglist>
-    </member>
-    <member kind="typedef">
-      <type>Key&lt; Dependency &gt;::Normalized</type>
-      <name>Normalized</name>
-      <anchorfile>structsauce_1_1internal_1_1_get_decorator_3_01_implicit_bindings_00_01_named_3_01_provider_3_01_2bd1789f15c1abf4bb77f9fe019a26cd.html</anchorfile>
-      <anchor>af08342804f15511ba5653a41815d4ab1</anchor>
-      <arglist></arglist>
-    </member>
-    <member kind="typedef">
-      <type>Bindings&lt; ImplicitBindings &gt;</type>
-      <name>Bindings_</name>
-      <anchorfile>structsauce_1_1internal_1_1_get_decorator_3_01_implicit_bindings_00_01_named_3_01_provider_3_01_2bd1789f15c1abf4bb77f9fe019a26cd.html</anchorfile>
-      <anchor>a5ba551c7bd185630b0d937b7a359a790</anchor>
-      <arglist></arglist>
-    </member>
-    <member kind="typedef">
-      <type>sauce::shared_ptr&lt; Injector &gt;</type>
-      <name>InjectorPtr</name>
-      <anchorfile>structsauce_1_1internal_1_1_get_decorator_3_01_implicit_bindings_00_01_named_3_01_provider_3_01_2bd1789f15c1abf4bb77f9fe019a26cd.html</anchorfile>
-      <anchor>a5deff862f69c21211fd8916ab843bc59</anchor>
-      <arglist></arglist>
-    </member>
-    <member kind="function">
-      <type>Ptr</type>
-      <name>get</name>
-      <anchorfile>structsauce_1_1internal_1_1_get_decorator_3_01_implicit_bindings_00_01_named_3_01_provider_3_01_2bd1789f15c1abf4bb77f9fe019a26cd.html</anchorfile>
-      <anchor>a68553d525ecfaba966e9cc298780cf1f</anchor>
-      <arglist>(Bindings_ const &amp;bindings, InjectorPtr injector, std::string const name)</arglist>
-    </member>
-    <member kind="function">
-      <type>void</type>
-      <name>setSelf</name>
-      <anchorfile>structsauce_1_1internal_1_1_provider_friend.html</anchorfile>
-      <anchor>a335c721a6d2c83e11d8498dada73d4c6</anchor>
-      <arglist>(typename Key&lt; Named&lt; Provider&lt; ProvidedDependency &gt;, Name &gt; &gt;::Ptr ptr) const </arglist>
     </member>
   </compound>
   <compound kind="class">
@@ -1269,6 +1091,21 @@
     </member>
   </compound>
   <compound kind="class">
+    <name>sauce::internal::ProviderBindingCreator</name>
+    <filename>classsauce_1_1internal_1_1_provider_binding_creator.html</filename>
+    <templarg>Dependency</templarg>
+    <templarg>Scope</templarg>
+    <templarg>Ctor</templarg>
+    <templarg>Allocator</templarg>
+    <member kind="function">
+      <type>OpaqueBindingPtr</type>
+      <name>create</name>
+      <anchorfile>classsauce_1_1internal_1_1_provider_binding_creator.html</anchorfile>
+      <anchor>a3a35a400553c425286ddf9de6aac915f</anchor>
+      <arglist>()</arglist>
+    </member>
+  </compound>
+  <compound kind="class">
     <name>sauce::internal::ClauseState</name>
     <filename>classsauce_1_1internal_1_1_clause_state.html</filename>
     <member kind="function">
@@ -1282,14 +1119,7 @@
       <type>void</type>
       <name>bind</name>
       <anchorfile>classsauce_1_1internal_1_1_clause_state.html</anchorfile>
-      <anchor>aba03bf94603ef44c42fe42722c5ad878</anchor>
-      <arglist>()</arglist>
-    </member>
-    <member kind="function">
-      <type>void</type>
-      <name>bindExtra</name>
-      <anchorfile>classsauce_1_1internal_1_1_clause_state.html</anchorfile>
-      <anchor>a78a618b36d93cbea655a29062bad85f2</anchor>
+      <anchor>a7cbc82cc8d177e8831c76bc28e667b65</anchor>
       <arglist>()</arglist>
     </member>
     <member kind="function">
@@ -1325,13 +1155,6 @@
     <name>sauce::internal::InitialClause</name>
     <filename>classsauce_1_1internal_1_1_initial_clause.html</filename>
     <templarg>Dependency</templarg>
-    <member kind="function" protection="protected">
-      <type>void</type>
-      <name>onComplete</name>
-      <anchorfile>classsauce_1_1internal_1_1_initial_clause.html</anchorfile>
-      <anchor>a06750baf1f99773b73f856cedeccec1b</anchor>
-      <arglist>()</arglist>
-    </member>
     <member kind="function" protection="protected">
       <type></type>
       <name>InitialClause</name>
@@ -1402,20 +1225,6 @@
       <anchorfile>classsauce_1_1internal_1_1_final_clause.html</anchorfile>
       <anchor>a45f561024722fb62635433458471ad4e</anchor>
       <arglist>(Next next)</arglist>
-    </member>
-    <member kind="function" protection="protected">
-      <type>void</type>
-      <name>bind</name>
-      <anchorfile>classsauce_1_1internal_1_1_final_clause.html</anchorfile>
-      <anchor>a36344543b017d215f0f11afcbe22e852</anchor>
-      <arglist>()</arglist>
-    </member>
-    <member kind="function" protection="protected">
-      <type>void</type>
-      <name>bindExtra</name>
-      <anchorfile>classsauce_1_1internal_1_1_final_clause.html</anchorfile>
-      <anchor>a53e5cfdafa278b6c4a108040500bb6a4</anchor>
-      <arglist>(BoundInjection)</arglist>
     </member>
     <member kind="function" protection="protected">
       <type>void</type>
@@ -1595,6 +1404,13 @@
       <anchor>af5a3f7e0ce487716bd095897bf86e508</anchor>
       <arglist>()</arglist>
     </member>
+    <member kind="function">
+      <type>void</type>
+      <name>setSelf</name>
+      <anchorfile>classsauce_1_1_provider.html</anchorfile>
+      <anchor>ad52b193be1e5efecf29fa27bb3eab610</anchor>
+      <arglist>(sauce::weak_ptr&lt; Provider&lt; Dependency &gt; &gt; weak)</arglist>
+    </member>
     <member kind="friend" protection="private">
       <type>friend class</type>
       <name>ImplicitProviderBinding&lt; Dependency, Name &gt;</name>
@@ -1623,7 +1439,6 @@
     <templarg></templarg>
     <templarg></templarg>
     <base>Binding&lt; Named&lt; Provider&lt; Dependency &gt;, Name &gt;, NoScope &gt;</base>
-    <base>sauce::internal::ProviderFriend</base>
     <member kind="typedef">
       <type>ResolvedBinding&lt; ProviderDependency &gt;::BindingPtr</type>
       <name>BindingPtr</name>
@@ -1700,13 +1515,6 @@
       <anchorfile>structsauce_1_1internal_1_1_opaque_binding.html</anchorfile>
       <anchor>a9cbe103bedc3ea77c5edef5f30a4d74c</anchor>
       <arglist>(OpaqueBindingPtr, sauce::shared_ptr&lt; Injector &gt;) const =0</arglist>
-    </member>
-    <member kind="function">
-      <type>void</type>
-      <name>setSelf</name>
-      <anchorfile>structsauce_1_1internal_1_1_provider_friend.html</anchorfile>
-      <anchor>a335c721a6d2c83e11d8498dada73d4c6</anchor>
-      <arglist>(typename Key&lt; Named&lt; Provider&lt; ProvidedDependency &gt;, Name &gt; &gt;::Ptr ptr) const </arglist>
     </member>
   </compound>
   <compound kind="class">
@@ -3477,17 +3285,6 @@
       <arglist>(TypeSignature const &amp;signature)</arglist>
     </member>
   </compound>
-  <compound kind="struct">
-    <name>sauce::internal::ProviderFriend</name>
-    <filename>structsauce_1_1internal_1_1_provider_friend.html</filename>
-    <member kind="function">
-      <type>void</type>
-      <name>setSelf</name>
-      <anchorfile>structsauce_1_1internal_1_1_provider_friend.html</anchorfile>
-      <anchor>a335c721a6d2c83e11d8498dada73d4c6</anchor>
-      <arglist>(typename Key&lt; Named&lt; Provider&lt; ProvidedDependency &gt;, Name &gt; &gt;::Ptr ptr) const </arglist>
-    </member>
-  </compound>
   <compound kind="dir">
     <name>sauce/internal/</name>
     <path>/Users/phil/code/sauce/sauce/internal/</path>
@@ -3509,6 +3306,7 @@
     <file>provider_binding.h</file>
     <file>resolved_binding.h</file>
     <file>scope_cache.h</file>
+    <file>self_injector.h</file>
     <file>type_id.h</file>
   </compound>
   <compound kind="dir">

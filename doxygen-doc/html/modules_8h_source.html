@@ -113,7 +113,7 @@
 <div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;    sauce::shared_ptr&lt;i::BaseInjector&lt;i::ImplicitBindings&gt; &gt; base(</div>
 <div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;      <span class="keyword">new</span> <a class="code" href="classsauce_1_1internal_1_1_base_injector.html">i::BaseInjector&lt;i::ImplicitBindings&gt;</a>(bindings, lockFactory));</div>
 <div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160;    sauce::shared_ptr&lt;Injector&gt; injector(<span class="keyword">new</span> <a class="code" href="classsauce_1_1_injector.html">Injector</a>(base));</div>
-<div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160;    injector-&gt;setSelf(injector);</div>
+<div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160;    injector-&gt;setSelfPtr(injector);</div>
 <div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160;    <span class="keywordflow">return</span> injector;</div>
 <div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160;  }</div>
 <div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160;</div>

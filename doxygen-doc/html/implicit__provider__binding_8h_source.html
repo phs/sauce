@@ -90,41 +90,38 @@
 <div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;</div>
 <div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;<span class="keyword">template</span>&lt;<span class="keyword">typename</span> Dependency, <span class="keyword">typename</span> Name&gt;</div>
 <div class="line"><a name="l00048"></a><span class="lineno"><a class="code" href="classsauce_1_1internal_1_1_implicit_provider_binding.html">   48</a></span>&#160;<span class="keyword">class </span><a class="code" href="classsauce_1_1internal_1_1_implicit_provider_binding.html" title="An injection that provides Providers for an already-bound dependency.">ImplicitProviderBinding</a>:</div>
-<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;  <span class="keyword">public</span> <a class="code" href="classsauce_1_1internal_1_1_binding.html" title="The base class of all actual binding implementations.">Binding</a>&lt;Named&lt;Provider&lt;Dependency&gt;, Name&gt;, NoScope&gt;,</div>
-<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;  <span class="keyword">public</span> <a class="code" href="structsauce_1_1internal_1_1_provider_friend.html" title="A friend of the Provider base type.">ProviderFriend</a> {</div>
-<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;</div>
-<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;  <span class="keyword">typedef</span> <span class="keyword">typename</span> <a class="code" href="classsauce_1_1_named.html" title="Wrap dependency requests with Named to choose one of several (statically) named alternatives.">Key&lt;Dependency&gt;::Normalized</a> <a class="code" href="classsauce_1_1_named.html" title="Wrap dependency requests with Named to choose one of several (statically) named alternatives.">Normalized</a>;</div>
-<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;  <span class="keyword">typedef</span> <span class="keyword">typename</span> <a class="code" href="structsauce_1_1internal_1_1_resolved_binding.html" title="A binding for an acknowledged interface.">ResolvedBinding&lt;Normalized&gt;::BindingPtr</a> ProvidedBindingPtr;</div>
-<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;  <span class="keyword">typedef</span> <a class="code" href="classsauce_1_1_named.html" title="Wrap dependency requests with Named to choose one of several (statically) named alternatives.">Named&lt;Provider&lt;Dependency&gt;</a>, Name&gt; <a class="code" href="classsauce_1_1_named.html" title="Wrap dependency requests with Named to choose one of several (statically) named alternatives.">ProviderDependency</a>;</div>
-<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;  <span class="keyword">typedef</span> <span class="keyword">typename</span> Key&lt;ProviderDependency&gt;::Ptr ProviderPtr;</div>
-<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;</div>
-<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;  ProvidedBindingPtr providedBinding;</div>
-<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;</div>
-<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;  <span class="keywordtype">void</span> validateAcyclic(InjectorPtr, TypeIds &amp;)<span class="keyword"> const </span>{}</div>
-<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;</div>
-<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;<span class="keyword">public</span>:</div>
-<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;</div>
-<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;  <span class="keyword">typedef</span> <span class="keyword">typename</span> ResolvedBinding&lt;ProviderDependency&gt;::BindingPtr BindingPtr;</div>
-<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;</div>
-<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;  <a class="code" href="classsauce_1_1internal_1_1_implicit_provider_binding.html" title="An injection that provides Providers for an already-bound dependency.">ImplicitProviderBinding</a>(ProvidedBindingPtr providedBinding):</div>
-<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;    <a class="code" href="classsauce_1_1internal_1_1_binding.html" title="The base class of all actual binding implementations.">Binding&lt;Named&lt;Provider&lt;Dependency&gt;</a>, Name&gt;, <a class="code" href="classsauce_1_1_no_scope.html" title="The scope of unscoped bindings.">NoScope</a>&gt;(),</div>
-<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;    <a class="code" href="structsauce_1_1internal_1_1_provider_friend.html" title="A friend of the Provider base type.">ProviderFriend</a>(),</div>
-<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;    providedBinding(providedBinding) {}</div>
-<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;</div>
-<div class="line"><a name="l00070"></a><span class="lineno"><a class="code" href="classsauce_1_1internal_1_1_implicit_provider_binding.html#af0d21fc2e678fb1e69fa43a14d570f06">   70</a></span>&#160;  ProviderPtr <a class="code" href="classsauce_1_1internal_1_1_implicit_provider_binding.html#af0d21fc2e678fb1e69fa43a14d570f06" title="Provide an Iface.">provide</a>(BindingPtr, InjectorPtr injector)<span class="keyword"> const </span>{</div>
-<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;    ProviderPtr provider(<span class="keyword">new</span> <a class="code" href="classsauce_1_1internal_1_1_implicit_provider.html" title="A Provider for an explicitly-bound Dependency.">ImplicitProvider&lt;Dependency, Name&gt;</a>(providedBinding, injector));</div>
-<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;    setSelf&lt;Dependency, Name&gt;(provider);</div>
-<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;    <span class="keywordflow">return</span> provider;</div>
-<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;  }</div>
-<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;};</div>
-<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;</div>
-<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;}</div>
-<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;</div>
-<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;<span class="keyword">namespace </span>i = ::sauce::internal;</div>
-<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;</div>
-<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;}</div>
-<div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;</div>
-<div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160;<span class="preprocessor">#endif // SAUCE_INTERNAL_IMPLICIT_PROVIDER_BINDING_H_</span></div>
+<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;  <span class="keyword">public</span> <a class="code" href="classsauce_1_1internal_1_1_binding.html" title="The base class of all actual binding implementations.">Binding</a>&lt;Named&lt;Provider&lt;Dependency&gt;, Name&gt;, NoScope&gt; {</div>
+<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;</div>
+<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;  <span class="keyword">typedef</span> <span class="keyword">typename</span> <a class="code" href="classsauce_1_1_named.html" title="Wrap dependency requests with Named to choose one of several (statically) named alternatives.">Key&lt;Dependency&gt;::Normalized</a> <a class="code" href="classsauce_1_1_named.html" title="Wrap dependency requests with Named to choose one of several (statically) named alternatives.">Normalized</a>;</div>
+<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;  <span class="keyword">typedef</span> <span class="keyword">typename</span> <a class="code" href="structsauce_1_1internal_1_1_resolved_binding.html" title="A binding for an acknowledged interface.">ResolvedBinding&lt;Normalized&gt;::BindingPtr</a> ProvidedBindingPtr;</div>
+<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;  <span class="keyword">typedef</span> <a class="code" href="classsauce_1_1_named.html" title="Wrap dependency requests with Named to choose one of several (statically) named alternatives.">Named&lt;Provider&lt;Dependency&gt;</a>, Name&gt; <a class="code" href="classsauce_1_1_named.html" title="Wrap dependency requests with Named to choose one of several (statically) named alternatives.">ProviderDependency</a>;</div>
+<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;  <span class="keyword">typedef</span> <span class="keyword">typename</span> Key&lt;ProviderDependency&gt;::Ptr ProviderPtr;</div>
+<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;</div>
+<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;  ProvidedBindingPtr providedBinding;</div>
+<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;</div>
+<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;  <span class="keywordtype">void</span> validateAcyclic(InjectorPtr, TypeIds &amp;)<span class="keyword"> const </span>{}</div>
+<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;</div>
+<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;<span class="keyword">public</span>:</div>
+<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;</div>
+<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;  <span class="keyword">typedef</span> <span class="keyword">typename</span> ResolvedBinding&lt;ProviderDependency&gt;::BindingPtr BindingPtr;</div>
+<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;</div>
+<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;  <a class="code" href="classsauce_1_1internal_1_1_implicit_provider_binding.html" title="An injection that provides Providers for an already-bound dependency.">ImplicitProviderBinding</a>(ProvidedBindingPtr providedBinding):</div>
+<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;    <a class="code" href="classsauce_1_1internal_1_1_binding.html" title="The base class of all actual binding implementations.">Binding&lt;Named&lt;Provider&lt;Dependency&gt;</a>, Name&gt;, <a class="code" href="classsauce_1_1_no_scope.html" title="The scope of unscoped bindings.">NoScope</a>&gt;(),</div>
+<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;    providedBinding(providedBinding) {}</div>
+<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;</div>
+<div class="line"><a name="l00068"></a><span class="lineno"><a class="code" href="classsauce_1_1internal_1_1_implicit_provider_binding.html#af0d21fc2e678fb1e69fa43a14d570f06">   68</a></span>&#160;  ProviderPtr <a class="code" href="classsauce_1_1internal_1_1_implicit_provider_binding.html#af0d21fc2e678fb1e69fa43a14d570f06" title="Provide an Iface.">provide</a>(BindingPtr, InjectorPtr injector)<span class="keyword"> const </span>{</div>
+<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;    ProviderPtr provider(<span class="keyword">new</span> <a class="code" href="classsauce_1_1internal_1_1_implicit_provider.html" title="A Provider for an explicitly-bound Dependency.">ImplicitProvider&lt;Dependency, Name&gt;</a>(providedBinding, injector));</div>
+<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;    <span class="keywordflow">return</span> provider;</div>
+<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;  }</div>
+<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;};</div>
+<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;</div>
+<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;}</div>
+<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;</div>
+<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;<span class="keyword">namespace </span>i = ::sauce::internal;</div>
+<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;</div>
+<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;}</div>
+<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;</div>
+<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;<span class="preprocessor">#endif // SAUCE_INTERNAL_IMPLICIT_PROVIDER_BINDING_H_</span></div>
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>

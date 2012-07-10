@@ -95,7 +95,7 @@
 <div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;    next(),</div>
 <div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;    base(base) {}</div>
 <div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;</div>
-<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;  <span class="keywordtype">void</span> setSelf(sauce::shared_ptr&lt;Injector&gt; shared) {</div>
+<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;  <span class="keywordtype">void</span> setSelfPtr(sauce::shared_ptr&lt;Injector&gt; shared) {</div>
 <div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;    assert(shared.get() == <span class="keyword">this</span>);</div>
 <div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;    weak = shared;</div>
 <div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;  }</div>
@@ -200,7 +200,7 @@
 <div class="line"><a name="l00153"></a><span class="lineno">  153</span>&#160;    }</div>
 <div class="line"><a name="l00154"></a><span class="lineno">  154</span>&#160;</div>
 <div class="line"><a name="l00155"></a><span class="lineno">  155</span>&#160;    sauce::shared_ptr&lt;Injector&gt; scoped(<span class="keyword">new</span> <a class="code" href="classsauce_1_1_injector.html">Injector</a>(i::typeIdOf&lt;Scope&gt;(), getSelf()));</div>
-<div class="line"><a name="l00156"></a><span class="lineno">  156</span>&#160;    scoped-&gt;setSelf(scoped);</div>
+<div class="line"><a name="l00156"></a><span class="lineno">  156</span>&#160;    scoped-&gt;setSelfPtr(scoped);</div>
 <div class="line"><a name="l00157"></a><span class="lineno">  157</span>&#160;    <span class="keywordflow">return</span> scoped;</div>
 <div class="line"><a name="l00158"></a><span class="lineno">  158</span>&#160;  }</div>
 <div class="line"><a name="l00159"></a><span class="lineno">  159</span>&#160;</div>

@@ -1,7 +1,6 @@
 <map id="G" name="G">
-<area shape="rect" id="node2" href="$classsauce_1_1internal_1_1_binding.html" title="sauce::internal::Binding\l\&lt; Named\&lt; Provider\&lt; Dependency\l \&gt;, Name \&gt;, NoScope \&gt;" alt="" coords="496,42,720,102"/>
+<area shape="rect" id="node2" href="$classsauce_1_1internal_1_1_binding.html" title="sauce::internal::Binding\l\&lt; Named\&lt; Provider\&lt; Dependency\l \&gt;, Name \&gt;, NoScope \&gt;" alt="" coords="496,43,720,103"/>
 <area shape="rect" id="node4" href="$structsauce_1_1internal_1_1_resolved_binding.html" title="sauce::internal::Resolved\lBinding\&lt; Named\&lt; Provider\l\&lt; Dependency \&gt;, Name \&gt; \&gt;" alt="" coords="262,5,447,65"/>
 <area shape="rect" id="node6" href="$structsauce_1_1internal_1_1_opaque_binding.html" title="An opaque binding." alt="" coords="6,21,213,49"/>
 <area shape="rect" id="node8" href="$classsauce_1_1internal_1_1_injector_friend.html" title="sauce::internal::Injector\lFriend" alt="" coords="275,89,434,133"/>
-<area shape="rect" id="node10" href="$structsauce_1_1internal_1_1_provider_friend.html" title="A friend of the Provider base type." alt="" coords="525,126,691,170"/>
 </map>

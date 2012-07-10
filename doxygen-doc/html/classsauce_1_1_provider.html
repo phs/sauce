@@ -49,8 +49,7 @@
   <div class="summary">
 <a href="#pub-types">Public Types</a> &#124;
 <a href="#pub-methods">Public Member Functions</a> &#124;
-<a href="#pro-methods">Protected Member Functions</a> &#124;
-<a href="#friends">Friends</a>  </div>
+<a href="#pro-methods">Protected Member Functions</a>  </div>
   <div class="headertitle">
 <div class="title">sauce::Provider&lt; Dependency &gt; Class Template Reference</div>  </div>
 </div><!--header-->
@@ -77,6 +76,8 @@ typedef <a class="el" href="structsauce_1_1internal_1_1_key.html">i::Key</a>&lt;
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
+<tr class="memitem:ad52b193be1e5efecf29fa27bb3eab610"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ad52b193be1e5efecf29fa27bb3eab610"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>setSelf</b> (sauce::weak_ptr&lt; <a class="el" href="classsauce_1_1_provider.html">Provider</a>&lt; Dependency &gt; &gt; weak)</td></tr>
 <tr class="memitem:a11a5255647c2570bf86e15a04dbef82a"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a11a5255647c2570bf86e15a04dbef82a"></a>
 virtual sauce::shared_ptr&lt; Iface &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classsauce_1_1_provider.html#a11a5255647c2570bf86e15a04dbef82a">get</a> ()=0</td></tr>
 <tr class="memdesc:a11a5255647c2570bf86e15a04dbef82a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Provide an Iface. <br/></td></tr>
@@ -86,11 +87,6 @@ Protected Member Functions</h2></td></tr>
 <tr class="memitem:a9fac62da0c899b2b8ae4a55dc22c5b90"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a9fac62da0c899b2b8ae4a55dc22c5b90"></a>
 sauce::shared_ptr&lt; <a class="el" href="classsauce_1_1_provider.html">Provider</a><br class="typebreak"/>
 &lt; Dependency &gt; &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>getSelf</b> () const </td></tr>
-</table><table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2><a name="friends"></a>
-Friends</h2></td></tr>
-<tr class="memitem:a3906d3c8cf401f08c6fcfbafaa1d2d99"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a3906d3c8cf401f08c6fcfbafaa1d2d99"></a>
-struct&#160;</td><td class="memItemRight" valign="bottom"><b>::sauce::internal::ProviderFriend</b></td></tr>
 </table>
 <hr/><a name="details" id="details"></a><h2>Detailed Description</h2>
 <div class="textblock"><h3>template&lt;typename Dependency&gt;<br/>
