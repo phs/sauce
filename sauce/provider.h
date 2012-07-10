@@ -21,22 +21,7 @@ class Provider;
  */
 template<typename Dependency>
 class Provider {
-  sauce::weak_ptr<Provider<Dependency> > weak;
-
-protected:
-
-  sauce::shared_ptr<Provider<Dependency> > getSelf() const {
-    sauce::shared_ptr<Provider<Dependency> > self = weak.lock();
-    assert(self.get() == this);
-    return self;
-  }
-
 public:
-
-  void setSelf(sauce::weak_ptr<Provider<Dependency> > weak) {
-    assert(weak.lock().get() == this);
-    this->weak = weak;
-  }
 
   typedef typename i::Key<Dependency>::Iface Iface;
 
@@ -58,6 +43,8 @@ class AbstractProvider: public Provider<Dependency> {
 
   friend class i::DisposalDeleter<Iface, Abstract>;
 
+  sauce::weak_ptr<Abstract> weak;
+
   /**
    * Provide a naked Iface pointer.
    */
@@ -70,7 +57,12 @@ class AbstractProvider: public Provider<Dependency> {
 
 public:
 
-  typedef Provider<Dependency> RequestsSelfInjection;
+  typedef Abstract RequestsSelfInjection;
+
+  void setSelf(sauce::weak_ptr<Abstract> weak) {
+    assert(weak.lock().get() == this);
+    this->weak = weak;
+  }
 
   /**
    * Provide an Iface.
@@ -79,9 +71,10 @@ public:
    * given a custom deleter, to dispose of the naked pointer with dispose(Iface *).
    */
   sauce::shared_ptr<Iface> get() {
-    Deleter deleter(sauce::static_pointer_cast<Abstract>(this->getSelf()));
-    sauce::shared_ptr<Iface> provided(provide(), deleter);
-    return provided;
+    sauce::shared_ptr<Abstract> self = weak.lock();
+    assert(self.get() == this);
+    Deleter deleter(sauce::static_pointer_cast<Abstract>(self));
+    return sauce::shared_ptr<Iface>(provide(), deleter);
   }
 
 };
