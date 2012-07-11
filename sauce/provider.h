@@ -16,19 +16,21 @@ class Provider;
 
 /**
  * An interface for including custom factories in an Injector.
- *
- * TODO: It would really be great if this could be reduced to a template concept..
  */
 template<typename Dependency>
 class Provider {
 public:
 
-  typedef typename i::Key<Dependency>::Iface Iface;
+  /**
+   * Indicates to template magic that this type exposes sauce::shared_ptr<Provides> get().
+   */
+  typedef typename i::Key<Dependency>::Iface Provides;
 
   /**
    * Provide an Iface.
    */
   virtual typename i::Key<Dependency>::Ptr get() = 0;
+
 };
 
 /**

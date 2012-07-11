@@ -17,9 +17,6 @@
 namespace sauce {
 namespace internal {
 
-// TODO This is only detecting the presence of an Iface typedef.
-// Far better would be checking for a sauce::shared_ptr<Iface> get() member function.
-// Provider wants some cleanup first.
 template<typename Dependency, typename Scope, typename Ctor, typename Allocator>
 class ProviderBindingCreator {
   template<typename T>
@@ -28,9 +25,9 @@ class ProviderBindingCreator {
   }
 
   template<typename T>
-  OpaqueBindingPtr createIfDependencyIsAProvider(typename i::Key<T>::Iface::Iface *) {
+  OpaqueBindingPtr createIfDependencyIsAProvider(typename i::Key<T>::Iface::Provides *) {
     typedef typename i::Key<Dependency>::Iface Provider;
-    typedef typename Provider::Iface Iface;
+    typedef typename Provider::Provides Iface;
     typedef typename i::Key<Dependency>::Name Name;
     typedef Named<Iface, Name> ProvidedDependency;
 
