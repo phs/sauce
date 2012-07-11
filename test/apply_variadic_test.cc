@@ -90,6 +90,7 @@ struct SideEffectParameters {
 int SideEffectParameters::called = 0;
 
 TEST(ApplyFunctionTest, shouldYieldParametersForSideEffectsIfRequested) {
+  SideEffectParameters::called = 0;
   yieldForFunction<SideEffectParameters>(&toString, 0);
   ASSERT_EQ(2, SideEffectParameters::called);
 }
@@ -133,6 +134,10 @@ TEST(ApplyMethodTest, shouldCallPassedMethodOnReceiverWithParametersGeneratedFro
 
   std::string passed = "foo";
   ASSERT_EQ("'foo' '1'", applyMethod<MoreSpecializedParameters>(hasToString, &HasToString::toString, passed));
+
+  SideEffectParameters::called = 0;
+  yieldForMethod<SideEffectParameters>(&HasToString::toString, 0);
+  ASSERT_EQ(2, SideEffectParameters::called);
 }
 
 struct ToStringer {

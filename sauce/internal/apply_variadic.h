@@ -38,6 +38,11 @@ typename ApplyMethod<Parameters, Method>::Return applyMethod(
   return ApplyMethod<Parameters, Method>(method) (receiver, passed);
 }
 
+template<typename Parameters, typename Method, typename Passed>
+void yieldForMethod(Method method, Passed passed) {
+  ApplyMethod<Parameters, Method>(method).yield(passed);
+}
+
 template<typename Parameters, typename Constructed_, typename Allocator_>
 class ApplyConstructor {
   typedef Constructed_ (Constructor)();
@@ -122,6 +127,10 @@ public:
   template<typename Passed>
   Return operator()(Receiver & receiver, Passed passed) {
     return (receiver.*method)();
+  }
+
+  template<typename Passed>
+  void yield(Passed passed) {
   }
 };
 /* *INDENT-ON* */
@@ -211,6 +220,11 @@ public:
   Return operator()(Receiver & receiver, Passed passed) {
     return (receiver.*method)(
       (typename Parameters::template Parameter<A0, 0, Passed>()).yield(passed));
+  }
+
+  template<typename Passed>
+  void yield(Passed passed) {
+    (typename Parameters::template Parameter<A0, 0, Passed>()).yield(passed);
   }
 };
 /* *INDENT-ON* */
@@ -305,6 +319,12 @@ public:
     return (receiver.*method)(
       (typename Parameters::template Parameter<A0, 0, Passed>()).yield(passed),
       (typename Parameters::template Parameter<A1, 1, Passed>()).yield(passed));
+  }
+
+  template<typename Passed>
+  void yield(Passed passed) {
+    (typename Parameters::template Parameter<A0, 0, Passed>()).yield(passed);
+    (typename Parameters::template Parameter<A1, 1, Passed>()).yield(passed);
   }
 };
 /* *INDENT-ON* */
@@ -404,6 +424,13 @@ public:
       (typename Parameters::template Parameter<A0, 0, Passed>()).yield(passed),
       (typename Parameters::template Parameter<A1, 1, Passed>()).yield(passed),
       (typename Parameters::template Parameter<A2, 2, Passed>()).yield(passed));
+  }
+
+  template<typename Passed>
+  void yield(Passed passed) {
+    (typename Parameters::template Parameter<A0, 0, Passed>()).yield(passed);
+    (typename Parameters::template Parameter<A1, 1, Passed>()).yield(passed);
+    (typename Parameters::template Parameter<A2, 2, Passed>()).yield(passed);
   }
 };
 /* *INDENT-ON* */
@@ -508,6 +535,14 @@ public:
       (typename Parameters::template Parameter<A1, 1, Passed>()).yield(passed),
       (typename Parameters::template Parameter<A2, 2, Passed>()).yield(passed),
       (typename Parameters::template Parameter<A3, 3, Passed>()).yield(passed));
+  }
+
+  template<typename Passed>
+  void yield(Passed passed) {
+    (typename Parameters::template Parameter<A0, 0, Passed>()).yield(passed);
+    (typename Parameters::template Parameter<A1, 1, Passed>()).yield(passed);
+    (typename Parameters::template Parameter<A2, 2, Passed>()).yield(passed);
+    (typename Parameters::template Parameter<A3, 3, Passed>()).yield(passed);
   }
 };
 /* *INDENT-ON* */
@@ -619,6 +654,15 @@ public:
       (typename Parameters::template Parameter<A2, 2, Passed>()).yield(passed),
       (typename Parameters::template Parameter<A3, 3, Passed>()).yield(passed),
       (typename Parameters::template Parameter<A4, 4, Passed>()).yield(passed));
+  }
+
+  template<typename Passed>
+  void yield(Passed passed) {
+    (typename Parameters::template Parameter<A0, 0, Passed>()).yield(passed);
+    (typename Parameters::template Parameter<A1, 1, Passed>()).yield(passed);
+    (typename Parameters::template Parameter<A2, 2, Passed>()).yield(passed);
+    (typename Parameters::template Parameter<A3, 3, Passed>()).yield(passed);
+    (typename Parameters::template Parameter<A4, 4, Passed>()).yield(passed);
   }
 };
 /* *INDENT-ON* */
@@ -736,6 +780,16 @@ public:
       (typename Parameters::template Parameter<A3, 3, Passed>()).yield(passed),
       (typename Parameters::template Parameter<A4, 4, Passed>()).yield(passed),
       (typename Parameters::template Parameter<A5, 5, Passed>()).yield(passed));
+  }
+
+  template<typename Passed>
+  void yield(Passed passed) {
+    (typename Parameters::template Parameter<A0, 0, Passed>()).yield(passed);
+    (typename Parameters::template Parameter<A1, 1, Passed>()).yield(passed);
+    (typename Parameters::template Parameter<A2, 2, Passed>()).yield(passed);
+    (typename Parameters::template Parameter<A3, 3, Passed>()).yield(passed);
+    (typename Parameters::template Parameter<A4, 4, Passed>()).yield(passed);
+    (typename Parameters::template Parameter<A5, 5, Passed>()).yield(passed);
   }
 };
 /* *INDENT-ON* */
@@ -858,6 +912,17 @@ public:
       (typename Parameters::template Parameter<A4, 4, Passed>()).yield(passed),
       (typename Parameters::template Parameter<A5, 5, Passed>()).yield(passed),
       (typename Parameters::template Parameter<A6, 6, Passed>()).yield(passed));
+  }
+
+  template<typename Passed>
+  void yield(Passed passed) {
+    (typename Parameters::template Parameter<A0, 0, Passed>()).yield(passed);
+    (typename Parameters::template Parameter<A1, 1, Passed>()).yield(passed);
+    (typename Parameters::template Parameter<A2, 2, Passed>()).yield(passed);
+    (typename Parameters::template Parameter<A3, 3, Passed>()).yield(passed);
+    (typename Parameters::template Parameter<A4, 4, Passed>()).yield(passed);
+    (typename Parameters::template Parameter<A5, 5, Passed>()).yield(passed);
+    (typename Parameters::template Parameter<A6, 6, Passed>()).yield(passed);
   }
 };
 /* *INDENT-ON* */
@@ -986,6 +1051,18 @@ public:
       (typename Parameters::template Parameter<A5, 5, Passed>()).yield(passed),
       (typename Parameters::template Parameter<A6, 6, Passed>()).yield(passed),
       (typename Parameters::template Parameter<A7, 7, Passed>()).yield(passed));
+  }
+
+  template<typename Passed>
+  void yield(Passed passed) {
+    (typename Parameters::template Parameter<A0, 0, Passed>()).yield(passed);
+    (typename Parameters::template Parameter<A1, 1, Passed>()).yield(passed);
+    (typename Parameters::template Parameter<A2, 2, Passed>()).yield(passed);
+    (typename Parameters::template Parameter<A3, 3, Passed>()).yield(passed);
+    (typename Parameters::template Parameter<A4, 4, Passed>()).yield(passed);
+    (typename Parameters::template Parameter<A5, 5, Passed>()).yield(passed);
+    (typename Parameters::template Parameter<A6, 6, Passed>()).yield(passed);
+    (typename Parameters::template Parameter<A7, 7, Passed>()).yield(passed);
   }
 };
 /* *INDENT-ON* */
@@ -1119,6 +1196,19 @@ public:
       (typename Parameters::template Parameter<A6, 6, Passed>()).yield(passed),
       (typename Parameters::template Parameter<A7, 7, Passed>()).yield(passed),
       (typename Parameters::template Parameter<A8, 8, Passed>()).yield(passed));
+  }
+
+  template<typename Passed>
+  void yield(Passed passed) {
+    (typename Parameters::template Parameter<A0, 0, Passed>()).yield(passed);
+    (typename Parameters::template Parameter<A1, 1, Passed>()).yield(passed);
+    (typename Parameters::template Parameter<A2, 2, Passed>()).yield(passed);
+    (typename Parameters::template Parameter<A3, 3, Passed>()).yield(passed);
+    (typename Parameters::template Parameter<A4, 4, Passed>()).yield(passed);
+    (typename Parameters::template Parameter<A5, 5, Passed>()).yield(passed);
+    (typename Parameters::template Parameter<A6, 6, Passed>()).yield(passed);
+    (typename Parameters::template Parameter<A7, 7, Passed>()).yield(passed);
+    (typename Parameters::template Parameter<A8, 8, Passed>()).yield(passed);
   }
 };
 /* *INDENT-ON* */
@@ -1257,6 +1347,20 @@ public:
       (typename Parameters::template Parameter<A7, 7, Passed>()).yield(passed),
       (typename Parameters::template Parameter<A8, 8, Passed>()).yield(passed),
       (typename Parameters::template Parameter<A9, 9, Passed>()).yield(passed));
+  }
+
+  template<typename Passed>
+  void yield(Passed passed) {
+    (typename Parameters::template Parameter<A0, 0, Passed>()).yield(passed);
+    (typename Parameters::template Parameter<A1, 1, Passed>()).yield(passed);
+    (typename Parameters::template Parameter<A2, 2, Passed>()).yield(passed);
+    (typename Parameters::template Parameter<A3, 3, Passed>()).yield(passed);
+    (typename Parameters::template Parameter<A4, 4, Passed>()).yield(passed);
+    (typename Parameters::template Parameter<A5, 5, Passed>()).yield(passed);
+    (typename Parameters::template Parameter<A6, 6, Passed>()).yield(passed);
+    (typename Parameters::template Parameter<A7, 7, Passed>()).yield(passed);
+    (typename Parameters::template Parameter<A8, 8, Passed>()).yield(passed);
+    (typename Parameters::template Parameter<A9, 9, Passed>()).yield(passed);
   }
 };
 /* *INDENT-ON* */

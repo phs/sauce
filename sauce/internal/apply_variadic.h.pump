@@ -37,6 +37,11 @@ typename ApplyMethod<Parameters, Method>::Return applyMethod(
   return ApplyMethod<Parameters, Method>(method) (receiver, passed);
 }
 
+template<typename Parameters, typename Method, typename Passed>
+void yieldForMethod(Method method, Passed passed) {
+  ApplyMethod<Parameters, Method>(method).yield(passed);
+}
+
 template<typename Parameters, typename Constructed_, typename Allocator_>
 class ApplyConstructor {
   typedef Constructed_ (Constructor)();
@@ -141,6 +146,14 @@ public:
 
       (typename Parameters::template Parameter<A$j, $j, Passed>()).yield(passed)
 ]]]]);
+  }
+
+  template<typename Passed>
+  void yield(Passed passed) {
+[[$for j [[
+    (typename Parameters::template Parameter<A$j, $j, Passed>()).yield(passed);
+
+]]]]
   }
 };
 /* *INDENT-ON* */
