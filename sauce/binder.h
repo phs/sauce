@@ -30,7 +30,6 @@ public:
 
   SettingClause(Method method):
     method(method) {}
-
 };
 
 /**
