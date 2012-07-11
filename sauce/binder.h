@@ -214,7 +214,7 @@ public:
 class Modules;
 
 namespace internal {
-struct ImplicitBindings;
+class ImplicitBindings;
 }
 
 /**

@@ -16,12 +16,13 @@
 namespace sauce {
 namespace internal {
 
-struct ImplicitBindings;
+class ImplicitBindings;
 
 typedef Bindings<ImplicitBindings> ConcreteBindings;
 
 template<typename ImplicitInjection_>
-struct ImplicitBindingTraits {
+class ImplicitBindingTraits {
+public:
   typedef ImplicitInjection_ ImplicitInjection;
   typedef typename ImplicitInjection::Dependency Dependency;
   typedef typename ResolvedBinding<Dependency>::BindingPtr BindingPtr;
@@ -31,7 +32,9 @@ struct ImplicitBindingTraits {
  * Attempts to supply a Binding when the given Dependency is not found.
  */
 template<typename Dependency>
-struct ImplicitBinding {
+class ImplicitBinding {
+public:
+
   typedef sauce::shared_ptr<ResolvedBinding<Dependency> > BindingPtr;
 
   /**
@@ -46,7 +49,8 @@ struct ImplicitBinding {
 /**
  * Attempts to supply a Binding when none is found for a dependency.
  */
-struct ImplicitBindings {
+class ImplicitBindings {
+public:
 
   /**
    * Attempt to supply a (unknown) Binding at provision time.
@@ -63,7 +67,8 @@ struct ImplicitBindings {
  * The implicit Injector binding.
  */
 template<>
-struct ImplicitBinding<Named<Injector, Unnamed> >: ImplicitBindingTraits<i::InjectorBinding> {
+class ImplicitBinding<Named<Injector, Unnamed> >: ImplicitBindingTraits<i::InjectorBinding> {
+public:
   static BindingPtr get(ConcreteBindings const &, std::string const name) {
     if (name != unnamed()) {
       throw UnboundExceptionFor<Named<Injector, Unnamed> >(name);
@@ -77,7 +82,8 @@ struct ImplicitBinding<Named<Injector, Unnamed> >: ImplicitBindingTraits<i::Inje
  * The implicit Provider binding for bound dependencies.
  */
 template<typename ProvidedDependency, typename Name>
-struct ImplicitBinding<Named<Provider<ProvidedDependency>, Name> > {
+class ImplicitBinding<Named<Provider<ProvidedDependency>, Name> > {
+public:
   typedef ImplicitBindingTraits<i::ImplicitProviderBinding<ProvidedDependency, Name> > Traits;
   typedef typename Traits::ImplicitInjection ImplicitInjection;
   typedef typename Traits::Dependency Dependency;
