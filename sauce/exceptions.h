@@ -9,7 +9,8 @@ namespace sauce {
 /**
  * Base class for all sauce exceptions.
  */
-struct Exception: std::runtime_error {
+class Exception: public std::runtime_error {
+public:
   Exception(std::string message):
     std::runtime_error(message) {}
 };
@@ -17,7 +18,8 @@ struct Exception: std::runtime_error {
 /**
  * Thrown when a binding cannot be found.
  */
-struct UnboundException: Exception {
+class UnboundException: public Exception {
+public:
   UnboundException(std::string const name):
     Exception("Request for unbound interface " + name + ".") {}
 };
@@ -26,14 +28,16 @@ struct UnboundException: Exception {
  * Thrown when a binding cannot be found for the given interface.
  */
 template<typename Dependency>
-struct UnboundExceptionFor: UnboundException {
+class UnboundExceptionFor: public UnboundException {
+public:
   UnboundExceptionFor(std::string const name): UnboundException(name) {}
 };
 
 /**
  * Thrown when a binding hasn't been completely specified.
  */
-struct PartialBindingException: Exception {
+class PartialBindingException: public Exception {
+public:
   PartialBindingException():
     Exception("Binding is incomplete.") {}
 };
@@ -42,14 +46,16 @@ struct PartialBindingException: Exception {
  * Thrown when a binding hasn't been completely specified for the given interface.
  */
 template<typename Dependency>
-struct PartialBindingExceptionFor: PartialBindingException {
+class PartialBindingExceptionFor: public PartialBindingException {
+public:
   PartialBindingExceptionFor(): PartialBindingException() {}
 };
 
 /**
  * Thrown when a dependency cycle is found.
  */
-struct CircularDependencyException: Exception {
+class CircularDependencyException: public Exception {
+public:
   CircularDependencyException():
     Exception("Request for unbound interface.") {}
 };
@@ -58,14 +64,16 @@ struct CircularDependencyException: Exception {
  * Thrown when a dependency cycle is found for the given interface.
  */
 template<typename Dependency>
-struct CircularDependencyExceptionFor: CircularDependencyException {
+class CircularDependencyExceptionFor: public CircularDependencyException {
+public:
   CircularDependencyExceptionFor(): CircularDependencyException() {}
 };
 
 /**
  * Thrown when a provision is requested outside of its bound scope.
  */
-struct OutOfScopeException: Exception {
+class OutOfScopeException: public Exception {
+public:
   OutOfScopeException():
     Exception("Out of dependency scope.") {}
 };
@@ -74,14 +82,16 @@ struct OutOfScopeException: Exception {
  * Thrown when a provision is requested outside of its given, bound scope.
  */
 template<typename Scope>
-struct OutOfScopeExceptionFor: OutOfScopeException {
+class OutOfScopeExceptionFor: public OutOfScopeException {
+public:
   OutOfScopeExceptionFor(): OutOfScopeException() {}
 };
 
 /**
  * Thrown when re-entering a scope that is already open.
  */
-struct AlreadyInScopeException: Exception {
+class AlreadyInScopeException: public Exception {
+public:
   AlreadyInScopeException():
     Exception("Already in scope.") {}
 };
@@ -90,14 +100,16 @@ struct AlreadyInScopeException: Exception {
  * Thrown when re-entering the given scope, which is already open.
  */
 template<typename Scope>
-struct AlreadyInScopeExceptionFor: AlreadyInScopeException {
+class AlreadyInScopeExceptionFor: public AlreadyInScopeException {
+public:
   AlreadyInScopeExceptionFor(): AlreadyInScopeException() {}
 };
 
 /**
  * Thrown when exiting the singleton scope.
  */
-struct ExitingSingletonScopeException: Exception {
+class ExitingSingletonScopeException: public Exception {
+public:
   ExitingSingletonScopeException():
     Exception("Can't exit SingletonScope") {}
 };
