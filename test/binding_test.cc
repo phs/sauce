@@ -15,7 +15,7 @@ using ::sauce::Named;
 namespace sauce {
 namespace test {
 
-struct Bound {};
+class Bound {};
 
 void BoundModule(Binder & binder) {
   binder.bind<Bound>().to<Bound()>();
@@ -42,17 +42,20 @@ TEST(BindingTest, shouldInterpretNonFunctionTypesAsNoArgumentConstructors) {
   // TODO make this work for explicit providers as well.
 }
 
-struct PureVirtual {
+class PureVirtual {
+public:
   virtual std::string says() = 0;
 };
 
-struct PureVirtualImpl: public PureVirtual {
+class PureVirtualImpl: public PureVirtual {
+public:
   std::string says() {
     return "impl!";
   }
 };
 
-struct NeedsPureVirtual {
+class NeedsPureVirtual {
+public:
   sauce::shared_ptr<PureVirtual> pure;
   explicit NeedsPureVirtual(sauce::shared_ptr<PureVirtual> pure):
     pure(pure) {}
@@ -91,9 +94,10 @@ TEST(BindingTest, shouldAllowBindingUnnamedPureVirtualDependenciesByReference) {
   EXPECT_EQ("impl!", (injector->get<NeedsPureVirtual>()->pure->says()));
 }
 
-struct CustomBuilt {};
+class CustomBuilt {};
 
-struct CustomBuiltProvider: AbstractProvider<CustomBuilt> {
+class CustomBuiltProvider: public AbstractProvider<CustomBuilt> {
+public:
   CustomBuilt * provide() {
     return new CustomBuilt();
   }
@@ -115,7 +119,7 @@ TEST(BindingTest, shouldProvideDependenciesBoundToProvidersAndTheProvidersToo) {
   sauce::shared_ptr<Provider<CustomBuilt> > provider = injector->get<Provider<CustomBuilt> >();
 }
 
-struct Unbound {};
+class Unbound {};
 
 TEST(BindingTest, shouldThrowExceptionWhenGettingAnUnboundIface) {
   sauce::shared_ptr<Injector> injector(Modules().createInjector());
@@ -128,11 +132,13 @@ TEST(BindingTest, shouldImplicitlyBindTheInjectorItself) {
   ASSERT_EQ(expected, actual);
 }
 
-struct HasBound {
+class HasBound {
+public:
   virtual sauce::shared_ptr<Bound> getBound() = 0;
 };
 
-struct HasSetter: public HasBound {
+class HasSetter: public HasBound {
+public:
   sauce::shared_ptr<Bound> bound;
 
   HasSetter():
@@ -160,13 +166,15 @@ TEST(BindingTest, shouldInjectBoundSetters) {
   // ASSERT_EQ(bound, injector->get<HasBound>()->getBound()); // TODO
 }
 
-struct Dog;
+class Dog;
 
-struct Tail {
+class Tail {
+public:
   Tail(sauce::shared_ptr<Dog>) {}
 };
 
-struct Dog {
+class Dog {
+public:
   Dog(sauce::shared_ptr<Tail>) {}
 };
 
@@ -185,7 +193,7 @@ TEST(BindingTest, shouldThrowExceptionWhenEagerlyProvidingCircularDependency) {
   ASSERT_THROW(injector->eagerlyProvide<SingletonScope>(), ::sauce::CircularDependencyException);
 }
 
-struct IncompletelyBound {};
+class IncompletelyBound {};
 
 void IncompleteModule(Binder & binder) {
   binder.bind<IncompletelyBound>() /* to ...? */;
@@ -197,25 +205,30 @@ TEST(BindingTest, shouldThrowExceptionOnPartialBinding) {
     ::sauce::PartialBindingException);
 }
 
-struct Animal {
+class Animal {
+public:
   virtual std::string says() = 0;
 };
 
-struct Cat: Animal {
+class Cat: public Animal {
+public:
   std::string says() { return "Meow"; }
 };
 
-struct LieutenantShinysides {};
-struct Fish: Animal {
+class LieutenantShinysides {};
+class Fish: public Animal {
+public:
   std::string says() { return "Blub blub"; }
 };
 
-struct Meatloaf {};
-struct Cow: Animal {
+class Meatloaf {};
+class Cow: public Animal {
+public:
   std::string says() { return "Moo"; }
 };
 
-struct CowProvider: AbstractProvider<Animal> {
+class CowProvider: public AbstractProvider<Animal> {
+public:
   Animal * provide() {
     return new Cow();
   }
@@ -225,18 +238,21 @@ struct CowProvider: AbstractProvider<Animal> {
   }
 };
 
-struct Bird: Animal {
+class Bird: public Animal {
+public:
   std::string says() { return "Cheep cheep"; }
 };
 
-struct Pond {
+class Pond {
+public:
   sauce::shared_ptr<Animal> animal;
 
   Pond(sauce::shared_ptr<Animal> animal):
     animal(animal) {}
 };
 
-struct BirdCage {
+class BirdCage {
+public:
   sauce::shared_ptr<Animal> animal;
 
   BirdCage(sauce::shared_ptr<Animal> animal):
@@ -335,7 +351,8 @@ TEST(BindingTest, shouldThrowExceptionOnPartialScopedBinding) {
     ::sauce::PartialBindingException);
 }
 
-struct SelfInterested: public Bound {
+class SelfInterested: public Bound {
+public:
   sauce::weak_ptr<SelfInterested> self;
 
   SelfInterested():
@@ -358,7 +375,7 @@ struct SelfInterested: public Bound {
   }
 };
 
-struct SonOfSelfInterested: public SelfInterested {};
+class SonOfSelfInterested: public SelfInterested {};
 
 void SelfInterestedModule(Binder & binder) {
   binder.bind<SelfInterested>().to<SelfInterested>();
@@ -377,7 +394,8 @@ TEST(BindingTest, shouldInjectSelfWeakPointersAutomaticallyIfSpecialTypedefIsInh
   ASSERT_EQ(son, son->self.lock());
 }
 
-struct SelfInterestedProvider: public AbstractProvider<SelfInterested> {
+class SelfInterestedProvider: public AbstractProvider<SelfInterested> {
+public:
   SelfInterested * provide() {
     return new SelfInterested();
   }

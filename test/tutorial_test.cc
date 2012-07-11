@@ -45,7 +45,8 @@ typedef std::vector<std::map<std::string, std::string> > ResultSet;
 /**
  * An interface to a SQL store.
  */
-struct Database {
+class Database {
+public:
   virtual ResultSet query(std::string) = 0;
   virtual bool mutate(std::string) = 0;
 };
@@ -55,7 +56,8 @@ typedef std::vector<std::string> ValidationErrors;
 /**
  * Parent type of ORM-managed models.
  */
-struct Model {
+class Model {
+public:
   bool validate(ValidationErrors &) const { return true; }
 };
 
@@ -66,7 +68,8 @@ struct Model {
  * own way to communicate this, but I might as well show some things off.
  */
 template<typename ModelType>
-struct Table {
+class Table {
+public:
   typedef typename ModelType::Key Key;
 
   sauce::shared_ptr<Database> database;
@@ -97,7 +100,8 @@ typedef std::string ConnectionURI;
 /**
  * A Database exposed over a TCP connection.
  */
-struct RemoteDatabase: public Database {
+class RemoteDatabase: public Database {
+public:
   RemoteDatabase(ConnectionURI) {}
   ResultSet query(std::string) { return ResultSet(); }
   bool mutate(std::string) { return true; }
@@ -144,7 +148,8 @@ typedef std::string Filename;
 /**
  * A Database exposed as a flat file.
  */
-struct FlatFileDatabase: public Database {
+class FlatFileDatabase: public Database {
+public:
   FlatFileDatabase(Filename) {}
   ResultSet query(std::string) { return ResultSet(); }
   bool mutate(std::string) { return true; }
@@ -179,16 +184,18 @@ using sauce::Injector;
 using sauce::Provider;
 
 // Have some interfaces.
-struct Request {};
-struct Response {};
+class Request {};
+class Response {};
 
-struct Controller {
+class Controller {
+public:
   virtual void serve(sauce::shared_ptr<Request>, sauce::shared_ptr<Response>) = 0;
 };
 
 typedef std::string RequestPattern;
 
-struct Router {
+class Router {
+public:
   sauce::shared_ptr<Injector> injector;
 
   /**
@@ -230,11 +237,14 @@ typedef std::pair<sauce::shared_ptr<Request>, sauce::shared_ptr<Response> > Requ
 /**
  * Receives new request, response pairs from the web server.
  */
-struct Acceptor {
+class Acceptor {
+public:
+
   /**
    * Block until a request to process arrives.
    */
   virtual RequestResponsePair accept() = 0;
+
 };
 
 /**
@@ -250,7 +260,8 @@ struct Acceptor {
  * request, it just wants an opportunity to modify it before it gets handed to the router.  An injected provider fits
  * this need well.
  */
-struct FCGIAcceptor: public Acceptor {
+class FCGIAcceptor: public Acceptor {
+public:
   sauce::shared_ptr<Provider<Request> > requestProvider;
   sauce::shared_ptr<Provider<Response> > responseProvider;
 
@@ -270,7 +281,8 @@ struct FCGIAcceptor: public Acceptor {
 /**
  * An application encapsulates the request cycle of single-threaded app worker.
  */
-struct Application {
+class Application {
+public:
   sauce::shared_ptr<Acceptor> acceptor;
   sauce::shared_ptr<Router> router;
 
@@ -302,7 +314,8 @@ struct Application {
  * Here are the application author-supplied mappings between url patterns and controllers in our ficticuous framework.
  */
 
-struct MyRouter: public Router {
+class MyRouter: public Router {
+public:
   // TODO: Setter injection would allow us to expose an inherited setter, instead of delegating in the constructor.
   MyRouter(sauce::shared_ptr<Injector> injector):
     Router(injector) {}
@@ -319,7 +332,8 @@ struct MyRouter: public Router {
 /**
  * A pizza order being processed.
  */
-struct Order: public Model {
+class Order: public Model {
+public:
   typedef int Key;
 
   std::string getStatus() {
@@ -333,14 +347,16 @@ struct Order: public Model {
 /**
  * Handles requests to place an order.
  */
-struct PlaceController: public Controller {
+class PlaceController: public Controller {
+public:
   void serve(sauce::shared_ptr<Request>, sauce::shared_ptr<Response>) {}
 };
 
 /**
  * Handles requests regarding an order's status.
  */
-struct StatusController: public Controller {
+class StatusController: public Controller {
+public:
   sauce::shared_ptr<Table<Order> > orders;
 
   StatusController(sauce::shared_ptr<Table<Order> > orders):
@@ -364,7 +380,7 @@ using sauce::Provider;
 /**
  * A type tag used as a static name, see below.
  */
-struct Local {};
+class Local {};
 
 /**
  * The sauce module, written by the framework author, that specifies the bindings used when running in production.
