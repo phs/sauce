@@ -11,7 +11,8 @@ namespace internal {
  * A complete specification of a dependency request.
  */
 template<typename Iface_>
-struct Key {
+class Key {
+public:
   typedef Iface_ Iface;
   typedef sauce::shared_ptr<Iface_> Ptr;
   typedef Unnamed Name;
@@ -29,7 +30,8 @@ struct Key {
  * Template specialization when an unnamed reference is used.
  */
 template<typename Iface_>
-struct Key<Iface_ &> {
+class Key<Iface_ &> {
+public:
   typedef Iface_ Iface;
   typedef sauce::shared_ptr<Iface_> Ptr;
   typedef Unnamed Name;
@@ -40,7 +42,8 @@ struct Key<Iface_ &> {
  * Template specialization when an actual name is used.
  */
 template<typename Iface_, typename Name_>
-struct Key<Named<Iface_, Name_> > {
+class Key<Named<Iface_, Name_> > {
+public:
   typedef Iface_ Iface;
   typedef sauce::shared_ptr<Iface_> Ptr;
   typedef Name_ Name;

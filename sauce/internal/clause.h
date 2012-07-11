@@ -41,7 +41,7 @@ public:
   }
 };
 
-struct ImplicitBindings;
+class ImplicitBindings;
 
 /**
  * The accumulated state passed between Clauses that ultimately results in a new Binding.
