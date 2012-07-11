@@ -107,7 +107,7 @@ struct HasVoidToString {
 
 std::string HasVoidToString::asString = "";
 
-TEST(ApplyFunctionTest, shouldCallPassedVoidFunctionWithParametersGeneratedFromPassedType) {
+TEST(ApplyVoidFunctionTest, shouldCallPassedVoidFunctionWithParametersGeneratedFromPassedType) {
   applyVoidFunction<DefaultValueParameters>(&HasVoidToString::toString, 0);
   ASSERT_EQ("'' '0'", HasVoidToString::asString);
 
