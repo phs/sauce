@@ -75,6 +75,30 @@ TEST(ApplyFunctionTest, shouldLetParametersExamineParameterIndexAndPassedValue) 
   ASSERT_EQ("'foo' '1'", applyFunction<MoreSpecializedParameters>(&toString, passed));
 }
 
+struct HasVoidToString {
+  static std::string asString;
+
+  static void toString(std::string s, int i) {
+    std::stringstream buffer;
+    buffer << "'" << s << "' '" << i << "'";
+    asString = buffer.str();
+  }
+};
+
+std::string HasVoidToString::asString = "";
+
+TEST(ApplyFunctionTest, shouldCallPassedVoidFunctionWithParametersGeneratedFromPassedType) {
+  applyVoidFunction<DefaultValueParameters>(&HasVoidToString::toString, 0);
+  ASSERT_EQ("'' '0'", HasVoidToString::asString);
+
+  applyVoidFunction<SpecializedParameters>(&HasVoidToString::toString, 0);
+  ASSERT_EQ("'foobar' '17'", HasVoidToString::asString);
+
+  std::string passed = "foo";
+  applyVoidFunction<MoreSpecializedParameters>(&HasVoidToString::toString, passed);
+  ASSERT_EQ("'foo' '1'", HasVoidToString::asString);
+}
+
 struct HasToString {
   std::string toString(std::string s, int i) {
     std::stringstream buffer;

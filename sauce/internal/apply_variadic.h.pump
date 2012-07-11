@@ -15,6 +15,14 @@ typename ApplyFunction<Parameters, Function>::Return applyFunction(Function func
   return ApplyFunction<Parameters, Function>(function) (passed);
 }
 
+template<typename Parameters, typename Function>
+class ApplyVoidFunction;
+
+template<typename Parameters, typename Function, typename Passed>
+void applyVoidFunction(Function function, Passed passed) {
+  (ApplyVoidFunction<Parameters, Function>(function))(passed);
+}
+
 template<typename Parameters, typename Method>
 class ApplyMethod;
 
@@ -72,6 +80,27 @@ public:
   template<typename Passed>
   Return operator()(Passed passed) {
     return function([[$for j, [[
+
+      (typename Parameters::template Parameter<A$j, $j, Passed>()).yield(passed)
+]]]]);
+  }
+};
+/* *INDENT-ON* */
+
+/* *INDENT-OFF* */
+template<typename Parameters$comma_typename_As>
+class ApplyVoidFunction<Parameters, void(*)($As)> {
+  typedef void (* Function)($As);
+  Function function;
+
+public:
+
+  ApplyVoidFunction(Function function):
+    function(function) {}
+
+  template<typename Passed>
+  void operator()(Passed passed) {
+    function([[$for j, [[
 
       (typename Parameters::template Parameter<A$j, $j, Passed>()).yield(passed)
 ]]]]);

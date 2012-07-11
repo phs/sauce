@@ -16,6 +16,14 @@ typename ApplyFunction<Parameters, Function>::Return applyFunction(Function func
   return ApplyFunction<Parameters, Function>(function) (passed);
 }
 
+template<typename Parameters, typename Function>
+class ApplyVoidFunction;
+
+template<typename Parameters, typename Function, typename Passed>
+void applyVoidFunction(Function function, Passed passed) {
+  (ApplyVoidFunction<Parameters, Function>(function))(passed);
+}
+
 template<typename Parameters, typename Method>
 class ApplyMethod;
 
@@ -66,6 +74,24 @@ public:
   template<typename Passed>
   Return operator()(Passed passed) {
     return function();
+  }
+};
+/* *INDENT-ON* */
+
+/* *INDENT-OFF* */
+template<typename Parameters>
+class ApplyVoidFunction<Parameters, void(*)()> {
+  typedef void (* Function)();
+  Function function;
+
+public:
+
+  ApplyVoidFunction(Function function):
+    function(function) {}
+
+  template<typename Passed>
+  void operator()(Passed passed) {
+    function();
   }
 };
 /* *INDENT-ON* */
@@ -135,6 +161,25 @@ public:
 /* *INDENT-ON* */
 
 /* *INDENT-OFF* */
+template<typename Parameters, typename A0>
+class ApplyVoidFunction<Parameters, void(*)(A0)> {
+  typedef void (* Function)(A0);
+  Function function;
+
+public:
+
+  ApplyVoidFunction(Function function):
+    function(function) {}
+
+  template<typename Passed>
+  void operator()(Passed passed) {
+    function(
+      (typename Parameters::template Parameter<A0, 0, Passed>()).yield(passed));
+  }
+};
+/* *INDENT-ON* */
+
+/* *INDENT-OFF* */
 template<typename Parameters, typename Return_, typename Receiver_, typename A0>
 class ApplyMethod<Parameters, Return_(Receiver_::*)(A0)> {
   typedef Return_ (Receiver_::* Method)(A0);
@@ -195,6 +240,26 @@ public:
   template<typename Passed>
   Return operator()(Passed passed) {
     return function(
+      (typename Parameters::template Parameter<A0, 0, Passed>()).yield(passed),
+      (typename Parameters::template Parameter<A1, 1, Passed>()).yield(passed));
+  }
+};
+/* *INDENT-ON* */
+
+/* *INDENT-OFF* */
+template<typename Parameters, typename A0, typename A1>
+class ApplyVoidFunction<Parameters, void(*)(A0, A1)> {
+  typedef void (* Function)(A0, A1);
+  Function function;
+
+public:
+
+  ApplyVoidFunction(Function function):
+    function(function) {}
+
+  template<typename Passed>
+  void operator()(Passed passed) {
+    function(
       (typename Parameters::template Parameter<A0, 0, Passed>()).yield(passed),
       (typename Parameters::template Parameter<A1, 1, Passed>()).yield(passed));
   }
@@ -272,6 +337,27 @@ public:
 /* *INDENT-ON* */
 
 /* *INDENT-OFF* */
+template<typename Parameters, typename A0, typename A1, typename A2>
+class ApplyVoidFunction<Parameters, void(*)(A0, A1, A2)> {
+  typedef void (* Function)(A0, A1, A2);
+  Function function;
+
+public:
+
+  ApplyVoidFunction(Function function):
+    function(function) {}
+
+  template<typename Passed>
+  void operator()(Passed passed) {
+    function(
+      (typename Parameters::template Parameter<A0, 0, Passed>()).yield(passed),
+      (typename Parameters::template Parameter<A1, 1, Passed>()).yield(passed),
+      (typename Parameters::template Parameter<A2, 2, Passed>()).yield(passed));
+  }
+};
+/* *INDENT-ON* */
+
+/* *INDENT-OFF* */
 template<typename Parameters, typename Return_, typename Receiver_, typename A0, typename A1, typename A2>
 class ApplyMethod<Parameters, Return_(Receiver_::*)(A0, A1, A2)> {
   typedef Return_ (Receiver_::* Method)(A0, A1, A2);
@@ -336,6 +422,28 @@ public:
   template<typename Passed>
   Return operator()(Passed passed) {
     return function(
+      (typename Parameters::template Parameter<A0, 0, Passed>()).yield(passed),
+      (typename Parameters::template Parameter<A1, 1, Passed>()).yield(passed),
+      (typename Parameters::template Parameter<A2, 2, Passed>()).yield(passed),
+      (typename Parameters::template Parameter<A3, 3, Passed>()).yield(passed));
+  }
+};
+/* *INDENT-ON* */
+
+/* *INDENT-OFF* */
+template<typename Parameters, typename A0, typename A1, typename A2, typename A3>
+class ApplyVoidFunction<Parameters, void(*)(A0, A1, A2, A3)> {
+  typedef void (* Function)(A0, A1, A2, A3);
+  Function function;
+
+public:
+
+  ApplyVoidFunction(Function function):
+    function(function) {}
+
+  template<typename Passed>
+  void operator()(Passed passed) {
+    function(
       (typename Parameters::template Parameter<A0, 0, Passed>()).yield(passed),
       (typename Parameters::template Parameter<A1, 1, Passed>()).yield(passed),
       (typename Parameters::template Parameter<A2, 2, Passed>()).yield(passed),
@@ -422,6 +530,29 @@ public:
 /* *INDENT-ON* */
 
 /* *INDENT-OFF* */
+template<typename Parameters, typename A0, typename A1, typename A2, typename A3, typename A4>
+class ApplyVoidFunction<Parameters, void(*)(A0, A1, A2, A3, A4)> {
+  typedef void (* Function)(A0, A1, A2, A3, A4);
+  Function function;
+
+public:
+
+  ApplyVoidFunction(Function function):
+    function(function) {}
+
+  template<typename Passed>
+  void operator()(Passed passed) {
+    function(
+      (typename Parameters::template Parameter<A0, 0, Passed>()).yield(passed),
+      (typename Parameters::template Parameter<A1, 1, Passed>()).yield(passed),
+      (typename Parameters::template Parameter<A2, 2, Passed>()).yield(passed),
+      (typename Parameters::template Parameter<A3, 3, Passed>()).yield(passed),
+      (typename Parameters::template Parameter<A4, 4, Passed>()).yield(passed));
+  }
+};
+/* *INDENT-ON* */
+
+/* *INDENT-OFF* */
 template<typename Parameters, typename Return_, typename Receiver_, typename A0, typename A1, typename A2, typename A3,
     typename A4>
 class ApplyMethod<Parameters, Return_(Receiver_::*)(A0, A1, A2, A3, A4)> {
@@ -493,6 +624,30 @@ public:
   template<typename Passed>
   Return operator()(Passed passed) {
     return function(
+      (typename Parameters::template Parameter<A0, 0, Passed>()).yield(passed),
+      (typename Parameters::template Parameter<A1, 1, Passed>()).yield(passed),
+      (typename Parameters::template Parameter<A2, 2, Passed>()).yield(passed),
+      (typename Parameters::template Parameter<A3, 3, Passed>()).yield(passed),
+      (typename Parameters::template Parameter<A4, 4, Passed>()).yield(passed),
+      (typename Parameters::template Parameter<A5, 5, Passed>()).yield(passed));
+  }
+};
+/* *INDENT-ON* */
+
+/* *INDENT-OFF* */
+template<typename Parameters, typename A0, typename A1, typename A2, typename A3, typename A4, typename A5>
+class ApplyVoidFunction<Parameters, void(*)(A0, A1, A2, A3, A4, A5)> {
+  typedef void (* Function)(A0, A1, A2, A3, A4, A5);
+  Function function;
+
+public:
+
+  ApplyVoidFunction(Function function):
+    function(function) {}
+
+  template<typename Passed>
+  void operator()(Passed passed) {
+    function(
       (typename Parameters::template Parameter<A0, 0, Passed>()).yield(passed),
       (typename Parameters::template Parameter<A1, 1, Passed>()).yield(passed),
       (typename Parameters::template Parameter<A2, 2, Passed>()).yield(passed),
@@ -589,6 +744,31 @@ public:
 /* *INDENT-ON* */
 
 /* *INDENT-OFF* */
+template<typename Parameters, typename A0, typename A1, typename A2, typename A3, typename A4, typename A5, typename A6>
+class ApplyVoidFunction<Parameters, void(*)(A0, A1, A2, A3, A4, A5, A6)> {
+  typedef void (* Function)(A0, A1, A2, A3, A4, A5, A6);
+  Function function;
+
+public:
+
+  ApplyVoidFunction(Function function):
+    function(function) {}
+
+  template<typename Passed>
+  void operator()(Passed passed) {
+    function(
+      (typename Parameters::template Parameter<A0, 0, Passed>()).yield(passed),
+      (typename Parameters::template Parameter<A1, 1, Passed>()).yield(passed),
+      (typename Parameters::template Parameter<A2, 2, Passed>()).yield(passed),
+      (typename Parameters::template Parameter<A3, 3, Passed>()).yield(passed),
+      (typename Parameters::template Parameter<A4, 4, Passed>()).yield(passed),
+      (typename Parameters::template Parameter<A5, 5, Passed>()).yield(passed),
+      (typename Parameters::template Parameter<A6, 6, Passed>()).yield(passed));
+  }
+};
+/* *INDENT-ON* */
+
+/* *INDENT-OFF* */
 template<typename Parameters, typename Return_, typename Receiver_, typename A0, typename A1, typename A2, typename A3,
     typename A4, typename A5, typename A6>
 class ApplyMethod<Parameters, Return_(Receiver_::*)(A0, A1, A2, A3, A4, A5, A6)> {
@@ -664,6 +844,33 @@ public:
   template<typename Passed>
   Return operator()(Passed passed) {
     return function(
+      (typename Parameters::template Parameter<A0, 0, Passed>()).yield(passed),
+      (typename Parameters::template Parameter<A1, 1, Passed>()).yield(passed),
+      (typename Parameters::template Parameter<A2, 2, Passed>()).yield(passed),
+      (typename Parameters::template Parameter<A3, 3, Passed>()).yield(passed),
+      (typename Parameters::template Parameter<A4, 4, Passed>()).yield(passed),
+      (typename Parameters::template Parameter<A5, 5, Passed>()).yield(passed),
+      (typename Parameters::template Parameter<A6, 6, Passed>()).yield(passed),
+      (typename Parameters::template Parameter<A7, 7, Passed>()).yield(passed));
+  }
+};
+/* *INDENT-ON* */
+
+/* *INDENT-OFF* */
+template<typename Parameters, typename A0, typename A1, typename A2, typename A3, typename A4, typename A5,
+    typename A6, typename A7>
+class ApplyVoidFunction<Parameters, void(*)(A0, A1, A2, A3, A4, A5, A6, A7)> {
+  typedef void (* Function)(A0, A1, A2, A3, A4, A5, A6, A7);
+  Function function;
+
+public:
+
+  ApplyVoidFunction(Function function):
+    function(function) {}
+
+  template<typename Passed>
+  void operator()(Passed passed) {
+    function(
       (typename Parameters::template Parameter<A0, 0, Passed>()).yield(passed),
       (typename Parameters::template Parameter<A1, 1, Passed>()).yield(passed),
       (typename Parameters::template Parameter<A2, 2, Passed>()).yield(passed),
@@ -768,6 +975,34 @@ public:
 /* *INDENT-ON* */
 
 /* *INDENT-OFF* */
+template<typename Parameters, typename A0, typename A1, typename A2, typename A3, typename A4, typename A5,
+    typename A6, typename A7, typename A8>
+class ApplyVoidFunction<Parameters, void(*)(A0, A1, A2, A3, A4, A5, A6, A7, A8)> {
+  typedef void (* Function)(A0, A1, A2, A3, A4, A5, A6, A7, A8);
+  Function function;
+
+public:
+
+  ApplyVoidFunction(Function function):
+    function(function) {}
+
+  template<typename Passed>
+  void operator()(Passed passed) {
+    function(
+      (typename Parameters::template Parameter<A0, 0, Passed>()).yield(passed),
+      (typename Parameters::template Parameter<A1, 1, Passed>()).yield(passed),
+      (typename Parameters::template Parameter<A2, 2, Passed>()).yield(passed),
+      (typename Parameters::template Parameter<A3, 3, Passed>()).yield(passed),
+      (typename Parameters::template Parameter<A4, 4, Passed>()).yield(passed),
+      (typename Parameters::template Parameter<A5, 5, Passed>()).yield(passed),
+      (typename Parameters::template Parameter<A6, 6, Passed>()).yield(passed),
+      (typename Parameters::template Parameter<A7, 7, Passed>()).yield(passed),
+      (typename Parameters::template Parameter<A8, 8, Passed>()).yield(passed));
+  }
+};
+/* *INDENT-ON* */
+
+/* *INDENT-OFF* */
 template<typename Parameters, typename Return_, typename Receiver_, typename A0, typename A1, typename A2, typename A3,
     typename A4, typename A5, typename A6, typename A7, typename A8>
 class ApplyMethod<Parameters, Return_(Receiver_::*)(A0, A1, A2, A3, A4, A5, A6, A7, A8)> {
@@ -847,6 +1082,35 @@ public:
   template<typename Passed>
   Return operator()(Passed passed) {
     return function(
+      (typename Parameters::template Parameter<A0, 0, Passed>()).yield(passed),
+      (typename Parameters::template Parameter<A1, 1, Passed>()).yield(passed),
+      (typename Parameters::template Parameter<A2, 2, Passed>()).yield(passed),
+      (typename Parameters::template Parameter<A3, 3, Passed>()).yield(passed),
+      (typename Parameters::template Parameter<A4, 4, Passed>()).yield(passed),
+      (typename Parameters::template Parameter<A5, 5, Passed>()).yield(passed),
+      (typename Parameters::template Parameter<A6, 6, Passed>()).yield(passed),
+      (typename Parameters::template Parameter<A7, 7, Passed>()).yield(passed),
+      (typename Parameters::template Parameter<A8, 8, Passed>()).yield(passed),
+      (typename Parameters::template Parameter<A9, 9, Passed>()).yield(passed));
+  }
+};
+/* *INDENT-ON* */
+
+/* *INDENT-OFF* */
+template<typename Parameters, typename A0, typename A1, typename A2, typename A3, typename A4, typename A5,
+    typename A6, typename A7, typename A8, typename A9>
+class ApplyVoidFunction<Parameters, void(*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9)> {
+  typedef void (* Function)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9);
+  Function function;
+
+public:
+
+  ApplyVoidFunction(Function function):
+    function(function) {}
+
+  template<typename Passed>
+  void operator()(Passed passed) {
+    function(
       (typename Parameters::template Parameter<A0, 0, Passed>()).yield(passed),
       (typename Parameters::template Parameter<A1, 1, Passed>()).yield(passed),
       (typename Parameters::template Parameter<A2, 2, Passed>()).yield(passed),
