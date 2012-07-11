@@ -75,6 +75,25 @@ TEST(ApplyFunctionTest, shouldLetParametersExamineParameterIndexAndPassedValue) 
   ASSERT_EQ("'foo' '1'", applyFunction<MoreSpecializedParameters>(&toString, passed));
 }
 
+struct SideEffectParameters {
+  static int called;
+
+  template<typename T, int i, typename Passed>
+  struct Parameter {
+    T yield(Passed) {
+      ++called;
+      return T();
+    }
+  };
+};
+
+int SideEffectParameters::called = 0;
+
+TEST(ApplyFunctionTest, shouldYieldParametersForSideEffectsIfRequested) {
+  yieldForFunction<SideEffectParameters>(&toString, 0);
+  ASSERT_EQ(2, SideEffectParameters::called);
+}
+
 struct HasVoidToString {
   static std::string asString;
 
@@ -97,25 +116,6 @@ TEST(ApplyFunctionTest, shouldCallPassedVoidFunctionWithParametersGeneratedFromP
   std::string passed = "foo";
   applyVoidFunction<MoreSpecializedParameters>(&HasVoidToString::toString, passed);
   ASSERT_EQ("'foo' '1'", HasVoidToString::asString);
-}
-
-struct SideEffectParameters {
-  static int called;
-
-  template<typename T, int i, typename Passed>
-  struct Parameter {
-    T yield(Passed) {
-      ++called;
-      return T();
-    }
-  };
-};
-
-int SideEffectParameters::called = 0;
-
-TEST(ApplyFunctionTest, shouldTakeNullFunctionPointerButStillYieldArgumentsForSideEffects) {
-  applyVoidFunction<SideEffectParameters, void (*)(std::string, int)>(0, 0);
-  ASSERT_EQ(2, SideEffectParameters::called);
 }
 
 struct HasToString {
