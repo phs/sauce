@@ -17,7 +17,8 @@ namespace internal {
  * A binding for an acknowledged interface.
  */
 template<typename Dependency>
-struct ResolvedBinding: public OpaqueBinding {
+class ResolvedBinding: public OpaqueBinding {
+public:
 
   typedef typename Key<Dependency>::Ptr IfacePtr;
   typedef sauce::shared_ptr<ResolvedBinding<Dependency> > BindingPtr;

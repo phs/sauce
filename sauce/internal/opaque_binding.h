@@ -13,7 +13,7 @@ class Injector;
 
 namespace internal {
 
-struct OpaqueBinding;
+class OpaqueBinding;
 
 typedef sauce::shared_ptr<OpaqueBinding> OpaqueBindingPtr;
 
@@ -30,7 +30,8 @@ typedef sauce::shared_ptr<OpaqueBinding> OpaqueBindingPtr;
  * interface is raised to the type system in ResolvedBinding, a class template
  * deriving from OpaqueBinding.
  */
-struct OpaqueBinding {
+class OpaqueBinding {
+public:
 
   /**
    * The dynamic name of this binding.

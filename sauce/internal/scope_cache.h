@@ -8,7 +8,8 @@ namespace sauce {
 namespace internal {
 
 template<typename Dependency>
-struct ScopeCacheLineDeleter {
+class ScopeCacheLineDeleter {
+public:
   typedef typename Key<Dependency>::Ptr SmartPtr;
   void operator()(void * smartPtrPtr) const {
     delete static_cast<SmartPtr *>(smartPtrPtr);

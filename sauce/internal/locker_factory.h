@@ -7,14 +7,15 @@ namespace internal {
 /**
  * An RAII wrapper to hide locker details.
  */
-struct Lock {
+class Lock {
+public:
   virtual ~Lock() {}
 };
 
 /**
  * Not a lock at all, but used when no synchronization is configured.
  */
-struct NullLock: Lock {};
+class NullLock: public Lock {};
 
 /**
  * An adapter to hide the type of the given Locker.
@@ -39,11 +40,13 @@ public:
  * This formulation is specifically chosen to cater to boost/thread's approach to RAII lockers.
  * Specifically, a lock_guard used with a mutex should be sufficient for all needs.
  */
-struct LockFactory {
+class LockFactory {
+public:
   virtual sauce::auto_ptr<Lock> createLock() = 0;
 };
 
-struct NullLockFactory: LockFactory {
+class NullLockFactory: public LockFactory {
+public:
   sauce::auto_ptr<Lock> createLock() {
     sauce::auto_ptr<Lock> lock(new NullLock());
     return lock;
