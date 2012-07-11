@@ -38,8 +38,6 @@ TEST(BindingTest, shouldInterpretNonFunctionTypesAsNoArgumentConstructors) {
 
   sauce::shared_ptr<Bound> bound = injector->get<Bound>();
   sauce::shared_ptr<Provider<Bound> > provider = injector->get<Provider<Bound> >();
-
-  // TODO make this work for explicit providers as well.
 }
 
 class PureVirtual {
@@ -117,6 +115,18 @@ TEST(BindingTest, shouldProvideDependenciesBoundToProvidersAndTheProvidersToo) {
   // We can get an instance, or a provider
   sauce::shared_ptr<CustomBuilt> customBuilt = injector->get<CustomBuilt>();
   sauce::shared_ptr<Provider<CustomBuilt> > provider = injector->get<Provider<CustomBuilt> >();
+}
+
+void ForgotTheParensProviderModule(Binder & binder) {
+  binder.bind<CustomBuilt>().toProvider<CustomBuiltProvider>();
+}
+
+TEST(BindingTest, shouldInterpretNonFunctionProviderTypesAsNoArgumentProviderConstructors) {
+  sauce::shared_ptr<Injector> injector(Modules().add(&ForgotTheParensProviderModule).createInjector());
+
+  sauce::shared_ptr<CustomBuilt> customBuilt = injector->get<CustomBuilt>();
+  sauce::shared_ptr<Provider<CustomBuilt> > customBuiltProvider = injector->get<Provider<CustomBuilt> >();
+  sauce::shared_ptr<CustomBuilt> explicitlyProvided = customBuiltProvider->get();
 }
 
 class Unbound {};
