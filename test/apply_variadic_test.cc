@@ -142,6 +142,8 @@ TEST(ApplyMethodTest, shouldCallPassedMethodOnReceiverWithParametersGeneratedFro
   SideEffectParameters::called = 0;
   yieldForMethod<SideEffectParameters>(&HasToString::toString, 0);
   ASSERT_EQ(2, SideEffectParameters::called);
+
+  ASSERT_EQ(2, (ApplyMethod<DefaultValueParameters, std::string(HasToString::*) (std::string, int)>::arity()));
 }
 
 struct ToStringer {

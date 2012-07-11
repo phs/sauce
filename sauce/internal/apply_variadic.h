@@ -128,6 +128,10 @@ public:
   ApplyMethod(Method method):
     method(method) {}
 
+  static int arity() {
+    return 0;
+  }
+
   template<typename Passed>
   Return operator()(Receiver & receiver, Passed passed) {
     return (receiver.*method)();
@@ -223,6 +227,10 @@ public:
 
   ApplyMethod(Method method):
     method(method) {}
+
+  static int arity() {
+    return 1;
+  }
 
   template<typename Passed>
   Return operator()(Receiver & receiver, Passed passed) {
@@ -325,6 +333,10 @@ public:
 
   ApplyMethod(Method method):
     method(method) {}
+
+  static int arity() {
+    return 2;
+  }
 
   template<typename Passed>
   Return operator()(Receiver & receiver, Passed passed) {
@@ -433,6 +445,10 @@ public:
 
   ApplyMethod(Method method):
     method(method) {}
+
+  static int arity() {
+    return 3;
+  }
 
   template<typename Passed>
   Return operator()(Receiver & receiver, Passed passed) {
@@ -547,6 +563,10 @@ public:
 
   ApplyMethod(Method method):
     method(method) {}
+
+  static int arity() {
+    return 4;
+  }
 
   template<typename Passed>
   Return operator()(Receiver & receiver, Passed passed) {
@@ -669,6 +689,10 @@ public:
 
   ApplyMethod(Method method):
     method(method) {}
+
+  static int arity() {
+    return 5;
+  }
 
   template<typename Passed>
   Return operator()(Receiver & receiver, Passed passed) {
@@ -798,6 +822,10 @@ public:
 
   ApplyMethod(Method method):
     method(method) {}
+
+  static int arity() {
+    return 6;
+  }
 
   template<typename Passed>
   Return operator()(Receiver & receiver, Passed passed) {
@@ -933,6 +961,10 @@ public:
 
   ApplyMethod(Method method):
     method(method) {}
+
+  static int arity() {
+    return 7;
+  }
 
   template<typename Passed>
   Return operator()(Receiver & receiver, Passed passed) {
@@ -1075,6 +1107,10 @@ public:
 
   ApplyMethod(Method method):
     method(method) {}
+
+  static int arity() {
+    return 8;
+  }
 
   template<typename Passed>
   Return operator()(Receiver & receiver, Passed passed) {
@@ -1223,6 +1259,10 @@ public:
 
   ApplyMethod(Method method):
     method(method) {}
+
+  static int arity() {
+    return 9;
+  }
 
   template<typename Passed>
   Return operator()(Receiver & receiver, Passed passed) {
@@ -1377,6 +1417,10 @@ public:
 
   ApplyMethod(Method method):
     method(method) {}
+
+  static int arity() {
+    return 10;
+  }
 
   template<typename Passed>
   Return operator()(Receiver & receiver, Passed passed) {

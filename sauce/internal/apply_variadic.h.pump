@@ -144,6 +144,10 @@ public:
   ApplyMethod(Method method):
     method(method) {}
 
+  static int arity() {
+    return $i;
+  }
+
   template<typename Passed>
   Return operator()(Receiver & receiver, Passed passed) {
     return (receiver.*method)([[$for j, [[
