@@ -17,6 +17,10 @@ $var n = 10  $$ The maximum arity we support.
 namespace sauce {
 namespace internal {
 
+namespace newschool {}
+
+namespace oldschool {
+
 $range includeParens 0..1
 $for includeParens [[
 $var parens = [[$if includeParens==1 [[()]]]]
@@ -144,6 +148,11 @@ public:
 /* *INDENT-ON* */
 
 ]]
+
+}
+
+using namespace oldschool;
+// using namespace newschool;
 
 }
 

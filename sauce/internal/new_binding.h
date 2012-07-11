@@ -18,6 +18,10 @@
 namespace sauce {
 namespace internal {
 
+namespace newschool {}
+
+namespace oldschool {
+
 /* *INDENT-OFF* */
 template<typename Dependency, typename Scope, typename Impl, typename Allocator>
 class NewBinding: public Binding<Dependency, Scope> {
@@ -840,6 +844,11 @@ public:
   }
 };
 /* *INDENT-ON* */
+
+}
+
+using namespace oldschool;
+// using namespace newschool;
 
 }
 
