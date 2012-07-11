@@ -81,6 +81,10 @@ public:
   ApplyFunction(Function function):
     function(function) {}
 
+  static int arity() {
+    return 0;
+  }
+
   template<typename Passed>
   Return operator()(Passed passed) {
     return function();
@@ -169,6 +173,10 @@ public:
 
   ApplyFunction(Function function):
     function(function) {}
+
+  static int arity() {
+    return 1;
+  }
 
   template<typename Passed>
   Return operator()(Passed passed) {
@@ -264,6 +272,10 @@ public:
 
   ApplyFunction(Function function):
     function(function) {}
+
+  static int arity() {
+    return 2;
+  }
 
   template<typename Passed>
   Return operator()(Passed passed) {
@@ -365,6 +377,10 @@ public:
 
   ApplyFunction(Function function):
     function(function) {}
+
+  static int arity() {
+    return 3;
+  }
 
   template<typename Passed>
   Return operator()(Passed passed) {
@@ -472,6 +488,10 @@ public:
 
   ApplyFunction(Function function):
     function(function) {}
+
+  static int arity() {
+    return 4;
+  }
 
   template<typename Passed>
   Return operator()(Passed passed) {
@@ -586,6 +606,10 @@ public:
 
   ApplyFunction(Function function):
     function(function) {}
+
+  static int arity() {
+    return 5;
+  }
 
   template<typename Passed>
   Return operator()(Passed passed) {
@@ -708,6 +732,10 @@ public:
 
   ApplyFunction(Function function):
     function(function) {}
+
+  static int arity() {
+    return 6;
+  }
 
   template<typename Passed>
   Return operator()(Passed passed) {
@@ -836,6 +864,10 @@ public:
 
   ApplyFunction(Function function):
     function(function) {}
+
+  static int arity() {
+    return 7;
+  }
 
   template<typename Passed>
   Return operator()(Passed passed) {
@@ -970,6 +1002,10 @@ public:
 
   ApplyFunction(Function function):
     function(function) {}
+
+  static int arity() {
+    return 8;
+  }
 
   template<typename Passed>
   Return operator()(Passed passed) {
@@ -1111,6 +1147,10 @@ public:
 
   ApplyFunction(Function function):
     function(function) {}
+
+  static int arity() {
+    return 9;
+  }
 
   template<typename Passed>
   Return operator()(Passed passed) {
@@ -1258,6 +1298,10 @@ public:
 
   ApplyFunction(Function function):
     function(function) {}
+
+  static int arity() {
+    return 10;
+  }
 
   template<typename Passed>
   Return operator()(Passed passed) {

@@ -87,6 +87,10 @@ public:
   ApplyFunction(Function function):
     function(function) {}
 
+  static int arity() {
+    return $i;
+  }
+
   template<typename Passed>
   Return operator()(Passed passed) {
     return function([[$for j, [[

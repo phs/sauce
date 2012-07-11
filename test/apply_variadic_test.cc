@@ -95,6 +95,10 @@ TEST(ApplyFunctionTest, shouldYieldParametersForSideEffectsIfRequested) {
   ASSERT_EQ(2, SideEffectParameters::called);
 }
 
+TEST(ApplyFunctionTest, shouldExposeArity) {
+  ASSERT_EQ(2, (ApplyFunction<DefaultValueParameters, std::string (*)(std::string, int)>::arity()));
+}
+
 struct HasVoidToString {
   static std::string asString;
 
