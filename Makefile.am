@@ -60,6 +60,8 @@ nobase_include_HEADERS += \
   sauce/binder.h \
   sauce/exceptions.h \
   sauce/injector.h \
+  sauce/internal/apply_variadic.h \
+  sauce/internal/apply_variadic.h.pump \
   sauce/internal/base_injector.h \
   sauce/internal/binding.h \
   sauce/internal/bindings.h \
@@ -93,6 +95,8 @@ EXTRA_DIST += \
   sauce/binder.h \
   sauce/exceptions.h \
   sauce/injector.h \
+  sauce/internal/apply_variadic.h \
+  sauce/internal/apply_variadic.h.pump \
   sauce/internal/base_injector.h \
   sauce/internal/binding.h \
   sauce/internal/bindings.h \
@@ -123,6 +127,7 @@ EXTRA_DIST += \
   sauce/scopes.h \
   test/allocate_with.h \
   test/allocation_test.cc \
+  test/apply_variadic_test.cc \
   test/binding_test.cc \
   test/scope_test.cc \
   test/tutorial_test.cc
@@ -147,6 +152,7 @@ endif GCOV_ENABLED
 
 unittests_SOURCES = \
   test/allocation_test.cc \
+  test/apply_variadic_test.cc \
   test/binding_test.cc \
   test/scope_test.cc \
   test/tutorial_test.cc
@@ -302,6 +308,9 @@ endif DX_COND_doc
 
 # Generate templated headers from their "pump" sources
 sauce/internal/new_binding.h: sauce/internal/new_binding.h.pump
+	vendor/pump.py $+
+
+sauce/internal/apply_variadic.h: sauce/internal/apply_variadic.h.pump
 	vendor/pump.py $+
 
 # This must be the last section so that the corrosponding variables have their final values.

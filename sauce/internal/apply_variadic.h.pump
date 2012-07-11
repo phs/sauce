@@ -1,0 +1,122 @@
+$$ This is a Pump source file.  Please use Pump to convert it.
+$$
+$var n = 10  $$ The maximum arity we support.
+#ifndef SAUCE_INTERNAL_APPLY_VARIADIC_H_
+#define SAUCE_INTERNAL_APPLY_VARIADIC_H_
+
+namespace sauce {
+namespace internal {
+
+template<typename Parameters, typename Function>
+class ApplyFunction;
+
+template<typename Parameters, typename Function, typename Passed>
+typename ApplyFunction<Parameters, Function>::Return applyFunction(Function function, Passed passed) {
+  return ApplyFunction<Parameters, Function>(function) (passed);
+}
+
+template<typename Parameters, typename Method>
+class ApplyMethod;
+
+template<typename Parameters, typename Method, typename Passed>
+typename ApplyMethod<Parameters, Method>::Return applyMethod(
+  typename ApplyMethod<Parameters, Method>::Receiver & receiver, Method method, Passed passed) {
+  return ApplyMethod<Parameters, Method>(method) (receiver, passed);
+}
+
+template<typename Parameters, typename Constructor, typename Allocator>
+class ApplyConstructor;
+
+template<typename Parameters, typename Constructor, typename Allocator, typename Passed>
+typename ApplyConstructor<Parameters, Constructor, Allocator>::Constructed * applyConstructor(Passed passed) {
+  return ApplyConstructor<Parameters, Constructor, Allocator>() (passed);
+}
+
+$range i 0..n
+$for i [[
+$range j 0..i-1
+$var comma_typename_As = [[$for j [[, typename A$j]]]]
+$var As = [[$for j, [[A$j]]]]
+$var as = [[$for j, [[a$j]]]]
+
+/* *INDENT-OFF* */
+template<typename Parameters, typename Return_$comma_typename_As>
+class ApplyFunction<Parameters, Return_(*)($As)> {
+  typedef Return_ (* Function)($As);
+  Function function;
+
+public:
+
+  typedef Return_ Return;
+
+  ApplyFunction(Function function):
+    function(function) {}
+
+  template<typename Passed>
+  Return operator()(Passed passed) {
+    return function([[$for j, [[
+
+      (typename Parameters::template Parameter<A$j, $j, Passed>()).yield(passed)
+]]]]);
+  }
+};
+/* *INDENT-ON* */
+
+/* *INDENT-OFF* */
+template<typename Parameters, typename Return_, typename Receiver_$comma_typename_As>
+class ApplyMethod<Parameters, Return_(Receiver_::*)($As)> {
+  typedef Return_ (Receiver_::* Method)($As);
+  Method method;
+
+public:
+
+  typedef Return_ Return;
+  typedef Receiver_ Receiver;
+
+  ApplyMethod(Method method):
+    method(method) {}
+
+  template<typename Passed>
+  Return operator()(Receiver & receiver, Passed passed) {
+    return (receiver.*method)([[$for j, [[
+
+      (typename Parameters::template Parameter<A$j, $j, Passed>()).yield(passed)
+]]]]);
+  }
+};
+/* *INDENT-ON* */
+
+/* *INDENT-OFF* */
+template<typename Parameters, typename Allocator_, typename Constructed_$comma_typename_As>
+class ApplyConstructor<Parameters, Constructed_($As), Allocator_> {
+  typedef Constructed_ (Constructor)($As);
+  typedef typename Allocator_::template rebind<Constructed_>::other Allocator;
+
+  Allocator allocator;
+
+public:
+
+  typedef Constructed_ Constructed;
+
+  ApplyConstructor():
+    allocator() {}
+
+  template<typename Passed>
+  Constructed * operator()(Passed passed) {
+    return new(allocator.allocate(1)) Constructed([[$for j, [[
+
+      (typename Parameters::template Parameter<A$j, $j, Passed>()).yield(passed)
+]]]]);
+  }
+};
+/* *INDENT-ON* */
+
+]]
+
+}
+
+namespace i = ::sauce::internal;
+
+}
+
+#endif // SAUCE_INTERNAL_APPLY_VARIADIC_H_
