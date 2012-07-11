@@ -51,15 +51,10 @@ public:
   virtual bool mutate(std::string) = 0;
 };
 
-typedef std::vector<std::string> ValidationErrors;
-
 /**
  * Parent type of ORM-managed models.
  */
-class Model {
-public:
-  bool validate(ValidationErrors &) const { return true; }
-};
+class Model {};
 
 /**
  * A persisted collection of models.
