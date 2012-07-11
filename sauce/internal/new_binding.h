@@ -19,8 +19,7 @@ namespace internal {
 
 /* *INDENT-OFF* */
 template<typename Dependency, typename Scope, typename Impl, typename Allocator>
-class NewBinding:
-  public Binding<Dependency, Scope> {
+class NewBinding: public Binding<Dependency, Scope> {
 
   typedef typename Key<Dependency>::Iface Iface;
   typedef typename Key<Dependency>::Ptr IfacePtr;
@@ -69,8 +68,7 @@ public:
 
 /* *INDENT-OFF* */
 template<typename Dependency, typename Scope, typename Impl, typename Allocator>
-class NewBinding<Dependency, Scope, Impl(), Allocator>:
-  public Binding<Dependency, Scope> {
+class NewBinding<Dependency, Scope, Impl(), Allocator>: public Binding<Dependency, Scope> {
 
   typedef typename Key<Dependency>::Iface Iface;
   typedef typename Key<Dependency>::Ptr IfacePtr;
@@ -119,8 +117,7 @@ public:
 
 /* *INDENT-OFF* */
 template<typename Dependency, typename Scope, typename Impl, typename Allocator, typename A1>
-class NewBinding<Dependency, Scope, Impl(A1), Allocator>:
-  public Binding<Dependency, Scope> {
+class NewBinding<Dependency, Scope, Impl(A1), Allocator>: public Binding<Dependency, Scope> {
 
   typedef typename Key<Dependency>::Iface Iface;
   typedef typename Key<Dependency>::Ptr IfacePtr;
@@ -178,8 +175,7 @@ public:
 
 /* *INDENT-OFF* */
 template<typename Dependency, typename Scope, typename Impl, typename Allocator, typename A1, typename A2>
-class NewBinding<Dependency, Scope, Impl(A1, A2), Allocator>:
-  public Binding<Dependency, Scope> {
+class NewBinding<Dependency, Scope, Impl(A1, A2), Allocator>: public Binding<Dependency, Scope> {
 
   typedef typename Key<Dependency>::Iface Iface;
   typedef typename Key<Dependency>::Ptr IfacePtr;
@@ -240,8 +236,7 @@ public:
 
 /* *INDENT-OFF* */
 template<typename Dependency, typename Scope, typename Impl, typename Allocator, typename A1, typename A2, typename A3>
-class NewBinding<Dependency, Scope, Impl(A1, A2, A3), Allocator>:
-  public Binding<Dependency, Scope> {
+class NewBinding<Dependency, Scope, Impl(A1, A2, A3), Allocator>: public Binding<Dependency, Scope> {
 
   typedef typename Key<Dependency>::Iface Iface;
   typedef typename Key<Dependency>::Ptr IfacePtr;
@@ -306,8 +301,7 @@ public:
 /* *INDENT-OFF* */
 template<typename Dependency, typename Scope, typename Impl, typename Allocator, typename A1, typename A2, typename A3,
     typename A4>
-class NewBinding<Dependency, Scope, Impl(A1, A2, A3, A4), Allocator>:
-  public Binding<Dependency, Scope> {
+class NewBinding<Dependency, Scope, Impl(A1, A2, A3, A4), Allocator>: public Binding<Dependency, Scope> {
 
   typedef typename Key<Dependency>::Iface Iface;
   typedef typename Key<Dependency>::Ptr IfacePtr;
@@ -375,8 +369,7 @@ public:
 /* *INDENT-OFF* */
 template<typename Dependency, typename Scope, typename Impl, typename Allocator, typename A1, typename A2, typename A3,
     typename A4, typename A5>
-class NewBinding<Dependency, Scope, Impl(A1, A2, A3, A4, A5), Allocator>:
-  public Binding<Dependency, Scope> {
+class NewBinding<Dependency, Scope, Impl(A1, A2, A3, A4, A5), Allocator>: public Binding<Dependency, Scope> {
 
   typedef typename Key<Dependency>::Iface Iface;
   typedef typename Key<Dependency>::Ptr IfacePtr;
@@ -447,8 +440,7 @@ public:
 /* *INDENT-OFF* */
 template<typename Dependency, typename Scope, typename Impl, typename Allocator, typename A1, typename A2, typename A3,
     typename A4, typename A5, typename A6>
-class NewBinding<Dependency, Scope, Impl(A1, A2, A3, A4, A5, A6), Allocator>:
-  public Binding<Dependency, Scope> {
+class NewBinding<Dependency, Scope, Impl(A1, A2, A3, A4, A5, A6), Allocator>: public Binding<Dependency, Scope> {
 
   typedef typename Key<Dependency>::Iface Iface;
   typedef typename Key<Dependency>::Ptr IfacePtr;
@@ -522,8 +514,7 @@ public:
 /* *INDENT-OFF* */
 template<typename Dependency, typename Scope, typename Impl, typename Allocator, typename A1, typename A2, typename A3,
     typename A4, typename A5, typename A6, typename A7>
-class NewBinding<Dependency, Scope, Impl(A1, A2, A3, A4, A5, A6, A7), Allocator>:
-  public Binding<Dependency, Scope> {
+class NewBinding<Dependency, Scope, Impl(A1, A2, A3, A4, A5, A6, A7), Allocator>: public Binding<Dependency, Scope> {
 
   typedef typename Key<Dependency>::Iface Iface;
   typedef typename Key<Dependency>::Ptr IfacePtr;
@@ -600,8 +591,8 @@ public:
 /* *INDENT-OFF* */
 template<typename Dependency, typename Scope, typename Impl, typename Allocator, typename A1, typename A2, typename A3,
     typename A4, typename A5, typename A6, typename A7, typename A8>
-class NewBinding<Dependency, Scope, Impl(A1, A2, A3, A4, A5, A6, A7, A8), Allocator>:
-  public Binding<Dependency, Scope> {
+class NewBinding<Dependency, Scope, Impl(A1, A2, A3, A4, A5, A6, A7, A8), Allocator>: public Binding<Dependency,
+    Scope> {
 
   typedef typename Key<Dependency>::Iface Iface;
   typedef typename Key<Dependency>::Ptr IfacePtr;
@@ -681,8 +672,8 @@ public:
 /* *INDENT-OFF* */
 template<typename Dependency, typename Scope, typename Impl, typename Allocator, typename A1, typename A2, typename A3,
     typename A4, typename A5, typename A6, typename A7, typename A8, typename A9>
-class NewBinding<Dependency, Scope, Impl(A1, A2, A3, A4, A5, A6, A7, A8, A9), Allocator>:
-  public Binding<Dependency, Scope> {
+class NewBinding<Dependency, Scope, Impl(A1, A2, A3, A4, A5, A6, A7, A8, A9), Allocator>: public Binding<Dependency,
+    Scope> {
 
   typedef typename Key<Dependency>::Iface Iface;
   typedef typename Key<Dependency>::Ptr IfacePtr;
@@ -765,8 +756,8 @@ public:
 /* *INDENT-OFF* */
 template<typename Dependency, typename Scope, typename Impl, typename Allocator, typename A1, typename A2, typename A3,
     typename A4, typename A5, typename A6, typename A7, typename A8, typename A9, typename A10>
-class NewBinding<Dependency, Scope, Impl(A1, A2, A3, A4, A5, A6, A7, A8, A9, A10), Allocator>:
-  public Binding<Dependency, Scope> {
+class NewBinding<Dependency, Scope, Impl(A1, A2, A3, A4, A5, A6, A7, A8, A9, A10),
+    Allocator>: public Binding<Dependency, Scope> {
 
   typedef typename Key<Dependency>::Iface Iface;
   typedef typename Key<Dependency>::Ptr IfacePtr;

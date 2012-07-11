@@ -23,8 +23,7 @@ $var specializationParameters = [[$if includeParens==1 [[<Dependency, Scope, Imp
 
 /* *INDENT-OFF* */
 template<typename Dependency, typename Scope, typename Impl, typename Allocator>
-class NewBinding$specializationParameters:
-  public Binding<Dependency, Scope> {
+class NewBinding$specializationParameters: public Binding<Dependency, Scope> {
 
   typedef typename Key<Dependency>::Iface Iface;
   typedef typename Key<Dependency>::Ptr IfacePtr;
@@ -82,8 +81,7 @@ $var as = [[$for j, [[a$j]]]]
 
 /* *INDENT-OFF* */
 template<typename Dependency, typename Scope, typename Impl, typename Allocator$comma_typename_As>
-class NewBinding<Dependency, Scope, Impl($As), Allocator>:
-  public Binding<Dependency, Scope> {
+class NewBinding<Dependency, Scope, Impl($As), Allocator>: public Binding<Dependency, Scope> {
 
   typedef typename Key<Dependency>::Iface Iface;
   typedef typename Key<Dependency>::Ptr IfacePtr;
