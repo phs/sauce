@@ -99,6 +99,25 @@ TEST(ApplyFunctionTest, shouldCallPassedVoidFunctionWithParametersGeneratedFromP
   ASSERT_EQ("'foo' '1'", HasVoidToString::asString);
 }
 
+struct SideEffectParameters {
+  static int called;
+
+  template<typename T, int i, typename Passed>
+  struct Parameter {
+    T yield(Passed) {
+      ++called;
+      return T();
+    }
+  };
+};
+
+int SideEffectParameters::called = 0;
+
+TEST(ApplyFunctionTest, shouldTakeNullFunctionPointerButStillYieldArgumentsForSideEffects) {
+  applyVoidFunction<SideEffectParameters, void (*)(std::string, int)>(0, 0);
+  ASSERT_EQ(2, SideEffectParameters::called);
+}
+
 struct HasToString {
   std::string toString(std::string s, int i) {
     std::stringstream buffer;

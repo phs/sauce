@@ -93,10 +93,12 @@ class ApplyVoidFunction<Parameters, void(*)($As)> {
   typedef void (* Function)($As);
   Function function;
 
+  void noFunction($As) {}
+
 public:
 
   ApplyVoidFunction(Function function):
-    function(function) {}
+    function(function == NULL ? noFunction : function) {}
 
   template<typename Passed>
   void operator()(Passed passed) {
