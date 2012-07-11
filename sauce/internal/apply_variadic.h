@@ -25,8 +25,25 @@ typename ApplyMethod<Parameters, Method>::Return applyMethod(
   return ApplyMethod<Parameters, Method>(method) (receiver, passed);
 }
 
-template<typename Parameters, typename Constructor, typename Allocator>
-class ApplyConstructor;
+template<typename Parameters, typename Constructed_, typename Allocator_>
+class ApplyConstructor {
+  typedef Constructed_ (Constructor)();
+  typedef typename Allocator_::template rebind<Constructed_>::other Allocator;
+
+  Allocator allocator;
+
+public:
+
+  typedef Constructed_ Constructed;
+
+  ApplyConstructor():
+    allocator() {}
+
+  template<typename Passed>
+  Constructed * operator()(Passed) {
+    return new(allocator.allocate(1))Constructed();
+  }
+};
 
 template<typename Parameters, typename Constructor, typename Allocator, typename Passed>
 typename ApplyConstructor<Parameters, Constructor, Allocator>::Constructed * applyConstructor(Passed passed) {

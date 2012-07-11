@@ -117,5 +117,12 @@ TEST(ApplyConstructorTest, shouldCallConstructorWithParametersGeneratedFromPasse
   ASSERT_EQ("'foo' '1'", toStringer->toString);
 }
 
+class NoArg {};
+
+TEST(ApplyConstructorTest, shouldInterpretNakedTypesAsNoArgConstructors) {
+  typedef std::allocator<int> Allocator;
+  sauce::auto_ptr<NoArg> noArg(applyConstructor<DefaultValueParameters, NoArg, Allocator>(0));
+}
+
 }
 }
