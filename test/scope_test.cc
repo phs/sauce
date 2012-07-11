@@ -7,28 +7,31 @@ using ::sauce::Binder;
 namespace sauce {
 namespace test {
 
-struct C {};
-struct D {};
+class C {};
+class D {};
 
-struct Singleton {
+class Singleton {
+public:
   bool operator==(Singleton const & other) {
     return this == &other;
   }
 };
 
-struct Session {
+class Session {
+public:
   bool operator==(Session const & other) {
     return this == &other;
   }
 };
 
-struct Request {
+class Request {
+public:
   bool operator==(Request const & other) {
     return this == &other;
   }
 };
 
-struct MyScope {};
+class MyScope {};
 
 void ScopedModule(Binder & binder) {
   binder.bind<Singleton>().in<SingletonScope>().to<Singleton()>();
@@ -38,9 +41,8 @@ void ScopedModule(Binder & binder) {
   binder.bind<D>().to<D()>();
 }
 
-struct ScopeTest:
-  public ::testing::Test {
-
+class ScopeTest: public ::testing::Test {
+public:
   Modules modules;
   sauce::shared_ptr<Injector> injector;
 
@@ -203,12 +205,14 @@ TEST_F(ScopeTest, shouldNotScopeUnscopedDependencies) {
   EXPECT_NE(aD, aNewD);
 }
 
-struct CrankyConstructorException: public std::runtime_error {
+class CrankyConstructorException: public std::runtime_error {
+public:
   CrankyConstructorException():
     std::runtime_error("Can't connect to something-er-other!") {}
 };
 
-struct CrankyConstructor {
+class CrankyConstructor {
+public:
   CrankyConstructor() {
     throw CrankyConstructorException();
   }
@@ -218,9 +222,8 @@ void EagerlyScopedModule(Binder & binder) {
   binder.bind<CrankyConstructor>().in<RequestScope>().to<CrankyConstructor()>();
 }
 
-struct EagerlyScopeTest:
-  public ::testing::Test {
-
+class EagerlyScopeTest: public ::testing::Test {
+public:
   sauce::shared_ptr<Injector> injector;
 
   EagerlyScopeTest():
@@ -236,14 +239,16 @@ TEST_F(EagerlyScopeTest, shouldThrowExceptionWhenProvidingEagerlyOutOfScope) {
   ASSERT_THROW(injector->eagerlyProvide<RequestScope>(), OutOfScopeException);
 }
 
-struct CurrentUser {
+class CurrentUser {
+public:
   sauce::shared_ptr<Session> session;
 
   CurrentUser(sauce::shared_ptr<Session> session):
     session(session) {}
 };
 
-struct PersonalizedGreeting {
+class PersonalizedGreeting {
+public:
   sauce::shared_ptr<CurrentUser> currentUser;
   sauce::shared_ptr<Request> request;
 
@@ -258,7 +263,7 @@ struct PersonalizedGreeting {
  *
  * In reality this should be a mutex, such as one in boost/thread.
  */
-struct LockableStub {};
+class LockableStub {};
 
 /**
  * An RAII lock that accepts a templated mutex reference on construction.
@@ -268,7 +273,8 @@ struct LockableStub {};
  * This one merely counts, as part of the test fixture.
  */
 template<typename Lockable>
-struct CountingLocker {
+class CountingLocker {
+public:
   static int reentranceCount;
   static int maxReentranceCount;
 
@@ -295,9 +301,8 @@ void CrossScopeModule(Binder & binder) {
   binder.bind<PersonalizedGreeting>().to<PersonalizedGreeting(CurrentUser, Request)>();
 }
 
-struct SynchronizedScopeTest:
-  public ::testing::Test {
-
+class SynchronizedScopeTest: public ::testing::Test {
+public:
   LockableStub lock;
   sauce::shared_ptr<Injector> injector;
 

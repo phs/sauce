@@ -8,7 +8,8 @@ namespace test {
  * A template of tag types for mock allocators interacting with AllocateWith.
  */
 template<typename C>
-struct A {
+class A {
+public:
   bool operator==(A<C>) const {
     return true;
   }
@@ -28,7 +29,8 @@ struct A {
  * delegating to it with AllocateWith<Backing>::Allocator.
  */
 template<typename Backing>
-struct AllocateWith {
+class AllocateWith {
+public:
 
   typedef Backing Backing_;
 
@@ -47,7 +49,8 @@ struct AllocateWith {
   };
 
   template<class C>
-  struct Allocator: public Base {
+  class Allocator: public Base {
+  public:
 
     typedef size_t    size_type;
     typedef ptrdiff_t difference_type;
@@ -58,7 +61,8 @@ struct AllocateWith {
     typedef C         value_type;
 
     template<typename D>
-    struct rebind {
+    class rebind {
+    public:
       typedef Allocator<D> other;
     };
 

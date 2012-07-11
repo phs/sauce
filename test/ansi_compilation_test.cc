@@ -16,25 +16,30 @@ using ::sauce::Modules;
 using ::sauce::Named;
 using ::sauce::Provider;
 
-struct Animal {
+class Animal {
+public:
   virtual std::string says() = 0;
 };
 
-struct Cat: Animal {
+class Cat: public Animal {
+public:
   std::string says() { return "Meow"; }
 };
 
-struct LieutenantShinysides {};
-struct Fish: Animal {
+class LieutenantShinysides {};
+class Fish: public Animal {
+public:
   std::string says() { return "Blub blub"; }
 };
 
-struct Meatloaf {};
-struct Cow: Animal {
+class Meatloaf {};
+class Cow: public Animal {
+public:
   std::string says() { return "Moo"; }
 };
 
-struct CowProvider: AbstractProvider<Animal> {
+class CowProvider: public AbstractProvider<Animal> {
+public:
   Animal * provide() {
     return new Cow();
   }
@@ -44,7 +49,8 @@ struct CowProvider: AbstractProvider<Animal> {
   }
 };
 
-struct Pond {
+class Pond {
+public:
   sauce::shared_ptr<Animal> animal;
 
   Pond(sauce::shared_ptr<Animal> animal):

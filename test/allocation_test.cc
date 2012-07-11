@@ -14,13 +14,14 @@ using ::sauce::Modules;
 namespace sauce {
 namespace test {
 
-struct Chasis {
+class Chasis {
+public:
   Chasis() {}
   virtual ~Chasis() {}
 };
 
-struct CoupChasis:
-  public Chasis {
+class CoupChasis: public Chasis {
+public:
   static int constructed;
   static int destroyed;
 
@@ -36,13 +37,14 @@ struct CoupChasis:
 int CoupChasis::constructed = 0;
 int CoupChasis::destroyed = 0;
 
-struct Engine {
+class Engine {
+public:
   Engine() {}
   virtual ~Engine() {}
 };
 
-struct HybridEngine:
-  public Engine {
+class HybridEngine: public Engine {
+public:
   static int constructed;
   static int destroyed;
 
@@ -58,7 +60,8 @@ struct HybridEngine:
 int HybridEngine::constructed = 0;
 int HybridEngine::destroyed = 0;
 
-struct Vehicle {
+class Vehicle {
+public:
   Vehicle() {}
   virtual ~Vehicle() {}
 
@@ -67,8 +70,8 @@ struct Vehicle {
   virtual sauce::shared_ptr<Engine> getEngine() const = 0;
 };
 
-struct Herbie:
-  public Vehicle {
+class Herbie: public Vehicle {
+public:
   static int constructed;
   static int destroyed;
 
@@ -103,7 +106,8 @@ int Herbie::destroyed = 0;
  * The AllocateWith contract assumes allocate will be disambiguated with a
  * leading tag parameter.  So, be sure to accept such parameters.
  */
-struct MockAllocation {
+class MockAllocation {
+public:
   MOCK_METHOD2(allocate, CoupChasis * (A<CoupChasis>, size_t));
   MOCK_METHOD2(allocate, HybridEngine * (A<HybridEngine>, size_t));
   MOCK_METHOD2(allocate, Herbie * (A<Herbie>, size_t));
@@ -116,7 +120,8 @@ struct MockAllocation {
 template<>
 MockAllocation * AllocateWith<MockAllocation>::Base::backing = NULL;
 
-struct HerbieModule: sauce::AbstractModule {
+class HerbieModule: public sauce::AbstractModule {
+public:
   void configure() {
     typedef AllocateWith<MockAllocation>::Allocator<int> MockAllocator;
 
@@ -127,14 +132,15 @@ struct HerbieModule: sauce::AbstractModule {
 };
 
 template<typename T>
-struct DeallocateDeleter {
+class DeallocateDeleter {
+public:
   void operator()(T * t) const {
     std::allocator<T>().deallocate(t, 1);
   }
 };
 
-struct AllocationTest:
-  public ::testing::Test {
+class AllocationTest: public ::testing::Test {
+public:
 
   // These point to ALLOCATED but UNINITIALIZED memory
   sauce::shared_ptr<CoupChasis> chasis;
