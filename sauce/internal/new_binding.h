@@ -18,7 +18,35 @@
 namespace sauce {
 namespace internal {
 
-namespace newschool {}
+namespace newschool {
+
+template<typename Dependency, typename Scope, typename Constructor, typename Allocator>
+class NewBinding: public Binding<Dependency, Scope> {
+
+  struct ValidateAcyclicParameters {
+    template<typename T, int i, typename Passed>
+    struct Parameter {
+      T yield(Passed) {
+        return T();
+      }
+    };
+  };
+
+  struct ProvideParameters {
+    template<typename T, int i, typename Passed>
+    struct Parameter {
+      T yield(Passed) {
+        return T();
+      }
+    };
+  };
+
+  typedef ApplyConstructor<ValidateAcyclicParameters, Constructor, Allocator> ValidateAcyclic;
+  typedef ApplyConstructor<ProvideParameters, Constructor, Allocator> Provide;
+
+};
+
+}
 
 namespace oldschool {
 
@@ -124,6 +152,9 @@ public:
 template<typename Dependency, typename Scope, typename Impl, typename Allocator, typename A1>
 class NewBinding<Dependency, Scope, Impl(A1), Allocator>: public Binding<Dependency, Scope> {
 
+  // TODO Ditch this, but instantiate the template for now
+  typedef i::newschool::NewBinding<Dependency, Scope, Impl(A1), Allocator> NewWorld;
+
   typedef typename Key<Dependency>::Iface Iface;
   typedef typename Key<Dependency>::Ptr IfacePtr;
   typedef sauce::shared_ptr<Impl> ImplPtr;
@@ -181,6 +212,9 @@ public:
 /* *INDENT-OFF* */
 template<typename Dependency, typename Scope, typename Impl, typename Allocator, typename A1, typename A2>
 class NewBinding<Dependency, Scope, Impl(A1, A2), Allocator>: public Binding<Dependency, Scope> {
+
+  // TODO Ditch this, but instantiate the template for now
+  typedef i::newschool::NewBinding<Dependency, Scope, Impl(A1, A2), Allocator> NewWorld;
 
   typedef typename Key<Dependency>::Iface Iface;
   typedef typename Key<Dependency>::Ptr IfacePtr;
@@ -242,6 +276,9 @@ public:
 /* *INDENT-OFF* */
 template<typename Dependency, typename Scope, typename Impl, typename Allocator, typename A1, typename A2, typename A3>
 class NewBinding<Dependency, Scope, Impl(A1, A2, A3), Allocator>: public Binding<Dependency, Scope> {
+
+  // TODO Ditch this, but instantiate the template for now
+  typedef i::newschool::NewBinding<Dependency, Scope, Impl(A1, A2, A3), Allocator> NewWorld;
 
   typedef typename Key<Dependency>::Iface Iface;
   typedef typename Key<Dependency>::Ptr IfacePtr;
@@ -307,6 +344,9 @@ public:
 template<typename Dependency, typename Scope, typename Impl, typename Allocator, typename A1, typename A2, typename A3,
     typename A4>
 class NewBinding<Dependency, Scope, Impl(A1, A2, A3, A4), Allocator>: public Binding<Dependency, Scope> {
+
+  // TODO Ditch this, but instantiate the template for now
+  typedef i::newschool::NewBinding<Dependency, Scope, Impl(A1, A2, A3, A4), Allocator> NewWorld;
 
   typedef typename Key<Dependency>::Iface Iface;
   typedef typename Key<Dependency>::Ptr IfacePtr;
@@ -375,6 +415,9 @@ public:
 template<typename Dependency, typename Scope, typename Impl, typename Allocator, typename A1, typename A2, typename A3,
     typename A4, typename A5>
 class NewBinding<Dependency, Scope, Impl(A1, A2, A3, A4, A5), Allocator>: public Binding<Dependency, Scope> {
+
+  // TODO Ditch this, but instantiate the template for now
+  typedef i::newschool::NewBinding<Dependency, Scope, Impl(A1, A2, A3, A4, A5), Allocator> NewWorld;
 
   typedef typename Key<Dependency>::Iface Iface;
   typedef typename Key<Dependency>::Ptr IfacePtr;
@@ -446,6 +489,9 @@ public:
 template<typename Dependency, typename Scope, typename Impl, typename Allocator, typename A1, typename A2, typename A3,
     typename A4, typename A5, typename A6>
 class NewBinding<Dependency, Scope, Impl(A1, A2, A3, A4, A5, A6), Allocator>: public Binding<Dependency, Scope> {
+
+  // TODO Ditch this, but instantiate the template for now
+  typedef i::newschool::NewBinding<Dependency, Scope, Impl(A1, A2, A3, A4, A5, A6), Allocator> NewWorld;
 
   typedef typename Key<Dependency>::Iface Iface;
   typedef typename Key<Dependency>::Ptr IfacePtr;
@@ -520,6 +566,9 @@ public:
 template<typename Dependency, typename Scope, typename Impl, typename Allocator, typename A1, typename A2, typename A3,
     typename A4, typename A5, typename A6, typename A7>
 class NewBinding<Dependency, Scope, Impl(A1, A2, A3, A4, A5, A6, A7), Allocator>: public Binding<Dependency, Scope> {
+
+  // TODO Ditch this, but instantiate the template for now
+  typedef i::newschool::NewBinding<Dependency, Scope, Impl(A1, A2, A3, A4, A5, A6, A7), Allocator> NewWorld;
 
   typedef typename Key<Dependency>::Iface Iface;
   typedef typename Key<Dependency>::Ptr IfacePtr;
@@ -598,6 +647,9 @@ template<typename Dependency, typename Scope, typename Impl, typename Allocator,
     typename A4, typename A5, typename A6, typename A7, typename A8>
 class NewBinding<Dependency, Scope, Impl(A1, A2, A3, A4, A5, A6, A7, A8), Allocator>: public Binding<Dependency,
     Scope> {
+
+  // TODO Ditch this, but instantiate the template for now
+  typedef i::newschool::NewBinding<Dependency, Scope, Impl(A1, A2, A3, A4, A5, A6, A7, A8), Allocator> NewWorld;
 
   typedef typename Key<Dependency>::Iface Iface;
   typedef typename Key<Dependency>::Ptr IfacePtr;
@@ -679,6 +731,9 @@ template<typename Dependency, typename Scope, typename Impl, typename Allocator,
     typename A4, typename A5, typename A6, typename A7, typename A8, typename A9>
 class NewBinding<Dependency, Scope, Impl(A1, A2, A3, A4, A5, A6, A7, A8, A9), Allocator>: public Binding<Dependency,
     Scope> {
+
+  // TODO Ditch this, but instantiate the template for now
+  typedef i::newschool::NewBinding<Dependency, Scope, Impl(A1, A2, A3, A4, A5, A6, A7, A8, A9), Allocator> NewWorld;
 
   typedef typename Key<Dependency>::Iface Iface;
   typedef typename Key<Dependency>::Ptr IfacePtr;
@@ -763,6 +818,10 @@ template<typename Dependency, typename Scope, typename Impl, typename Allocator,
     typename A4, typename A5, typename A6, typename A7, typename A8, typename A9, typename A10>
 class NewBinding<Dependency, Scope, Impl(A1, A2, A3, A4, A5, A6, A7, A8, A9, A10),
     Allocator>: public Binding<Dependency, Scope> {
+
+  // TODO Ditch this, but instantiate the template for now
+  typedef i::newschool::NewBinding<Dependency, Scope, Impl(A1, A2, A3, A4, A5, A6, A7, A8, A9, A10),
+      Allocator> NewWorld;
 
   typedef typename Key<Dependency>::Iface Iface;
   typedef typename Key<Dependency>::Ptr IfacePtr;
