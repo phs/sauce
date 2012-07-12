@@ -29,13 +29,13 @@ class NewBinding: public Binding<Dependency, Scope> {
    */
   struct NewBindingFriend {
     template<typename T>
-    void validateAcyclicHelper(New & binding, InjectorPtr injector, TypeIds & ids, std::string dependencyName) {
-      binding->template validateAcyclicHelper<T>(injector, ids, dependencyName);
+    void validateAcyclicHelper(New const & binding, InjectorPtr injector, TypeIds & ids, std::string dependencyName) {
+      binding.template validateAcyclicHelper<T>(injector, ids, dependencyName);
     }
 
     template<typename T>
-    typename Key<T>::Ptr getHelper(New & binding, InjectorPtr injector, std::string dependencyName) {
-      binding->template getHelper<typename i::Key<T>::Normalized>(injector, dependencyName);
+    typename Key<T>::Ptr getHelper(New const & binding, InjectorPtr injector, std::string dependencyName) {
+      return binding.template getHelper<typename i::Key<T>::Normalized>(injector, dependencyName);
     }
   };
 
@@ -43,19 +43,19 @@ class NewBinding: public Binding<Dependency, Scope> {
 
   struct ProvideParameters {
     struct Passed {
-      New & binding;
+      New const & binding;
       InjectorPtr & injector;
 
-      Passed(New & binding, InjectorPtr & injector):
+      Passed(New const & binding, InjectorPtr & injector):
         binding(binding), injector(injector) {}
     };
 
-    template<typename T, int i>
+    template<typename T, int i, typename Passed>
     struct Parameter: public NewBindingFriend {
       typedef typename Key<T>::Ptr Ptr;
 
-      Ptr yield(Passed & passed) {
-        New & binding = passed.binding;
+      Ptr yield(Passed passed) {
+        New const & binding = passed.binding;
         InjectorPtr & injector = passed.injector;
         std::string dependencyName = binding.dynamicDependencyNames[i];
 
@@ -75,18 +75,18 @@ class NewBinding: public Binding<Dependency, Scope> {
 
   struct ValidateAcyclicParameters {
     struct Passed {
-      New & binding;
+      New const & binding;
       InjectorPtr & injector;
       TypeIds & ids;
 
-      Passed(New & binding, InjectorPtr & injector, TypeIds & ids):
+      Passed(New const & binding, InjectorPtr & injector, TypeIds & ids):
         binding(binding), injector(injector), ids(ids) {}
     };
     
-    template<typename T, int i>
+    template<typename T, int i, typename Passed>
     struct Parameter: public NewBindingFriend {
-      void observe(Passed & passed) {
-        New & binding = passed.binding;
+      void observe(Passed passed) {
+        New const & binding = passed.binding;
         InjectorPtr & injector = passed.injector;
         TypeIds & ids = passed.ids;
         std::string dependencyName = binding.dynamicDependencyNames[i];
@@ -122,7 +122,11 @@ public:
    */
   IfacePtr provide(BindingPtr binding, InjectorPtr injector) const {
     typename ProvideParameters::Passed passed(*this, injector);
-    return applyConstructor<ProvideParameters, Constructor, Allocator>(passed);
+    Deleter deleter(sauce::static_pointer_cast<New>(binding));
+    ImplPtr impl(applyConstructor<ProvideParameters, Constructor, Allocator>(passed), deleter);
+    SelfInjector<Impl> selfInjector;
+    selfInjector.setSelf(impl);
+    return sauce::static_pointer_cast<Iface>(impl);
   }
 
   void dispose(Iface * iface) const {
