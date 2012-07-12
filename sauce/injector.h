@@ -57,8 +57,7 @@ class Injector {
   }
 
   template<typename Dependency>
-  void validateAcyclic(
-    sauce::shared_ptr<Injector> injector, i::TypeIds & ids, std::string const name) {
+  void validateAcyclic(sauce::shared_ptr<Injector> injector, i::TypeIds & ids, std::string const name) {
     if (base.get() == NULL) {
       next->validateAcyclic<Dependency>(injector, ids, name);
     } else {
@@ -67,8 +66,7 @@ class Injector {
   }
 
   template<typename Dependency>
-  typename i::Key<Dependency>::Ptr get(
-    sauce::shared_ptr<Injector> injector, std::string const name) {
+  typename i::Key<Dependency>::Ptr get(sauce::shared_ptr<Injector> injector, std::string const name) {
     if (base.get() == NULL) {
       return next->get<Dependency>(injector, name);
     } else {
