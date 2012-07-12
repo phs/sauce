@@ -91,7 +91,7 @@ int SideEffectParameters::called = 0;
 
 TEST(ApplyFunctionTest, shouldYieldParametersForSideEffectsIfRequested) {
   SideEffectParameters::called = 0;
-  yieldForFunction<SideEffectParameters>(&toString, 0);
+  observeFunction<SideEffectParameters>(&toString, 0);
   ASSERT_EQ(2, SideEffectParameters::called);
 }
 
@@ -142,7 +142,7 @@ TEST(ApplyMethodTest, shouldCallPassedMethodOnReceiverWithParametersGeneratedFro
   ASSERT_EQ("'foo' '1'", applyMethod<MoreSpecializedParameters>(hasToString, &HasToString::toString, passed));
 
   SideEffectParameters::called = 0;
-  yieldForMethod<SideEffectParameters>(&HasToString::toString, 0);
+  observeMethod<SideEffectParameters>(&HasToString::toString, 0);
   ASSERT_EQ(2, SideEffectParameters::called);
 
   ASSERT_EQ(2, (ApplyMethod<DefaultValueParameters, std::string(HasToString::*) (std::string, int)>::arity()));

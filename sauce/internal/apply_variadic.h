@@ -17,7 +17,7 @@ typename ApplyFunction<Parameters, Function>::Return applyFunction(Function func
 }
 
 template<typename Parameters, typename Function, typename Passed>
-void yieldForFunction(Function function, Passed passed) {
+void observeFunction(Function function, Passed passed) {
   ApplyFunction<Parameters, Function>(function).yield(passed);
 }
 
@@ -39,7 +39,7 @@ typename ApplyMethod<Parameters, Method>::Return applyMethod(
 }
 
 template<typename Parameters, typename Method, typename Passed>
-void yieldForMethod(Method method, Passed passed) {
+void observeMethod(Method method, Passed passed) {
   ApplyMethod<Parameters, Method>(method).yield(passed);
 }
 
