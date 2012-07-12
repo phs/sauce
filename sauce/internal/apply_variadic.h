@@ -13,7 +13,7 @@ class ApplyFunction;
 
 template<typename Parameters, typename Function, typename Passed>
 typename ApplyFunction<Parameters, Function>::Return applyFunction(Function function, Passed passed) {
-  return ApplyFunction<Parameters, Function>(function) (passed);
+  return ApplyFunction<Parameters, Function>(function).apply(passed);
 }
 
 template<typename Parameters, typename Function, typename Passed>
@@ -26,7 +26,7 @@ class ApplyVoidFunction;
 
 template<typename Parameters, typename Function, typename Passed>
 void applyVoidFunction(Function function, Passed passed) {
-  (ApplyVoidFunction<Parameters, Function>(function))(passed);
+  (ApplyVoidFunction<Parameters, Function>(function)).apply(passed);
 }
 
 template<typename Parameters, typename Method>
@@ -35,7 +35,7 @@ class ApplyMethod;
 template<typename Parameters, typename Method, typename Passed>
 typename ApplyMethod<Parameters, Method>::Return applyMethod(
   typename ApplyMethod<Parameters, Method>::Receiver & receiver, Method method, Passed passed) {
-  return ApplyMethod<Parameters, Method>(method) (receiver, passed);
+  return ApplyMethod<Parameters, Method>(method).apply(receiver, passed);
 }
 
 template<typename Parameters, typename Method, typename Passed>
@@ -58,14 +58,14 @@ public:
     allocator() {}
 
   template<typename Passed>
-  Constructed * operator()(Passed) {
+  Constructed * apply(Passed) {
     return new(allocator.allocate(1))Constructed();
   }
 };
 
 template<typename Parameters, typename Constructor, typename Allocator, typename Passed>
 typename ApplyConstructor<Parameters, Constructor, Allocator>::Constructed * applyConstructor(Passed passed) {
-  return ApplyConstructor<Parameters, Constructor, Allocator>() (passed);
+  return ApplyConstructor<Parameters, Constructor, Allocator>().apply(passed);
 }
 
 /* *INDENT-OFF* */
@@ -86,7 +86,7 @@ public:
   }
 
   template<typename Passed>
-  Return operator()(Passed passed) {
+  Return apply(Passed passed) {
     return function();
   }
 
@@ -112,7 +112,7 @@ public:
   }
 
   template<typename Passed>
-  void operator()(Passed passed) {
+  void apply(Passed passed) {
     function();
   }
 };
@@ -137,7 +137,7 @@ public:
   }
 
   template<typename Passed>
-  Return operator()(Receiver & receiver, Passed passed) {
+  Return apply(Receiver & receiver, Passed passed) {
     return (receiver.*method)();
   }
 
@@ -167,7 +167,7 @@ public:
   }
 
   template<typename Passed>
-  Constructed * operator()(Passed passed) {
+  Constructed * apply(Passed passed) {
     return new(allocator.allocate(1)) Constructed();
   }
 };
@@ -191,7 +191,7 @@ public:
   }
 
   template<typename Passed>
-  Return operator()(Passed passed) {
+  Return apply(Passed passed) {
     return function(
       (typename Parameters::template Parameter<A0, 0, Passed>()).yield(passed));
   }
@@ -219,7 +219,7 @@ public:
   }
 
   template<typename Passed>
-  void operator()(Passed passed) {
+  void apply(Passed passed) {
     function(
       (typename Parameters::template Parameter<A0, 0, Passed>()).yield(passed));
   }
@@ -245,7 +245,7 @@ public:
   }
 
   template<typename Passed>
-  Return operator()(Receiver & receiver, Passed passed) {
+  Return apply(Receiver & receiver, Passed passed) {
     return (receiver.*method)(
       (typename Parameters::template Parameter<A0, 0, Passed>()).yield(passed));
   }
@@ -277,7 +277,7 @@ public:
   }
 
   template<typename Passed>
-  Constructed * operator()(Passed passed) {
+  Constructed * apply(Passed passed) {
     return new(allocator.allocate(1)) Constructed(
       (typename Parameters::template Parameter<A0, 0, Passed>()).yield(passed));
   }
@@ -302,7 +302,7 @@ public:
   }
 
   template<typename Passed>
-  Return operator()(Passed passed) {
+  Return apply(Passed passed) {
     return function(
       (typename Parameters::template Parameter<A0, 0, Passed>()).yield(passed),
       (typename Parameters::template Parameter<A1, 1, Passed>()).yield(passed));
@@ -332,7 +332,7 @@ public:
   }
 
   template<typename Passed>
-  void operator()(Passed passed) {
+  void apply(Passed passed) {
     function(
       (typename Parameters::template Parameter<A0, 0, Passed>()).yield(passed),
       (typename Parameters::template Parameter<A1, 1, Passed>()).yield(passed));
@@ -359,7 +359,7 @@ public:
   }
 
   template<typename Passed>
-  Return operator()(Receiver & receiver, Passed passed) {
+  Return apply(Receiver & receiver, Passed passed) {
     return (receiver.*method)(
       (typename Parameters::template Parameter<A0, 0, Passed>()).yield(passed),
       (typename Parameters::template Parameter<A1, 1, Passed>()).yield(passed));
@@ -393,7 +393,7 @@ public:
   }
 
   template<typename Passed>
-  Constructed * operator()(Passed passed) {
+  Constructed * apply(Passed passed) {
     return new(allocator.allocate(1)) Constructed(
       (typename Parameters::template Parameter<A0, 0, Passed>()).yield(passed),
       (typename Parameters::template Parameter<A1, 1, Passed>()).yield(passed));
@@ -419,7 +419,7 @@ public:
   }
 
   template<typename Passed>
-  Return operator()(Passed passed) {
+  Return apply(Passed passed) {
     return function(
       (typename Parameters::template Parameter<A0, 0, Passed>()).yield(passed),
       (typename Parameters::template Parameter<A1, 1, Passed>()).yield(passed),
@@ -451,7 +451,7 @@ public:
   }
 
   template<typename Passed>
-  void operator()(Passed passed) {
+  void apply(Passed passed) {
     function(
       (typename Parameters::template Parameter<A0, 0, Passed>()).yield(passed),
       (typename Parameters::template Parameter<A1, 1, Passed>()).yield(passed),
@@ -479,7 +479,7 @@ public:
   }
 
   template<typename Passed>
-  Return operator()(Receiver & receiver, Passed passed) {
+  Return apply(Receiver & receiver, Passed passed) {
     return (receiver.*method)(
       (typename Parameters::template Parameter<A0, 0, Passed>()).yield(passed),
       (typename Parameters::template Parameter<A1, 1, Passed>()).yield(passed),
@@ -515,7 +515,7 @@ public:
   }
 
   template<typename Passed>
-  Constructed * operator()(Passed passed) {
+  Constructed * apply(Passed passed) {
     return new(allocator.allocate(1)) Constructed(
       (typename Parameters::template Parameter<A0, 0, Passed>()).yield(passed),
       (typename Parameters::template Parameter<A1, 1, Passed>()).yield(passed),
@@ -542,7 +542,7 @@ public:
   }
 
   template<typename Passed>
-  Return operator()(Passed passed) {
+  Return apply(Passed passed) {
     return function(
       (typename Parameters::template Parameter<A0, 0, Passed>()).yield(passed),
       (typename Parameters::template Parameter<A1, 1, Passed>()).yield(passed),
@@ -576,7 +576,7 @@ public:
   }
 
   template<typename Passed>
-  void operator()(Passed passed) {
+  void apply(Passed passed) {
     function(
       (typename Parameters::template Parameter<A0, 0, Passed>()).yield(passed),
       (typename Parameters::template Parameter<A1, 1, Passed>()).yield(passed),
@@ -605,7 +605,7 @@ public:
   }
 
   template<typename Passed>
-  Return operator()(Receiver & receiver, Passed passed) {
+  Return apply(Receiver & receiver, Passed passed) {
     return (receiver.*method)(
       (typename Parameters::template Parameter<A0, 0, Passed>()).yield(passed),
       (typename Parameters::template Parameter<A1, 1, Passed>()).yield(passed),
@@ -644,7 +644,7 @@ public:
   }
 
   template<typename Passed>
-  Constructed * operator()(Passed passed) {
+  Constructed * apply(Passed passed) {
     return new(allocator.allocate(1)) Constructed(
       (typename Parameters::template Parameter<A0, 0, Passed>()).yield(passed),
       (typename Parameters::template Parameter<A1, 1, Passed>()).yield(passed),
@@ -672,7 +672,7 @@ public:
   }
 
   template<typename Passed>
-  Return operator()(Passed passed) {
+  Return apply(Passed passed) {
     return function(
       (typename Parameters::template Parameter<A0, 0, Passed>()).yield(passed),
       (typename Parameters::template Parameter<A1, 1, Passed>()).yield(passed),
@@ -708,7 +708,7 @@ public:
   }
 
   template<typename Passed>
-  void operator()(Passed passed) {
+  void apply(Passed passed) {
     function(
       (typename Parameters::template Parameter<A0, 0, Passed>()).yield(passed),
       (typename Parameters::template Parameter<A1, 1, Passed>()).yield(passed),
@@ -739,7 +739,7 @@ public:
   }
 
   template<typename Passed>
-  Return operator()(Receiver & receiver, Passed passed) {
+  Return apply(Receiver & receiver, Passed passed) {
     return (receiver.*method)(
       (typename Parameters::template Parameter<A0, 0, Passed>()).yield(passed),
       (typename Parameters::template Parameter<A1, 1, Passed>()).yield(passed),
@@ -780,7 +780,7 @@ public:
   }
 
   template<typename Passed>
-  Constructed * operator()(Passed passed) {
+  Constructed * apply(Passed passed) {
     return new(allocator.allocate(1)) Constructed(
       (typename Parameters::template Parameter<A0, 0, Passed>()).yield(passed),
       (typename Parameters::template Parameter<A1, 1, Passed>()).yield(passed),
@@ -810,7 +810,7 @@ public:
   }
 
   template<typename Passed>
-  Return operator()(Passed passed) {
+  Return apply(Passed passed) {
     return function(
       (typename Parameters::template Parameter<A0, 0, Passed>()).yield(passed),
       (typename Parameters::template Parameter<A1, 1, Passed>()).yield(passed),
@@ -848,7 +848,7 @@ public:
   }
 
   template<typename Passed>
-  void operator()(Passed passed) {
+  void apply(Passed passed) {
     function(
       (typename Parameters::template Parameter<A0, 0, Passed>()).yield(passed),
       (typename Parameters::template Parameter<A1, 1, Passed>()).yield(passed),
@@ -880,7 +880,7 @@ public:
   }
 
   template<typename Passed>
-  Return operator()(Receiver & receiver, Passed passed) {
+  Return apply(Receiver & receiver, Passed passed) {
     return (receiver.*method)(
       (typename Parameters::template Parameter<A0, 0, Passed>()).yield(passed),
       (typename Parameters::template Parameter<A1, 1, Passed>()).yield(passed),
@@ -923,7 +923,7 @@ public:
   }
 
   template<typename Passed>
-  Constructed * operator()(Passed passed) {
+  Constructed * apply(Passed passed) {
     return new(allocator.allocate(1)) Constructed(
       (typename Parameters::template Parameter<A0, 0, Passed>()).yield(passed),
       (typename Parameters::template Parameter<A1, 1, Passed>()).yield(passed),
@@ -954,7 +954,7 @@ public:
   }
 
   template<typename Passed>
-  Return operator()(Passed passed) {
+  Return apply(Passed passed) {
     return function(
       (typename Parameters::template Parameter<A0, 0, Passed>()).yield(passed),
       (typename Parameters::template Parameter<A1, 1, Passed>()).yield(passed),
@@ -994,7 +994,7 @@ public:
   }
 
   template<typename Passed>
-  void operator()(Passed passed) {
+  void apply(Passed passed) {
     function(
       (typename Parameters::template Parameter<A0, 0, Passed>()).yield(passed),
       (typename Parameters::template Parameter<A1, 1, Passed>()).yield(passed),
@@ -1027,7 +1027,7 @@ public:
   }
 
   template<typename Passed>
-  Return operator()(Receiver & receiver, Passed passed) {
+  Return apply(Receiver & receiver, Passed passed) {
     return (receiver.*method)(
       (typename Parameters::template Parameter<A0, 0, Passed>()).yield(passed),
       (typename Parameters::template Parameter<A1, 1, Passed>()).yield(passed),
@@ -1072,7 +1072,7 @@ public:
   }
 
   template<typename Passed>
-  Constructed * operator()(Passed passed) {
+  Constructed * apply(Passed passed) {
     return new(allocator.allocate(1)) Constructed(
       (typename Parameters::template Parameter<A0, 0, Passed>()).yield(passed),
       (typename Parameters::template Parameter<A1, 1, Passed>()).yield(passed),
@@ -1104,7 +1104,7 @@ public:
   }
 
   template<typename Passed>
-  Return operator()(Passed passed) {
+  Return apply(Passed passed) {
     return function(
       (typename Parameters::template Parameter<A0, 0, Passed>()).yield(passed),
       (typename Parameters::template Parameter<A1, 1, Passed>()).yield(passed),
@@ -1147,7 +1147,7 @@ public:
   }
 
   template<typename Passed>
-  void operator()(Passed passed) {
+  void apply(Passed passed) {
     function(
       (typename Parameters::template Parameter<A0, 0, Passed>()).yield(passed),
       (typename Parameters::template Parameter<A1, 1, Passed>()).yield(passed),
@@ -1181,7 +1181,7 @@ public:
   }
 
   template<typename Passed>
-  Return operator()(Receiver & receiver, Passed passed) {
+  Return apply(Receiver & receiver, Passed passed) {
     return (receiver.*method)(
       (typename Parameters::template Parameter<A0, 0, Passed>()).yield(passed),
       (typename Parameters::template Parameter<A1, 1, Passed>()).yield(passed),
@@ -1228,7 +1228,7 @@ public:
   }
 
   template<typename Passed>
-  Constructed * operator()(Passed passed) {
+  Constructed * apply(Passed passed) {
     return new(allocator.allocate(1)) Constructed(
       (typename Parameters::template Parameter<A0, 0, Passed>()).yield(passed),
       (typename Parameters::template Parameter<A1, 1, Passed>()).yield(passed),
@@ -1261,7 +1261,7 @@ public:
   }
 
   template<typename Passed>
-  Return operator()(Passed passed) {
+  Return apply(Passed passed) {
     return function(
       (typename Parameters::template Parameter<A0, 0, Passed>()).yield(passed),
       (typename Parameters::template Parameter<A1, 1, Passed>()).yield(passed),
@@ -1306,7 +1306,7 @@ public:
   }
 
   template<typename Passed>
-  void operator()(Passed passed) {
+  void apply(Passed passed) {
     function(
       (typename Parameters::template Parameter<A0, 0, Passed>()).yield(passed),
       (typename Parameters::template Parameter<A1, 1, Passed>()).yield(passed),
@@ -1341,7 +1341,7 @@ public:
   }
 
   template<typename Passed>
-  Return operator()(Receiver & receiver, Passed passed) {
+  Return apply(Receiver & receiver, Passed passed) {
     return (receiver.*method)(
       (typename Parameters::template Parameter<A0, 0, Passed>()).yield(passed),
       (typename Parameters::template Parameter<A1, 1, Passed>()).yield(passed),
@@ -1390,7 +1390,7 @@ public:
   }
 
   template<typename Passed>
-  Constructed * operator()(Passed passed) {
+  Constructed * apply(Passed passed) {
     return new(allocator.allocate(1)) Constructed(
       (typename Parameters::template Parameter<A0, 0, Passed>()).yield(passed),
       (typename Parameters::template Parameter<A1, 1, Passed>()).yield(passed),
@@ -1424,7 +1424,7 @@ public:
   }
 
   template<typename Passed>
-  Return operator()(Passed passed) {
+  Return apply(Passed passed) {
     return function(
       (typename Parameters::template Parameter<A0, 0, Passed>()).yield(passed),
       (typename Parameters::template Parameter<A1, 1, Passed>()).yield(passed),
@@ -1471,7 +1471,7 @@ public:
   }
 
   template<typename Passed>
-  void operator()(Passed passed) {
+  void apply(Passed passed) {
     function(
       (typename Parameters::template Parameter<A0, 0, Passed>()).yield(passed),
       (typename Parameters::template Parameter<A1, 1, Passed>()).yield(passed),
@@ -1507,7 +1507,7 @@ public:
   }
 
   template<typename Passed>
-  Return operator()(Receiver & receiver, Passed passed) {
+  Return apply(Receiver & receiver, Passed passed) {
     return (receiver.*method)(
       (typename Parameters::template Parameter<A0, 0, Passed>()).yield(passed),
       (typename Parameters::template Parameter<A1, 1, Passed>()).yield(passed),
@@ -1558,7 +1558,7 @@ public:
   }
 
   template<typename Passed>
-  Constructed * operator()(Passed passed) {
+  Constructed * apply(Passed passed) {
     return new(allocator.allocate(1)) Constructed(
       (typename Parameters::template Parameter<A0, 0, Passed>()).yield(passed),
       (typename Parameters::template Parameter<A1, 1, Passed>()).yield(passed),
