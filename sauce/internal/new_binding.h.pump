@@ -22,41 +22,69 @@ namespace newschool {
 template<typename Dependency, typename Scope, typename Constructor, typename Allocator>
 class NewBinding: public Binding<Dependency, Scope> {
 
-  struct ValidateAcyclicParameters {
-    template<typename T, int i, typename Passed>
-    struct Parameter {
-      T yield(Passed) {
-        return T(); // TODO
-      }
-    };
+  typedef NewBinding<Dependency, Scope, Constructor, Allocator> New;
+
+  /**
+   * A mixin for ApplyVariadic parameter concept types.
+   */
+  struct NewBindingFriend {
+    template<typename T>
+    void validateAcyclicHelper(New & binding, InjectorPtr injector, TypeIds & ids, std::string dependencyName) {
+      binding->template validateAcyclicHelper<T>(injector, ids, dependencyName);
+    }
   };
+
+  friend class NewBindingFriend;
 
   struct ProvideParameters {
     template<typename T, int i, typename Passed>
-    struct Parameter {
+    struct Parameter: public NewBindingFriend {
       T yield(Passed) {
         return T(); // TODO
       }
     };
   };
 
-  typedef ApplyConstructor<ValidateAcyclicParameters, Constructor, Allocator> ValidateAcyclic;
   typedef ApplyConstructor<ProvideParameters, Constructor, Allocator> Provide;
   typedef typename Provide::Constructed Impl;
   typedef typename Key<Dependency>::Iface Iface;
   typedef typename Key<Dependency>::Ptr IfacePtr;
   typedef sauce::shared_ptr<Impl> ImplPtr;
-  typedef NewBinding<Dependency, Scope, Constructor, Allocator> New;
   typedef DisposalDeleter<Iface, New> Deleter;
 
   std::vector<std::string> dynamicDependencyNames;
 
+  struct ValidateAcyclicParameters {
+    struct Passed {
+      New & binding;
+      InjectorPtr & injector;
+      TypeIds & ids;
+
+      Passed(New & binding, InjectorPtr & injector, TypeIds & ids):
+        binding(binding), injector(injector), ids(ids) {}
+    };
+    
+    template<typename T, int i>
+    struct Parameter: public NewBindingFriend {
+      void observe(Passed & passed) {
+        New & binding = passed.binding;
+        InjectorPtr & injector = passed.injector;
+        TypeIds & ids = passed.ids;
+        std::string dependencyName = binding.dynamicDependencyNames[i];
+
+        this->template validateAcyclicHelper<T>(binding, injector, ids, dependencyName);
+      }
+    };
+  };
+
   void validateAcyclic(InjectorPtr injector, TypeIds & ids) const {
-    // TODO
+    typename ValidateAcyclicParameters::Passed passed(*this, injector, ids);
+    observeConstructor<ValidateAcyclicParameters, Constructor, Allocator>(passed);
   }
 
   void setDynamicDependencyNames(std::vector<std::string> const & dynamicDependencyNames) {
-    // TODO
+    this->dynamicDependencyNames = dynamicDependencyNames;
+    this->dynamicDependencyNames.resize(Provide::arity(), unnamed());
   }
 
 public:
@@ -64,7 +92,7 @@ public:
   typedef typename ResolvedBinding<Dependency>::BindingPtr BindingPtr;
 
   NewBinding():
-    dynamicDependencyNames(0 /* TODO */, unnamed()) {}
+    dynamicDependencyNames(Provide::arity(), unnamed()) {}
 
   /**
    * Provide an Iface.
