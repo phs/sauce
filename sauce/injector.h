@@ -137,7 +137,7 @@ public:
     typedef typename i::Key<Dependency>::Normalized Normalized;
     sauce::auto_ptr<i::Lock> lock = acquireLock();
     i::TypeIds ids;
-    validateAcyclic<Normalized>(getSelf(), ids, name);
+    validateAcyclic<Normalized>(getSelf(), ids, name); // TODO Make this check optional.
     return get<Normalized>(getSelf(), name);
   }
 
