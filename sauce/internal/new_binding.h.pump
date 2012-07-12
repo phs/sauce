@@ -107,9 +107,11 @@ public:
   }
 
   void dispose(Iface * iface) const {
+    typedef typename Allocator::template rebind<Impl>::other ImplAllocator;
+    ImplAllocator allocator;
     Impl * impl = static_cast<Impl *>(iface);
     impl->~Impl(); // Must not throw
-    // allocator.deallocate(impl, 1); // TODO
+    allocator.deallocate(impl, 1);
   }
 
 };
