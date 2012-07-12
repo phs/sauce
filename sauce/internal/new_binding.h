@@ -33,15 +33,34 @@ class NewBinding: public Binding<Dependency, Scope> {
     void validateAcyclicHelper(New & binding, InjectorPtr injector, TypeIds & ids, std::string dependencyName) {
       binding->template validateAcyclicHelper<T>(injector, ids, dependencyName);
     }
+
+    template<typename T>
+    typename Key<T>::Ptr getHelper(New & binding, InjectorPtr injector, std::string dependencyName) {
+      binding->template getHelper<typename i::Key<T>::Normalized>(injector, dependencyName);
+    }
   };
 
   friend class NewBindingFriend;
 
   struct ProvideParameters {
-    template<typename T, int i, typename Passed>
+    struct Passed {
+      New & binding;
+      InjectorPtr & injector;
+
+      Passed(New & binding, InjectorPtr & injector):
+        binding(binding), injector(injector) {}
+    };
+
+    template<typename T, int i>
     struct Parameter: public NewBindingFriend {
-      T yield(Passed) {
-        return T(); // TODO
+      typedef typename Key<T>::Ptr Ptr;
+
+      Ptr yield(Passed & passed) {
+        New & binding = passed.binding;
+        InjectorPtr & injector = passed.injector;
+        std::string dependencyName = binding.dynamicDependencyNames[i];
+
+        return this->template getHelper<T>(binding, injector, dependencyName);
       }
     };
   };
@@ -103,8 +122,8 @@ public:
    * dispose(Iface *).
    */
   IfacePtr provide(BindingPtr binding, InjectorPtr injector) const {
-    IfacePtr TODO;
-    return TODO;
+    typename ProvideParameters::Passed passed(*this, injector);
+    return applyConstructor<ProvideParameters, Constructor, Allocator>(passed);
   }
 
   void dispose(Iface * iface) const {
