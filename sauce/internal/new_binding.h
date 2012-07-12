@@ -1000,8 +1000,8 @@ public:
 
 }
 
-using namespace oldschool;
-// using namespace newschool;
+// using namespace oldschool;
+using namespace newschool;
 
 }
 
