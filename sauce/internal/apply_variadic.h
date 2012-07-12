@@ -98,12 +98,12 @@ public:
   }
 
   template<typename Passed>
-  Return apply(Passed passed) {
+  Return apply(Passed) {
     return function();
   }
 
   template<typename Passed>
-  void observe(Passed passed) {
+  void observe(Passed) {
   }
 };
 /* *INDENT-ON* */
@@ -124,7 +124,7 @@ public:
   }
 
   template<typename Passed>
-  void apply(Passed passed) {
+  void apply(Passed) {
     function();
   }
 };
@@ -149,12 +149,12 @@ public:
   }
 
   template<typename Passed>
-  Return apply(Receiver & receiver, Passed passed) {
+  Return apply(Receiver & receiver, Passed) {
     return (receiver.*method)();
   }
 
   template<typename Passed>
-  void observe(Passed passed) {
+  void observe(Passed) {
   }
 };
 /* *INDENT-ON* */
@@ -179,12 +179,12 @@ public:
   }
 
   template<typename Passed>
-  Constructed * apply(Passed passed) {
+  Constructed * apply(Passed) {
     return new(allocator.allocate(1)) Constructed();
   }
 
   template<typename Passed>
-  void observe(Passed passed) {
+  void observe(Passed) {
   }
 };
 /* *INDENT-ON* */

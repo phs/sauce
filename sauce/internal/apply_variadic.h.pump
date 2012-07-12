@@ -85,6 +85,7 @@ $range j 0..i-1
 $var comma_typename_As = [[$for j [[, typename A$j]]]]
 $var As = [[$for j, [[A$j]]]]
 $var as = [[$for j, [[a$j]]]]
+$var Passed_passed = [[$if i == 0 [[Passed]] $else [[Passed passed]]]]
 
 /* *INDENT-OFF* */
 template<typename Parameters, typename Return_$comma_typename_As>
@@ -104,7 +105,7 @@ public:
   }
 
   template<typename Passed>
-  Return apply(Passed passed) {
+  Return apply($Passed_passed) {
     return function([[$for j, [[
 
       (typename Parameters::template Parameter<A$j, $j, Passed>()).yield(passed)
@@ -112,7 +113,7 @@ public:
   }
 
   template<typename Passed>
-  void observe(Passed passed) {
+  void observe($Passed_passed) {
 [[$for j [[
     (typename Parameters::template Parameter<A$j, $j, Passed>()).observe(passed);
 
@@ -137,7 +138,7 @@ public:
   }
 
   template<typename Passed>
-  void apply(Passed passed) {
+  void apply($Passed_passed) {
     function([[$for j, [[
 
       (typename Parameters::template Parameter<A$j, $j, Passed>()).yield(passed)
@@ -165,7 +166,7 @@ public:
   }
 
   template<typename Passed>
-  Return apply(Receiver & receiver, Passed passed) {
+  Return apply(Receiver & receiver, $Passed_passed) {
     return (receiver.*method)([[$for j, [[
 
       (typename Parameters::template Parameter<A$j, $j, Passed>()).yield(passed)
@@ -173,7 +174,7 @@ public:
   }
 
   template<typename Passed>
-  void observe(Passed passed) {
+  void observe($Passed_passed) {
 [[$for j [[
     (typename Parameters::template Parameter<A$j, $j, Passed>()).observe(passed);
 
@@ -202,7 +203,7 @@ public:
   }
 
   template<typename Passed>
-  Constructed * apply(Passed passed) {
+  Constructed * apply($Passed_passed) {
     return new(allocator.allocate(1)) Constructed([[$for j, [[
 
       (typename Parameters::template Parameter<A$j, $j, Passed>()).yield(passed)
@@ -210,7 +211,7 @@ public:
   }
 
   template<typename Passed>
-  void observe(Passed passed) {
+  void observe($Passed_passed) {
 [[$for j [[
     (typename Parameters::template Parameter<A$j, $j, Passed>()).observe(passed);
 
