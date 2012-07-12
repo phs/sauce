@@ -183,6 +183,12 @@ class NoArg {};
 TEST(ApplyConstructorTest, shouldInterpretNakedTypesAsNoArgConstructors) {
   typedef std::allocator<int> Allocator;
   sauce::auto_ptr<NoArg> noArg(applyConstructor<DefaultValueParameters, NoArg, Allocator>(0));
+
+  SideEffectParameters::called = 0;
+  observeConstructor<SideEffectParameters, NoArg, Allocator>(0);
+  ASSERT_EQ(0, SideEffectParameters::called);
+
+  ASSERT_EQ(0, (ApplyConstructor<DefaultValueParameters, NoArg, Allocator>::arity()));
 }
 
 }

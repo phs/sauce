@@ -57,10 +57,17 @@ public:
   ApplyConstructor():
     allocator() {}
 
+  static int arity() {
+    return 0;
+  }
+
   template<typename Passed>
   Constructed * apply(Passed) {
     return new(allocator.allocate(1))Constructed();
   }
+
+  template<typename Passed>
+  void observe(Passed) {}
 };
 
 template<typename Parameters, typename Constructor, typename Allocator, typename Passed>
