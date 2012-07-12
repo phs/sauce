@@ -171,6 +171,10 @@ TEST(ApplyConstructorTest, shouldCallConstructorWithParametersGeneratedFromPasse
   toStringer.reset(applyConstructor<MoreSpecializedParameters, Ctor, Allocator>(passed));
   ASSERT_EQ("'foo' '1'", toStringer->toString);
 
+  SideEffectParameters::called = 0;
+  observeConstructor<SideEffectParameters, Ctor, Allocator>(0);
+  ASSERT_EQ(2, SideEffectParameters::called);
+
   ASSERT_EQ(2, (ApplyConstructor<DefaultValueParameters, Ctor, Allocator>::arity()));
 }
 

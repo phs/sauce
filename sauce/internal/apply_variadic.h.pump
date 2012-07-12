@@ -67,6 +67,11 @@ typename ApplyConstructor<Parameters, Constructor, Allocator>::Constructed * app
   return ApplyConstructor<Parameters, Constructor, Allocator>().apply(passed);
 }
 
+template<typename Parameters, typename Constructor, typename Allocator, typename Passed>
+void observeConstructor(Passed passed) {
+  ApplyConstructor<Parameters, Constructor, Allocator>().observe(passed);
+}
+
 $range i 0..n
 $for i [[
 $range j 0..i-1
@@ -195,6 +200,14 @@ public:
 
       (typename Parameters::template Parameter<A$j, $j, Passed>()).yield(passed)
 ]]]]);
+  }
+
+  template<typename Passed>
+  void observe(Passed passed) {
+[[$for j [[
+    (typename Parameters::template Parameter<A$j, $j, Passed>()).observe(passed);
+
+]]]]
   }
 };
 /* *INDENT-ON* */
