@@ -121,6 +121,8 @@ TEST(ApplyVoidFunctionTest, shouldCallPassedVoidFunctionWithParametersGeneratedF
   std::string passed = "foo";
   applyVoidFunction<MoreSpecializedParameters>(&HasVoidToString::toString, passed);
   ASSERT_EQ("'foo' '1'", HasVoidToString::asString);
+
+  ASSERT_EQ(2, (ApplyVoidFunction<DefaultValueParameters, void (*)(std::string, int)>::arity()));
 }
 
 struct HasToString {
@@ -169,6 +171,8 @@ TEST(ApplyConstructorTest, shouldCallConstructorWithParametersGeneratedFromPasse
   std::string passed = "foo";
   toStringer.reset(applyConstructor<MoreSpecializedParameters, Ctor, Allocator>(passed));
   ASSERT_EQ("'foo' '1'", toStringer->toString);
+
+  ASSERT_EQ(2, (ApplyConstructor<DefaultValueParameters, Ctor, Allocator>::arity()));
 }
 
 class NoArg {};

@@ -107,6 +107,10 @@ public:
   ApplyVoidFunction(Function function):
     function(function) {}
 
+  static int arity() {
+    return 0;
+  }
+
   template<typename Passed>
   void operator()(Passed passed) {
     function();
@@ -158,6 +162,10 @@ public:
   ApplyConstructor():
     allocator() {}
 
+  static int arity() {
+    return 0;
+  }
+
   template<typename Passed>
   Constructed * operator()(Passed passed) {
     return new(allocator.allocate(1)) Constructed();
@@ -205,6 +213,10 @@ public:
 
   ApplyVoidFunction(Function function):
     function(function) {}
+
+  static int arity() {
+    return 1;
+  }
 
   template<typename Passed>
   void operator()(Passed passed) {
@@ -260,6 +272,10 @@ public:
   ApplyConstructor():
     allocator() {}
 
+  static int arity() {
+    return 1;
+  }
+
   template<typename Passed>
   Constructed * operator()(Passed passed) {
     return new(allocator.allocate(1)) Constructed(
@@ -310,6 +326,10 @@ public:
 
   ApplyVoidFunction(Function function):
     function(function) {}
+
+  static int arity() {
+    return 2;
+  }
 
   template<typename Passed>
   void operator()(Passed passed) {
@@ -368,6 +388,10 @@ public:
   ApplyConstructor():
     allocator() {}
 
+  static int arity() {
+    return 2;
+  }
+
   template<typename Passed>
   Constructed * operator()(Passed passed) {
     return new(allocator.allocate(1)) Constructed(
@@ -421,6 +445,10 @@ public:
 
   ApplyVoidFunction(Function function):
     function(function) {}
+
+  static int arity() {
+    return 3;
+  }
 
   template<typename Passed>
   void operator()(Passed passed) {
@@ -482,6 +510,10 @@ public:
   ApplyConstructor():
     allocator() {}
 
+  static int arity() {
+    return 3;
+  }
+
   template<typename Passed>
   Constructed * operator()(Passed passed) {
     return new(allocator.allocate(1)) Constructed(
@@ -538,6 +570,10 @@ public:
 
   ApplyVoidFunction(Function function):
     function(function) {}
+
+  static int arity() {
+    return 4;
+  }
 
   template<typename Passed>
   void operator()(Passed passed) {
@@ -603,6 +639,10 @@ public:
   ApplyConstructor():
     allocator() {}
 
+  static int arity() {
+    return 4;
+  }
+
   template<typename Passed>
   Constructed * operator()(Passed passed) {
     return new(allocator.allocate(1)) Constructed(
@@ -662,6 +702,10 @@ public:
 
   ApplyVoidFunction(Function function):
     function(function) {}
+
+  static int arity() {
+    return 5;
+  }
 
   template<typename Passed>
   void operator()(Passed passed) {
@@ -731,6 +775,10 @@ public:
   ApplyConstructor():
     allocator() {}
 
+  static int arity() {
+    return 5;
+  }
+
   template<typename Passed>
   Constructed * operator()(Passed passed) {
     return new(allocator.allocate(1)) Constructed(
@@ -794,6 +842,10 @@ public:
 
   ApplyVoidFunction(Function function):
     function(function) {}
+
+  static int arity() {
+    return 6;
+  }
 
   template<typename Passed>
   void operator()(Passed passed) {
@@ -866,6 +918,10 @@ public:
   ApplyConstructor():
     allocator() {}
 
+  static int arity() {
+    return 6;
+  }
+
   template<typename Passed>
   Constructed * operator()(Passed passed) {
     return new(allocator.allocate(1)) Constructed(
@@ -932,6 +988,10 @@ public:
 
   ApplyVoidFunction(Function function):
     function(function) {}
+
+  static int arity() {
+    return 7;
+  }
 
   template<typename Passed>
   void operator()(Passed passed) {
@@ -1007,6 +1067,10 @@ public:
   ApplyConstructor():
     allocator() {}
 
+  static int arity() {
+    return 7;
+  }
+
   template<typename Passed>
   Constructed * operator()(Passed passed) {
     return new(allocator.allocate(1)) Constructed(
@@ -1077,6 +1141,10 @@ public:
 
   ApplyVoidFunction(Function function):
     function(function) {}
+
+  static int arity() {
+    return 8;
+  }
 
   template<typename Passed>
   void operator()(Passed passed) {
@@ -1155,6 +1223,10 @@ public:
   ApplyConstructor():
     allocator() {}
 
+  static int arity() {
+    return 8;
+  }
+
   template<typename Passed>
   Constructed * operator()(Passed passed) {
     return new(allocator.allocate(1)) Constructed(
@@ -1228,6 +1300,10 @@ public:
 
   ApplyVoidFunction(Function function):
     function(function) {}
+
+  static int arity() {
+    return 9;
+  }
 
   template<typename Passed>
   void operator()(Passed passed) {
@@ -1309,6 +1385,10 @@ public:
   ApplyConstructor():
     allocator() {}
 
+  static int arity() {
+    return 9;
+  }
+
   template<typename Passed>
   Constructed * operator()(Passed passed) {
     return new(allocator.allocate(1)) Constructed(
@@ -1385,6 +1465,10 @@ public:
 
   ApplyVoidFunction(Function function):
     function(function) {}
+
+  static int arity() {
+    return 10;
+  }
 
   template<typename Passed>
   void operator()(Passed passed) {
@@ -1468,6 +1552,10 @@ public:
 
   ApplyConstructor():
     allocator() {}
+
+  static int arity() {
+    return 10;
+  }
 
   template<typename Passed>
   Constructed * operator()(Passed passed) {

@@ -120,6 +120,10 @@ public:
   ApplyVoidFunction(Function function):
     function(function) {}
 
+  static int arity() {
+    return $i;
+  }
+
   template<typename Passed>
   void operator()(Passed passed) {
     function([[$for j, [[
@@ -180,6 +184,10 @@ public:
 
   ApplyConstructor():
     allocator() {}
+
+  static int arity() {
+    return $i;
+  }
 
   template<typename Passed>
   Constructed * operator()(Passed passed) {
