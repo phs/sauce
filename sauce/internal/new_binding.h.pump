@@ -26,7 +26,7 @@ class NewBinding: public Binding<Dependency, Scope> {
     template<typename T, int i, typename Passed>
     struct Parameter {
       T yield(Passed) {
-        return T();
+        return T(); // TODO
       }
     };
   };
@@ -35,13 +35,54 @@ class NewBinding: public Binding<Dependency, Scope> {
     template<typename T, int i, typename Passed>
     struct Parameter {
       T yield(Passed) {
-        return T();
+        return T(); // TODO
       }
     };
   };
 
   typedef ApplyConstructor<ValidateAcyclicParameters, Constructor, Allocator> ValidateAcyclic;
   typedef ApplyConstructor<ProvideParameters, Constructor, Allocator> Provide;
+  typedef typename Provide::Constructed Impl;
+  typedef typename Key<Dependency>::Iface Iface;
+  typedef typename Key<Dependency>::Ptr IfacePtr;
+  typedef sauce::shared_ptr<Impl> ImplPtr;
+  typedef NewBinding<Dependency, Scope, Constructor, Allocator> New;
+  typedef DisposalDeleter<Iface, New> Deleter;
+
+  std::vector<std::string> dynamicDependencyNames;
+
+  void validateAcyclic(InjectorPtr injector, TypeIds & ids) const {
+    // TODO
+  }
+
+  void setDynamicDependencyNames(std::vector<std::string> const & dynamicDependencyNames) {
+    // TODO
+  }
+
+public:
+
+  typedef typename ResolvedBinding<Dependency>::BindingPtr BindingPtr;
+
+  NewBinding():
+    dynamicDependencyNames(0 /* TODO */, unnamed()) {}
+
+  /**
+   * Provide an Iface.
+   *
+   * A naked instance pointer is allocated and wrapped in a shared_ptr.  It is
+   * also given a custom deleter, to dispose of the naked pointer with
+   * dispose(Iface *).
+   */
+  IfacePtr provide(BindingPtr binding, InjectorPtr injector) const {
+    IfacePtr TODO;
+    return TODO;
+  }
+
+  void dispose(Iface * iface) const {
+    Impl * impl = static_cast<Impl *>(iface);
+    impl->~Impl(); // Must not throw
+    // allocator.deallocate(impl, 1); // TODO
+  }
 
 };
 
