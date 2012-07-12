@@ -80,9 +80,8 @@ struct SideEffectParameters {
 
   template<typename T, int i, typename Passed>
   struct Parameter {
-    T yield(Passed) {
+    void observe(Passed) {
       ++called;
-      return T();
     }
   };
 };

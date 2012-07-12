@@ -17,7 +17,7 @@ typename ApplyFunction<Parameters, Function>::Return applyFunction(Function func
 
 template<typename Parameters, typename Function, typename Passed>
 void observeFunction(Function function, Passed passed) {
-  ApplyFunction<Parameters, Function>(function).yield(passed);
+  ApplyFunction<Parameters, Function>(function).observe(passed);
 }
 
 template<typename Parameters, typename Function>
@@ -39,7 +39,7 @@ typename ApplyMethod<Parameters, Method>::Return applyMethod(
 
 template<typename Parameters, typename Method, typename Passed>
 void observeMethod(Method method, Passed passed) {
-  ApplyMethod<Parameters, Method>(method).yield(passed);
+  ApplyMethod<Parameters, Method>(method).observe(passed);
 }
 
 template<typename Parameters, typename Constructed_, typename Allocator_>
@@ -100,9 +100,9 @@ public:
   }
 
   template<typename Passed>
-  void yield(Passed passed) {
+  void observe(Passed passed) {
 [[$for j [[
-    (typename Parameters::template Parameter<A$j, $j, Passed>()).yield(passed);
+    (typename Parameters::template Parameter<A$j, $j, Passed>()).observe(passed);
 
 ]]]]
   }
@@ -161,9 +161,9 @@ public:
   }
 
   template<typename Passed>
-  void yield(Passed passed) {
+  void observe(Passed passed) {
 [[$for j [[
-    (typename Parameters::template Parameter<A$j, $j, Passed>()).yield(passed);
+    (typename Parameters::template Parameter<A$j, $j, Passed>()).observe(passed);
 
 ]]]]
   }
