@@ -64,28 +64,29 @@
 <div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;<span class="keyword">namespace </span>internal {</div>
 <div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;</div>
 <div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;<span class="keyword">template</span>&lt;<span class="keyword">typename</span> Dependency&gt;</div>
-<div class="line"><a name="l00020"></a><span class="lineno"><a class="code" href="structsauce_1_1internal_1_1_resolved_binding.html">   20</a></span>&#160;<span class="keyword">struct </span><a class="code" href="structsauce_1_1internal_1_1_resolved_binding.html" title="A binding for an acknowledged interface.">ResolvedBinding</a>: <span class="keyword">public</span> <a class="code" href="structsauce_1_1internal_1_1_opaque_binding.html" title="An opaque binding.">OpaqueBinding</a> {</div>
-<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;</div>
-<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;  <span class="keyword">typedef</span> <span class="keyword">typename</span> Key&lt;Dependency&gt;::Ptr IfacePtr;</div>
-<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;  <span class="keyword">typedef</span> sauce::shared_ptr&lt;ResolvedBinding&lt;Dependency&gt; &gt; BindingPtr;</div>
-<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;</div>
-<div class="line"><a name="l00028"></a><span class="lineno"><a class="code" href="structsauce_1_1internal_1_1_resolved_binding.html#a7ff0341fe08ae52a0f03a35ad6dd3c79">   28</a></span>&#160;  NamedTypeId <a class="code" href="structsauce_1_1internal_1_1_resolved_binding.html#a7ff0341fe08ae52a0f03a35ad6dd3c79" title="The TypeId of the Dependency template parameter.">getKey</a>()<span class="keyword"> const </span>{</div>
-<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;    <span class="keywordflow">return</span> namedTypeIdOf&lt;Dependency&gt;(<a class="code" href="structsauce_1_1internal_1_1_opaque_binding.html#aa22bfd5e4d4459c2e3379ab6802d0285" title="The dynamic name of this binding.">getName</a>());</div>
-<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;  }</div>
-<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;</div>
-<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;  <span class="keyword">virtual</span> <span class="keywordtype">void</span> <a class="code" href="structsauce_1_1internal_1_1_resolved_binding.html#a503de5fe9cb4996db536f6f6d6d486be" title="Establish that further dependencies do not introduce cycles with ones already accumulated.">validateAcyclic</a>(sauce::shared_ptr&lt;Injector&gt;, TypeIds &amp;) <span class="keyword">const</span> = 0;</div>
-<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;</div>
-<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;  <span class="keyword">virtual</span> IfacePtr <span class="keyword">get</span>(BindingPtr, sauce::shared_ptr&lt;Injector&gt;) <span class="keyword">const</span> = 0;</div>
-<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;</div>
-<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;};</div>
-<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;</div>
-<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;}</div>
-<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;</div>
-<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;<span class="keyword">namespace </span>i = ::sauce::internal;</div>
-<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;</div>
-<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;}</div>
-<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;</div>
-<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;<span class="preprocessor">#endif // SAUCE_INTERNAL_RESOLVED_BINDING_H_</span></div>
+<div class="line"><a name="l00020"></a><span class="lineno"><a class="code" href="classsauce_1_1internal_1_1_resolved_binding.html">   20</a></span>&#160;<span class="keyword">class </span><a class="code" href="classsauce_1_1internal_1_1_resolved_binding.html" title="A binding for an acknowledged interface.">ResolvedBinding</a>: <span class="keyword">public</span> <a class="code" href="classsauce_1_1internal_1_1_opaque_binding.html" title="An opaque binding.">OpaqueBinding</a> {</div>
+<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;<span class="keyword">public</span>:</div>
+<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;</div>
+<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;  <span class="keyword">typedef</span> <span class="keyword">typename</span> Key&lt;Dependency&gt;::Ptr IfacePtr;</div>
+<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;  <span class="keyword">typedef</span> sauce::shared_ptr&lt;ResolvedBinding&lt;Dependency&gt; &gt; BindingPtr;</div>
+<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;</div>
+<div class="line"><a name="l00029"></a><span class="lineno"><a class="code" href="classsauce_1_1internal_1_1_resolved_binding.html#a7ff0341fe08ae52a0f03a35ad6dd3c79">   29</a></span>&#160;  NamedTypeId <a class="code" href="classsauce_1_1internal_1_1_resolved_binding.html#a7ff0341fe08ae52a0f03a35ad6dd3c79" title="The TypeId of the Dependency template parameter.">getKey</a>()<span class="keyword"> const </span>{</div>
+<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;    <span class="keywordflow">return</span> namedTypeIdOf&lt;Dependency&gt;(<a class="code" href="classsauce_1_1internal_1_1_opaque_binding.html#aa22bfd5e4d4459c2e3379ab6802d0285" title="The dynamic name of this binding.">getName</a>());</div>
+<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;  }</div>
+<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;</div>
+<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;  <span class="keyword">virtual</span> <span class="keywordtype">void</span> <a class="code" href="classsauce_1_1internal_1_1_resolved_binding.html#a503de5fe9cb4996db536f6f6d6d486be" title="Establish that further dependencies do not introduce cycles with ones already accumulated.">validateAcyclic</a>(sauce::shared_ptr&lt;Injector&gt;, TypeIds &amp;) <span class="keyword">const</span> = 0;</div>
+<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;</div>
+<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;  <span class="keyword">virtual</span> IfacePtr <span class="keyword">get</span>(BindingPtr, sauce::shared_ptr&lt;Injector&gt;) <span class="keyword">const</span> = 0;</div>
+<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;</div>
+<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;};</div>
+<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;</div>
+<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;}</div>
+<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;</div>
+<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;<span class="keyword">namespace </span>i = ::sauce::internal;</div>
+<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;</div>
+<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;}</div>
+<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;</div>
+<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;<span class="preprocessor">#endif // SAUCE_INTERNAL_RESOLVED_BINDING_H_</span></div>
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>

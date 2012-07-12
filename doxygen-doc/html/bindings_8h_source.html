@@ -100,8 +100,8 @@
 <div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;</div>
 <div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;    BindingMap::const_iterator i = bindingMap.find(namedTypeIdOf&lt;Dependency&gt;(name));</div>
 <div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;    <span class="keywordflow">if</span> (i == bindingMap.end()) {</div>
-<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;      <a class="code" href="structsauce_1_1internal_1_1_implicit_bindings.html" title="Attempts to supply a Binding when none is found for a dependency.">ImplicitBindings</a> implicitBindings;</div>
-<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;      binding = implicitBindings.<a class="code" href="structsauce_1_1internal_1_1_implicit_bindings.html#a2ab32c0258b8150fa3f769869f17a9b1" title="Attempt to supply a (unknown) Binding at provision time.">get</a>&lt;Dependency&gt;(*<span class="keyword">this</span>, name);</div>
+<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;      <a class="code" href="classsauce_1_1internal_1_1_implicit_bindings.html" title="Attempts to supply a Binding when none is found for a dependency.">ImplicitBindings</a> implicitBindings;</div>
+<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;      binding = implicitBindings.<a class="code" href="classsauce_1_1internal_1_1_implicit_bindings.html#a2ab32c0258b8150fa3f769869f17a9b1" title="Attempt to supply a (unknown) Binding at provision time.">get</a>&lt;Dependency&gt;(*<span class="keyword">this</span>, name);</div>
 <div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;    } <span class="keywordflow">else</span> {</div>
 <div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;      binding = resolve&lt;Dependency&gt;(i-&gt;second);</div>
 <div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;    }</div>

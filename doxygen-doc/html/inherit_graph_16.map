@@ -1,5 +1,3 @@
 <map id="G" name="G">
-<area shape="rect" id="node1" href="$classsauce_1_1internal_1_1_initial_clause.html" title="Base class for initial parts of the fluent binding API." alt="" coords="6,39,167,83"/>
-<area shape="rect" id="node3" href="$classsauce_1_1_in_clause.html" title="Scopes the binding." alt="" coords="217,5,423,49"/>
-<area shape="rect" id="node5" href="$classsauce_1_1_named_clause.html" title="Names the binding." alt="" coords="246,73,394,117"/>
+<area shape="rect" id="node1" href="$classsauce_1_1internal_1_1_apply_function_3_01_parameters_00_01_return___07_5_08_07_a0_08_4.html" title="sauce::internal::ApplyFunction\l\&lt; Parameters, Return_(*)(A0)\&gt;" alt="" coords="6,5,210,49"/>
 </map>

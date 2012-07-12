@@ -85,7 +85,7 @@
 <div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;    <span class="keywordflow">if</span> (i == ids.end()) {</div>
 <div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;      ids.insert(i, <span class="keywordtype">id</span>);</div>
 <div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;    } <span class="keywordflow">else</span> {</div>
-<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;      <span class="keywordflow">throw</span> <a class="code" href="structsauce_1_1_circular_dependency_exception_for.html" title="Thrown when a dependency cycle is found for the given interface.">CircularDependencyExceptionFor&lt;Dependency&gt;</a>();</div>
+<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;      <span class="keywordflow">throw</span> <a class="code" href="classsauce_1_1_circular_dependency_exception_for.html" title="Thrown when a dependency cycle is found for the given interface.">CircularDependencyExceptionFor&lt;Dependency&gt;</a>();</div>
 <div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;    }</div>
 <div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;  }</div>
 <div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;</div>
@@ -123,7 +123,7 @@
 <div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;    <span class="keyword">typedef</span> <span class="keyword">typename</span> Key&lt;Dependency&gt;::Iface Iface;</div>
 <div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;    <span class="keyword">typedef</span> <span class="keyword">typename</span> Key&lt;Dependency&gt;::Ptr Ptr;</div>
 <div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;    Ptr ptr(bindings.template get&lt;Normalized&gt;(injector, name));</div>
-<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;    <a class="code" href="class_self_injector.html" title="If a type requests injection of its own smart pointer, do so.">SelfInjector&lt;Iface&gt;</a> selfInjector;</div>
+<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;    <a class="code" href="classsauce_1_1internal_1_1_self_injector.html" title="If a type requests injection of its own smart pointer, do so.">SelfInjector&lt;Iface&gt;</a> selfInjector;</div>
 <div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;    selfInjector.setSelf(ptr);</div>
 <div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;    <span class="keywordflow">return</span> ptr;</div>
 <div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;  }</div>

@@ -63,33 +63,34 @@
 <div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;</div>
 <div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;<span class="keyword">namespace </span>internal {</div>
 <div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;</div>
-<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;<span class="keyword">struct </span>OpaqueBinding;</div>
+<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;<span class="keyword">class </span>OpaqueBinding;</div>
 <div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;</div>
 <div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;<span class="keyword">typedef</span> sauce::shared_ptr&lt;OpaqueBinding&gt; OpaqueBindingPtr;</div>
 <div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;</div>
-<div class="line"><a name="l00033"></a><span class="lineno"><a class="code" href="structsauce_1_1internal_1_1_opaque_binding.html">   33</a></span>&#160;<span class="keyword">struct </span><a class="code" href="structsauce_1_1internal_1_1_opaque_binding.html" title="An opaque binding.">OpaqueBinding</a> {</div>
-<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;</div>
-<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;  <span class="keyword">virtual</span> std::string <a class="code" href="structsauce_1_1internal_1_1_opaque_binding.html#aa22bfd5e4d4459c2e3379ab6802d0285" title="The dynamic name of this binding.">getName</a>() <span class="keyword">const</span> = 0;</div>
-<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;</div>
-<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;  <span class="keyword">virtual</span> <span class="keywordtype">void</span> <a class="code" href="structsauce_1_1internal_1_1_opaque_binding.html#aebbd72acc376d0f4733e51a13f94db99" title="Set the dynamic name of this binding.">setName</a>(std::string) = 0;</div>
-<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;</div>
-<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;  <span class="keyword">virtual</span> NamedTypeId <a class="code" href="structsauce_1_1internal_1_1_opaque_binding.html#a16b36cf388c4edeea73f0b18bb376481" title="The NamedTypeId of the (hidden) provided interface.">getKey</a>() <span class="keyword">const</span> = 0;</div>
-<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;</div>
-<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;  <span class="keyword">virtual</span> <a class="code" href="classsauce_1_1internal_1_1_type_id.html" title="A TypeSignature equipped with specific helper methods dealing in the hidden type.">TypeId</a> <a class="code" href="structsauce_1_1internal_1_1_opaque_binding.html#afcab860863e3fdec961ff24704c45217" title="The TypeId of the (hidden) scope.">getScopeKey</a>() <span class="keyword">const</span> = 0;</div>
-<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;</div>
-<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;  <span class="keyword">virtual</span> <span class="keywordtype">void</span> <a class="code" href="structsauce_1_1internal_1_1_opaque_binding.html#a9cbe103bedc3ea77c5edef5f30a4d74c" title="Provide, but do not return the hidden interface.">eagerlyProvide</a>(OpaqueBindingPtr, sauce::shared_ptr&lt;Injector&gt;) <span class="keyword">const</span> = 0;</div>
-<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;</div>
-<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;  <span class="keyword">virtual</span> <span class="keywordtype">void</span> <a class="code" href="structsauce_1_1internal_1_1_opaque_binding.html#a0d34b0bb5be2e0d0546200d480f3ae30" title="Accept the list of dynamic dependency names this binding was created with.">setDynamicDependencyNames</a>(std::vector&lt;std::string&gt; <span class="keyword">const</span> &amp;) = 0;</div>
-<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;</div>
-<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;};</div>
-<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;</div>
-<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;}</div>
-<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;</div>
-<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;<span class="keyword">namespace </span>i = ::sauce::internal;</div>
-<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;</div>
-<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;}</div>
-<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;</div>
-<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;<span class="preprocessor">#endif // SAUCE_INTERNAL_OPAQUE_BINDING_H_</span></div>
+<div class="line"><a name="l00033"></a><span class="lineno"><a class="code" href="classsauce_1_1internal_1_1_opaque_binding.html">   33</a></span>&#160;<span class="keyword">class </span><a class="code" href="classsauce_1_1internal_1_1_opaque_binding.html" title="An opaque binding.">OpaqueBinding</a> {</div>
+<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;<span class="keyword">public</span>:</div>
+<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;</div>
+<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;  <span class="keyword">virtual</span> std::string <a class="code" href="classsauce_1_1internal_1_1_opaque_binding.html#aa22bfd5e4d4459c2e3379ab6802d0285" title="The dynamic name of this binding.">getName</a>() <span class="keyword">const</span> = 0;</div>
+<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;</div>
+<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;  <span class="keyword">virtual</span> <span class="keywordtype">void</span> <a class="code" href="classsauce_1_1internal_1_1_opaque_binding.html#aebbd72acc376d0f4733e51a13f94db99" title="Set the dynamic name of this binding.">setName</a>(std::string) = 0;</div>
+<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;</div>
+<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;  <span class="keyword">virtual</span> NamedTypeId <a class="code" href="classsauce_1_1internal_1_1_opaque_binding.html#a16b36cf388c4edeea73f0b18bb376481" title="The NamedTypeId of the (hidden) provided interface.">getKey</a>() <span class="keyword">const</span> = 0;</div>
+<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;</div>
+<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;  <span class="keyword">virtual</span> <a class="code" href="classsauce_1_1internal_1_1_type_id.html" title="A TypeSignature equipped with specific helper methods dealing in the hidden type.">TypeId</a> <a class="code" href="classsauce_1_1internal_1_1_opaque_binding.html#afcab860863e3fdec961ff24704c45217" title="The TypeId of the (hidden) scope.">getScopeKey</a>() <span class="keyword">const</span> = 0;</div>
+<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;</div>
+<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;  <span class="keyword">virtual</span> <span class="keywordtype">void</span> <a class="code" href="classsauce_1_1internal_1_1_opaque_binding.html#a9cbe103bedc3ea77c5edef5f30a4d74c" title="Provide, but do not return the hidden interface.">eagerlyProvide</a>(OpaqueBindingPtr, sauce::shared_ptr&lt;Injector&gt;) <span class="keyword">const</span> = 0;</div>
+<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;</div>
+<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;  <span class="keyword">virtual</span> <span class="keywordtype">void</span> <a class="code" href="classsauce_1_1internal_1_1_opaque_binding.html#a0d34b0bb5be2e0d0546200d480f3ae30" title="Accept the list of dynamic dependency names this binding was created with.">setDynamicDependencyNames</a>(std::vector&lt;std::string&gt; <span class="keyword">const</span> &amp;) = 0;</div>
+<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;</div>
+<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;};</div>
+<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;</div>
+<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;}</div>
+<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;</div>
+<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;<span class="keyword">namespace </span>i = ::sauce::internal;</div>
+<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;</div>
+<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;}</div>
+<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;</div>
+<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;<span class="preprocessor">#endif // SAUCE_INTERNAL_OPAQUE_BINDING_H_</span></div>
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>

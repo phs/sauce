@@ -145,7 +145,7 @@ Here is the call graph for this function:</div>
 <p>Create an <a class="el" href="classsauce_1_1_injector.html">Injector</a> that can provide dependencies specified by all added <a class="el" href="classsauce_1_1_modules.html" title="A factory that accepts Modules and creates Injectors.">Modules</a>. </p>
 <p>Any modules added after an <a class="el" href="classsauce_1_1_injector.html">Injector</a> is created will have no effect on that <a class="el" href="classsauce_1_1_injector.html">Injector</a>. </p>
 <div class="fragment"><div class="line">                                                   {</div>
-<div class="line">    sauce::auto_ptr&lt;i::LockFactory&gt; lockFactory(<span class="keyword">new</span> <a class="code" href="structsauce_1_1internal_1_1_null_lock_factory.html">i::NullLockFactory</a>());</div>
+<div class="line">    sauce::auto_ptr&lt;i::LockFactory&gt; lockFactory(<span class="keyword">new</span> <a class="code" href="classsauce_1_1internal_1_1_null_lock_factory.html">i::NullLockFactory</a>());</div>
 <div class="line">    <span class="keywordflow">return</span> <a class="code" href="classsauce_1_1_modules.html#a260dc95bac47b875b0daefe8892559d3" title="Create an Injector that can provide dependencies specified by all added Modules.">createInjector</a>(lockFactory);</div>
 <div class="line">  }</div>
 </div><!-- fragment -->

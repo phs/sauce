@@ -64,56 +64,52 @@
 <div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;<span class="keyword">template</span>&lt;<span class="keyword">typename</span> Dependency&gt;</div>
 <div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;<span class="keyword">class </span>Provider;</div>
 <div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;</div>
-<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;<span class="keyword">template</span>&lt;<span class="keyword">typename</span> Dependency&gt;</div>
-<div class="line"><a name="l00023"></a><span class="lineno"><a class="code" href="classsauce_1_1_provider.html">   23</a></span>&#160;<span class="keyword">class </span><a class="code" href="classsauce_1_1_provider.html" title="An interface for including custom factories in an Injector.">Provider</a> {</div>
-<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;  sauce::weak_ptr&lt;Provider&lt;Dependency&gt; &gt; weak;</div>
-<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;</div>
-<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;<span class="keyword">protected</span>:</div>
-<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;</div>
-<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;  sauce::shared_ptr&lt;Provider&lt;Dependency&gt; &gt; getSelf()<span class="keyword"> const </span>{</div>
-<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;    sauce::shared_ptr&lt;Provider&lt;Dependency&gt; &gt; <span class="keyword">self</span> = weak.lock();</div>
-<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;    assert(<span class="keyword">self</span>.<span class="keyword">get</span>() == <span class="keyword">this</span>);</div>
-<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;    <span class="keywordflow">return</span> <span class="keyword">self</span>;</div>
-<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;  }</div>
+<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;<span class="keyword">template</span>&lt;<span class="keyword">typename</span> Dependency&gt;</div>
+<div class="line"><a name="l00021"></a><span class="lineno"><a class="code" href="classsauce_1_1_provider.html">   21</a></span>&#160;<span class="keyword">class </span><a class="code" href="classsauce_1_1_provider.html" title="An interface for including custom factories in an Injector.">Provider</a> {</div>
+<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;<span class="keyword">public</span>:</div>
+<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;</div>
+<div class="line"><a name="l00027"></a><span class="lineno"><a class="code" href="classsauce_1_1_provider.html#a8dc8f1867171016bf6fdd2497cebb64f">   27</a></span>&#160;  <span class="keyword">typedef</span> <span class="keyword">typename</span> <a class="code" href="classsauce_1_1internal_1_1_key.html" title="A complete specification of a dependency request.">i::Key&lt;Dependency&gt;::Iface</a> <a class="code" href="classsauce_1_1_provider.html#a8dc8f1867171016bf6fdd2497cebb64f" title="Indicates to template magic that this type exposes sauce::shared_ptr&lt;Provides&gt; get().">Provides</a>;</div>
+<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;</div>
+<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;  <span class="keyword">virtual</span> <span class="keyword">typename</span> <a class="code" href="classsauce_1_1internal_1_1_key.html" title="A complete specification of a dependency request.">i::Key&lt;Dependency&gt;::Ptr</a> <span class="keyword">get</span>() = 0;</div>
 <div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;</div>
-<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;<span class="keyword">public</span>:</div>
+<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;};</div>
 <div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;</div>
-<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;  <span class="keywordtype">void</span> setSelf(sauce::weak_ptr&lt;<a class="code" href="classsauce_1_1_provider.html" title="An interface for including custom factories in an Injector.">Provider&lt;Dependency&gt;</a> &gt; weak) {</div>
-<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;    assert(weak.lock().get() == <span class="keyword">this</span>);</div>
-<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;    this-&gt;weak = weak;</div>
-<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;  }</div>
-<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;</div>
-<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;  <span class="keyword">typedef</span> <span class="keyword">typename</span> <a class="code" href="structsauce_1_1internal_1_1_key.html" title="A complete specification of a dependency request.">i::Key&lt;Dependency&gt;::Iface</a> Iface;</div>
-<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;</div>
-<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;  <span class="keyword">virtual</span> sauce::shared_ptr&lt;Iface&gt; <span class="keyword">get</span>() = 0;</div>
-<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;};</div>
-<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;</div>
-<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;<span class="keyword">template</span>&lt;<span class="keyword">typename</span> Dependency&gt;</div>
-<div class="line"><a name="l00053"></a><span class="lineno"><a class="code" href="classsauce_1_1_abstract_provider.html">   53</a></span>&#160;<span class="keyword">class </span><a class="code" href="classsauce_1_1_abstract_provider.html" title="An interface for including custom factories in an Injector.">AbstractProvider</a>: <span class="keyword">public</span> <a class="code" href="classsauce_1_1_provider.html" title="An interface for including custom factories in an Injector.">Provider</a>&lt;Dependency&gt; {</div>
+<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;<span class="keyword">template</span>&lt;<span class="keyword">typename</span> Dependency&gt;</div>
+<div class="line"><a name="l00040"></a><span class="lineno"><a class="code" href="classsauce_1_1_abstract_provider.html">   40</a></span>&#160;<span class="keyword">class </span><a class="code" href="classsauce_1_1_abstract_provider.html" title="An interface for including custom factories in an Injector.">AbstractProvider</a>: <span class="keyword">public</span> <a class="code" href="classsauce_1_1_provider.html" title="An interface for including custom factories in an Injector.">Provider</a>&lt;Dependency&gt; {</div>
+<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;</div>
+<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;  <span class="keyword">typedef</span> <span class="keyword">typename</span> <a class="code" href="classsauce_1_1internal_1_1_key.html" title="A complete specification of a dependency request.">i::Key&lt;Dependency&gt;::Iface</a> Iface;</div>
+<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;  <span class="keyword">typedef</span> <a class="code" href="classsauce_1_1_abstract_provider.html" title="An interface for including custom factories in an Injector.">AbstractProvider&lt;Dependency&gt;</a> <a class="code" href="classsauce_1_1_abstract_provider.html" title="An interface for including custom factories in an Injector.">Abstract</a>;</div>
+<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;  <span class="keyword">typedef</span> <a class="code" href="classsauce_1_1internal_1_1_disposal_deleter.html" title="A smart pointer deleter that diposes with the given disposal.">i::DisposalDeleter&lt;Iface, Abstract&gt;</a> <a class="code" href="classsauce_1_1internal_1_1_disposal_deleter.html" title="A smart pointer deleter that diposes with the given disposal.">Deleter</a>;</div>
+<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;</div>
+<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;  <span class="keyword">friend</span> <span class="keyword">class </span><a class="code" href="classsauce_1_1internal_1_1_disposal_deleter.html" title="A smart pointer deleter that diposes with the given disposal.">i::DisposalDeleter</a>&lt;Iface, Abstract&gt;;</div>
+<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;</div>
+<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;  sauce::weak_ptr&lt;Abstract&gt; weak;</div>
+<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;</div>
+<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;  <span class="keyword">virtual</span> Iface * provide() = 0;</div>
 <div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;</div>
-<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;  <span class="keyword">typedef</span> <span class="keyword">typename</span> <a class="code" href="structsauce_1_1internal_1_1_key.html" title="A complete specification of a dependency request.">i::Key&lt;Dependency&gt;::Iface</a> Iface;</div>
-<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;  <span class="keyword">typedef</span> <a class="code" href="classsauce_1_1_abstract_provider.html" title="An interface for including custom factories in an Injector.">AbstractProvider&lt;Dependency&gt;</a> <a class="code" href="classsauce_1_1_abstract_provider.html" title="An interface for including custom factories in an Injector.">Abstract</a>;</div>
-<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;  <span class="keyword">typedef</span> <a class="code" href="classsauce_1_1internal_1_1_disposal_deleter.html" title="A smart pointer deleter that diposes with the given disposal.">i::DisposalDeleter&lt;Iface, Abstract&gt;</a> <a class="code" href="classsauce_1_1internal_1_1_disposal_deleter.html" title="A smart pointer deleter that diposes with the given disposal.">Deleter</a>;</div>
-<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;</div>
-<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;  <span class="keyword">friend</span> <span class="keyword">class </span><a class="code" href="classsauce_1_1internal_1_1_disposal_deleter.html" title="A smart pointer deleter that diposes with the given disposal.">i::DisposalDeleter</a>&lt;Iface, Abstract&gt;;</div>
-<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;</div>
-<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;  <span class="keyword">virtual</span> Iface * provide() = 0;</div>
-<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;</div>
-<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;  <span class="keyword">virtual</span> <span class="keywordtype">void</span> dispose(Iface *) = 0;</div>
-<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;</div>
-<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;<span class="keyword">public</span>:</div>
-<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;</div>
-<div class="line"><a name="l00079"></a><span class="lineno"><a class="code" href="classsauce_1_1_abstract_provider.html#a3a11110c10e8d92c8e8fc8bf87ae7609">   79</a></span>&#160;  sauce::shared_ptr&lt;Iface&gt; <span class="keyword">get</span>() {</div>
-<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;    <a class="code" href="classsauce_1_1internal_1_1_disposal_deleter.html" title="A smart pointer deleter that diposes with the given disposal.">Deleter</a> deleter(sauce::static_pointer_cast&lt;Abstract&gt;(this-&gt;getSelf()));</div>
-<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;    sauce::shared_ptr&lt;Iface&gt; provided(provide(), deleter);</div>
-<div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;    <span class="keywordflow">return</span> provided;</div>
-<div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160;  }</div>
-<div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160;</div>
-<div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160;};</div>
-<div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160;</div>
-<div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160;}</div>
-<div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160;</div>
-<div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160;<span class="preprocessor">#endif // SAUCE_PROVIDER_H_</span></div>
+<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;  <span class="keyword">virtual</span> <span class="keywordtype">void</span> dispose(Iface *) = 0;</div>
+<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;</div>
+<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;<span class="keyword">public</span>:</div>
+<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;</div>
+<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;  <span class="keyword">typedef</span> Abstract <a class="code" href="classsauce_1_1_abstract_provider.html" title="An interface for including custom factories in an Injector.">RequestsSelfInjection</a>;</div>
+<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;</div>
+<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;  <span class="keywordtype">void</span> setSelf(sauce::weak_ptr&lt;Abstract&gt; weak) {</div>
+<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;    assert(weak.lock().get() == <span class="keyword">this</span>);</div>
+<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;    this-&gt;weak = weak;</div>
+<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;  }</div>
+<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;</div>
+<div class="line"><a name="l00075"></a><span class="lineno"><a class="code" href="classsauce_1_1_abstract_provider.html#a3a11110c10e8d92c8e8fc8bf87ae7609">   75</a></span>&#160;  sauce::shared_ptr&lt;Iface&gt; <span class="keyword">get</span>() {</div>
+<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;    sauce::shared_ptr&lt;Abstract&gt; <span class="keyword">self</span> = weak.lock();</div>
+<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;    assert(<span class="keyword">self</span>.<span class="keyword">get</span>() == <span class="keyword">this</span>);</div>
+<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;    <a class="code" href="classsauce_1_1internal_1_1_disposal_deleter.html" title="A smart pointer deleter that diposes with the given disposal.">Deleter</a> deleter(sauce::static_pointer_cast&lt;Abstract&gt;(<span class="keyword">self</span>));</div>
+<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;    <span class="keywordflow">return</span> sauce::shared_ptr&lt;Iface&gt;(provide(), deleter);</div>
+<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;  }</div>
+<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;</div>
+<div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;};</div>
+<div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160;</div>
+<div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160;}</div>
+<div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160;</div>
+<div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160;<span class="preprocessor">#endif // SAUCE_PROVIDER_H_</span></div>
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
