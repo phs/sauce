@@ -76,7 +76,6 @@ nobase_include_HEADERS += \
   sauce/internal/memory/std.h \
   sauce/internal/memory/tr1.h \
   sauce/internal/new_binding.h \
-  sauce/internal/new_binding.h.pump \
   sauce/internal/opaque_binding.h \
   sauce/internal/pending_thrower.h \
   sauce/internal/provider_binding.h \
@@ -111,7 +110,6 @@ EXTRA_DIST += \
   sauce/internal/memory/std.h \
   sauce/internal/memory/tr1.h \
   sauce/internal/new_binding.h \
-  sauce/internal/new_binding.h.pump \
   sauce/internal/opaque_binding.h \
   sauce/internal/pending_thrower.h \
   sauce/internal/provider_binding.h \
@@ -307,9 +305,6 @@ endif DX_COND_doc
 #
 
 # Generate templated headers from their "pump" sources
-sauce/internal/new_binding.h: sauce/internal/new_binding.h.pump
-	vendor/pump.py $+
-
 sauce/internal/apply_variadic.h: sauce/internal/apply_variadic.h.pump
 	vendor/pump.py $+
 
