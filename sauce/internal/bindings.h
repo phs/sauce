@@ -122,8 +122,19 @@ public:
    */
   template<typename Dependency>
   void get(typename Key<Dependency>::Ptr & injected, InjectorPtr injector, std::string const name) const {
-    sauce::shared_ptr<ResolvedBinding<Dependency> > binding(getProvidingBinding<Dependency>(name));
-    binding->get(injected, binding, injector);
+    typedef std::vector<sauce::shared_ptr<ResolvedBinding<Dependency> > > BindingPtrs;
+
+    // The providing binding must be used first.  Push it onto the back and walk the vector in reverse
+    BindingPtrs bindings = getModifierBindings<Dependency>(name);
+    bindings.push_back(getProvidingBinding<Dependency>(name));
+
+    typename BindingPtrs::reverse_iterator i = bindings.rbegin();
+    typename BindingPtrs::reverse_iterator end = bindings.rend();
+
+    for (; i != end; ++i) {
+      sauce::shared_ptr<ResolvedBinding<Dependency> > binding = *i;
+      binding->get(injected, binding, injector);
+    }
   }
 
   template<typename Scope>
