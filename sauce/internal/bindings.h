@@ -47,11 +47,11 @@ sauce::shared_ptr<ResolvedBinding<Dependency> > resolve(OpaqueBindingPtr binding
  */
 template<typename ImplicitBindings>
 class Bindings {
-  typedef std::map<NamedTypeId, OpaqueBindingPtr> BindingMap;
+  typedef std::map<NamedTypeId, OpaqueBindingPtr> ProvidingBindingMap;
   typedef std::multimap<TypeId, OpaqueBindingPtr> ScopeMap;
   typedef sauce::shared_ptr<Injector> InjectorPtr;
 
-  BindingMap bindingMap;
+  ProvidingBindingMap bindingMap;
   ScopeMap scopeMap;
 
 public:
@@ -73,7 +73,7 @@ public:
   sauce::shared_ptr<ResolvedBinding<Dependency> > getBinding(std::string const name) const {
     sauce::shared_ptr<ResolvedBinding<Dependency> > binding;
 
-    BindingMap::const_iterator i = bindingMap.find(namedTypeIdOf<Dependency>(name));
+    ProvidingBindingMap::const_iterator i = bindingMap.find(namedTypeIdOf<Dependency>(name));
     if (i == bindingMap.end()) {
       ImplicitBindings implicitBindings;
       binding = implicitBindings.get<Dependency>(*this, name);
