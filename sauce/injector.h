@@ -86,11 +86,11 @@ class Injector {
   }
 
   template<typename Scope>
-  void eagerlyProvide(sauce::shared_ptr<Injector> injector) {
+  void eagerlyInject(sauce::shared_ptr<Injector> injector) {
     if (base.get() == NULL) {
-      next->eagerlyProvide<Scope>(injector);
+      next->eagerlyInject<Scope>(injector);
     } else {
-      base->eagerlyProvide<Scope>(injector);
+      base->eagerlyInject<Scope>(injector);
     }
   }
 
@@ -170,9 +170,9 @@ public:
   }
 
   template<typename Scope>
-  void eagerlyProvide() {
+  void eagerlyInject() {
     sauce::auto_ptr<i::Lock> lock = acquireLock();
-    eagerlyProvide<Scope>(getSelf());
+    eagerlyInject<Scope>(getSelf());
   }
 
 };

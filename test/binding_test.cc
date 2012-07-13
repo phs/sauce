@@ -198,9 +198,9 @@ TEST(BindingTest, shouldThrowExceptionWhenResolvingCircularDependency) {
   ASSERT_THROW(injector->get<Tail>(), ::sauce::CircularDependencyException);
 }
 
-TEST(BindingTest, shouldThrowExceptionWhenEagerlyProvidingCircularDependency) {
+TEST(BindingTest, shouldThrowExceptionWhenEagerlyInjectingCircularDependency) {
   sauce::shared_ptr<Injector> injector(Modules().add(&CircularModule).createInjector());
-  ASSERT_THROW(injector->eagerlyProvide<SingletonScope>(), ::sauce::CircularDependencyException);
+  ASSERT_THROW(injector->eagerlyInject<SingletonScope>(), ::sauce::CircularDependencyException);
 }
 
 class IncompletelyBound {};

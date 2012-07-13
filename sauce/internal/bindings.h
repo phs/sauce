@@ -108,14 +108,14 @@ public:
   }
 
   template<typename Scope>
-  void eagerlyProvide(InjectorPtr injector) const {
+  void eagerlyInject(InjectorPtr injector) const {
     TypeId scopeKey = typeIdOf<Scope>();
     ScopeMap::const_iterator i = scopeMap.lower_bound(scopeKey);
     ScopeMap::const_iterator end = scopeMap.upper_bound(scopeKey);
 
     for (; i != end; ++i) {
       OpaqueBindingPtr const & binding = i->second;
-      binding->eagerlyProvide(binding, injector);
+      binding->eagerlyInject(binding, injector);
     }
   }
 };

@@ -230,13 +230,13 @@ public:
     injector(Modules().add(&EagerlyScopedModule).createInjector()) {}
 };
 
-TEST_F(EagerlyScopeTest, shouldProvidedScopedDependenciesEagerlyIfAsked) {
+TEST_F(EagerlyScopeTest, shouldInjectScopedDependenciesEagerlyIfAsked) {
   sauce::shared_ptr<Injector> requestScoped = injector->enter<RequestScope>();
-  ASSERT_THROW(requestScoped->eagerlyProvide<RequestScope>(), CrankyConstructorException);
+  ASSERT_THROW(requestScoped->eagerlyInject<RequestScope>(), CrankyConstructorException);
 }
 
-TEST_F(EagerlyScopeTest, shouldThrowExceptionWhenProvidingEagerlyOutOfScope) {
-  ASSERT_THROW(injector->eagerlyProvide<RequestScope>(), OutOfScopeException);
+TEST_F(EagerlyScopeTest, shouldThrowExceptionWhenEagerlyInjectingOutOfScope) {
+  ASSERT_THROW(injector->eagerlyInject<RequestScope>(), OutOfScopeException);
 }
 
 class CurrentUser {
@@ -331,8 +331,8 @@ TEST_F(SynchronizedScopeTest, shouldNotRecurseLockOnEachProvision) {
   EXPECT_EQ(1, CountingLocker<LockableStub>::maxReentranceCount);
 }
 
-TEST_F(SynchronizedScopeTest, shouldOptionallyGuardEagerProvisionsWithLockable) {
-  injector->eagerlyProvide<SingletonScope>();
+TEST_F(SynchronizedScopeTest, shouldOptionallyGuardEagerInjectionsWithLockable) {
+  injector->eagerlyInject<SingletonScope>();
   ASSERT_EQ(0, CountingLocker<LockableStub>::reentranceCount);
   EXPECT_EQ(1, CountingLocker<LockableStub>::maxReentranceCount);
 }

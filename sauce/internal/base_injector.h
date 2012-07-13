@@ -80,8 +80,8 @@ public:
   }
 
   template<typename Scope>
-  void eagerlyProvide(InjectorPtr injector) const {
-    bindings.eagerlyProvide<Scope>(injector);
+  void eagerlyInject(InjectorPtr injector) const {
+    bindings.eagerlyInject<Scope>(injector);
   }
 
   /**

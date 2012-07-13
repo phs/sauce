@@ -16,7 +16,7 @@ class NoScope {};
  * Its intended use is for extremely long-lived values.  Dependencies like connection pools or
  * global configuration stores make good singletons.  One might wish to create
  * environmentally-dependent singletons such as a connection pool as early as possible: use
- * Injector::eagerlyProvide() to accomplish this.
+ * Injector::eagerlyInject() to accomplish this.
  */
 class SingletonScope {};
 

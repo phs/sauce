@@ -26,9 +26,9 @@ Entered scopes form a stack: entering the `RequestScope` from a `SessionScope` i
 
 It is possible (and encouraged!) to reenter a scope many times from a single injector in _parallel_.  For example, one may enter `RequestScope` from the same `SessionScope` injector many times concurrently, to create many contemporary `RequestScope` injectors.  These will all cache `RequestScope` dependencies separately, but share the same `SessionScope` cache.  Such shared scopes are not thread-safe by default, but may be made so by supplying a locker type and a lockable instance when creating the initial, root injector.  [Boost::thread](http://www.boost.org/doc/libs/1_47_0/doc/html/thread.html)'s [`lock_guard`](http://www.boost.org/doc/libs/1_47_0/doc/html/thread/synchronization.html#thread.synchronization.locks.lock_guard) and [`mutex`](http://www.boost.org/doc/libs/1_47_0/doc/html/thread/synchronization.html#thread.synchronization.mutex_types.mutex) are suitable for this purpose.
 
-Sometimes it is convenient to force the creation of all dependencies up front in a given scope (such as singleton scope.)  This can help programs fail fast, by exposing environmental issues or other problems at start up.  Sauce supports this by optionally _eagerly providing_ arbitrary scopes (with an injector method.)  One may only eagerly provide dependencies in open scopes.
+Sometimes it is convenient to force the creation of all dependencies up front in a given scope (such as singleton scope.)  This can help programs fail fast, by exposing environmental issues or other problems at start up.  Sauce supports this by optionally _eagerly injecting_ arbitrary scopes (with an injector method.)  One may only eagerly inject dependencies in open scopes.
 
-Unlike Guice, Sauce expects the developer to enter and eagerly provide scopes explicitly, at their convenience.  No entrance or eager provision occurs implicitly.
+Unlike Guice, Sauce expects the developer to enter and eagerly inject scopes explicitly, at their convenience.  No entrance or eager injection occurs implicitly.
 
 ## Further Reading ##
 
