@@ -1,6 +1,7 @@
 #ifndef SAUCE_INTERNAL_BINDING_H_
 #define SAUCE_INTERNAL_BINDING_H_
 
+#include <cassert>
 #include <string>
 
 #include <sauce/injector.h>
@@ -68,6 +69,10 @@ private:
     bool unscoped = (getScopeKey() == typeIdOf<NoScope>()) || isModifier();
 
     if (unscoped || !probe<Dependency>(injector, injected, getScopeKey())) {
+
+      // injected is not null if and only if we are a modifier.
+      assert((injected.get() != NULL) == isModifier());
+
       inject(injected, binding, injector);
       if (!unscoped) {
         cache<Dependency>(injector, injected, getScopeKey());
