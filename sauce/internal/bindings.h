@@ -99,9 +99,9 @@ public:
       implicitBindings.template getModifyings<Dependency>(*this, name);
 
     NamedTypeId bindingKey = namedTypeIdOf<Dependency>(name);
-
     ModifyingBindingMap::const_iterator i = modifyingBindingMap.lower_bound(bindingKey);
     ModifyingBindingMap::const_iterator end = modifyingBindingMap.upper_bound(bindingKey);
+
     for (; i != end; ++i) {
       OpaqueBindingPtr const & binding = i->second;
       bindings.push_back(resolve<Dependency>(binding));
