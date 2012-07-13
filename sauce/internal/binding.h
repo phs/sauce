@@ -47,30 +47,30 @@ private:
   }
 
   /**
-   * Provide an Iface.
+   * Inject an Iface.
    *
    * The strategy used is left to derived types.
    */
-  virtual void provide(IfacePtr &, BindingPtr, InjectorPtr) const = 0;
+  virtual void inject(IfacePtr &, BindingPtr, InjectorPtr) const = 0;
 
   /**
-   * Provide an Iface.
+   * Inject an Iface.
    *
    * If a Scope is configured for the injection, this checks the scope cache first before calling
-   * provide(), and caches the new Iface on miss.
+   * inject(), and caches the new Iface on miss.
    *
    * Modifying bindings (those which return true from isModifier()) are never scoped, since they don't provide the
    * would-be scoped value to begin with.
    *
-   * Derived classes should not override get(), but rather provide().
+   * Derived classes should not override get(), but rather inject().
    */
-  void get(IfacePtr & provided, BindingPtr binding, InjectorPtr injector) const {
+  void get(IfacePtr & injected, BindingPtr binding, InjectorPtr injector) const {
     bool unscoped = (getScopeKey() == typeIdOf<NoScope>()) || isModifier();
 
-    if (unscoped || !probe<Dependency>(injector, provided, getScopeKey())) {
-      provide(provided, binding, injector);
+    if (unscoped || !probe<Dependency>(injector, injected, getScopeKey())) {
+      inject(injected, binding, injector);
       if (!unscoped) {
-        cache<Dependency>(injector, provided, getScopeKey());
+        cache<Dependency>(injector, injected, getScopeKey());
       }
     }
   }
@@ -84,7 +84,7 @@ private:
   virtual void validateAcyclic(InjectorPtr, TypeIds &) const = 0;
 
   /**
-   * Provide, but do not return an Iface.
+   * Inject, but do not return an Iface.
    *
    * Instead, cache the instance in its appropriate scope, if any.  If the injection is not scoped,
    * do nothing.
@@ -94,8 +94,8 @@ private:
       BindingPtr binding = resolve<Dependency>(opaque);
       TypeIds ids;
       validateAcyclic(injector, ids);
-      IfacePtr provided;
-      get(provided, binding, injector);
+      IfacePtr injected;
+      get(injected, binding, injector);
     }
   }
 

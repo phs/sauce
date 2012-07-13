@@ -37,9 +37,9 @@ class ImplicitProvider: public Provider<Dependency> {
 public:
 
   typename Key<Dependency>::Ptr get() {
-    typename Key<Dependency>::Ptr provided;
-    binding->get(provided, binding, injector);
-    return provided;
+    typename Key<Dependency>::Ptr injected;
+    binding->get(injected, binding, injector);
+    return injected;
   }
 };
 
@@ -66,8 +66,8 @@ public:
     Binding<Named<Provider<Dependency>, Name>, NoScope>(),
     providedBinding(providedBinding) {}
 
-  void provide(ProviderPtr & provided, BindingPtr, InjectorPtr injector) const {
-    provided.reset(new ImplicitProvider<Dependency, Name>(providedBinding, injector));
+  void inject(ProviderPtr & injected, BindingPtr, InjectorPtr injector) const {
+    injected.reset(new ImplicitProvider<Dependency, Name>(providedBinding, injector));
   }
 };
 

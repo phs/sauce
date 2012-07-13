@@ -19,12 +19,12 @@ class InjectorBinding: public Binding<Key<Injector>::Normalized, NoScope> {
 public:
 
   /**
-   * Provide the injector.
+   * Inject the injector.
    *
    * Just return the passed injector.
    */
-  void provide(InjectorPtr & provided, BindingPtr, InjectorPtr injector) const {
-    provided = injector;
+  void inject(InjectorPtr & injected, BindingPtr, InjectorPtr injector) const {
+    injected = injector;
   }
 
 };

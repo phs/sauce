@@ -36,7 +36,7 @@ class NewBinding: public Binding<Dependency, Scope> {
 
   friend class NewBindingFriend;
 
-  struct ProvideParameters {
+  struct InjectParameters {
     struct Passed {
       New const & binding;
       InjectorPtr & injector;
@@ -59,8 +59,8 @@ class NewBinding: public Binding<Dependency, Scope> {
     };
   };
 
-  typedef ApplyConstructor<ProvideParameters, Constructor, Allocator> Provide;
-  typedef typename Provide::Constructed Impl;
+  typedef ApplyConstructor<InjectParameters, Constructor, Allocator> Inject;
+  typedef typename Inject::Constructed Impl;
   typedef typename Key<Dependency>::Iface Iface;
   typedef typename Key<Dependency>::Ptr IfacePtr;
   typedef sauce::shared_ptr<Impl> ImplPtr;
@@ -98,7 +98,7 @@ class NewBinding: public Binding<Dependency, Scope> {
 
   void setDynamicDependencyNames(std::vector<std::string> const & dynamicDependencyNames) {
     this->dynamicDependencyNames = dynamicDependencyNames;
-    this->dynamicDependencyNames.resize(Provide::arity(), unnamed());
+    this->dynamicDependencyNames.resize(Inject::arity(), unnamed());
   }
 
 public:
@@ -106,22 +106,22 @@ public:
   typedef typename ResolvedBinding<Dependency>::BindingPtr BindingPtr;
 
   NewBinding():
-    dynamicDependencyNames(Provide::arity(), unnamed()) {}
+    dynamicDependencyNames(Inject::arity(), unnamed()) {}
 
   /**
-   * Provide an Iface.
+   * Inject an Iface.
    *
    * A naked instance pointer is allocated and wrapped in a shared_ptr.  It is
    * also given a custom deleter, to dispose of the naked pointer with
    * dispose(Iface *).
    */
-  void provide(IfacePtr & provided, BindingPtr binding, InjectorPtr injector) const {
-    typename ProvideParameters::Passed passed(*this, injector);
+  void inject(IfacePtr & injected, BindingPtr binding, InjectorPtr injector) const {
+    typename InjectParameters::Passed passed(*this, injector);
     Deleter deleter(sauce::static_pointer_cast<New>(binding));
-    ImplPtr impl(applyConstructor<ProvideParameters, Constructor, Allocator>(passed), deleter);
+    ImplPtr impl(applyConstructor<InjectParameters, Constructor, Allocator>(passed), deleter);
     SelfInjector<Impl> selfInjector;
     selfInjector.setSelf(impl);
-    provided = sauce::static_pointer_cast<Iface>(impl);
+    injected = sauce::static_pointer_cast<Iface>(impl);
   }
 
   void dispose(Iface * iface) const {

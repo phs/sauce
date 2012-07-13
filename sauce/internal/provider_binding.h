@@ -23,8 +23,8 @@ public:
     this->template validateAcyclicHelper<Provider>(injector, ids, this->getName());
   }
 
-  void provide(typename Key<Dependency>::Ptr & provided, BindingPtr binding, InjectorPtr injector) const {
-    provided = this->template getHelper<Provider>(injector, binding->getName())->get();
+  void inject(typename Key<Dependency>::Ptr & injected, BindingPtr binding, InjectorPtr injector) const {
+    injected = this->template getHelper<Provider>(injector, binding->getName())->get();
   }
 };
 
