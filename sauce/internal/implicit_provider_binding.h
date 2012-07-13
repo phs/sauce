@@ -67,8 +67,7 @@ public:
     providedBinding(providedBinding) {}
 
   void provide(ProviderPtr & provided, BindingPtr, InjectorPtr injector) const {
-    ProviderPtr provider(new ImplicitProvider<Dependency, Name>(providedBinding, injector));
-    provided = provider;
+    provided.reset(new ImplicitProvider<Dependency, Name>(providedBinding, injector));
   }
 };
 
