@@ -49,6 +49,15 @@ public:
   virtual NamedTypeId getKey() const = 0;
 
   /**
+   * Does this binding modify an existing value?
+   *
+   * If not, it must provide a new value, and so is "providing" binding.
+   */
+  virtual bool isModifier() const {
+    return false;
+  }
+
+  /**
    * The TypeId of the (hidden) scope.
    */
   virtual TypeId getScopeKey() const = 0;

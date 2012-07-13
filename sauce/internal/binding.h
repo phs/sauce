@@ -38,16 +38,6 @@ private:
   }
 
   /**
-   * Does this binding modify an existing value?
-   *
-   * If so, then the passed output smart pointer must not be null.  Alternately if this binding provides a new smart
-   * pointer, then the passed (and overwritten) value must be null.
-   */
-  virtual bool isModifier() const {
-    return false;
-  }
-
-  /**
    * Inject an Iface.
    *
    * The strategy used is left to derived types.
@@ -66,12 +56,12 @@ private:
    * Derived classes should not override get(), but rather inject().
    */
   void get(IfacePtr & injected, BindingPtr binding, InjectorPtr injector) const {
-    bool unscoped = (getScopeKey() == typeIdOf<NoScope>()) || isModifier();
+    bool unscoped = (getScopeKey() == typeIdOf<NoScope>()) || this->isModifier();
 
     if (unscoped || !probe<Dependency>(injector, injected, getScopeKey())) {
 
       // injected is not null if and only if we are a modifier.
-      assert((injected.get() != NULL) == isModifier());
+      assert((injected.get() != NULL) == this->isModifier());
 
       inject(injected, binding, injector);
       if (!unscoped) {
