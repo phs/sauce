@@ -18,7 +18,7 @@ namespace internal {
 
 class ImplicitBindings;
 
-typedef Bindings<ImplicitBindings> ConcreteBindings;
+typedef Bindings<ImplicitBindings> Concrete;
 
 template<typename ImplicitInjection_>
 class ImplicitBindingTraits {
@@ -40,7 +40,7 @@ public:
   /**
    * Attempt to supply a (unknown) Binding at provision time.
    */
-  static BindingPtr get(ConcreteBindings const &, std::string const name) {
+  static BindingPtr get(Concrete const &, std::string const name) {
     throw UnboundExceptionFor<Dependency>(name);
   }
 
@@ -56,8 +56,7 @@ public:
    * Attempt to supply a (unknown) Binding at provision time.
    */
   template<typename Dependency>
-  sauce::shared_ptr<ResolvedBinding<Dependency> > get(
-    ConcreteBindings const & bindings, std::string const name) const {
+  sauce::shared_ptr<ResolvedBinding<Dependency> > get(Concrete const & bindings, std::string const name) const {
     return ImplicitBinding<Dependency>::get(bindings, name);
   }
 
@@ -69,7 +68,7 @@ public:
 template<>
 class ImplicitBinding<Named<Injector, Unnamed> >: ImplicitBindingTraits<i::InjectorBinding> {
 public:
-  static BindingPtr get(ConcreteBindings const &, std::string const name) {
+  static BindingPtr get(Concrete const &, std::string const name) {
     if (name != unnamed()) {
       throw UnboundExceptionFor<Named<Injector, Unnamed> >(name);
     }
@@ -89,7 +88,7 @@ public:
   typedef typename Traits::Dependency Dependency;
   typedef typename Traits::BindingPtr BindingPtr;
 
-  static BindingPtr get(ConcreteBindings const & bindings, std::string const name) {
+  static BindingPtr get(Concrete const & bindings, std::string const name) {
     typedef typename Key<ProvidedDependency>::Normalized Normalized;
     typedef typename ResolvedBinding<Normalized>::BindingPtr ProvidedBindingPtr;
 
