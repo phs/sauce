@@ -74,9 +74,9 @@ Collaboration diagram for sauce::internal::NewBinding&lt; Dependency, Scope, Con
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2><a name="nested-classes"></a>
 Classes</h2></td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><b>InjectParameters</b></td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><b>NewBindingFriend</b></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">A mixin for ApplyVariadic parameter concept types. <br/></td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><b>ProvideParameters</b></td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><b>ValidateAcyclicParameters</b></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2><a name="pub-types"></a>
@@ -92,8 +92,8 @@ typedef <a class="el" href="classsauce_1_1internal_1_1_key.html">Key</a>&lt; <a 
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:a344be2114dab707553905c12542d80df"><td class="memItemLeft" align="right" valign="top">IfacePtr&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classsauce_1_1internal_1_1_new_binding.html#a344be2114dab707553905c12542d80df">provide</a> (BindingPtr binding, InjectorPtr injector) const </td></tr>
-<tr class="memdesc:a344be2114dab707553905c12542d80df"><td class="mdescLeft">&#160;</td><td class="mdescRight">Provide an Iface.  <a href="#a344be2114dab707553905c12542d80df"></a><br/></td></tr>
+<tr class="memitem:a1ef83c10662cb5bfbdaae8f7b472d707"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classsauce_1_1internal_1_1_new_binding.html#a1ef83c10662cb5bfbdaae8f7b472d707">inject</a> (IfacePtr &amp;injected, BindingPtr binding, InjectorPtr injector) const </td></tr>
+<tr class="memdesc:a1ef83c10662cb5bfbdaae8f7b472d707"><td class="mdescLeft">&#160;</td><td class="mdescRight">Inject an Iface.  <a href="#a1ef83c10662cb5bfbdaae8f7b472d707"></a><br/></td></tr>
 <tr class="memitem:a35457ebb95ace1de6040de7cf7a97715"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a35457ebb95ace1de6040de7cf7a97715"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><b>dispose</b> (Iface *iface) const </td></tr>
 <tr class="inherit_header pub_methods_classsauce_1_1internal_1_1_binding"><td colspan="2" onclick="javascript:toggleInherit('pub_methods_classsauce_1_1internal_1_1_binding')"><img src="closed.png" alt="-"/>&nbsp;Public Member Functions inherited from <a class="el" href="classsauce_1_1internal_1_1_binding.html">sauce::internal::Binding< Dependency, Scope ></a></td></tr>
@@ -109,8 +109,8 @@ NamedTypeId&#160;</td><td class="memItemRight" valign="bottom"><a class="el" hre
 <tr class="memdesc:a7ff0341fe08ae52a0f03a35ad6dd3c79 inherit pub_methods_classsauce_1_1internal_1_1_resolved_binding"><td class="mdescLeft">&#160;</td><td class="mdescRight">The <a class="el" href="classsauce_1_1internal_1_1_type_id.html" title="A TypeSignature equipped with specific helper methods dealing in the hidden type.">TypeId</a> of the Dependency template parameter. <br/></td></tr>
 <tr class="memitem:a503de5fe9cb4996db536f6f6d6d486be inherit pub_methods_classsauce_1_1internal_1_1_resolved_binding"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classsauce_1_1internal_1_1_resolved_binding.html#a503de5fe9cb4996db536f6f6d6d486be">validateAcyclic</a> (sauce::shared_ptr&lt; <a class="el" href="classsauce_1_1_injector.html">Injector</a> &gt;, TypeIds &amp;) const =0</td></tr>
 <tr class="memdesc:a503de5fe9cb4996db536f6f6d6d486be inherit pub_methods_classsauce_1_1internal_1_1_resolved_binding"><td class="mdescLeft">&#160;</td><td class="mdescRight">Establish that further dependencies do not introduce cycles with ones already accumulated.  <a href="#a503de5fe9cb4996db536f6f6d6d486be"></a><br/></td></tr>
-<tr class="memitem:a06fb04d3ee1d8d42d7f93f20a205ff25 inherit pub_methods_classsauce_1_1internal_1_1_resolved_binding"><td class="memItemLeft" align="right" valign="top">virtual IfacePtr&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classsauce_1_1internal_1_1_resolved_binding.html#a06fb04d3ee1d8d42d7f93f20a205ff25">get</a> (BindingPtr, sauce::shared_ptr&lt; <a class="el" href="classsauce_1_1_injector.html">Injector</a> &gt;) const =0</td></tr>
-<tr class="memdesc:a06fb04d3ee1d8d42d7f93f20a205ff25 inherit pub_methods_classsauce_1_1internal_1_1_resolved_binding"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get an Iface, using the given injector to provide dependencies.  <a href="#a06fb04d3ee1d8d42d7f93f20a205ff25"></a><br/></td></tr>
+<tr class="memitem:a052b701d112012a04c93d7c76ffac334 inherit pub_methods_classsauce_1_1internal_1_1_resolved_binding"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classsauce_1_1internal_1_1_resolved_binding.html#a052b701d112012a04c93d7c76ffac334">get</a> (IfacePtr &amp;, BindingPtr, sauce::shared_ptr&lt; <a class="el" href="classsauce_1_1_injector.html">Injector</a> &gt;) const =0</td></tr>
+<tr class="memdesc:a052b701d112012a04c93d7c76ffac334 inherit pub_methods_classsauce_1_1internal_1_1_resolved_binding"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get an Iface, using the given injector to provide dependencies.  <a href="#a052b701d112012a04c93d7c76ffac334"></a><br/></td></tr>
 <tr class="inherit_header pub_methods_classsauce_1_1internal_1_1_opaque_binding"><td colspan="2" onclick="javascript:toggleInherit('pub_methods_classsauce_1_1internal_1_1_opaque_binding')"><img src="closed.png" alt="-"/>&nbsp;Public Member Functions inherited from <a class="el" href="classsauce_1_1internal_1_1_opaque_binding.html">sauce::internal::OpaqueBinding</a></td></tr>
 <tr class="memitem:a9cbe103bedc3ea77c5edef5f30a4d74c inherit pub_methods_classsauce_1_1internal_1_1_opaque_binding"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classsauce_1_1internal_1_1_opaque_binding.html#a9cbe103bedc3ea77c5edef5f30a4d74c">eagerlyProvide</a> (OpaqueBindingPtr, sauce::shared_ptr&lt; <a class="el" href="classsauce_1_1_injector.html">Injector</a> &gt;) const =0</td></tr>
 <tr class="memdesc:a9cbe103bedc3ea77c5edef5f30a4d74c inherit pub_methods_classsauce_1_1internal_1_1_opaque_binding"><td class="mdescLeft">&#160;</td><td class="mdescRight">Provide, but do not return the hidden interface.  <a href="#a9cbe103bedc3ea77c5edef5f30a4d74c"></a><br/></td></tr>
@@ -121,7 +121,7 @@ Friends</h2></td></tr>
 class&#160;</td><td class="memItemRight" valign="bottom"><b>NewBindingFriend</b></td></tr>
 </table>
 <hr/><h2>Member Function Documentation</h2>
-<a class="anchor" id="a344be2114dab707553905c12542d80df"></a>
+<a class="anchor" id="a1ef83c10662cb5bfbdaae8f7b472d707"></a>
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
@@ -131,8 +131,14 @@ template&lt;typename Dependency , typename Scope , typename Constructor , typena
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">IfacePtr <a class="el" href="classsauce_1_1internal_1_1_new_binding.html">sauce::internal::NewBinding</a>&lt; <a class="el" href="classsauce_1_1_named.html">Dependency</a>, Scope, Constructor, Allocator &gt;::provide </td>
+          <td class="memname">void <a class="el" href="classsauce_1_1internal_1_1_new_binding.html">sauce::internal::NewBinding</a>&lt; <a class="el" href="classsauce_1_1_named.html">Dependency</a>, Scope, Constructor, Allocator &gt;::inject </td>
           <td>(</td>
+          <td class="paramtype">IfacePtr &amp;&#160;</td>
+          <td class="paramname"><em>injected</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
           <td class="paramtype">BindingPtr&#160;</td>
           <td class="paramname"><em>binding</em>, </td>
         </tr>
@@ -155,17 +161,17 @@ template&lt;typename Dependency , typename Scope , typename Constructor , typena
 </table>
 </div><div class="memdoc">
 
-<p>Provide an Iface. </p>
+<p>Inject an Iface. </p>
 <p>A naked instance pointer is allocated and wrapped in a shared_ptr. It is also given a custom deleter, to dispose of the naked pointer with dispose(Iface *). </p>
 
 <p>Implements <a class="el" href="classsauce_1_1internal_1_1_binding.html">sauce::internal::Binding&lt; Dependency, Scope &gt;</a>.</p>
-<div class="fragment"><div class="line">                                                                   {</div>
-<div class="line">    <span class="keyword">typename</span> ProvideParameters::Passed passed(*<span class="keyword">this</span>, injector);</div>
+<div class="fragment"><div class="line">                                                                                   {</div>
+<div class="line">    <span class="keyword">typename</span> InjectParameters::Passed passed(*<span class="keyword">this</span>, injector);</div>
 <div class="line">    Deleter deleter(sauce::static_pointer_cast&lt;New&gt;(binding));</div>
-<div class="line">    ImplPtr impl(applyConstructor&lt;ProvideParameters, Constructor, Allocator&gt;(passed), deleter);</div>
+<div class="line">    ImplPtr impl(applyConstructor&lt;InjectParameters, Constructor, Allocator&gt;(passed), deleter);</div>
 <div class="line">    SelfInjector&lt;Impl&gt; selfInjector;</div>
 <div class="line">    selfInjector.setSelf(impl);</div>
-<div class="line">    <span class="keywordflow">return</span> sauce::static_pointer_cast&lt;Iface&gt;(impl);</div>
+<div class="line">    injected = sauce::static_pointer_cast&lt;Iface&gt;(impl);</div>
 <div class="line">  }</div>
 </div><!-- fragment -->
 </div>

@@ -94,8 +94,8 @@ typedef <a class="el" href="classsauce_1_1internal_1_1_key.html">Key</a>&lt; <a 
 Public Member Functions</h2></td></tr>
 <tr class="memitem:a3348a56c86e37c29418cd979044f156f"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a3348a56c86e37c29418cd979044f156f"></a>
 &#160;</td><td class="memItemRight" valign="bottom"><b>ImplicitProviderBinding</b> (ProvidedBindingPtr providedBinding)</td></tr>
-<tr class="memitem:af0d21fc2e678fb1e69fa43a14d570f06"><td class="memItemLeft" align="right" valign="top">ProviderPtr&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classsauce_1_1internal_1_1_implicit_provider_binding.html#af0d21fc2e678fb1e69fa43a14d570f06">provide</a> (BindingPtr, InjectorPtr injector) const </td></tr>
-<tr class="memdesc:af0d21fc2e678fb1e69fa43a14d570f06"><td class="mdescLeft">&#160;</td><td class="mdescRight">Provide an Iface.  <a href="#af0d21fc2e678fb1e69fa43a14d570f06"></a><br/></td></tr>
+<tr class="memitem:a852fbd6139e75cd579ced28a8e362bc1"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classsauce_1_1internal_1_1_implicit_provider_binding.html#a852fbd6139e75cd579ced28a8e362bc1">inject</a> (ProviderPtr &amp;injected, BindingPtr, InjectorPtr injector) const </td></tr>
+<tr class="memdesc:a852fbd6139e75cd579ced28a8e362bc1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Inject an Iface.  <a href="#a852fbd6139e75cd579ced28a8e362bc1"></a><br/></td></tr>
 <tr class="inherit_header pub_methods_classsauce_1_1internal_1_1_binding"><td colspan="2" onclick="javascript:toggleInherit('pub_methods_classsauce_1_1internal_1_1_binding')"><img src="closed.png" alt="-"/>&nbsp;Public Member Functions inherited from <a class="el" href="classsauce_1_1internal_1_1_binding.html">sauce::internal::Binding< Named< Provider< Dependency >, Name >, NoScope ></a></td></tr>
 <tr class="memitem:ae7bf0f08a99b2346aca54988a13bad99 inherit pub_methods_classsauce_1_1internal_1_1_binding"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ae7bf0f08a99b2346aca54988a13bad99"></a>
 std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classsauce_1_1internal_1_1_binding.html#ae7bf0f08a99b2346aca54988a13bad99">getName</a> () const</td></tr>
@@ -109,8 +109,8 @@ NamedTypeId&#160;</td><td class="memItemRight" valign="bottom"><a class="el" hre
 <tr class="memdesc:a7ff0341fe08ae52a0f03a35ad6dd3c79 inherit pub_methods_classsauce_1_1internal_1_1_resolved_binding"><td class="mdescLeft">&#160;</td><td class="mdescRight">The TypeId of the Dependency template parameter. <br/></td></tr>
 <tr class="memitem:a503de5fe9cb4996db536f6f6d6d486be inherit pub_methods_classsauce_1_1internal_1_1_resolved_binding"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classsauce_1_1internal_1_1_resolved_binding.html#a503de5fe9cb4996db536f6f6d6d486be">validateAcyclic</a> (sauce::shared_ptr&lt; <a class="el" href="classsauce_1_1_injector.html">Injector</a> &gt;, TypeIds &amp;) const =0</td></tr>
 <tr class="memdesc:a503de5fe9cb4996db536f6f6d6d486be inherit pub_methods_classsauce_1_1internal_1_1_resolved_binding"><td class="mdescLeft">&#160;</td><td class="mdescRight">Establish that further dependencies do not introduce cycles with ones already accumulated.  <a href="#a503de5fe9cb4996db536f6f6d6d486be"></a><br/></td></tr>
-<tr class="memitem:a06fb04d3ee1d8d42d7f93f20a205ff25 inherit pub_methods_classsauce_1_1internal_1_1_resolved_binding"><td class="memItemLeft" align="right" valign="top">virtual IfacePtr&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classsauce_1_1internal_1_1_resolved_binding.html#a06fb04d3ee1d8d42d7f93f20a205ff25">get</a> (BindingPtr, sauce::shared_ptr&lt; <a class="el" href="classsauce_1_1_injector.html">Injector</a> &gt;) const =0</td></tr>
-<tr class="memdesc:a06fb04d3ee1d8d42d7f93f20a205ff25 inherit pub_methods_classsauce_1_1internal_1_1_resolved_binding"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get an Iface, using the given injector to provide dependencies.  <a href="#a06fb04d3ee1d8d42d7f93f20a205ff25"></a><br/></td></tr>
+<tr class="memitem:a052b701d112012a04c93d7c76ffac334 inherit pub_methods_classsauce_1_1internal_1_1_resolved_binding"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classsauce_1_1internal_1_1_resolved_binding.html#a052b701d112012a04c93d7c76ffac334">get</a> (IfacePtr &amp;, BindingPtr, sauce::shared_ptr&lt; <a class="el" href="classsauce_1_1_injector.html">Injector</a> &gt;) const =0</td></tr>
+<tr class="memdesc:a052b701d112012a04c93d7c76ffac334 inherit pub_methods_classsauce_1_1internal_1_1_resolved_binding"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get an Iface, using the given injector to provide dependencies.  <a href="#a052b701d112012a04c93d7c76ffac334"></a><br/></td></tr>
 <tr class="inherit_header pub_methods_classsauce_1_1internal_1_1_opaque_binding"><td colspan="2" onclick="javascript:toggleInherit('pub_methods_classsauce_1_1internal_1_1_opaque_binding')"><img src="closed.png" alt="-"/>&nbsp;Public Member Functions inherited from <a class="el" href="classsauce_1_1internal_1_1_opaque_binding.html">sauce::internal::OpaqueBinding</a></td></tr>
 <tr class="memitem:a9cbe103bedc3ea77c5edef5f30a4d74c inherit pub_methods_classsauce_1_1internal_1_1_opaque_binding"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classsauce_1_1internal_1_1_opaque_binding.html#a9cbe103bedc3ea77c5edef5f30a4d74c">eagerlyProvide</a> (OpaqueBindingPtr, sauce::shared_ptr&lt; <a class="el" href="classsauce_1_1_injector.html">Injector</a> &gt;) const =0</td></tr>
 <tr class="memdesc:a9cbe103bedc3ea77c5edef5f30a4d74c inherit pub_methods_classsauce_1_1internal_1_1_opaque_binding"><td class="mdescLeft">&#160;</td><td class="mdescRight">Provide, but do not return the hidden interface.  <a href="#a9cbe103bedc3ea77c5edef5f30a4d74c"></a><br/></td></tr>
@@ -121,7 +121,7 @@ class sauce::internal::ImplicitProviderBinding&lt; Dependency, Name &gt;</h3>
 
 <p>An injection that provides Providers for an already-bound dependency. </p>
 </div><hr/><h2>Member Function Documentation</h2>
-<a class="anchor" id="af0d21fc2e678fb1e69fa43a14d570f06"></a>
+<a class="anchor" id="a852fbd6139e75cd579ced28a8e362bc1"></a>
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
@@ -131,8 +131,14 @@ template&lt;typename Dependency , typename Name &gt; </div>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">ProviderPtr <a class="el" href="classsauce_1_1internal_1_1_implicit_provider_binding.html">sauce::internal::ImplicitProviderBinding</a>&lt; <a class="el" href="classsauce_1_1_named.html">Dependency</a>, Name &gt;::provide </td>
+          <td class="memname">void <a class="el" href="classsauce_1_1internal_1_1_implicit_provider_binding.html">sauce::internal::ImplicitProviderBinding</a>&lt; <a class="el" href="classsauce_1_1_named.html">Dependency</a>, Name &gt;::inject </td>
           <td>(</td>
+          <td class="paramtype">ProviderPtr &amp;&#160;</td>
+          <td class="paramname">, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
           <td class="paramtype">BindingPtr&#160;</td>
           <td class="paramname">, </td>
         </tr>
@@ -155,13 +161,12 @@ template&lt;typename Dependency , typename Name &gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p>Provide an Iface. </p>
+<p>Inject an Iface. </p>
 <p>The strategy used is left to derived types. </p>
 
 <p>Implements <a class="el" href="classsauce_1_1internal_1_1_binding.html">sauce::internal::Binding&lt; Named&lt; Provider&lt; Dependency &gt;, Name &gt;, NoScope &gt;</a>.</p>
-<div class="fragment"><div class="line">                                                              {</div>
-<div class="line">    ProviderPtr provider(<span class="keyword">new</span> ImplicitProvider&lt;Dependency, Name&gt;(providedBinding, injector));</div>
-<div class="line">    <span class="keywordflow">return</span> provider;</div>
+<div class="fragment"><div class="line">                                                                              {</div>
+<div class="line">    injected.reset(<span class="keyword">new</span> ImplicitProvider&lt;Dependency, Name&gt;(providedBinding, injector));</div>
 <div class="line">  }</div>
 </div><!-- fragment -->
 </div>

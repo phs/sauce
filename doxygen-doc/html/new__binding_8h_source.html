@@ -83,20 +83,20 @@
 <div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;</div>
 <div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;  <span class="keyword">friend</span> <span class="keyword">class </span>NewBindingFriend;</div>
 <div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;</div>
-<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;  <span class="keyword">struct </span>ProvideParameters {</div>
-<div class="line"><a name="l00040"></a><span class="lineno"><a class="code" href="structsauce_1_1internal_1_1_new_binding_1_1_provide_parameters_1_1_passed.html">   40</a></span>&#160;    <span class="keyword">struct </span><a class="code" href="structsauce_1_1internal_1_1_new_binding_1_1_provide_parameters_1_1_passed.html">Passed</a> {</div>
+<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;  <span class="keyword">struct </span>InjectParameters {</div>
+<div class="line"><a name="l00040"></a><span class="lineno"><a class="code" href="structsauce_1_1internal_1_1_new_binding_1_1_inject_parameters_1_1_passed.html">   40</a></span>&#160;    <span class="keyword">struct </span><a class="code" href="structsauce_1_1internal_1_1_new_binding_1_1_inject_parameters_1_1_passed.html">Passed</a> {</div>
 <div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;      <a class="code" href="classsauce_1_1internal_1_1_new_binding.html">New</a> <span class="keyword">const</span> &amp; binding;</div>
 <div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;      InjectorPtr &amp; injector;</div>
 <div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;</div>
-<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;      <a class="code" href="structsauce_1_1internal_1_1_new_binding_1_1_provide_parameters_1_1_passed.html">Passed</a>(<a class="code" href="classsauce_1_1internal_1_1_new_binding.html">New</a> <span class="keyword">const</span> &amp; binding, InjectorPtr &amp; injector):</div>
+<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;      <a class="code" href="structsauce_1_1internal_1_1_new_binding_1_1_inject_parameters_1_1_passed.html">Passed</a>(<a class="code" href="classsauce_1_1internal_1_1_new_binding.html">New</a> <span class="keyword">const</span> &amp; binding, InjectorPtr &amp; injector):</div>
 <div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;        binding(binding), injector(injector) {}</div>
 <div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;    };</div>
 <div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;</div>
 <div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;    <span class="keyword">template</span>&lt;<span class="keyword">typename</span> T, <span class="keywordtype">int</span> i, <span class="keyword">typename</span> Passed&gt;</div>
-<div class="line"><a name="l00049"></a><span class="lineno"><a class="code" href="structsauce_1_1internal_1_1_new_binding_1_1_provide_parameters_1_1_parameter.html">   49</a></span>&#160;    <span class="keyword">struct </span><a class="code" href="structsauce_1_1internal_1_1_new_binding_1_1_provide_parameters_1_1_parameter.html">Parameter</a>: <span class="keyword">public</span> NewBindingFriend {</div>
+<div class="line"><a name="l00049"></a><span class="lineno"><a class="code" href="structsauce_1_1internal_1_1_new_binding_1_1_inject_parameters_1_1_parameter.html">   49</a></span>&#160;    <span class="keyword">struct </span><a class="code" href="structsauce_1_1internal_1_1_new_binding_1_1_inject_parameters_1_1_parameter.html">Parameter</a>: <span class="keyword">public</span> NewBindingFriend {</div>
 <div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;      <span class="keyword">typedef</span> <span class="keyword">typename</span> Key&lt;T&gt;::Ptr Ptr;</div>
 <div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;</div>
-<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;      Ptr yield(<a class="code" href="structsauce_1_1internal_1_1_new_binding_1_1_provide_parameters_1_1_passed.html">Passed</a> passed) {</div>
+<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;      Ptr yield(<a class="code" href="structsauce_1_1internal_1_1_new_binding_1_1_inject_parameters_1_1_passed.html">Passed</a> passed) {</div>
 <div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;        <a class="code" href="classsauce_1_1internal_1_1_new_binding.html">New</a> <span class="keyword">const</span> &amp; binding = passed.binding;</div>
 <div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;        InjectorPtr &amp; injector = passed.injector;</div>
 <div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;        std::string dependencyName = binding.dynamicDependencyNames[i];</div>
@@ -106,8 +106,8 @@
 <div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;    };</div>
 <div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;  };</div>
 <div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;</div>
-<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;  <span class="keyword">typedef</span> <a class="code" href="classsauce_1_1internal_1_1_apply_constructor.html">ApplyConstructor&lt;ProvideParameters, Constructor, Allocator&gt;</a> <a class="code" href="classsauce_1_1internal_1_1_apply_constructor.html">Provide</a>;</div>
-<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;  <span class="keyword">typedef</span> <span class="keyword">typename</span> Provide::Constructed Impl;</div>
+<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;  <span class="keyword">typedef</span> <a class="code" href="classsauce_1_1internal_1_1_apply_constructor.html">ApplyConstructor&lt;InjectParameters, Constructor, Allocator&gt;</a> <a class="code" href="classsauce_1_1internal_1_1_apply_constructor.html">Inject</a>;</div>
+<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;  <span class="keyword">typedef</span> <span class="keyword">typename</span> Inject::Constructed Impl;</div>
 <div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;  <span class="keyword">typedef</span> <span class="keyword">typename</span> Key&lt;Dependency&gt;::Iface Iface;</div>
 <div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;  <span class="keyword">typedef</span> <span class="keyword">typename</span> Key&lt;Dependency&gt;::Ptr IfacePtr;</div>
 <div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;  <span class="keyword">typedef</span> sauce::shared_ptr&lt;Impl&gt; ImplPtr;</div>
@@ -145,7 +145,7 @@
 <div class="line"><a name="l00098"></a><span class="lineno">   98</span>&#160;</div>
 <div class="line"><a name="l00099"></a><span class="lineno">   99</span>&#160;  <span class="keywordtype">void</span> setDynamicDependencyNames(std::vector&lt;std::string&gt; <span class="keyword">const</span> &amp; dynamicDependencyNames) {</div>
 <div class="line"><a name="l00100"></a><span class="lineno">  100</span>&#160;    this-&gt;dynamicDependencyNames = dynamicDependencyNames;</div>
-<div class="line"><a name="l00101"></a><span class="lineno">  101</span>&#160;    this-&gt;dynamicDependencyNames.resize(Provide::arity(), unnamed());</div>
+<div class="line"><a name="l00101"></a><span class="lineno">  101</span>&#160;    this-&gt;dynamicDependencyNames.resize(Inject::arity(), unnamed());</div>
 <div class="line"><a name="l00102"></a><span class="lineno">  102</span>&#160;  }</div>
 <div class="line"><a name="l00103"></a><span class="lineno">  103</span>&#160;</div>
 <div class="line"><a name="l00104"></a><span class="lineno">  104</span>&#160;<span class="keyword">public</span>:</div>
@@ -153,15 +153,15 @@
 <div class="line"><a name="l00106"></a><span class="lineno">  106</span>&#160;  <span class="keyword">typedef</span> <span class="keyword">typename</span> ResolvedBinding&lt;Dependency&gt;::BindingPtr BindingPtr;</div>
 <div class="line"><a name="l00107"></a><span class="lineno">  107</span>&#160;</div>
 <div class="line"><a name="l00108"></a><span class="lineno">  108</span>&#160;  NewBinding():</div>
-<div class="line"><a name="l00109"></a><span class="lineno">  109</span>&#160;    dynamicDependencyNames(Provide::arity(), unnamed()) {}</div>
+<div class="line"><a name="l00109"></a><span class="lineno">  109</span>&#160;    dynamicDependencyNames(Inject::arity(), unnamed()) {}</div>
 <div class="line"><a name="l00110"></a><span class="lineno">  110</span>&#160;</div>
-<div class="line"><a name="l00118"></a><span class="lineno"><a class="code" href="classsauce_1_1internal_1_1_new_binding.html#a344be2114dab707553905c12542d80df">  118</a></span>&#160;  IfacePtr <a class="code" href="classsauce_1_1internal_1_1_new_binding.html#a344be2114dab707553905c12542d80df" title="Provide an Iface.">provide</a>(BindingPtr binding, InjectorPtr injector)<span class="keyword"> const </span>{</div>
-<div class="line"><a name="l00119"></a><span class="lineno">  119</span>&#160;    <span class="keyword">typename</span> <a class="code" href="structsauce_1_1internal_1_1_new_binding_1_1_provide_parameters_1_1_passed.html">ProvideParameters::Passed</a> passed(*<span class="keyword">this</span>, injector);</div>
+<div class="line"><a name="l00118"></a><span class="lineno"><a class="code" href="classsauce_1_1internal_1_1_new_binding.html#a1ef83c10662cb5bfbdaae8f7b472d707">  118</a></span>&#160;  <span class="keywordtype">void</span> <a class="code" href="classsauce_1_1internal_1_1_new_binding.html#a1ef83c10662cb5bfbdaae8f7b472d707" title="Inject an Iface.">inject</a>(IfacePtr &amp; injected, BindingPtr binding, InjectorPtr injector)<span class="keyword"> const </span>{</div>
+<div class="line"><a name="l00119"></a><span class="lineno">  119</span>&#160;    <span class="keyword">typename</span> <a class="code" href="structsauce_1_1internal_1_1_new_binding_1_1_inject_parameters_1_1_passed.html">InjectParameters::Passed</a> passed(*<span class="keyword">this</span>, injector);</div>
 <div class="line"><a name="l00120"></a><span class="lineno">  120</span>&#160;    <a class="code" href="classsauce_1_1internal_1_1_disposal_deleter.html" title="A smart pointer deleter that diposes with the given disposal.">Deleter</a> deleter(sauce::static_pointer_cast&lt;New&gt;(binding));</div>
-<div class="line"><a name="l00121"></a><span class="lineno">  121</span>&#160;    ImplPtr impl(applyConstructor&lt;ProvideParameters, Constructor, Allocator&gt;(passed), deleter);</div>
+<div class="line"><a name="l00121"></a><span class="lineno">  121</span>&#160;    ImplPtr impl(applyConstructor&lt;InjectParameters, Constructor, Allocator&gt;(passed), deleter);</div>
 <div class="line"><a name="l00122"></a><span class="lineno">  122</span>&#160;    <a class="code" href="classsauce_1_1internal_1_1_self_injector.html" title="If a type requests injection of its own smart pointer, do so.">SelfInjector&lt;Impl&gt;</a> selfInjector;</div>
 <div class="line"><a name="l00123"></a><span class="lineno">  123</span>&#160;    selfInjector.setSelf(impl);</div>
-<div class="line"><a name="l00124"></a><span class="lineno">  124</span>&#160;    <span class="keywordflow">return</span> sauce::static_pointer_cast&lt;Iface&gt;(impl);</div>
+<div class="line"><a name="l00124"></a><span class="lineno">  124</span>&#160;    injected = sauce::static_pointer_cast&lt;Iface&gt;(impl);</div>
 <div class="line"><a name="l00125"></a><span class="lineno">  125</span>&#160;  }</div>
 <div class="line"><a name="l00126"></a><span class="lineno">  126</span>&#160;</div>
 <div class="line"><a name="l00127"></a><span class="lineno">  127</span>&#160;  <span class="keywordtype">void</span> dispose(Iface * iface)<span class="keyword"> const </span>{</div>

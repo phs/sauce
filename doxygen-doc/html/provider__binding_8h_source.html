@@ -70,8 +70,8 @@
 <div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;    this-&gt;<span class="keyword">template</span> validateAcyclicHelper&lt;Provider&gt;(injector, ids, this-&gt;<a class="code" href="classsauce_1_1internal_1_1_binding.html#ae7bf0f08a99b2346aca54988a13bad99" title="The dynamic name of this binding.">getName</a>());</div>
 <div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;  }</div>
 <div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;</div>
-<div class="line"><a name="l00026"></a><span class="lineno"><a class="code" href="classsauce_1_1internal_1_1_provider_binding.html#a8c57c0b8f1609f7ce5ed915c657d450f">   26</a></span>&#160;  <span class="keyword">typename</span> Key&lt;Dependency&gt;::Ptr <a class="code" href="classsauce_1_1internal_1_1_provider_binding.html#a8c57c0b8f1609f7ce5ed915c657d450f" title="Provide an Iface.">provide</a>(BindingPtr binding, InjectorPtr injector)<span class="keyword"> const </span>{</div>
-<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;    <span class="keywordflow">return</span> this-&gt;<span class="keyword">template</span> getHelper&lt;Provider&gt;(injector, binding-&gt;getName())-&gt;<span class="keyword">get</span>();</div>
+<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;  <span class="keywordtype">void</span> inject(<span class="keyword">typename</span> Key&lt;Dependency&gt;::Ptr &amp; injected, BindingPtr binding, InjectorPtr injector)<span class="keyword"> const </span>{</div>
+<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;    injected = this-&gt;<span class="keyword">template</span> getHelper&lt;Provider&gt;(injector, binding-&gt;getName())-&gt;<span class="keyword">get</span>();</div>
 <div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;  }</div>
 <div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;};</div>
 <div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;</div>
