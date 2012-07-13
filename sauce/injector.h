@@ -197,13 +197,13 @@ protected:
   }
 
   template<typename Dependency>
-  void cache(InjectorPtr injector, typename Key<Dependency>::Ptr pointer, i::TypeId scope) const {
-    injector->template cache<Dependency>(pointer, scope);
+  void cache(InjectorPtr injector, typename Key<Dependency>::Ptr provided, i::TypeId scope) const {
+    injector->template cache<Dependency>(provided, scope);
   }
 
   template<typename Dependency>
-  bool probe(InjectorPtr injector, typename Key<Dependency>::Ptr & out, i::TypeId scope) const {
-    return injector->template probe<Dependency>(out, scope);
+  bool probe(InjectorPtr injector, typename Key<Dependency>::Ptr & provided, i::TypeId scope) const {
+    return injector->template probe<Dependency>(provided, scope);
   }
 
 };
