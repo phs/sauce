@@ -56,7 +56,7 @@ private:
     if (unscoped || !probe<Dependency>(injector, provided, getScopeKey())) {
       provided = provide(binding, injector);
       if (!unscoped) {
-        cache<Dependency>(injector, provided, getScopeKey());
+        cache<Dependency>(injector, provided, getScopeKey()); // TODO How does caching relate to setter injection?
       }
     }
   }
