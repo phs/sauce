@@ -56,8 +56,8 @@ public:
    * Attempt to supply a (unknown) Binding at provision time.
    */
   template<typename Dependency>
-  sauce::shared_ptr<ResolvedBinding<Dependency> > get(Concrete const & bindings, std::string const name) const {
-    return ImplicitBinding<Dependency>::get(bindings, name);
+  sauce::shared_ptr<ResolvedBinding<Dependency> > getProviding(Concrete const & c, std::string const name) const {
+    return ImplicitBinding<Dependency>::get(c, name);
   }
 
 };

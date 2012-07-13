@@ -83,7 +83,7 @@ public:
     ProvidingBindingMap::const_iterator i = providingBindingMap.find(namedTypeIdOf<Dependency>(name));
     if (i == providingBindingMap.end()) {
       ImplicitBindings implicitBindings;
-      binding = implicitBindings.template get<Dependency>(*this, name);
+      binding = implicitBindings.template getProviding<Dependency>(*this, name);
     } else {
       binding = resolve<Dependency>(i->second);
     }
