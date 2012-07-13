@@ -67,7 +67,7 @@ public:
    */
   template<typename Dependency>
   std::vector<sauce::shared_ptr<ResolvedBinding<Dependency> > > getModifyings(
-    Concrete const & bindings, std::string const name) const {
+    Concrete const &, std::string const) const {
     return std::vector<sauce::shared_ptr<ResolvedBinding<Dependency> > >(); // TODO
   }
 
