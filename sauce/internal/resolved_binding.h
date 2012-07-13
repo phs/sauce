@@ -43,7 +43,7 @@ public:
    *
    * The binding pointer must point to this same binding instance.
    */
-  virtual IfacePtr get(BindingPtr, sauce::shared_ptr<Injector>) const = 0;
+  virtual void get(IfacePtr &, BindingPtr, sauce::shared_ptr<Injector>) const = 0;
 
 };
 

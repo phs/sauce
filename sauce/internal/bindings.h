@@ -97,7 +97,7 @@ public:
   template<typename Dependency>
   void get(typename Key<Dependency>::Ptr & provided, InjectorPtr injector, std::string const name) const {
     sauce::shared_ptr<ResolvedBinding<Dependency> > binding(getBinding<Dependency>(name));
-    provided = binding->get(binding, injector);
+    binding->get(provided, binding, injector);
   }
 
   template<typename Scope>

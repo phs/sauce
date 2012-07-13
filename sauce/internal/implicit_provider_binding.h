@@ -37,7 +37,9 @@ class ImplicitProvider: public Provider<Dependency> {
 public:
 
   typename Key<Dependency>::Ptr get() {
-    return binding->get(binding, injector);
+    typename Key<Dependency>::Ptr provided;
+    binding->get(provided, binding, injector);
+    return provided;
   }
 };
 

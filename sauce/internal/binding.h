@@ -51,7 +51,7 @@ private:
    *
    * Derived classes should not override get(), but rather provide().
    */
-  IfacePtr get(BindingPtr binding, InjectorPtr injector) const {
+  void get(IfacePtr & provided, BindingPtr binding, InjectorPtr injector) const {
     IfacePtr smartPointer;
 
     bool unscoped = getScopeKey() == typeIdOf<NoScope>();
@@ -62,7 +62,7 @@ private:
       }
     }
 
-    return smartPointer;
+    provided = smartPointer;
   }
 
   /**
@@ -84,7 +84,8 @@ private:
       BindingPtr binding = resolve<Dependency>(opaque);
       TypeIds ids;
       validateAcyclic(injector, ids);
-      get(binding, injector);
+      IfacePtr provided;
+      get(provided, binding, injector);
     }
   }
 
