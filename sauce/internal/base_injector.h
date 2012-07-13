@@ -74,11 +74,9 @@ public:
   void get(typename Key<Dependency>::Ptr & provided, InjectorPtr injector, std::string const name) const {
     typedef typename Key<Dependency>::Normalized Normalized;
     typedef typename Key<Dependency>::Iface Iface;
-    typedef typename Key<Dependency>::Ptr Ptr;
-    Ptr ptr(bindings.template get<Normalized>(injector, name));
+    bindings.template get<Normalized>(provided, injector, name);
     SelfInjector<Iface> selfInjector;
-    selfInjector.setSelf(ptr);
-    provided = ptr;
+    selfInjector.setSelf(provided);
   }
 
   template<typename Scope>
