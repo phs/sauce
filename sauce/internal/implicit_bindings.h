@@ -93,7 +93,7 @@ public:
     typedef typename Key<ProvidedDependency>::Normalized Normalized;
     typedef typename ResolvedBinding<Normalized>::BindingPtr ProvidedBindingPtr;
 
-    ProvidedBindingPtr providedBinding(bindings.getBinding<Normalized>(name));
+    ProvidedBindingPtr providedBinding(bindings.getProvidingBinding<Normalized>(name));
     BindingPtr binding(new ImplicitInjection(providedBinding));
     return binding;
   }
