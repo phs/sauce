@@ -49,6 +49,7 @@ template<typename ImplicitBindings>
 class Bindings {
   typedef std::map<NamedTypeId, OpaqueBindingPtr> BindingMap;
   typedef std::multimap<TypeId, OpaqueBindingPtr> ScopeMap;
+  typedef sauce::shared_ptr<Injector> InjectorPtr;
 
   BindingMap bindingMap;
   ScopeMap scopeMap;
@@ -84,8 +85,7 @@ public:
   }
 
   template<typename Dependency>
-  void validateAcyclic(
-    sauce::shared_ptr<Injector> injector, TypeIds & ids, std::string const name) const {
+  void validateAcyclic(InjectorPtr injector, TypeIds & ids, std::string const name) const {
     getBinding<Dependency>(name)->validateAcyclic(injector, ids);
   }
 
@@ -95,14 +95,13 @@ public:
    * If no binding is found, the implicit bindings are checked.
    */
   template<typename Dependency>
-  typename Key<Dependency>::Ptr get(
-    sauce::shared_ptr<Injector> injector, std::string const name) const {
+  typename Key<Dependency>::Ptr get(InjectorPtr injector, std::string const name) const {
     sauce::shared_ptr<ResolvedBinding<Dependency> > binding(getBinding<Dependency>(name));
     return binding->get(binding, injector);
   }
 
   template<typename Scope>
-  void eagerlyProvide(sauce::shared_ptr<Injector> injector) const {
+  void eagerlyProvide(InjectorPtr injector) const {
     TypeId scopeKey = typeIdOf<Scope>();
     ScopeMap::const_iterator i = scopeMap.lower_bound(scopeKey);
     ScopeMap::const_iterator end = scopeMap.upper_bound(scopeKey);
