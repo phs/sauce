@@ -51,20 +51,20 @@ class Bindings {
   typedef std::multimap<TypeId, OpaqueBindingPtr> ScopeMap;
   typedef sauce::shared_ptr<Injector> InjectorPtr;
 
-  ProvidingBindingMap bindingMap;
+  ProvidingBindingMap providingBindingMap;
   ScopeMap scopeMap;
 
 public:
 
   Bindings():
-    bindingMap(),
+    providingBindingMap(),
     scopeMap() {}
 
   /**
    * Insert the given binding.
    */
   void put(OpaqueBindingPtr binding) {
-    bindingMap.insert(std::make_pair(binding->getKey(), binding));
+    providingBindingMap.insert(std::make_pair(binding->getKey(), binding));
     TypeId scopeKey = binding->getScopeKey();
     scopeMap.insert(std::make_pair(scopeKey, binding));
   }
@@ -73,8 +73,8 @@ public:
   sauce::shared_ptr<ResolvedBinding<Dependency> > getBinding(std::string const name) const {
     sauce::shared_ptr<ResolvedBinding<Dependency> > binding;
 
-    ProvidingBindingMap::const_iterator i = bindingMap.find(namedTypeIdOf<Dependency>(name));
-    if (i == bindingMap.end()) {
+    ProvidingBindingMap::const_iterator i = providingBindingMap.find(namedTypeIdOf<Dependency>(name));
+    if (i == providingBindingMap.end()) {
       ImplicitBindings implicitBindings;
       binding = implicitBindings.get<Dependency>(*this, name);
     } else {
