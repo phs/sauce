@@ -66,9 +66,9 @@ public:
    * Attempt to supply unknown modifying Bindings at injection time.
    */
   template<typename Dependency>
-  std::vector<sauce::shared_ptr<ResolvedBinding<Dependency> > > getModifying(
+  std::vector<sauce::shared_ptr<ResolvedBinding<Dependency> > > getModifyings(
     Concrete const & bindings, std::string const name) const {
-    return std::vector<sauce::shared_ptr<ResolvedBinding<Dependency> > >();
+    return std::vector<sauce::shared_ptr<ResolvedBinding<Dependency> > >(); // TODO
   }
 
 };

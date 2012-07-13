@@ -4,6 +4,7 @@
 #include <cassert>
 #include <map>
 #include <utility>
+#include <vector>
 
 #include <sauce/exceptions.h>
 #include <sauce/memory.h>
@@ -89,6 +90,24 @@ public:
     }
 
     return binding;
+  }
+
+  template<typename Dependency>
+  std::vector<sauce::shared_ptr<ResolvedBinding<Dependency> > > getModifierBindings(std::string const name) const {
+    ImplicitBindings implicitBindings;
+    std::vector<sauce::shared_ptr<ResolvedBinding<Dependency> > > bindings =
+      implicitBindings.template getModifyings<Dependency>(*this, name);
+
+    NamedTypeId bindingKey = namedTypeIdOf<Dependency>(name);
+
+    ModifyingBindingMap::const_iterator i = modifyingBindingMap.lower_bound(bindingKey);
+    ModifyingBindingMap::const_iterator end = modifyingBindingMap.upper_bound(bindingKey);
+    for (; i != end; ++i) {
+      OpaqueBindingPtr const & binding = i->second;
+      bindings.push_back(resolve<Dependency>(binding));
+    }
+
+    return bindings;
   }
 
   template<typename Dependency>
