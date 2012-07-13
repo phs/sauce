@@ -41,7 +41,7 @@ private:
    *
    * The strategy used is left to derived types.
    */
-  virtual IfacePtr provide(BindingPtr, InjectorPtr) const = 0;
+  virtual void provide(IfacePtr &, BindingPtr, InjectorPtr) const = 0;
 
   /**
    * Provide an Iface.
@@ -54,7 +54,7 @@ private:
   void get(IfacePtr & provided, BindingPtr binding, InjectorPtr injector) const {
     bool unscoped = (getScopeKey() == typeIdOf<NoScope>());
     if (unscoped || !probe<Dependency>(injector, provided, getScopeKey())) {
-      provided = provide(binding, injector);
+      provide(provided, binding, injector);
       if (!unscoped) {
         cache<Dependency>(injector, provided, getScopeKey()); // TODO How does caching relate to setter injection?
       }

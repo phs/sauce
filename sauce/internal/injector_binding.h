@@ -23,8 +23,8 @@ public:
    *
    * Just return the passed injector.
    */
-  InjectorPtr provide(BindingPtr, InjectorPtr injector) const {
-    return injector;
+  void provide(InjectorPtr & provided, BindingPtr, InjectorPtr injector) const {
+    provided = injector;
   }
 
 };

@@ -115,13 +115,13 @@ public:
    * also given a custom deleter, to dispose of the naked pointer with
    * dispose(Iface *).
    */
-  IfacePtr provide(BindingPtr binding, InjectorPtr injector) const {
+  void provide(IfacePtr & provided, BindingPtr binding, InjectorPtr injector) const {
     typename ProvideParameters::Passed passed(*this, injector);
     Deleter deleter(sauce::static_pointer_cast<New>(binding));
     ImplPtr impl(applyConstructor<ProvideParameters, Constructor, Allocator>(passed), deleter);
     SelfInjector<Impl> selfInjector;
     selfInjector.setSelf(impl);
-    return sauce::static_pointer_cast<Iface>(impl);
+    provided = sauce::static_pointer_cast<Iface>(impl);
   }
 
   void dispose(Iface * iface) const {
