@@ -59,10 +59,12 @@ private:
    * If a Scope is configured for the injection, this checks the scope cache first before calling
    * provide(), and caches the new Iface on miss.
    *
+   * Modifying bindings (those which return true from isModifier()) are never scoped, since they don't provide the
+   * would-be scoped value to begin with.
+   *
    * Derived classes should not override get(), but rather provide().
    */
   void get(IfacePtr & provided, BindingPtr binding, InjectorPtr injector) const {
-    // Do not scope provisions from modifying bindings, or the NoScope scope.
     bool unscoped = (getScopeKey() == typeIdOf<NoScope>()) || isModifier();
 
     if (unscoped || !probe<Dependency>(injector, provided, getScopeKey())) {
