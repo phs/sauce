@@ -72,12 +72,12 @@ template&lt;typename Dependency &gt; </td></tr>
 <tr class="memitem:a8d3ccf7a6ffc15e454735b933c8470d2"><td class="memTemplParams" colspan="2"><a class="anchor" id="a8d3ccf7a6ffc15e454735b933c8470d2"></a>
 template&lt;typename Dependency &gt; </td></tr>
 <tr class="memitem:a8d3ccf7a6ffc15e454735b933c8470d2"><td class="memTemplItemLeft" align="right" valign="top">void&#160;</td><td class="memTemplItemRight" valign="bottom"><b>validateAcyclic</b> (InjectorPtr injector, TypeIds &amp;ids, std::string const name) const </td></tr>
-<tr class="memitem:a336ca106c5891549292ad7594c43d4c0"><td class="memTemplParams" colspan="2">template&lt;typename Dependency &gt; </td></tr>
-<tr class="memitem:a336ca106c5891549292ad7594c43d4c0"><td class="memTemplItemLeft" align="right" valign="top">void&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classsauce_1_1internal_1_1_bindings.html#a336ca106c5891549292ad7594c43d4c0">get</a> (typename <a class="el" href="classsauce_1_1internal_1_1_key.html">Key</a>&lt; Dependency &gt;::Ptr &amp;provided, InjectorPtr injector, std::string const name) const </td></tr>
-<tr class="memdesc:a336ca106c5891549292ad7594c43d4c0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Provide the named Dependency.  <a href="#a336ca106c5891549292ad7594c43d4c0"></a><br/></td></tr>
-<tr class="memitem:adaa9df79bc66cb934e2970757c3ec8d9"><td class="memTemplParams" colspan="2"><a class="anchor" id="adaa9df79bc66cb934e2970757c3ec8d9"></a>
+<tr class="memitem:a687faca79d1ff2cc0562527732a833d3"><td class="memTemplParams" colspan="2">template&lt;typename Dependency &gt; </td></tr>
+<tr class="memitem:a687faca79d1ff2cc0562527732a833d3"><td class="memTemplItemLeft" align="right" valign="top">void&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classsauce_1_1internal_1_1_bindings.html#a687faca79d1ff2cc0562527732a833d3">get</a> (typename <a class="el" href="classsauce_1_1internal_1_1_key.html">Key</a>&lt; Dependency &gt;::Ptr &amp;injected, InjectorPtr injector, std::string const name) const </td></tr>
+<tr class="memdesc:a687faca79d1ff2cc0562527732a833d3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Inject the named Dependency.  <a href="#a687faca79d1ff2cc0562527732a833d3"></a><br/></td></tr>
+<tr class="memitem:acf5babc50930470bbdc05174c4aedd6a"><td class="memTemplParams" colspan="2"><a class="anchor" id="acf5babc50930470bbdc05174c4aedd6a"></a>
 template&lt;typename Scope &gt; </td></tr>
-<tr class="memitem:adaa9df79bc66cb934e2970757c3ec8d9"><td class="memTemplItemLeft" align="right" valign="top">void&#160;</td><td class="memTemplItemRight" valign="bottom"><b>eagerlyProvide</b> (InjectorPtr injector) const </td></tr>
+<tr class="memitem:acf5babc50930470bbdc05174c4aedd6a"><td class="memTemplItemLeft" align="right" valign="top">void&#160;</td><td class="memTemplItemRight" valign="bottom"><b>eagerlyInject</b> (InjectorPtr injector) const </td></tr>
 </table>
 <hr/><a name="details" id="details"></a><h2>Detailed Description</h2>
 <div class="textblock"><h3>template&lt;typename ImplicitBindings&gt;<br/>
@@ -88,7 +88,7 @@ class sauce::internal::Bindings&lt; ImplicitBindings &gt;</h3>
 <p>When providing instances (eagerly and not) the injector is passed in and the dependency is returned directly, instead of giving the binding to the injector (the binding details stay hidden.)</p>
 <p>The template parameter is a strategy type that attempts to located unknown bindings dynamically (implicitly.) Due to the threat of circular dependencies (in Sauce's type space), <a class="el" href="classsauce_1_1internal_1_1_bindings.html" title="A container for bindings.">Bindings</a> itself can't be aware of concrete <a class="el" href="classsauce_1_1internal_1_1_binding.html" title="The base class of all actual binding implementations.">Binding</a> implementations. The only time it needs to know about them is when resolving implicit bindings. So, this functionality is hidden behind the templated strategy. </p>
 </div><hr/><h2>Member Function Documentation</h2>
-<a class="anchor" id="a336ca106c5891549292ad7594c43d4c0"></a>
+<a class="anchor" id="a687faca79d1ff2cc0562527732a833d3"></a>
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
@@ -103,7 +103,7 @@ template&lt;typename Dependency &gt; </div>
           <td class="memname">void <a class="el" href="classsauce_1_1internal_1_1_bindings.html">sauce::internal::Bindings</a>&lt; <a class="el" href="classsauce_1_1internal_1_1_implicit_bindings.html">ImplicitBindings</a> &gt;::get </td>
           <td>(</td>
           <td class="paramtype">typename <a class="el" href="classsauce_1_1internal_1_1_key.html">Key</a>&lt; Dependency &gt;::Ptr &amp;&#160;</td>
-          <td class="paramname"><em>provided</em>, </td>
+          <td class="paramname"><em>injected</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
@@ -130,11 +130,11 @@ template&lt;typename Dependency &gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p>Provide the named Dependency. </p>
+<p>Inject the named Dependency. </p>
 <p>If no binding is found, the implicit bindings are checked. </p>
 <div class="fragment"><div class="line">                                                                                                     {</div>
 <div class="line">    sauce::shared_ptr&lt;ResolvedBinding&lt;Dependency&gt; &gt; binding(getBinding&lt;Dependency&gt;(name));</div>
-<div class="line">    binding-&gt;get(provided, binding, injector);</div>
+<div class="line">    binding-&gt;get(injected, binding, injector);</div>
 <div class="line">  }</div>
 </div><!-- fragment -->
 </div>

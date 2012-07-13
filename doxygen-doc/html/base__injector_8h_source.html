@@ -127,8 +127,8 @@
 <div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;  }</div>
 <div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;</div>
 <div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;  <span class="keyword">template</span>&lt;<span class="keyword">typename</span> Scope&gt;</div>
-<div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160;  <span class="keywordtype">void</span> eagerlyProvide(InjectorPtr injector)<span class="keyword"> const </span>{</div>
-<div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160;    bindings.eagerlyProvide&lt;Scope&gt;(injector);</div>
+<div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160;  <span class="keywordtype">void</span> eagerlyInject(InjectorPtr injector)<span class="keyword"> const </span>{</div>
+<div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160;    bindings.eagerlyInject&lt;Scope&gt;(injector);</div>
 <div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160;  }</div>
 <div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160;</div>
 <div class="line"><a name="l00090"></a><span class="lineno"><a class="code" href="classsauce_1_1internal_1_1_base_injector.html#a10391f6b6167d89af6c27c64f87a58f8">   90</a></span>&#160;  sauce::auto_ptr&lt;Lock&gt; <a class="code" href="classsauce_1_1internal_1_1_base_injector.html#a10391f6b6167d89af6c27c64f87a58f8" title="Create an RAII synchronization lock.">acquireLock</a>() {</div>

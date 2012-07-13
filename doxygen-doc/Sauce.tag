@@ -676,9 +676,9 @@
     </member>
     <member kind="function">
       <type>void</type>
-      <name>eagerlyProvide</name>
+      <name>eagerlyInject</name>
       <anchorfile>classsauce_1_1_injector.html</anchorfile>
-      <anchor>a956812dc1a989bec7baa35bb0a73a726</anchor>
+      <anchor>a116d1a65f9dfa5d17f8a5e43f62c7a82</anchor>
       <arglist>()</arglist>
     </member>
     <member kind="friend" protection="private">
@@ -2828,9 +2828,9 @@
     </member>
     <member kind="function">
       <type>void</type>
-      <name>eagerlyProvide</name>
+      <name>eagerlyInject</name>
       <anchorfile>classsauce_1_1internal_1_1_base_injector.html</anchorfile>
-      <anchor>a96853a6111ba257837d3acf4516fab8e</anchor>
+      <anchor>a98bf181dd46348e766352438c81181bb</anchor>
       <arglist>(InjectorPtr injector) const </arglist>
     </member>
     <member kind="function">
@@ -2911,11 +2911,18 @@
       <anchor>a052b701d112012a04c93d7c76ffac334</anchor>
       <arglist>(IfacePtr &amp;, BindingPtr, sauce::shared_ptr&lt; Injector &gt;) const =0</arglist>
     </member>
+    <member kind="function" virtualness="virtual">
+      <type>virtual bool</type>
+      <name>isModifier</name>
+      <anchorfile>classsauce_1_1internal_1_1_opaque_binding.html</anchorfile>
+      <anchor>a08d286d2d97f34d3c5104b4ed95527bc</anchor>
+      <arglist>() const </arglist>
+    </member>
     <member kind="function" virtualness="pure">
       <type>virtual void</type>
-      <name>eagerlyProvide</name>
+      <name>eagerlyInject</name>
       <anchorfile>classsauce_1_1internal_1_1_opaque_binding.html</anchorfile>
-      <anchor>a9cbe103bedc3ea77c5edef5f30a4d74c</anchor>
+      <anchor>a7f2819936b99c569cc29e3114d216328</anchor>
       <arglist>(OpaqueBindingPtr, sauce::shared_ptr&lt; Injector &gt;) const =0</arglist>
     </member>
     <member kind="function" protection="protected">
@@ -2976,14 +2983,14 @@
       <type>void</type>
       <name>get</name>
       <anchorfile>classsauce_1_1internal_1_1_bindings.html</anchorfile>
-      <anchor>a336ca106c5891549292ad7594c43d4c0</anchor>
-      <arglist>(typename Key&lt; Dependency &gt;::Ptr &amp;provided, InjectorPtr injector, std::string const name) const </arglist>
+      <anchor>a687faca79d1ff2cc0562527732a833d3</anchor>
+      <arglist>(typename Key&lt; Dependency &gt;::Ptr &amp;injected, InjectorPtr injector, std::string const name) const </arglist>
     </member>
     <member kind="function">
       <type>void</type>
-      <name>eagerlyProvide</name>
+      <name>eagerlyInject</name>
       <anchorfile>classsauce_1_1internal_1_1_bindings.html</anchorfile>
-      <anchor>adaa9df79bc66cb934e2970757c3ec8d9</anchor>
+      <anchor>acf5babc50930470bbdc05174c4aedd6a</anchor>
       <arglist>(InjectorPtr injector) const </arglist>
     </member>
   </compound>
@@ -3392,11 +3399,18 @@
       <anchor>a052b701d112012a04c93d7c76ffac334</anchor>
       <arglist>(IfacePtr &amp;, BindingPtr, sauce::shared_ptr&lt; Injector &gt;) const =0</arglist>
     </member>
+    <member kind="function" virtualness="virtual">
+      <type>virtual bool</type>
+      <name>isModifier</name>
+      <anchorfile>classsauce_1_1internal_1_1_opaque_binding.html</anchorfile>
+      <anchor>a08d286d2d97f34d3c5104b4ed95527bc</anchor>
+      <arglist>() const </arglist>
+    </member>
     <member kind="function" virtualness="pure">
       <type>virtual void</type>
-      <name>eagerlyProvide</name>
+      <name>eagerlyInject</name>
       <anchorfile>classsauce_1_1internal_1_1_opaque_binding.html</anchorfile>
-      <anchor>a9cbe103bedc3ea77c5edef5f30a4d74c</anchor>
+      <anchor>a7f2819936b99c569cc29e3114d216328</anchor>
       <arglist>(OpaqueBindingPtr, sauce::shared_ptr&lt; Injector &gt;) const =0</arglist>
     </member>
   </compound>
@@ -3446,11 +3460,18 @@
       <anchor>a052b701d112012a04c93d7c76ffac334</anchor>
       <arglist>(IfacePtr &amp;, BindingPtr, sauce::shared_ptr&lt; Injector &gt;) const =0</arglist>
     </member>
+    <member kind="function" virtualness="virtual">
+      <type>virtual bool</type>
+      <name>isModifier</name>
+      <anchorfile>classsauce_1_1internal_1_1_opaque_binding.html</anchorfile>
+      <anchor>a08d286d2d97f34d3c5104b4ed95527bc</anchor>
+      <arglist>() const </arglist>
+    </member>
     <member kind="function" virtualness="pure">
       <type>virtual void</type>
-      <name>eagerlyProvide</name>
+      <name>eagerlyInject</name>
       <anchorfile>classsauce_1_1internal_1_1_opaque_binding.html</anchorfile>
-      <anchor>a9cbe103bedc3ea77c5edef5f30a4d74c</anchor>
+      <anchor>a7f2819936b99c569cc29e3114d216328</anchor>
       <arglist>(OpaqueBindingPtr, sauce::shared_ptr&lt; Injector &gt;) const =0</arglist>
     </member>
     <member kind="typedef">
@@ -3715,11 +3736,18 @@
       <anchor>a052b701d112012a04c93d7c76ffac334</anchor>
       <arglist>(IfacePtr &amp;, BindingPtr, sauce::shared_ptr&lt; Injector &gt;) const =0</arglist>
     </member>
+    <member kind="function" virtualness="virtual">
+      <type>virtual bool</type>
+      <name>isModifier</name>
+      <anchorfile>classsauce_1_1internal_1_1_opaque_binding.html</anchorfile>
+      <anchor>a08d286d2d97f34d3c5104b4ed95527bc</anchor>
+      <arglist>() const </arglist>
+    </member>
     <member kind="function" virtualness="pure">
       <type>virtual void</type>
-      <name>eagerlyProvide</name>
+      <name>eagerlyInject</name>
       <anchorfile>classsauce_1_1internal_1_1_opaque_binding.html</anchorfile>
-      <anchor>a9cbe103bedc3ea77c5edef5f30a4d74c</anchor>
+      <anchor>a7f2819936b99c569cc29e3114d216328</anchor>
       <arglist>(OpaqueBindingPtr, sauce::shared_ptr&lt; Injector &gt;) const =0</arglist>
     </member>
     <member kind="friend" protection="private">
@@ -3874,6 +3902,13 @@
       <anchor>a16b36cf388c4edeea73f0b18bb376481</anchor>
       <arglist>() const =0</arglist>
     </member>
+    <member kind="function" virtualness="virtual">
+      <type>virtual bool</type>
+      <name>isModifier</name>
+      <anchorfile>classsauce_1_1internal_1_1_opaque_binding.html</anchorfile>
+      <anchor>a08d286d2d97f34d3c5104b4ed95527bc</anchor>
+      <arglist>() const </arglist>
+    </member>
     <member kind="function" virtualness="pure">
       <type>virtual TypeId</type>
       <name>getScopeKey</name>
@@ -3883,9 +3918,9 @@
     </member>
     <member kind="function" virtualness="pure">
       <type>virtual void</type>
-      <name>eagerlyProvide</name>
+      <name>eagerlyInject</name>
       <anchorfile>classsauce_1_1internal_1_1_opaque_binding.html</anchorfile>
-      <anchor>a9cbe103bedc3ea77c5edef5f30a4d74c</anchor>
+      <anchor>a7f2819936b99c569cc29e3114d216328</anchor>
       <arglist>(OpaqueBindingPtr, sauce::shared_ptr&lt; Injector &gt;) const =0</arglist>
     </member>
     <member kind="function" virtualness="pure">
@@ -3998,11 +4033,18 @@
       <anchor>a052b701d112012a04c93d7c76ffac334</anchor>
       <arglist>(IfacePtr &amp;, BindingPtr, sauce::shared_ptr&lt; Injector &gt;) const =0</arglist>
     </member>
+    <member kind="function" virtualness="virtual">
+      <type>virtual bool</type>
+      <name>isModifier</name>
+      <anchorfile>classsauce_1_1internal_1_1_opaque_binding.html</anchorfile>
+      <anchor>a08d286d2d97f34d3c5104b4ed95527bc</anchor>
+      <arglist>() const </arglist>
+    </member>
     <member kind="function" virtualness="pure">
       <type>virtual void</type>
-      <name>eagerlyProvide</name>
+      <name>eagerlyInject</name>
       <anchorfile>classsauce_1_1internal_1_1_opaque_binding.html</anchorfile>
-      <anchor>a9cbe103bedc3ea77c5edef5f30a4d74c</anchor>
+      <anchor>a7f2819936b99c569cc29e3114d216328</anchor>
       <arglist>(OpaqueBindingPtr, sauce::shared_ptr&lt; Injector &gt;) const =0</arglist>
     </member>
   </compound>
@@ -4060,6 +4102,13 @@
       <anchor>aebbd72acc376d0f4733e51a13f94db99</anchor>
       <arglist>(std::string)=0</arglist>
     </member>
+    <member kind="function" virtualness="virtual">
+      <type>virtual bool</type>
+      <name>isModifier</name>
+      <anchorfile>classsauce_1_1internal_1_1_opaque_binding.html</anchorfile>
+      <anchor>a08d286d2d97f34d3c5104b4ed95527bc</anchor>
+      <arglist>() const </arglist>
+    </member>
     <member kind="function" virtualness="pure">
       <type>virtual TypeId</type>
       <name>getScopeKey</name>
@@ -4069,9 +4118,9 @@
     </member>
     <member kind="function" virtualness="pure">
       <type>virtual void</type>
-      <name>eagerlyProvide</name>
+      <name>eagerlyInject</name>
       <anchorfile>classsauce_1_1internal_1_1_opaque_binding.html</anchorfile>
-      <anchor>a9cbe103bedc3ea77c5edef5f30a4d74c</anchor>
+      <anchor>a7f2819936b99c569cc29e3114d216328</anchor>
       <arglist>(OpaqueBindingPtr, sauce::shared_ptr&lt; Injector &gt;) const =0</arglist>
     </member>
     <member kind="function" virtualness="pure">

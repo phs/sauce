@@ -78,11 +78,13 @@ virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" hr
 <tr class="memitem:a16b36cf388c4edeea73f0b18bb376481"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a16b36cf388c4edeea73f0b18bb376481"></a>
 virtual NamedTypeId&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classsauce_1_1internal_1_1_opaque_binding.html#a16b36cf388c4edeea73f0b18bb376481">getKey</a> () const =0</td></tr>
 <tr class="memdesc:a16b36cf388c4edeea73f0b18bb376481"><td class="mdescLeft">&#160;</td><td class="mdescRight">The NamedTypeId of the (hidden) provided interface. <br/></td></tr>
+<tr class="memitem:a08d286d2d97f34d3c5104b4ed95527bc"><td class="memItemLeft" align="right" valign="top">virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classsauce_1_1internal_1_1_opaque_binding.html#a08d286d2d97f34d3c5104b4ed95527bc">isModifier</a> () const </td></tr>
+<tr class="memdesc:a08d286d2d97f34d3c5104b4ed95527bc"><td class="mdescLeft">&#160;</td><td class="mdescRight">Does this binding modify an existing value?  <a href="#a08d286d2d97f34d3c5104b4ed95527bc"></a><br/></td></tr>
 <tr class="memitem:afcab860863e3fdec961ff24704c45217"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="afcab860863e3fdec961ff24704c45217"></a>
 virtual <a class="el" href="classsauce_1_1internal_1_1_type_id.html">TypeId</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classsauce_1_1internal_1_1_opaque_binding.html#afcab860863e3fdec961ff24704c45217">getScopeKey</a> () const =0</td></tr>
 <tr class="memdesc:afcab860863e3fdec961ff24704c45217"><td class="mdescLeft">&#160;</td><td class="mdescRight">The <a class="el" href="classsauce_1_1internal_1_1_type_id.html" title="A TypeSignature equipped with specific helper methods dealing in the hidden type.">TypeId</a> of the (hidden) scope. <br/></td></tr>
-<tr class="memitem:a9cbe103bedc3ea77c5edef5f30a4d74c"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classsauce_1_1internal_1_1_opaque_binding.html#a9cbe103bedc3ea77c5edef5f30a4d74c">eagerlyProvide</a> (OpaqueBindingPtr, sauce::shared_ptr&lt; <a class="el" href="classsauce_1_1_injector.html">Injector</a> &gt;) const =0</td></tr>
-<tr class="memdesc:a9cbe103bedc3ea77c5edef5f30a4d74c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Provide, but do not return the hidden interface.  <a href="#a9cbe103bedc3ea77c5edef5f30a4d74c"></a><br/></td></tr>
+<tr class="memitem:a7f2819936b99c569cc29e3114d216328"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classsauce_1_1internal_1_1_opaque_binding.html#a7f2819936b99c569cc29e3114d216328">eagerlyInject</a> (OpaqueBindingPtr, sauce::shared_ptr&lt; <a class="el" href="classsauce_1_1_injector.html">Injector</a> &gt;) const =0</td></tr>
+<tr class="memdesc:a7f2819936b99c569cc29e3114d216328"><td class="mdescLeft">&#160;</td><td class="mdescRight">Provide, but do not return the hidden interface.  <a href="#a7f2819936b99c569cc29e3114d216328"></a><br/></td></tr>
 <tr class="memitem:a0d34b0bb5be2e0d0546200d480f3ae30"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a0d34b0bb5be2e0d0546200d480f3ae30"></a>
 virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classsauce_1_1internal_1_1_opaque_binding.html#a0d34b0bb5be2e0d0546200d480f3ae30">setDynamicDependencyNames</a> (std::vector&lt; std::string &gt; const &amp;)=0</td></tr>
 <tr class="memdesc:a0d34b0bb5be2e0d0546200d480f3ae30"><td class="mdescLeft">&#160;</td><td class="mdescRight">Accept the list of dynamic dependency names this binding was created with. <br/></td></tr>
@@ -92,7 +94,7 @@ virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" hr
 <p><a class="el" href="classsauce_1_1internal_1_1_bindings.html" title="A container for bindings.">Bindings</a> associate an interface with an implementation. How that provision comes about is determine by derived types. <a class="el" href="classsauce_1_1internal_1_1_binding.html" title="The base class of all actual binding implementations.">Binding</a> itself is a pure interface.</p>
 <p>To be type-homogenous, <a class="el" href="classsauce_1_1internal_1_1_opaque_binding.html" title="An opaque binding.">OpaqueBinding</a> is not a template, and particularly not a template of any specific interface or implementation types. It however has a <a class="el" href="classsauce_1_1internal_1_1_type_id.html" title="A TypeSignature equipped with specific helper methods dealing in the hidden type.">TypeId</a>, which indirectly identifies the interface it is bound to. The interface is raised to the type system in <a class="el" href="classsauce_1_1internal_1_1_resolved_binding.html" title="A binding for an acknowledged interface.">ResolvedBinding</a>, a class template deriving from <a class="el" href="classsauce_1_1internal_1_1_opaque_binding.html" title="An opaque binding.">OpaqueBinding</a>. </p>
 </div><hr/><h2>Member Function Documentation</h2>
-<a class="anchor" id="a9cbe103bedc3ea77c5edef5f30a4d74c"></a>
+<a class="anchor" id="a7f2819936b99c569cc29e3114d216328"></a>
 <div class="memitem">
 <div class="memproto">
 <table class="mlabels">
@@ -100,7 +102,7 @@ virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" hr
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">virtual void sauce::internal::OpaqueBinding::eagerlyProvide </td>
+          <td class="memname">virtual void sauce::internal::OpaqueBinding::eagerlyInject </td>
           <td>(</td>
           <td class="paramtype">OpaqueBindingPtr&#160;</td>
           <td class="paramname">, </td>
@@ -127,6 +129,35 @@ virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" hr
 <p>Provide, but do not return the hidden interface. </p>
 <p>Instead, cache the instance in its appropriate scope, if any. If the binding is not scoped, do nothing. </p>
 
+</div>
+</div>
+<a class="anchor" id="a08d286d2d97f34d3c5104b4ed95527bc"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual bool sauce::internal::OpaqueBinding::isModifier </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Does this binding modify an existing value? </p>
+<p>If not, it must provide a new value, and so is "providing" binding. </p>
+<div class="fragment"><div class="line">                                  {</div>
+<div class="line">    <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
+<div class="line">  }</div>
+</div><!-- fragment -->
 </div>
 </div>
 <hr/>The documentation for this class was generated from the following file:<ul>

@@ -133,11 +133,11 @@
 <div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160;  }</div>
 <div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160;</div>
 <div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160;  <span class="keyword">template</span>&lt;<span class="keyword">typename</span> Scope&gt;</div>
-<div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160;  <span class="keywordtype">void</span> eagerlyProvide(sauce::shared_ptr&lt;Injector&gt; injector) {</div>
+<div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160;  <span class="keywordtype">void</span> eagerlyInject(sauce::shared_ptr&lt;Injector&gt; injector) {</div>
 <div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160;    <span class="keywordflow">if</span> (base.get() == NULL) {</div>
-<div class="line"><a name="l00091"></a><span class="lineno">   91</span>&#160;      next-&gt;eagerlyProvide&lt;Scope&gt;(injector);</div>
+<div class="line"><a name="l00091"></a><span class="lineno">   91</span>&#160;      next-&gt;eagerlyInject&lt;Scope&gt;(injector);</div>
 <div class="line"><a name="l00092"></a><span class="lineno">   92</span>&#160;    } <span class="keywordflow">else</span> {</div>
-<div class="line"><a name="l00093"></a><span class="lineno">   93</span>&#160;      base-&gt;eagerlyProvide&lt;Scope&gt;(injector);</div>
+<div class="line"><a name="l00093"></a><span class="lineno">   93</span>&#160;      base-&gt;eagerlyInject&lt;Scope&gt;(injector);</div>
 <div class="line"><a name="l00094"></a><span class="lineno">   94</span>&#160;    }</div>
 <div class="line"><a name="l00095"></a><span class="lineno">   95</span>&#160;  }</div>
 <div class="line"><a name="l00096"></a><span class="lineno">   96</span>&#160;</div>
@@ -217,9 +217,9 @@
 <div class="line"><a name="l00170"></a><span class="lineno">  170</span>&#160;  }</div>
 <div class="line"><a name="l00171"></a><span class="lineno">  171</span>&#160;</div>
 <div class="line"><a name="l00172"></a><span class="lineno">  172</span>&#160;  <span class="keyword">template</span>&lt;<span class="keyword">typename</span> Scope&gt;</div>
-<div class="line"><a name="l00173"></a><span class="lineno">  173</span>&#160;  <span class="keywordtype">void</span> eagerlyProvide() {</div>
+<div class="line"><a name="l00173"></a><span class="lineno">  173</span>&#160;  <span class="keywordtype">void</span> eagerlyInject() {</div>
 <div class="line"><a name="l00174"></a><span class="lineno">  174</span>&#160;    sauce::auto_ptr&lt;i::Lock&gt; lock = acquireLock();</div>
-<div class="line"><a name="l00175"></a><span class="lineno">  175</span>&#160;    eagerlyProvide&lt;Scope&gt;(getSelf());</div>
+<div class="line"><a name="l00175"></a><span class="lineno">  175</span>&#160;    eagerlyInject&lt;Scope&gt;(getSelf());</div>
 <div class="line"><a name="l00176"></a><span class="lineno">  176</span>&#160;  }</div>
 <div class="line"><a name="l00177"></a><span class="lineno">  177</span>&#160;</div>
 <div class="line"><a name="l00178"></a><span class="lineno">  178</span>&#160;};</div>
