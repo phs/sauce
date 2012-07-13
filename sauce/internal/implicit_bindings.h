@@ -2,6 +2,7 @@
 #define SAUCE_INTERNAL_IMPLICIT_BINDINGS_H_
 
 #include <string>
+#include <vector>
 
 #include <sauce/exceptions.h>
 #include <sauce/injector.h>
@@ -38,7 +39,7 @@ public:
   typedef sauce::shared_ptr<ResolvedBinding<Dependency> > BindingPtr;
 
   /**
-   * Attempt to supply a (unknown) Binding at provision time.
+   * Attempt to supply an unknown providing Binding at injection time.
    */
   static BindingPtr get(Concrete const &, std::string const name) {
     throw UnboundExceptionFor<Dependency>(name);
@@ -53,11 +54,21 @@ class ImplicitBindings {
 public:
 
   /**
-   * Attempt to supply a (unknown) Binding at provision time.
+   * Attempt to supply an unknown providing Binding at injection time.
    */
   template<typename Dependency>
-  sauce::shared_ptr<ResolvedBinding<Dependency> > getProviding(Concrete const & c, std::string const name) const {
-    return ImplicitBinding<Dependency>::get(c, name);
+  sauce::shared_ptr<ResolvedBinding<Dependency> > getProviding(
+    Concrete const & bindings, std::string const name) const {
+    return ImplicitBinding<Dependency>::get(bindings, name);
+  }
+
+  /**
+   * Attempt to supply unknown modifying Bindings at injection time.
+   */
+  template<typename Dependency>
+  std::vector<sauce::shared_ptr<ResolvedBinding<Dependency> > > getModifying(
+    Concrete const & bindings, std::string const name) const {
+    return std::vector<sauce::shared_ptr<ResolvedBinding<Dependency> > >();
   }
 
 };
