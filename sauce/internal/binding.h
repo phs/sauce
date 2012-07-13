@@ -37,6 +37,16 @@ private:
   }
 
   /**
+   * Does this binding modify an existing value?
+   *
+   * If so, then the passed output smart pointer must not be null.  Alternately if this binding provides a new smart
+   * pointer, then the passed (and overwritten) value must be null.
+   */
+  virtual bool isModifier() const {
+    return false;
+  }
+
+  /**
    * Provide an Iface.
    *
    * The strategy used is left to derived types.
@@ -52,11 +62,13 @@ private:
    * Derived classes should not override get(), but rather provide().
    */
   void get(IfacePtr & provided, BindingPtr binding, InjectorPtr injector) const {
-    bool unscoped = (getScopeKey() == typeIdOf<NoScope>());
+    // Do not scope provisions from modifying bindings, or the NoScope scope.
+    bool unscoped = (getScopeKey() == typeIdOf<NoScope>()) || isModifier();
+
     if (unscoped || !probe<Dependency>(injector, provided, getScopeKey())) {
       provide(provided, binding, injector);
       if (!unscoped) {
-        cache<Dependency>(injector, provided, getScopeKey()); // TODO How does caching relate to setter injection?
+        cache<Dependency>(injector, provided, getScopeKey());
       }
     }
   }
