@@ -66,11 +66,11 @@ class Injector {
   }
 
   template<typename Dependency>
-  typename i::Key<Dependency>::Ptr get(sauce::shared_ptr<Injector> injector, std::string const name) {
+  void get(typename i::Key<Dependency>::Ptr & provided, sauce::shared_ptr<Injector> injector, std::string const name) {
     if (base.get() == NULL) {
-      return next->get<Dependency>(injector, name);
+      next->get<Dependency>(provided, injector, name);
     } else {
-      return base->get<Dependency>(injector, name);
+      base->get<Dependency>(provided, injector, name);
     }
   }
 
@@ -132,11 +132,17 @@ public:
 
   template<typename Dependency>
   typename i::Key<Dependency>::Ptr get(std::string const name = unnamed()) {
+    typedef typename i::Key<Dependency>::Ptr Ptr;
     typedef typename i::Key<Dependency>::Normalized Normalized;
+
     sauce::auto_ptr<i::Lock> lock = acquireLock();
+
     i::TypeIds ids;
     validateAcyclic<Normalized>(getSelf(), ids, name); // TODO Make this check optional.
-    return get<Normalized>(getSelf(), name);
+
+    Ptr provided;
+    get<Normalized>(provided, getSelf(), name);
+    return provided;
   }
 
   template<typename Iface, typename Name>
@@ -185,7 +191,9 @@ protected:
 
   template<typename Dependency>
   typename Key<Dependency>::Ptr getHelper(InjectorPtr injector, std::string const name) const {
-    return injector->get<Dependency>(injector, name);
+    typename Key<Dependency>::Ptr provided;
+    injector->get<Dependency>(provided, injector, name);
+    return provided;
   }
 
   template<typename Dependency>

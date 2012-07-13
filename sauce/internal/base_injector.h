@@ -50,6 +50,7 @@ class CircularDependencyGuard {
 template<typename ImplicitBindings>
 class BaseInjector {
   typedef sauce::auto_ptr<LockFactory> LockFactoryPtr;
+  typedef sauce::shared_ptr<Injector> InjectorPtr;
 
   Bindings<ImplicitBindings> const bindings;
   LockFactoryPtr lockFactory;
@@ -63,26 +64,25 @@ class BaseInjector {
 public:
 
   template<typename Dependency>
-  void validateAcyclic(
-    sauce::shared_ptr<Injector> injector, TypeIds & ids, std::string const name) const {
+  void validateAcyclic(InjectorPtr injector, TypeIds & ids, std::string const name) const {
     typedef typename Key<Dependency>::Normalized Normalized;
     CircularDependencyGuard<ImplicitBindings, Normalized> guard(ids, name);
     bindings.validateAcyclic<Normalized>(injector, ids, name);
   }
 
   template<typename Dependency>
-  typename Key<Dependency>::Ptr get(sauce::shared_ptr<Injector> injector, std::string const name) const {
+  void get(typename Key<Dependency>::Ptr & provided, InjectorPtr injector, std::string const name) const {
     typedef typename Key<Dependency>::Normalized Normalized;
     typedef typename Key<Dependency>::Iface Iface;
     typedef typename Key<Dependency>::Ptr Ptr;
     Ptr ptr(bindings.template get<Normalized>(injector, name));
     SelfInjector<Iface> selfInjector;
     selfInjector.setSelf(ptr);
-    return ptr;
+    provided = ptr;
   }
 
   template<typename Scope>
-  void eagerlyProvide(sauce::shared_ptr<Injector> injector) const {
+  void eagerlyProvide(InjectorPtr injector) const {
     bindings.eagerlyProvide<Scope>(injector);
   }
 
