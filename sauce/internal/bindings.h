@@ -97,14 +97,14 @@ public:
   }
 
   /**
-   * Provide the named Dependency.
+   * Inject the named Dependency.
    *
    * If no binding is found, the implicit bindings are checked.
    */
   template<typename Dependency>
-  void get(typename Key<Dependency>::Ptr & provided, InjectorPtr injector, std::string const name) const {
+  void get(typename Key<Dependency>::Ptr & injected, InjectorPtr injector, std::string const name) const {
     sauce::shared_ptr<ResolvedBinding<Dependency> > binding(getBinding<Dependency>(name));
-    binding->get(provided, binding, injector);
+    binding->get(injected, binding, injector);
   }
 
   template<typename Scope>
