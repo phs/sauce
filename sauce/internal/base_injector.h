@@ -71,7 +71,7 @@ public:
   }
 
   template<typename Dependency>
-  void get(typename Key<Dependency>::Ptr & provided, InjectorPtr injector, std::string const name) const {
+  void inject(typename Key<Dependency>::Ptr & provided, InjectorPtr injector, std::string const name) const {
     typedef typename Key<Dependency>::Normalized Normalized;
     typedef typename Key<Dependency>::Iface Iface;
     bindings.template get<Normalized>(provided, injector, name);

@@ -167,7 +167,7 @@ TEST(BindingTest, shouldInjectBoundSettersOnUserSuppliedValues) {
   sauce::shared_ptr<Injector> injector(Modules().add(&SetterModule).createInjector());
 
   sauce::shared_ptr<HasSetter> hasSetter(new HasSetter());
-  // injector->inject(hasSetter);
+  // injector->inject<HasSetter>(hasSetter);
 
   sauce::shared_ptr<Bound> bound = injector->get<Bound>();
   // Equal since Bound is a singleton

@@ -15,23 +15,25 @@
 namespace sauce {
 
 class Modules;
+class Injector;
 
 namespace internal {
 class ImplicitBindings;
 class InjectorFriend;
+typedef sauce::shared_ptr<Injector> InjectorPtr;
 }
 
 class Injector {
   i::TypeId const scopeKey;
   i::ScopeCache scopeCache;
   sauce::weak_ptr<Injector> weak;
-  sauce::shared_ptr<Injector> const next;
+  i::InjectorPtr const next;
   sauce::shared_ptr<i::BaseInjector<i::ImplicitBindings> > const base;
 
   friend class Modules;
   friend class i::InjectorFriend;
 
-  Injector(i::TypeId scopeKey, sauce::shared_ptr<Injector> next):
+  Injector(i::TypeId scopeKey, i::InjectorPtr next):
     scopeKey(scopeKey),
     scopeCache(),
     weak(),
@@ -45,19 +47,19 @@ class Injector {
     next(),
     base(base) {}
 
-  void setSelfPtr(sauce::shared_ptr<Injector> shared) {
+  void setSelfPtr(i::InjectorPtr shared) {
     assert(shared.get() == this);
     weak = shared;
   }
 
-  sauce::shared_ptr<Injector> getSelf() const {
-    sauce::shared_ptr<Injector> self = weak.lock();
+  i::InjectorPtr getSelf() const {
+    i::InjectorPtr self = weak.lock();
     assert(self.get() == this);
     return self;
   }
 
   template<typename Dependency>
-  void validateAcyclic(sauce::shared_ptr<Injector> injector, i::TypeIds & ids, std::string const name) {
+  void validateAcyclic(i::InjectorPtr injector, i::TypeIds & ids, std::string const name) {
     if (base.get() == NULL) {
       next->validateAcyclic<Dependency>(injector, ids, name);
     } else {
@@ -66,11 +68,11 @@ class Injector {
   }
 
   template<typename Dependency>
-  void get(typename i::Key<Dependency>::Ptr & provided, sauce::shared_ptr<Injector> injector, std::string const name) {
+  void inject(typename i::Key<Dependency>::Ptr & provided, i::InjectorPtr injector, std::string const name) {
     if (base.get() == NULL) {
-      next->get<Dependency>(provided, injector, name);
+      next->inject<Dependency>(provided, injector, name);
     } else {
-      base->get<Dependency>(provided, injector, name);
+      base->inject<Dependency>(provided, injector, name);
     }
   }
 
@@ -86,7 +88,7 @@ class Injector {
   }
 
   template<typename Scope>
-  void eagerlyInject(sauce::shared_ptr<Injector> injector) {
+  void eagerlyInject(i::InjectorPtr injector) {
     if (base.get() == NULL) {
       next->eagerlyInject<Scope>(injector);
     } else {
@@ -131,7 +133,7 @@ class Injector {
 public:
 
   template<typename Dependency>
-  typename i::Key<Dependency>::Ptr get(std::string const name = unnamed()) {
+  void inject(typename i::Key<Dependency>::Ptr & injected, std::string const name = unnamed()) {
     typedef typename i::Key<Dependency>::Ptr Ptr;
     typedef typename i::Key<Dependency>::Normalized Normalized;
 
@@ -140,9 +142,14 @@ public:
     i::TypeIds ids;
     validateAcyclic<Normalized>(getSelf(), ids, name); // TODO Make this check optional.
 
-    Ptr provided;
-    get<Normalized>(provided, getSelf(), name);
-    return provided;
+    inject<Normalized>(injected, getSelf(), name);
+  }
+
+  template<typename Dependency>
+  typename i::Key<Dependency>::Ptr get(std::string const name = unnamed()) {
+    typename i::Key<Dependency>::Ptr injected;
+    inject<Dependency>(injected, name);
+    return injected;
   }
 
   template<typename Iface, typename Name>
@@ -151,17 +158,17 @@ public:
   }
 
   template<typename Scope>
-  sauce::shared_ptr<Injector> enter() const {
+  i::InjectorPtr enter() const {
     if (alreadyInScope<Scope>()) {
       throw AlreadyInScopeExceptionFor<Scope>();
     }
 
-    sauce::shared_ptr<Injector> scoped(new Injector(i::typeIdOf<Scope>(), getSelf()));
+    i::InjectorPtr scoped(new Injector(i::typeIdOf<Scope>(), getSelf()));
     scoped->setSelfPtr(scoped);
     return scoped;
   }
 
-  sauce::shared_ptr<Injector> exit() const {
+  i::InjectorPtr exit() const {
     if (next.get() == NULL) {
       throw ExitingSingletonScopeException();
     } else {
@@ -179,8 +186,6 @@ public:
 
 namespace internal {
 
-typedef sauce::shared_ptr<Injector> InjectorPtr;
-
 class InjectorFriend {
 protected:
 
@@ -192,7 +197,7 @@ protected:
   template<typename Dependency>
   typename Key<Dependency>::Ptr getHelper(InjectorPtr injector, std::string const name) const {
     typename Key<Dependency>::Ptr provided;
-    injector->get<Dependency>(provided, injector, name);
+    injector->inject<Dependency>(provided, injector, name);
     return provided;
   }
 
