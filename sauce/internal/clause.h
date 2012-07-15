@@ -94,7 +94,7 @@ typedef sauce::shared_ptr<ClauseState> ClauseStatePtr;
  * Base class for initial parts of the fluent binding API.
  *
  * An initial clause is what all binding sentences begin with, but do not contain enough information to yet create
- * bindings.  When they do, a transition to a FinalClause occurs.
+ * bindings.  When they do, a transition to a ProvidingClause occurs.
  */
 template<typename Dependency>
 class InitialClause {
@@ -135,14 +135,10 @@ protected:
 };
 
 /**
- * Base class for final parts of the fluent binding API.
- *
- * A final clause is not necessarily the last in its binding sentence, but will only be followed by other final
- * clauses.  They contain enough state to create the user's chosen bindings, but still offer the possibility of
- * further customization.
+ * Base class for final parts of the fluent binding API that result in providing bindings.
  */
 template<typename Dependency, typename Scope, typename Ctor, typename Allocator>
-class FinalClause {
+class ProvidingClause {
   ClauseStatePtr state;
 
   friend class InitialClause<Dependency>;
@@ -151,10 +147,10 @@ class FinalClause {
 
 protected:
 
-  FinalClause():
+  ProvidingClause():
     state() {}
 
-  FinalClause(ClauseStatePtr state):
+  ProvidingClause(ClauseStatePtr state):
     state(state) {}
 
   ClauseStatePtr getState() {

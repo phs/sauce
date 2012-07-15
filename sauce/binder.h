@@ -24,7 +24,7 @@ namespace sauce {
  * Assigns dynamic name requirements to the explicit dependencies of a binding.
  */
 template<typename Dependency, typename Scope, typename Ctor, typename Allocator>
-class NamingClause: public i::FinalClause<Dependency, Scope, Ctor, Allocator> {
+class NamingClause: public i::ProvidingClause<Dependency, Scope, Ctor, Allocator> {
 public:
 
   NamingClause<Dependency, Scope, Ctor, Allocator> & naming(unsigned int position, std::string const name) {
@@ -37,7 +37,7 @@ public:
  * Binds to a specific constructor and allocator.
  */
 template<typename Dependency, typename Scope, typename Ctor, typename Allocator>
-class AllocateFromClause: public i::FinalClause<Dependency, Scope, Ctor, Allocator> {
+class AllocateFromClause: public i::ProvidingClause<Dependency, Scope, Ctor, Allocator> {
 public:
 
   NamingClause<Dependency, Scope, Ctor, Allocator> naming(unsigned int position, std::string const name) {
@@ -49,7 +49,7 @@ public:
  * Binds to a specific constructor, allocating from the heap.
  */
 template<typename Dependency, typename Scope, typename Ctor>
-class ToClause: public i::FinalClause<Dependency, Scope, Ctor, std::allocator<int> > {
+class ToClause: public i::ProvidingClause<Dependency, Scope, Ctor, std::allocator<int> > {
   typedef typename i::Key<Dependency>::Iface Iface;
 
 public:
@@ -68,7 +68,7 @@ public:
  * Binds to a provider with a specific constructor, allocating from the heap.
  */
 template<typename ProviderDependency, typename Scope, typename ProviderCtor>
-class ToProviderClause: public i::FinalClause<ProviderDependency, Scope, ProviderCtor, std::allocator<int> > {
+class ToProviderClause: public i::ProvidingClause<ProviderDependency, Scope, ProviderCtor, std::allocator<int> > {
 
   void onComplete() {
     typedef typename i::Key<ProviderDependency>::Iface Provider;
