@@ -17,30 +17,6 @@
 namespace sauce {
 namespace internal {
 
-template<typename Dependency, typename Scope, typename Ctor, typename Allocator>
-class ProviderBindingCreator {
-  template<typename T>
-  OpaqueBindingPtr createIfDependencyIsAProvider(...) {
-    return OpaqueBindingPtr();
-  }
-
-  template<typename T>
-  OpaqueBindingPtr createIfDependencyIsAProvider(typename i::Key<T>::Iface::Provides *) {
-    typedef typename i::Key<Dependency>::Iface Provider;
-    typedef typename Provider::Provides Iface;
-    typedef typename i::Key<Dependency>::Name Name;
-    typedef Named<Iface, Name> ProvidedDependency;
-
-    return OpaqueBindingPtr(new i::ProviderBinding<ProvidedDependency, Scope, Dependency>());
-  }
-
-public:
-
-  OpaqueBindingPtr create() {
-    return createIfDependencyIsAProvider<Dependency>(0);
-  }
-};
-
 class ImplicitBindings;
 
 /**
@@ -171,6 +147,8 @@ class FinalClause {
 
   friend class InitialClause<Dependency>;
 
+  virtual void onComplete() {}
+
 protected:
 
   FinalClause():
@@ -178,6 +156,10 @@ protected:
 
   FinalClause(ClauseStatePtr state):
     state(state) {}
+
+  ClauseStatePtr getState() {
+    return state;
+  }
 
   template<typename Next>
   Next pass(Next next) {
@@ -193,12 +175,11 @@ public:
 
   void setState(ClauseStatePtr state) {
     OpaqueBindingPtr pendingBinding(new i::NewBinding<Dependency, Scope, Ctor, Allocator>());
-    ProviderBindingCreator<Dependency, Scope, Ctor, Allocator> creator;
-
-    state->clearException();
     this->state = state;
-    this->state->bind(pendingBinding);
-    this->state->bindProvider(creator.create());
+
+    getState()->clearException();
+    getState()->bind(pendingBinding);
+    onComplete();
   }
 };
 

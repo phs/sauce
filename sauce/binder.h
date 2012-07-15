@@ -14,6 +14,7 @@
 #include <sauce/internal/injector_binding.h>
 #include <sauce/internal/key.h>
 #include <sauce/internal/new_binding.h>
+#include <sauce/internal/opaque_binding.h>
 #include <sauce/internal/pending_thrower.h>
 #include <sauce/internal/provider_binding.h>
 
@@ -68,6 +69,16 @@ public:
  */
 template<typename ProviderDependency, typename Scope, typename ProviderCtor>
 class ToProviderClause: public i::FinalClause<ProviderDependency, Scope, ProviderCtor, std::allocator<int> > {
+
+  void onComplete() {
+    typedef typename i::Key<ProviderDependency>::Iface Provider;
+    typedef typename Provider::Provides Iface;
+    typedef typename i::Key<ProviderDependency>::Name Name;
+    typedef Named<Iface, Name> ProvidedDependency;
+
+    i::OpaqueBindingPtr providerBinding(new i::ProviderBinding<ProvidedDependency, Scope, ProviderDependency>());
+    this->getState()->bindProvider(providerBinding);
+  }
 
 public:
 
