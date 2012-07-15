@@ -15,6 +15,10 @@ class MethodBinding: public Binding<Dependency, NoScope> {
 
   Method method;
 
+  bool isModifier() const {
+    return true;
+  }
+
 public:
 
   typedef typename ResolvedBinding<Dependency>::BindingPtr BindingPtr;
