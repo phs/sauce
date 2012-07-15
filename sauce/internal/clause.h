@@ -83,12 +83,12 @@ public:
     }
   }
 
-  template<typename Dependency, typename Scope, typename Ctor, typename Allocator>
-  void bind() {
-    pendingBinding.reset(new i::NewBinding<Dependency, Scope, Ctor, Allocator>());
+  void bind(OpaqueBindingPtr pendingBinding) {
+    this->pendingBinding = pendingBinding;
+  }
 
-    ProviderBindingCreator<Dependency, Scope, Ctor, Allocator> creator;
-    providerBinding = creator.create();
+  void bindProvider(OpaqueBindingPtr providerBinding) {
+    this->providerBinding = providerBinding;
   }
 
   void setDynamicName(std::string const name) {
@@ -192,9 +192,13 @@ protected:
 public:
 
   void setState(ClauseStatePtr state) {
+    OpaqueBindingPtr pendingBinding(new i::NewBinding<Dependency, Scope, Ctor, Allocator>());
+    ProviderBindingCreator<Dependency, Scope, Ctor, Allocator> creator;
+
     state->clearException();
     this->state = state;
-    this->state->template bind<Dependency, Scope, Ctor, Allocator>();
+    this->state->bind(pendingBinding);
+    this->state->bindProvider(creator.create());
   }
 };
 
