@@ -70,14 +70,6 @@ private:
   }
 
   /**
-   * Establish that further dependencies do not introduce cycles with ones already accumulated.
-   *
-   * This is Tarjan's algorithm using the call stack.  When a cycle is detected a
-   * CircularDependencyException is thrown.
-   */
-  virtual void validateAcyclic(InjectorPtr, TypeIds &) const = 0;
-
-  /**
    * Inject, but do not return an Iface.
    *
    * Instead, cache the instance in its appropriate scope, if any.  If the injection is not scoped,
@@ -87,7 +79,7 @@ private:
     if (getScopeKey() != typeIdOf<NoScope>()) {
       BindingPtr binding = resolve<Dependency>(opaque);
       TypeIds ids;
-      validateAcyclic(injector, ids);
+      this->validateAcyclic(injector, ids);
       IfacePtr injected;
       get(injected, binding, injector);
     }
