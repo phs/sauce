@@ -116,6 +116,23 @@ public:
 };
 
 /**
+ * Binds to a specific method.
+ */
+template<typename Dependency, typename Method>
+class ToMethodClause: public i::ModifyingClause<Dependency> {
+  Method method;
+
+  void onComplete() {
+    // i::OpaqueBindingPtr methodBinding(new i::MethodBinding<Dependency>());
+    // this->getState()->bind();
+  }
+
+  ToMethodClause(Method method):
+    i::ModifyingClause<Dependency>(),
+    method(method) {}
+};
+
+/**
  * Names the binding.
  *
  * There are two kinds of names: static and dynamic.  Static names are given by template parameter
@@ -143,6 +160,11 @@ public:
   template<typename ProviderCtor>
   ToProviderClause<ProviderDependency, NoScope, ProviderCtor> toProvider() {
     return pass(ToProviderClause<ProviderDependency, NoScope, ProviderCtor>());
+  }
+
+  template<typename Method>
+  ToMethodClause<Dependency, Method> toMethod(Method method) {
+    return pass(ToMethodClause<Dependency, Method>(method));
   }
 };
 

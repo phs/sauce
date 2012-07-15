@@ -94,7 +94,7 @@ typedef sauce::shared_ptr<ClauseState> ClauseStatePtr;
  * Base class for initial parts of the fluent binding API.
  *
  * An initial clause is what all binding sentences begin with, but do not contain enough information to yet create
- * bindings.  When they do, a transition to a ProvidingClause occurs.
+ * bindings.  When they do, a transition to a ProvidingClause or ModifyingClause occurs.
  */
 template<typename Dependency>
 class InitialClause {
@@ -175,6 +175,49 @@ public:
 
     getState()->clearException();
     getState()->bind(pendingBinding);
+    onComplete();
+  }
+};
+
+/**
+ * Base class for final parts of the fluent binding API that result in modifying bindings.
+ */
+template<typename Dependency>
+class ModifyingClause {
+  ClauseStatePtr state;
+
+  friend class InitialClause<Dependency>;
+
+  virtual void onComplete() {}
+
+protected:
+
+  ModifyingClause():
+    state() {}
+
+  ModifyingClause(ClauseStatePtr state):
+    state(state) {}
+
+  ClauseStatePtr getState() {
+    return state;
+  }
+
+  template<typename Next>
+  Next pass(Next next) {
+    next.setState(state);
+    return next;
+  }
+
+  void bindDynamicDependencyName(unsigned int position, std::string const name) {
+    state->bindDynamicDependencyName(position, name);
+  }
+
+public:
+
+  void setState(ClauseStatePtr state) {
+    this->state = state;
+
+    getState()->clearException();
     onComplete();
   }
 };
