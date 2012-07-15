@@ -59,7 +59,6 @@ private:
     bool unscoped = (getScopeKey() == typeIdOf<NoScope>()) || this->isModifier();
 
     if (unscoped || !probe<Dependency>(injector, injected, getScopeKey())) {
-
       // injected is not null if and only if we are a modifier.
       assert((injected.get() != NULL) == this->isModifier());
 
