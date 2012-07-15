@@ -64,10 +64,10 @@ class BaseInjector {
 public:
 
   template<typename Dependency>
-  void validateAcyclic(InjectorPtr injector, TypeIds & ids, std::string const name) const {
+  void validateAcyclic(bool validateProviding, InjectorPtr injector, TypeIds & ids, std::string const name) const {
     typedef typename Key<Dependency>::Normalized Normalized;
     CircularDependencyGuard<ImplicitBindings, Normalized> guard(ids, name);
-    bindings.validateAcyclic<Normalized>(injector, ids, name);
+    bindings.validateAcyclic<Normalized>(validateProviding, injector, ids, name);
   }
 
   template<typename Dependency>

@@ -59,11 +59,11 @@ class Injector {
   }
 
   template<typename Dependency>
-  void validateAcyclic(i::InjectorPtr injector, i::TypeIds & ids, std::string const name) {
+  void validateAcyclic(bool validateProviding, i::InjectorPtr injector, i::TypeIds & ids, std::string const name) {
     if (base.get() == NULL) {
-      next->validateAcyclic<Dependency>(injector, ids, name);
+      next->validateAcyclic<Dependency>(validateProviding, injector, ids, name);
     } else {
-      base->validateAcyclic<Dependency>(injector, ids, name);
+      base->validateAcyclic<Dependency>(validateProviding, injector, ids, name);
     }
   }
 
@@ -140,7 +140,8 @@ public:
     sauce::auto_ptr<i::Lock> lock = acquireLock();
 
     i::TypeIds ids;
-    validateAcyclic<Normalized>(getSelf(), ids, name); // TODO Make this check optional.
+    bool validateProviding = (injected.get() == NULL);
+    validateAcyclic<Normalized>(validateProviding, getSelf(), ids, name); // TODO Make this check optional.
 
     inject<Normalized>(injected, getSelf(), name);
   }
@@ -191,7 +192,7 @@ protected:
 
   template<typename Dependency>
   void validateAcyclicHelper(InjectorPtr injector, TypeIds & ids, std::string const name) const {
-    injector->validateAcyclic<Dependency>(injector, ids, name);
+    injector->validateAcyclic<Dependency>(true, injector, ids, name);
   }
 
   template<typename Dependency>

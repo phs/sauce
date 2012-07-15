@@ -111,7 +111,7 @@ public:
   }
 
   template<typename Dependency>
-  void validateAcyclic(InjectorPtr injector, TypeIds & ids, std::string const name) const {
+  void validateAcyclic(bool /*validateProviding*/, InjectorPtr injector, TypeIds & ids, std::string const name) const {
     getProvidingBinding<Dependency>(name)->validateAcyclic(injector, ids);
   }
 
