@@ -1,7 +1,6 @@
 #ifndef SAUCE_CLAUSE_H_
 #define SAUCE_CLAUSE_H_
 
-#include <cassert>
 #include <string>
 #include <vector>
 
@@ -54,20 +53,6 @@ class ClauseState {
   OpaqueBindingPtr providerBinding;
   std::string dynamicName;
   std::vector<std::string> dynamicDependencyNames;
-  bool finalizedProvision;
-
-  void finalizeInjection() {
-    if (pendingBinding.get() == NULL) {
-      return;
-    }
-
-    if (!finalizedProvision) {
-      pendingBinding->setName(dynamicName);
-      pendingBinding->setDynamicDependencyNames(dynamicDependencyNames);
-      dynamicDependencyNames.clear();
-      finalizedProvision = true;
-    }
-  }
 
 public:
 
@@ -77,13 +62,17 @@ public:
     pendingBinding(),
     providerBinding(),
     dynamicName(unnamed()),
-    dynamicDependencyNames(),
-    finalizedProvision(false) {
+    dynamicDependencyNames() {
     pendingThrower.throwAnyPending();
   }
 
   virtual ~ClauseState() {
-    finalizeInjection();
+    if (pendingBinding.get() == NULL) {
+      return;
+    }
+
+    pendingBinding->setName(dynamicName);
+    pendingBinding->setDynamicDependencyNames(dynamicDependencyNames);
 
     if (pendingBinding.get() != NULL) {
       bindings.put(pendingBinding);
@@ -96,7 +85,6 @@ public:
 
   template<typename Dependency, typename Scope, typename Ctor, typename Allocator>
   void bind() {
-    assert(!finalizedProvision);
     pendingBinding.reset(new i::NewBinding<Dependency, Scope, Ctor, Allocator>());
 
     ProviderBindingCreator<Dependency, Scope, Ctor, Allocator> creator;
