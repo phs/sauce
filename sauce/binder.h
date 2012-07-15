@@ -115,6 +115,12 @@ public:
   }
 };
 
+template<typename Dependency>
+class NamedClause;
+
+template<typename Iface>
+class BindClause;
+
 /**
  * Binds to a specific method.
  */
@@ -122,9 +128,12 @@ template<typename Dependency, typename Method>
 class ToMethodClause: public i::ModifyingClause<Dependency> {
   Method method;
 
+  friend class NamedClause<Dependency>;
+  friend class BindClause<typename i::Key<Dependency>::Iface>;
+
   void onComplete() {
-    // i::OpaqueBindingPtr methodBinding(new i::MethodBinding<Dependency>());
-    // this->getState()->bind();
+    // i::OpaqueBindingPtr methodBinding(new i::MethodBinding<Dependency, Method>());
+    // this->getState()->bind(methodBinding);
   }
 
   ToMethodClause(Method method):
@@ -147,6 +156,11 @@ class NamedClause: public i::InitialClause<Dependency> {
 
 public:
 
+  template<typename Method>
+  ToMethodClause<Dependency, Method> toMethod(Method method) {
+    return pass(ToMethodClause<Dependency, Method>(method));
+  }
+
   template<typename Scope>
   InClause<Dependency, Scope> in() {
     return pass(InClause<Dependency, Scope>());
@@ -160,11 +174,6 @@ public:
   template<typename ProviderCtor>
   ToProviderClause<ProviderDependency, NoScope, ProviderCtor> toProvider() {
     return pass(ToProviderClause<ProviderDependency, NoScope, ProviderCtor>());
-  }
-
-  template<typename Method>
-  ToMethodClause<Dependency, Method> toMethod(Method method) {
-    return pass(ToMethodClause<Dependency, Method>(method));
   }
 };
 
@@ -192,6 +201,11 @@ public:
   NamedClause<Named<Iface, Unnamed> > named(std::string const name) {
     this->setDynamicName(name);
     return pass(NamedClause<Named<Iface, Unnamed> >());
+  }
+
+  template<typename Method>
+  ToMethodClause<Named<Iface, Unnamed>, Method> toMethod(Method method) {
+    return pass(ToMethodClause<Named<Iface, Unnamed>, Method>(method));
   }
 
   template<typename Scope>

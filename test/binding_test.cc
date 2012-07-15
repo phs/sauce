@@ -160,7 +160,7 @@ public:
 
 void SetterModule(Binder & binder) {
   binder.bind<Bound>().in<SingletonScope>().to<Bound()>();
-  // binder.bind<HasSetter>().toMethod(&HasSetter::setBound);
+  binder.bind<HasSetter>().toMethod(&HasSetter::setBound);
 }
 
 TEST(BindingTest, shouldInjectBoundSettersOnUserSuppliedValues) {
