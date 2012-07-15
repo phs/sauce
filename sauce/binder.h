@@ -20,19 +20,6 @@
 namespace sauce {
 
 /**
- * Binds to a specific method on an already-provided instance.
- */
-template<typename Dependency, typename Scope, typename Ctor, typename Allocator, typename Method>
-class SettingClause: public i::FinalClause<Dependency, Scope, Ctor, Allocator> {
-  Method method;
-
-public:
-
-  SettingClause(Method method):
-    method(method) {}
-};
-
-/**
  * Assigns dynamic name requirements to the explicit dependencies of a binding.
  */
 template<typename Dependency, typename Scope, typename Ctor, typename Allocator>
@@ -42,11 +29,6 @@ public:
   NamingClause<Dependency, Scope, Ctor, Allocator> & naming(unsigned int position, std::string const name) {
     this->bindDynamicDependencyName(position, name);
     return *this;
-  }
-
-  template<typename Method>
-  SettingClause<Dependency, Scope, Ctor, Allocator, Method> setting(Method method) {
-    return pass(SettingClause<Dependency, Scope, Ctor, Allocator, Method>(method));
   }
 };
 
@@ -59,11 +41,6 @@ public:
 
   NamingClause<Dependency, Scope, Ctor, Allocator> naming(unsigned int position, std::string const name) {
     return pass(NamingClause<Dependency, Scope, Ctor, Allocator>()).naming(position, name);
-  }
-
-  template<typename Method>
-  SettingClause<Dependency, Scope, Ctor, Allocator, Method> setting(Method method) {
-    return pass(SettingClause<Dependency, Scope, Ctor, Allocator, Method>(method));
   }
 };
 
@@ -84,11 +61,6 @@ public:
   NamingClause<Dependency, Scope, Ctor, std::allocator<int> > naming(unsigned int position, std::string const name) {
     return pass(NamingClause<Dependency, Scope, Ctor, std::allocator<int> >()).naming(position, name);
   }
-
-  template<typename Method>
-  SettingClause<Dependency, Scope, Ctor, std::allocator<int>, Method> setting(Method method) {
-    return pass(SettingClause<Dependency, Scope, Ctor, std::allocator<int>, Method>(method));
-  }
 };
 
 /**
@@ -107,11 +79,6 @@ public:
   NamingClause<ProviderDependency, Scope, ProviderCtor, std::allocator<int> > naming(
     unsigned int position, std::string const name) {
     return pass(NamingClause<ProviderDependency, Scope, ProviderCtor, std::allocator<int> >()).naming(position, name);
-  }
-
-  template<typename Method>
-  SettingClause<ProviderDependency, Scope, ProviderCtor, std::allocator<int>, Method> setting(Method method) {
-    return pass(SettingClause<ProviderDependency, Scope, ProviderCtor, std::allocator<int>, Method>(method));
   }
 };
 

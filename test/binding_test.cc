@@ -142,17 +142,11 @@ TEST(BindingTest, shouldImplicitlyBindTheInjectorItself) {
   ASSERT_EQ(expected, actual);
 }
 
-class HasBound {
-public:
-  virtual sauce::shared_ptr<Bound> getBound() = 0;
-};
-
-class HasSetter: public HasBound {
+class HasSetter {
 public:
   sauce::shared_ptr<Bound> bound;
 
   HasSetter():
-    HasBound(),
     bound() {}
 
   void setBound(sauce::shared_ptr<Bound> bound) {
@@ -166,14 +160,18 @@ public:
 
 void SetterModule(Binder & binder) {
   binder.bind<Bound>().in<SingletonScope>().to<Bound()>();
-  binder.bind<HasBound>().to<HasSetter()>().setting(&HasSetter::setBound);
+  // binder.bind<HasSetter>().toMethod(&HasSetter::setBound);
 }
 
-TEST(BindingTest, shouldInjectBoundSetters) {
+TEST(BindingTest, shouldInjectBoundSettersOnUserSuppliedValues) {
   sauce::shared_ptr<Injector> injector(Modules().add(&SetterModule).createInjector());
+
+  sauce::shared_ptr<HasSetter> hasSetter(new HasSetter());
+  // injector->inject(hasSetter);
+
   sauce::shared_ptr<Bound> bound = injector->get<Bound>();
   // Equal since Bound is a singleton
-  // ASSERT_EQ(bound, injector->get<HasBound>()->getBound()); // TODO
+  // ASSERT_EQ(bound, hasSetter->getBound()); // TODO
 }
 
 class Dog;
