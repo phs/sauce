@@ -132,8 +132,8 @@ class ToMethodClause: public i::ModifyingClause<Dependency> {
   friend class BindClause<typename i::Key<Dependency>::Iface>;
 
   void onComplete() {
-    // i::OpaqueBindingPtr methodBinding(new i::MethodBinding<Dependency, Method>());
-    // this->getState()->bind(methodBinding);
+    i::OpaqueBindingPtr methodBinding(new i::MethodBinding<Dependency, Method>(method));
+    this->getState()->bind(methodBinding);
   }
 
   ToMethodClause(Method method):
