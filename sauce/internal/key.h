@@ -32,10 +32,10 @@ public:
 template<typename Iface_>
 class Key<Iface_ &> {
 public:
-  typedef Iface_ Iface;
-  typedef sauce::shared_ptr<Iface_> Ptr;
-  typedef Unnamed Name;
-  typedef Named<Iface_, Unnamed> Normalized;
+  typedef typename Key<Iface_>::Iface Iface;
+  typedef typename Key<Iface_>::Ptr Ptr;
+  typedef typename Key<Iface_>::Name Name;
+  typedef typename Key<Iface_>::Normalized Normalized;
 };
 
 /**
