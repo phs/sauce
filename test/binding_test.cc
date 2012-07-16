@@ -171,6 +171,9 @@ public:
 void SetterModule(Binder & binder) {
   binder.bind<Bound>().in<SingletonScope>().to<Bound()>();
   binder.bind<HasSetter>().toMethod(&HasSetter::setBound);
+
+  binder.bind<HasSetterIface>().to<HasSetter()>();
+  binder.bind<HasSetter>().to<HasSetter()>();
 }
 
 TEST(BindingTest, shouldInjectBoundSettersOnUserSuppliedValues) {
@@ -184,22 +187,15 @@ TEST(BindingTest, shouldInjectBoundSettersOnUserSuppliedValues) {
   ASSERT_EQ(bound, hasSetter->getBound());
 }
 
-void ProvideAndSetterModule(Binder & binder) {
-  binder.bind<Bound>().in<SingletonScope>().to<Bound()>();
-  binder.bind<HasSetterIface>().to<HasSetter()>();
-  binder.bind<HasSetter>().to<HasSetter()>();
-  binder.bind<HasSetter>().toMethod(&HasSetter::setBound);
-}
-
 TEST(BindingTest, shouldProvideAndInjectSetters) {
-  sauce::shared_ptr<Injector> injector(Modules().add(&ProvideAndSetterModule).createInjector());
+  sauce::shared_ptr<Injector> injector(Modules().add(&SetterModule).createInjector());
   sauce::shared_ptr<Bound> bound = injector->get<Bound>();
   sauce::shared_ptr<HasSetter> hasSetter = injector->get<HasSetter>();
   ASSERT_EQ(bound, hasSetter->getBound());
 }
 
 TEST(BindingTest, shouldProvideIfacesAndInjectSettersOnImpls) {
-  sauce::shared_ptr<Injector> injector(Modules().add(&ProvideAndSetterModule).createInjector());
+  sauce::shared_ptr<Injector> injector(Modules().add(&SetterModule).createInjector());
   sauce::shared_ptr<Bound> bound = injector->get<Bound>();
   sauce::shared_ptr<HasSetterIface> hasSetterIface = injector->get<HasSetterIface>();
   ASSERT_EQ(bound, hasSetterIface->getBound());
