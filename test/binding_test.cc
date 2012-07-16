@@ -147,7 +147,12 @@ TEST(BindingTest, shouldImplicitlyBindTheInjectorItself) {
   ASSERT_EQ(expected, actual);
 }
 
-class HasSetter {
+class HasSetterIface {
+public:
+  virtual sauce::shared_ptr<Bound> getBound() = 0;
+};
+
+class HasSetter: public HasSetterIface {
 public:
   sauce::shared_ptr<Bound> bound;
 
@@ -179,7 +184,18 @@ TEST(BindingTest, shouldInjectBoundSettersOnUserSuppliedValues) {
   ASSERT_EQ(bound, hasSetter->getBound());
 }
 
-// TODO combine provide and modify injection
+void ProvideAndSetterModule(Binder & binder) {
+  binder.bind<Bound>().in<SingletonScope>().to<Bound()>();
+  binder.bind<HasSetterIface>().to<HasSetter()>();
+  binder.bind<HasSetter>().toMethod(&HasSetter::setBound);
+}
+
+TEST(BindingTest, shouldProvideInjectSetters) {
+  sauce::shared_ptr<Injector> injector(Modules().add(&ProvideAndSetterModule).createInjector());
+  sauce::shared_ptr<Bound> bound = injector->get<Bound>();
+  sauce::shared_ptr<HasSetterIface> hasSetterIface = injector->get<HasSetterIface>();
+  // ASSERT_EQ(bound, hasSetterIface->getBound()); // TODO
+}
 
 class Dog;
 
