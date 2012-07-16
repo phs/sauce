@@ -21,6 +21,8 @@ std::string toString(std::string s, int i) {
   return buffer.str();
 }
 
+typedef std::string (*ToString)(std::string, int);
+
 struct DefaultValueParameters {
   template<typename T, int i, typename Passed>
   struct Parameter {
@@ -50,8 +52,8 @@ struct SpecializedParameters {
 };
 
 TEST(ApplyFunctionTest, shouldCallPassedFunctionWithParametersGeneratedFromPassedType) {
-  ASSERT_EQ("'' '0'", applyFunction<DefaultValueParameters>(&toString, 0));
-  ASSERT_EQ("'foobar' '17'", applyFunction<SpecializedParameters>(&toString, 0));
+  ASSERT_EQ("'' '0'", (applyFunction<DefaultValueParameters, ToString>(&toString, 0)));
+  ASSERT_EQ("'foobar' '17'", (applyFunction<SpecializedParameters, ToString>(&toString, 0)));
 }
 
 TEST(ApplyFunctionTest, shouldTransformSignatureBeforeApplying) {
@@ -81,7 +83,7 @@ struct MoreSpecializedParameters {
 
 TEST(ApplyFunctionTest, shouldLetParametersExamineParameterIndexAndPassedValue) {
   std::string passed = "foo";
-  ASSERT_EQ("'foo' '1'", applyFunction<MoreSpecializedParameters>(&toString, passed));
+  ASSERT_EQ("'foo' '1'", (applyFunction<MoreSpecializedParameters, ToString>(&toString, passed)));
 }
 
 struct SideEffectParameters {
@@ -99,12 +101,12 @@ int SideEffectParameters::called = 0;
 
 TEST(ApplyFunctionTest, shouldYieldParametersForSideEffectsIfRequested) {
   SideEffectParameters::called = 0;
-  observeFunction<SideEffectParameters>(&toString, 0);
+  observeFunction<SideEffectParameters, ToString>(&toString, 0);
   ASSERT_EQ(2, SideEffectParameters::called);
 }
 
 TEST(ApplyFunctionTest, shouldExposeArity) {
-  ASSERT_EQ(2, (ApplyFunction<DefaultValueParameters, std::string (*)(std::string, int)>::arity()));
+  ASSERT_EQ(2, (ApplyFunction<DefaultValueParameters, ToString>::arity()));
 }
 
 struct HasVoidToString {

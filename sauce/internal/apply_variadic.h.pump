@@ -11,12 +11,13 @@ template<typename Parameters, typename Signature>
 class ApplyFunction;
 
 template<typename Parameters, typename Signature, typename Passed>
-typename ApplyFunction<Parameters, Signature>::Return applyFunction(Signature function, Passed passed) {
+typename ApplyFunction<Parameters, Signature>::Return applyFunction(
+  typename ApplyFunction<Parameters, Signature>::Function function, Passed passed) {
   return ApplyFunction<Parameters, Signature>(function).apply(passed);
 }
 
 template<typename Parameters, typename Signature, typename Passed>
-void observeFunction(Signature function, Passed passed) {
+void observeFunction(typename ApplyFunction<Parameters, Signature>::Function function, Passed passed) {
   ApplyFunction<Parameters, Signature>(function).observe(passed);
 }
 
@@ -90,14 +91,15 @@ $var Passed_passed = [[$if i == 0 [[Passed]] $else [[Passed passed]]]]
 /* *INDENT-OFF* */
 template<typename Parameters, typename Return_$comma_typename_As>
 class ApplyFunction<Parameters, Return_(*)($As)> {
-  typedef Return_ (* Signature)($As);
-  Signature function;
+public:
+  typedef Return_ Return;
+  typedef Return_ (* Function)($As);
 
+private:
+  Function function;
 public:
 
-  typedef Return_ Return;
-
-  ApplyFunction(Signature function):
+  ApplyFunction(Function function):
     function(function) {}
 
   static int arity() {

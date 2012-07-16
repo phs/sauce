@@ -12,12 +12,13 @@ template<typename Parameters, typename Signature>
 class ApplyFunction;
 
 template<typename Parameters, typename Signature, typename Passed>
-typename ApplyFunction<Parameters, Signature>::Return applyFunction(Signature function, Passed passed) {
+typename ApplyFunction<Parameters, Signature>::Return applyFunction(
+  typename ApplyFunction<Parameters, Signature>::Function function, Passed passed) {
   return ApplyFunction<Parameters, Signature>(function).apply(passed);
 }
 
 template<typename Parameters, typename Signature, typename Passed>
-void observeFunction(Signature function, Passed passed) {
+void observeFunction(typename ApplyFunction<Parameters, Signature>::Function function, Passed passed) {
   ApplyFunction<Parameters, Signature>(function).observe(passed);
 }
 
@@ -83,14 +84,15 @@ void observeConstructor(Passed passed) {
 /* *INDENT-OFF* */
 template<typename Parameters, typename Return_>
 class ApplyFunction<Parameters, Return_(*)()> {
-  typedef Return_ (* Signature)();
-  Signature function;
+public:
+  typedef Return_ Return;
+  typedef Return_ (* Function)();
 
+private:
+  Function function;
 public:
 
-  typedef Return_ Return;
-
-  ApplyFunction(Signature function):
+  ApplyFunction(Function function):
     function(function) {}
 
   static int arity() {
@@ -192,14 +194,15 @@ public:
 /* *INDENT-OFF* */
 template<typename Parameters, typename Return_, typename A0>
 class ApplyFunction<Parameters, Return_(*)(A0)> {
-  typedef Return_ (* Signature)(A0);
-  Signature function;
+public:
+  typedef Return_ Return;
+  typedef Return_ (* Function)(A0);
 
+private:
+  Function function;
 public:
 
-  typedef Return_ Return;
-
-  ApplyFunction(Signature function):
+  ApplyFunction(Function function):
     function(function) {}
 
   static int arity() {
@@ -308,14 +311,15 @@ public:
 /* *INDENT-OFF* */
 template<typename Parameters, typename Return_, typename A0, typename A1>
 class ApplyFunction<Parameters, Return_(*)(A0, A1)> {
-  typedef Return_ (* Signature)(A0, A1);
-  Signature function;
+public:
+  typedef Return_ Return;
+  typedef Return_ (* Function)(A0, A1);
 
+private:
+  Function function;
 public:
 
-  typedef Return_ Return;
-
-  ApplyFunction(Signature function):
+  ApplyFunction(Function function):
     function(function) {}
 
   static int arity() {
@@ -431,14 +435,15 @@ public:
 /* *INDENT-OFF* */
 template<typename Parameters, typename Return_, typename A0, typename A1, typename A2>
 class ApplyFunction<Parameters, Return_(*)(A0, A1, A2)> {
-  typedef Return_ (* Signature)(A0, A1, A2);
-  Signature function;
+public:
+  typedef Return_ Return;
+  typedef Return_ (* Function)(A0, A1, A2);
 
+private:
+  Function function;
 public:
 
-  typedef Return_ Return;
-
-  ApplyFunction(Signature function):
+  ApplyFunction(Function function):
     function(function) {}
 
   static int arity() {
@@ -561,14 +566,15 @@ public:
 /* *INDENT-OFF* */
 template<typename Parameters, typename Return_, typename A0, typename A1, typename A2, typename A3>
 class ApplyFunction<Parameters, Return_(*)(A0, A1, A2, A3)> {
-  typedef Return_ (* Signature)(A0, A1, A2, A3);
-  Signature function;
+public:
+  typedef Return_ Return;
+  typedef Return_ (* Function)(A0, A1, A2, A3);
 
+private:
+  Function function;
 public:
 
-  typedef Return_ Return;
-
-  ApplyFunction(Signature function):
+  ApplyFunction(Function function):
     function(function) {}
 
   static int arity() {
@@ -699,14 +705,15 @@ public:
 /* *INDENT-OFF* */
 template<typename Parameters, typename Return_, typename A0, typename A1, typename A2, typename A3, typename A4>
 class ApplyFunction<Parameters, Return_(*)(A0, A1, A2, A3, A4)> {
-  typedef Return_ (* Signature)(A0, A1, A2, A3, A4);
-  Signature function;
+public:
+  typedef Return_ Return;
+  typedef Return_ (* Function)(A0, A1, A2, A3, A4);
 
+private:
+  Function function;
 public:
 
-  typedef Return_ Return;
-
-  ApplyFunction(Signature function):
+  ApplyFunction(Function function):
     function(function) {}
 
   static int arity() {
@@ -846,14 +853,15 @@ public:
 template<typename Parameters, typename Return_, typename A0, typename A1, typename A2, typename A3, typename A4,
     typename A5>
 class ApplyFunction<Parameters, Return_(*)(A0, A1, A2, A3, A4, A5)> {
-  typedef Return_ (* Signature)(A0, A1, A2, A3, A4, A5);
-  Signature function;
+public:
+  typedef Return_ Return;
+  typedef Return_ (* Function)(A0, A1, A2, A3, A4, A5);
 
+private:
+  Function function;
 public:
 
-  typedef Return_ Return;
-
-  ApplyFunction(Signature function):
+  ApplyFunction(Function function):
     function(function) {}
 
   static int arity() {
@@ -1000,14 +1008,15 @@ public:
 template<typename Parameters, typename Return_, typename A0, typename A1, typename A2, typename A3, typename A4,
     typename A5, typename A6>
 class ApplyFunction<Parameters, Return_(*)(A0, A1, A2, A3, A4, A5, A6)> {
-  typedef Return_ (* Signature)(A0, A1, A2, A3, A4, A5, A6);
-  Signature function;
+public:
+  typedef Return_ Return;
+  typedef Return_ (* Function)(A0, A1, A2, A3, A4, A5, A6);
 
+private:
+  Function function;
 public:
 
-  typedef Return_ Return;
-
-  ApplyFunction(Signature function):
+  ApplyFunction(Function function):
     function(function) {}
 
   static int arity() {
@@ -1161,14 +1170,15 @@ public:
 template<typename Parameters, typename Return_, typename A0, typename A1, typename A2, typename A3, typename A4,
     typename A5, typename A6, typename A7>
 class ApplyFunction<Parameters, Return_(*)(A0, A1, A2, A3, A4, A5, A6, A7)> {
-  typedef Return_ (* Signature)(A0, A1, A2, A3, A4, A5, A6, A7);
-  Signature function;
+public:
+  typedef Return_ Return;
+  typedef Return_ (* Function)(A0, A1, A2, A3, A4, A5, A6, A7);
 
+private:
+  Function function;
 public:
 
-  typedef Return_ Return;
-
-  ApplyFunction(Signature function):
+  ApplyFunction(Function function):
     function(function) {}
 
   static int arity() {
@@ -1330,14 +1340,15 @@ public:
 template<typename Parameters, typename Return_, typename A0, typename A1, typename A2, typename A3, typename A4,
     typename A5, typename A6, typename A7, typename A8>
 class ApplyFunction<Parameters, Return_(*)(A0, A1, A2, A3, A4, A5, A6, A7, A8)> {
-  typedef Return_ (* Signature)(A0, A1, A2, A3, A4, A5, A6, A7, A8);
-  Signature function;
+public:
+  typedef Return_ Return;
+  typedef Return_ (* Function)(A0, A1, A2, A3, A4, A5, A6, A7, A8);
 
+private:
+  Function function;
 public:
 
-  typedef Return_ Return;
-
-  ApplyFunction(Signature function):
+  ApplyFunction(Function function):
     function(function) {}
 
   static int arity() {
@@ -1506,14 +1517,15 @@ public:
 template<typename Parameters, typename Return_, typename A0, typename A1, typename A2, typename A3, typename A4,
     typename A5, typename A6, typename A7, typename A8, typename A9>
 class ApplyFunction<Parameters, Return_(*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9)> {
-  typedef Return_ (* Signature)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9);
-  Signature function;
+public:
+  typedef Return_ Return;
+  typedef Return_ (* Function)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9);
 
+private:
+  Function function;
 public:
 
-  typedef Return_ Return;
-
-  ApplyFunction(Signature function):
+  ApplyFunction(Function function):
     function(function) {}
 
   static int arity() {
