@@ -31,7 +31,7 @@ TEST(BindingTest, shouldProvideBoundDependenciesAndTheirProvidersToo) {
 
 TEST(BindingTest, shouldProvideExplicitlyRequestedSmartPointers) {
   sauce::shared_ptr<Injector> injector(Modules().add(&BoundModule).createInjector());
-  // sauce::shared_ptr<Bound> bound = injector->get<sauce::shared_ptr<Bound> >(); // TODO
+  sauce::shared_ptr<Bound> bound = injector->get<sauce::shared_ptr<Bound> >(); // TODO
 }
 
 void ForgotTheParensModule(Binder & binder) {

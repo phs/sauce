@@ -39,6 +39,18 @@ public:
 };
 
 /**
+ * Template specialization when a smart pointer is used.
+ */
+template<typename Iface_>
+class Key<sauce::shared_ptr<Iface_> > {
+public:
+  typedef typename Key<Iface_>::Iface Iface;
+  typedef typename Key<Iface_>::Ptr Ptr;
+  typedef typename Key<Iface_>::Name Name;
+  typedef typename Key<Iface_>::Normalized Normalized;
+};
+
+/**
  * Template specialization when an actual name is used.
  */
 template<typename Iface_, typename Name_>
