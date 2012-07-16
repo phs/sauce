@@ -217,6 +217,30 @@ TEST(BindingTest, shouldInjectSettersTransitively) {
   ASSERT_EQ(bound, needsAHasSetter->hasSetterIface->getBound());
 }
 
+class HasSetterProvider: public AbstractProvider<HasSetter> {
+public:
+  HasSetter * provide() {
+    return new HasSetter();
+  }
+
+  void dispose(HasSetter * hasSetter) {
+    delete hasSetter;
+  }
+};
+
+void ProviderSetterModule(Binder & binder) {
+  binder.bind<Bound>().in<SingletonScope>().to<Bound()>();
+  binder.bind<HasSetter>().toMethod(&HasSetter::setBound);
+  binder.bind<HasSetter>().toProvider<HasSetterProvider()>();
+}
+
+TEST(BindingTest, shouldInjectSettersOnValuesFromExplicitProviders) {
+  sauce::shared_ptr<Injector> injector(Modules().add(&ProviderSetterModule).createInjector());
+  sauce::shared_ptr<Bound> bound = injector->get<Bound>();
+  sauce::shared_ptr<HasSetter> hasSetter = injector->get<HasSetter>();
+  ASSERT_EQ(bound, hasSetter->getBound());
+}
+
 class Dog;
 
 class Tail {
