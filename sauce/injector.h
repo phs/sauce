@@ -68,11 +68,11 @@ class Injector {
   }
 
   template<typename Dependency>
-  void inject(typename i::Key<Dependency>::Ptr & provided, i::InjectorPtr injector, std::string const name) {
+  void inject(typename i::Key<Dependency>::Ptr & injected, i::InjectorPtr injector, std::string const name) {
     if (base.get() == NULL) {
-      next->inject<Dependency>(provided, injector, name);
+      next->inject<Dependency>(injected, injector, name);
     } else {
-      base->inject<Dependency>(provided, injector, name);
+      base->inject<Dependency>(injected, injector, name);
     }
   }
 
@@ -197,19 +197,19 @@ protected:
 
   template<typename Dependency>
   typename Key<Dependency>::Ptr injectHelper(InjectorPtr injector, std::string const name) const {
-    typename Key<Dependency>::Ptr provided;
-    injector->inject<Dependency>(provided, injector, name);
-    return provided;
+    typename Key<Dependency>::Ptr injected;
+    injector->inject<Dependency>(injected, injector, name);
+    return injected;
   }
 
   template<typename Dependency>
-  void cache(InjectorPtr injector, typename Key<Dependency>::Ptr provided, i::TypeId scope) const {
-    injector->template cache<Dependency>(provided, scope);
+  void cache(InjectorPtr injector, typename Key<Dependency>::Ptr injected, i::TypeId scope) const {
+    injector->template cache<Dependency>(injected, scope);
   }
 
   template<typename Dependency>
-  bool probe(InjectorPtr injector, typename Key<Dependency>::Ptr & provided, i::TypeId scope) const {
-    return injector->template probe<Dependency>(provided, scope);
+  bool probe(InjectorPtr injector, typename Key<Dependency>::Ptr & injected, i::TypeId scope) const {
+    return injector->template probe<Dependency>(injected, scope);
   }
 
 };
