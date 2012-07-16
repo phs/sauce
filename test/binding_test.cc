@@ -202,7 +202,7 @@ TEST(BindingTest, shouldProvideIfacesAndInjectSettersOnImpls) {
   sauce::shared_ptr<Injector> injector(Modules().add(&ProvideAndSetterModule).createInjector());
   sauce::shared_ptr<Bound> bound = injector->get<Bound>();
   sauce::shared_ptr<HasSetterIface> hasSetterIface = injector->get<HasSetterIface>();
-  // ASSERT_EQ(bound, hasSetterIface->getBound()); // TODO
+  ASSERT_EQ(bound, hasSetterIface->getBound());
 }
 
 class Dog;

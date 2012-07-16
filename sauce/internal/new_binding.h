@@ -124,6 +124,8 @@ public:
     ImplPtr impl(applyConstructor<InjectParameters, Constructor, Allocator>(passed), deleter);
     SelfInjector<Impl> selfInjector;
     selfInjector.setSelf(impl);
+    typedef Named<Impl, typename i::Key<Dependency>::Name> NormalizedImpl;
+    this->template injectHelper<NormalizedImpl>(impl, injector, this->getName());
     injected = sauce::static_pointer_cast<Iface>(impl);
   }
 
