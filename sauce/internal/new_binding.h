@@ -31,7 +31,9 @@ class NewBinding: public Binding<Dependency, Scope> {
 
     template<typename T>
     typename Key<T>::Ptr injectHelper(NewBinding_ const & binding, InjectorPtr injector, std::string name) {
-      return binding.template injectHelper<typename i::Key<T>::Normalized>(injector, name);
+      typename Key<T>::Ptr injected;
+      binding.template injectHelper<typename i::Key<T>::Normalized>(injected, injector, name);
+      return injected;
     }
   };
 
