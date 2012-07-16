@@ -168,12 +168,21 @@ public:
   }
 };
 
+class NeedsAHasSetter {
+public:
+  sauce::shared_ptr<HasSetterIface> hasSetterIface;
+
+  NeedsAHasSetter(sauce::shared_ptr<HasSetterIface> hasSetterIface):
+    hasSetterIface(hasSetterIface) {}
+};
+
 void SetterModule(Binder & binder) {
   binder.bind<Bound>().in<SingletonScope>().to<Bound()>();
   binder.bind<HasSetter>().toMethod(&HasSetter::setBound);
 
   binder.bind<HasSetterIface>().to<HasSetter()>();
   binder.bind<HasSetter>().to<HasSetter()>();
+  binder.bind<NeedsAHasSetter>().to<NeedsAHasSetter(HasSetter)>();
 }
 
 TEST(BindingTest, shouldInjectBoundSettersOnUserSuppliedValues) {
@@ -199,6 +208,13 @@ TEST(BindingTest, shouldProvideIfacesAndInjectSettersOnImpls) {
   sauce::shared_ptr<Bound> bound = injector->get<Bound>();
   sauce::shared_ptr<HasSetterIface> hasSetterIface = injector->get<HasSetterIface>();
   ASSERT_EQ(bound, hasSetterIface->getBound());
+}
+
+TEST(BindingTest, shouldInjectSettersTransitively) {
+  sauce::shared_ptr<Injector> injector(Modules().add(&SetterModule).createInjector());
+  sauce::shared_ptr<Bound> bound = injector->get<Bound>();
+  sauce::shared_ptr<NeedsAHasSetter> needsAHasSetter = injector->get<NeedsAHasSetter>();
+  ASSERT_EQ(bound, needsAHasSetter->hasSetterIface->getBound());
 }
 
 class Dog;
