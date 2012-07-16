@@ -179,6 +179,8 @@ TEST(BindingTest, shouldInjectBoundSettersOnUserSuppliedValues) {
   ASSERT_EQ(bound, hasSetter->getBound());
 }
 
+// TODO combine provide and modify injection
+
 class Dog;
 
 class Tail {
