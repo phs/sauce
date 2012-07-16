@@ -137,9 +137,12 @@ public:
   template<typename Dependency>
   void get(typename Key<Dependency>::Ptr & injected, InjectorPtr injector, std::string const name) const {
     typedef sauce::shared_ptr<ResolvedBinding<Dependency> > BindingPtr;
+    BindingPtr binding;
 
-    BindingPtr binding = getProvidingBinding<Dependency>(name);
-    binding->get(injected, binding, injector);
+    if (injected.get() == NULL) {
+      binding = getProvidingBinding<Dependency>(name);
+      binding->get(injected, binding, injector);
+    }
 
     typedef std::vector<BindingPtr> BindingPtrs;
     BindingPtrs bindings = getModifierBindings<Dependency>(name);
