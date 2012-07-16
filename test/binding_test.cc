@@ -176,7 +176,7 @@ TEST(BindingTest, shouldInjectBoundSettersOnUserSuppliedValues) {
 
   sauce::shared_ptr<Bound> bound = injector->get<Bound>();
   // Equal since Bound is a singleton
-  // ASSERT_EQ(bound, hasSetter->getBound()); // TODO
+  ASSERT_EQ(bound, hasSetter->getBound());
 }
 
 class Dog;

@@ -92,7 +92,7 @@ class MethodBinding: public Binding<Dependency, NoScope> {
 
   void validateAcyclic(InjectorPtr injector, TypeIds & ids) const {
     typename ValidateAcyclicParameters::Passed passed(*this, injector, ids);
-    // observeMethod<ValidateAcyclicParameters>(method, passed);
+    observeMethod<ValidateAcyclicParameters>(method, passed);
   }
 
 public:
@@ -103,9 +103,9 @@ public:
     dynamicDependencyNames(Inject::arity(), unnamed()),
     method(method) {}
 
-  void inject(IfacePtr & /* injected */, BindingPtr, InjectorPtr injector) const {
+  void inject(IfacePtr & injected, BindingPtr, InjectorPtr injector) const {
     typename InjectParameters::Passed passed(*this, injector);
-    // applyMethod<InjectParameters>(*injected.get(), method, passed);
+    applyMethod<InjectParameters>(*injected.get(), method, passed);
   }
 
 };
