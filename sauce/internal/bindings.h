@@ -111,8 +111,22 @@ public:
   }
 
   template<typename Dependency>
-  void validateAcyclic(bool /*validateProviding*/, InjectorPtr injector, TypeIds & ids, std::string const name) const {
-    getProvidingBinding<Dependency>(name)->validateAcyclic(injector, ids);
+  void validateAcyclic(bool validateProviding, InjectorPtr injector, TypeIds & ids, std::string const name) const {
+    typedef sauce::shared_ptr<ResolvedBinding<Dependency> > BindingPtr;
+    BindingPtr binding;
+
+    if (validateProviding) {
+      binding = getProvidingBinding<Dependency>(name);
+      binding->validateAcyclic(injector, ids);
+    }
+
+    typedef std::vector<BindingPtr> BindingPtrs;
+    BindingPtrs bindings = getModifierBindings<Dependency>(name);
+
+    for (typename BindingPtrs::iterator i = bindings.begin(); i != bindings.end(); ++i) {
+      binding = *i;
+      binding->validateAcyclic(injector, ids);
+    }
   }
 
   /**
