@@ -406,6 +406,18 @@ TEST(BindingTest, shouldProvideDynamicallyNamedRequestsThatHaveDependencies) {
   injector->get<BirdCage>("golden");
 }
 
+void StaticallyNamedSetterModule(Binder & binder) {
+  binder.bind<Bound>().named<LieutenantShinysides>().in<SingletonScope>().to<Bound()>();
+  binder.bind<HasSetter>().toMethod(&HasSetter::setBound); // TODO
+}
+
+TEST(BindingTest, shouldInjectStaticallyNamedDependenciesIntoSetters) {
+  sauce::shared_ptr<Injector> injector(Modules().add(&StaticallyNamedSetterModule).createInjector());
+  sauce::shared_ptr<Bound> bound = injector->get<Bound, LieutenantShinysides>();
+  // sauce::shared_ptr<HasSetter> hasSetter = injector->get<HasSetter>();
+  // ASSERT_EQ(bound, hasSetter->getBound()); // TODO
+}
+
 void IncompleteNamedModule(Binder & binder) {
   binder.bind<IncompletelyBound>().named<LieutenantShinysides>() /* to ...? */;
 }
