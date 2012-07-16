@@ -187,10 +187,18 @@ TEST(BindingTest, shouldInjectBoundSettersOnUserSuppliedValues) {
 void ProvideAndSetterModule(Binder & binder) {
   binder.bind<Bound>().in<SingletonScope>().to<Bound()>();
   binder.bind<HasSetterIface>().to<HasSetter()>();
+  binder.bind<HasSetter>().to<HasSetter()>();
   binder.bind<HasSetter>().toMethod(&HasSetter::setBound);
 }
 
-TEST(BindingTest, shouldProvideInjectSetters) {
+TEST(BindingTest, shouldProvideAndInjectSetters) {
+  sauce::shared_ptr<Injector> injector(Modules().add(&ProvideAndSetterModule).createInjector());
+  sauce::shared_ptr<Bound> bound = injector->get<Bound>();
+  sauce::shared_ptr<HasSetter> hasSetter = injector->get<HasSetter>();
+  ASSERT_EQ(bound, hasSetter->getBound());
+}
+
+TEST(BindingTest, shouldProvideIfacesAndInjectSettersOnImpls) {
   sauce::shared_ptr<Injector> injector(Modules().add(&ProvideAndSetterModule).createInjector());
   sauce::shared_ptr<Bound> bound = injector->get<Bound>();
   sauce::shared_ptr<HasSetterIface> hasSetterIface = injector->get<HasSetterIface>();
