@@ -30,8 +30,8 @@ class NewBinding: public Binding<Dependency, Scope> {
     }
 
     template<typename T>
-    typename Key<T>::Ptr getHelper(NewBinding_ const & binding, InjectorPtr injector, std::string name) {
-      return binding.template getHelper<typename i::Key<T>::Normalized>(injector, name);
+    typename Key<T>::Ptr injectHelper(NewBinding_ const & binding, InjectorPtr injector, std::string name) {
+      return binding.template injectHelper<typename i::Key<T>::Normalized>(injector, name);
     }
   };
 
@@ -55,7 +55,7 @@ class NewBinding: public Binding<Dependency, Scope> {
         InjectorPtr & injector = passed.injector;
         std::string dependencyName = binding.dynamicDependencyNames[i];
 
-        return this->template getHelper<T>(binding, injector, dependencyName);
+        return this->template injectHelper<T>(binding, injector, dependencyName);
       }
     };
   };

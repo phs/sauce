@@ -24,7 +24,7 @@ public:
   }
 
   void inject(typename Key<Dependency>::Ptr & injected, BindingPtr binding, InjectorPtr injector) const {
-    injected = this->template getHelper<Provider>(injector, binding->getName())->get();
+    injected = this->template injectHelper<Provider>(injector, binding->getName())->get();
   }
 };
 

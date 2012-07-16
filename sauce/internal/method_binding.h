@@ -25,8 +25,8 @@ class MethodBinding: public Binding<Dependency, NoScope> {
     }
 
     template<typename T>
-    typename Key<T>::Ptr getHelper(MethodBinding_ const & binding, InjectorPtr injector, std::string name) {
-      return binding.template getHelper<typename i::Key<T>::Normalized>(injector, name);
+    typename Key<T>::Ptr injectHelper(MethodBinding_ const & binding, InjectorPtr injector, std::string name) {
+      return binding.template injectHelper<typename i::Key<T>::Normalized>(injector, name);
     }
   };
 
@@ -50,7 +50,7 @@ class MethodBinding: public Binding<Dependency, NoScope> {
         InjectorPtr & injector = passed.injector;
         std::string dependencyName = binding.dynamicDependencyNames[i];
 
-        return this->template getHelper<T>(binding, injector, dependencyName);
+        return this->template injectHelper<T>(binding, injector, dependencyName);
       }
     };
   };
