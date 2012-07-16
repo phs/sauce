@@ -27,7 +27,7 @@ public:
 };
 
 /**
- * Template specialization when an unnamed reference is used.
+ * Template specialization when a reference is used.
  */
 template<typename Iface_>
 class Key<Iface_ &> {
