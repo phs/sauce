@@ -12,6 +12,9 @@ namespace test {
 
 using namespace sauce::internal;
 
+template<typename Type>
+class Annotation {};
+
 std::string toString(std::string s, int i) {
   std::stringstream buffer;
   buffer << "'" << s << "' '" << i << "'";
@@ -49,6 +52,12 @@ struct SpecializedParameters {
 TEST(ApplyFunctionTest, shouldCallPassedFunctionWithParametersGeneratedFromPassedType) {
   ASSERT_EQ("'' '0'", applyFunction<DefaultValueParameters>(&toString, 0));
   ASSERT_EQ("'foobar' '17'", applyFunction<SpecializedParameters>(&toString, 0));
+}
+
+TEST(ApplyFunctionTest, shouldTransformSignatureBeforeApplying) {
+  typedef Annotation<std::string> AnnotatedString;
+  // TODO
+  // ASSERT_EQ("'' '0'", (applyFunction<DefaultValueParameters, std::string(*)(AnnotatedString, int)>(&toString, 0)));
 }
 
 struct MoreSpecializedParameters {
