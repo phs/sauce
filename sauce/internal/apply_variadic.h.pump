@@ -7,25 +7,25 @@ $var n = 10  $$ The maximum arity we support.
 namespace sauce {
 namespace internal {
 
-template<typename Parameters, typename Function>
+template<typename Parameters, typename Signature>
 class ApplyFunction;
 
-template<typename Parameters, typename Function, typename Passed>
-typename ApplyFunction<Parameters, Function>::Return applyFunction(Function function, Passed passed) {
-  return ApplyFunction<Parameters, Function>(function).apply(passed);
+template<typename Parameters, typename Signature, typename Passed>
+typename ApplyFunction<Parameters, Signature>::Return applyFunction(Signature function, Passed passed) {
+  return ApplyFunction<Parameters, Signature>(function).apply(passed);
 }
 
-template<typename Parameters, typename Function, typename Passed>
-void observeFunction(Function function, Passed passed) {
-  ApplyFunction<Parameters, Function>(function).observe(passed);
+template<typename Parameters, typename Signature, typename Passed>
+void observeFunction(Signature function, Passed passed) {
+  ApplyFunction<Parameters, Signature>(function).observe(passed);
 }
 
-template<typename Parameters, typename Function>
+template<typename Parameters, typename Signature>
 class ApplyVoidFunction;
 
-template<typename Parameters, typename Function, typename Passed>
-void applyVoidFunction(Function function, Passed passed) {
-  (ApplyVoidFunction<Parameters, Function>(function)).apply(passed);
+template<typename Parameters, typename Signature, typename Passed>
+void applyVoidFunction(Signature function, Passed passed) {
+  (ApplyVoidFunction<Parameters, Signature>(function)).apply(passed);
 }
 
 template<typename Parameters, typename Method>
@@ -90,14 +90,14 @@ $var Passed_passed = [[$if i == 0 [[Passed]] $else [[Passed passed]]]]
 /* *INDENT-OFF* */
 template<typename Parameters, typename Return_$comma_typename_As>
 class ApplyFunction<Parameters, Return_(*)($As)> {
-  typedef Return_ (* Function)($As);
-  Function function;
+  typedef Return_ (* Signature)($As);
+  Signature function;
 
 public:
 
   typedef Return_ Return;
 
-  ApplyFunction(Function function):
+  ApplyFunction(Signature function):
     function(function) {}
 
   static int arity() {
@@ -125,12 +125,12 @@ public:
 /* *INDENT-OFF* */
 template<typename Parameters$comma_typename_As>
 class ApplyVoidFunction<Parameters, void(*)($As)> {
-  typedef void (* Function)($As);
-  Function function;
+  typedef void (* Signature)($As);
+  Signature function;
 
 public:
 
-  ApplyVoidFunction(Function function):
+  ApplyVoidFunction(Signature function):
     function(function) {}
 
   static int arity() {

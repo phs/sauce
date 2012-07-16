@@ -8,25 +8,25 @@
 namespace sauce {
 namespace internal {
 
-template<typename Parameters, typename Function>
+template<typename Parameters, typename Signature>
 class ApplyFunction;
 
-template<typename Parameters, typename Function, typename Passed>
-typename ApplyFunction<Parameters, Function>::Return applyFunction(Function function, Passed passed) {
-  return ApplyFunction<Parameters, Function>(function).apply(passed);
+template<typename Parameters, typename Signature, typename Passed>
+typename ApplyFunction<Parameters, Signature>::Return applyFunction(Signature function, Passed passed) {
+  return ApplyFunction<Parameters, Signature>(function).apply(passed);
 }
 
-template<typename Parameters, typename Function, typename Passed>
-void observeFunction(Function function, Passed passed) {
-  ApplyFunction<Parameters, Function>(function).observe(passed);
+template<typename Parameters, typename Signature, typename Passed>
+void observeFunction(Signature function, Passed passed) {
+  ApplyFunction<Parameters, Signature>(function).observe(passed);
 }
 
-template<typename Parameters, typename Function>
+template<typename Parameters, typename Signature>
 class ApplyVoidFunction;
 
-template<typename Parameters, typename Function, typename Passed>
-void applyVoidFunction(Function function, Passed passed) {
-  (ApplyVoidFunction<Parameters, Function>(function)).apply(passed);
+template<typename Parameters, typename Signature, typename Passed>
+void applyVoidFunction(Signature function, Passed passed) {
+  (ApplyVoidFunction<Parameters, Signature>(function)).apply(passed);
 }
 
 template<typename Parameters, typename Method>
@@ -83,14 +83,14 @@ void observeConstructor(Passed passed) {
 /* *INDENT-OFF* */
 template<typename Parameters, typename Return_>
 class ApplyFunction<Parameters, Return_(*)()> {
-  typedef Return_ (* Function)();
-  Function function;
+  typedef Return_ (* Signature)();
+  Signature function;
 
 public:
 
   typedef Return_ Return;
 
-  ApplyFunction(Function function):
+  ApplyFunction(Signature function):
     function(function) {}
 
   static int arity() {
@@ -111,12 +111,12 @@ public:
 /* *INDENT-OFF* */
 template<typename Parameters>
 class ApplyVoidFunction<Parameters, void(*)()> {
-  typedef void (* Function)();
-  Function function;
+  typedef void (* Signature)();
+  Signature function;
 
 public:
 
-  ApplyVoidFunction(Function function):
+  ApplyVoidFunction(Signature function):
     function(function) {}
 
   static int arity() {
@@ -192,14 +192,14 @@ public:
 /* *INDENT-OFF* */
 template<typename Parameters, typename Return_, typename A0>
 class ApplyFunction<Parameters, Return_(*)(A0)> {
-  typedef Return_ (* Function)(A0);
-  Function function;
+  typedef Return_ (* Signature)(A0);
+  Signature function;
 
 public:
 
   typedef Return_ Return;
 
-  ApplyFunction(Function function):
+  ApplyFunction(Signature function):
     function(function) {}
 
   static int arity() {
@@ -222,12 +222,12 @@ public:
 /* *INDENT-OFF* */
 template<typename Parameters, typename A0>
 class ApplyVoidFunction<Parameters, void(*)(A0)> {
-  typedef void (* Function)(A0);
-  Function function;
+  typedef void (* Signature)(A0);
+  Signature function;
 
 public:
 
-  ApplyVoidFunction(Function function):
+  ApplyVoidFunction(Signature function):
     function(function) {}
 
   static int arity() {
@@ -308,14 +308,14 @@ public:
 /* *INDENT-OFF* */
 template<typename Parameters, typename Return_, typename A0, typename A1>
 class ApplyFunction<Parameters, Return_(*)(A0, A1)> {
-  typedef Return_ (* Function)(A0, A1);
-  Function function;
+  typedef Return_ (* Signature)(A0, A1);
+  Signature function;
 
 public:
 
   typedef Return_ Return;
 
-  ApplyFunction(Function function):
+  ApplyFunction(Signature function):
     function(function) {}
 
   static int arity() {
@@ -340,12 +340,12 @@ public:
 /* *INDENT-OFF* */
 template<typename Parameters, typename A0, typename A1>
 class ApplyVoidFunction<Parameters, void(*)(A0, A1)> {
-  typedef void (* Function)(A0, A1);
-  Function function;
+  typedef void (* Signature)(A0, A1);
+  Signature function;
 
 public:
 
-  ApplyVoidFunction(Function function):
+  ApplyVoidFunction(Signature function):
     function(function) {}
 
   static int arity() {
@@ -431,14 +431,14 @@ public:
 /* *INDENT-OFF* */
 template<typename Parameters, typename Return_, typename A0, typename A1, typename A2>
 class ApplyFunction<Parameters, Return_(*)(A0, A1, A2)> {
-  typedef Return_ (* Function)(A0, A1, A2);
-  Function function;
+  typedef Return_ (* Signature)(A0, A1, A2);
+  Signature function;
 
 public:
 
   typedef Return_ Return;
 
-  ApplyFunction(Function function):
+  ApplyFunction(Signature function):
     function(function) {}
 
   static int arity() {
@@ -465,12 +465,12 @@ public:
 /* *INDENT-OFF* */
 template<typename Parameters, typename A0, typename A1, typename A2>
 class ApplyVoidFunction<Parameters, void(*)(A0, A1, A2)> {
-  typedef void (* Function)(A0, A1, A2);
-  Function function;
+  typedef void (* Signature)(A0, A1, A2);
+  Signature function;
 
 public:
 
-  ApplyVoidFunction(Function function):
+  ApplyVoidFunction(Signature function):
     function(function) {}
 
   static int arity() {
@@ -561,14 +561,14 @@ public:
 /* *INDENT-OFF* */
 template<typename Parameters, typename Return_, typename A0, typename A1, typename A2, typename A3>
 class ApplyFunction<Parameters, Return_(*)(A0, A1, A2, A3)> {
-  typedef Return_ (* Function)(A0, A1, A2, A3);
-  Function function;
+  typedef Return_ (* Signature)(A0, A1, A2, A3);
+  Signature function;
 
 public:
 
   typedef Return_ Return;
 
-  ApplyFunction(Function function):
+  ApplyFunction(Signature function):
     function(function) {}
 
   static int arity() {
@@ -597,12 +597,12 @@ public:
 /* *INDENT-OFF* */
 template<typename Parameters, typename A0, typename A1, typename A2, typename A3>
 class ApplyVoidFunction<Parameters, void(*)(A0, A1, A2, A3)> {
-  typedef void (* Function)(A0, A1, A2, A3);
-  Function function;
+  typedef void (* Signature)(A0, A1, A2, A3);
+  Signature function;
 
 public:
 
-  ApplyVoidFunction(Function function):
+  ApplyVoidFunction(Signature function):
     function(function) {}
 
   static int arity() {
@@ -699,14 +699,14 @@ public:
 /* *INDENT-OFF* */
 template<typename Parameters, typename Return_, typename A0, typename A1, typename A2, typename A3, typename A4>
 class ApplyFunction<Parameters, Return_(*)(A0, A1, A2, A3, A4)> {
-  typedef Return_ (* Function)(A0, A1, A2, A3, A4);
-  Function function;
+  typedef Return_ (* Signature)(A0, A1, A2, A3, A4);
+  Signature function;
 
 public:
 
   typedef Return_ Return;
 
-  ApplyFunction(Function function):
+  ApplyFunction(Signature function):
     function(function) {}
 
   static int arity() {
@@ -737,12 +737,12 @@ public:
 /* *INDENT-OFF* */
 template<typename Parameters, typename A0, typename A1, typename A2, typename A3, typename A4>
 class ApplyVoidFunction<Parameters, void(*)(A0, A1, A2, A3, A4)> {
-  typedef void (* Function)(A0, A1, A2, A3, A4);
-  Function function;
+  typedef void (* Signature)(A0, A1, A2, A3, A4);
+  Signature function;
 
 public:
 
-  ApplyVoidFunction(Function function):
+  ApplyVoidFunction(Signature function):
     function(function) {}
 
   static int arity() {
@@ -846,14 +846,14 @@ public:
 template<typename Parameters, typename Return_, typename A0, typename A1, typename A2, typename A3, typename A4,
     typename A5>
 class ApplyFunction<Parameters, Return_(*)(A0, A1, A2, A3, A4, A5)> {
-  typedef Return_ (* Function)(A0, A1, A2, A3, A4, A5);
-  Function function;
+  typedef Return_ (* Signature)(A0, A1, A2, A3, A4, A5);
+  Signature function;
 
 public:
 
   typedef Return_ Return;
 
-  ApplyFunction(Function function):
+  ApplyFunction(Signature function):
     function(function) {}
 
   static int arity() {
@@ -886,12 +886,12 @@ public:
 /* *INDENT-OFF* */
 template<typename Parameters, typename A0, typename A1, typename A2, typename A3, typename A4, typename A5>
 class ApplyVoidFunction<Parameters, void(*)(A0, A1, A2, A3, A4, A5)> {
-  typedef void (* Function)(A0, A1, A2, A3, A4, A5);
-  Function function;
+  typedef void (* Signature)(A0, A1, A2, A3, A4, A5);
+  Signature function;
 
 public:
 
-  ApplyVoidFunction(Function function):
+  ApplyVoidFunction(Signature function):
     function(function) {}
 
   static int arity() {
@@ -1000,14 +1000,14 @@ public:
 template<typename Parameters, typename Return_, typename A0, typename A1, typename A2, typename A3, typename A4,
     typename A5, typename A6>
 class ApplyFunction<Parameters, Return_(*)(A0, A1, A2, A3, A4, A5, A6)> {
-  typedef Return_ (* Function)(A0, A1, A2, A3, A4, A5, A6);
-  Function function;
+  typedef Return_ (* Signature)(A0, A1, A2, A3, A4, A5, A6);
+  Signature function;
 
 public:
 
   typedef Return_ Return;
 
-  ApplyFunction(Function function):
+  ApplyFunction(Signature function):
     function(function) {}
 
   static int arity() {
@@ -1042,12 +1042,12 @@ public:
 /* *INDENT-OFF* */
 template<typename Parameters, typename A0, typename A1, typename A2, typename A3, typename A4, typename A5, typename A6>
 class ApplyVoidFunction<Parameters, void(*)(A0, A1, A2, A3, A4, A5, A6)> {
-  typedef void (* Function)(A0, A1, A2, A3, A4, A5, A6);
-  Function function;
+  typedef void (* Signature)(A0, A1, A2, A3, A4, A5, A6);
+  Signature function;
 
 public:
 
-  ApplyVoidFunction(Function function):
+  ApplyVoidFunction(Signature function):
     function(function) {}
 
   static int arity() {
@@ -1161,14 +1161,14 @@ public:
 template<typename Parameters, typename Return_, typename A0, typename A1, typename A2, typename A3, typename A4,
     typename A5, typename A6, typename A7>
 class ApplyFunction<Parameters, Return_(*)(A0, A1, A2, A3, A4, A5, A6, A7)> {
-  typedef Return_ (* Function)(A0, A1, A2, A3, A4, A5, A6, A7);
-  Function function;
+  typedef Return_ (* Signature)(A0, A1, A2, A3, A4, A5, A6, A7);
+  Signature function;
 
 public:
 
   typedef Return_ Return;
 
-  ApplyFunction(Function function):
+  ApplyFunction(Signature function):
     function(function) {}
 
   static int arity() {
@@ -1206,12 +1206,12 @@ public:
 template<typename Parameters, typename A0, typename A1, typename A2, typename A3, typename A4, typename A5,
     typename A6, typename A7>
 class ApplyVoidFunction<Parameters, void(*)(A0, A1, A2, A3, A4, A5, A6, A7)> {
-  typedef void (* Function)(A0, A1, A2, A3, A4, A5, A6, A7);
-  Function function;
+  typedef void (* Signature)(A0, A1, A2, A3, A4, A5, A6, A7);
+  Signature function;
 
 public:
 
-  ApplyVoidFunction(Function function):
+  ApplyVoidFunction(Signature function):
     function(function) {}
 
   static int arity() {
@@ -1330,14 +1330,14 @@ public:
 template<typename Parameters, typename Return_, typename A0, typename A1, typename A2, typename A3, typename A4,
     typename A5, typename A6, typename A7, typename A8>
 class ApplyFunction<Parameters, Return_(*)(A0, A1, A2, A3, A4, A5, A6, A7, A8)> {
-  typedef Return_ (* Function)(A0, A1, A2, A3, A4, A5, A6, A7, A8);
-  Function function;
+  typedef Return_ (* Signature)(A0, A1, A2, A3, A4, A5, A6, A7, A8);
+  Signature function;
 
 public:
 
   typedef Return_ Return;
 
-  ApplyFunction(Function function):
+  ApplyFunction(Signature function):
     function(function) {}
 
   static int arity() {
@@ -1377,12 +1377,12 @@ public:
 template<typename Parameters, typename A0, typename A1, typename A2, typename A3, typename A4, typename A5,
     typename A6, typename A7, typename A8>
 class ApplyVoidFunction<Parameters, void(*)(A0, A1, A2, A3, A4, A5, A6, A7, A8)> {
-  typedef void (* Function)(A0, A1, A2, A3, A4, A5, A6, A7, A8);
-  Function function;
+  typedef void (* Signature)(A0, A1, A2, A3, A4, A5, A6, A7, A8);
+  Signature function;
 
 public:
 
-  ApplyVoidFunction(Function function):
+  ApplyVoidFunction(Signature function):
     function(function) {}
 
   static int arity() {
@@ -1506,14 +1506,14 @@ public:
 template<typename Parameters, typename Return_, typename A0, typename A1, typename A2, typename A3, typename A4,
     typename A5, typename A6, typename A7, typename A8, typename A9>
 class ApplyFunction<Parameters, Return_(*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9)> {
-  typedef Return_ (* Function)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9);
-  Function function;
+  typedef Return_ (* Signature)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9);
+  Signature function;
 
 public:
 
   typedef Return_ Return;
 
-  ApplyFunction(Function function):
+  ApplyFunction(Signature function):
     function(function) {}
 
   static int arity() {
@@ -1555,12 +1555,12 @@ public:
 template<typename Parameters, typename A0, typename A1, typename A2, typename A3, typename A4, typename A5,
     typename A6, typename A7, typename A8, typename A9>
 class ApplyVoidFunction<Parameters, void(*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9)> {
-  typedef void (* Function)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9);
-  Function function;
+  typedef void (* Signature)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9);
+  Signature function;
 
 public:
 
-  ApplyVoidFunction(Function function):
+  ApplyVoidFunction(Signature function):
     function(function) {}
 
   static int arity() {
