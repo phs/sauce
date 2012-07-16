@@ -26,7 +26,7 @@ template<typename Parameters, typename Signature>
 class ApplyVoidFunction;
 
 template<typename Parameters, typename Signature, typename Passed>
-void applyVoidFunction(Signature function, Passed passed) {
+void applyVoidFunction(typename ApplyVoidFunction<Parameters, Signature>::Function function, Passed passed) {
   (ApplyVoidFunction<Parameters, Signature>(function)).apply(passed);
 }
 
@@ -113,12 +113,14 @@ public:
 /* *INDENT-OFF* */
 template<typename Parameters>
 class ApplyVoidFunction<Parameters, void(*)()> {
-  typedef void (* Signature)();
-  Signature function;
+public:
+  typedef void (* Function)();
 
+private:
+  Function function;
 public:
 
-  ApplyVoidFunction(Signature function):
+  ApplyVoidFunction(Function function):
     function(function) {}
 
   static int arity() {
@@ -225,12 +227,14 @@ public:
 /* *INDENT-OFF* */
 template<typename Parameters, typename A0>
 class ApplyVoidFunction<Parameters, void(*)(A0)> {
-  typedef void (* Signature)(A0);
-  Signature function;
+public:
+  typedef void (* Function)(A0);
 
+private:
+  Function function;
 public:
 
-  ApplyVoidFunction(Signature function):
+  ApplyVoidFunction(Function function):
     function(function) {}
 
   static int arity() {
@@ -344,12 +348,14 @@ public:
 /* *INDENT-OFF* */
 template<typename Parameters, typename A0, typename A1>
 class ApplyVoidFunction<Parameters, void(*)(A0, A1)> {
-  typedef void (* Signature)(A0, A1);
-  Signature function;
+public:
+  typedef void (* Function)(A0, A1);
 
+private:
+  Function function;
 public:
 
-  ApplyVoidFunction(Signature function):
+  ApplyVoidFunction(Function function):
     function(function) {}
 
   static int arity() {
@@ -470,12 +476,14 @@ public:
 /* *INDENT-OFF* */
 template<typename Parameters, typename A0, typename A1, typename A2>
 class ApplyVoidFunction<Parameters, void(*)(A0, A1, A2)> {
-  typedef void (* Signature)(A0, A1, A2);
-  Signature function;
+public:
+  typedef void (* Function)(A0, A1, A2);
 
+private:
+  Function function;
 public:
 
-  ApplyVoidFunction(Signature function):
+  ApplyVoidFunction(Function function):
     function(function) {}
 
   static int arity() {
@@ -603,12 +611,14 @@ public:
 /* *INDENT-OFF* */
 template<typename Parameters, typename A0, typename A1, typename A2, typename A3>
 class ApplyVoidFunction<Parameters, void(*)(A0, A1, A2, A3)> {
-  typedef void (* Signature)(A0, A1, A2, A3);
-  Signature function;
+public:
+  typedef void (* Function)(A0, A1, A2, A3);
 
+private:
+  Function function;
 public:
 
-  ApplyVoidFunction(Signature function):
+  ApplyVoidFunction(Function function):
     function(function) {}
 
   static int arity() {
@@ -744,12 +754,14 @@ public:
 /* *INDENT-OFF* */
 template<typename Parameters, typename A0, typename A1, typename A2, typename A3, typename A4>
 class ApplyVoidFunction<Parameters, void(*)(A0, A1, A2, A3, A4)> {
-  typedef void (* Signature)(A0, A1, A2, A3, A4);
-  Signature function;
+public:
+  typedef void (* Function)(A0, A1, A2, A3, A4);
 
+private:
+  Function function;
 public:
 
-  ApplyVoidFunction(Signature function):
+  ApplyVoidFunction(Function function):
     function(function) {}
 
   static int arity() {
@@ -894,12 +906,14 @@ public:
 /* *INDENT-OFF* */
 template<typename Parameters, typename A0, typename A1, typename A2, typename A3, typename A4, typename A5>
 class ApplyVoidFunction<Parameters, void(*)(A0, A1, A2, A3, A4, A5)> {
-  typedef void (* Signature)(A0, A1, A2, A3, A4, A5);
-  Signature function;
+public:
+  typedef void (* Function)(A0, A1, A2, A3, A4, A5);
 
+private:
+  Function function;
 public:
 
-  ApplyVoidFunction(Signature function):
+  ApplyVoidFunction(Function function):
     function(function) {}
 
   static int arity() {
@@ -1051,12 +1065,14 @@ public:
 /* *INDENT-OFF* */
 template<typename Parameters, typename A0, typename A1, typename A2, typename A3, typename A4, typename A5, typename A6>
 class ApplyVoidFunction<Parameters, void(*)(A0, A1, A2, A3, A4, A5, A6)> {
-  typedef void (* Signature)(A0, A1, A2, A3, A4, A5, A6);
-  Signature function;
+public:
+  typedef void (* Function)(A0, A1, A2, A3, A4, A5, A6);
 
+private:
+  Function function;
 public:
 
-  ApplyVoidFunction(Signature function):
+  ApplyVoidFunction(Function function):
     function(function) {}
 
   static int arity() {
@@ -1216,12 +1232,14 @@ public:
 template<typename Parameters, typename A0, typename A1, typename A2, typename A3, typename A4, typename A5,
     typename A6, typename A7>
 class ApplyVoidFunction<Parameters, void(*)(A0, A1, A2, A3, A4, A5, A6, A7)> {
-  typedef void (* Signature)(A0, A1, A2, A3, A4, A5, A6, A7);
-  Signature function;
+public:
+  typedef void (* Function)(A0, A1, A2, A3, A4, A5, A6, A7);
 
+private:
+  Function function;
 public:
 
-  ApplyVoidFunction(Signature function):
+  ApplyVoidFunction(Function function):
     function(function) {}
 
   static int arity() {
@@ -1388,12 +1406,14 @@ public:
 template<typename Parameters, typename A0, typename A1, typename A2, typename A3, typename A4, typename A5,
     typename A6, typename A7, typename A8>
 class ApplyVoidFunction<Parameters, void(*)(A0, A1, A2, A3, A4, A5, A6, A7, A8)> {
-  typedef void (* Signature)(A0, A1, A2, A3, A4, A5, A6, A7, A8);
-  Signature function;
+public:
+  typedef void (* Function)(A0, A1, A2, A3, A4, A5, A6, A7, A8);
 
+private:
+  Function function;
 public:
 
-  ApplyVoidFunction(Signature function):
+  ApplyVoidFunction(Function function):
     function(function) {}
 
   static int arity() {
@@ -1567,12 +1587,14 @@ public:
 template<typename Parameters, typename A0, typename A1, typename A2, typename A3, typename A4, typename A5,
     typename A6, typename A7, typename A8, typename A9>
 class ApplyVoidFunction<Parameters, void(*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9)> {
-  typedef void (* Signature)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9);
-  Signature function;
+public:
+  typedef void (* Function)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9);
 
+private:
+  Function function;
 public:
 
-  ApplyVoidFunction(Signature function):
+  ApplyVoidFunction(Function function):
     function(function) {}
 
   static int arity() {

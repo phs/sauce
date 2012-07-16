@@ -25,7 +25,7 @@ template<typename Parameters, typename Signature>
 class ApplyVoidFunction;
 
 template<typename Parameters, typename Signature, typename Passed>
-void applyVoidFunction(Signature function, Passed passed) {
+void applyVoidFunction(typename ApplyVoidFunction<Parameters, Signature>::Function function, Passed passed) {
   (ApplyVoidFunction<Parameters, Signature>(function)).apply(passed);
 }
 
@@ -127,12 +127,14 @@ public:
 /* *INDENT-OFF* */
 template<typename Parameters$comma_typename_As>
 class ApplyVoidFunction<Parameters, void(*)($As)> {
-  typedef void (* Signature)($As);
-  Signature function;
+public:
+  typedef void (* Function)($As);
 
+private:
+  Function function;
 public:
 
-  ApplyVoidFunction(Signature function):
+  ApplyVoidFunction(Function function):
     function(function) {}
 
   static int arity() {

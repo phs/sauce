@@ -121,18 +121,20 @@ struct HasVoidToString {
 
 std::string HasVoidToString::asString = "";
 
+typedef void (*VoidToString)(std::string s, int i);
+
 TEST(ApplyVoidFunctionTest, shouldCallPassedVoidFunctionWithParametersGeneratedFromPassedType) {
-  applyVoidFunction<DefaultValueParameters>(&HasVoidToString::toString, 0);
+  applyVoidFunction<DefaultValueParameters, VoidToString>(&HasVoidToString::toString, 0);
   ASSERT_EQ("'' '0'", HasVoidToString::asString);
 
-  applyVoidFunction<SpecializedParameters>(&HasVoidToString::toString, 0);
+  applyVoidFunction<SpecializedParameters, VoidToString>(&HasVoidToString::toString, 0);
   ASSERT_EQ("'foobar' '17'", HasVoidToString::asString);
 
   std::string passed = "foo";
-  applyVoidFunction<MoreSpecializedParameters>(&HasVoidToString::toString, passed);
+  applyVoidFunction<MoreSpecializedParameters, VoidToString>(&HasVoidToString::toString, passed);
   ASSERT_EQ("'foo' '1'", HasVoidToString::asString);
 
-  ASSERT_EQ(2, (ApplyVoidFunction<DefaultValueParameters, void (*)(std::string, int)>::arity()));
+  ASSERT_EQ(2, (ApplyVoidFunction<DefaultValueParameters, VoidToString>::arity()));
 }
 
 struct HasToString {
