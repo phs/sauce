@@ -144,6 +144,28 @@ class ToMethodClause: public i::ModifyingClause<Dependency> {
 };
 
 /**
+ * Binds to a specific method with possible static dependency names.
+ */
+template<typename Dependency, typename Signature>
+class ToMethodNamingClause: public i::ModifyingClause<Dependency> {
+  typedef typename i::MethodBinding<Dependency, Signature> MethodBinding_;
+  typedef typename MethodBinding_::Method Method;
+  Method method;
+
+  friend class NamedClause<Dependency>;
+  friend class BindClause<typename i::Key<Dependency>::Iface>;
+
+  void onComplete() {
+    i::OpaqueBindingPtr methodBinding(new MethodBinding_(method));
+    this->getState()->bind(methodBinding);
+  }
+
+  ToMethodNamingClause(Method method):
+    i::ModifyingClause<Dependency>(),
+    method(method) {}
+};
+
+/**
  * Names the binding.
  *
  * There are two kinds of names: static and dynamic.  Static names are given by template parameter
@@ -161,6 +183,11 @@ public:
   template<typename Method>
   ToMethodClause<Dependency, Method> toMethod(Method method) {
     return pass(ToMethodClause<Dependency, Method>(method));
+  }
+
+  template<typename Method>
+  ToMethodNamingClause<Dependency, Method> toMethodNaming(Method method) {
+    return pass(ToMethodNamingClause<Dependency, Method>(method));
   }
 
   template<typename Scope>
@@ -208,6 +235,11 @@ public:
   template<typename Method>
   ToMethodClause<Named<Iface, Unnamed>, Method> toMethod(Method method) {
     return pass(ToMethodClause<Named<Iface, Unnamed>, Method>(method));
+  }
+
+  template<typename Method>
+  ToMethodNamingClause<Named<Iface, Unnamed>, Method> toMethodNaming(Method method) {
+    return pass(ToMethodNamingClause<Named<Iface, Unnamed>, Method>(method));
   }
 
   template<typename Scope>
