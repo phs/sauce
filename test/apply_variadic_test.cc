@@ -26,6 +26,7 @@ typedef std::string (*ToString)(std::string, int);
 struct DefaultValueParameters {
   template<typename T, int i, typename Passed>
   struct Parameter {
+    typedef T Type;
     T yield(Passed) {
       return T();
     }
@@ -34,10 +35,11 @@ struct DefaultValueParameters {
 
 struct SpecializedParameters {
   template<typename T, int i, typename Passed>
-  struct Parameter;
+  struct Parameter {};
 
   template<int i, typename Passed>
   struct Parameter<std::string, i, Passed> {
+    typedef std::string Type;
     std::string yield(Passed) {
       return "foobar";
     }
@@ -45,8 +47,27 @@ struct SpecializedParameters {
 
   template<int i, typename Passed>
   struct Parameter<int, i, Passed> {
+    typedef int Type;
     int yield(Passed) {
       return 17;
+    }
+  };
+};
+
+struct AnnotatedParameters {
+  template<typename T, int i, typename Passed>
+  struct Parameter {
+    typedef T Type;
+    T yield(Passed) {
+      return T();
+    }
+  };
+
+  template<typename T, int i, typename Passed>
+  struct Parameter<Annotation<T>, i, Passed> {
+    typedef T Type;
+    T yield(Passed) {
+      return T();
     }
   };
 };
@@ -57,9 +78,9 @@ TEST(ApplyFunctionTest, shouldCallPassedFunctionWithParametersGeneratedFromPasse
 }
 
 TEST(ApplyFunctionTest, shouldTransformSignatureBeforeApplying) {
-  typedef Annotation<std::string> AnnotatedString;
-  // TODO
-  // ASSERT_EQ("'' '0'", (applyFunction<DefaultValueParameters, std::string(*)(AnnotatedString, int)>(&toString, 0)));
+  typedef std::string (*AnnotatedToString)(Annotation<std::string>, int);
+  // std::string actual = applyFunction<AnnotatedParameters, AnnotatedToString>(&toString, 0); // TODO
+  // ASSERT_EQ("'' '0'", actual);
 }
 
 struct MoreSpecializedParameters {
