@@ -408,14 +408,15 @@ TEST(BindingTest, shouldProvideDynamicallyNamedRequestsThatHaveDependencies) {
 
 void StaticallyNamedSetterModule(Binder & binder) {
   binder.bind<Bound>().named<LieutenantShinysides>().in<SingletonScope>().to<Bound()>();
-  // TODO
-  // binder.bind<HasSetter>().toMethod<void (HasSetter::*)(Named<Bound, LieutenantShinysides>)>(&HasSetter::setBound);
+  binder.bind<HasSetter>().toMethodNaming<void(HasSetter::*) (Named<Bound, LieutenantShinysides>)>(&HasSetter::setBound);
 }
 
 TEST(BindingTest, shouldInjectStaticallyNamedDependenciesIntoSetters) {
   sauce::shared_ptr<Injector> injector(Modules().add(&StaticallyNamedSetterModule).createInjector());
   sauce::shared_ptr<Bound> bound = injector->get<Bound, LieutenantShinysides>();
-  // sauce::shared_ptr<HasSetter> hasSetter = injector->get<HasSetter>();
+
+  sauce::shared_ptr<HasSetter> hasSetter(new HasSetter());
+  // injector->inject<HasSetter>(hasSetter);
   // ASSERT_EQ(bound, hasSetter->getBound()); // TODO
 }
 
