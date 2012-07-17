@@ -124,15 +124,17 @@ class BindClause;
 /**
  * Binds to a specific method.
  */
-template<typename Dependency, typename Method>
+template<typename Dependency, typename Signature>
 class ToMethodClause: public i::ModifyingClause<Dependency> {
+  typedef typename i::MethodBinding<Dependency, Signature> MethodBinding_;
+  typedef typename MethodBinding_::Method Method;
   Method method;
 
   friend class NamedClause<Dependency>;
   friend class BindClause<typename i::Key<Dependency>::Iface>;
 
   void onComplete() {
-    i::OpaqueBindingPtr methodBinding(new i::MethodBinding<Dependency, Method>(method));
+    i::OpaqueBindingPtr methodBinding(new MethodBinding_(method));
     this->getState()->bind(methodBinding);
   }
 
