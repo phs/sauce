@@ -59,7 +59,6 @@ class MethodBinding: public Binding<Dependency, NoScope> {
   };
 
   typedef ApplyMethod<InjectParameters, Signature> Inject;
-  typedef typename Inject::Method Method;
   typedef typename Key<Dependency>::Iface Iface;
   typedef typename Key<Dependency>::Ptr IfacePtr;
 
@@ -90,6 +89,10 @@ class MethodBinding: public Binding<Dependency, NoScope> {
       }
     };
   };
+
+public:
+  typedef typename Inject::Method Method;
+private:
 
   Method method;
 
