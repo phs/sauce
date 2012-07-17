@@ -99,6 +99,11 @@ public:
     typename Parameters::template Parameter<A$j, $j>::Type
 ]]]]);
 
+  template<typename Receiver>
+  struct Method {
+    typedef ApplyMethod<Parameters, Return_ (Receiver::*)($As)> Apply;
+  };
+
 private:
   Function function;
 public:
@@ -108,11 +113,6 @@ public:
 
   static int arity() {
     return $i;
-  }
-
-  template<typename Receiver>
-  ApplyMethod<Parameters, Return_ (Receiver::*)($As)> toApplyMethod(Return_ (Receiver::*method)($As) ) {
-    return ApplyMethod<Parameters, Return_ (Receiver::*)($As)>(method);
   }
 
   template<typename Passed>

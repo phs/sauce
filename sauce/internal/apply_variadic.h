@@ -89,6 +89,11 @@ public:
   typedef Return_ Return;
   typedef Return_ (* Function)();
 
+  template<typename Receiver>
+  struct Method {
+    typedef ApplyMethod<Parameters, Return_ (Receiver::*)()> Apply;
+  };
+
 private:
   Function function;
 public:
@@ -98,11 +103,6 @@ public:
 
   static int arity() {
     return 0;
-  }
-
-  template<typename Receiver>
-  ApplyMethod<Parameters, Return_ (Receiver::*)()> toApplyMethod(Return_ (Receiver::*method)() ) {
-    return ApplyMethod<Parameters, Return_ (Receiver::*)()>(method);
   }
 
   template<typename Passed>
@@ -209,6 +209,11 @@ public:
   typedef Return_ (* Function)(
     typename Parameters::template Parameter<A0, 0>::Type);
 
+  template<typename Receiver>
+  struct Method {
+    typedef ApplyMethod<Parameters, Return_ (Receiver::*)(A0)> Apply;
+  };
+
 private:
   Function function;
 public:
@@ -218,11 +223,6 @@ public:
 
   static int arity() {
     return 1;
-  }
-
-  template<typename Receiver>
-  ApplyMethod<Parameters, Return_ (Receiver::*)(A0)> toApplyMethod(Return_ (Receiver::*method)(A0) ) {
-    return ApplyMethod<Parameters, Return_ (Receiver::*)(A0)>(method);
   }
 
   template<typename Passed>
@@ -339,6 +339,11 @@ public:
     typename Parameters::template Parameter<A0, 0>::Type,
     typename Parameters::template Parameter<A1, 1>::Type);
 
+  template<typename Receiver>
+  struct Method {
+    typedef ApplyMethod<Parameters, Return_ (Receiver::*)(A0, A1)> Apply;
+  };
+
 private:
   Function function;
 public:
@@ -348,11 +353,6 @@ public:
 
   static int arity() {
     return 2;
-  }
-
-  template<typename Receiver>
-  ApplyMethod<Parameters, Return_ (Receiver::*)(A0, A1)> toApplyMethod(Return_ (Receiver::*method)(A0, A1) ) {
-    return ApplyMethod<Parameters, Return_ (Receiver::*)(A0, A1)>(method);
   }
 
   template<typename Passed>
@@ -479,6 +479,11 @@ public:
     typename Parameters::template Parameter<A1, 1>::Type,
     typename Parameters::template Parameter<A2, 2>::Type);
 
+  template<typename Receiver>
+  struct Method {
+    typedef ApplyMethod<Parameters, Return_ (Receiver::*)(A0, A1, A2)> Apply;
+  };
+
 private:
   Function function;
 public:
@@ -488,11 +493,6 @@ public:
 
   static int arity() {
     return 3;
-  }
-
-  template<typename Receiver>
-  ApplyMethod<Parameters, Return_ (Receiver::*)(A0, A1, A2)> toApplyMethod(Return_ (Receiver::*method)(A0, A1, A2) ) {
-    return ApplyMethod<Parameters, Return_ (Receiver::*)(A0, A1, A2)>(method);
   }
 
   template<typename Passed>
@@ -629,6 +629,11 @@ public:
     typename Parameters::template Parameter<A2, 2>::Type,
     typename Parameters::template Parameter<A3, 3>::Type);
 
+  template<typename Receiver>
+  struct Method {
+    typedef ApplyMethod<Parameters, Return_ (Receiver::*)(A0, A1, A2, A3)> Apply;
+  };
+
 private:
   Function function;
 public:
@@ -638,12 +643,6 @@ public:
 
   static int arity() {
     return 4;
-  }
-
-  template<typename Receiver>
-  ApplyMethod<Parameters, Return_ (Receiver::*)(A0, A1, A2, A3)> toApplyMethod(Return_ (Receiver::*method)(A0, A1, A2,
-      A3) ) {
-    return ApplyMethod<Parameters, Return_ (Receiver::*)(A0, A1, A2, A3)>(method);
   }
 
   template<typename Passed>
@@ -791,6 +790,11 @@ public:
     typename Parameters::template Parameter<A3, 3>::Type,
     typename Parameters::template Parameter<A4, 4>::Type);
 
+  template<typename Receiver>
+  struct Method {
+    typedef ApplyMethod<Parameters, Return_ (Receiver::*)(A0, A1, A2, A3, A4)> Apply;
+  };
+
 private:
   Function function;
 public:
@@ -800,12 +804,6 @@ public:
 
   static int arity() {
     return 5;
-  }
-
-  template<typename Receiver>
-  ApplyMethod<Parameters, Return_ (Receiver::*)(A0, A1, A2, A3, A4)> toApplyMethod(Return_ (Receiver::*method)(A0, A1,
-      A2, A3, A4) ) {
-    return ApplyMethod<Parameters, Return_ (Receiver::*)(A0, A1, A2, A3, A4)>(method);
   }
 
   template<typename Passed>
@@ -965,6 +963,11 @@ public:
     typename Parameters::template Parameter<A4, 4>::Type,
     typename Parameters::template Parameter<A5, 5>::Type);
 
+  template<typename Receiver>
+  struct Method {
+    typedef ApplyMethod<Parameters, Return_ (Receiver::*)(A0, A1, A2, A3, A4, A5)> Apply;
+  };
+
 private:
   Function function;
 public:
@@ -974,12 +977,6 @@ public:
 
   static int arity() {
     return 6;
-  }
-
-  template<typename Receiver>
-  ApplyMethod<Parameters, Return_ (Receiver::*)(A0, A1, A2, A3, A4, A5)> toApplyMethod(Return_ (Receiver::*method)(A0,
-      A1, A2, A3, A4, A5) ) {
-    return ApplyMethod<Parameters, Return_ (Receiver::*)(A0, A1, A2, A3, A4, A5)>(method);
   }
 
   template<typename Passed>
@@ -1149,6 +1146,11 @@ public:
     typename Parameters::template Parameter<A5, 5>::Type,
     typename Parameters::template Parameter<A6, 6>::Type);
 
+  template<typename Receiver>
+  struct Method {
+    typedef ApplyMethod<Parameters, Return_ (Receiver::*)(A0, A1, A2, A3, A4, A5, A6)> Apply;
+  };
+
 private:
   Function function;
 public:
@@ -1158,12 +1160,6 @@ public:
 
   static int arity() {
     return 7;
-  }
-
-  template<typename Receiver>
-  ApplyMethod<Parameters, Return_ (Receiver::*)(A0, A1, A2, A3, A4, A5,
-      A6)> toApplyMethod(Return_ (Receiver::*method)(A0, A1, A2, A3, A4, A5, A6) ) {
-    return ApplyMethod<Parameters, Return_ (Receiver::*)(A0, A1, A2, A3, A4, A5, A6)>(method);
   }
 
   template<typename Passed>
@@ -1343,6 +1339,11 @@ public:
     typename Parameters::template Parameter<A6, 6>::Type,
     typename Parameters::template Parameter<A7, 7>::Type);
 
+  template<typename Receiver>
+  struct Method {
+    typedef ApplyMethod<Parameters, Return_ (Receiver::*)(A0, A1, A2, A3, A4, A5, A6, A7)> Apply;
+  };
+
 private:
   Function function;
 public:
@@ -1352,12 +1353,6 @@ public:
 
   static int arity() {
     return 8;
-  }
-
-  template<typename Receiver>
-  ApplyMethod<Parameters, Return_ (Receiver::*)(A0, A1, A2, A3, A4, A5, A6,
-      A7)> toApplyMethod(Return_ (Receiver::*method)(A0, A1, A2, A3, A4, A5, A6, A7) ) {
-    return ApplyMethod<Parameters, Return_ (Receiver::*)(A0, A1, A2, A3, A4, A5, A6, A7)>(method);
   }
 
   template<typename Passed>
@@ -1548,6 +1543,11 @@ public:
     typename Parameters::template Parameter<A7, 7>::Type,
     typename Parameters::template Parameter<A8, 8>::Type);
 
+  template<typename Receiver>
+  struct Method {
+    typedef ApplyMethod<Parameters, Return_ (Receiver::*)(A0, A1, A2, A3, A4, A5, A6, A7, A8)> Apply;
+  };
+
 private:
   Function function;
 public:
@@ -1557,12 +1557,6 @@ public:
 
   static int arity() {
     return 9;
-  }
-
-  template<typename Receiver>
-  ApplyMethod<Parameters, Return_ (Receiver::*)(A0, A1, A2, A3, A4, A5, A6, A7,
-      A8)> toApplyMethod(Return_ (Receiver::*method)(A0, A1, A2, A3, A4, A5, A6, A7, A8) ) {
-    return ApplyMethod<Parameters, Return_ (Receiver::*)(A0, A1, A2, A3, A4, A5, A6, A7, A8)>(method);
   }
 
   template<typename Passed>
@@ -1763,6 +1757,11 @@ public:
     typename Parameters::template Parameter<A8, 8>::Type,
     typename Parameters::template Parameter<A9, 9>::Type);
 
+  template<typename Receiver>
+  struct Method {
+    typedef ApplyMethod<Parameters, Return_ (Receiver::*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9)> Apply;
+  };
+
 private:
   Function function;
 public:
@@ -1772,12 +1771,6 @@ public:
 
   static int arity() {
     return 10;
-  }
-
-  template<typename Receiver>
-  ApplyMethod<Parameters, Return_ (Receiver::*)(A0, A1, A2, A3, A4, A5, A6, A7, A8,
-      A9)> toApplyMethod(Return_ (Receiver::*method)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9) ) {
-    return ApplyMethod<Parameters, Return_ (Receiver::*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9)>(method);
   }
 
   template<typename Passed>

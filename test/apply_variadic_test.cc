@@ -214,8 +214,8 @@ TEST(ApplyMethodTest, shouldCallPassedMethodOnReceiverWithParametersGeneratedFro
 }
 
 TEST(ApplyMethodTest, shouldConvertFromEquivalentFunctionApplier) {
-  ApplyFunction<DefaultValueParameters, ToString> function(&toString);
-  ApplyMethod<DefaultValueParameters, ToStringMethod> method = function.toApplyMethod(&HasToString::toString);
+  typedef ApplyFunction<DefaultValueParameters, ToString>::Method<HasToString>::Apply Apply;
+  Apply method(&HasToString::toString);
 
   HasToString hasToString;
   ASSERT_EQ("'' '0'", method.apply(hasToString, 0));
