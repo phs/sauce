@@ -89,8 +89,8 @@ TEST(ApplyFunctionTest, shouldCallPassedFunctionWithParametersGeneratedFromPasse
 
 TEST(ApplyFunctionTest, shouldTransformSignatureBeforeApplying) {
   typedef std::string (*AnnotatedToString)(Annotation<std::string>, int);
-  // std::string actual = applyFunction<AnnotatedParameters, AnnotatedToString>(&toString, 0); // TODO
-  // ASSERT_EQ("'' '0'", actual);
+  std::string actual = applyFunction<AnnotatedParameters, AnnotatedToString>(&toString, 0);
+  ASSERT_EQ("'' '0'", actual);
 }
 
 struct MoreSpecializedParameters {
@@ -128,6 +128,8 @@ struct SideEffectParameters {
 
   template<typename T, int i>
   struct Parameter {
+    typedef T Type;
+
     template<typename Passed>
     void observe(Passed) {
       ++called;

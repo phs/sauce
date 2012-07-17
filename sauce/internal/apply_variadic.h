@@ -201,7 +201,8 @@ template<typename Parameters, typename Return_, typename A0>
 class ApplyFunction<Parameters, Return_(*)(A0)> {
 public:
   typedef Return_ Return;
-  typedef Return_ (* Function)(A0);
+  typedef Return_ (* Function)(
+    typename Parameters::template Parameter<A0, 0>::Type);
 
 private:
   Function function;
@@ -322,7 +323,9 @@ template<typename Parameters, typename Return_, typename A0, typename A1>
 class ApplyFunction<Parameters, Return_(*)(A0, A1)> {
 public:
   typedef Return_ Return;
-  typedef Return_ (* Function)(A0, A1);
+  typedef Return_ (* Function)(
+    typename Parameters::template Parameter<A0, 0>::Type,
+    typename Parameters::template Parameter<A1, 1>::Type);
 
 private:
   Function function;
@@ -450,7 +453,10 @@ template<typename Parameters, typename Return_, typename A0, typename A1, typena
 class ApplyFunction<Parameters, Return_(*)(A0, A1, A2)> {
 public:
   typedef Return_ Return;
-  typedef Return_ (* Function)(A0, A1, A2);
+  typedef Return_ (* Function)(
+    typename Parameters::template Parameter<A0, 0>::Type,
+    typename Parameters::template Parameter<A1, 1>::Type,
+    typename Parameters::template Parameter<A2, 2>::Type);
 
 private:
   Function function;
@@ -585,7 +591,11 @@ template<typename Parameters, typename Return_, typename A0, typename A1, typena
 class ApplyFunction<Parameters, Return_(*)(A0, A1, A2, A3)> {
 public:
   typedef Return_ Return;
-  typedef Return_ (* Function)(A0, A1, A2, A3);
+  typedef Return_ (* Function)(
+    typename Parameters::template Parameter<A0, 0>::Type,
+    typename Parameters::template Parameter<A1, 1>::Type,
+    typename Parameters::template Parameter<A2, 2>::Type,
+    typename Parameters::template Parameter<A3, 3>::Type);
 
 private:
   Function function;
@@ -728,7 +738,12 @@ template<typename Parameters, typename Return_, typename A0, typename A1, typena
 class ApplyFunction<Parameters, Return_(*)(A0, A1, A2, A3, A4)> {
 public:
   typedef Return_ Return;
-  typedef Return_ (* Function)(A0, A1, A2, A3, A4);
+  typedef Return_ (* Function)(
+    typename Parameters::template Parameter<A0, 0>::Type,
+    typename Parameters::template Parameter<A1, 1>::Type,
+    typename Parameters::template Parameter<A2, 2>::Type,
+    typename Parameters::template Parameter<A3, 3>::Type,
+    typename Parameters::template Parameter<A4, 4>::Type);
 
 private:
   Function function;
@@ -880,7 +895,13 @@ template<typename Parameters, typename Return_, typename A0, typename A1, typena
 class ApplyFunction<Parameters, Return_(*)(A0, A1, A2, A3, A4, A5)> {
 public:
   typedef Return_ Return;
-  typedef Return_ (* Function)(A0, A1, A2, A3, A4, A5);
+  typedef Return_ (* Function)(
+    typename Parameters::template Parameter<A0, 0>::Type,
+    typename Parameters::template Parameter<A1, 1>::Type,
+    typename Parameters::template Parameter<A2, 2>::Type,
+    typename Parameters::template Parameter<A3, 3>::Type,
+    typename Parameters::template Parameter<A4, 4>::Type,
+    typename Parameters::template Parameter<A5, 5>::Type);
 
 private:
   Function function;
@@ -1039,7 +1060,14 @@ template<typename Parameters, typename Return_, typename A0, typename A1, typena
 class ApplyFunction<Parameters, Return_(*)(A0, A1, A2, A3, A4, A5, A6)> {
 public:
   typedef Return_ Return;
-  typedef Return_ (* Function)(A0, A1, A2, A3, A4, A5, A6);
+  typedef Return_ (* Function)(
+    typename Parameters::template Parameter<A0, 0>::Type,
+    typename Parameters::template Parameter<A1, 1>::Type,
+    typename Parameters::template Parameter<A2, 2>::Type,
+    typename Parameters::template Parameter<A3, 3>::Type,
+    typename Parameters::template Parameter<A4, 4>::Type,
+    typename Parameters::template Parameter<A5, 5>::Type,
+    typename Parameters::template Parameter<A6, 6>::Type);
 
 private:
   Function function;
@@ -1205,7 +1233,15 @@ template<typename Parameters, typename Return_, typename A0, typename A1, typena
 class ApplyFunction<Parameters, Return_(*)(A0, A1, A2, A3, A4, A5, A6, A7)> {
 public:
   typedef Return_ Return;
-  typedef Return_ (* Function)(A0, A1, A2, A3, A4, A5, A6, A7);
+  typedef Return_ (* Function)(
+    typename Parameters::template Parameter<A0, 0>::Type,
+    typename Parameters::template Parameter<A1, 1>::Type,
+    typename Parameters::template Parameter<A2, 2>::Type,
+    typename Parameters::template Parameter<A3, 3>::Type,
+    typename Parameters::template Parameter<A4, 4>::Type,
+    typename Parameters::template Parameter<A5, 5>::Type,
+    typename Parameters::template Parameter<A6, 6>::Type,
+    typename Parameters::template Parameter<A7, 7>::Type);
 
 private:
   Function function;
@@ -1379,7 +1415,16 @@ template<typename Parameters, typename Return_, typename A0, typename A1, typena
 class ApplyFunction<Parameters, Return_(*)(A0, A1, A2, A3, A4, A5, A6, A7, A8)> {
 public:
   typedef Return_ Return;
-  typedef Return_ (* Function)(A0, A1, A2, A3, A4, A5, A6, A7, A8);
+  typedef Return_ (* Function)(
+    typename Parameters::template Parameter<A0, 0>::Type,
+    typename Parameters::template Parameter<A1, 1>::Type,
+    typename Parameters::template Parameter<A2, 2>::Type,
+    typename Parameters::template Parameter<A3, 3>::Type,
+    typename Parameters::template Parameter<A4, 4>::Type,
+    typename Parameters::template Parameter<A5, 5>::Type,
+    typename Parameters::template Parameter<A6, 6>::Type,
+    typename Parameters::template Parameter<A7, 7>::Type,
+    typename Parameters::template Parameter<A8, 8>::Type);
 
 private:
   Function function;
@@ -1560,7 +1605,17 @@ template<typename Parameters, typename Return_, typename A0, typename A1, typena
 class ApplyFunction<Parameters, Return_(*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9)> {
 public:
   typedef Return_ Return;
-  typedef Return_ (* Function)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9);
+  typedef Return_ (* Function)(
+    typename Parameters::template Parameter<A0, 0>::Type,
+    typename Parameters::template Parameter<A1, 1>::Type,
+    typename Parameters::template Parameter<A2, 2>::Type,
+    typename Parameters::template Parameter<A3, 3>::Type,
+    typename Parameters::template Parameter<A4, 4>::Type,
+    typename Parameters::template Parameter<A5, 5>::Type,
+    typename Parameters::template Parameter<A6, 6>::Type,
+    typename Parameters::template Parameter<A7, 7>::Type,
+    typename Parameters::template Parameter<A8, 8>::Type,
+    typename Parameters::template Parameter<A9, 9>::Type);
 
 private:
   Function function;
