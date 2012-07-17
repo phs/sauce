@@ -161,7 +161,7 @@ struct HasVoidToString {
 
 std::string HasVoidToString::asString = "";
 
-typedef void (*VoidToString)(std::string s, int i); // TODO ditch parameter names
+typedef void (*VoidToString)(std::string, int);
 typedef void (*AnnotatedVoidToString)(Annotation<std::string>, int);
 
 TEST(ApplyVoidFunctionTest, shouldCallPassedVoidFunctionWithParametersGeneratedFromPassedType) {
@@ -189,7 +189,7 @@ struct HasToString {
   }
 };
 
-typedef std::string (HasToString::* ToStringMethod)(std::string s, int i);
+typedef std::string (HasToString::* ToStringMethod)(std::string, int);
 typedef std::string (HasToString::* AnnotatedToStringMethod)(Annotation<std::string>, int);
 
 TEST(ApplyMethodTest, shouldCallPassedMethodOnReceiverWithParametersGeneratedFromPassedType) {
