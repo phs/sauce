@@ -10,10 +10,10 @@
 namespace sauce {
 namespace internal {
 
-template<typename Dependency, typename Method>
+template<typename Dependency, typename Signature>
 class MethodBinding: public Binding<Dependency, NoScope> {
 
-  typedef MethodBinding<Dependency, Method> MethodBinding_;
+  typedef MethodBinding<Dependency, Signature> MethodBinding_;
 
   /**
    * A mixin for ApplyVariadic parameter concept types.
@@ -58,7 +58,8 @@ class MethodBinding: public Binding<Dependency, NoScope> {
     };
   };
 
-  typedef ApplyMethod<InjectParameters, Method> Inject;
+  typedef ApplyMethod<InjectParameters, Signature> Inject;
+  typedef typename Inject::Method Method;
   typedef typename Key<Dependency>::Iface Iface;
   typedef typename Key<Dependency>::Ptr IfacePtr;
 
