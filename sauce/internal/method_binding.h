@@ -102,7 +102,7 @@ private:
 
   void validateAcyclic(InjectorPtr injector, TypeIds & ids) const {
     typename ValidateAcyclicParameters::Passed passed(*this, injector, ids);
-    observeMethod<ValidateAcyclicParameters, Method>(method, passed);
+    observeMethod<ValidateAcyclicParameters, Signature>(method, passed);
   }
 
 public:
@@ -115,7 +115,7 @@ public:
 
   void inject(IfacePtr & injected, BindingPtr, InjectorPtr injector) const {
     typename InjectParameters::Passed passed(*this, injector);
-    applyMethod<InjectParameters, Method>(*injected.get(), method, passed);
+    applyMethod<InjectParameters, Signature>(*injected.get(), method, passed);
   }
 
 };

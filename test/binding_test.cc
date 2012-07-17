@@ -416,8 +416,8 @@ TEST(BindingTest, shouldInjectStaticallyNamedDependenciesIntoSetters) {
   sauce::shared_ptr<Bound> bound = injector->get<Bound, LieutenantShinysides>();
 
   sauce::shared_ptr<HasSetter> hasSetter(new HasSetter());
-  // injector->inject<HasSetter>(hasSetter);
-  // ASSERT_EQ(bound, hasSetter->getBound()); // TODO
+  injector->inject<HasSetter>(hasSetter);
+  ASSERT_EQ(bound, hasSetter->getBound());
 }
 
 void IncompleteNamedModule(Binder & binder) {
