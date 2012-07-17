@@ -100,6 +100,11 @@ public:
     return 0;
   }
 
+  template<typename Receiver>
+  ApplyMethod<Parameters, Return_ (Receiver::*)()> toApplyMethod(Return_ (Receiver::*method)() ) {
+    return ApplyMethod<Parameters, Return_ (Receiver::*)()>(method);
+  }
+
   template<typename Passed>
   Return apply(Passed) {
     return function();
@@ -213,6 +218,11 @@ public:
 
   static int arity() {
     return 1;
+  }
+
+  template<typename Receiver>
+  ApplyMethod<Parameters, Return_ (Receiver::*)(A0)> toApplyMethod(Return_ (Receiver::*method)(A0) ) {
+    return ApplyMethod<Parameters, Return_ (Receiver::*)(A0)>(method);
   }
 
   template<typename Passed>
@@ -338,6 +348,11 @@ public:
 
   static int arity() {
     return 2;
+  }
+
+  template<typename Receiver>
+  ApplyMethod<Parameters, Return_ (Receiver::*)(A0, A1)> toApplyMethod(Return_ (Receiver::*method)(A0, A1) ) {
+    return ApplyMethod<Parameters, Return_ (Receiver::*)(A0, A1)>(method);
   }
 
   template<typename Passed>
@@ -473,6 +488,11 @@ public:
 
   static int arity() {
     return 3;
+  }
+
+  template<typename Receiver>
+  ApplyMethod<Parameters, Return_ (Receiver::*)(A0, A1, A2)> toApplyMethod(Return_ (Receiver::*method)(A0, A1, A2) ) {
+    return ApplyMethod<Parameters, Return_ (Receiver::*)(A0, A1, A2)>(method);
   }
 
   template<typename Passed>
@@ -618,6 +638,12 @@ public:
 
   static int arity() {
     return 4;
+  }
+
+  template<typename Receiver>
+  ApplyMethod<Parameters, Return_ (Receiver::*)(A0, A1, A2, A3)> toApplyMethod(Return_ (Receiver::*method)(A0, A1, A2,
+      A3) ) {
+    return ApplyMethod<Parameters, Return_ (Receiver::*)(A0, A1, A2, A3)>(method);
   }
 
   template<typename Passed>
@@ -774,6 +800,12 @@ public:
 
   static int arity() {
     return 5;
+  }
+
+  template<typename Receiver>
+  ApplyMethod<Parameters, Return_ (Receiver::*)(A0, A1, A2, A3, A4)> toApplyMethod(Return_ (Receiver::*method)(A0, A1,
+      A2, A3, A4) ) {
+    return ApplyMethod<Parameters, Return_ (Receiver::*)(A0, A1, A2, A3, A4)>(method);
   }
 
   template<typename Passed>
@@ -942,6 +974,12 @@ public:
 
   static int arity() {
     return 6;
+  }
+
+  template<typename Receiver>
+  ApplyMethod<Parameters, Return_ (Receiver::*)(A0, A1, A2, A3, A4, A5)> toApplyMethod(Return_ (Receiver::*method)(A0,
+      A1, A2, A3, A4, A5) ) {
+    return ApplyMethod<Parameters, Return_ (Receiver::*)(A0, A1, A2, A3, A4, A5)>(method);
   }
 
   template<typename Passed>
@@ -1120,6 +1158,12 @@ public:
 
   static int arity() {
     return 7;
+  }
+
+  template<typename Receiver>
+  ApplyMethod<Parameters, Return_ (Receiver::*)(A0, A1, A2, A3, A4, A5,
+      A6)> toApplyMethod(Return_ (Receiver::*method)(A0, A1, A2, A3, A4, A5, A6) ) {
+    return ApplyMethod<Parameters, Return_ (Receiver::*)(A0, A1, A2, A3, A4, A5, A6)>(method);
   }
 
   template<typename Passed>
@@ -1308,6 +1352,12 @@ public:
 
   static int arity() {
     return 8;
+  }
+
+  template<typename Receiver>
+  ApplyMethod<Parameters, Return_ (Receiver::*)(A0, A1, A2, A3, A4, A5, A6,
+      A7)> toApplyMethod(Return_ (Receiver::*method)(A0, A1, A2, A3, A4, A5, A6, A7) ) {
+    return ApplyMethod<Parameters, Return_ (Receiver::*)(A0, A1, A2, A3, A4, A5, A6, A7)>(method);
   }
 
   template<typename Passed>
@@ -1507,6 +1557,12 @@ public:
 
   static int arity() {
     return 9;
+  }
+
+  template<typename Receiver>
+  ApplyMethod<Parameters, Return_ (Receiver::*)(A0, A1, A2, A3, A4, A5, A6, A7,
+      A8)> toApplyMethod(Return_ (Receiver::*method)(A0, A1, A2, A3, A4, A5, A6, A7, A8) ) {
+    return ApplyMethod<Parameters, Return_ (Receiver::*)(A0, A1, A2, A3, A4, A5, A6, A7, A8)>(method);
   }
 
   template<typename Passed>
@@ -1716,6 +1772,12 @@ public:
 
   static int arity() {
     return 10;
+  }
+
+  template<typename Receiver>
+  ApplyMethod<Parameters, Return_ (Receiver::*)(A0, A1, A2, A3, A4, A5, A6, A7, A8,
+      A9)> toApplyMethod(Return_ (Receiver::*method)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9) ) {
+    return ApplyMethod<Parameters, Return_ (Receiver::*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9)>(method);
   }
 
   template<typename Passed>

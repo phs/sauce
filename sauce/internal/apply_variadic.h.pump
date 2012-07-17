@@ -110,6 +110,11 @@ public:
     return $i;
   }
 
+  template<typename Receiver>
+  ApplyMethod<Parameters, Return_ (Receiver::*)($As)> toApplyMethod(Return_ (Receiver::*method)($As) ) {
+    return ApplyMethod<Parameters, Return_ (Receiver::*)($As)>(method);
+  }
+
   template<typename Passed>
   Return apply($Passed_passed) {
     return function([[$for j, [[
