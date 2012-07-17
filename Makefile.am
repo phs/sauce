@@ -75,6 +75,7 @@ nobase_include_HEADERS += \
   sauce/internal/memory/boost.h \
   sauce/internal/memory/std.h \
   sauce/internal/memory/tr1.h \
+  sauce/internal/method_binding.h \
   sauce/internal/new_binding.h \
   sauce/internal/opaque_binding.h \
   sauce/internal/pending_thrower.h \
@@ -109,6 +110,7 @@ EXTRA_DIST += \
   sauce/internal/memory/boost.h \
   sauce/internal/memory/std.h \
   sauce/internal/memory/tr1.h \
+  sauce/internal/method_binding.h \
   sauce/internal/new_binding.h \
   sauce/internal/opaque_binding.h \
   sauce/internal/pending_thrower.h \
