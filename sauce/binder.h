@@ -186,7 +186,8 @@ public:
   }
 
   template<typename Signature>
-  ToMethodNamingClause<Dependency, Signature> toMethodNaming(Signature method) {
+  ToMethodNamingClause<Dependency, Signature> toMethodNaming(
+    typename ToMethodNamingClause<Dependency, Signature>::Method method) {
     return pass(ToMethodNamingClause<Dependency, Signature>(method));
   }
 
@@ -238,7 +239,8 @@ public:
   }
 
   template<typename Signature>
-  ToMethodNamingClause<Named<Iface, Unnamed>, Signature> toMethodNaming(Signature method) {
+  ToMethodNamingClause<Named<Iface, Unnamed>, Signature> toMethodNaming(
+    typename ToMethodNamingClause<Named<Iface, Unnamed>, Signature>::Method method) {
     return pass(ToMethodNamingClause<Named<Iface, Unnamed>, Signature>(method));
   }
 
