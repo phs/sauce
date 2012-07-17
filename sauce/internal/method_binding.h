@@ -58,9 +58,9 @@ class MethodBinding: public Binding<Dependency, NoScope> {
     };
   };
 
-  typedef ApplyMethod<InjectParameters, Signature> Inject;
   typedef typename Key<Dependency>::Iface Iface;
   typedef typename Key<Dependency>::Ptr IfacePtr;
+  typedef ApplyMethod<InjectParameters, Signature> Inject;
 
   std::vector<std::string> dynamicDependencyNames;
 
