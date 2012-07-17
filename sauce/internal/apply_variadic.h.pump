@@ -29,18 +29,18 @@ void applyVoidFunction(typename ApplyVoidFunction<Parameters, Signature>::Functi
   (ApplyVoidFunction<Parameters, Signature>(function)).apply(passed);
 }
 
-template<typename Parameters, typename Method>
+template<typename Parameters, typename Signature>
 class ApplyMethod;
 
-template<typename Parameters, typename Method, typename Passed>
-typename ApplyMethod<Parameters, Method>::Return applyMethod(
-  typename ApplyMethod<Parameters, Method>::Receiver & receiver, Method method, Passed passed) {
-  return ApplyMethod<Parameters, Method>(method).apply(receiver, passed);
+template<typename Parameters, typename Signature, typename Passed>
+typename ApplyMethod<Parameters, Signature>::Return applyMethod(
+  typename ApplyMethod<Parameters, Signature>::Receiver & receiver, Signature method, Passed passed) {
+  return ApplyMethod<Parameters, Signature>(method).apply(receiver, passed);
 }
 
-template<typename Parameters, typename Method, typename Passed>
-void observeMethod(Method method, Passed passed) {
-  ApplyMethod<Parameters, Method>(method).observe(passed);
+template<typename Parameters, typename Signature, typename Passed>
+void observeMethod(Signature method, Passed passed) {
+  ApplyMethod<Parameters, Signature>(method).observe(passed);
 }
 
 template<typename Parameters, typename Constructed_, typename Allocator_>
