@@ -43,10 +43,11 @@ class MethodBinding: public Binding<Dependency, NoScope> {
         binding(binding), injector(injector) {}
     };
 
-    template<typename T, int i, typename Passed>
+    template<typename T, int i>
     struct Parameter: public MethodBindingFriend {
       typedef typename Key<T>::Ptr Ptr;
 
+      template<typename Passed>
       Ptr yield(Passed passed) {
         MethodBinding_ const & binding = passed.binding;
         InjectorPtr & injector = passed.injector;
@@ -73,8 +74,9 @@ class MethodBinding: public Binding<Dependency, NoScope> {
         binding(binding), injector(injector), ids(ids) {}
     };
 
-    template<typename T, int i, typename Passed>
+    template<typename T, int i>
     struct Parameter: public MethodBindingFriend {
+      template<typename Passed>
       void observe(Passed passed) {
         MethodBinding_ const & binding = passed.binding;
         InjectorPtr & injector = passed.injector;

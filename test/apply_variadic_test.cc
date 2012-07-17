@@ -24,9 +24,11 @@ std::string toString(std::string s, int i) {
 typedef std::string (*ToString)(std::string, int);
 
 struct DefaultValueParameters {
-  template<typename T, int i, typename Passed>
+  template<typename T, int i>
   struct Parameter {
     typedef T Type;
+
+    template<typename Passed>
     T yield(Passed) {
       return T();
     }
@@ -34,20 +36,24 @@ struct DefaultValueParameters {
 };
 
 struct SpecializedParameters {
-  template<typename T, int i, typename Passed>
+  template<typename T, int i>
   struct Parameter {};
 
-  template<int i, typename Passed>
-  struct Parameter<std::string, i, Passed> {
+  template<int i>
+  struct Parameter<std::string, i> {
     typedef std::string Type;
+
+    template<typename Passed>
     std::string yield(Passed) {
       return "foobar";
     }
   };
 
-  template<int i, typename Passed>
-  struct Parameter<int, i, Passed> {
+  template<int i>
+  struct Parameter<int, i> {
     typedef int Type;
+
+    template<typename Passed>
     int yield(Passed) {
       return 17;
     }
@@ -55,17 +61,21 @@ struct SpecializedParameters {
 };
 
 struct AnnotatedParameters {
-  template<typename T, int i, typename Passed>
+  template<typename T, int i>
   struct Parameter {
     typedef T Type;
+
+    template<typename Passed>
     T yield(Passed) {
       return T();
     }
   };
 
-  template<typename T, int i, typename Passed>
-  struct Parameter<Annotation<T>, i, Passed> {
+  template<typename T, int i>
+  struct Parameter<Annotation<T>, i> {
     typedef T Type;
+
+    template<typename Passed>
     T yield(Passed) {
       return T();
     }
@@ -84,18 +94,24 @@ TEST(ApplyFunctionTest, shouldTransformSignatureBeforeApplying) {
 }
 
 struct MoreSpecializedParameters {
-  template<typename T, int i, typename Passed>
+  template<typename T, int i>
   struct Parameter;
 
   template<int i>
-  struct Parameter<std::string, i, std::string> {
+  struct Parameter<std::string, i> {
+    typedef std::string Type;
+
+    template<typename Passed>
     std::string yield(std::string passed) {
       return passed;
     }
   };
 
-  template<int i, typename Passed>
-  struct Parameter<int, i, Passed> {
+  template<int i>
+  struct Parameter<int, i> {
+    typedef int Type;
+
+    template<typename Passed>
     int yield(Passed) {
       return i;
     }
@@ -110,8 +126,9 @@ TEST(ApplyFunctionTest, shouldLetParametersExamineParameterIndexAndPassedValue) 
 struct SideEffectParameters {
   static int called;
 
-  template<typename T, int i, typename Passed>
+  template<typename T, int i>
   struct Parameter {
+    template<typename Passed>
     void observe(Passed) {
       ++called;
     }

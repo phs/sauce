@@ -111,14 +111,14 @@ public:
   Return apply($Passed_passed) {
     return function([[$for j, [[
 
-      (typename Parameters::template Parameter<A$j, $j, Passed>()).yield(passed)
+      (typename Parameters::template Parameter<A$j, $j>()).template yield<Passed>(passed)
 ]]]]);
   }
 
   template<typename Passed>
   void observe($Passed_passed) {
 [[$for j [[
-    (typename Parameters::template Parameter<A$j, $j, Passed>()).observe(passed);
+    (typename Parameters::template Parameter<A$j, $j>()).template observe<Passed>(passed);
 
 ]]]]
   }
@@ -146,7 +146,7 @@ public:
   void apply($Passed_passed) {
     function([[$for j, [[
 
-      (typename Parameters::template Parameter<A$j, $j, Passed>()).yield(passed)
+      (typename Parameters::template Parameter<A$j, $j>()).template yield<Passed>(passed)
 ]]]]);
   }
 };
@@ -176,14 +176,14 @@ public:
   Return apply(Receiver & receiver, $Passed_passed) {
     return (receiver.*method)([[$for j, [[
 
-      (typename Parameters::template Parameter<A$j, $j, Passed>()).yield(passed)
+      (typename Parameters::template Parameter<A$j, $j>()).template yield<Passed>(passed)
 ]]]]);
   }
 
   template<typename Passed>
   void observe($Passed_passed) {
 [[$for j [[
-    (typename Parameters::template Parameter<A$j, $j, Passed>()).observe(passed);
+    (typename Parameters::template Parameter<A$j, $j>()).template observe<Passed>(passed);
 
 ]]]]
   }
@@ -213,14 +213,14 @@ public:
   Constructed * apply($Passed_passed) {
     return new(allocator.allocate(1)) Constructed([[$for j, [[
 
-      (typename Parameters::template Parameter<A$j, $j, Passed>()).yield(passed)
+      (typename Parameters::template Parameter<A$j, $j>()).template yield<Passed>(passed)
 ]]]]);
   }
 
   template<typename Passed>
   void observe($Passed_passed) {
 [[$for j [[
-    (typename Parameters::template Parameter<A$j, $j, Passed>()).observe(passed);
+    (typename Parameters::template Parameter<A$j, $j>()).template observe<Passed>(passed);
 
 ]]]]
   }

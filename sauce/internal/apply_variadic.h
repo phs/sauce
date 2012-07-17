@@ -217,12 +217,12 @@ public:
   template<typename Passed>
   Return apply(Passed passed) {
     return function(
-      (typename Parameters::template Parameter<A0, 0, Passed>()).yield(passed));
+      (typename Parameters::template Parameter<A0, 0>()).template yield<Passed>(passed));
   }
 
   template<typename Passed>
   void observe(Passed passed) {
-    (typename Parameters::template Parameter<A0, 0, Passed>()).observe(passed);
+    (typename Parameters::template Parameter<A0, 0>()).template observe<Passed>(passed);
   }
 };
 /* *INDENT-ON* */
@@ -247,7 +247,7 @@ public:
   template<typename Passed>
   void apply(Passed passed) {
     function(
-      (typename Parameters::template Parameter<A0, 0, Passed>()).yield(passed));
+      (typename Parameters::template Parameter<A0, 0>()).template yield<Passed>(passed));
   }
 };
 /* *INDENT-ON* */
@@ -275,12 +275,12 @@ public:
   template<typename Passed>
   Return apply(Receiver & receiver, Passed passed) {
     return (receiver.*method)(
-      (typename Parameters::template Parameter<A0, 0, Passed>()).yield(passed));
+      (typename Parameters::template Parameter<A0, 0>()).template yield<Passed>(passed));
   }
 
   template<typename Passed>
   void observe(Passed passed) {
-    (typename Parameters::template Parameter<A0, 0, Passed>()).observe(passed);
+    (typename Parameters::template Parameter<A0, 0>()).template observe<Passed>(passed);
   }
 };
 /* *INDENT-ON* */
@@ -307,12 +307,12 @@ public:
   template<typename Passed>
   Constructed * apply(Passed passed) {
     return new(allocator.allocate(1)) Constructed(
-      (typename Parameters::template Parameter<A0, 0, Passed>()).yield(passed));
+      (typename Parameters::template Parameter<A0, 0>()).template yield<Passed>(passed));
   }
 
   template<typename Passed>
   void observe(Passed passed) {
-    (typename Parameters::template Parameter<A0, 0, Passed>()).observe(passed);
+    (typename Parameters::template Parameter<A0, 0>()).template observe<Passed>(passed);
   }
 };
 /* *INDENT-ON* */
@@ -338,14 +338,14 @@ public:
   template<typename Passed>
   Return apply(Passed passed) {
     return function(
-      (typename Parameters::template Parameter<A0, 0, Passed>()).yield(passed),
-      (typename Parameters::template Parameter<A1, 1, Passed>()).yield(passed));
+      (typename Parameters::template Parameter<A0, 0>()).template yield<Passed>(passed),
+      (typename Parameters::template Parameter<A1, 1>()).template yield<Passed>(passed));
   }
 
   template<typename Passed>
   void observe(Passed passed) {
-    (typename Parameters::template Parameter<A0, 0, Passed>()).observe(passed);
-    (typename Parameters::template Parameter<A1, 1, Passed>()).observe(passed);
+    (typename Parameters::template Parameter<A0, 0>()).template observe<Passed>(passed);
+    (typename Parameters::template Parameter<A1, 1>()).template observe<Passed>(passed);
   }
 };
 /* *INDENT-ON* */
@@ -370,8 +370,8 @@ public:
   template<typename Passed>
   void apply(Passed passed) {
     function(
-      (typename Parameters::template Parameter<A0, 0, Passed>()).yield(passed),
-      (typename Parameters::template Parameter<A1, 1, Passed>()).yield(passed));
+      (typename Parameters::template Parameter<A0, 0>()).template yield<Passed>(passed),
+      (typename Parameters::template Parameter<A1, 1>()).template yield<Passed>(passed));
   }
 };
 /* *INDENT-ON* */
@@ -399,14 +399,14 @@ public:
   template<typename Passed>
   Return apply(Receiver & receiver, Passed passed) {
     return (receiver.*method)(
-      (typename Parameters::template Parameter<A0, 0, Passed>()).yield(passed),
-      (typename Parameters::template Parameter<A1, 1, Passed>()).yield(passed));
+      (typename Parameters::template Parameter<A0, 0>()).template yield<Passed>(passed),
+      (typename Parameters::template Parameter<A1, 1>()).template yield<Passed>(passed));
   }
 
   template<typename Passed>
   void observe(Passed passed) {
-    (typename Parameters::template Parameter<A0, 0, Passed>()).observe(passed);
-    (typename Parameters::template Parameter<A1, 1, Passed>()).observe(passed);
+    (typename Parameters::template Parameter<A0, 0>()).template observe<Passed>(passed);
+    (typename Parameters::template Parameter<A1, 1>()).template observe<Passed>(passed);
   }
 };
 /* *INDENT-ON* */
@@ -433,14 +433,14 @@ public:
   template<typename Passed>
   Constructed * apply(Passed passed) {
     return new(allocator.allocate(1)) Constructed(
-      (typename Parameters::template Parameter<A0, 0, Passed>()).yield(passed),
-      (typename Parameters::template Parameter<A1, 1, Passed>()).yield(passed));
+      (typename Parameters::template Parameter<A0, 0>()).template yield<Passed>(passed),
+      (typename Parameters::template Parameter<A1, 1>()).template yield<Passed>(passed));
   }
 
   template<typename Passed>
   void observe(Passed passed) {
-    (typename Parameters::template Parameter<A0, 0, Passed>()).observe(passed);
-    (typename Parameters::template Parameter<A1, 1, Passed>()).observe(passed);
+    (typename Parameters::template Parameter<A0, 0>()).template observe<Passed>(passed);
+    (typename Parameters::template Parameter<A1, 1>()).template observe<Passed>(passed);
   }
 };
 /* *INDENT-ON* */
@@ -466,16 +466,16 @@ public:
   template<typename Passed>
   Return apply(Passed passed) {
     return function(
-      (typename Parameters::template Parameter<A0, 0, Passed>()).yield(passed),
-      (typename Parameters::template Parameter<A1, 1, Passed>()).yield(passed),
-      (typename Parameters::template Parameter<A2, 2, Passed>()).yield(passed));
+      (typename Parameters::template Parameter<A0, 0>()).template yield<Passed>(passed),
+      (typename Parameters::template Parameter<A1, 1>()).template yield<Passed>(passed),
+      (typename Parameters::template Parameter<A2, 2>()).template yield<Passed>(passed));
   }
 
   template<typename Passed>
   void observe(Passed passed) {
-    (typename Parameters::template Parameter<A0, 0, Passed>()).observe(passed);
-    (typename Parameters::template Parameter<A1, 1, Passed>()).observe(passed);
-    (typename Parameters::template Parameter<A2, 2, Passed>()).observe(passed);
+    (typename Parameters::template Parameter<A0, 0>()).template observe<Passed>(passed);
+    (typename Parameters::template Parameter<A1, 1>()).template observe<Passed>(passed);
+    (typename Parameters::template Parameter<A2, 2>()).template observe<Passed>(passed);
   }
 };
 /* *INDENT-ON* */
@@ -500,9 +500,9 @@ public:
   template<typename Passed>
   void apply(Passed passed) {
     function(
-      (typename Parameters::template Parameter<A0, 0, Passed>()).yield(passed),
-      (typename Parameters::template Parameter<A1, 1, Passed>()).yield(passed),
-      (typename Parameters::template Parameter<A2, 2, Passed>()).yield(passed));
+      (typename Parameters::template Parameter<A0, 0>()).template yield<Passed>(passed),
+      (typename Parameters::template Parameter<A1, 1>()).template yield<Passed>(passed),
+      (typename Parameters::template Parameter<A2, 2>()).template yield<Passed>(passed));
   }
 };
 /* *INDENT-ON* */
@@ -530,16 +530,16 @@ public:
   template<typename Passed>
   Return apply(Receiver & receiver, Passed passed) {
     return (receiver.*method)(
-      (typename Parameters::template Parameter<A0, 0, Passed>()).yield(passed),
-      (typename Parameters::template Parameter<A1, 1, Passed>()).yield(passed),
-      (typename Parameters::template Parameter<A2, 2, Passed>()).yield(passed));
+      (typename Parameters::template Parameter<A0, 0>()).template yield<Passed>(passed),
+      (typename Parameters::template Parameter<A1, 1>()).template yield<Passed>(passed),
+      (typename Parameters::template Parameter<A2, 2>()).template yield<Passed>(passed));
   }
 
   template<typename Passed>
   void observe(Passed passed) {
-    (typename Parameters::template Parameter<A0, 0, Passed>()).observe(passed);
-    (typename Parameters::template Parameter<A1, 1, Passed>()).observe(passed);
-    (typename Parameters::template Parameter<A2, 2, Passed>()).observe(passed);
+    (typename Parameters::template Parameter<A0, 0>()).template observe<Passed>(passed);
+    (typename Parameters::template Parameter<A1, 1>()).template observe<Passed>(passed);
+    (typename Parameters::template Parameter<A2, 2>()).template observe<Passed>(passed);
   }
 };
 /* *INDENT-ON* */
@@ -566,16 +566,16 @@ public:
   template<typename Passed>
   Constructed * apply(Passed passed) {
     return new(allocator.allocate(1)) Constructed(
-      (typename Parameters::template Parameter<A0, 0, Passed>()).yield(passed),
-      (typename Parameters::template Parameter<A1, 1, Passed>()).yield(passed),
-      (typename Parameters::template Parameter<A2, 2, Passed>()).yield(passed));
+      (typename Parameters::template Parameter<A0, 0>()).template yield<Passed>(passed),
+      (typename Parameters::template Parameter<A1, 1>()).template yield<Passed>(passed),
+      (typename Parameters::template Parameter<A2, 2>()).template yield<Passed>(passed));
   }
 
   template<typename Passed>
   void observe(Passed passed) {
-    (typename Parameters::template Parameter<A0, 0, Passed>()).observe(passed);
-    (typename Parameters::template Parameter<A1, 1, Passed>()).observe(passed);
-    (typename Parameters::template Parameter<A2, 2, Passed>()).observe(passed);
+    (typename Parameters::template Parameter<A0, 0>()).template observe<Passed>(passed);
+    (typename Parameters::template Parameter<A1, 1>()).template observe<Passed>(passed);
+    (typename Parameters::template Parameter<A2, 2>()).template observe<Passed>(passed);
   }
 };
 /* *INDENT-ON* */
@@ -601,18 +601,18 @@ public:
   template<typename Passed>
   Return apply(Passed passed) {
     return function(
-      (typename Parameters::template Parameter<A0, 0, Passed>()).yield(passed),
-      (typename Parameters::template Parameter<A1, 1, Passed>()).yield(passed),
-      (typename Parameters::template Parameter<A2, 2, Passed>()).yield(passed),
-      (typename Parameters::template Parameter<A3, 3, Passed>()).yield(passed));
+      (typename Parameters::template Parameter<A0, 0>()).template yield<Passed>(passed),
+      (typename Parameters::template Parameter<A1, 1>()).template yield<Passed>(passed),
+      (typename Parameters::template Parameter<A2, 2>()).template yield<Passed>(passed),
+      (typename Parameters::template Parameter<A3, 3>()).template yield<Passed>(passed));
   }
 
   template<typename Passed>
   void observe(Passed passed) {
-    (typename Parameters::template Parameter<A0, 0, Passed>()).observe(passed);
-    (typename Parameters::template Parameter<A1, 1, Passed>()).observe(passed);
-    (typename Parameters::template Parameter<A2, 2, Passed>()).observe(passed);
-    (typename Parameters::template Parameter<A3, 3, Passed>()).observe(passed);
+    (typename Parameters::template Parameter<A0, 0>()).template observe<Passed>(passed);
+    (typename Parameters::template Parameter<A1, 1>()).template observe<Passed>(passed);
+    (typename Parameters::template Parameter<A2, 2>()).template observe<Passed>(passed);
+    (typename Parameters::template Parameter<A3, 3>()).template observe<Passed>(passed);
   }
 };
 /* *INDENT-ON* */
@@ -637,10 +637,10 @@ public:
   template<typename Passed>
   void apply(Passed passed) {
     function(
-      (typename Parameters::template Parameter<A0, 0, Passed>()).yield(passed),
-      (typename Parameters::template Parameter<A1, 1, Passed>()).yield(passed),
-      (typename Parameters::template Parameter<A2, 2, Passed>()).yield(passed),
-      (typename Parameters::template Parameter<A3, 3, Passed>()).yield(passed));
+      (typename Parameters::template Parameter<A0, 0>()).template yield<Passed>(passed),
+      (typename Parameters::template Parameter<A1, 1>()).template yield<Passed>(passed),
+      (typename Parameters::template Parameter<A2, 2>()).template yield<Passed>(passed),
+      (typename Parameters::template Parameter<A3, 3>()).template yield<Passed>(passed));
   }
 };
 /* *INDENT-ON* */
@@ -668,18 +668,18 @@ public:
   template<typename Passed>
   Return apply(Receiver & receiver, Passed passed) {
     return (receiver.*method)(
-      (typename Parameters::template Parameter<A0, 0, Passed>()).yield(passed),
-      (typename Parameters::template Parameter<A1, 1, Passed>()).yield(passed),
-      (typename Parameters::template Parameter<A2, 2, Passed>()).yield(passed),
-      (typename Parameters::template Parameter<A3, 3, Passed>()).yield(passed));
+      (typename Parameters::template Parameter<A0, 0>()).template yield<Passed>(passed),
+      (typename Parameters::template Parameter<A1, 1>()).template yield<Passed>(passed),
+      (typename Parameters::template Parameter<A2, 2>()).template yield<Passed>(passed),
+      (typename Parameters::template Parameter<A3, 3>()).template yield<Passed>(passed));
   }
 
   template<typename Passed>
   void observe(Passed passed) {
-    (typename Parameters::template Parameter<A0, 0, Passed>()).observe(passed);
-    (typename Parameters::template Parameter<A1, 1, Passed>()).observe(passed);
-    (typename Parameters::template Parameter<A2, 2, Passed>()).observe(passed);
-    (typename Parameters::template Parameter<A3, 3, Passed>()).observe(passed);
+    (typename Parameters::template Parameter<A0, 0>()).template observe<Passed>(passed);
+    (typename Parameters::template Parameter<A1, 1>()).template observe<Passed>(passed);
+    (typename Parameters::template Parameter<A2, 2>()).template observe<Passed>(passed);
+    (typename Parameters::template Parameter<A3, 3>()).template observe<Passed>(passed);
   }
 };
 /* *INDENT-ON* */
@@ -707,18 +707,18 @@ public:
   template<typename Passed>
   Constructed * apply(Passed passed) {
     return new(allocator.allocate(1)) Constructed(
-      (typename Parameters::template Parameter<A0, 0, Passed>()).yield(passed),
-      (typename Parameters::template Parameter<A1, 1, Passed>()).yield(passed),
-      (typename Parameters::template Parameter<A2, 2, Passed>()).yield(passed),
-      (typename Parameters::template Parameter<A3, 3, Passed>()).yield(passed));
+      (typename Parameters::template Parameter<A0, 0>()).template yield<Passed>(passed),
+      (typename Parameters::template Parameter<A1, 1>()).template yield<Passed>(passed),
+      (typename Parameters::template Parameter<A2, 2>()).template yield<Passed>(passed),
+      (typename Parameters::template Parameter<A3, 3>()).template yield<Passed>(passed));
   }
 
   template<typename Passed>
   void observe(Passed passed) {
-    (typename Parameters::template Parameter<A0, 0, Passed>()).observe(passed);
-    (typename Parameters::template Parameter<A1, 1, Passed>()).observe(passed);
-    (typename Parameters::template Parameter<A2, 2, Passed>()).observe(passed);
-    (typename Parameters::template Parameter<A3, 3, Passed>()).observe(passed);
+    (typename Parameters::template Parameter<A0, 0>()).template observe<Passed>(passed);
+    (typename Parameters::template Parameter<A1, 1>()).template observe<Passed>(passed);
+    (typename Parameters::template Parameter<A2, 2>()).template observe<Passed>(passed);
+    (typename Parameters::template Parameter<A3, 3>()).template observe<Passed>(passed);
   }
 };
 /* *INDENT-ON* */
@@ -744,20 +744,20 @@ public:
   template<typename Passed>
   Return apply(Passed passed) {
     return function(
-      (typename Parameters::template Parameter<A0, 0, Passed>()).yield(passed),
-      (typename Parameters::template Parameter<A1, 1, Passed>()).yield(passed),
-      (typename Parameters::template Parameter<A2, 2, Passed>()).yield(passed),
-      (typename Parameters::template Parameter<A3, 3, Passed>()).yield(passed),
-      (typename Parameters::template Parameter<A4, 4, Passed>()).yield(passed));
+      (typename Parameters::template Parameter<A0, 0>()).template yield<Passed>(passed),
+      (typename Parameters::template Parameter<A1, 1>()).template yield<Passed>(passed),
+      (typename Parameters::template Parameter<A2, 2>()).template yield<Passed>(passed),
+      (typename Parameters::template Parameter<A3, 3>()).template yield<Passed>(passed),
+      (typename Parameters::template Parameter<A4, 4>()).template yield<Passed>(passed));
   }
 
   template<typename Passed>
   void observe(Passed passed) {
-    (typename Parameters::template Parameter<A0, 0, Passed>()).observe(passed);
-    (typename Parameters::template Parameter<A1, 1, Passed>()).observe(passed);
-    (typename Parameters::template Parameter<A2, 2, Passed>()).observe(passed);
-    (typename Parameters::template Parameter<A3, 3, Passed>()).observe(passed);
-    (typename Parameters::template Parameter<A4, 4, Passed>()).observe(passed);
+    (typename Parameters::template Parameter<A0, 0>()).template observe<Passed>(passed);
+    (typename Parameters::template Parameter<A1, 1>()).template observe<Passed>(passed);
+    (typename Parameters::template Parameter<A2, 2>()).template observe<Passed>(passed);
+    (typename Parameters::template Parameter<A3, 3>()).template observe<Passed>(passed);
+    (typename Parameters::template Parameter<A4, 4>()).template observe<Passed>(passed);
   }
 };
 /* *INDENT-ON* */
@@ -782,11 +782,11 @@ public:
   template<typename Passed>
   void apply(Passed passed) {
     function(
-      (typename Parameters::template Parameter<A0, 0, Passed>()).yield(passed),
-      (typename Parameters::template Parameter<A1, 1, Passed>()).yield(passed),
-      (typename Parameters::template Parameter<A2, 2, Passed>()).yield(passed),
-      (typename Parameters::template Parameter<A3, 3, Passed>()).yield(passed),
-      (typename Parameters::template Parameter<A4, 4, Passed>()).yield(passed));
+      (typename Parameters::template Parameter<A0, 0>()).template yield<Passed>(passed),
+      (typename Parameters::template Parameter<A1, 1>()).template yield<Passed>(passed),
+      (typename Parameters::template Parameter<A2, 2>()).template yield<Passed>(passed),
+      (typename Parameters::template Parameter<A3, 3>()).template yield<Passed>(passed),
+      (typename Parameters::template Parameter<A4, 4>()).template yield<Passed>(passed));
   }
 };
 /* *INDENT-ON* */
@@ -815,20 +815,20 @@ public:
   template<typename Passed>
   Return apply(Receiver & receiver, Passed passed) {
     return (receiver.*method)(
-      (typename Parameters::template Parameter<A0, 0, Passed>()).yield(passed),
-      (typename Parameters::template Parameter<A1, 1, Passed>()).yield(passed),
-      (typename Parameters::template Parameter<A2, 2, Passed>()).yield(passed),
-      (typename Parameters::template Parameter<A3, 3, Passed>()).yield(passed),
-      (typename Parameters::template Parameter<A4, 4, Passed>()).yield(passed));
+      (typename Parameters::template Parameter<A0, 0>()).template yield<Passed>(passed),
+      (typename Parameters::template Parameter<A1, 1>()).template yield<Passed>(passed),
+      (typename Parameters::template Parameter<A2, 2>()).template yield<Passed>(passed),
+      (typename Parameters::template Parameter<A3, 3>()).template yield<Passed>(passed),
+      (typename Parameters::template Parameter<A4, 4>()).template yield<Passed>(passed));
   }
 
   template<typename Passed>
   void observe(Passed passed) {
-    (typename Parameters::template Parameter<A0, 0, Passed>()).observe(passed);
-    (typename Parameters::template Parameter<A1, 1, Passed>()).observe(passed);
-    (typename Parameters::template Parameter<A2, 2, Passed>()).observe(passed);
-    (typename Parameters::template Parameter<A3, 3, Passed>()).observe(passed);
-    (typename Parameters::template Parameter<A4, 4, Passed>()).observe(passed);
+    (typename Parameters::template Parameter<A0, 0>()).template observe<Passed>(passed);
+    (typename Parameters::template Parameter<A1, 1>()).template observe<Passed>(passed);
+    (typename Parameters::template Parameter<A2, 2>()).template observe<Passed>(passed);
+    (typename Parameters::template Parameter<A3, 3>()).template observe<Passed>(passed);
+    (typename Parameters::template Parameter<A4, 4>()).template observe<Passed>(passed);
   }
 };
 /* *INDENT-ON* */
@@ -856,20 +856,20 @@ public:
   template<typename Passed>
   Constructed * apply(Passed passed) {
     return new(allocator.allocate(1)) Constructed(
-      (typename Parameters::template Parameter<A0, 0, Passed>()).yield(passed),
-      (typename Parameters::template Parameter<A1, 1, Passed>()).yield(passed),
-      (typename Parameters::template Parameter<A2, 2, Passed>()).yield(passed),
-      (typename Parameters::template Parameter<A3, 3, Passed>()).yield(passed),
-      (typename Parameters::template Parameter<A4, 4, Passed>()).yield(passed));
+      (typename Parameters::template Parameter<A0, 0>()).template yield<Passed>(passed),
+      (typename Parameters::template Parameter<A1, 1>()).template yield<Passed>(passed),
+      (typename Parameters::template Parameter<A2, 2>()).template yield<Passed>(passed),
+      (typename Parameters::template Parameter<A3, 3>()).template yield<Passed>(passed),
+      (typename Parameters::template Parameter<A4, 4>()).template yield<Passed>(passed));
   }
 
   template<typename Passed>
   void observe(Passed passed) {
-    (typename Parameters::template Parameter<A0, 0, Passed>()).observe(passed);
-    (typename Parameters::template Parameter<A1, 1, Passed>()).observe(passed);
-    (typename Parameters::template Parameter<A2, 2, Passed>()).observe(passed);
-    (typename Parameters::template Parameter<A3, 3, Passed>()).observe(passed);
-    (typename Parameters::template Parameter<A4, 4, Passed>()).observe(passed);
+    (typename Parameters::template Parameter<A0, 0>()).template observe<Passed>(passed);
+    (typename Parameters::template Parameter<A1, 1>()).template observe<Passed>(passed);
+    (typename Parameters::template Parameter<A2, 2>()).template observe<Passed>(passed);
+    (typename Parameters::template Parameter<A3, 3>()).template observe<Passed>(passed);
+    (typename Parameters::template Parameter<A4, 4>()).template observe<Passed>(passed);
   }
 };
 /* *INDENT-ON* */
@@ -896,22 +896,22 @@ public:
   template<typename Passed>
   Return apply(Passed passed) {
     return function(
-      (typename Parameters::template Parameter<A0, 0, Passed>()).yield(passed),
-      (typename Parameters::template Parameter<A1, 1, Passed>()).yield(passed),
-      (typename Parameters::template Parameter<A2, 2, Passed>()).yield(passed),
-      (typename Parameters::template Parameter<A3, 3, Passed>()).yield(passed),
-      (typename Parameters::template Parameter<A4, 4, Passed>()).yield(passed),
-      (typename Parameters::template Parameter<A5, 5, Passed>()).yield(passed));
+      (typename Parameters::template Parameter<A0, 0>()).template yield<Passed>(passed),
+      (typename Parameters::template Parameter<A1, 1>()).template yield<Passed>(passed),
+      (typename Parameters::template Parameter<A2, 2>()).template yield<Passed>(passed),
+      (typename Parameters::template Parameter<A3, 3>()).template yield<Passed>(passed),
+      (typename Parameters::template Parameter<A4, 4>()).template yield<Passed>(passed),
+      (typename Parameters::template Parameter<A5, 5>()).template yield<Passed>(passed));
   }
 
   template<typename Passed>
   void observe(Passed passed) {
-    (typename Parameters::template Parameter<A0, 0, Passed>()).observe(passed);
-    (typename Parameters::template Parameter<A1, 1, Passed>()).observe(passed);
-    (typename Parameters::template Parameter<A2, 2, Passed>()).observe(passed);
-    (typename Parameters::template Parameter<A3, 3, Passed>()).observe(passed);
-    (typename Parameters::template Parameter<A4, 4, Passed>()).observe(passed);
-    (typename Parameters::template Parameter<A5, 5, Passed>()).observe(passed);
+    (typename Parameters::template Parameter<A0, 0>()).template observe<Passed>(passed);
+    (typename Parameters::template Parameter<A1, 1>()).template observe<Passed>(passed);
+    (typename Parameters::template Parameter<A2, 2>()).template observe<Passed>(passed);
+    (typename Parameters::template Parameter<A3, 3>()).template observe<Passed>(passed);
+    (typename Parameters::template Parameter<A4, 4>()).template observe<Passed>(passed);
+    (typename Parameters::template Parameter<A5, 5>()).template observe<Passed>(passed);
   }
 };
 /* *INDENT-ON* */
@@ -936,12 +936,12 @@ public:
   template<typename Passed>
   void apply(Passed passed) {
     function(
-      (typename Parameters::template Parameter<A0, 0, Passed>()).yield(passed),
-      (typename Parameters::template Parameter<A1, 1, Passed>()).yield(passed),
-      (typename Parameters::template Parameter<A2, 2, Passed>()).yield(passed),
-      (typename Parameters::template Parameter<A3, 3, Passed>()).yield(passed),
-      (typename Parameters::template Parameter<A4, 4, Passed>()).yield(passed),
-      (typename Parameters::template Parameter<A5, 5, Passed>()).yield(passed));
+      (typename Parameters::template Parameter<A0, 0>()).template yield<Passed>(passed),
+      (typename Parameters::template Parameter<A1, 1>()).template yield<Passed>(passed),
+      (typename Parameters::template Parameter<A2, 2>()).template yield<Passed>(passed),
+      (typename Parameters::template Parameter<A3, 3>()).template yield<Passed>(passed),
+      (typename Parameters::template Parameter<A4, 4>()).template yield<Passed>(passed),
+      (typename Parameters::template Parameter<A5, 5>()).template yield<Passed>(passed));
   }
 };
 /* *INDENT-ON* */
@@ -970,22 +970,22 @@ public:
   template<typename Passed>
   Return apply(Receiver & receiver, Passed passed) {
     return (receiver.*method)(
-      (typename Parameters::template Parameter<A0, 0, Passed>()).yield(passed),
-      (typename Parameters::template Parameter<A1, 1, Passed>()).yield(passed),
-      (typename Parameters::template Parameter<A2, 2, Passed>()).yield(passed),
-      (typename Parameters::template Parameter<A3, 3, Passed>()).yield(passed),
-      (typename Parameters::template Parameter<A4, 4, Passed>()).yield(passed),
-      (typename Parameters::template Parameter<A5, 5, Passed>()).yield(passed));
+      (typename Parameters::template Parameter<A0, 0>()).template yield<Passed>(passed),
+      (typename Parameters::template Parameter<A1, 1>()).template yield<Passed>(passed),
+      (typename Parameters::template Parameter<A2, 2>()).template yield<Passed>(passed),
+      (typename Parameters::template Parameter<A3, 3>()).template yield<Passed>(passed),
+      (typename Parameters::template Parameter<A4, 4>()).template yield<Passed>(passed),
+      (typename Parameters::template Parameter<A5, 5>()).template yield<Passed>(passed));
   }
 
   template<typename Passed>
   void observe(Passed passed) {
-    (typename Parameters::template Parameter<A0, 0, Passed>()).observe(passed);
-    (typename Parameters::template Parameter<A1, 1, Passed>()).observe(passed);
-    (typename Parameters::template Parameter<A2, 2, Passed>()).observe(passed);
-    (typename Parameters::template Parameter<A3, 3, Passed>()).observe(passed);
-    (typename Parameters::template Parameter<A4, 4, Passed>()).observe(passed);
-    (typename Parameters::template Parameter<A5, 5, Passed>()).observe(passed);
+    (typename Parameters::template Parameter<A0, 0>()).template observe<Passed>(passed);
+    (typename Parameters::template Parameter<A1, 1>()).template observe<Passed>(passed);
+    (typename Parameters::template Parameter<A2, 2>()).template observe<Passed>(passed);
+    (typename Parameters::template Parameter<A3, 3>()).template observe<Passed>(passed);
+    (typename Parameters::template Parameter<A4, 4>()).template observe<Passed>(passed);
+    (typename Parameters::template Parameter<A5, 5>()).template observe<Passed>(passed);
   }
 };
 /* *INDENT-ON* */
@@ -1013,22 +1013,22 @@ public:
   template<typename Passed>
   Constructed * apply(Passed passed) {
     return new(allocator.allocate(1)) Constructed(
-      (typename Parameters::template Parameter<A0, 0, Passed>()).yield(passed),
-      (typename Parameters::template Parameter<A1, 1, Passed>()).yield(passed),
-      (typename Parameters::template Parameter<A2, 2, Passed>()).yield(passed),
-      (typename Parameters::template Parameter<A3, 3, Passed>()).yield(passed),
-      (typename Parameters::template Parameter<A4, 4, Passed>()).yield(passed),
-      (typename Parameters::template Parameter<A5, 5, Passed>()).yield(passed));
+      (typename Parameters::template Parameter<A0, 0>()).template yield<Passed>(passed),
+      (typename Parameters::template Parameter<A1, 1>()).template yield<Passed>(passed),
+      (typename Parameters::template Parameter<A2, 2>()).template yield<Passed>(passed),
+      (typename Parameters::template Parameter<A3, 3>()).template yield<Passed>(passed),
+      (typename Parameters::template Parameter<A4, 4>()).template yield<Passed>(passed),
+      (typename Parameters::template Parameter<A5, 5>()).template yield<Passed>(passed));
   }
 
   template<typename Passed>
   void observe(Passed passed) {
-    (typename Parameters::template Parameter<A0, 0, Passed>()).observe(passed);
-    (typename Parameters::template Parameter<A1, 1, Passed>()).observe(passed);
-    (typename Parameters::template Parameter<A2, 2, Passed>()).observe(passed);
-    (typename Parameters::template Parameter<A3, 3, Passed>()).observe(passed);
-    (typename Parameters::template Parameter<A4, 4, Passed>()).observe(passed);
-    (typename Parameters::template Parameter<A5, 5, Passed>()).observe(passed);
+    (typename Parameters::template Parameter<A0, 0>()).template observe<Passed>(passed);
+    (typename Parameters::template Parameter<A1, 1>()).template observe<Passed>(passed);
+    (typename Parameters::template Parameter<A2, 2>()).template observe<Passed>(passed);
+    (typename Parameters::template Parameter<A3, 3>()).template observe<Passed>(passed);
+    (typename Parameters::template Parameter<A4, 4>()).template observe<Passed>(passed);
+    (typename Parameters::template Parameter<A5, 5>()).template observe<Passed>(passed);
   }
 };
 /* *INDENT-ON* */
@@ -1055,24 +1055,24 @@ public:
   template<typename Passed>
   Return apply(Passed passed) {
     return function(
-      (typename Parameters::template Parameter<A0, 0, Passed>()).yield(passed),
-      (typename Parameters::template Parameter<A1, 1, Passed>()).yield(passed),
-      (typename Parameters::template Parameter<A2, 2, Passed>()).yield(passed),
-      (typename Parameters::template Parameter<A3, 3, Passed>()).yield(passed),
-      (typename Parameters::template Parameter<A4, 4, Passed>()).yield(passed),
-      (typename Parameters::template Parameter<A5, 5, Passed>()).yield(passed),
-      (typename Parameters::template Parameter<A6, 6, Passed>()).yield(passed));
+      (typename Parameters::template Parameter<A0, 0>()).template yield<Passed>(passed),
+      (typename Parameters::template Parameter<A1, 1>()).template yield<Passed>(passed),
+      (typename Parameters::template Parameter<A2, 2>()).template yield<Passed>(passed),
+      (typename Parameters::template Parameter<A3, 3>()).template yield<Passed>(passed),
+      (typename Parameters::template Parameter<A4, 4>()).template yield<Passed>(passed),
+      (typename Parameters::template Parameter<A5, 5>()).template yield<Passed>(passed),
+      (typename Parameters::template Parameter<A6, 6>()).template yield<Passed>(passed));
   }
 
   template<typename Passed>
   void observe(Passed passed) {
-    (typename Parameters::template Parameter<A0, 0, Passed>()).observe(passed);
-    (typename Parameters::template Parameter<A1, 1, Passed>()).observe(passed);
-    (typename Parameters::template Parameter<A2, 2, Passed>()).observe(passed);
-    (typename Parameters::template Parameter<A3, 3, Passed>()).observe(passed);
-    (typename Parameters::template Parameter<A4, 4, Passed>()).observe(passed);
-    (typename Parameters::template Parameter<A5, 5, Passed>()).observe(passed);
-    (typename Parameters::template Parameter<A6, 6, Passed>()).observe(passed);
+    (typename Parameters::template Parameter<A0, 0>()).template observe<Passed>(passed);
+    (typename Parameters::template Parameter<A1, 1>()).template observe<Passed>(passed);
+    (typename Parameters::template Parameter<A2, 2>()).template observe<Passed>(passed);
+    (typename Parameters::template Parameter<A3, 3>()).template observe<Passed>(passed);
+    (typename Parameters::template Parameter<A4, 4>()).template observe<Passed>(passed);
+    (typename Parameters::template Parameter<A5, 5>()).template observe<Passed>(passed);
+    (typename Parameters::template Parameter<A6, 6>()).template observe<Passed>(passed);
   }
 };
 /* *INDENT-ON* */
@@ -1097,13 +1097,13 @@ public:
   template<typename Passed>
   void apply(Passed passed) {
     function(
-      (typename Parameters::template Parameter<A0, 0, Passed>()).yield(passed),
-      (typename Parameters::template Parameter<A1, 1, Passed>()).yield(passed),
-      (typename Parameters::template Parameter<A2, 2, Passed>()).yield(passed),
-      (typename Parameters::template Parameter<A3, 3, Passed>()).yield(passed),
-      (typename Parameters::template Parameter<A4, 4, Passed>()).yield(passed),
-      (typename Parameters::template Parameter<A5, 5, Passed>()).yield(passed),
-      (typename Parameters::template Parameter<A6, 6, Passed>()).yield(passed));
+      (typename Parameters::template Parameter<A0, 0>()).template yield<Passed>(passed),
+      (typename Parameters::template Parameter<A1, 1>()).template yield<Passed>(passed),
+      (typename Parameters::template Parameter<A2, 2>()).template yield<Passed>(passed),
+      (typename Parameters::template Parameter<A3, 3>()).template yield<Passed>(passed),
+      (typename Parameters::template Parameter<A4, 4>()).template yield<Passed>(passed),
+      (typename Parameters::template Parameter<A5, 5>()).template yield<Passed>(passed),
+      (typename Parameters::template Parameter<A6, 6>()).template yield<Passed>(passed));
   }
 };
 /* *INDENT-ON* */
@@ -1132,24 +1132,24 @@ public:
   template<typename Passed>
   Return apply(Receiver & receiver, Passed passed) {
     return (receiver.*method)(
-      (typename Parameters::template Parameter<A0, 0, Passed>()).yield(passed),
-      (typename Parameters::template Parameter<A1, 1, Passed>()).yield(passed),
-      (typename Parameters::template Parameter<A2, 2, Passed>()).yield(passed),
-      (typename Parameters::template Parameter<A3, 3, Passed>()).yield(passed),
-      (typename Parameters::template Parameter<A4, 4, Passed>()).yield(passed),
-      (typename Parameters::template Parameter<A5, 5, Passed>()).yield(passed),
-      (typename Parameters::template Parameter<A6, 6, Passed>()).yield(passed));
+      (typename Parameters::template Parameter<A0, 0>()).template yield<Passed>(passed),
+      (typename Parameters::template Parameter<A1, 1>()).template yield<Passed>(passed),
+      (typename Parameters::template Parameter<A2, 2>()).template yield<Passed>(passed),
+      (typename Parameters::template Parameter<A3, 3>()).template yield<Passed>(passed),
+      (typename Parameters::template Parameter<A4, 4>()).template yield<Passed>(passed),
+      (typename Parameters::template Parameter<A5, 5>()).template yield<Passed>(passed),
+      (typename Parameters::template Parameter<A6, 6>()).template yield<Passed>(passed));
   }
 
   template<typename Passed>
   void observe(Passed passed) {
-    (typename Parameters::template Parameter<A0, 0, Passed>()).observe(passed);
-    (typename Parameters::template Parameter<A1, 1, Passed>()).observe(passed);
-    (typename Parameters::template Parameter<A2, 2, Passed>()).observe(passed);
-    (typename Parameters::template Parameter<A3, 3, Passed>()).observe(passed);
-    (typename Parameters::template Parameter<A4, 4, Passed>()).observe(passed);
-    (typename Parameters::template Parameter<A5, 5, Passed>()).observe(passed);
-    (typename Parameters::template Parameter<A6, 6, Passed>()).observe(passed);
+    (typename Parameters::template Parameter<A0, 0>()).template observe<Passed>(passed);
+    (typename Parameters::template Parameter<A1, 1>()).template observe<Passed>(passed);
+    (typename Parameters::template Parameter<A2, 2>()).template observe<Passed>(passed);
+    (typename Parameters::template Parameter<A3, 3>()).template observe<Passed>(passed);
+    (typename Parameters::template Parameter<A4, 4>()).template observe<Passed>(passed);
+    (typename Parameters::template Parameter<A5, 5>()).template observe<Passed>(passed);
+    (typename Parameters::template Parameter<A6, 6>()).template observe<Passed>(passed);
   }
 };
 /* *INDENT-ON* */
@@ -1177,24 +1177,24 @@ public:
   template<typename Passed>
   Constructed * apply(Passed passed) {
     return new(allocator.allocate(1)) Constructed(
-      (typename Parameters::template Parameter<A0, 0, Passed>()).yield(passed),
-      (typename Parameters::template Parameter<A1, 1, Passed>()).yield(passed),
-      (typename Parameters::template Parameter<A2, 2, Passed>()).yield(passed),
-      (typename Parameters::template Parameter<A3, 3, Passed>()).yield(passed),
-      (typename Parameters::template Parameter<A4, 4, Passed>()).yield(passed),
-      (typename Parameters::template Parameter<A5, 5, Passed>()).yield(passed),
-      (typename Parameters::template Parameter<A6, 6, Passed>()).yield(passed));
+      (typename Parameters::template Parameter<A0, 0>()).template yield<Passed>(passed),
+      (typename Parameters::template Parameter<A1, 1>()).template yield<Passed>(passed),
+      (typename Parameters::template Parameter<A2, 2>()).template yield<Passed>(passed),
+      (typename Parameters::template Parameter<A3, 3>()).template yield<Passed>(passed),
+      (typename Parameters::template Parameter<A4, 4>()).template yield<Passed>(passed),
+      (typename Parameters::template Parameter<A5, 5>()).template yield<Passed>(passed),
+      (typename Parameters::template Parameter<A6, 6>()).template yield<Passed>(passed));
   }
 
   template<typename Passed>
   void observe(Passed passed) {
-    (typename Parameters::template Parameter<A0, 0, Passed>()).observe(passed);
-    (typename Parameters::template Parameter<A1, 1, Passed>()).observe(passed);
-    (typename Parameters::template Parameter<A2, 2, Passed>()).observe(passed);
-    (typename Parameters::template Parameter<A3, 3, Passed>()).observe(passed);
-    (typename Parameters::template Parameter<A4, 4, Passed>()).observe(passed);
-    (typename Parameters::template Parameter<A5, 5, Passed>()).observe(passed);
-    (typename Parameters::template Parameter<A6, 6, Passed>()).observe(passed);
+    (typename Parameters::template Parameter<A0, 0>()).template observe<Passed>(passed);
+    (typename Parameters::template Parameter<A1, 1>()).template observe<Passed>(passed);
+    (typename Parameters::template Parameter<A2, 2>()).template observe<Passed>(passed);
+    (typename Parameters::template Parameter<A3, 3>()).template observe<Passed>(passed);
+    (typename Parameters::template Parameter<A4, 4>()).template observe<Passed>(passed);
+    (typename Parameters::template Parameter<A5, 5>()).template observe<Passed>(passed);
+    (typename Parameters::template Parameter<A6, 6>()).template observe<Passed>(passed);
   }
 };
 /* *INDENT-ON* */
@@ -1221,26 +1221,26 @@ public:
   template<typename Passed>
   Return apply(Passed passed) {
     return function(
-      (typename Parameters::template Parameter<A0, 0, Passed>()).yield(passed),
-      (typename Parameters::template Parameter<A1, 1, Passed>()).yield(passed),
-      (typename Parameters::template Parameter<A2, 2, Passed>()).yield(passed),
-      (typename Parameters::template Parameter<A3, 3, Passed>()).yield(passed),
-      (typename Parameters::template Parameter<A4, 4, Passed>()).yield(passed),
-      (typename Parameters::template Parameter<A5, 5, Passed>()).yield(passed),
-      (typename Parameters::template Parameter<A6, 6, Passed>()).yield(passed),
-      (typename Parameters::template Parameter<A7, 7, Passed>()).yield(passed));
+      (typename Parameters::template Parameter<A0, 0>()).template yield<Passed>(passed),
+      (typename Parameters::template Parameter<A1, 1>()).template yield<Passed>(passed),
+      (typename Parameters::template Parameter<A2, 2>()).template yield<Passed>(passed),
+      (typename Parameters::template Parameter<A3, 3>()).template yield<Passed>(passed),
+      (typename Parameters::template Parameter<A4, 4>()).template yield<Passed>(passed),
+      (typename Parameters::template Parameter<A5, 5>()).template yield<Passed>(passed),
+      (typename Parameters::template Parameter<A6, 6>()).template yield<Passed>(passed),
+      (typename Parameters::template Parameter<A7, 7>()).template yield<Passed>(passed));
   }
 
   template<typename Passed>
   void observe(Passed passed) {
-    (typename Parameters::template Parameter<A0, 0, Passed>()).observe(passed);
-    (typename Parameters::template Parameter<A1, 1, Passed>()).observe(passed);
-    (typename Parameters::template Parameter<A2, 2, Passed>()).observe(passed);
-    (typename Parameters::template Parameter<A3, 3, Passed>()).observe(passed);
-    (typename Parameters::template Parameter<A4, 4, Passed>()).observe(passed);
-    (typename Parameters::template Parameter<A5, 5, Passed>()).observe(passed);
-    (typename Parameters::template Parameter<A6, 6, Passed>()).observe(passed);
-    (typename Parameters::template Parameter<A7, 7, Passed>()).observe(passed);
+    (typename Parameters::template Parameter<A0, 0>()).template observe<Passed>(passed);
+    (typename Parameters::template Parameter<A1, 1>()).template observe<Passed>(passed);
+    (typename Parameters::template Parameter<A2, 2>()).template observe<Passed>(passed);
+    (typename Parameters::template Parameter<A3, 3>()).template observe<Passed>(passed);
+    (typename Parameters::template Parameter<A4, 4>()).template observe<Passed>(passed);
+    (typename Parameters::template Parameter<A5, 5>()).template observe<Passed>(passed);
+    (typename Parameters::template Parameter<A6, 6>()).template observe<Passed>(passed);
+    (typename Parameters::template Parameter<A7, 7>()).template observe<Passed>(passed);
   }
 };
 /* *INDENT-ON* */
@@ -1266,14 +1266,14 @@ public:
   template<typename Passed>
   void apply(Passed passed) {
     function(
-      (typename Parameters::template Parameter<A0, 0, Passed>()).yield(passed),
-      (typename Parameters::template Parameter<A1, 1, Passed>()).yield(passed),
-      (typename Parameters::template Parameter<A2, 2, Passed>()).yield(passed),
-      (typename Parameters::template Parameter<A3, 3, Passed>()).yield(passed),
-      (typename Parameters::template Parameter<A4, 4, Passed>()).yield(passed),
-      (typename Parameters::template Parameter<A5, 5, Passed>()).yield(passed),
-      (typename Parameters::template Parameter<A6, 6, Passed>()).yield(passed),
-      (typename Parameters::template Parameter<A7, 7, Passed>()).yield(passed));
+      (typename Parameters::template Parameter<A0, 0>()).template yield<Passed>(passed),
+      (typename Parameters::template Parameter<A1, 1>()).template yield<Passed>(passed),
+      (typename Parameters::template Parameter<A2, 2>()).template yield<Passed>(passed),
+      (typename Parameters::template Parameter<A3, 3>()).template yield<Passed>(passed),
+      (typename Parameters::template Parameter<A4, 4>()).template yield<Passed>(passed),
+      (typename Parameters::template Parameter<A5, 5>()).template yield<Passed>(passed),
+      (typename Parameters::template Parameter<A6, 6>()).template yield<Passed>(passed),
+      (typename Parameters::template Parameter<A7, 7>()).template yield<Passed>(passed));
   }
 };
 /* *INDENT-ON* */
@@ -1302,26 +1302,26 @@ public:
   template<typename Passed>
   Return apply(Receiver & receiver, Passed passed) {
     return (receiver.*method)(
-      (typename Parameters::template Parameter<A0, 0, Passed>()).yield(passed),
-      (typename Parameters::template Parameter<A1, 1, Passed>()).yield(passed),
-      (typename Parameters::template Parameter<A2, 2, Passed>()).yield(passed),
-      (typename Parameters::template Parameter<A3, 3, Passed>()).yield(passed),
-      (typename Parameters::template Parameter<A4, 4, Passed>()).yield(passed),
-      (typename Parameters::template Parameter<A5, 5, Passed>()).yield(passed),
-      (typename Parameters::template Parameter<A6, 6, Passed>()).yield(passed),
-      (typename Parameters::template Parameter<A7, 7, Passed>()).yield(passed));
+      (typename Parameters::template Parameter<A0, 0>()).template yield<Passed>(passed),
+      (typename Parameters::template Parameter<A1, 1>()).template yield<Passed>(passed),
+      (typename Parameters::template Parameter<A2, 2>()).template yield<Passed>(passed),
+      (typename Parameters::template Parameter<A3, 3>()).template yield<Passed>(passed),
+      (typename Parameters::template Parameter<A4, 4>()).template yield<Passed>(passed),
+      (typename Parameters::template Parameter<A5, 5>()).template yield<Passed>(passed),
+      (typename Parameters::template Parameter<A6, 6>()).template yield<Passed>(passed),
+      (typename Parameters::template Parameter<A7, 7>()).template yield<Passed>(passed));
   }
 
   template<typename Passed>
   void observe(Passed passed) {
-    (typename Parameters::template Parameter<A0, 0, Passed>()).observe(passed);
-    (typename Parameters::template Parameter<A1, 1, Passed>()).observe(passed);
-    (typename Parameters::template Parameter<A2, 2, Passed>()).observe(passed);
-    (typename Parameters::template Parameter<A3, 3, Passed>()).observe(passed);
-    (typename Parameters::template Parameter<A4, 4, Passed>()).observe(passed);
-    (typename Parameters::template Parameter<A5, 5, Passed>()).observe(passed);
-    (typename Parameters::template Parameter<A6, 6, Passed>()).observe(passed);
-    (typename Parameters::template Parameter<A7, 7, Passed>()).observe(passed);
+    (typename Parameters::template Parameter<A0, 0>()).template observe<Passed>(passed);
+    (typename Parameters::template Parameter<A1, 1>()).template observe<Passed>(passed);
+    (typename Parameters::template Parameter<A2, 2>()).template observe<Passed>(passed);
+    (typename Parameters::template Parameter<A3, 3>()).template observe<Passed>(passed);
+    (typename Parameters::template Parameter<A4, 4>()).template observe<Passed>(passed);
+    (typename Parameters::template Parameter<A5, 5>()).template observe<Passed>(passed);
+    (typename Parameters::template Parameter<A6, 6>()).template observe<Passed>(passed);
+    (typename Parameters::template Parameter<A7, 7>()).template observe<Passed>(passed);
   }
 };
 /* *INDENT-ON* */
@@ -1349,26 +1349,26 @@ public:
   template<typename Passed>
   Constructed * apply(Passed passed) {
     return new(allocator.allocate(1)) Constructed(
-      (typename Parameters::template Parameter<A0, 0, Passed>()).yield(passed),
-      (typename Parameters::template Parameter<A1, 1, Passed>()).yield(passed),
-      (typename Parameters::template Parameter<A2, 2, Passed>()).yield(passed),
-      (typename Parameters::template Parameter<A3, 3, Passed>()).yield(passed),
-      (typename Parameters::template Parameter<A4, 4, Passed>()).yield(passed),
-      (typename Parameters::template Parameter<A5, 5, Passed>()).yield(passed),
-      (typename Parameters::template Parameter<A6, 6, Passed>()).yield(passed),
-      (typename Parameters::template Parameter<A7, 7, Passed>()).yield(passed));
+      (typename Parameters::template Parameter<A0, 0>()).template yield<Passed>(passed),
+      (typename Parameters::template Parameter<A1, 1>()).template yield<Passed>(passed),
+      (typename Parameters::template Parameter<A2, 2>()).template yield<Passed>(passed),
+      (typename Parameters::template Parameter<A3, 3>()).template yield<Passed>(passed),
+      (typename Parameters::template Parameter<A4, 4>()).template yield<Passed>(passed),
+      (typename Parameters::template Parameter<A5, 5>()).template yield<Passed>(passed),
+      (typename Parameters::template Parameter<A6, 6>()).template yield<Passed>(passed),
+      (typename Parameters::template Parameter<A7, 7>()).template yield<Passed>(passed));
   }
 
   template<typename Passed>
   void observe(Passed passed) {
-    (typename Parameters::template Parameter<A0, 0, Passed>()).observe(passed);
-    (typename Parameters::template Parameter<A1, 1, Passed>()).observe(passed);
-    (typename Parameters::template Parameter<A2, 2, Passed>()).observe(passed);
-    (typename Parameters::template Parameter<A3, 3, Passed>()).observe(passed);
-    (typename Parameters::template Parameter<A4, 4, Passed>()).observe(passed);
-    (typename Parameters::template Parameter<A5, 5, Passed>()).observe(passed);
-    (typename Parameters::template Parameter<A6, 6, Passed>()).observe(passed);
-    (typename Parameters::template Parameter<A7, 7, Passed>()).observe(passed);
+    (typename Parameters::template Parameter<A0, 0>()).template observe<Passed>(passed);
+    (typename Parameters::template Parameter<A1, 1>()).template observe<Passed>(passed);
+    (typename Parameters::template Parameter<A2, 2>()).template observe<Passed>(passed);
+    (typename Parameters::template Parameter<A3, 3>()).template observe<Passed>(passed);
+    (typename Parameters::template Parameter<A4, 4>()).template observe<Passed>(passed);
+    (typename Parameters::template Parameter<A5, 5>()).template observe<Passed>(passed);
+    (typename Parameters::template Parameter<A6, 6>()).template observe<Passed>(passed);
+    (typename Parameters::template Parameter<A7, 7>()).template observe<Passed>(passed);
   }
 };
 /* *INDENT-ON* */
@@ -1395,28 +1395,28 @@ public:
   template<typename Passed>
   Return apply(Passed passed) {
     return function(
-      (typename Parameters::template Parameter<A0, 0, Passed>()).yield(passed),
-      (typename Parameters::template Parameter<A1, 1, Passed>()).yield(passed),
-      (typename Parameters::template Parameter<A2, 2, Passed>()).yield(passed),
-      (typename Parameters::template Parameter<A3, 3, Passed>()).yield(passed),
-      (typename Parameters::template Parameter<A4, 4, Passed>()).yield(passed),
-      (typename Parameters::template Parameter<A5, 5, Passed>()).yield(passed),
-      (typename Parameters::template Parameter<A6, 6, Passed>()).yield(passed),
-      (typename Parameters::template Parameter<A7, 7, Passed>()).yield(passed),
-      (typename Parameters::template Parameter<A8, 8, Passed>()).yield(passed));
+      (typename Parameters::template Parameter<A0, 0>()).template yield<Passed>(passed),
+      (typename Parameters::template Parameter<A1, 1>()).template yield<Passed>(passed),
+      (typename Parameters::template Parameter<A2, 2>()).template yield<Passed>(passed),
+      (typename Parameters::template Parameter<A3, 3>()).template yield<Passed>(passed),
+      (typename Parameters::template Parameter<A4, 4>()).template yield<Passed>(passed),
+      (typename Parameters::template Parameter<A5, 5>()).template yield<Passed>(passed),
+      (typename Parameters::template Parameter<A6, 6>()).template yield<Passed>(passed),
+      (typename Parameters::template Parameter<A7, 7>()).template yield<Passed>(passed),
+      (typename Parameters::template Parameter<A8, 8>()).template yield<Passed>(passed));
   }
 
   template<typename Passed>
   void observe(Passed passed) {
-    (typename Parameters::template Parameter<A0, 0, Passed>()).observe(passed);
-    (typename Parameters::template Parameter<A1, 1, Passed>()).observe(passed);
-    (typename Parameters::template Parameter<A2, 2, Passed>()).observe(passed);
-    (typename Parameters::template Parameter<A3, 3, Passed>()).observe(passed);
-    (typename Parameters::template Parameter<A4, 4, Passed>()).observe(passed);
-    (typename Parameters::template Parameter<A5, 5, Passed>()).observe(passed);
-    (typename Parameters::template Parameter<A6, 6, Passed>()).observe(passed);
-    (typename Parameters::template Parameter<A7, 7, Passed>()).observe(passed);
-    (typename Parameters::template Parameter<A8, 8, Passed>()).observe(passed);
+    (typename Parameters::template Parameter<A0, 0>()).template observe<Passed>(passed);
+    (typename Parameters::template Parameter<A1, 1>()).template observe<Passed>(passed);
+    (typename Parameters::template Parameter<A2, 2>()).template observe<Passed>(passed);
+    (typename Parameters::template Parameter<A3, 3>()).template observe<Passed>(passed);
+    (typename Parameters::template Parameter<A4, 4>()).template observe<Passed>(passed);
+    (typename Parameters::template Parameter<A5, 5>()).template observe<Passed>(passed);
+    (typename Parameters::template Parameter<A6, 6>()).template observe<Passed>(passed);
+    (typename Parameters::template Parameter<A7, 7>()).template observe<Passed>(passed);
+    (typename Parameters::template Parameter<A8, 8>()).template observe<Passed>(passed);
   }
 };
 /* *INDENT-ON* */
@@ -1442,15 +1442,15 @@ public:
   template<typename Passed>
   void apply(Passed passed) {
     function(
-      (typename Parameters::template Parameter<A0, 0, Passed>()).yield(passed),
-      (typename Parameters::template Parameter<A1, 1, Passed>()).yield(passed),
-      (typename Parameters::template Parameter<A2, 2, Passed>()).yield(passed),
-      (typename Parameters::template Parameter<A3, 3, Passed>()).yield(passed),
-      (typename Parameters::template Parameter<A4, 4, Passed>()).yield(passed),
-      (typename Parameters::template Parameter<A5, 5, Passed>()).yield(passed),
-      (typename Parameters::template Parameter<A6, 6, Passed>()).yield(passed),
-      (typename Parameters::template Parameter<A7, 7, Passed>()).yield(passed),
-      (typename Parameters::template Parameter<A8, 8, Passed>()).yield(passed));
+      (typename Parameters::template Parameter<A0, 0>()).template yield<Passed>(passed),
+      (typename Parameters::template Parameter<A1, 1>()).template yield<Passed>(passed),
+      (typename Parameters::template Parameter<A2, 2>()).template yield<Passed>(passed),
+      (typename Parameters::template Parameter<A3, 3>()).template yield<Passed>(passed),
+      (typename Parameters::template Parameter<A4, 4>()).template yield<Passed>(passed),
+      (typename Parameters::template Parameter<A5, 5>()).template yield<Passed>(passed),
+      (typename Parameters::template Parameter<A6, 6>()).template yield<Passed>(passed),
+      (typename Parameters::template Parameter<A7, 7>()).template yield<Passed>(passed),
+      (typename Parameters::template Parameter<A8, 8>()).template yield<Passed>(passed));
   }
 };
 /* *INDENT-ON* */
@@ -1479,28 +1479,28 @@ public:
   template<typename Passed>
   Return apply(Receiver & receiver, Passed passed) {
     return (receiver.*method)(
-      (typename Parameters::template Parameter<A0, 0, Passed>()).yield(passed),
-      (typename Parameters::template Parameter<A1, 1, Passed>()).yield(passed),
-      (typename Parameters::template Parameter<A2, 2, Passed>()).yield(passed),
-      (typename Parameters::template Parameter<A3, 3, Passed>()).yield(passed),
-      (typename Parameters::template Parameter<A4, 4, Passed>()).yield(passed),
-      (typename Parameters::template Parameter<A5, 5, Passed>()).yield(passed),
-      (typename Parameters::template Parameter<A6, 6, Passed>()).yield(passed),
-      (typename Parameters::template Parameter<A7, 7, Passed>()).yield(passed),
-      (typename Parameters::template Parameter<A8, 8, Passed>()).yield(passed));
+      (typename Parameters::template Parameter<A0, 0>()).template yield<Passed>(passed),
+      (typename Parameters::template Parameter<A1, 1>()).template yield<Passed>(passed),
+      (typename Parameters::template Parameter<A2, 2>()).template yield<Passed>(passed),
+      (typename Parameters::template Parameter<A3, 3>()).template yield<Passed>(passed),
+      (typename Parameters::template Parameter<A4, 4>()).template yield<Passed>(passed),
+      (typename Parameters::template Parameter<A5, 5>()).template yield<Passed>(passed),
+      (typename Parameters::template Parameter<A6, 6>()).template yield<Passed>(passed),
+      (typename Parameters::template Parameter<A7, 7>()).template yield<Passed>(passed),
+      (typename Parameters::template Parameter<A8, 8>()).template yield<Passed>(passed));
   }
 
   template<typename Passed>
   void observe(Passed passed) {
-    (typename Parameters::template Parameter<A0, 0, Passed>()).observe(passed);
-    (typename Parameters::template Parameter<A1, 1, Passed>()).observe(passed);
-    (typename Parameters::template Parameter<A2, 2, Passed>()).observe(passed);
-    (typename Parameters::template Parameter<A3, 3, Passed>()).observe(passed);
-    (typename Parameters::template Parameter<A4, 4, Passed>()).observe(passed);
-    (typename Parameters::template Parameter<A5, 5, Passed>()).observe(passed);
-    (typename Parameters::template Parameter<A6, 6, Passed>()).observe(passed);
-    (typename Parameters::template Parameter<A7, 7, Passed>()).observe(passed);
-    (typename Parameters::template Parameter<A8, 8, Passed>()).observe(passed);
+    (typename Parameters::template Parameter<A0, 0>()).template observe<Passed>(passed);
+    (typename Parameters::template Parameter<A1, 1>()).template observe<Passed>(passed);
+    (typename Parameters::template Parameter<A2, 2>()).template observe<Passed>(passed);
+    (typename Parameters::template Parameter<A3, 3>()).template observe<Passed>(passed);
+    (typename Parameters::template Parameter<A4, 4>()).template observe<Passed>(passed);
+    (typename Parameters::template Parameter<A5, 5>()).template observe<Passed>(passed);
+    (typename Parameters::template Parameter<A6, 6>()).template observe<Passed>(passed);
+    (typename Parameters::template Parameter<A7, 7>()).template observe<Passed>(passed);
+    (typename Parameters::template Parameter<A8, 8>()).template observe<Passed>(passed);
   }
 };
 /* *INDENT-ON* */
@@ -1528,28 +1528,28 @@ public:
   template<typename Passed>
   Constructed * apply(Passed passed) {
     return new(allocator.allocate(1)) Constructed(
-      (typename Parameters::template Parameter<A0, 0, Passed>()).yield(passed),
-      (typename Parameters::template Parameter<A1, 1, Passed>()).yield(passed),
-      (typename Parameters::template Parameter<A2, 2, Passed>()).yield(passed),
-      (typename Parameters::template Parameter<A3, 3, Passed>()).yield(passed),
-      (typename Parameters::template Parameter<A4, 4, Passed>()).yield(passed),
-      (typename Parameters::template Parameter<A5, 5, Passed>()).yield(passed),
-      (typename Parameters::template Parameter<A6, 6, Passed>()).yield(passed),
-      (typename Parameters::template Parameter<A7, 7, Passed>()).yield(passed),
-      (typename Parameters::template Parameter<A8, 8, Passed>()).yield(passed));
+      (typename Parameters::template Parameter<A0, 0>()).template yield<Passed>(passed),
+      (typename Parameters::template Parameter<A1, 1>()).template yield<Passed>(passed),
+      (typename Parameters::template Parameter<A2, 2>()).template yield<Passed>(passed),
+      (typename Parameters::template Parameter<A3, 3>()).template yield<Passed>(passed),
+      (typename Parameters::template Parameter<A4, 4>()).template yield<Passed>(passed),
+      (typename Parameters::template Parameter<A5, 5>()).template yield<Passed>(passed),
+      (typename Parameters::template Parameter<A6, 6>()).template yield<Passed>(passed),
+      (typename Parameters::template Parameter<A7, 7>()).template yield<Passed>(passed),
+      (typename Parameters::template Parameter<A8, 8>()).template yield<Passed>(passed));
   }
 
   template<typename Passed>
   void observe(Passed passed) {
-    (typename Parameters::template Parameter<A0, 0, Passed>()).observe(passed);
-    (typename Parameters::template Parameter<A1, 1, Passed>()).observe(passed);
-    (typename Parameters::template Parameter<A2, 2, Passed>()).observe(passed);
-    (typename Parameters::template Parameter<A3, 3, Passed>()).observe(passed);
-    (typename Parameters::template Parameter<A4, 4, Passed>()).observe(passed);
-    (typename Parameters::template Parameter<A5, 5, Passed>()).observe(passed);
-    (typename Parameters::template Parameter<A6, 6, Passed>()).observe(passed);
-    (typename Parameters::template Parameter<A7, 7, Passed>()).observe(passed);
-    (typename Parameters::template Parameter<A8, 8, Passed>()).observe(passed);
+    (typename Parameters::template Parameter<A0, 0>()).template observe<Passed>(passed);
+    (typename Parameters::template Parameter<A1, 1>()).template observe<Passed>(passed);
+    (typename Parameters::template Parameter<A2, 2>()).template observe<Passed>(passed);
+    (typename Parameters::template Parameter<A3, 3>()).template observe<Passed>(passed);
+    (typename Parameters::template Parameter<A4, 4>()).template observe<Passed>(passed);
+    (typename Parameters::template Parameter<A5, 5>()).template observe<Passed>(passed);
+    (typename Parameters::template Parameter<A6, 6>()).template observe<Passed>(passed);
+    (typename Parameters::template Parameter<A7, 7>()).template observe<Passed>(passed);
+    (typename Parameters::template Parameter<A8, 8>()).template observe<Passed>(passed);
   }
 };
 /* *INDENT-ON* */
@@ -1576,30 +1576,30 @@ public:
   template<typename Passed>
   Return apply(Passed passed) {
     return function(
-      (typename Parameters::template Parameter<A0, 0, Passed>()).yield(passed),
-      (typename Parameters::template Parameter<A1, 1, Passed>()).yield(passed),
-      (typename Parameters::template Parameter<A2, 2, Passed>()).yield(passed),
-      (typename Parameters::template Parameter<A3, 3, Passed>()).yield(passed),
-      (typename Parameters::template Parameter<A4, 4, Passed>()).yield(passed),
-      (typename Parameters::template Parameter<A5, 5, Passed>()).yield(passed),
-      (typename Parameters::template Parameter<A6, 6, Passed>()).yield(passed),
-      (typename Parameters::template Parameter<A7, 7, Passed>()).yield(passed),
-      (typename Parameters::template Parameter<A8, 8, Passed>()).yield(passed),
-      (typename Parameters::template Parameter<A9, 9, Passed>()).yield(passed));
+      (typename Parameters::template Parameter<A0, 0>()).template yield<Passed>(passed),
+      (typename Parameters::template Parameter<A1, 1>()).template yield<Passed>(passed),
+      (typename Parameters::template Parameter<A2, 2>()).template yield<Passed>(passed),
+      (typename Parameters::template Parameter<A3, 3>()).template yield<Passed>(passed),
+      (typename Parameters::template Parameter<A4, 4>()).template yield<Passed>(passed),
+      (typename Parameters::template Parameter<A5, 5>()).template yield<Passed>(passed),
+      (typename Parameters::template Parameter<A6, 6>()).template yield<Passed>(passed),
+      (typename Parameters::template Parameter<A7, 7>()).template yield<Passed>(passed),
+      (typename Parameters::template Parameter<A8, 8>()).template yield<Passed>(passed),
+      (typename Parameters::template Parameter<A9, 9>()).template yield<Passed>(passed));
   }
 
   template<typename Passed>
   void observe(Passed passed) {
-    (typename Parameters::template Parameter<A0, 0, Passed>()).observe(passed);
-    (typename Parameters::template Parameter<A1, 1, Passed>()).observe(passed);
-    (typename Parameters::template Parameter<A2, 2, Passed>()).observe(passed);
-    (typename Parameters::template Parameter<A3, 3, Passed>()).observe(passed);
-    (typename Parameters::template Parameter<A4, 4, Passed>()).observe(passed);
-    (typename Parameters::template Parameter<A5, 5, Passed>()).observe(passed);
-    (typename Parameters::template Parameter<A6, 6, Passed>()).observe(passed);
-    (typename Parameters::template Parameter<A7, 7, Passed>()).observe(passed);
-    (typename Parameters::template Parameter<A8, 8, Passed>()).observe(passed);
-    (typename Parameters::template Parameter<A9, 9, Passed>()).observe(passed);
+    (typename Parameters::template Parameter<A0, 0>()).template observe<Passed>(passed);
+    (typename Parameters::template Parameter<A1, 1>()).template observe<Passed>(passed);
+    (typename Parameters::template Parameter<A2, 2>()).template observe<Passed>(passed);
+    (typename Parameters::template Parameter<A3, 3>()).template observe<Passed>(passed);
+    (typename Parameters::template Parameter<A4, 4>()).template observe<Passed>(passed);
+    (typename Parameters::template Parameter<A5, 5>()).template observe<Passed>(passed);
+    (typename Parameters::template Parameter<A6, 6>()).template observe<Passed>(passed);
+    (typename Parameters::template Parameter<A7, 7>()).template observe<Passed>(passed);
+    (typename Parameters::template Parameter<A8, 8>()).template observe<Passed>(passed);
+    (typename Parameters::template Parameter<A9, 9>()).template observe<Passed>(passed);
   }
 };
 /* *INDENT-ON* */
@@ -1625,16 +1625,16 @@ public:
   template<typename Passed>
   void apply(Passed passed) {
     function(
-      (typename Parameters::template Parameter<A0, 0, Passed>()).yield(passed),
-      (typename Parameters::template Parameter<A1, 1, Passed>()).yield(passed),
-      (typename Parameters::template Parameter<A2, 2, Passed>()).yield(passed),
-      (typename Parameters::template Parameter<A3, 3, Passed>()).yield(passed),
-      (typename Parameters::template Parameter<A4, 4, Passed>()).yield(passed),
-      (typename Parameters::template Parameter<A5, 5, Passed>()).yield(passed),
-      (typename Parameters::template Parameter<A6, 6, Passed>()).yield(passed),
-      (typename Parameters::template Parameter<A7, 7, Passed>()).yield(passed),
-      (typename Parameters::template Parameter<A8, 8, Passed>()).yield(passed),
-      (typename Parameters::template Parameter<A9, 9, Passed>()).yield(passed));
+      (typename Parameters::template Parameter<A0, 0>()).template yield<Passed>(passed),
+      (typename Parameters::template Parameter<A1, 1>()).template yield<Passed>(passed),
+      (typename Parameters::template Parameter<A2, 2>()).template yield<Passed>(passed),
+      (typename Parameters::template Parameter<A3, 3>()).template yield<Passed>(passed),
+      (typename Parameters::template Parameter<A4, 4>()).template yield<Passed>(passed),
+      (typename Parameters::template Parameter<A5, 5>()).template yield<Passed>(passed),
+      (typename Parameters::template Parameter<A6, 6>()).template yield<Passed>(passed),
+      (typename Parameters::template Parameter<A7, 7>()).template yield<Passed>(passed),
+      (typename Parameters::template Parameter<A8, 8>()).template yield<Passed>(passed),
+      (typename Parameters::template Parameter<A9, 9>()).template yield<Passed>(passed));
   }
 };
 /* *INDENT-ON* */
@@ -1663,30 +1663,30 @@ public:
   template<typename Passed>
   Return apply(Receiver & receiver, Passed passed) {
     return (receiver.*method)(
-      (typename Parameters::template Parameter<A0, 0, Passed>()).yield(passed),
-      (typename Parameters::template Parameter<A1, 1, Passed>()).yield(passed),
-      (typename Parameters::template Parameter<A2, 2, Passed>()).yield(passed),
-      (typename Parameters::template Parameter<A3, 3, Passed>()).yield(passed),
-      (typename Parameters::template Parameter<A4, 4, Passed>()).yield(passed),
-      (typename Parameters::template Parameter<A5, 5, Passed>()).yield(passed),
-      (typename Parameters::template Parameter<A6, 6, Passed>()).yield(passed),
-      (typename Parameters::template Parameter<A7, 7, Passed>()).yield(passed),
-      (typename Parameters::template Parameter<A8, 8, Passed>()).yield(passed),
-      (typename Parameters::template Parameter<A9, 9, Passed>()).yield(passed));
+      (typename Parameters::template Parameter<A0, 0>()).template yield<Passed>(passed),
+      (typename Parameters::template Parameter<A1, 1>()).template yield<Passed>(passed),
+      (typename Parameters::template Parameter<A2, 2>()).template yield<Passed>(passed),
+      (typename Parameters::template Parameter<A3, 3>()).template yield<Passed>(passed),
+      (typename Parameters::template Parameter<A4, 4>()).template yield<Passed>(passed),
+      (typename Parameters::template Parameter<A5, 5>()).template yield<Passed>(passed),
+      (typename Parameters::template Parameter<A6, 6>()).template yield<Passed>(passed),
+      (typename Parameters::template Parameter<A7, 7>()).template yield<Passed>(passed),
+      (typename Parameters::template Parameter<A8, 8>()).template yield<Passed>(passed),
+      (typename Parameters::template Parameter<A9, 9>()).template yield<Passed>(passed));
   }
 
   template<typename Passed>
   void observe(Passed passed) {
-    (typename Parameters::template Parameter<A0, 0, Passed>()).observe(passed);
-    (typename Parameters::template Parameter<A1, 1, Passed>()).observe(passed);
-    (typename Parameters::template Parameter<A2, 2, Passed>()).observe(passed);
-    (typename Parameters::template Parameter<A3, 3, Passed>()).observe(passed);
-    (typename Parameters::template Parameter<A4, 4, Passed>()).observe(passed);
-    (typename Parameters::template Parameter<A5, 5, Passed>()).observe(passed);
-    (typename Parameters::template Parameter<A6, 6, Passed>()).observe(passed);
-    (typename Parameters::template Parameter<A7, 7, Passed>()).observe(passed);
-    (typename Parameters::template Parameter<A8, 8, Passed>()).observe(passed);
-    (typename Parameters::template Parameter<A9, 9, Passed>()).observe(passed);
+    (typename Parameters::template Parameter<A0, 0>()).template observe<Passed>(passed);
+    (typename Parameters::template Parameter<A1, 1>()).template observe<Passed>(passed);
+    (typename Parameters::template Parameter<A2, 2>()).template observe<Passed>(passed);
+    (typename Parameters::template Parameter<A3, 3>()).template observe<Passed>(passed);
+    (typename Parameters::template Parameter<A4, 4>()).template observe<Passed>(passed);
+    (typename Parameters::template Parameter<A5, 5>()).template observe<Passed>(passed);
+    (typename Parameters::template Parameter<A6, 6>()).template observe<Passed>(passed);
+    (typename Parameters::template Parameter<A7, 7>()).template observe<Passed>(passed);
+    (typename Parameters::template Parameter<A8, 8>()).template observe<Passed>(passed);
+    (typename Parameters::template Parameter<A9, 9>()).template observe<Passed>(passed);
   }
 };
 /* *INDENT-ON* */
@@ -1714,30 +1714,30 @@ public:
   template<typename Passed>
   Constructed * apply(Passed passed) {
     return new(allocator.allocate(1)) Constructed(
-      (typename Parameters::template Parameter<A0, 0, Passed>()).yield(passed),
-      (typename Parameters::template Parameter<A1, 1, Passed>()).yield(passed),
-      (typename Parameters::template Parameter<A2, 2, Passed>()).yield(passed),
-      (typename Parameters::template Parameter<A3, 3, Passed>()).yield(passed),
-      (typename Parameters::template Parameter<A4, 4, Passed>()).yield(passed),
-      (typename Parameters::template Parameter<A5, 5, Passed>()).yield(passed),
-      (typename Parameters::template Parameter<A6, 6, Passed>()).yield(passed),
-      (typename Parameters::template Parameter<A7, 7, Passed>()).yield(passed),
-      (typename Parameters::template Parameter<A8, 8, Passed>()).yield(passed),
-      (typename Parameters::template Parameter<A9, 9, Passed>()).yield(passed));
+      (typename Parameters::template Parameter<A0, 0>()).template yield<Passed>(passed),
+      (typename Parameters::template Parameter<A1, 1>()).template yield<Passed>(passed),
+      (typename Parameters::template Parameter<A2, 2>()).template yield<Passed>(passed),
+      (typename Parameters::template Parameter<A3, 3>()).template yield<Passed>(passed),
+      (typename Parameters::template Parameter<A4, 4>()).template yield<Passed>(passed),
+      (typename Parameters::template Parameter<A5, 5>()).template yield<Passed>(passed),
+      (typename Parameters::template Parameter<A6, 6>()).template yield<Passed>(passed),
+      (typename Parameters::template Parameter<A7, 7>()).template yield<Passed>(passed),
+      (typename Parameters::template Parameter<A8, 8>()).template yield<Passed>(passed),
+      (typename Parameters::template Parameter<A9, 9>()).template yield<Passed>(passed));
   }
 
   template<typename Passed>
   void observe(Passed passed) {
-    (typename Parameters::template Parameter<A0, 0, Passed>()).observe(passed);
-    (typename Parameters::template Parameter<A1, 1, Passed>()).observe(passed);
-    (typename Parameters::template Parameter<A2, 2, Passed>()).observe(passed);
-    (typename Parameters::template Parameter<A3, 3, Passed>()).observe(passed);
-    (typename Parameters::template Parameter<A4, 4, Passed>()).observe(passed);
-    (typename Parameters::template Parameter<A5, 5, Passed>()).observe(passed);
-    (typename Parameters::template Parameter<A6, 6, Passed>()).observe(passed);
-    (typename Parameters::template Parameter<A7, 7, Passed>()).observe(passed);
-    (typename Parameters::template Parameter<A8, 8, Passed>()).observe(passed);
-    (typename Parameters::template Parameter<A9, 9, Passed>()).observe(passed);
+    (typename Parameters::template Parameter<A0, 0>()).template observe<Passed>(passed);
+    (typename Parameters::template Parameter<A1, 1>()).template observe<Passed>(passed);
+    (typename Parameters::template Parameter<A2, 2>()).template observe<Passed>(passed);
+    (typename Parameters::template Parameter<A3, 3>()).template observe<Passed>(passed);
+    (typename Parameters::template Parameter<A4, 4>()).template observe<Passed>(passed);
+    (typename Parameters::template Parameter<A5, 5>()).template observe<Passed>(passed);
+    (typename Parameters::template Parameter<A6, 6>()).template observe<Passed>(passed);
+    (typename Parameters::template Parameter<A7, 7>()).template observe<Passed>(passed);
+    (typename Parameters::template Parameter<A8, 8>()).template observe<Passed>(passed);
+    (typename Parameters::template Parameter<A9, 9>()).template observe<Passed>(passed);
   }
 };
 /* *INDENT-ON* */
