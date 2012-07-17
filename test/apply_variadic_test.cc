@@ -225,6 +225,7 @@ struct ToStringer {
 
 TEST(ApplyConstructorTest, shouldCallConstructorWithParametersGeneratedFromPassedType) {
   typedef ToStringer Ctor (std::string, int);
+  typedef ToStringer AnnotatedCtor (Annotation<std::string>, int);
   typedef std::allocator<int> Allocator;
 
   sauce::auto_ptr<ToStringer> toStringer(applyConstructor<DefaultValueParameters, Ctor, Allocator>(0));
@@ -232,6 +233,9 @@ TEST(ApplyConstructorTest, shouldCallConstructorWithParametersGeneratedFromPasse
 
   toStringer.reset(applyConstructor<SpecializedParameters, Ctor, Allocator>(0));
   ASSERT_EQ("'foobar' '17'", toStringer->toString);
+
+  toStringer.reset(applyConstructor<AnnotatedParameters, AnnotatedCtor, Allocator>(0));
+  ASSERT_EQ("'' '0'", toStringer->toString);
 
   std::string passed = "foo";
   toStringer.reset(applyConstructor<MoreSpecializedParameters, Ctor, Allocator>(passed));
