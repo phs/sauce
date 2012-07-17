@@ -82,15 +82,15 @@ struct AnnotatedParameters {
   };
 };
 
+typedef std::string (*AnnotatedToString)(Annotation<std::string>, int);
+
 TEST(ApplyFunctionTest, shouldCallPassedFunctionWithParametersGeneratedFromPassedType) {
   ASSERT_EQ("'' '0'", (applyFunction<DefaultValueParameters, ToString>(&toString, 0)));
   ASSERT_EQ("'foobar' '17'", (applyFunction<SpecializedParameters, ToString>(&toString, 0)));
 }
 
 TEST(ApplyFunctionTest, shouldTransformSignatureBeforeApplying) {
-  typedef std::string (*AnnotatedToString)(Annotation<std::string>, int);
-  std::string actual = applyFunction<AnnotatedParameters, AnnotatedToString>(&toString, 0);
-  ASSERT_EQ("'' '0'", actual);
+  ASSERT_EQ("'' '0'", (applyFunction<AnnotatedParameters, AnnotatedToString>(&toString, 0)));
 }
 
 struct MoreSpecializedParameters {
@@ -162,6 +162,7 @@ struct HasVoidToString {
 std::string HasVoidToString::asString = "";
 
 typedef void (*VoidToString)(std::string s, int i);
+typedef void (*AnnotatedVoidToString)(Annotation<std::string>, int);
 
 TEST(ApplyVoidFunctionTest, shouldCallPassedVoidFunctionWithParametersGeneratedFromPassedType) {
   applyVoidFunction<DefaultValueParameters, VoidToString>(&HasVoidToString::toString, 0);
@@ -169,6 +170,9 @@ TEST(ApplyVoidFunctionTest, shouldCallPassedVoidFunctionWithParametersGeneratedF
 
   applyVoidFunction<SpecializedParameters, VoidToString>(&HasVoidToString::toString, 0);
   ASSERT_EQ("'foobar' '17'", HasVoidToString::asString);
+
+  applyVoidFunction<AnnotatedParameters, AnnotatedVoidToString>(&HasVoidToString::toString, 0);
+  ASSERT_EQ("'' '0'", HasVoidToString::asString);
 
   std::string passed = "foo";
   applyVoidFunction<MoreSpecializedParameters, VoidToString>(&HasVoidToString::toString, passed);

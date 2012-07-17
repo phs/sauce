@@ -132,7 +132,10 @@ public:
 template<typename Parameters$comma_typename_As>
 class ApplyVoidFunction<Parameters, void(*)($As)> {
 public:
-  typedef void (* Function)($As);
+  typedef void (* Function)([[$for j, [[
+
+    typename Parameters::template Parameter<A$j, $j>::Type
+]]]]);
 
 private:
   Function function;

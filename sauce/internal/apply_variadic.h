@@ -232,7 +232,8 @@ public:
 template<typename Parameters, typename A0>
 class ApplyVoidFunction<Parameters, void(*)(A0)> {
 public:
-  typedef void (* Function)(A0);
+  typedef void (* Function)(
+    typename Parameters::template Parameter<A0, 0>::Type);
 
 private:
   Function function;
@@ -357,7 +358,9 @@ public:
 template<typename Parameters, typename A0, typename A1>
 class ApplyVoidFunction<Parameters, void(*)(A0, A1)> {
 public:
-  typedef void (* Function)(A0, A1);
+  typedef void (* Function)(
+    typename Parameters::template Parameter<A0, 0>::Type,
+    typename Parameters::template Parameter<A1, 1>::Type);
 
 private:
   Function function;
@@ -490,7 +493,10 @@ public:
 template<typename Parameters, typename A0, typename A1, typename A2>
 class ApplyVoidFunction<Parameters, void(*)(A0, A1, A2)> {
 public:
-  typedef void (* Function)(A0, A1, A2);
+  typedef void (* Function)(
+    typename Parameters::template Parameter<A0, 0>::Type,
+    typename Parameters::template Parameter<A1, 1>::Type,
+    typename Parameters::template Parameter<A2, 2>::Type);
 
 private:
   Function function;
@@ -631,7 +637,11 @@ public:
 template<typename Parameters, typename A0, typename A1, typename A2, typename A3>
 class ApplyVoidFunction<Parameters, void(*)(A0, A1, A2, A3)> {
 public:
-  typedef void (* Function)(A0, A1, A2, A3);
+  typedef void (* Function)(
+    typename Parameters::template Parameter<A0, 0>::Type,
+    typename Parameters::template Parameter<A1, 1>::Type,
+    typename Parameters::template Parameter<A2, 2>::Type,
+    typename Parameters::template Parameter<A3, 3>::Type);
 
 private:
   Function function;
@@ -781,7 +791,12 @@ public:
 template<typename Parameters, typename A0, typename A1, typename A2, typename A3, typename A4>
 class ApplyVoidFunction<Parameters, void(*)(A0, A1, A2, A3, A4)> {
 public:
-  typedef void (* Function)(A0, A1, A2, A3, A4);
+  typedef void (* Function)(
+    typename Parameters::template Parameter<A0, 0>::Type,
+    typename Parameters::template Parameter<A1, 1>::Type,
+    typename Parameters::template Parameter<A2, 2>::Type,
+    typename Parameters::template Parameter<A3, 3>::Type,
+    typename Parameters::template Parameter<A4, 4>::Type);
 
 private:
   Function function;
@@ -941,7 +956,13 @@ public:
 template<typename Parameters, typename A0, typename A1, typename A2, typename A3, typename A4, typename A5>
 class ApplyVoidFunction<Parameters, void(*)(A0, A1, A2, A3, A4, A5)> {
 public:
-  typedef void (* Function)(A0, A1, A2, A3, A4, A5);
+  typedef void (* Function)(
+    typename Parameters::template Parameter<A0, 0>::Type,
+    typename Parameters::template Parameter<A1, 1>::Type,
+    typename Parameters::template Parameter<A2, 2>::Type,
+    typename Parameters::template Parameter<A3, 3>::Type,
+    typename Parameters::template Parameter<A4, 4>::Type,
+    typename Parameters::template Parameter<A5, 5>::Type);
 
 private:
   Function function;
@@ -1109,7 +1130,14 @@ public:
 template<typename Parameters, typename A0, typename A1, typename A2, typename A3, typename A4, typename A5, typename A6>
 class ApplyVoidFunction<Parameters, void(*)(A0, A1, A2, A3, A4, A5, A6)> {
 public:
-  typedef void (* Function)(A0, A1, A2, A3, A4, A5, A6);
+  typedef void (* Function)(
+    typename Parameters::template Parameter<A0, 0>::Type,
+    typename Parameters::template Parameter<A1, 1>::Type,
+    typename Parameters::template Parameter<A2, 2>::Type,
+    typename Parameters::template Parameter<A3, 3>::Type,
+    typename Parameters::template Parameter<A4, 4>::Type,
+    typename Parameters::template Parameter<A5, 5>::Type,
+    typename Parameters::template Parameter<A6, 6>::Type);
 
 private:
   Function function;
@@ -1286,7 +1314,15 @@ template<typename Parameters, typename A0, typename A1, typename A2, typename A3
     typename A6, typename A7>
 class ApplyVoidFunction<Parameters, void(*)(A0, A1, A2, A3, A4, A5, A6, A7)> {
 public:
-  typedef void (* Function)(A0, A1, A2, A3, A4, A5, A6, A7);
+  typedef void (* Function)(
+    typename Parameters::template Parameter<A0, 0>::Type,
+    typename Parameters::template Parameter<A1, 1>::Type,
+    typename Parameters::template Parameter<A2, 2>::Type,
+    typename Parameters::template Parameter<A3, 3>::Type,
+    typename Parameters::template Parameter<A4, 4>::Type,
+    typename Parameters::template Parameter<A5, 5>::Type,
+    typename Parameters::template Parameter<A6, 6>::Type,
+    typename Parameters::template Parameter<A7, 7>::Type);
 
 private:
   Function function;
@@ -1471,7 +1507,16 @@ template<typename Parameters, typename A0, typename A1, typename A2, typename A3
     typename A6, typename A7, typename A8>
 class ApplyVoidFunction<Parameters, void(*)(A0, A1, A2, A3, A4, A5, A6, A7, A8)> {
 public:
-  typedef void (* Function)(A0, A1, A2, A3, A4, A5, A6, A7, A8);
+  typedef void (* Function)(
+    typename Parameters::template Parameter<A0, 0>::Type,
+    typename Parameters::template Parameter<A1, 1>::Type,
+    typename Parameters::template Parameter<A2, 2>::Type,
+    typename Parameters::template Parameter<A3, 3>::Type,
+    typename Parameters::template Parameter<A4, 4>::Type,
+    typename Parameters::template Parameter<A5, 5>::Type,
+    typename Parameters::template Parameter<A6, 6>::Type,
+    typename Parameters::template Parameter<A7, 7>::Type,
+    typename Parameters::template Parameter<A8, 8>::Type);
 
 private:
   Function function;
@@ -1664,7 +1709,17 @@ template<typename Parameters, typename A0, typename A1, typename A2, typename A3
     typename A6, typename A7, typename A8, typename A9>
 class ApplyVoidFunction<Parameters, void(*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9)> {
 public:
-  typedef void (* Function)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9);
+  typedef void (* Function)(
+    typename Parameters::template Parameter<A0, 0>::Type,
+    typename Parameters::template Parameter<A1, 1>::Type,
+    typename Parameters::template Parameter<A2, 2>::Type,
+    typename Parameters::template Parameter<A3, 3>::Type,
+    typename Parameters::template Parameter<A4, 4>::Type,
+    typename Parameters::template Parameter<A5, 5>::Type,
+    typename Parameters::template Parameter<A6, 6>::Type,
+    typename Parameters::template Parameter<A7, 7>::Type,
+    typename Parameters::template Parameter<A8, 8>::Type,
+    typename Parameters::template Parameter<A9, 9>::Type);
 
 private:
   Function function;
