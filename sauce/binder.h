@@ -185,9 +185,9 @@ public:
     return pass(ToMethodClause<Dependency, Method>(method));
   }
 
-  template<typename Method>
-  ToMethodNamingClause<Dependency, Method> toMethodNaming(Method method) {
-    return pass(ToMethodNamingClause<Dependency, Method>(method));
+  template<typename Signature>
+  ToMethodNamingClause<Dependency, Signature> toMethodNaming(Signature method) {
+    return pass(ToMethodNamingClause<Dependency, Signature>(method));
   }
 
   template<typename Scope>
@@ -237,9 +237,9 @@ public:
     return pass(ToMethodClause<Named<Iface, Unnamed>, Method>(method));
   }
 
-  template<typename Method>
-  ToMethodNamingClause<Named<Iface, Unnamed>, Method> toMethodNaming(Method method) {
-    return pass(ToMethodNamingClause<Named<Iface, Unnamed>, Method>(method));
+  template<typename Signature>
+  ToMethodNamingClause<Named<Iface, Unnamed>, Signature> toMethodNaming(Signature method) {
+    return pass(ToMethodNamingClause<Named<Iface, Unnamed>, Signature>(method));
   }
 
   template<typename Scope>
