@@ -145,19 +145,24 @@ struct HasToString {
   }
 };
 
+typedef std::string (HasToString::* ToStringMethod)(std::string s, int i);
+
 TEST(ApplyMethodTest, shouldCallPassedMethodOnReceiverWithParametersGeneratedFromPassedType) {
   HasToString hasToString;
-  ASSERT_EQ("'' '0'", applyMethod<DefaultValueParameters>(hasToString, &HasToString::toString, 0));
-  ASSERT_EQ("'foobar' '17'", applyMethod<SpecializedParameters>(hasToString, &HasToString::toString, 0));
+  ASSERT_EQ("'' '0'", (applyMethod<DefaultValueParameters, ToStringMethod>(hasToString, &HasToString::toString, 0)));
+
+  ASSERT_EQ("'foobar' '17'",
+            (applyMethod<SpecializedParameters, ToStringMethod>(hasToString, &HasToString::toString, 0)));
 
   std::string passed = "foo";
-  ASSERT_EQ("'foo' '1'", applyMethod<MoreSpecializedParameters>(hasToString, &HasToString::toString, passed));
+  ASSERT_EQ("'foo' '1'",
+            (applyMethod<MoreSpecializedParameters, ToStringMethod>(hasToString, &HasToString::toString, passed)));
 
   SideEffectParameters::called = 0;
-  observeMethod<SideEffectParameters>(&HasToString::toString, 0);
+  observeMethod<SideEffectParameters, ToStringMethod>(&HasToString::toString, 0);
   ASSERT_EQ(2, SideEffectParameters::called);
 
-  ASSERT_EQ(2, (ApplyMethod<DefaultValueParameters, std::string(HasToString::*) (std::string, int)>::arity()));
+  ASSERT_EQ(2, (ApplyMethod<DefaultValueParameters, ToStringMethod>::arity()));
 }
 
 struct ToStringer {

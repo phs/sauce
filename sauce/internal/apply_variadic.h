@@ -35,12 +35,13 @@ class ApplyMethod;
 
 template<typename Parameters, typename Signature, typename Passed>
 typename ApplyMethod<Parameters, Signature>::Return applyMethod(
-  typename ApplyMethod<Parameters, Signature>::Receiver & receiver, Signature method, Passed passed) {
+  typename ApplyMethod<Parameters, Signature>::Receiver & receiver,
+  typename ApplyMethod<Parameters, Signature>::Method method, Passed passed) {
   return ApplyMethod<Parameters, Signature>(method).apply(receiver, passed);
 }
 
 template<typename Parameters, typename Signature, typename Passed>
-void observeMethod(Signature method, Passed passed) {
+void observeMethod(typename ApplyMethod<Parameters, Signature>::Method method, Passed passed) {
   ApplyMethod<Parameters, Signature>(method).observe(passed);
 }
 
@@ -137,9 +138,11 @@ public:
 /* *INDENT-OFF* */
 template<typename Parameters, typename Return_, typename Receiver_>
 class ApplyMethod<Parameters, Return_(Receiver_::*)()> {
+public:
   typedef Return_ (Receiver_::* Method)();
-  Method method;
 
+private:
+  Method method;
 public:
 
   typedef Return_ Return;
@@ -252,9 +255,11 @@ public:
 /* *INDENT-OFF* */
 template<typename Parameters, typename Return_, typename Receiver_, typename A0>
 class ApplyMethod<Parameters, Return_(Receiver_::*)(A0)> {
+public:
   typedef Return_ (Receiver_::* Method)(A0);
-  Method method;
 
+private:
+  Method method;
 public:
 
   typedef Return_ Return;
@@ -374,9 +379,11 @@ public:
 /* *INDENT-OFF* */
 template<typename Parameters, typename Return_, typename Receiver_, typename A0, typename A1>
 class ApplyMethod<Parameters, Return_(Receiver_::*)(A0, A1)> {
+public:
   typedef Return_ (Receiver_::* Method)(A0, A1);
-  Method method;
 
+private:
+  Method method;
 public:
 
   typedef Return_ Return;
@@ -503,9 +510,11 @@ public:
 /* *INDENT-OFF* */
 template<typename Parameters, typename Return_, typename Receiver_, typename A0, typename A1, typename A2>
 class ApplyMethod<Parameters, Return_(Receiver_::*)(A0, A1, A2)> {
+public:
   typedef Return_ (Receiver_::* Method)(A0, A1, A2);
-  Method method;
 
+private:
+  Method method;
 public:
 
   typedef Return_ Return;
@@ -639,9 +648,11 @@ public:
 /* *INDENT-OFF* */
 template<typename Parameters, typename Return_, typename Receiver_, typename A0, typename A1, typename A2, typename A3>
 class ApplyMethod<Parameters, Return_(Receiver_::*)(A0, A1, A2, A3)> {
+public:
   typedef Return_ (Receiver_::* Method)(A0, A1, A2, A3);
-  Method method;
 
+private:
+  Method method;
 public:
 
   typedef Return_ Return;
@@ -784,9 +795,11 @@ public:
 template<typename Parameters, typename Return_, typename Receiver_, typename A0, typename A1, typename A2, typename A3,
     typename A4>
 class ApplyMethod<Parameters, Return_(Receiver_::*)(A0, A1, A2, A3, A4)> {
+public:
   typedef Return_ (Receiver_::* Method)(A0, A1, A2, A3, A4);
-  Method method;
 
+private:
+  Method method;
 public:
 
   typedef Return_ Return;
@@ -937,9 +950,11 @@ public:
 template<typename Parameters, typename Return_, typename Receiver_, typename A0, typename A1, typename A2, typename A3,
     typename A4, typename A5>
 class ApplyMethod<Parameters, Return_(Receiver_::*)(A0, A1, A2, A3, A4, A5)> {
+public:
   typedef Return_ (Receiver_::* Method)(A0, A1, A2, A3, A4, A5);
-  Method method;
 
+private:
+  Method method;
 public:
 
   typedef Return_ Return;
@@ -1097,9 +1112,11 @@ public:
 template<typename Parameters, typename Return_, typename Receiver_, typename A0, typename A1, typename A2, typename A3,
     typename A4, typename A5, typename A6>
 class ApplyMethod<Parameters, Return_(Receiver_::*)(A0, A1, A2, A3, A4, A5, A6)> {
+public:
   typedef Return_ (Receiver_::* Method)(A0, A1, A2, A3, A4, A5, A6);
-  Method method;
 
+private:
+  Method method;
 public:
 
   typedef Return_ Return;
@@ -1265,9 +1282,11 @@ public:
 template<typename Parameters, typename Return_, typename Receiver_, typename A0, typename A1, typename A2, typename A3,
     typename A4, typename A5, typename A6, typename A7>
 class ApplyMethod<Parameters, Return_(Receiver_::*)(A0, A1, A2, A3, A4, A5, A6, A7)> {
+public:
   typedef Return_ (Receiver_::* Method)(A0, A1, A2, A3, A4, A5, A6, A7);
-  Method method;
 
+private:
+  Method method;
 public:
 
   typedef Return_ Return;
@@ -1440,9 +1459,11 @@ public:
 template<typename Parameters, typename Return_, typename Receiver_, typename A0, typename A1, typename A2, typename A3,
     typename A4, typename A5, typename A6, typename A7, typename A8>
 class ApplyMethod<Parameters, Return_(Receiver_::*)(A0, A1, A2, A3, A4, A5, A6, A7, A8)> {
+public:
   typedef Return_ (Receiver_::* Method)(A0, A1, A2, A3, A4, A5, A6, A7, A8);
-  Method method;
 
+private:
+  Method method;
 public:
 
   typedef Return_ Return;
@@ -1622,9 +1643,11 @@ public:
 template<typename Parameters, typename Return_, typename Receiver_, typename A0, typename A1, typename A2, typename A3,
     typename A4, typename A5, typename A6, typename A7, typename A8, typename A9>
 class ApplyMethod<Parameters, Return_(Receiver_::*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9)> {
+public:
   typedef Return_ (Receiver_::* Method)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9);
-  Method method;
 
+private:
+  Method method;
 public:
 
   typedef Return_ Return;
