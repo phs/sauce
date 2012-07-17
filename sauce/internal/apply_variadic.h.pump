@@ -162,7 +162,10 @@ public:
 template<typename Parameters, typename Return_, typename Receiver_$comma_typename_As>
 class ApplyMethod<Parameters, Return_(Receiver_::*)($As)> {
 public:
-  typedef Return_ (Receiver_::* Method)($As);
+  typedef Return_ (Receiver_::* Method)([[$for j, [[
+
+    typename Parameters::template Parameter<A$j, $j>::Type
+]]]]);
 
 private:
   Method method;

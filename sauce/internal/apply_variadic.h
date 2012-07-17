@@ -258,7 +258,8 @@ public:
 template<typename Parameters, typename Return_, typename Receiver_, typename A0>
 class ApplyMethod<Parameters, Return_(Receiver_::*)(A0)> {
 public:
-  typedef Return_ (Receiver_::* Method)(A0);
+  typedef Return_ (Receiver_::* Method)(
+    typename Parameters::template Parameter<A0, 0>::Type);
 
 private:
   Method method;
@@ -386,7 +387,9 @@ public:
 template<typename Parameters, typename Return_, typename Receiver_, typename A0, typename A1>
 class ApplyMethod<Parameters, Return_(Receiver_::*)(A0, A1)> {
 public:
-  typedef Return_ (Receiver_::* Method)(A0, A1);
+  typedef Return_ (Receiver_::* Method)(
+    typename Parameters::template Parameter<A0, 0>::Type,
+    typename Parameters::template Parameter<A1, 1>::Type);
 
 private:
   Method method;
@@ -523,7 +526,10 @@ public:
 template<typename Parameters, typename Return_, typename Receiver_, typename A0, typename A1, typename A2>
 class ApplyMethod<Parameters, Return_(Receiver_::*)(A0, A1, A2)> {
 public:
-  typedef Return_ (Receiver_::* Method)(A0, A1, A2);
+  typedef Return_ (Receiver_::* Method)(
+    typename Parameters::template Parameter<A0, 0>::Type,
+    typename Parameters::template Parameter<A1, 1>::Type,
+    typename Parameters::template Parameter<A2, 2>::Type);
 
 private:
   Method method;
@@ -669,7 +675,11 @@ public:
 template<typename Parameters, typename Return_, typename Receiver_, typename A0, typename A1, typename A2, typename A3>
 class ApplyMethod<Parameters, Return_(Receiver_::*)(A0, A1, A2, A3)> {
 public:
-  typedef Return_ (Receiver_::* Method)(A0, A1, A2, A3);
+  typedef Return_ (Receiver_::* Method)(
+    typename Parameters::template Parameter<A0, 0>::Type,
+    typename Parameters::template Parameter<A1, 1>::Type,
+    typename Parameters::template Parameter<A2, 2>::Type,
+    typename Parameters::template Parameter<A3, 3>::Type);
 
 private:
   Method method;
@@ -826,7 +836,12 @@ template<typename Parameters, typename Return_, typename Receiver_, typename A0,
     typename A4>
 class ApplyMethod<Parameters, Return_(Receiver_::*)(A0, A1, A2, A3, A4)> {
 public:
-  typedef Return_ (Receiver_::* Method)(A0, A1, A2, A3, A4);
+  typedef Return_ (Receiver_::* Method)(
+    typename Parameters::template Parameter<A0, 0>::Type,
+    typename Parameters::template Parameter<A1, 1>::Type,
+    typename Parameters::template Parameter<A2, 2>::Type,
+    typename Parameters::template Parameter<A3, 3>::Type,
+    typename Parameters::template Parameter<A4, 4>::Type);
 
 private:
   Method method;
@@ -993,7 +1008,13 @@ template<typename Parameters, typename Return_, typename Receiver_, typename A0,
     typename A4, typename A5>
 class ApplyMethod<Parameters, Return_(Receiver_::*)(A0, A1, A2, A3, A4, A5)> {
 public:
-  typedef Return_ (Receiver_::* Method)(A0, A1, A2, A3, A4, A5);
+  typedef Return_ (Receiver_::* Method)(
+    typename Parameters::template Parameter<A0, 0>::Type,
+    typename Parameters::template Parameter<A1, 1>::Type,
+    typename Parameters::template Parameter<A2, 2>::Type,
+    typename Parameters::template Parameter<A3, 3>::Type,
+    typename Parameters::template Parameter<A4, 4>::Type,
+    typename Parameters::template Parameter<A5, 5>::Type);
 
 private:
   Method method;
@@ -1169,7 +1190,14 @@ template<typename Parameters, typename Return_, typename Receiver_, typename A0,
     typename A4, typename A5, typename A6>
 class ApplyMethod<Parameters, Return_(Receiver_::*)(A0, A1, A2, A3, A4, A5, A6)> {
 public:
-  typedef Return_ (Receiver_::* Method)(A0, A1, A2, A3, A4, A5, A6);
+  typedef Return_ (Receiver_::* Method)(
+    typename Parameters::template Parameter<A0, 0>::Type,
+    typename Parameters::template Parameter<A1, 1>::Type,
+    typename Parameters::template Parameter<A2, 2>::Type,
+    typename Parameters::template Parameter<A3, 3>::Type,
+    typename Parameters::template Parameter<A4, 4>::Type,
+    typename Parameters::template Parameter<A5, 5>::Type,
+    typename Parameters::template Parameter<A6, 6>::Type);
 
 private:
   Method method;
@@ -1355,7 +1383,15 @@ template<typename Parameters, typename Return_, typename Receiver_, typename A0,
     typename A4, typename A5, typename A6, typename A7>
 class ApplyMethod<Parameters, Return_(Receiver_::*)(A0, A1, A2, A3, A4, A5, A6, A7)> {
 public:
-  typedef Return_ (Receiver_::* Method)(A0, A1, A2, A3, A4, A5, A6, A7);
+  typedef Return_ (Receiver_::* Method)(
+    typename Parameters::template Parameter<A0, 0>::Type,
+    typename Parameters::template Parameter<A1, 1>::Type,
+    typename Parameters::template Parameter<A2, 2>::Type,
+    typename Parameters::template Parameter<A3, 3>::Type,
+    typename Parameters::template Parameter<A4, 4>::Type,
+    typename Parameters::template Parameter<A5, 5>::Type,
+    typename Parameters::template Parameter<A6, 6>::Type,
+    typename Parameters::template Parameter<A7, 7>::Type);
 
 private:
   Method method;
@@ -1550,7 +1586,16 @@ template<typename Parameters, typename Return_, typename Receiver_, typename A0,
     typename A4, typename A5, typename A6, typename A7, typename A8>
 class ApplyMethod<Parameters, Return_(Receiver_::*)(A0, A1, A2, A3, A4, A5, A6, A7, A8)> {
 public:
-  typedef Return_ (Receiver_::* Method)(A0, A1, A2, A3, A4, A5, A6, A7, A8);
+  typedef Return_ (Receiver_::* Method)(
+    typename Parameters::template Parameter<A0, 0>::Type,
+    typename Parameters::template Parameter<A1, 1>::Type,
+    typename Parameters::template Parameter<A2, 2>::Type,
+    typename Parameters::template Parameter<A3, 3>::Type,
+    typename Parameters::template Parameter<A4, 4>::Type,
+    typename Parameters::template Parameter<A5, 5>::Type,
+    typename Parameters::template Parameter<A6, 6>::Type,
+    typename Parameters::template Parameter<A7, 7>::Type,
+    typename Parameters::template Parameter<A8, 8>::Type);
 
 private:
   Method method;
@@ -1754,7 +1799,17 @@ template<typename Parameters, typename Return_, typename Receiver_, typename A0,
     typename A4, typename A5, typename A6, typename A7, typename A8, typename A9>
 class ApplyMethod<Parameters, Return_(Receiver_::*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9)> {
 public:
-  typedef Return_ (Receiver_::* Method)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9);
+  typedef Return_ (Receiver_::* Method)(
+    typename Parameters::template Parameter<A0, 0>::Type,
+    typename Parameters::template Parameter<A1, 1>::Type,
+    typename Parameters::template Parameter<A2, 2>::Type,
+    typename Parameters::template Parameter<A3, 3>::Type,
+    typename Parameters::template Parameter<A4, 4>::Type,
+    typename Parameters::template Parameter<A5, 5>::Type,
+    typename Parameters::template Parameter<A6, 6>::Type,
+    typename Parameters::template Parameter<A7, 7>::Type,
+    typename Parameters::template Parameter<A8, 8>::Type,
+    typename Parameters::template Parameter<A9, 9>::Type);
 
 private:
   Method method;

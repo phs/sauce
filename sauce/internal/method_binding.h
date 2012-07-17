@@ -76,6 +76,8 @@ class MethodBinding: public Binding<Dependency, NoScope> {
 
     template<typename T, int i>
     struct Parameter: public MethodBindingFriend {
+      typedef T Type;
+
       template<typename Passed>
       void observe(Passed passed) {
         MethodBinding_ const & binding = passed.binding;
