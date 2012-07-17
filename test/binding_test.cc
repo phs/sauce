@@ -408,7 +408,8 @@ TEST(BindingTest, shouldProvideDynamicallyNamedRequestsThatHaveDependencies) {
 
 void StaticallyNamedSetterModule(Binder & binder) {
   binder.bind<Bound>().named<LieutenantShinysides>().in<SingletonScope>().to<Bound()>();
-  binder.bind<HasSetter>().toMethod(&HasSetter::setBound); // TODO
+  // TODO
+  // binder.bind<HasSetter>().toMethod<void (HasSetter::*)(Named<Bound, LieutenantShinysides>)>(&HasSetter::setBound);
 }
 
 TEST(BindingTest, shouldInjectStaticallyNamedDependenciesIntoSetters) {
