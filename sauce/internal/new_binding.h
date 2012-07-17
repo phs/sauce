@@ -50,10 +50,10 @@ class NewBinding: public Binding<Dependency, Scope> {
 
     template<typename T, int i>
     struct Parameter: public NewBindingFriend {
-      typedef typename Key<T>::Ptr Ptr;
+      typedef typename Key<T>::Ptr Type;
 
       template<typename Passed>
-      Ptr yield(Passed passed) {
+      Type yield(Passed passed) {
         NewBinding_ const & binding = passed.binding;
         InjectorPtr & injector = passed.injector;
         std::string dependencyName = binding.dynamicDependencyNames[i];

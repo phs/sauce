@@ -45,10 +45,10 @@ class MethodBinding: public Binding<Dependency, NoScope> {
 
     template<typename T, int i>
     struct Parameter: public MethodBindingFriend {
-      typedef typename Key<T>::Ptr Ptr;
+      typedef typename Key<T>::Ptr Type;
 
       template<typename Passed>
-      Ptr yield(Passed passed) {
+      Type yield(Passed passed) {
         MethodBinding_ const & binding = passed.binding;
         InjectorPtr & injector = passed.injector;
         std::string dependencyName = binding.dynamicDependencyNames[i];
