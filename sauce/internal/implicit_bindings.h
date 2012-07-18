@@ -51,6 +51,24 @@ public:
  * Attempts to supply a Binding when none is found for a dependency.
  */
 class ImplicitBindings {
+  /**
+   * SFINAE base case for locating providing bindings.
+   */
+  template<typename Dependency>
+  sauce::shared_ptr<ResolvedBinding<Dependency> > getProvidingSFINAE(
+    Concrete const & bindings, std::string const name, ...) const {
+    return ImplicitBinding<Dependency>::get(bindings, name);
+  }
+
+  /**
+   * SFINAE base case for locating modifying bindings.
+   */
+  template<typename Dependency>
+  std::vector<sauce::shared_ptr<ResolvedBinding<Dependency> > > getModifyingsSFINAE(
+    Concrete const &, std::string const, ...) const {
+    return std::vector<sauce::shared_ptr<ResolvedBinding<Dependency> > >(); // TODO
+  }
+
 public:
 
   /**
@@ -59,7 +77,7 @@ public:
   template<typename Dependency>
   sauce::shared_ptr<ResolvedBinding<Dependency> > getProviding(
     Concrete const & bindings, std::string const name) const {
-    return ImplicitBinding<Dependency>::get(bindings, name);
+    return getProvidingSFINAE<Dependency>(bindings, name, 0);
   }
 
   /**
@@ -67,10 +85,9 @@ public:
    */
   template<typename Dependency>
   std::vector<sauce::shared_ptr<ResolvedBinding<Dependency> > > getModifyings(
-    Concrete const &, std::string const) const {
-    return std::vector<sauce::shared_ptr<ResolvedBinding<Dependency> > >(); // TODO
+    Concrete const & bindings, std::string const name) const {
+    return getModifyingsSFINAE<Dependency>(bindings, name, 0);
   }
-
 };
 
 /**
