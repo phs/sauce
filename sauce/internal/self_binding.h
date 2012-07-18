@@ -9,7 +9,15 @@ namespace sauce {
 namespace internal {
 
 template<typename Dependency>
-class SelfBinding: public Binding<Dependency, NoScope> {};
+class SelfBinding: public Binding<Dependency, NoScope> {
+  typedef typename Key<Dependency>::Ptr IfacePtr;
+
+public:
+  typedef typename SelfBinding<Dependency>::BindingPtr BindingPtr;
+private:
+
+  void inject(IfacePtr &, BindingPtr, InjectorPtr) const {}
+};
 
 }
 
