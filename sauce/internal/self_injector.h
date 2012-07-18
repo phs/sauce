@@ -13,7 +13,7 @@ namespace internal {
  * void setSelf(sauce::weak_ptr<RequestsSelfInjection>) must be defined and will be passes a self weak pointer.
  */
 template<typename T>
-class SelfInjector {
+class SelfInjector { // TODO Ditch this thing.
   typedef sauce::shared_ptr<T> Ptr;
 
   template<typename DoesNotRequest>
