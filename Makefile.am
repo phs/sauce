@@ -82,6 +82,7 @@ nobase_include_HEADERS += \
   sauce/internal/provider_binding.h \
   sauce/internal/resolved_binding.h \
   sauce/internal/scope_cache.h \
+  sauce/internal/self_binding.h \
   sauce/internal/self_injector.h \
   sauce/internal/type_id.h \
   sauce/memory.h \
@@ -117,6 +118,7 @@ EXTRA_DIST += \
   sauce/internal/provider_binding.h \
   sauce/internal/resolved_binding.h \
   sauce/internal/scope_cache.h \
+  sauce/internal/self_binding.h \
   sauce/internal/self_injector.h \
   sauce/internal/type_id.h \
   sauce/memory.h \
