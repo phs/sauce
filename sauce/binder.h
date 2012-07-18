@@ -165,8 +165,11 @@ public:
   template<typename SetDependency>
   ToMethodNamingClause<Dependency, void(Iface::*) (SetDependency)> setting(
     typename ToMethodNamingClause<Dependency, void(Iface::*) (SetDependency)>::Method method,
-    std::string /* name */ = unnamed()) {
-    return pass(ToMethodNamingClause<Dependency, void(Iface::*) (SetDependency)>(method));
+    std::string name = unnamed()) {
+    ToMethodNamingClause<Dependency, void(Iface::*) (SetDependency)> toMethodNamingClause(method);
+    toMethodNamingClause = pass(toMethodNamingClause);
+    toMethodNamingClause.bindDynamicDependencyName(0, name);
+    return toMethodNamingClause;
   }
 
   template<typename Iface, typename Name>
@@ -231,8 +234,11 @@ public:
   template<typename SetDependency>
   ToMethodNamingClause<Named<Iface, Unnamed>, void(Iface::*) (SetDependency)> setting(
     typename ToMethodNamingClause<Named<Iface, Unnamed>, void(Iface::*) (SetDependency)>::Method method,
-    std::string /* name */ = unnamed()) {
-    return pass(ToMethodNamingClause<Named<Iface, Unnamed>, void(Iface::*) (SetDependency)>(method));
+    std::string name = unnamed()) {
+    ToMethodNamingClause<Named<Iface, Unnamed>, void(Iface::*) (SetDependency)> toMethodNamingClause(method);
+    toMethodNamingClause = pass(toMethodNamingClause);
+    toMethodNamingClause.bindDynamicDependencyName(0, name);
+    return toMethodNamingClause;
   }
 
   template<typename SetIface, typename Name>

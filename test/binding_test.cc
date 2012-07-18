@@ -477,7 +477,7 @@ TEST(BindingTest, shouldBindVoidUnarySettersWithStaticallyNamedDepSimply) {
 
 void DynamicallyNamedSetterShorthandModule(Binder & binder) {
   binder.bind<Bound>().named("General Fishiness").in<SingletonScope>().to<Bound()>();
-  // binder.bind<HasSetter>().setting<Bound>(&HasSetter::setBound, "General Fishiness");
+  binder.bind<HasSetter>().setting<Bound>(&HasSetter::setBound, "General Fishiness");
 }
 
 TEST(BindingTest, shouldBindVoidUnarySettersWithDynamicallyNamedDepSimply) {
@@ -486,7 +486,7 @@ TEST(BindingTest, shouldBindVoidUnarySettersWithDynamicallyNamedDepSimply) {
 
   sauce::shared_ptr<HasSetter> hasSetter(new HasSetter());
   injector->inject<HasSetter>(hasSetter);
-  // ASSERT_EQ(bound, hasSetter->getBound()); // TODO
+  ASSERT_EQ(bound, hasSetter->getBound());
 }
 
 void IncompleteNamedModule(Binder & binder) {
