@@ -48,27 +48,25 @@ public:
  */
 template<typename Dependency, typename Name>
 class ImplicitProviderBinding: public Binding<Named<Provider<Dependency>, Name>, NoScope> {
-
   typedef typename Key<Dependency>::Normalized Normalized;
   typedef typename ResolvedBinding<Normalized>::BindingPtr ProvidedBindingPtr;
   typedef Named<Provider<Dependency>, Name> ProviderDependency;
   typedef typename Key<ProviderDependency>::Ptr ProviderPtr;
+  typedef typename ResolvedBinding<ProviderDependency>::BindingPtr BindingPtr;
 
   ProvidedBindingPtr providedBinding;
 
   void validateAcyclic(InjectorPtr, TypeIds &) const {}
 
-public:
+  void inject(ProviderPtr & injected, BindingPtr, InjectorPtr injector) const {
+    injected.reset(new ImplicitProvider<Dependency, Name>(providedBinding, injector));
+  }
 
-  typedef typename ResolvedBinding<ProviderDependency>::BindingPtr BindingPtr;
+public:
 
   ImplicitProviderBinding(ProvidedBindingPtr providedBinding):
     Binding<Named<Provider<Dependency>, Name>, NoScope>(),
     providedBinding(providedBinding) {}
-
-  void inject(ProviderPtr & injected, BindingPtr, InjectorPtr injector) const {
-    injected.reset(new ImplicitProvider<Dependency, Name>(providedBinding, injector));
-  }
 };
 
 }

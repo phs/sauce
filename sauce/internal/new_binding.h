@@ -106,12 +106,7 @@ class NewBinding: public Binding<Dependency, Scope> {
     this->dynamicDependencyNames.resize(Inject::arity(), unnamed());
   }
 
-public:
-
   typedef typename ResolvedBinding<Dependency>::BindingPtr BindingPtr;
-
-  NewBinding():
-    dynamicDependencyNames(Inject::arity(), unnamed()) {}
 
   /**
    * Inject an Iface.
@@ -131,6 +126,11 @@ public:
     injected = sauce::static_pointer_cast<Iface>(impl);
   }
 
+public:
+
+  NewBinding():
+    dynamicDependencyNames(Inject::arity(), unnamed()) {}
+
   void dispose(Iface * iface) const {
     typedef typename Allocator::template rebind<Impl>::other ImplAllocator;
     ImplAllocator allocator;
@@ -138,7 +138,6 @@ public:
     impl->~Impl(); // Must not throw
     allocator.deallocate(impl, 1);
   }
-
 };
 
 }
