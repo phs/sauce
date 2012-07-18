@@ -422,7 +422,7 @@ TEST(BindingTest, shouldInjectStaticallyNamedDependenciesIntoSetters) {
 
 void SetterShorthandModule(Binder & binder) {
   binder.bind<Bound>().named<LieutenantShinysides>().in<SingletonScope>().to<Bound()>();
-  // binder.bind<HasSetter>().toSetter(&HasSetter::setBound); // TODO
+  binder.bind<HasSetter>().setting<Bound>(&HasSetter::setBound);
 }
 
 TEST(BindingTest, shouldBindVoidUnarySettersSimply) {

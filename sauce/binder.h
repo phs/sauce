@@ -191,6 +191,12 @@ public:
     return pass(ToMethodNamingClause<Dependency, Signature>(method));
   }
 
+  template<typename SetDependency>
+  ToMethodNamingClause<Dependency, void(Iface::*) (SetDependency)> setting(
+    typename ToMethodNamingClause<Dependency, void(Iface::*) (SetDependency)>::Method method) {
+    return pass(ToMethodNamingClause<Dependency, void(Iface::*) (SetDependency)>(method));
+  }
+
   template<typename Scope>
   InClause<Dependency, Scope> in() {
     return pass(InClause<Dependency, Scope>());
@@ -242,6 +248,12 @@ public:
   ToMethodNamingClause<Named<Iface, Unnamed>, Signature> toMethodNaming(
     typename ToMethodNamingClause<Named<Iface, Unnamed>, Signature>::Method method) {
     return pass(ToMethodNamingClause<Named<Iface, Unnamed>, Signature>(method));
+  }
+
+  template<typename SetDependency>
+  ToMethodNamingClause<Named<Iface, Unnamed>, void(Iface::*) (SetDependency)> setting(
+    typename ToMethodNamingClause<Named<Iface, Unnamed>, void(Iface::*) (SetDependency)>::Method method) {
+    return pass(ToMethodNamingClause<Named<Iface, Unnamed>, void(Iface::*) (SetDependency)>(method));
   }
 
   template<typename Scope>
