@@ -434,6 +434,20 @@ TEST(BindingTest, shouldBindVoidUnarySettersSimply) {
   ASSERT_EQ(bound, hasSetter->getBound());
 }
 
+void StaticallyNamedSetterShorthandModule(Binder & binder) {
+  binder.bind<Bound>().named<LieutenantShinysides>().in<SingletonScope>().to<Bound()>();
+  binder.bind<HasSetter>().setting<Bound, LieutenantShinysides>(&HasSetter::setBound);
+}
+
+TEST(BindingTest, shouldBindVoidUnarySettersWithStaticallyNamedDepSimply) {
+  sauce::shared_ptr<Injector> injector(Modules().add(&StaticallyNamedSetterShorthandModule).createInjector());
+  sauce::shared_ptr<Bound> bound = injector->get<Bound, LieutenantShinysides>();
+
+  sauce::shared_ptr<HasSetter> hasSetter(new HasSetter());
+  injector->inject<HasSetter>(hasSetter);
+  ASSERT_EQ(bound, hasSetter->getBound());
+}
+
 void IncompleteNamedModule(Binder & binder) {
   binder.bind<IncompletelyBound>().named<LieutenantShinysides>() /* to ...? */;
 }
