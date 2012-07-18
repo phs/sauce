@@ -146,6 +146,11 @@ public:
     inject<Normalized>(injected, getSelf(), name);
   }
 
+  template<typename Iface, typename Name>
+  void inject(typename i::Key<Named<Iface, Name> >::Ptr & injected, std::string const name = unnamed()) {
+    inject<Named<Iface, Name> >(injected, name);
+  }
+
   template<typename Dependency>
   typename i::Key<Dependency>::Ptr get(std::string const name = unnamed()) {
     typename i::Key<Dependency>::Ptr injected;
