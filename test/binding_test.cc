@@ -433,6 +433,20 @@ TEST(BindingTest, shouldInjectStaticallyNamedDependenciesIntoSetters) {
   ASSERT_EQ(bound, hasSetter->getBound());
 }
 
+void DynamicallyNamedSetterModule(Binder & binder) {
+  binder.bind<Bound>().named("General Fishiness").in<SingletonScope>().to<Bound()>();
+  // binder.bind<HasSetter>().toMethod(&HasSetter::setBound).naming(0, "General Fishiness");
+}
+
+TEST(BindingTest, shouldInjectDynamicallyNamedDependenciesIntoSetters) {
+  sauce::shared_ptr<Injector> injector(Modules().add(&DynamicallyNamedSetterModule).createInjector());
+  sauce::shared_ptr<Bound> bound = injector->get<Bound>("General Fishiness");
+
+  sauce::shared_ptr<HasSetter> hasSetter(new HasSetter());
+  injector->inject<HasSetter>(hasSetter);
+  // ASSERT_EQ(bound, hasSetter->getBound()); // TODO
+}
+
 void SetterShorthandModule(Binder & binder) {
   binder.bind<Bound>().in<SingletonScope>().to<Bound()>();
   binder.bind<HasSetter>().setting<Bound>(&HasSetter::setBound);
