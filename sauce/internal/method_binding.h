@@ -105,6 +105,11 @@ private:
     observeMethod<ValidateAcyclicParameters, Signature>(method, passed);
   }
 
+  void setDynamicDependencyNames(std::vector<std::string> const & dynamicDependencyNames) {
+    this->dynamicDependencyNames = dynamicDependencyNames;
+    this->dynamicDependencyNames.resize(Inject::arity(), unnamed());
+  }
+
 public:
 
   typedef typename ResolvedBinding<Dependency>::BindingPtr BindingPtr;
