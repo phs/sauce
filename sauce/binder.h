@@ -21,29 +21,10 @@
 namespace sauce {
 
 /**
- * Assigns dynamic name requirements to the explicit dependencies of a binding.
- */
-template<typename Dependency, typename Scope, typename Ctor, typename Allocator>
-class NamingClause: public i::ProvidingClause<Dependency, Scope, Ctor, Allocator> {
-public:
-
-  NamingClause<Dependency, Scope, Ctor, Allocator> & naming(unsigned int position, std::string const name) {
-    this->bindDynamicDependencyName(position, name);
-    return *this;
-  }
-};
-
-/**
  * Binds to a specific constructor and allocator.
  */
 template<typename Dependency, typename Scope, typename Ctor, typename Allocator>
-class AllocateFromClause: public i::ProvidingClause<Dependency, Scope, Ctor, Allocator> {
-public:
-
-  NamingClause<Dependency, Scope, Ctor, Allocator> naming(unsigned int position, std::string const name) {
-    return pass(NamingClause<Dependency, Scope, Ctor, Allocator>()).naming(position, name);
-  }
-};
+class AllocateFromClause: public i::ProvidingClause<Dependency, Scope, Ctor, Allocator> {};
 
 /**
  * Binds to a specific constructor, allocating from the heap.
@@ -58,10 +39,6 @@ public:
   AllocateFromClause<Dependency, Scope, Ctor, Allocator> allocatedFrom() {
     return pass(AllocateFromClause<Dependency, Scope, Ctor, Allocator>());
   }
-
-  NamingClause<Dependency, Scope, Ctor, std::allocator<int> > naming(unsigned int position, std::string const name) {
-    return pass(NamingClause<Dependency, Scope, Ctor, std::allocator<int> >()).naming(position, name);
-  }
 };
 
 /**
@@ -69,7 +46,6 @@ public:
  */
 template<typename ProviderDependency, typename Scope, typename ProviderCtor>
 class ToProviderClause: public i::ProvidingClause<ProviderDependency, Scope, ProviderCtor, std::allocator<int> > {
-
   void onComplete() {
     typedef typename i::Key<ProviderDependency>::Iface Provider;
     typedef typename Provider::Provides Iface;
@@ -85,11 +61,6 @@ public:
   template<typename Allocator>
   AllocateFromClause<ProviderDependency, Scope, ProviderCtor, Allocator> allocatedFrom() {
     return pass(AllocateFromClause<ProviderDependency, Scope, ProviderCtor, Allocator>());
-  }
-
-  NamingClause<ProviderDependency, Scope, ProviderCtor, std::allocator<int> > naming(
-    unsigned int position, std::string const name) {
-    return pass(NamingClause<ProviderDependency, Scope, ProviderCtor, std::allocator<int> >()).naming(position, name);
   }
 };
 

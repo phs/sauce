@@ -169,6 +169,11 @@ protected:
 
 public:
 
+  ProvidingClause<Dependency, Scope, Ctor, Allocator> & naming(unsigned int position, std::string const name) {
+    this->bindDynamicDependencyName(position, name);
+    return *this;
+  }
+
   void setState(ClauseStatePtr state) {
     OpaqueBindingPtr pendingBinding(new i::NewBinding<Dependency, Scope, Ctor, Allocator>());
     this->state = state;
@@ -213,6 +218,11 @@ protected:
   }
 
 public:
+
+  ModifyingClause<Dependency> & naming(unsigned int position, std::string const name) {
+    this->bindDynamicDependencyName(position, name);
+    return *this;
+  }
 
   void setState(ClauseStatePtr state) {
     this->state = state;
