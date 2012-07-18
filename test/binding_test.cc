@@ -435,7 +435,7 @@ TEST(BindingTest, shouldInjectStaticallyNamedDependenciesIntoSetters) {
 
 void DynamicallyNamedSetterModule(Binder & binder) {
   binder.bind<Bound>().named("General Fishiness").in<SingletonScope>().to<Bound()>();
-  // binder.bind<HasSetter>().toMethod(&HasSetter::setBound).naming(0, "General Fishiness");
+  binder.bind<HasSetter>().toMethod(&HasSetter::setBound).naming(0, "General Fishiness");
 }
 
 TEST(BindingTest, shouldInjectDynamicallyNamedDependenciesIntoSetters) {
@@ -444,7 +444,7 @@ TEST(BindingTest, shouldInjectDynamicallyNamedDependenciesIntoSetters) {
 
   sauce::shared_ptr<HasSetter> hasSetter(new HasSetter());
   injector->inject<HasSetter>(hasSetter);
-  // ASSERT_EQ(bound, hasSetter->getBound()); // TODO
+  ASSERT_EQ(bound, hasSetter->getBound());
 }
 
 void SetterShorthandModule(Binder & binder) {
