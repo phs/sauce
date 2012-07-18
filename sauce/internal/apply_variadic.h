@@ -90,12 +90,6 @@ public:
   typedef Return_ (* Signature)();
   typedef Return_ (* Function)();
 
-  // TODO: do we actually need this?
-  template<typename Receiver>
-  struct Method {
-    typedef ApplyMethod<Parameters, Return_ (Receiver::*)()> Apply;
-  };
-
 private:
   Function function;
 public:
@@ -212,12 +206,6 @@ public:
   typedef Return_ (* Signature)(A0);
   typedef Return_ (* Function)(
     typename Parameters::template Parameter<A0, 0>::Type);
-
-  // TODO: do we actually need this?
-  template<typename Receiver>
-  struct Method {
-    typedef ApplyMethod<Parameters, Return_ (Receiver::*)(A0)> Apply;
-  };
 
 private:
   Function function;
@@ -345,12 +333,6 @@ public:
   typedef Return_ (* Function)(
     typename Parameters::template Parameter<A0, 0>::Type,
     typename Parameters::template Parameter<A1, 1>::Type);
-
-  // TODO: do we actually need this?
-  template<typename Receiver>
-  struct Method {
-    typedef ApplyMethod<Parameters, Return_ (Receiver::*)(A0, A1)> Apply;
-  };
 
 private:
   Function function;
@@ -488,12 +470,6 @@ public:
     typename Parameters::template Parameter<A0, 0>::Type,
     typename Parameters::template Parameter<A1, 1>::Type,
     typename Parameters::template Parameter<A2, 2>::Type);
-
-  // TODO: do we actually need this?
-  template<typename Receiver>
-  struct Method {
-    typedef ApplyMethod<Parameters, Return_ (Receiver::*)(A0, A1, A2)> Apply;
-  };
 
 private:
   Function function;
@@ -641,12 +617,6 @@ public:
     typename Parameters::template Parameter<A1, 1>::Type,
     typename Parameters::template Parameter<A2, 2>::Type,
     typename Parameters::template Parameter<A3, 3>::Type);
-
-  // TODO: do we actually need this?
-  template<typename Receiver>
-  struct Method {
-    typedef ApplyMethod<Parameters, Return_ (Receiver::*)(A0, A1, A2, A3)> Apply;
-  };
 
 private:
   Function function;
@@ -805,12 +775,6 @@ public:
     typename Parameters::template Parameter<A2, 2>::Type,
     typename Parameters::template Parameter<A3, 3>::Type,
     typename Parameters::template Parameter<A4, 4>::Type);
-
-  // TODO: do we actually need this?
-  template<typename Receiver>
-  struct Method {
-    typedef ApplyMethod<Parameters, Return_ (Receiver::*)(A0, A1, A2, A3, A4)> Apply;
-  };
 
 private:
   Function function;
@@ -981,12 +945,6 @@ public:
     typename Parameters::template Parameter<A3, 3>::Type,
     typename Parameters::template Parameter<A4, 4>::Type,
     typename Parameters::template Parameter<A5, 5>::Type);
-
-  // TODO: do we actually need this?
-  template<typename Receiver>
-  struct Method {
-    typedef ApplyMethod<Parameters, Return_ (Receiver::*)(A0, A1, A2, A3, A4, A5)> Apply;
-  };
 
 private:
   Function function;
@@ -1167,12 +1125,6 @@ public:
     typename Parameters::template Parameter<A4, 4>::Type,
     typename Parameters::template Parameter<A5, 5>::Type,
     typename Parameters::template Parameter<A6, 6>::Type);
-
-  // TODO: do we actually need this?
-  template<typename Receiver>
-  struct Method {
-    typedef ApplyMethod<Parameters, Return_ (Receiver::*)(A0, A1, A2, A3, A4, A5, A6)> Apply;
-  };
 
 private:
   Function function;
@@ -1363,12 +1315,6 @@ public:
     typename Parameters::template Parameter<A5, 5>::Type,
     typename Parameters::template Parameter<A6, 6>::Type,
     typename Parameters::template Parameter<A7, 7>::Type);
-
-  // TODO: do we actually need this?
-  template<typename Receiver>
-  struct Method {
-    typedef ApplyMethod<Parameters, Return_ (Receiver::*)(A0, A1, A2, A3, A4, A5, A6, A7)> Apply;
-  };
 
 private:
   Function function;
@@ -1570,12 +1516,6 @@ public:
     typename Parameters::template Parameter<A6, 6>::Type,
     typename Parameters::template Parameter<A7, 7>::Type,
     typename Parameters::template Parameter<A8, 8>::Type);
-
-  // TODO: do we actually need this?
-  template<typename Receiver>
-  struct Method {
-    typedef ApplyMethod<Parameters, Return_ (Receiver::*)(A0, A1, A2, A3, A4, A5, A6, A7, A8)> Apply;
-  };
 
 private:
   Function function;
@@ -1787,12 +1727,6 @@ public:
     typename Parameters::template Parameter<A7, 7>::Type,
     typename Parameters::template Parameter<A8, 8>::Type,
     typename Parameters::template Parameter<A9, 9>::Type);
-
-  // TODO: do we actually need this?
-  template<typename Receiver>
-  struct Method {
-    typedef ApplyMethod<Parameters, Return_ (Receiver::*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9)> Apply;
-  };
 
 private:
   Function function;

@@ -100,12 +100,6 @@ public:
     typename Parameters::template Parameter<A$j, $j>::Type
 ]]]]);
 
-  // TODO: do we actually need this?
-  template<typename Receiver>
-  struct Method {
-    typedef ApplyMethod<Parameters, Return_ (Receiver::*)($As)> Apply;
-  };
-
 private:
   Function function;
 public:

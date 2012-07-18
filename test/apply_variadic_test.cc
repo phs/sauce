@@ -213,14 +213,6 @@ TEST(ApplyMethodTest, shouldCallPassedMethodOnReceiverWithParametersGeneratedFro
   ASSERT_EQ(2, (ApplyMethod<DefaultValueParameters, ToStringMethod>::arity()));
 }
 
-TEST(ApplyMethodTest, shouldConvertFromEquivalentFunctionApplier) {
-  typedef ApplyFunction<DefaultValueParameters, ToString>::Method<HasToString>::Apply Apply;
-  Apply method(&HasToString::toString);
-
-  HasToString hasToString;
-  ASSERT_EQ("'' '0'", method.apply(hasToString, 0));
-}
-
 struct ToStringer {
   std::string toString;
 
