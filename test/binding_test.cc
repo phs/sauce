@@ -475,6 +475,20 @@ TEST(BindingTest, shouldBindVoidUnarySettersWithStaticallyNamedDepSimply) {
   ASSERT_EQ(bound, hasSetter->getBound());
 }
 
+void DynamicallyNamedSetterShorthandModule(Binder & binder) {
+  binder.bind<Bound>().named("General Fishiness").in<SingletonScope>().to<Bound()>();
+  // binder.bind<HasSetter>().setting<Bound>(&HasSetter::setBound, "General Fishiness");
+}
+
+TEST(BindingTest, shouldBindVoidUnarySettersWithDynamicallyNamedDepSimply) {
+  sauce::shared_ptr<Injector> injector(Modules().add(&DynamicallyNamedSetterShorthandModule).createInjector());
+  sauce::shared_ptr<Bound> bound = injector->get<Bound>("General Fishiness");
+
+  sauce::shared_ptr<HasSetter> hasSetter(new HasSetter());
+  injector->inject<HasSetter>(hasSetter);
+  // ASSERT_EQ(bound, hasSetter->getBound()); // TODO
+}
+
 void IncompleteNamedModule(Binder & binder) {
   binder.bind<IncompletelyBound>().named<LieutenantShinysides>() /* to ...? */;
 }
