@@ -87,6 +87,7 @@ template<typename Parameters, typename Return_>
 class ApplyFunction<Parameters, Return_(*)()> {
 public:
   typedef Return_ Return;
+  typedef Return_ (* Signature)();
   typedef Return_ (* Function)();
 
   template<typename Receiver>
@@ -120,6 +121,7 @@ public:
 template<typename Parameters>
 class ApplyVoidFunction<Parameters, void(*)()> {
 public:
+  typedef void (* Signature)();
   typedef void (* Function)();
 
 private:
@@ -144,14 +146,14 @@ public:
 template<typename Parameters, typename Return_, typename Receiver_>
 class ApplyMethod<Parameters, Return_(Receiver_::*)()> {
 public:
+  typedef Return_ Return;
+  typedef Receiver_ Receiver;
+  typedef Return_ (Receiver_::* Signature)();
   typedef Return_ (Receiver_::* Method)();
 
 private:
   Method method;
 public:
-
-  typedef Return_ Return;
-  typedef Receiver_ Receiver;
 
   ApplyMethod(Method method):
     method(method) {}
@@ -206,6 +208,7 @@ template<typename Parameters, typename Return_, typename A0>
 class ApplyFunction<Parameters, Return_(*)(A0)> {
 public:
   typedef Return_ Return;
+  typedef Return_ (* Signature)(A0);
   typedef Return_ (* Function)(
     typename Parameters::template Parameter<A0, 0>::Type);
 
@@ -242,6 +245,7 @@ public:
 template<typename Parameters, typename A0>
 class ApplyVoidFunction<Parameters, void(*)(A0)> {
 public:
+  typedef void (* Signature)(A0);
   typedef void (* Function)(
     typename Parameters::template Parameter<A0, 0>::Type);
 
@@ -268,15 +272,15 @@ public:
 template<typename Parameters, typename Return_, typename Receiver_, typename A0>
 class ApplyMethod<Parameters, Return_(Receiver_::*)(A0)> {
 public:
+  typedef Return_ Return;
+  typedef Receiver_ Receiver;
+  typedef Return_ (Receiver_::* Signature)(A0);
   typedef Return_ (Receiver_::* Method)(
     typename Parameters::template Parameter<A0, 0>::Type);
 
 private:
   Method method;
 public:
-
-  typedef Return_ Return;
-  typedef Receiver_ Receiver;
 
   ApplyMethod(Method method):
     method(method) {}
@@ -335,6 +339,7 @@ template<typename Parameters, typename Return_, typename A0, typename A1>
 class ApplyFunction<Parameters, Return_(*)(A0, A1)> {
 public:
   typedef Return_ Return;
+  typedef Return_ (* Signature)(A0, A1);
   typedef Return_ (* Function)(
     typename Parameters::template Parameter<A0, 0>::Type,
     typename Parameters::template Parameter<A1, 1>::Type);
@@ -374,6 +379,7 @@ public:
 template<typename Parameters, typename A0, typename A1>
 class ApplyVoidFunction<Parameters, void(*)(A0, A1)> {
 public:
+  typedef void (* Signature)(A0, A1);
   typedef void (* Function)(
     typename Parameters::template Parameter<A0, 0>::Type,
     typename Parameters::template Parameter<A1, 1>::Type);
@@ -402,6 +408,9 @@ public:
 template<typename Parameters, typename Return_, typename Receiver_, typename A0, typename A1>
 class ApplyMethod<Parameters, Return_(Receiver_::*)(A0, A1)> {
 public:
+  typedef Return_ Return;
+  typedef Receiver_ Receiver;
+  typedef Return_ (Receiver_::* Signature)(A0, A1);
   typedef Return_ (Receiver_::* Method)(
     typename Parameters::template Parameter<A0, 0>::Type,
     typename Parameters::template Parameter<A1, 1>::Type);
@@ -409,9 +418,6 @@ public:
 private:
   Method method;
 public:
-
-  typedef Return_ Return;
-  typedef Receiver_ Receiver;
 
   ApplyMethod(Method method):
     method(method) {}
@@ -474,6 +480,7 @@ template<typename Parameters, typename Return_, typename A0, typename A1, typena
 class ApplyFunction<Parameters, Return_(*)(A0, A1, A2)> {
 public:
   typedef Return_ Return;
+  typedef Return_ (* Signature)(A0, A1, A2);
   typedef Return_ (* Function)(
     typename Parameters::template Parameter<A0, 0>::Type,
     typename Parameters::template Parameter<A1, 1>::Type,
@@ -516,6 +523,7 @@ public:
 template<typename Parameters, typename A0, typename A1, typename A2>
 class ApplyVoidFunction<Parameters, void(*)(A0, A1, A2)> {
 public:
+  typedef void (* Signature)(A0, A1, A2);
   typedef void (* Function)(
     typename Parameters::template Parameter<A0, 0>::Type,
     typename Parameters::template Parameter<A1, 1>::Type,
@@ -546,6 +554,9 @@ public:
 template<typename Parameters, typename Return_, typename Receiver_, typename A0, typename A1, typename A2>
 class ApplyMethod<Parameters, Return_(Receiver_::*)(A0, A1, A2)> {
 public:
+  typedef Return_ Return;
+  typedef Receiver_ Receiver;
+  typedef Return_ (Receiver_::* Signature)(A0, A1, A2);
   typedef Return_ (Receiver_::* Method)(
     typename Parameters::template Parameter<A0, 0>::Type,
     typename Parameters::template Parameter<A1, 1>::Type,
@@ -554,9 +565,6 @@ public:
 private:
   Method method;
 public:
-
-  typedef Return_ Return;
-  typedef Receiver_ Receiver;
 
   ApplyMethod(Method method):
     method(method) {}
@@ -623,6 +631,7 @@ template<typename Parameters, typename Return_, typename A0, typename A1, typena
 class ApplyFunction<Parameters, Return_(*)(A0, A1, A2, A3)> {
 public:
   typedef Return_ Return;
+  typedef Return_ (* Signature)(A0, A1, A2, A3);
   typedef Return_ (* Function)(
     typename Parameters::template Parameter<A0, 0>::Type,
     typename Parameters::template Parameter<A1, 1>::Type,
@@ -668,6 +677,7 @@ public:
 template<typename Parameters, typename A0, typename A1, typename A2, typename A3>
 class ApplyVoidFunction<Parameters, void(*)(A0, A1, A2, A3)> {
 public:
+  typedef void (* Signature)(A0, A1, A2, A3);
   typedef void (* Function)(
     typename Parameters::template Parameter<A0, 0>::Type,
     typename Parameters::template Parameter<A1, 1>::Type,
@@ -700,6 +710,9 @@ public:
 template<typename Parameters, typename Return_, typename Receiver_, typename A0, typename A1, typename A2, typename A3>
 class ApplyMethod<Parameters, Return_(Receiver_::*)(A0, A1, A2, A3)> {
 public:
+  typedef Return_ Return;
+  typedef Receiver_ Receiver;
+  typedef Return_ (Receiver_::* Signature)(A0, A1, A2, A3);
   typedef Return_ (Receiver_::* Method)(
     typename Parameters::template Parameter<A0, 0>::Type,
     typename Parameters::template Parameter<A1, 1>::Type,
@@ -709,9 +722,6 @@ public:
 private:
   Method method;
 public:
-
-  typedef Return_ Return;
-  typedef Receiver_ Receiver;
 
   ApplyMethod(Method method):
     method(method) {}
@@ -783,6 +793,7 @@ template<typename Parameters, typename Return_, typename A0, typename A1, typena
 class ApplyFunction<Parameters, Return_(*)(A0, A1, A2, A3, A4)> {
 public:
   typedef Return_ Return;
+  typedef Return_ (* Signature)(A0, A1, A2, A3, A4);
   typedef Return_ (* Function)(
     typename Parameters::template Parameter<A0, 0>::Type,
     typename Parameters::template Parameter<A1, 1>::Type,
@@ -831,6 +842,7 @@ public:
 template<typename Parameters, typename A0, typename A1, typename A2, typename A3, typename A4>
 class ApplyVoidFunction<Parameters, void(*)(A0, A1, A2, A3, A4)> {
 public:
+  typedef void (* Signature)(A0, A1, A2, A3, A4);
   typedef void (* Function)(
     typename Parameters::template Parameter<A0, 0>::Type,
     typename Parameters::template Parameter<A1, 1>::Type,
@@ -866,6 +878,9 @@ template<typename Parameters, typename Return_, typename Receiver_, typename A0,
     typename A4>
 class ApplyMethod<Parameters, Return_(Receiver_::*)(A0, A1, A2, A3, A4)> {
 public:
+  typedef Return_ Return;
+  typedef Receiver_ Receiver;
+  typedef Return_ (Receiver_::* Signature)(A0, A1, A2, A3, A4);
   typedef Return_ (Receiver_::* Method)(
     typename Parameters::template Parameter<A0, 0>::Type,
     typename Parameters::template Parameter<A1, 1>::Type,
@@ -876,9 +891,6 @@ public:
 private:
   Method method;
 public:
-
-  typedef Return_ Return;
-  typedef Receiver_ Receiver;
 
   ApplyMethod(Method method):
     method(method) {}
@@ -955,6 +967,7 @@ template<typename Parameters, typename Return_, typename A0, typename A1, typena
 class ApplyFunction<Parameters, Return_(*)(A0, A1, A2, A3, A4, A5)> {
 public:
   typedef Return_ Return;
+  typedef Return_ (* Signature)(A0, A1, A2, A3, A4, A5);
   typedef Return_ (* Function)(
     typename Parameters::template Parameter<A0, 0>::Type,
     typename Parameters::template Parameter<A1, 1>::Type,
@@ -1006,6 +1019,7 @@ public:
 template<typename Parameters, typename A0, typename A1, typename A2, typename A3, typename A4, typename A5>
 class ApplyVoidFunction<Parameters, void(*)(A0, A1, A2, A3, A4, A5)> {
 public:
+  typedef void (* Signature)(A0, A1, A2, A3, A4, A5);
   typedef void (* Function)(
     typename Parameters::template Parameter<A0, 0>::Type,
     typename Parameters::template Parameter<A1, 1>::Type,
@@ -1043,6 +1057,9 @@ template<typename Parameters, typename Return_, typename Receiver_, typename A0,
     typename A4, typename A5>
 class ApplyMethod<Parameters, Return_(Receiver_::*)(A0, A1, A2, A3, A4, A5)> {
 public:
+  typedef Return_ Return;
+  typedef Receiver_ Receiver;
+  typedef Return_ (Receiver_::* Signature)(A0, A1, A2, A3, A4, A5);
   typedef Return_ (Receiver_::* Method)(
     typename Parameters::template Parameter<A0, 0>::Type,
     typename Parameters::template Parameter<A1, 1>::Type,
@@ -1054,9 +1071,6 @@ public:
 private:
   Method method;
 public:
-
-  typedef Return_ Return;
-  typedef Receiver_ Receiver;
 
   ApplyMethod(Method method):
     method(method) {}
@@ -1137,6 +1151,7 @@ template<typename Parameters, typename Return_, typename A0, typename A1, typena
 class ApplyFunction<Parameters, Return_(*)(A0, A1, A2, A3, A4, A5, A6)> {
 public:
   typedef Return_ Return;
+  typedef Return_ (* Signature)(A0, A1, A2, A3, A4, A5, A6);
   typedef Return_ (* Function)(
     typename Parameters::template Parameter<A0, 0>::Type,
     typename Parameters::template Parameter<A1, 1>::Type,
@@ -1191,6 +1206,7 @@ public:
 template<typename Parameters, typename A0, typename A1, typename A2, typename A3, typename A4, typename A5, typename A6>
 class ApplyVoidFunction<Parameters, void(*)(A0, A1, A2, A3, A4, A5, A6)> {
 public:
+  typedef void (* Signature)(A0, A1, A2, A3, A4, A5, A6);
   typedef void (* Function)(
     typename Parameters::template Parameter<A0, 0>::Type,
     typename Parameters::template Parameter<A1, 1>::Type,
@@ -1230,6 +1246,9 @@ template<typename Parameters, typename Return_, typename Receiver_, typename A0,
     typename A4, typename A5, typename A6>
 class ApplyMethod<Parameters, Return_(Receiver_::*)(A0, A1, A2, A3, A4, A5, A6)> {
 public:
+  typedef Return_ Return;
+  typedef Receiver_ Receiver;
+  typedef Return_ (Receiver_::* Signature)(A0, A1, A2, A3, A4, A5, A6);
   typedef Return_ (Receiver_::* Method)(
     typename Parameters::template Parameter<A0, 0>::Type,
     typename Parameters::template Parameter<A1, 1>::Type,
@@ -1242,9 +1261,6 @@ public:
 private:
   Method method;
 public:
-
-  typedef Return_ Return;
-  typedef Receiver_ Receiver;
 
   ApplyMethod(Method method):
     method(method) {}
@@ -1329,6 +1345,7 @@ template<typename Parameters, typename Return_, typename A0, typename A1, typena
 class ApplyFunction<Parameters, Return_(*)(A0, A1, A2, A3, A4, A5, A6, A7)> {
 public:
   typedef Return_ Return;
+  typedef Return_ (* Signature)(A0, A1, A2, A3, A4, A5, A6, A7);
   typedef Return_ (* Function)(
     typename Parameters::template Parameter<A0, 0>::Type,
     typename Parameters::template Parameter<A1, 1>::Type,
@@ -1387,6 +1404,7 @@ template<typename Parameters, typename A0, typename A1, typename A2, typename A3
     typename A6, typename A7>
 class ApplyVoidFunction<Parameters, void(*)(A0, A1, A2, A3, A4, A5, A6, A7)> {
 public:
+  typedef void (* Signature)(A0, A1, A2, A3, A4, A5, A6, A7);
   typedef void (* Function)(
     typename Parameters::template Parameter<A0, 0>::Type,
     typename Parameters::template Parameter<A1, 1>::Type,
@@ -1428,6 +1446,9 @@ template<typename Parameters, typename Return_, typename Receiver_, typename A0,
     typename A4, typename A5, typename A6, typename A7>
 class ApplyMethod<Parameters, Return_(Receiver_::*)(A0, A1, A2, A3, A4, A5, A6, A7)> {
 public:
+  typedef Return_ Return;
+  typedef Receiver_ Receiver;
+  typedef Return_ (Receiver_::* Signature)(A0, A1, A2, A3, A4, A5, A6, A7);
   typedef Return_ (Receiver_::* Method)(
     typename Parameters::template Parameter<A0, 0>::Type,
     typename Parameters::template Parameter<A1, 1>::Type,
@@ -1441,9 +1462,6 @@ public:
 private:
   Method method;
 public:
-
-  typedef Return_ Return;
-  typedef Receiver_ Receiver;
 
   ApplyMethod(Method method):
     method(method) {}
@@ -1532,6 +1550,7 @@ template<typename Parameters, typename Return_, typename A0, typename A1, typena
 class ApplyFunction<Parameters, Return_(*)(A0, A1, A2, A3, A4, A5, A6, A7, A8)> {
 public:
   typedef Return_ Return;
+  typedef Return_ (* Signature)(A0, A1, A2, A3, A4, A5, A6, A7, A8);
   typedef Return_ (* Function)(
     typename Parameters::template Parameter<A0, 0>::Type,
     typename Parameters::template Parameter<A1, 1>::Type,
@@ -1593,6 +1612,7 @@ template<typename Parameters, typename A0, typename A1, typename A2, typename A3
     typename A6, typename A7, typename A8>
 class ApplyVoidFunction<Parameters, void(*)(A0, A1, A2, A3, A4, A5, A6, A7, A8)> {
 public:
+  typedef void (* Signature)(A0, A1, A2, A3, A4, A5, A6, A7, A8);
   typedef void (* Function)(
     typename Parameters::template Parameter<A0, 0>::Type,
     typename Parameters::template Parameter<A1, 1>::Type,
@@ -1636,6 +1656,9 @@ template<typename Parameters, typename Return_, typename Receiver_, typename A0,
     typename A4, typename A5, typename A6, typename A7, typename A8>
 class ApplyMethod<Parameters, Return_(Receiver_::*)(A0, A1, A2, A3, A4, A5, A6, A7, A8)> {
 public:
+  typedef Return_ Return;
+  typedef Receiver_ Receiver;
+  typedef Return_ (Receiver_::* Signature)(A0, A1, A2, A3, A4, A5, A6, A7, A8);
   typedef Return_ (Receiver_::* Method)(
     typename Parameters::template Parameter<A0, 0>::Type,
     typename Parameters::template Parameter<A1, 1>::Type,
@@ -1650,9 +1673,6 @@ public:
 private:
   Method method;
 public:
-
-  typedef Return_ Return;
-  typedef Receiver_ Receiver;
 
   ApplyMethod(Method method):
     method(method) {}
@@ -1745,6 +1765,7 @@ template<typename Parameters, typename Return_, typename A0, typename A1, typena
 class ApplyFunction<Parameters, Return_(*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9)> {
 public:
   typedef Return_ Return;
+  typedef Return_ (* Signature)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9);
   typedef Return_ (* Function)(
     typename Parameters::template Parameter<A0, 0>::Type,
     typename Parameters::template Parameter<A1, 1>::Type,
@@ -1809,6 +1830,7 @@ template<typename Parameters, typename A0, typename A1, typename A2, typename A3
     typename A6, typename A7, typename A8, typename A9>
 class ApplyVoidFunction<Parameters, void(*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9)> {
 public:
+  typedef void (* Signature)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9);
   typedef void (* Function)(
     typename Parameters::template Parameter<A0, 0>::Type,
     typename Parameters::template Parameter<A1, 1>::Type,
@@ -1854,6 +1876,9 @@ template<typename Parameters, typename Return_, typename Receiver_, typename A0,
     typename A4, typename A5, typename A6, typename A7, typename A8, typename A9>
 class ApplyMethod<Parameters, Return_(Receiver_::*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9)> {
 public:
+  typedef Return_ Return;
+  typedef Receiver_ Receiver;
+  typedef Return_ (Receiver_::* Signature)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9);
   typedef Return_ (Receiver_::* Method)(
     typename Parameters::template Parameter<A0, 0>::Type,
     typename Parameters::template Parameter<A1, 1>::Type,
@@ -1869,9 +1894,6 @@ public:
 private:
   Method method;
 public:
-
-  typedef Return_ Return;
-  typedef Receiver_ Receiver;
 
   ApplyMethod(Method method):
     method(method) {}

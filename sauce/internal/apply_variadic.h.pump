@@ -94,6 +94,7 @@ template<typename Parameters, typename Return_$comma_typename_As>
 class ApplyFunction<Parameters, Return_(*)($As)> {
 public:
   typedef Return_ Return;
+  typedef Return_ (* Signature)($As);
   typedef Return_ (* Function)([[$for j, [[
 
     typename Parameters::template Parameter<A$j, $j>::Type
@@ -137,6 +138,7 @@ public:
 template<typename Parameters$comma_typename_As>
 class ApplyVoidFunction<Parameters, void(*)($As)> {
 public:
+  typedef void (* Signature)($As);
   typedef void (* Function)([[$for j, [[
 
     typename Parameters::template Parameter<A$j, $j>::Type
@@ -167,6 +169,9 @@ public:
 template<typename Parameters, typename Return_, typename Receiver_$comma_typename_As>
 class ApplyMethod<Parameters, Return_(Receiver_::*)($As)> {
 public:
+  typedef Return_ Return;
+  typedef Receiver_ Receiver;
+  typedef Return_ (Receiver_::* Signature)($As);
   typedef Return_ (Receiver_::* Method)([[$for j, [[
 
     typename Parameters::template Parameter<A$j, $j>::Type
@@ -175,9 +180,6 @@ public:
 private:
   Method method;
 public:
-
-  typedef Return_ Return;
-  typedef Receiver_ Receiver;
 
   ApplyMethod(Method method):
     method(method) {}
