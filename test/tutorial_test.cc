@@ -193,12 +193,16 @@ class Router {
 public:
   sauce::shared_ptr<Injector> injector;
 
+  Router():
+    injector() {}
+
   /**
    * Notice that a Router depends on having an injector itself, which sauce satisfies even though no injector is
    * explicitly bound.
    */
-  Router(sauce::shared_ptr<Injector> injector):
-    injector(injector) {}
+  void setInjector(sauce::shared_ptr<Injector> injector) {
+    this->injector = injector;
+  }
 
   void map(RequestPattern, std::string /* controllerName */) {} // One could imagine this building up a pattern index.
   virtual void wire() = 0;                                      // Override to supposedly declare routes.
@@ -311,10 +315,6 @@ public:
 
 class MyRouter: public Router {
 public:
-  // TODO: Setter injection would allow us to expose an inherited setter, instead of delegating in the constructor.
-  MyRouter(sauce::shared_ptr<Injector> injector):
-    Router(injector) {}
-
   void wire() {
     map("/orders/new(/.*)?", "place");
     map("/status", "status");
@@ -413,6 +413,22 @@ class FrameworkModule: public AbstractModule {
      * way.
      */
     bind<Acceptor>().to<FCGIAcceptor(Provider<Request> &, Provider<Response> &)>();
+
+    /**
+     * Router depends on having access to the injector itself but no injector is bound, nor is it obvious how to
+     * declare such a binding.  Sauce addresses this with an "implicit" binding: requests for the injector are
+     * ultimately satisfied with the same injector that the initial e.g. get() call was made to.
+     *
+     * As an aside, it's generally considered bad practice to rely on this feature heavily, since it obscures what the
+     * real dependencies are.  Here, the Router only wants access to Controllers bound with various dynamic names, but
+     * inspecting the module alone can't tell us that: all we can see is it could request anything.  Still, the feature
+     * has its uses.
+     *
+     * This binding also demonstrates the common form of setter injection: the address of a void method accepting a
+     * single shared_ptr parameter.  The templated type of the smart pointer is called out here as the template
+     * parameter of setting<>().
+     */
+    bind<Router>().setting<Injector>(&Router::setInjector);
   }
 };
 
@@ -434,17 +450,7 @@ class FrameworkModule: public AbstractModule {
  */
 class ProductionModule: public AbstractModule {
   void configure() {
-    /**
-     * MyRouter depends on having access to the injector itself but no injector is bound, nor is it obvious how to
-     * declare such a binding.  Sauce addresses this with an "implicit" binding: requests for the injector are
-     * ultimately satisfied with the same injector that the initial e.g. get() call was made to.
-     *
-     * As an aside, it's generally considered bad practice to rely on this feature heavily, since it obscures what the
-     * real dependencies are.  Here, the Router only wants access to Controllers bound with various dynamic names, but
-     * inspecting the module alone can't tell us that: all we can see is it could request anything.  Still, the feature
-     * has its uses.
-     */
-    bind<Router>().to<MyRouter(Injector)>();
+    bind<Router>().to<MyRouter()>();
 
     /**
      * Here we bind a user-supplied provider; notice the toProvider<>() call instead of to<>().
