@@ -1,4 +1,4 @@
-<map id="G" name="G">
+<map id="sauce::internal::InjectorBinding" name="sauce::internal::InjectorBinding">
 <area shape="rect" id="node2" href="$classsauce_1_1internal_1_1_binding.html" title="sauce::internal::Binding\l\&lt; Key\&lt; Injector \&gt;::Normalized,\l NoScope \&gt;" alt="" coords="481,43,682,103"/>
 <area shape="rect" id="node4" href="$classsauce_1_1internal_1_1_resolved_binding.html" title="sauce::internal::Resolved\lBinding\&lt; Key\&lt; Injector\l \&gt;::Normalized \&gt;" alt="" coords="261,5,432,65"/>
 <area shape="rect" id="node6" href="$classsauce_1_1internal_1_1_opaque_binding.html" title="An opaque binding." alt="" coords="6,21,213,49"/>

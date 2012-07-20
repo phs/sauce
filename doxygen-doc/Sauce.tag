@@ -1,149 +1,53 @@
 <?xml version='1.0' encoding='UTF-8' standalone='yes' ?>
 <tagfile>
   <compound kind="class">
-    <name>sauce::SettingClause</name>
-    <filename>classsauce_1_1_setting_clause.html</filename>
-    <templarg></templarg>
-    <templarg></templarg>
-    <templarg></templarg>
-    <templarg></templarg>
-    <templarg></templarg>
-    <base>sauce::internal::FinalClause</base>
-    <member kind="function">
-      <type></type>
-      <name>SettingClause</name>
-      <anchorfile>classsauce_1_1_setting_clause.html</anchorfile>
-      <anchor>a6464272d13f0dfca4a95a7691a8472dc</anchor>
-      <arglist>(Method method)</arglist>
-    </member>
-    <member kind="function">
-      <type>void</type>
-      <name>setState</name>
-      <anchorfile>classsauce_1_1internal_1_1_final_clause.html</anchorfile>
-      <anchor>a8ac2fc03c59af1c1d3cf298d63217114</anchor>
-      <arglist>(ClauseStatePtr state)</arglist>
-    </member>
-    <member kind="function" protection="protected">
-      <type></type>
-      <name>FinalClause</name>
-      <anchorfile>classsauce_1_1internal_1_1_final_clause.html</anchorfile>
-      <anchor>a4caa056b5e9dd1b6668462bb138dd63d</anchor>
-      <arglist>(ClauseStatePtr state)</arglist>
-    </member>
-    <member kind="function" protection="protected">
-      <type>Next</type>
-      <name>pass</name>
-      <anchorfile>classsauce_1_1internal_1_1_final_clause.html</anchorfile>
-      <anchor>a45f561024722fb62635433458471ad4e</anchor>
-      <arglist>(Next next)</arglist>
-    </member>
-    <member kind="function" protection="protected">
-      <type>void</type>
-      <name>bindDynamicDependencyName</name>
-      <anchorfile>classsauce_1_1internal_1_1_final_clause.html</anchorfile>
-      <anchor>aa333cb17528b9dbf8e38a72b82bcca83</anchor>
-      <arglist>(unsigned int position, std::string const name)</arglist>
-    </member>
-  </compound>
-  <compound kind="class">
-    <name>sauce::NamingClause</name>
-    <filename>classsauce_1_1_naming_clause.html</filename>
-    <templarg></templarg>
-    <templarg></templarg>
-    <templarg></templarg>
-    <templarg></templarg>
-    <base>sauce::internal::FinalClause</base>
-    <member kind="function">
-      <type>NamingClause&lt; Dependency, Scope, Ctor, Allocator &gt; &amp;</type>
-      <name>naming</name>
-      <anchorfile>classsauce_1_1_naming_clause.html</anchorfile>
-      <anchor>a7cf46feb6bab715bbac5ff748b367dce</anchor>
-      <arglist>(unsigned int position, std::string const name)</arglist>
-    </member>
-    <member kind="function">
-      <type>SettingClause&lt; Dependency, Scope, Ctor, Allocator, Method &gt;</type>
-      <name>setting</name>
-      <anchorfile>classsauce_1_1_naming_clause.html</anchorfile>
-      <anchor>a92baee4f3c910b4803929aed9dc698b4</anchor>
-      <arglist>(Method method)</arglist>
-    </member>
-    <member kind="function">
-      <type>void</type>
-      <name>setState</name>
-      <anchorfile>classsauce_1_1internal_1_1_final_clause.html</anchorfile>
-      <anchor>a8ac2fc03c59af1c1d3cf298d63217114</anchor>
-      <arglist>(ClauseStatePtr state)</arglist>
-    </member>
-    <member kind="function" protection="protected">
-      <type></type>
-      <name>FinalClause</name>
-      <anchorfile>classsauce_1_1internal_1_1_final_clause.html</anchorfile>
-      <anchor>a4caa056b5e9dd1b6668462bb138dd63d</anchor>
-      <arglist>(ClauseStatePtr state)</arglist>
-    </member>
-    <member kind="function" protection="protected">
-      <type>Next</type>
-      <name>pass</name>
-      <anchorfile>classsauce_1_1internal_1_1_final_clause.html</anchorfile>
-      <anchor>a45f561024722fb62635433458471ad4e</anchor>
-      <arglist>(Next next)</arglist>
-    </member>
-    <member kind="function" protection="protected">
-      <type>void</type>
-      <name>bindDynamicDependencyName</name>
-      <anchorfile>classsauce_1_1internal_1_1_final_clause.html</anchorfile>
-      <anchor>aa333cb17528b9dbf8e38a72b82bcca83</anchor>
-      <arglist>(unsigned int position, std::string const name)</arglist>
-    </member>
-  </compound>
-  <compound kind="class">
     <name>sauce::AllocateFromClause</name>
     <filename>classsauce_1_1_allocate_from_clause.html</filename>
     <templarg></templarg>
     <templarg></templarg>
     <templarg></templarg>
     <templarg></templarg>
-    <base>sauce::internal::FinalClause</base>
+    <base>sauce::internal::ProvidingClause</base>
     <member kind="function">
-      <type>NamingClause&lt; Dependency, Scope, Ctor, Allocator &gt;</type>
+      <type>ProvidingClause&lt; Dependency, Scope, Ctor, Allocator &gt; &amp;</type>
       <name>naming</name>
-      <anchorfile>classsauce_1_1_allocate_from_clause.html</anchorfile>
-      <anchor>a4920e56ee856690edaba116f48928c5c</anchor>
+      <anchorfile>classsauce_1_1internal_1_1_providing_clause.html</anchorfile>
+      <anchor>a2dfc7df377fa585cae843fa2edff7369</anchor>
       <arglist>(unsigned int position, std::string const name)</arglist>
-    </member>
-    <member kind="function">
-      <type>SettingClause&lt; Dependency, Scope, Ctor, Allocator, Method &gt;</type>
-      <name>setting</name>
-      <anchorfile>classsauce_1_1_allocate_from_clause.html</anchorfile>
-      <anchor>aa08b7d99485f5db64f8a7c74ff64b1bb</anchor>
-      <arglist>(Method method)</arglist>
     </member>
     <member kind="function">
       <type>void</type>
       <name>setState</name>
-      <anchorfile>classsauce_1_1internal_1_1_final_clause.html</anchorfile>
-      <anchor>a8ac2fc03c59af1c1d3cf298d63217114</anchor>
+      <anchorfile>classsauce_1_1internal_1_1_providing_clause.html</anchorfile>
+      <anchor>a410a3fd00778c18d8edb940f862fea86</anchor>
       <arglist>(ClauseStatePtr state)</arglist>
     </member>
     <member kind="function" protection="protected">
       <type></type>
-      <name>FinalClause</name>
-      <anchorfile>classsauce_1_1internal_1_1_final_clause.html</anchorfile>
-      <anchor>a4caa056b5e9dd1b6668462bb138dd63d</anchor>
+      <name>ProvidingClause</name>
+      <anchorfile>classsauce_1_1internal_1_1_providing_clause.html</anchorfile>
+      <anchor>aa1ff165e9bbfab1f8b25e5ce09329351</anchor>
       <arglist>(ClauseStatePtr state)</arglist>
+    </member>
+    <member kind="function" protection="protected">
+      <type>ClauseStatePtr</type>
+      <name>getState</name>
+      <anchorfile>classsauce_1_1internal_1_1_providing_clause.html</anchorfile>
+      <anchor>a0014fbe999e74d2f05f1d05eb891af7f</anchor>
+      <arglist>()</arglist>
     </member>
     <member kind="function" protection="protected">
       <type>Next</type>
       <name>pass</name>
-      <anchorfile>classsauce_1_1internal_1_1_final_clause.html</anchorfile>
-      <anchor>a45f561024722fb62635433458471ad4e</anchor>
+      <anchorfile>classsauce_1_1internal_1_1_providing_clause.html</anchorfile>
+      <anchor>abb38ce313b0a46c4af6c2213dce088cb</anchor>
       <arglist>(Next next)</arglist>
     </member>
     <member kind="function" protection="protected">
       <type>void</type>
       <name>bindDynamicDependencyName</name>
-      <anchorfile>classsauce_1_1internal_1_1_final_clause.html</anchorfile>
-      <anchor>aa333cb17528b9dbf8e38a72b82bcca83</anchor>
+      <anchorfile>classsauce_1_1internal_1_1_providing_clause.html</anchorfile>
+      <anchor>aec3ff7abd3123d1263ed6310cfe3bbef</anchor>
       <arglist>(unsigned int position, std::string const name)</arglist>
     </member>
   </compound>
@@ -153,7 +57,7 @@
     <templarg></templarg>
     <templarg></templarg>
     <templarg></templarg>
-    <base>FinalClause&lt; Dependency, Scope, Ctor, std::allocator&lt; int &gt; &gt;</base>
+    <base>ProvidingClause&lt; Dependency, Scope, Ctor, std::allocator&lt; int &gt; &gt;</base>
     <member kind="function">
       <type>AllocateFromClause&lt; Dependency, Scope, Ctor, Allocator &gt;</type>
       <name>allocatedFrom</name>
@@ -162,45 +66,45 @@
       <arglist>()</arglist>
     </member>
     <member kind="function">
-      <type>NamingClause&lt; Dependency, Scope, Ctor, std::allocator&lt; int &gt; &gt;</type>
+      <type>ProvidingClause&lt; Dependency, Scope, Ctor, std::allocator&lt; int &gt; &gt; &amp;</type>
       <name>naming</name>
-      <anchorfile>classsauce_1_1_to_clause.html</anchorfile>
-      <anchor>ac144980e1f799504d884f8d1bed7312f</anchor>
+      <anchorfile>classsauce_1_1internal_1_1_providing_clause.html</anchorfile>
+      <anchor>a2dfc7df377fa585cae843fa2edff7369</anchor>
       <arglist>(unsigned int position, std::string const name)</arglist>
-    </member>
-    <member kind="function">
-      <type>SettingClause&lt; Dependency, Scope, Ctor, std::allocator&lt; int &gt;, Method &gt;</type>
-      <name>setting</name>
-      <anchorfile>classsauce_1_1_to_clause.html</anchorfile>
-      <anchor>ad2fa52a2727cc471340fb8190f121540</anchor>
-      <arglist>(Method method)</arglist>
     </member>
     <member kind="function">
       <type>void</type>
       <name>setState</name>
-      <anchorfile>classsauce_1_1internal_1_1_final_clause.html</anchorfile>
-      <anchor>a8ac2fc03c59af1c1d3cf298d63217114</anchor>
+      <anchorfile>classsauce_1_1internal_1_1_providing_clause.html</anchorfile>
+      <anchor>a410a3fd00778c18d8edb940f862fea86</anchor>
       <arglist>(ClauseStatePtr state)</arglist>
     </member>
     <member kind="function" protection="protected">
       <type></type>
-      <name>FinalClause</name>
-      <anchorfile>classsauce_1_1internal_1_1_final_clause.html</anchorfile>
-      <anchor>a4caa056b5e9dd1b6668462bb138dd63d</anchor>
+      <name>ProvidingClause</name>
+      <anchorfile>classsauce_1_1internal_1_1_providing_clause.html</anchorfile>
+      <anchor>aa1ff165e9bbfab1f8b25e5ce09329351</anchor>
       <arglist>(ClauseStatePtr state)</arglist>
+    </member>
+    <member kind="function" protection="protected">
+      <type>ClauseStatePtr</type>
+      <name>getState</name>
+      <anchorfile>classsauce_1_1internal_1_1_providing_clause.html</anchorfile>
+      <anchor>a0014fbe999e74d2f05f1d05eb891af7f</anchor>
+      <arglist>()</arglist>
     </member>
     <member kind="function" protection="protected">
       <type>Next</type>
       <name>pass</name>
-      <anchorfile>classsauce_1_1internal_1_1_final_clause.html</anchorfile>
-      <anchor>a45f561024722fb62635433458471ad4e</anchor>
+      <anchorfile>classsauce_1_1internal_1_1_providing_clause.html</anchorfile>
+      <anchor>abb38ce313b0a46c4af6c2213dce088cb</anchor>
       <arglist>(Next next)</arglist>
     </member>
     <member kind="function" protection="protected">
       <type>void</type>
       <name>bindDynamicDependencyName</name>
-      <anchorfile>classsauce_1_1internal_1_1_final_clause.html</anchorfile>
-      <anchor>aa333cb17528b9dbf8e38a72b82bcca83</anchor>
+      <anchorfile>classsauce_1_1internal_1_1_providing_clause.html</anchorfile>
+      <anchor>aec3ff7abd3123d1263ed6310cfe3bbef</anchor>
       <arglist>(unsigned int position, std::string const name)</arglist>
     </member>
   </compound>
@@ -210,7 +114,7 @@
     <templarg></templarg>
     <templarg></templarg>
     <templarg></templarg>
-    <base>FinalClause&lt; ProviderDependency, Scope, ProviderCtor, std::allocator&lt; int &gt; &gt;</base>
+    <base>ProvidingClause&lt; ProviderDependency, Scope, ProviderCtor, std::allocator&lt; int &gt; &gt;</base>
     <member kind="function">
       <type>AllocateFromClause&lt; ProviderDependency, Scope, ProviderCtor, Allocator &gt;</type>
       <name>allocatedFrom</name>
@@ -219,45 +123,45 @@
       <arglist>()</arglist>
     </member>
     <member kind="function">
-      <type>NamingClause&lt; ProviderDependency, Scope, ProviderCtor, std::allocator&lt; int &gt; &gt;</type>
+      <type>ProvidingClause&lt; ProviderDependency, Scope, ProviderCtor, std::allocator&lt; int &gt; &gt; &amp;</type>
       <name>naming</name>
-      <anchorfile>classsauce_1_1_to_provider_clause.html</anchorfile>
-      <anchor>ab1e660d093886087570e74e01f2b5e86</anchor>
+      <anchorfile>classsauce_1_1internal_1_1_providing_clause.html</anchorfile>
+      <anchor>a2dfc7df377fa585cae843fa2edff7369</anchor>
       <arglist>(unsigned int position, std::string const name)</arglist>
-    </member>
-    <member kind="function">
-      <type>SettingClause&lt; ProviderDependency, Scope, ProviderCtor, std::allocator&lt; int &gt;, Method &gt;</type>
-      <name>setting</name>
-      <anchorfile>classsauce_1_1_to_provider_clause.html</anchorfile>
-      <anchor>afcad93ec616dbaf7f9df5dce38f70bf1</anchor>
-      <arglist>(Method method)</arglist>
     </member>
     <member kind="function">
       <type>void</type>
       <name>setState</name>
-      <anchorfile>classsauce_1_1internal_1_1_final_clause.html</anchorfile>
-      <anchor>a8ac2fc03c59af1c1d3cf298d63217114</anchor>
+      <anchorfile>classsauce_1_1internal_1_1_providing_clause.html</anchorfile>
+      <anchor>a410a3fd00778c18d8edb940f862fea86</anchor>
       <arglist>(ClauseStatePtr state)</arglist>
     </member>
     <member kind="function" protection="protected">
       <type></type>
-      <name>FinalClause</name>
-      <anchorfile>classsauce_1_1internal_1_1_final_clause.html</anchorfile>
-      <anchor>a4caa056b5e9dd1b6668462bb138dd63d</anchor>
+      <name>ProvidingClause</name>
+      <anchorfile>classsauce_1_1internal_1_1_providing_clause.html</anchorfile>
+      <anchor>aa1ff165e9bbfab1f8b25e5ce09329351</anchor>
       <arglist>(ClauseStatePtr state)</arglist>
+    </member>
+    <member kind="function" protection="protected">
+      <type>ClauseStatePtr</type>
+      <name>getState</name>
+      <anchorfile>classsauce_1_1internal_1_1_providing_clause.html</anchorfile>
+      <anchor>a0014fbe999e74d2f05f1d05eb891af7f</anchor>
+      <arglist>()</arglist>
     </member>
     <member kind="function" protection="protected">
       <type>Next</type>
       <name>pass</name>
-      <anchorfile>classsauce_1_1internal_1_1_final_clause.html</anchorfile>
-      <anchor>a45f561024722fb62635433458471ad4e</anchor>
+      <anchorfile>classsauce_1_1internal_1_1_providing_clause.html</anchorfile>
+      <anchor>abb38ce313b0a46c4af6c2213dce088cb</anchor>
       <arglist>(Next next)</arglist>
     </member>
     <member kind="function" protection="protected">
       <type>void</type>
       <name>bindDynamicDependencyName</name>
-      <anchorfile>classsauce_1_1internal_1_1_final_clause.html</anchorfile>
-      <anchor>aa333cb17528b9dbf8e38a72b82bcca83</anchor>
+      <anchorfile>classsauce_1_1internal_1_1_providing_clause.html</anchorfile>
+      <anchor>aec3ff7abd3123d1263ed6310cfe3bbef</anchor>
       <arglist>(unsigned int position, std::string const name)</arglist>
     </member>
   </compound>
@@ -318,10 +222,164 @@
     </member>
   </compound>
   <compound kind="class">
+    <name>sauce::ToMethodClause</name>
+    <filename>classsauce_1_1_to_method_clause.html</filename>
+    <templarg></templarg>
+    <templarg></templarg>
+    <base>sauce::internal::ModifyingClause</base>
+    <member kind="friend" protection="private">
+      <type>friend class</type>
+      <name>NamedClause&lt; Dependency &gt;</name>
+      <anchorfile>classsauce_1_1_to_method_clause.html</anchorfile>
+      <anchor>a61ee6cabfdc629088248c5ebb0e5b75f</anchor>
+      <arglist></arglist>
+    </member>
+    <member kind="friend">
+      <type>friend class</type>
+      <name>BindClause&lt; typename i::Key&lt; Dependency &gt;::Iface &gt;</name>
+      <anchorfile>classsauce_1_1_to_method_clause.html</anchorfile>
+      <anchor>a3d9857c524fbe4ca8133e93cbd51d002</anchor>
+      <arglist></arglist>
+    </member>
+    <member kind="function">
+      <type>ModifyingClause&lt; Dependency &gt; &amp;</type>
+      <name>naming</name>
+      <anchorfile>classsauce_1_1internal_1_1_modifying_clause.html</anchorfile>
+      <anchor>a9da75d4af89602fb77dabc8e1f5f1392</anchor>
+      <arglist>(unsigned int position, std::string const name)</arglist>
+    </member>
+    <member kind="function">
+      <type>void</type>
+      <name>setState</name>
+      <anchorfile>classsauce_1_1internal_1_1_modifying_clause.html</anchorfile>
+      <anchor>a1710ab4840506c657e9fbc81070ac272</anchor>
+      <arglist>(ClauseStatePtr state)</arglist>
+    </member>
+    <member kind="function" protection="protected">
+      <type></type>
+      <name>ModifyingClause</name>
+      <anchorfile>classsauce_1_1internal_1_1_modifying_clause.html</anchorfile>
+      <anchor>a4e2b6a42e9d8c05036b2181c12e5ace1</anchor>
+      <arglist>(ClauseStatePtr state)</arglist>
+    </member>
+    <member kind="function" protection="protected">
+      <type>ClauseStatePtr</type>
+      <name>getState</name>
+      <anchorfile>classsauce_1_1internal_1_1_modifying_clause.html</anchorfile>
+      <anchor>a155a0d38d9ab3c67828bdfe8dbbc45dc</anchor>
+      <arglist>()</arglist>
+    </member>
+    <member kind="function" protection="protected">
+      <type>Next</type>
+      <name>pass</name>
+      <anchorfile>classsauce_1_1internal_1_1_modifying_clause.html</anchorfile>
+      <anchor>a582d3c536d6eec1eed4f0f1b6e197865</anchor>
+      <arglist>(Next next)</arglist>
+    </member>
+    <member kind="function" protection="protected">
+      <type>void</type>
+      <name>bindDynamicDependencyName</name>
+      <anchorfile>classsauce_1_1internal_1_1_modifying_clause.html</anchorfile>
+      <anchor>a710566d122272d8baaaa39713b80d25c</anchor>
+      <arglist>(unsigned int position, std::string const name)</arglist>
+    </member>
+  </compound>
+  <compound kind="class">
+    <name>sauce::ToMethodNamingClause</name>
+    <filename>classsauce_1_1_to_method_naming_clause.html</filename>
+    <templarg>Dependency</templarg>
+    <templarg>Signature</templarg>
+    <base>sauce::internal::ModifyingClause</base>
+    <member kind="friend" protection="private">
+      <type>friend class</type>
+      <name>NamedClause&lt; Dependency &gt;</name>
+      <anchorfile>classsauce_1_1_to_method_naming_clause.html</anchorfile>
+      <anchor>a61ee6cabfdc629088248c5ebb0e5b75f</anchor>
+      <arglist></arglist>
+    </member>
+    <member kind="friend">
+      <type>friend class</type>
+      <name>BindClause&lt; typename i::Key&lt; Dependency &gt;::Iface &gt;</name>
+      <anchorfile>classsauce_1_1_to_method_naming_clause.html</anchorfile>
+      <anchor>a3d9857c524fbe4ca8133e93cbd51d002</anchor>
+      <arglist></arglist>
+    </member>
+    <member kind="function">
+      <type>ModifyingClause&lt; Dependency &gt; &amp;</type>
+      <name>naming</name>
+      <anchorfile>classsauce_1_1internal_1_1_modifying_clause.html</anchorfile>
+      <anchor>a9da75d4af89602fb77dabc8e1f5f1392</anchor>
+      <arglist>(unsigned int position, std::string const name)</arglist>
+    </member>
+    <member kind="function">
+      <type>void</type>
+      <name>setState</name>
+      <anchorfile>classsauce_1_1internal_1_1_modifying_clause.html</anchorfile>
+      <anchor>a1710ab4840506c657e9fbc81070ac272</anchor>
+      <arglist>(ClauseStatePtr state)</arglist>
+    </member>
+    <member kind="function" protection="protected">
+      <type></type>
+      <name>ModifyingClause</name>
+      <anchorfile>classsauce_1_1internal_1_1_modifying_clause.html</anchorfile>
+      <anchor>a4e2b6a42e9d8c05036b2181c12e5ace1</anchor>
+      <arglist>(ClauseStatePtr state)</arglist>
+    </member>
+    <member kind="function" protection="protected">
+      <type>ClauseStatePtr</type>
+      <name>getState</name>
+      <anchorfile>classsauce_1_1internal_1_1_modifying_clause.html</anchorfile>
+      <anchor>a155a0d38d9ab3c67828bdfe8dbbc45dc</anchor>
+      <arglist>()</arglist>
+    </member>
+    <member kind="function" protection="protected">
+      <type>Next</type>
+      <name>pass</name>
+      <anchorfile>classsauce_1_1internal_1_1_modifying_clause.html</anchorfile>
+      <anchor>a582d3c536d6eec1eed4f0f1b6e197865</anchor>
+      <arglist>(Next next)</arglist>
+    </member>
+    <member kind="function" protection="protected">
+      <type>void</type>
+      <name>bindDynamicDependencyName</name>
+      <anchorfile>classsauce_1_1internal_1_1_modifying_clause.html</anchorfile>
+      <anchor>a710566d122272d8baaaa39713b80d25c</anchor>
+      <arglist>(unsigned int position, std::string const name)</arglist>
+    </member>
+  </compound>
+  <compound kind="class">
     <name>sauce::NamedClause</name>
     <filename>classsauce_1_1_named_clause.html</filename>
     <templarg></templarg>
     <base>sauce::internal::InitialClause</base>
+    <member kind="function">
+      <type>ToMethodClause&lt; Dependency, Method &gt;</type>
+      <name>toMethod</name>
+      <anchorfile>classsauce_1_1_named_clause.html</anchorfile>
+      <anchor>a6a97c8c7aad30a35969a55e9003f73ff</anchor>
+      <arglist>(Method method)</arglist>
+    </member>
+    <member kind="function">
+      <type>ToMethodNamingClause&lt; Dependency, Signature &gt;</type>
+      <name>toMethodNaming</name>
+      <anchorfile>classsauce_1_1_named_clause.html</anchorfile>
+      <anchor>a311521c1ced7fa9b25e0d20d84d468ab</anchor>
+      <arglist>(typename ToMethodNamingClause&lt; Dependency, Signature &gt;::Method method)</arglist>
+    </member>
+    <member kind="function">
+      <type>ToMethodNamingClause&lt; Dependency, void(Iface::*)(SetDependency)&gt;</type>
+      <name>setting</name>
+      <anchorfile>classsauce_1_1_named_clause.html</anchorfile>
+      <anchor>a6a636684d4ff2560befbf97b135f630a</anchor>
+      <arglist>(typename ToMethodNamingClause&lt; Dependency, void(Iface::*)(SetDependency)&gt;::Method method, std::string name=unnamed())</arglist>
+    </member>
+    <member kind="function">
+      <type>ToMethodNamingClause&lt; Dependency, void(Iface::*)(Named&lt; Iface, Name &gt;)&gt;</type>
+      <name>setting</name>
+      <anchorfile>classsauce_1_1_named_clause.html</anchorfile>
+      <anchor>a0168946d6da325a84df0ed98e66ef83d</anchor>
+      <arglist>(typename ToMethodNamingClause&lt; Dependency, void(Iface::*)(Named&lt; Iface, Name &gt;)&gt;::Method method)</arglist>
+    </member>
     <member kind="function">
       <type>InClause&lt; Dependency, Scope &gt;</type>
       <name>in</name>
@@ -397,6 +455,34 @@
       <anchorfile>classsauce_1_1_bind_clause.html</anchorfile>
       <anchor>afcf44385460b5c8801c6b5e5e629137d</anchor>
       <arglist>(std::string const name)</arglist>
+    </member>
+    <member kind="function">
+      <type>ToMethodClause&lt; Named&lt; Iface, Unnamed &gt;, Method &gt;</type>
+      <name>toMethod</name>
+      <anchorfile>classsauce_1_1_bind_clause.html</anchorfile>
+      <anchor>a818bb1f06223bd5d26e9d6ec51930613</anchor>
+      <arglist>(Method method)</arglist>
+    </member>
+    <member kind="function">
+      <type>ToMethodNamingClause&lt; Named&lt; Iface, Unnamed &gt;, Signature &gt;</type>
+      <name>toMethodNaming</name>
+      <anchorfile>classsauce_1_1_bind_clause.html</anchorfile>
+      <anchor>a38c94667fdd0edeba0832ecdf02da7b4</anchor>
+      <arglist>(typename ToMethodNamingClause&lt; Named&lt; Iface, Unnamed &gt;, Signature &gt;::Method method)</arglist>
+    </member>
+    <member kind="function">
+      <type>ToMethodNamingClause&lt; Named&lt; Iface, Unnamed &gt;, void(Iface::*)(SetDependency)&gt;</type>
+      <name>setting</name>
+      <anchorfile>classsauce_1_1_bind_clause.html</anchorfile>
+      <anchor>a3f61562ee0ec7a0071a1c06a54661886</anchor>
+      <arglist>(typename ToMethodNamingClause&lt; Named&lt; Iface, Unnamed &gt;, void(Iface::*)(SetDependency)&gt;::Method method, std::string name=unnamed())</arglist>
+    </member>
+    <member kind="function">
+      <type>ToMethodNamingClause&lt; Named&lt; Iface, Unnamed &gt;, void(Iface::*)(Named&lt; SetIface, Name &gt;)&gt;</type>
+      <name>setting</name>
+      <anchorfile>classsauce_1_1_bind_clause.html</anchorfile>
+      <anchor>a6859d9da54d4162d8f879c913bd13bfc</anchor>
+      <arglist>(typename ToMethodNamingClause&lt; Named&lt; Iface, Unnamed &gt;, void(Iface::*)(Named&lt; SetIface, Name &gt;)&gt;::Method method)</arglist>
     </member>
     <member kind="function">
       <type>InClause&lt; Named&lt; Iface, Unnamed &gt;, Scope &gt;</type>
@@ -576,6 +662,13 @@
     <filename>classsauce_1_1_partial_binding_exception_for.html</filename>
     <templarg></templarg>
     <base>sauce::PartialBindingException</base>
+    <member kind="function">
+      <type></type>
+      <name>Exception</name>
+      <anchorfile>classsauce_1_1_exception.html</anchorfile>
+      <anchor>a712d07bd39b9df1bf8b4596a0b64c9b7</anchor>
+      <arglist>(std::string message)</arglist>
+    </member>
   </compound>
   <compound kind="class">
     <name>sauce::CircularDependencyException</name>
@@ -594,6 +687,13 @@
     <filename>classsauce_1_1_circular_dependency_exception_for.html</filename>
     <templarg></templarg>
     <base>sauce::CircularDependencyException</base>
+    <member kind="function">
+      <type></type>
+      <name>Exception</name>
+      <anchorfile>classsauce_1_1_exception.html</anchorfile>
+      <anchor>a712d07bd39b9df1bf8b4596a0b64c9b7</anchor>
+      <arglist>(std::string message)</arglist>
+    </member>
   </compound>
   <compound kind="class">
     <name>sauce::OutOfScopeException</name>
@@ -612,6 +712,13 @@
     <filename>classsauce_1_1_out_of_scope_exception_for.html</filename>
     <templarg></templarg>
     <base>sauce::OutOfScopeException</base>
+    <member kind="function">
+      <type></type>
+      <name>Exception</name>
+      <anchorfile>classsauce_1_1_exception.html</anchorfile>
+      <anchor>a712d07bd39b9df1bf8b4596a0b64c9b7</anchor>
+      <arglist>(std::string message)</arglist>
+    </member>
   </compound>
   <compound kind="class">
     <name>sauce::AlreadyInScopeException</name>
@@ -630,6 +737,13 @@
     <filename>classsauce_1_1_already_in_scope_exception_for.html</filename>
     <templarg></templarg>
     <base>sauce::AlreadyInScopeException</base>
+    <member kind="function">
+      <type></type>
+      <name>Exception</name>
+      <anchorfile>classsauce_1_1_exception.html</anchorfile>
+      <anchor>a712d07bd39b9df1bf8b4596a0b64c9b7</anchor>
+      <arglist>(std::string message)</arglist>
+    </member>
   </compound>
   <compound kind="class">
     <name>sauce::ExitingSingletonScopeException</name>
@@ -647,6 +761,20 @@
     <name>sauce::Injector</name>
     <filename>classsauce_1_1_injector.html</filename>
     <member kind="function">
+      <type>void</type>
+      <name>inject</name>
+      <anchorfile>classsauce_1_1_injector.html</anchorfile>
+      <anchor>aa2f4d685e68bc4081b1884d63a3cf412</anchor>
+      <arglist>(typename i::Key&lt; Dependency &gt;::Ptr &amp;injected, std::string const name=unnamed())</arglist>
+    </member>
+    <member kind="function">
+      <type>void</type>
+      <name>inject</name>
+      <anchorfile>classsauce_1_1_injector.html</anchorfile>
+      <anchor>ac045afc073f986bed5a6f85975165e63</anchor>
+      <arglist>(typename i::Key&lt; Named&lt; Iface, Name &gt; &gt;::Ptr &amp;injected, std::string const name=unnamed())</arglist>
+    </member>
+    <member kind="function">
       <type>i::Key&lt; Dependency &gt;::Ptr</type>
       <name>get</name>
       <anchorfile>classsauce_1_1_injector.html</anchorfile>
@@ -661,17 +789,17 @@
       <arglist>(std::string const name=unnamed())</arglist>
     </member>
     <member kind="function">
-      <type>sauce::shared_ptr&lt; Injector &gt;</type>
+      <type>i::InjectorPtr</type>
       <name>enter</name>
       <anchorfile>classsauce_1_1_injector.html</anchorfile>
-      <anchor>a167426cc0c3aa9ec1063baf6eaaf3da5</anchor>
+      <anchor>a205ad24a0348fa5d31c6a6f59e4742d7</anchor>
       <arglist>() const </arglist>
     </member>
     <member kind="function">
-      <type>sauce::shared_ptr&lt; Injector &gt;</type>
+      <type>i::InjectorPtr</type>
       <name>exit</name>
       <anchorfile>classsauce_1_1_injector.html</anchorfile>
-      <anchor>a9b1a518af5173c7bcf5432827bb6ba34</anchor>
+      <anchor>aa1878959dac7a3bab3268d59c08e3ca8</anchor>
       <arglist>() const </arglist>
     </member>
     <member kind="function">
@@ -858,25 +986,25 @@
       <arglist>(InjectorPtr injector, TypeIds &amp;ids, std::string const name) const </arglist>
     </member>
     <member kind="function" protection="protected">
-      <type>Key&lt; Dependency &gt;::Ptr</type>
-      <name>getHelper</name>
+      <type>void</type>
+      <name>injectHelper</name>
       <anchorfile>classsauce_1_1internal_1_1_injector_friend.html</anchorfile>
-      <anchor>a03ee99cad37f969f3cfe3a6ca33724e0</anchor>
-      <arglist>(InjectorPtr injector, std::string const name) const </arglist>
+      <anchor>ad4e574164c05c602f782cfb13f2de721</anchor>
+      <arglist>(typename Key&lt; Dependency &gt;::Ptr &amp;injected, InjectorPtr injector, std::string const name) const </arglist>
     </member>
     <member kind="function" protection="protected">
       <type>void</type>
       <name>cache</name>
       <anchorfile>classsauce_1_1internal_1_1_injector_friend.html</anchorfile>
-      <anchor>af00f3d75070ba40a4e4bffe623c53fec</anchor>
-      <arglist>(InjectorPtr injector, typename Key&lt; Dependency &gt;::Ptr provided, i::TypeId scope) const </arglist>
+      <anchor>a0e1e832cfd7315fb4bc004566cf57755</anchor>
+      <arglist>(InjectorPtr injector, typename Key&lt; Dependency &gt;::Ptr injected, i::TypeId scope) const </arglist>
     </member>
     <member kind="function" protection="protected">
       <type>bool</type>
       <name>probe</name>
       <anchorfile>classsauce_1_1internal_1_1_injector_friend.html</anchorfile>
-      <anchor>a5fcd6d8e70ed219707733d1d859728c0</anchor>
-      <arglist>(InjectorPtr injector, typename Key&lt; Dependency &gt;::Ptr &amp;provided, i::TypeId scope) const </arglist>
+      <anchor>ab6020f7d9d9832ff7bc155c95ed89425</anchor>
+      <arglist>(InjectorPtr injector, typename Key&lt; Dependency &gt;::Ptr &amp;injected, i::TypeId scope) const </arglist>
     </member>
   </compound>
   <compound kind="class">
@@ -926,6 +1054,20 @@
       <anchor>a50c00832d393700f3ae63d4eede2a827</anchor>
       <arglist></arglist>
     </member>
+    <member kind="typedef">
+      <type>Return_(*</type>
+      <name>Signature</name>
+      <anchorfile>classsauce_1_1internal_1_1_apply_function_3_01_parameters_00_01_return___07_5_08_07_08_4.html</anchorfile>
+      <anchor>a486f8dbcde81c6de279611d14e4606f0</anchor>
+      <arglist>)()</arglist>
+    </member>
+    <member kind="typedef">
+      <type>Return_(*</type>
+      <name>Function</name>
+      <anchorfile>classsauce_1_1internal_1_1_apply_function_3_01_parameters_00_01_return___07_5_08_07_08_4.html</anchorfile>
+      <anchor>a0e2a72e0564e56facc9560fa805e21ef</anchor>
+      <arglist>)()</arglist>
+    </member>
     <member kind="function">
       <type></type>
       <name>ApplyFunction</name>
@@ -959,6 +1101,20 @@
     <name>sauce::internal::ApplyVoidFunction&lt; Parameters, void(*)()&gt;</name>
     <filename>classsauce_1_1internal_1_1_apply_void_function_3_01_parameters_00_01void_07_5_08_07_08_4.html</filename>
     <templarg></templarg>
+    <member kind="typedef">
+      <type>void(*</type>
+      <name>Signature</name>
+      <anchorfile>classsauce_1_1internal_1_1_apply_void_function_3_01_parameters_00_01void_07_5_08_07_08_4.html</anchorfile>
+      <anchor>a7fcba515d633d9a96f4ccf988ac85e6e</anchor>
+      <arglist>)()</arglist>
+    </member>
+    <member kind="typedef">
+      <type>void(*</type>
+      <name>Function</name>
+      <anchorfile>classsauce_1_1internal_1_1_apply_void_function_3_01_parameters_00_01void_07_5_08_07_08_4.html</anchorfile>
+      <anchor>af4d83d66d650689ff34857ea5b73fc18</anchor>
+      <arglist>)()</arglist>
+    </member>
     <member kind="function">
       <type></type>
       <name>ApplyVoidFunction</name>
@@ -1000,6 +1156,20 @@
       <anchorfile>classsauce_1_1internal_1_1_apply_method_3_01_parameters_00_01_return___07_receiver___1_1_5_08_07_08_4.html</anchorfile>
       <anchor>aa76b183c863f9fc1464bf187665b74aa</anchor>
       <arglist></arglist>
+    </member>
+    <member kind="typedef">
+      <type>Return_(Receiver_::*</type>
+      <name>Signature</name>
+      <anchorfile>classsauce_1_1internal_1_1_apply_method_3_01_parameters_00_01_return___07_receiver___1_1_5_08_07_08_4.html</anchorfile>
+      <anchor>a25b420babcc67cfd5ca5ae1be066cd61</anchor>
+      <arglist>)()</arglist>
+    </member>
+    <member kind="typedef">
+      <type>Return_(Receiver_::*</type>
+      <name>Method</name>
+      <anchorfile>classsauce_1_1internal_1_1_apply_method_3_01_parameters_00_01_return___07_receiver___1_1_5_08_07_08_4.html</anchorfile>
+      <anchor>a33e3f84a8af8caed48d4ebaa1170f49d</anchor>
+      <arglist>)()</arglist>
     </member>
     <member kind="function">
       <type></type>
@@ -1078,6 +1248,20 @@
       <anchor>a007cc0253e2794f88adfb439c115c75d</anchor>
       <arglist></arglist>
     </member>
+    <member kind="typedef">
+      <type>Return_(*</type>
+      <name>Signature</name>
+      <anchorfile>classsauce_1_1internal_1_1_apply_function_3_01_parameters_00_01_return___07_5_08_07_a0_08_4.html</anchorfile>
+      <anchor>a1f7054d8512c40575c51ae27f2adbd98</anchor>
+      <arglist>)(A0)</arglist>
+    </member>
+    <member kind="typedef">
+      <type>Return_(*</type>
+      <name>Function</name>
+      <anchorfile>classsauce_1_1internal_1_1_apply_function_3_01_parameters_00_01_return___07_5_08_07_a0_08_4.html</anchorfile>
+      <anchor>a8dd4cfa913b9e686dfb8517413ad60c7</anchor>
+      <arglist>)(typename Parameters::template Parameter&lt; A0, 0 &gt;::Type)</arglist>
+    </member>
     <member kind="function">
       <type></type>
       <name>ApplyFunction</name>
@@ -1112,6 +1296,20 @@
     <filename>classsauce_1_1internal_1_1_apply_void_function_3_01_parameters_00_01void_07_5_08_07_a0_08_4.html</filename>
     <templarg></templarg>
     <templarg></templarg>
+    <member kind="typedef">
+      <type>void(*</type>
+      <name>Signature</name>
+      <anchorfile>classsauce_1_1internal_1_1_apply_void_function_3_01_parameters_00_01void_07_5_08_07_a0_08_4.html</anchorfile>
+      <anchor>ae240638d7ca080304f47ace2df2e6bdd</anchor>
+      <arglist>)(A0)</arglist>
+    </member>
+    <member kind="typedef">
+      <type>void(*</type>
+      <name>Function</name>
+      <anchorfile>classsauce_1_1internal_1_1_apply_void_function_3_01_parameters_00_01void_07_5_08_07_a0_08_4.html</anchorfile>
+      <anchor>a5a8e4ef2cb5a9ec7b1c292414e5da61e</anchor>
+      <arglist>)(typename Parameters::template Parameter&lt; A0, 0 &gt;::Type)</arglist>
+    </member>
     <member kind="function">
       <type></type>
       <name>ApplyVoidFunction</name>
@@ -1154,6 +1352,20 @@
       <anchorfile>classsauce_1_1internal_1_1_apply_method_3_01_parameters_00_01_return___07_receiver___1_1_5_08_07_a0_08_4.html</anchorfile>
       <anchor>a09b91e6160ac348128dcbac78ddd7c2e</anchor>
       <arglist></arglist>
+    </member>
+    <member kind="typedef">
+      <type>Return_(Receiver_::*</type>
+      <name>Signature</name>
+      <anchorfile>classsauce_1_1internal_1_1_apply_method_3_01_parameters_00_01_return___07_receiver___1_1_5_08_07_a0_08_4.html</anchorfile>
+      <anchor>ad928b1ae9cb242bee6867155d16cc8b1</anchor>
+      <arglist>)(A0)</arglist>
+    </member>
+    <member kind="typedef">
+      <type>Return_(Receiver_::*</type>
+      <name>Method</name>
+      <anchorfile>classsauce_1_1internal_1_1_apply_method_3_01_parameters_00_01_return___07_receiver___1_1_5_08_07_a0_08_4.html</anchorfile>
+      <anchor>a6a214d7afd4659644b03116e4eaee970</anchor>
+      <arglist>)(typename Parameters::template Parameter&lt; A0, 0 &gt;::Type)</arglist>
     </member>
     <member kind="function">
       <type></type>
@@ -1234,6 +1446,20 @@
       <anchor>a7897d5f4b7eec377b9a5a1c3dff7862a</anchor>
       <arglist></arglist>
     </member>
+    <member kind="typedef">
+      <type>Return_(*</type>
+      <name>Signature</name>
+      <anchorfile>classsauce_1_1internal_1_1_apply_function_3_01_parameters_00_01_return___07_5_08_07_a0_00_01_a1_08_4.html</anchorfile>
+      <anchor>a770ac8d5cbafb9aa7951a7484cfc1515</anchor>
+      <arglist>)(A0, A1)</arglist>
+    </member>
+    <member kind="typedef">
+      <type>Return_(*</type>
+      <name>Function</name>
+      <anchorfile>classsauce_1_1internal_1_1_apply_function_3_01_parameters_00_01_return___07_5_08_07_a0_00_01_a1_08_4.html</anchorfile>
+      <anchor>ab62c64820f99a24a5093a19763bf0495</anchor>
+      <arglist>)(typename Parameters::template Parameter&lt; A0, 0 &gt;::Type, typename Parameters::template Parameter&lt; A1, 1 &gt;::Type)</arglist>
+    </member>
     <member kind="function">
       <type></type>
       <name>ApplyFunction</name>
@@ -1269,6 +1495,20 @@
     <templarg></templarg>
     <templarg></templarg>
     <templarg></templarg>
+    <member kind="typedef">
+      <type>void(*</type>
+      <name>Signature</name>
+      <anchorfile>classsauce_1_1internal_1_1_apply_void_function_3_01_parameters_00_01void_07_5_08_07_a0_00_01_a1_08_4.html</anchorfile>
+      <anchor>a37de599a7f7a076bdbe6135e4587d275</anchor>
+      <arglist>)(A0, A1)</arglist>
+    </member>
+    <member kind="typedef">
+      <type>void(*</type>
+      <name>Function</name>
+      <anchorfile>classsauce_1_1internal_1_1_apply_void_function_3_01_parameters_00_01void_07_5_08_07_a0_00_01_a1_08_4.html</anchorfile>
+      <anchor>a6d3eabb0f6240727203210ca249c3a9a</anchor>
+      <arglist>)(typename Parameters::template Parameter&lt; A0, 0 &gt;::Type, typename Parameters::template Parameter&lt; A1, 1 &gt;::Type)</arglist>
+    </member>
     <member kind="function">
       <type></type>
       <name>ApplyVoidFunction</name>
@@ -1312,6 +1552,20 @@
       <anchorfile>classsauce_1_1internal_1_1_apply_method_3_01_parameters_00_01_return___07_receiver___1_1_5_08_07_a0_00_01_a1_08_4.html</anchorfile>
       <anchor>a1999287aa332dd65bd3e8eaaa868a495</anchor>
       <arglist></arglist>
+    </member>
+    <member kind="typedef">
+      <type>Return_(Receiver_::*</type>
+      <name>Signature</name>
+      <anchorfile>classsauce_1_1internal_1_1_apply_method_3_01_parameters_00_01_return___07_receiver___1_1_5_08_07_a0_00_01_a1_08_4.html</anchorfile>
+      <anchor>a68db1efcb884e02eecdeb58075d75fa7</anchor>
+      <arglist>)(A0, A1)</arglist>
+    </member>
+    <member kind="typedef">
+      <type>Return_(Receiver_::*</type>
+      <name>Method</name>
+      <anchorfile>classsauce_1_1internal_1_1_apply_method_3_01_parameters_00_01_return___07_receiver___1_1_5_08_07_a0_00_01_a1_08_4.html</anchorfile>
+      <anchor>a2736defd9436c25dc0c762bd87e863c8</anchor>
+      <arglist>)(typename Parameters::template Parameter&lt; A0, 0 &gt;::Type, typename Parameters::template Parameter&lt; A1, 1 &gt;::Type)</arglist>
     </member>
     <member kind="function">
       <type></type>
@@ -1394,6 +1648,20 @@
       <anchor>a98c1936c20bcda3e9e87220f089d14f0</anchor>
       <arglist></arglist>
     </member>
+    <member kind="typedef">
+      <type>Return_(*</type>
+      <name>Signature</name>
+      <anchorfile>classsauce_1_1internal_1_1_apply_function_3_01_parameters_00_01_return___07_5_08_07_a0_00_01_a1_00_01_a2_08_4.html</anchorfile>
+      <anchor>a2b8c67c4b1977f0a4fa314769420e56a</anchor>
+      <arglist>)(A0, A1, A2)</arglist>
+    </member>
+    <member kind="typedef">
+      <type>Return_(*</type>
+      <name>Function</name>
+      <anchorfile>classsauce_1_1internal_1_1_apply_function_3_01_parameters_00_01_return___07_5_08_07_a0_00_01_a1_00_01_a2_08_4.html</anchorfile>
+      <anchor>a460d18e9785b7832323c016d9bad9198</anchor>
+      <arglist>)(typename Parameters::template Parameter&lt; A0, 0 &gt;::Type, typename Parameters::template Parameter&lt; A1, 1 &gt;::Type, typename Parameters::template Parameter&lt; A2, 2 &gt;::Type)</arglist>
+    </member>
     <member kind="function">
       <type></type>
       <name>ApplyFunction</name>
@@ -1430,6 +1698,20 @@
     <templarg></templarg>
     <templarg></templarg>
     <templarg></templarg>
+    <member kind="typedef">
+      <type>void(*</type>
+      <name>Signature</name>
+      <anchorfile>classsauce_1_1internal_1_1_apply_void_function_3_01_parameters_00_01void_07_5_08_07_a0_00_01_a1_00_01_a2_08_4.html</anchorfile>
+      <anchor>afe81d314f3cb46e484377b21328c1555</anchor>
+      <arglist>)(A0, A1, A2)</arglist>
+    </member>
+    <member kind="typedef">
+      <type>void(*</type>
+      <name>Function</name>
+      <anchorfile>classsauce_1_1internal_1_1_apply_void_function_3_01_parameters_00_01void_07_5_08_07_a0_00_01_a1_00_01_a2_08_4.html</anchorfile>
+      <anchor>a075af8f4ba04fa38014c979e2647994f</anchor>
+      <arglist>)(typename Parameters::template Parameter&lt; A0, 0 &gt;::Type, typename Parameters::template Parameter&lt; A1, 1 &gt;::Type, typename Parameters::template Parameter&lt; A2, 2 &gt;::Type)</arglist>
+    </member>
     <member kind="function">
       <type></type>
       <name>ApplyVoidFunction</name>
@@ -1474,6 +1756,20 @@
       <anchorfile>classsauce_1_1internal_1_1_apply_method_3_01_parameters_00_01_return___07_receiver___1_1_5_08_07_a0_00_01_a1_00_01_a2_08_4.html</anchorfile>
       <anchor>a6aa527bc759580d679aa9055e3e3d816</anchor>
       <arglist></arglist>
+    </member>
+    <member kind="typedef">
+      <type>Return_(Receiver_::*</type>
+      <name>Signature</name>
+      <anchorfile>classsauce_1_1internal_1_1_apply_method_3_01_parameters_00_01_return___07_receiver___1_1_5_08_07_a0_00_01_a1_00_01_a2_08_4.html</anchorfile>
+      <anchor>afe9f4c0d57a8e3d7ecdb8de5106ab2b6</anchor>
+      <arglist>)(A0, A1, A2)</arglist>
+    </member>
+    <member kind="typedef">
+      <type>Return_(Receiver_::*</type>
+      <name>Method</name>
+      <anchorfile>classsauce_1_1internal_1_1_apply_method_3_01_parameters_00_01_return___07_receiver___1_1_5_08_07_a0_00_01_a1_00_01_a2_08_4.html</anchorfile>
+      <anchor>afd834bbbcee9541f03aeca85ce3c6d42</anchor>
+      <arglist>)(typename Parameters::template Parameter&lt; A0, 0 &gt;::Type, typename Parameters::template Parameter&lt; A1, 1 &gt;::Type, typename Parameters::template Parameter&lt; A2, 2 &gt;::Type)</arglist>
     </member>
     <member kind="function">
       <type></type>
@@ -1558,6 +1854,20 @@
       <anchor>a3b7003f66d38bda0fc27e7e349cb3781</anchor>
       <arglist></arglist>
     </member>
+    <member kind="typedef">
+      <type>Return_(*</type>
+      <name>Signature</name>
+      <anchorfile>classsauce_1_1internal_1_1_apply_function_3_01_parameters_00_01_return___07_5_08_07_a0_00_01_a1_00_01_a2_00_01_a3_08_4.html</anchorfile>
+      <anchor>aa50cf2b7b58d22352572eca5aac93c16</anchor>
+      <arglist>)(A0, A1, A2, A3)</arglist>
+    </member>
+    <member kind="typedef">
+      <type>Return_(*</type>
+      <name>Function</name>
+      <anchorfile>classsauce_1_1internal_1_1_apply_function_3_01_parameters_00_01_return___07_5_08_07_a0_00_01_a1_00_01_a2_00_01_a3_08_4.html</anchorfile>
+      <anchor>a3358bc3cde9f3ad33ee8ce8f90d86bee</anchor>
+      <arglist>)(typename Parameters::template Parameter&lt; A0, 0 &gt;::Type, typename Parameters::template Parameter&lt; A1, 1 &gt;::Type, typename Parameters::template Parameter&lt; A2, 2 &gt;::Type, typename Parameters::template Parameter&lt; A3, 3 &gt;::Type)</arglist>
+    </member>
     <member kind="function">
       <type></type>
       <name>ApplyFunction</name>
@@ -1595,6 +1905,20 @@
     <templarg></templarg>
     <templarg></templarg>
     <templarg></templarg>
+    <member kind="typedef">
+      <type>void(*</type>
+      <name>Signature</name>
+      <anchorfile>classsauce_1_1internal_1_1_apply_void_function_3_01_parameters_00_01void_07_5_08_07_a0_00_01_a1_00_01_a2_00_01_a3_08_4.html</anchorfile>
+      <anchor>a719a23d25ed06d36cdb23ef618c2833d</anchor>
+      <arglist>)(A0, A1, A2, A3)</arglist>
+    </member>
+    <member kind="typedef">
+      <type>void(*</type>
+      <name>Function</name>
+      <anchorfile>classsauce_1_1internal_1_1_apply_void_function_3_01_parameters_00_01void_07_5_08_07_a0_00_01_a1_00_01_a2_00_01_a3_08_4.html</anchorfile>
+      <anchor>abd9f3a72eb710546c4ed12df0e7d10b5</anchor>
+      <arglist>)(typename Parameters::template Parameter&lt; A0, 0 &gt;::Type, typename Parameters::template Parameter&lt; A1, 1 &gt;::Type, typename Parameters::template Parameter&lt; A2, 2 &gt;::Type, typename Parameters::template Parameter&lt; A3, 3 &gt;::Type)</arglist>
+    </member>
     <member kind="function">
       <type></type>
       <name>ApplyVoidFunction</name>
@@ -1640,6 +1964,20 @@
       <anchorfile>classsauce_1_1internal_1_1_apply_method_3_01_parameters_00_01_return___07_receiver___1_1_5_08_07db496c441711b62bbe49eaaf5617d981.html</anchorfile>
       <anchor>adffc561fef773f6096cf1dfac1b206c4</anchor>
       <arglist></arglist>
+    </member>
+    <member kind="typedef">
+      <type>Return_(Receiver_::*</type>
+      <name>Signature</name>
+      <anchorfile>classsauce_1_1internal_1_1_apply_method_3_01_parameters_00_01_return___07_receiver___1_1_5_08_07db496c441711b62bbe49eaaf5617d981.html</anchorfile>
+      <anchor>ae9da9b2e75436811a7ab80da43a92106</anchor>
+      <arglist>)(A0, A1, A2, A3)</arglist>
+    </member>
+    <member kind="typedef">
+      <type>Return_(Receiver_::*</type>
+      <name>Method</name>
+      <anchorfile>classsauce_1_1internal_1_1_apply_method_3_01_parameters_00_01_return___07_receiver___1_1_5_08_07db496c441711b62bbe49eaaf5617d981.html</anchorfile>
+      <anchor>a998d0835a0eb97ab43fea2a2a6c9563a</anchor>
+      <arglist>)(typename Parameters::template Parameter&lt; A0, 0 &gt;::Type, typename Parameters::template Parameter&lt; A1, 1 &gt;::Type, typename Parameters::template Parameter&lt; A2, 2 &gt;::Type, typename Parameters::template Parameter&lt; A3, 3 &gt;::Type)</arglist>
     </member>
     <member kind="function">
       <type></type>
@@ -1726,6 +2064,20 @@
       <anchor>ac4f20aa34eb965cbe032301602f01a56</anchor>
       <arglist></arglist>
     </member>
+    <member kind="typedef">
+      <type>Return_(*</type>
+      <name>Signature</name>
+      <anchorfile>classsauce_1_1internal_1_1_apply_function_3_01_parameters_00_01_return___07_5_08_07_a0_00_01_a1_00_01_a2_00_01_a3_00_01_a4_08_4.html</anchorfile>
+      <anchor>a5dc63649cb08eccafe28b549d414e8d0</anchor>
+      <arglist>)(A0, A1, A2, A3, A4)</arglist>
+    </member>
+    <member kind="typedef">
+      <type>Return_(*</type>
+      <name>Function</name>
+      <anchorfile>classsauce_1_1internal_1_1_apply_function_3_01_parameters_00_01_return___07_5_08_07_a0_00_01_a1_00_01_a2_00_01_a3_00_01_a4_08_4.html</anchorfile>
+      <anchor>aa1217c281deb8fd4827a94ea8c68c0c6</anchor>
+      <arglist>)(typename Parameters::template Parameter&lt; A0, 0 &gt;::Type, typename Parameters::template Parameter&lt; A1, 1 &gt;::Type, typename Parameters::template Parameter&lt; A2, 2 &gt;::Type, typename Parameters::template Parameter&lt; A3, 3 &gt;::Type, typename Parameters::template Parameter&lt; A4, 4 &gt;::Type)</arglist>
+    </member>
     <member kind="function">
       <type></type>
       <name>ApplyFunction</name>
@@ -1764,6 +2116,20 @@
     <templarg></templarg>
     <templarg></templarg>
     <templarg></templarg>
+    <member kind="typedef">
+      <type>void(*</type>
+      <name>Signature</name>
+      <anchorfile>classsauce_1_1internal_1_1_apply_void_function_3_01_parameters_00_01void_07_5_08_07_a0_00_01_a1_00_01_a2_00_01_a3_00_01_a4_08_4.html</anchorfile>
+      <anchor>a2af96f3173c1adc14ecb10e9d095ac0f</anchor>
+      <arglist>)(A0, A1, A2, A3, A4)</arglist>
+    </member>
+    <member kind="typedef">
+      <type>void(*</type>
+      <name>Function</name>
+      <anchorfile>classsauce_1_1internal_1_1_apply_void_function_3_01_parameters_00_01void_07_5_08_07_a0_00_01_a1_00_01_a2_00_01_a3_00_01_a4_08_4.html</anchorfile>
+      <anchor>aa8b1314cfdf7c684164a42eca56c4d1a</anchor>
+      <arglist>)(typename Parameters::template Parameter&lt; A0, 0 &gt;::Type, typename Parameters::template Parameter&lt; A1, 1 &gt;::Type, typename Parameters::template Parameter&lt; A2, 2 &gt;::Type, typename Parameters::template Parameter&lt; A3, 3 &gt;::Type, typename Parameters::template Parameter&lt; A4, 4 &gt;::Type)</arglist>
+    </member>
     <member kind="function">
       <type></type>
       <name>ApplyVoidFunction</name>
@@ -1810,6 +2176,20 @@
       <anchorfile>classsauce_1_1internal_1_1_apply_method_3_01_parameters_00_01_return___07_receiver___1_1_5_08_0779cea12dc8b2859539bd629a370446e4.html</anchorfile>
       <anchor>a060b7a74dc147cf631874670f9b1d76c</anchor>
       <arglist></arglist>
+    </member>
+    <member kind="typedef">
+      <type>Return_(Receiver_::*</type>
+      <name>Signature</name>
+      <anchorfile>classsauce_1_1internal_1_1_apply_method_3_01_parameters_00_01_return___07_receiver___1_1_5_08_0779cea12dc8b2859539bd629a370446e4.html</anchorfile>
+      <anchor>a52355906e0c1820e93383841976e0492</anchor>
+      <arglist>)(A0, A1, A2, A3, A4)</arglist>
+    </member>
+    <member kind="typedef">
+      <type>Return_(Receiver_::*</type>
+      <name>Method</name>
+      <anchorfile>classsauce_1_1internal_1_1_apply_method_3_01_parameters_00_01_return___07_receiver___1_1_5_08_0779cea12dc8b2859539bd629a370446e4.html</anchorfile>
+      <anchor>a1c571e30fc69b7b2812fcafea501d6bd</anchor>
+      <arglist>)(typename Parameters::template Parameter&lt; A0, 0 &gt;::Type, typename Parameters::template Parameter&lt; A1, 1 &gt;::Type, typename Parameters::template Parameter&lt; A2, 2 &gt;::Type, typename Parameters::template Parameter&lt; A3, 3 &gt;::Type, typename Parameters::template Parameter&lt; A4, 4 &gt;::Type)</arglist>
     </member>
     <member kind="function">
       <type></type>
@@ -1898,6 +2278,20 @@
       <anchor>a607f47a9d9630e589106621cd8f07cf4</anchor>
       <arglist></arglist>
     </member>
+    <member kind="typedef">
+      <type>Return_(*</type>
+      <name>Signature</name>
+      <anchorfile>classsauce_1_1internal_1_1_apply_function_3_01_parameters_00_01_return___07_5_08_07_a0_00_01_a1_f96cfb5adadd4c1d01a9942a557415c8.html</anchorfile>
+      <anchor>a340b80a74345979d65cdd00320580040</anchor>
+      <arglist>)(A0, A1, A2, A3, A4, A5)</arglist>
+    </member>
+    <member kind="typedef">
+      <type>Return_(*</type>
+      <name>Function</name>
+      <anchorfile>classsauce_1_1internal_1_1_apply_function_3_01_parameters_00_01_return___07_5_08_07_a0_00_01_a1_f96cfb5adadd4c1d01a9942a557415c8.html</anchorfile>
+      <anchor>a571e5e00e4e5bbdcb19a7ad83e598ba4</anchor>
+      <arglist>)(typename Parameters::template Parameter&lt; A0, 0 &gt;::Type, typename Parameters::template Parameter&lt; A1, 1 &gt;::Type, typename Parameters::template Parameter&lt; A2, 2 &gt;::Type, typename Parameters::template Parameter&lt; A3, 3 &gt;::Type, typename Parameters::template Parameter&lt; A4, 4 &gt;::Type, typename Parameters::template Parameter&lt; A5, 5 &gt;::Type)</arglist>
+    </member>
     <member kind="function">
       <type></type>
       <name>ApplyFunction</name>
@@ -1937,6 +2331,20 @@
     <templarg></templarg>
     <templarg></templarg>
     <templarg></templarg>
+    <member kind="typedef">
+      <type>void(*</type>
+      <name>Signature</name>
+      <anchorfile>classsauce_1_1internal_1_1_apply_void_function_3_01_parameters_00_01void_07_5_08_07_a0_00_01_a1_e2db35fa2fa1ab9afb364a1ec2eb34b3.html</anchorfile>
+      <anchor>a1be283122cc3790efb0a859e88ed339b</anchor>
+      <arglist>)(A0, A1, A2, A3, A4, A5)</arglist>
+    </member>
+    <member kind="typedef">
+      <type>void(*</type>
+      <name>Function</name>
+      <anchorfile>classsauce_1_1internal_1_1_apply_void_function_3_01_parameters_00_01void_07_5_08_07_a0_00_01_a1_e2db35fa2fa1ab9afb364a1ec2eb34b3.html</anchorfile>
+      <anchor>a1b1da3fe813feb933708d156f809b2a1</anchor>
+      <arglist>)(typename Parameters::template Parameter&lt; A0, 0 &gt;::Type, typename Parameters::template Parameter&lt; A1, 1 &gt;::Type, typename Parameters::template Parameter&lt; A2, 2 &gt;::Type, typename Parameters::template Parameter&lt; A3, 3 &gt;::Type, typename Parameters::template Parameter&lt; A4, 4 &gt;::Type, typename Parameters::template Parameter&lt; A5, 5 &gt;::Type)</arglist>
+    </member>
     <member kind="function">
       <type></type>
       <name>ApplyVoidFunction</name>
@@ -1984,6 +2392,20 @@
       <anchorfile>classsauce_1_1internal_1_1_apply_method_3_01_parameters_00_01_return___07_receiver___1_1_5_08_07eb6bbc91d089db55639a996161271d6f.html</anchorfile>
       <anchor>a3ebc1823cab0d1300c546fae430b1d52</anchor>
       <arglist></arglist>
+    </member>
+    <member kind="typedef">
+      <type>Return_(Receiver_::*</type>
+      <name>Signature</name>
+      <anchorfile>classsauce_1_1internal_1_1_apply_method_3_01_parameters_00_01_return___07_receiver___1_1_5_08_07eb6bbc91d089db55639a996161271d6f.html</anchorfile>
+      <anchor>a8ced5a811dc411ab48bb18a6b77c2540</anchor>
+      <arglist>)(A0, A1, A2, A3, A4, A5)</arglist>
+    </member>
+    <member kind="typedef">
+      <type>Return_(Receiver_::*</type>
+      <name>Method</name>
+      <anchorfile>classsauce_1_1internal_1_1_apply_method_3_01_parameters_00_01_return___07_receiver___1_1_5_08_07eb6bbc91d089db55639a996161271d6f.html</anchorfile>
+      <anchor>a89469fcb3b1716a7ef956a36df26cf3e</anchor>
+      <arglist>)(typename Parameters::template Parameter&lt; A0, 0 &gt;::Type, typename Parameters::template Parameter&lt; A1, 1 &gt;::Type, typename Parameters::template Parameter&lt; A2, 2 &gt;::Type, typename Parameters::template Parameter&lt; A3, 3 &gt;::Type, typename Parameters::template Parameter&lt; A4, 4 &gt;::Type, typename Parameters::template Parameter&lt; A5, 5 &gt;::Type)</arglist>
     </member>
     <member kind="function">
       <type></type>
@@ -2074,6 +2496,20 @@
       <anchor>a8e1a70082e1b2e315d9d6549d1b37dd5</anchor>
       <arglist></arglist>
     </member>
+    <member kind="typedef">
+      <type>Return_(*</type>
+      <name>Signature</name>
+      <anchorfile>classsauce_1_1internal_1_1_apply_function_3_01_parameters_00_01_return___07_5_08_07_a0_00_01_a1_22660f3f670e1e6891b1fcb597224c58.html</anchorfile>
+      <anchor>a90d0a08d52e9e282c0ec02c45e85fc95</anchor>
+      <arglist>)(A0, A1, A2, A3, A4, A5, A6)</arglist>
+    </member>
+    <member kind="typedef">
+      <type>Return_(*</type>
+      <name>Function</name>
+      <anchorfile>classsauce_1_1internal_1_1_apply_function_3_01_parameters_00_01_return___07_5_08_07_a0_00_01_a1_22660f3f670e1e6891b1fcb597224c58.html</anchorfile>
+      <anchor>ac90938c888da6382b23fb3a32ec8f808</anchor>
+      <arglist>)(typename Parameters::template Parameter&lt; A0, 0 &gt;::Type, typename Parameters::template Parameter&lt; A1, 1 &gt;::Type, typename Parameters::template Parameter&lt; A2, 2 &gt;::Type, typename Parameters::template Parameter&lt; A3, 3 &gt;::Type, typename Parameters::template Parameter&lt; A4, 4 &gt;::Type, typename Parameters::template Parameter&lt; A5, 5 &gt;::Type, typename Parameters::template Parameter&lt; A6, 6 &gt;::Type)</arglist>
+    </member>
     <member kind="function">
       <type></type>
       <name>ApplyFunction</name>
@@ -2114,6 +2550,20 @@
     <templarg></templarg>
     <templarg></templarg>
     <templarg></templarg>
+    <member kind="typedef">
+      <type>void(*</type>
+      <name>Signature</name>
+      <anchorfile>classsauce_1_1internal_1_1_apply_void_function_3_01_parameters_00_01void_07_5_08_07_a0_00_01_a1_1dafffeed3f4dc4160cb49673e3cbb3d.html</anchorfile>
+      <anchor>a37b8e29347336c22d3ef82ba52a13669</anchor>
+      <arglist>)(A0, A1, A2, A3, A4, A5, A6)</arglist>
+    </member>
+    <member kind="typedef">
+      <type>void(*</type>
+      <name>Function</name>
+      <anchorfile>classsauce_1_1internal_1_1_apply_void_function_3_01_parameters_00_01void_07_5_08_07_a0_00_01_a1_1dafffeed3f4dc4160cb49673e3cbb3d.html</anchorfile>
+      <anchor>ab1a7c0e357758ec2d11ca5fa390970ff</anchor>
+      <arglist>)(typename Parameters::template Parameter&lt; A0, 0 &gt;::Type, typename Parameters::template Parameter&lt; A1, 1 &gt;::Type, typename Parameters::template Parameter&lt; A2, 2 &gt;::Type, typename Parameters::template Parameter&lt; A3, 3 &gt;::Type, typename Parameters::template Parameter&lt; A4, 4 &gt;::Type, typename Parameters::template Parameter&lt; A5, 5 &gt;::Type, typename Parameters::template Parameter&lt; A6, 6 &gt;::Type)</arglist>
+    </member>
     <member kind="function">
       <type></type>
       <name>ApplyVoidFunction</name>
@@ -2162,6 +2612,20 @@
       <anchorfile>classsauce_1_1internal_1_1_apply_method_3_01_parameters_00_01_return___07_receiver___1_1_5_08_070c47d89eac924e1785bbe73a5269e57a.html</anchorfile>
       <anchor>a7c83bc71451f0f819cc087fb6cdf7882</anchor>
       <arglist></arglist>
+    </member>
+    <member kind="typedef">
+      <type>Return_(Receiver_::*</type>
+      <name>Signature</name>
+      <anchorfile>classsauce_1_1internal_1_1_apply_method_3_01_parameters_00_01_return___07_receiver___1_1_5_08_070c47d89eac924e1785bbe73a5269e57a.html</anchorfile>
+      <anchor>ad259f28cbe9fbff12321c801456856a1</anchor>
+      <arglist>)(A0, A1, A2, A3, A4, A5, A6)</arglist>
+    </member>
+    <member kind="typedef">
+      <type>Return_(Receiver_::*</type>
+      <name>Method</name>
+      <anchorfile>classsauce_1_1internal_1_1_apply_method_3_01_parameters_00_01_return___07_receiver___1_1_5_08_070c47d89eac924e1785bbe73a5269e57a.html</anchorfile>
+      <anchor>a06b62cdfb03186b5cd6c820074c0dd1f</anchor>
+      <arglist>)(typename Parameters::template Parameter&lt; A0, 0 &gt;::Type, typename Parameters::template Parameter&lt; A1, 1 &gt;::Type, typename Parameters::template Parameter&lt; A2, 2 &gt;::Type, typename Parameters::template Parameter&lt; A3, 3 &gt;::Type, typename Parameters::template Parameter&lt; A4, 4 &gt;::Type, typename Parameters::template Parameter&lt; A5, 5 &gt;::Type, typename Parameters::template Parameter&lt; A6, 6 &gt;::Type)</arglist>
     </member>
     <member kind="function">
       <type></type>
@@ -2254,6 +2718,20 @@
       <anchor>a19e93064e384d250811bb0db88a40015</anchor>
       <arglist></arglist>
     </member>
+    <member kind="typedef">
+      <type>Return_(*</type>
+      <name>Signature</name>
+      <anchorfile>classsauce_1_1internal_1_1_apply_function_3_01_parameters_00_01_return___07_5_08_07_a0_00_01_a1_32f634c6d69a0ded4edd4975302e9447.html</anchorfile>
+      <anchor>a58c5dec364eb9588ebcd9b719c3e3374</anchor>
+      <arglist>)(A0, A1, A2, A3, A4, A5, A6, A7)</arglist>
+    </member>
+    <member kind="typedef">
+      <type>Return_(*</type>
+      <name>Function</name>
+      <anchorfile>classsauce_1_1internal_1_1_apply_function_3_01_parameters_00_01_return___07_5_08_07_a0_00_01_a1_32f634c6d69a0ded4edd4975302e9447.html</anchorfile>
+      <anchor>a56f216847e8749a02e017db62fba9952</anchor>
+      <arglist>)(typename Parameters::template Parameter&lt; A0, 0 &gt;::Type, typename Parameters::template Parameter&lt; A1, 1 &gt;::Type, typename Parameters::template Parameter&lt; A2, 2 &gt;::Type, typename Parameters::template Parameter&lt; A3, 3 &gt;::Type, typename Parameters::template Parameter&lt; A4, 4 &gt;::Type, typename Parameters::template Parameter&lt; A5, 5 &gt;::Type, typename Parameters::template Parameter&lt; A6, 6 &gt;::Type, typename Parameters::template Parameter&lt; A7, 7 &gt;::Type)</arglist>
+    </member>
     <member kind="function">
       <type></type>
       <name>ApplyFunction</name>
@@ -2295,6 +2773,20 @@
     <templarg></templarg>
     <templarg></templarg>
     <templarg></templarg>
+    <member kind="typedef">
+      <type>void(*</type>
+      <name>Signature</name>
+      <anchorfile>classsauce_1_1internal_1_1_apply_void_function_3_01_parameters_00_01void_07_5_08_07_a0_00_01_a1_7ff9269079a9963e6716f31a3862891b.html</anchorfile>
+      <anchor>aef247fe0f4084090ec7d1f1887b698ed</anchor>
+      <arglist>)(A0, A1, A2, A3, A4, A5, A6, A7)</arglist>
+    </member>
+    <member kind="typedef">
+      <type>void(*</type>
+      <name>Function</name>
+      <anchorfile>classsauce_1_1internal_1_1_apply_void_function_3_01_parameters_00_01void_07_5_08_07_a0_00_01_a1_7ff9269079a9963e6716f31a3862891b.html</anchorfile>
+      <anchor>af85047c960b1b0f53f3db179306f9399</anchor>
+      <arglist>)(typename Parameters::template Parameter&lt; A0, 0 &gt;::Type, typename Parameters::template Parameter&lt; A1, 1 &gt;::Type, typename Parameters::template Parameter&lt; A2, 2 &gt;::Type, typename Parameters::template Parameter&lt; A3, 3 &gt;::Type, typename Parameters::template Parameter&lt; A4, 4 &gt;::Type, typename Parameters::template Parameter&lt; A5, 5 &gt;::Type, typename Parameters::template Parameter&lt; A6, 6 &gt;::Type, typename Parameters::template Parameter&lt; A7, 7 &gt;::Type)</arglist>
+    </member>
     <member kind="function">
       <type></type>
       <name>ApplyVoidFunction</name>
@@ -2344,6 +2836,20 @@
       <anchorfile>classsauce_1_1internal_1_1_apply_method_3_01_parameters_00_01_return___07_receiver___1_1_5_08_07949352f572ce29ee47f6ac2462dde9c5.html</anchorfile>
       <anchor>a2f55dfc2d498c658cdf68445d5629902</anchor>
       <arglist></arglist>
+    </member>
+    <member kind="typedef">
+      <type>Return_(Receiver_::*</type>
+      <name>Signature</name>
+      <anchorfile>classsauce_1_1internal_1_1_apply_method_3_01_parameters_00_01_return___07_receiver___1_1_5_08_07949352f572ce29ee47f6ac2462dde9c5.html</anchorfile>
+      <anchor>a9def7e2369fa2d8c602fa63684a686b2</anchor>
+      <arglist>)(A0, A1, A2, A3, A4, A5, A6, A7)</arglist>
+    </member>
+    <member kind="typedef">
+      <type>Return_(Receiver_::*</type>
+      <name>Method</name>
+      <anchorfile>classsauce_1_1internal_1_1_apply_method_3_01_parameters_00_01_return___07_receiver___1_1_5_08_07949352f572ce29ee47f6ac2462dde9c5.html</anchorfile>
+      <anchor>a93433dfe1eb32e562d976039d4d15605</anchor>
+      <arglist>)(typename Parameters::template Parameter&lt; A0, 0 &gt;::Type, typename Parameters::template Parameter&lt; A1, 1 &gt;::Type, typename Parameters::template Parameter&lt; A2, 2 &gt;::Type, typename Parameters::template Parameter&lt; A3, 3 &gt;::Type, typename Parameters::template Parameter&lt; A4, 4 &gt;::Type, typename Parameters::template Parameter&lt; A5, 5 &gt;::Type, typename Parameters::template Parameter&lt; A6, 6 &gt;::Type, typename Parameters::template Parameter&lt; A7, 7 &gt;::Type)</arglist>
     </member>
     <member kind="function">
       <type></type>
@@ -2438,6 +2944,20 @@
       <anchor>a19cf938b28ad677b1a7020175c74f227</anchor>
       <arglist></arglist>
     </member>
+    <member kind="typedef">
+      <type>Return_(*</type>
+      <name>Signature</name>
+      <anchorfile>classsauce_1_1internal_1_1_apply_function_3_01_parameters_00_01_return___07_5_08_07_a0_00_01_a1_faa0873a9915d46f3121b9435dbffcf0.html</anchorfile>
+      <anchor>a554445583979c8871b8f0dd966750fba</anchor>
+      <arglist>)(A0, A1, A2, A3, A4, A5, A6, A7, A8)</arglist>
+    </member>
+    <member kind="typedef">
+      <type>Return_(*</type>
+      <name>Function</name>
+      <anchorfile>classsauce_1_1internal_1_1_apply_function_3_01_parameters_00_01_return___07_5_08_07_a0_00_01_a1_faa0873a9915d46f3121b9435dbffcf0.html</anchorfile>
+      <anchor>aa3c4f7b2a44c3aa0da9ccfee4d17de0c</anchor>
+      <arglist>)(typename Parameters::template Parameter&lt; A0, 0 &gt;::Type, typename Parameters::template Parameter&lt; A1, 1 &gt;::Type, typename Parameters::template Parameter&lt; A2, 2 &gt;::Type, typename Parameters::template Parameter&lt; A3, 3 &gt;::Type, typename Parameters::template Parameter&lt; A4, 4 &gt;::Type, typename Parameters::template Parameter&lt; A5, 5 &gt;::Type, typename Parameters::template Parameter&lt; A6, 6 &gt;::Type, typename Parameters::template Parameter&lt; A7, 7 &gt;::Type, typename Parameters::template Parameter&lt; A8, 8 &gt;::Type)</arglist>
+    </member>
     <member kind="function">
       <type></type>
       <name>ApplyFunction</name>
@@ -2480,6 +3000,20 @@
     <templarg></templarg>
     <templarg></templarg>
     <templarg></templarg>
+    <member kind="typedef">
+      <type>void(*</type>
+      <name>Signature</name>
+      <anchorfile>classsauce_1_1internal_1_1_apply_void_function_3_01_parameters_00_01void_07_5_08_07_a0_00_01_a1_ef17d523b67647b9cf0be9c97938aa9d.html</anchorfile>
+      <anchor>adedb8435003acc2106623bf4818e6c12</anchor>
+      <arglist>)(A0, A1, A2, A3, A4, A5, A6, A7, A8)</arglist>
+    </member>
+    <member kind="typedef">
+      <type>void(*</type>
+      <name>Function</name>
+      <anchorfile>classsauce_1_1internal_1_1_apply_void_function_3_01_parameters_00_01void_07_5_08_07_a0_00_01_a1_ef17d523b67647b9cf0be9c97938aa9d.html</anchorfile>
+      <anchor>ae7c27bbd736eec09e4ba45ea9ec633d9</anchor>
+      <arglist>)(typename Parameters::template Parameter&lt; A0, 0 &gt;::Type, typename Parameters::template Parameter&lt; A1, 1 &gt;::Type, typename Parameters::template Parameter&lt; A2, 2 &gt;::Type, typename Parameters::template Parameter&lt; A3, 3 &gt;::Type, typename Parameters::template Parameter&lt; A4, 4 &gt;::Type, typename Parameters::template Parameter&lt; A5, 5 &gt;::Type, typename Parameters::template Parameter&lt; A6, 6 &gt;::Type, typename Parameters::template Parameter&lt; A7, 7 &gt;::Type, typename Parameters::template Parameter&lt; A8, 8 &gt;::Type)</arglist>
+    </member>
     <member kind="function">
       <type></type>
       <name>ApplyVoidFunction</name>
@@ -2530,6 +3064,20 @@
       <anchorfile>classsauce_1_1internal_1_1_apply_method_3_01_parameters_00_01_return___07_receiver___1_1_5_08_0779c19a20f7b36e4dee1b3239eec3aec6.html</anchorfile>
       <anchor>abd0718000061e465eb6e10be9b5d843d</anchor>
       <arglist></arglist>
+    </member>
+    <member kind="typedef">
+      <type>Return_(Receiver_::*</type>
+      <name>Signature</name>
+      <anchorfile>classsauce_1_1internal_1_1_apply_method_3_01_parameters_00_01_return___07_receiver___1_1_5_08_0779c19a20f7b36e4dee1b3239eec3aec6.html</anchorfile>
+      <anchor>aad919e9c5c6c34c09bdaa9758951419a</anchor>
+      <arglist>)(A0, A1, A2, A3, A4, A5, A6, A7, A8)</arglist>
+    </member>
+    <member kind="typedef">
+      <type>Return_(Receiver_::*</type>
+      <name>Method</name>
+      <anchorfile>classsauce_1_1internal_1_1_apply_method_3_01_parameters_00_01_return___07_receiver___1_1_5_08_0779c19a20f7b36e4dee1b3239eec3aec6.html</anchorfile>
+      <anchor>acc9e1e2ee66c0bbd53d0a944b8a45f73</anchor>
+      <arglist>)(typename Parameters::template Parameter&lt; A0, 0 &gt;::Type, typename Parameters::template Parameter&lt; A1, 1 &gt;::Type, typename Parameters::template Parameter&lt; A2, 2 &gt;::Type, typename Parameters::template Parameter&lt; A3, 3 &gt;::Type, typename Parameters::template Parameter&lt; A4, 4 &gt;::Type, typename Parameters::template Parameter&lt; A5, 5 &gt;::Type, typename Parameters::template Parameter&lt; A6, 6 &gt;::Type, typename Parameters::template Parameter&lt; A7, 7 &gt;::Type, typename Parameters::template Parameter&lt; A8, 8 &gt;::Type)</arglist>
     </member>
     <member kind="function">
       <type></type>
@@ -2626,6 +3174,20 @@
       <anchor>a450c771d8f42c2c26540178f406763a0</anchor>
       <arglist></arglist>
     </member>
+    <member kind="typedef">
+      <type>Return_(*</type>
+      <name>Signature</name>
+      <anchorfile>classsauce_1_1internal_1_1_apply_function_3_01_parameters_00_01_return___07_5_08_07_a0_00_01_a1_349974af23a9d0be3f8f2992c351032f.html</anchorfile>
+      <anchor>af617ae647c5a693872ddeea427362903</anchor>
+      <arglist>)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9)</arglist>
+    </member>
+    <member kind="typedef">
+      <type>Return_(*</type>
+      <name>Function</name>
+      <anchorfile>classsauce_1_1internal_1_1_apply_function_3_01_parameters_00_01_return___07_5_08_07_a0_00_01_a1_349974af23a9d0be3f8f2992c351032f.html</anchorfile>
+      <anchor>a0bb57471535635434fdedb1dfe4cc4fc</anchor>
+      <arglist>)(typename Parameters::template Parameter&lt; A0, 0 &gt;::Type, typename Parameters::template Parameter&lt; A1, 1 &gt;::Type, typename Parameters::template Parameter&lt; A2, 2 &gt;::Type, typename Parameters::template Parameter&lt; A3, 3 &gt;::Type, typename Parameters::template Parameter&lt; A4, 4 &gt;::Type, typename Parameters::template Parameter&lt; A5, 5 &gt;::Type, typename Parameters::template Parameter&lt; A6, 6 &gt;::Type, typename Parameters::template Parameter&lt; A7, 7 &gt;::Type, typename Parameters::template Parameter&lt; A8, 8 &gt;::Type, typename Parameters::template Parameter&lt; A9, 9 &gt;::Type)</arglist>
+    </member>
     <member kind="function">
       <type></type>
       <name>ApplyFunction</name>
@@ -2669,6 +3231,20 @@
     <templarg></templarg>
     <templarg></templarg>
     <templarg></templarg>
+    <member kind="typedef">
+      <type>void(*</type>
+      <name>Signature</name>
+      <anchorfile>classsauce_1_1internal_1_1_apply_void_function_3_01_parameters_00_01void_07_5_08_07_a0_00_01_a1_3a72a2eeea4ef10e95e466ccf76ace1a.html</anchorfile>
+      <anchor>a6b261e2e21468ea78b43905c0b03d1ab</anchor>
+      <arglist>)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9)</arglist>
+    </member>
+    <member kind="typedef">
+      <type>void(*</type>
+      <name>Function</name>
+      <anchorfile>classsauce_1_1internal_1_1_apply_void_function_3_01_parameters_00_01void_07_5_08_07_a0_00_01_a1_3a72a2eeea4ef10e95e466ccf76ace1a.html</anchorfile>
+      <anchor>a39ed84ea08e6a8862588186e4f50e61b</anchor>
+      <arglist>)(typename Parameters::template Parameter&lt; A0, 0 &gt;::Type, typename Parameters::template Parameter&lt; A1, 1 &gt;::Type, typename Parameters::template Parameter&lt; A2, 2 &gt;::Type, typename Parameters::template Parameter&lt; A3, 3 &gt;::Type, typename Parameters::template Parameter&lt; A4, 4 &gt;::Type, typename Parameters::template Parameter&lt; A5, 5 &gt;::Type, typename Parameters::template Parameter&lt; A6, 6 &gt;::Type, typename Parameters::template Parameter&lt; A7, 7 &gt;::Type, typename Parameters::template Parameter&lt; A8, 8 &gt;::Type, typename Parameters::template Parameter&lt; A9, 9 &gt;::Type)</arglist>
+    </member>
     <member kind="function">
       <type></type>
       <name>ApplyVoidFunction</name>
@@ -2720,6 +3296,20 @@
       <anchorfile>classsauce_1_1internal_1_1_apply_method_3_01_parameters_00_01_return___07_receiver___1_1_5_08_07e7c2d3048b4a04bdbbb5c06aa0285288.html</anchorfile>
       <anchor>a570ece1a527408b65e6138d37fab8875</anchor>
       <arglist></arglist>
+    </member>
+    <member kind="typedef">
+      <type>Return_(Receiver_::*</type>
+      <name>Signature</name>
+      <anchorfile>classsauce_1_1internal_1_1_apply_method_3_01_parameters_00_01_return___07_receiver___1_1_5_08_07e7c2d3048b4a04bdbbb5c06aa0285288.html</anchorfile>
+      <anchor>a83cad7f759cc302506218344019c2e38</anchor>
+      <arglist>)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9)</arglist>
+    </member>
+    <member kind="typedef">
+      <type>Return_(Receiver_::*</type>
+      <name>Method</name>
+      <anchorfile>classsauce_1_1internal_1_1_apply_method_3_01_parameters_00_01_return___07_receiver___1_1_5_08_07e7c2d3048b4a04bdbbb5c06aa0285288.html</anchorfile>
+      <anchor>a11c528d4d5d96d4f22ece27fd0d6ac97</anchor>
+      <arglist>)(typename Parameters::template Parameter&lt; A0, 0 &gt;::Type, typename Parameters::template Parameter&lt; A1, 1 &gt;::Type, typename Parameters::template Parameter&lt; A2, 2 &gt;::Type, typename Parameters::template Parameter&lt; A3, 3 &gt;::Type, typename Parameters::template Parameter&lt; A4, 4 &gt;::Type, typename Parameters::template Parameter&lt; A5, 5 &gt;::Type, typename Parameters::template Parameter&lt; A6, 6 &gt;::Type, typename Parameters::template Parameter&lt; A7, 7 &gt;::Type, typename Parameters::template Parameter&lt; A8, 8 &gt;::Type, typename Parameters::template Parameter&lt; A9, 9 &gt;::Type)</arglist>
     </member>
     <member kind="function">
       <type></type>
@@ -2816,15 +3406,15 @@
       <type>void</type>
       <name>validateAcyclic</name>
       <anchorfile>classsauce_1_1internal_1_1_base_injector.html</anchorfile>
-      <anchor>a31a46608fec7c715bd8de14b95b7bed8</anchor>
-      <arglist>(InjectorPtr injector, TypeIds &amp;ids, std::string const name) const </arglist>
+      <anchor>aec899045c5320aed5a84a41c2775d97e</anchor>
+      <arglist>(bool validateProviding, InjectorPtr injector, TypeIds &amp;ids, std::string const name) const </arglist>
     </member>
     <member kind="function">
       <type>void</type>
-      <name>get</name>
+      <name>inject</name>
       <anchorfile>classsauce_1_1internal_1_1_base_injector.html</anchorfile>
-      <anchor>abe265f065b730635e1eed9b37c19ff1a</anchor>
-      <arglist>(typename Key&lt; Dependency &gt;::Ptr &amp;provided, InjectorPtr injector, std::string const name) const </arglist>
+      <anchor>aab609d51db6ee61af6abe1bd17645616</anchor>
+      <arglist>(typename Key&lt; Dependency &gt;::Ptr &amp;injected, InjectorPtr injector, std::string const name) const </arglist>
     </member>
     <member kind="function">
       <type>void</type>
@@ -2876,6 +3466,20 @@
       <anchor>a6f9598e25939f6925c61ce354b33db9a</anchor>
       <arglist></arglist>
     </member>
+    <member kind="typedef">
+      <type>Key&lt; Dependency_ &gt;::Ptr</type>
+      <name>IfacePtr</name>
+      <anchorfile>classsauce_1_1internal_1_1_resolved_binding.html</anchorfile>
+      <anchor>a2a0f836c59d54bed1a9a61820dc42bd5</anchor>
+      <arglist></arglist>
+    </member>
+    <member kind="typedef">
+      <type>sauce::shared_ptr&lt; ResolvedBinding&lt; Dependency_ &gt; &gt;</type>
+      <name>BindingPtr</name>
+      <anchorfile>classsauce_1_1internal_1_1_resolved_binding.html</anchorfile>
+      <anchor>a8da57e5d6d2367e6d9c22603582550f0</anchor>
+      <arglist></arglist>
+    </member>
     <member kind="function">
       <type>std::string</type>
       <name>getName</name>
@@ -2919,11 +3523,25 @@
       <arglist>() const </arglist>
     </member>
     <member kind="function" virtualness="pure">
+      <type>virtual TypeId</type>
+      <name>getScopeKey</name>
+      <anchorfile>classsauce_1_1internal_1_1_opaque_binding.html</anchorfile>
+      <anchor>afcab860863e3fdec961ff24704c45217</anchor>
+      <arglist>() const =0</arglist>
+    </member>
+    <member kind="function" virtualness="pure">
       <type>virtual void</type>
       <name>eagerlyInject</name>
       <anchorfile>classsauce_1_1internal_1_1_opaque_binding.html</anchorfile>
       <anchor>a7f2819936b99c569cc29e3114d216328</anchor>
       <arglist>(OpaqueBindingPtr, sauce::shared_ptr&lt; Injector &gt;) const =0</arglist>
+    </member>
+    <member kind="function" virtualness="pure">
+      <type>virtual void</type>
+      <name>setDynamicDependencyNames</name>
+      <anchorfile>classsauce_1_1internal_1_1_opaque_binding.html</anchorfile>
+      <anchor>a0d34b0bb5be2e0d0546200d480f3ae30</anchor>
+      <arglist>(std::vector&lt; std::string &gt; const &amp;)=0</arglist>
     </member>
     <member kind="function" protection="protected">
       <type>void</type>
@@ -2933,25 +3551,25 @@
       <arglist>(InjectorPtr injector, TypeIds &amp;ids, std::string const name) const </arglist>
     </member>
     <member kind="function" protection="protected">
-      <type>Key&lt; Dependency &gt;::Ptr</type>
-      <name>getHelper</name>
+      <type>void</type>
+      <name>injectHelper</name>
       <anchorfile>classsauce_1_1internal_1_1_injector_friend.html</anchorfile>
-      <anchor>a03ee99cad37f969f3cfe3a6ca33724e0</anchor>
-      <arglist>(InjectorPtr injector, std::string const name) const </arglist>
+      <anchor>ad4e574164c05c602f782cfb13f2de721</anchor>
+      <arglist>(typename Key&lt; Dependency &gt;::Ptr &amp;injected, InjectorPtr injector, std::string const name) const </arglist>
     </member>
     <member kind="function" protection="protected">
       <type>void</type>
       <name>cache</name>
       <anchorfile>classsauce_1_1internal_1_1_injector_friend.html</anchorfile>
-      <anchor>af00f3d75070ba40a4e4bffe623c53fec</anchor>
-      <arglist>(InjectorPtr injector, typename Key&lt; Dependency &gt;::Ptr provided, i::TypeId scope) const </arglist>
+      <anchor>a0e1e832cfd7315fb4bc004566cf57755</anchor>
+      <arglist>(InjectorPtr injector, typename Key&lt; Dependency &gt;::Ptr injected, i::TypeId scope) const </arglist>
     </member>
     <member kind="function" protection="protected">
       <type>bool</type>
       <name>probe</name>
       <anchorfile>classsauce_1_1internal_1_1_injector_friend.html</anchorfile>
-      <anchor>a5fcd6d8e70ed219707733d1d859728c0</anchor>
-      <arglist>(InjectorPtr injector, typename Key&lt; Dependency &gt;::Ptr &amp;provided, i::TypeId scope) const </arglist>
+      <anchor>ab6020f7d9d9832ff7bc155c95ed89425</anchor>
+      <arglist>(InjectorPtr injector, typename Key&lt; Dependency &gt;::Ptr &amp;injected, i::TypeId scope) const </arglist>
     </member>
   </compound>
   <compound kind="class">
@@ -2967,17 +3585,24 @@
     </member>
     <member kind="function">
       <type>sauce::shared_ptr&lt; ResolvedBinding&lt; Dependency &gt; &gt;</type>
-      <name>getBinding</name>
+      <name>getProvidingBinding</name>
       <anchorfile>classsauce_1_1internal_1_1_bindings.html</anchorfile>
-      <anchor>a5260f5aaa08c9e9c5b656be4e973e30f</anchor>
+      <anchor>a153d4d9966627dd936f5815e0f86dd9c</anchor>
+      <arglist>(std::string const name) const </arglist>
+    </member>
+    <member kind="function">
+      <type>std::vector&lt; sauce::shared_ptr&lt; ResolvedBinding&lt; Dependency &gt; &gt; &gt;</type>
+      <name>getModifierBindings</name>
+      <anchorfile>classsauce_1_1internal_1_1_bindings.html</anchorfile>
+      <anchor>ae1419026db2e02cd53bc05f5dd723dd4</anchor>
       <arglist>(std::string const name) const </arglist>
     </member>
     <member kind="function">
       <type>void</type>
       <name>validateAcyclic</name>
       <anchorfile>classsauce_1_1internal_1_1_bindings.html</anchorfile>
-      <anchor>a8d3ccf7a6ffc15e454735b933c8470d2</anchor>
-      <arglist>(InjectorPtr injector, TypeIds &amp;ids, std::string const name) const </arglist>
+      <anchor>acd96358e7adb1fa2e544cddc74e89703</anchor>
+      <arglist>(bool validateProviding, InjectorPtr injector, TypeIds &amp;ids, std::string const name) const </arglist>
     </member>
     <member kind="function">
       <type>void</type>
@@ -2995,21 +3620,6 @@
     </member>
   </compound>
   <compound kind="class">
-    <name>sauce::internal::ProviderBindingCreator</name>
-    <filename>classsauce_1_1internal_1_1_provider_binding_creator.html</filename>
-    <templarg>Dependency</templarg>
-    <templarg>Scope</templarg>
-    <templarg>Ctor</templarg>
-    <templarg>Allocator</templarg>
-    <member kind="function">
-      <type>OpaqueBindingPtr</type>
-      <name>create</name>
-      <anchorfile>classsauce_1_1internal_1_1_provider_binding_creator.html</anchorfile>
-      <anchor>a3a35a400553c425286ddf9de6aac915f</anchor>
-      <arglist>()</arglist>
-    </member>
-  </compound>
-  <compound kind="class">
     <name>sauce::internal::ClauseState</name>
     <filename>classsauce_1_1internal_1_1_clause_state.html</filename>
     <member kind="function">
@@ -3023,8 +3633,15 @@
       <type>void</type>
       <name>bind</name>
       <anchorfile>classsauce_1_1internal_1_1_clause_state.html</anchorfile>
-      <anchor>a7cbc82cc8d177e8831c76bc28e667b65</anchor>
-      <arglist>()</arglist>
+      <anchor>a43727998da0a57531a0e20622a2f57b0</anchor>
+      <arglist>(OpaqueBindingPtr pendingBinding)</arglist>
+    </member>
+    <member kind="function">
+      <type>void</type>
+      <name>bindProvider</name>
+      <anchorfile>classsauce_1_1internal_1_1_clause_state.html</anchorfile>
+      <anchor>ae85de232a58e0289f424d799426cfede</anchor>
+      <arglist>(OpaqueBindingPtr providerBinding)</arglist>
     </member>
     <member kind="function">
       <type>void</type>
@@ -3103,44 +3720,112 @@
     </member>
   </compound>
   <compound kind="class">
-    <name>sauce::internal::FinalClause</name>
-    <filename>classsauce_1_1internal_1_1_final_clause.html</filename>
+    <name>sauce::internal::ProvidingClause</name>
+    <filename>classsauce_1_1internal_1_1_providing_clause.html</filename>
     <templarg>Dependency</templarg>
     <templarg>Scope</templarg>
     <templarg>Ctor</templarg>
     <templarg>Allocator</templarg>
     <member kind="function">
+      <type>ProvidingClause&lt; Dependency, Scope, Ctor, Allocator &gt; &amp;</type>
+      <name>naming</name>
+      <anchorfile>classsauce_1_1internal_1_1_providing_clause.html</anchorfile>
+      <anchor>a2dfc7df377fa585cae843fa2edff7369</anchor>
+      <arglist>(unsigned int position, std::string const name)</arglist>
+    </member>
+    <member kind="function">
       <type>void</type>
       <name>setState</name>
-      <anchorfile>classsauce_1_1internal_1_1_final_clause.html</anchorfile>
-      <anchor>a8ac2fc03c59af1c1d3cf298d63217114</anchor>
+      <anchorfile>classsauce_1_1internal_1_1_providing_clause.html</anchorfile>
+      <anchor>a410a3fd00778c18d8edb940f862fea86</anchor>
       <arglist>(ClauseStatePtr state)</arglist>
     </member>
     <member kind="function" protection="protected">
       <type></type>
-      <name>FinalClause</name>
-      <anchorfile>classsauce_1_1internal_1_1_final_clause.html</anchorfile>
-      <anchor>a4caa056b5e9dd1b6668462bb138dd63d</anchor>
+      <name>ProvidingClause</name>
+      <anchorfile>classsauce_1_1internal_1_1_providing_clause.html</anchorfile>
+      <anchor>aa1ff165e9bbfab1f8b25e5ce09329351</anchor>
       <arglist>(ClauseStatePtr state)</arglist>
+    </member>
+    <member kind="function" protection="protected">
+      <type>ClauseStatePtr</type>
+      <name>getState</name>
+      <anchorfile>classsauce_1_1internal_1_1_providing_clause.html</anchorfile>
+      <anchor>a0014fbe999e74d2f05f1d05eb891af7f</anchor>
+      <arglist>()</arglist>
     </member>
     <member kind="function" protection="protected">
       <type>Next</type>
       <name>pass</name>
-      <anchorfile>classsauce_1_1internal_1_1_final_clause.html</anchorfile>
-      <anchor>a45f561024722fb62635433458471ad4e</anchor>
+      <anchorfile>classsauce_1_1internal_1_1_providing_clause.html</anchorfile>
+      <anchor>abb38ce313b0a46c4af6c2213dce088cb</anchor>
       <arglist>(Next next)</arglist>
     </member>
     <member kind="function" protection="protected">
       <type>void</type>
       <name>bindDynamicDependencyName</name>
-      <anchorfile>classsauce_1_1internal_1_1_final_clause.html</anchorfile>
-      <anchor>aa333cb17528b9dbf8e38a72b82bcca83</anchor>
+      <anchorfile>classsauce_1_1internal_1_1_providing_clause.html</anchorfile>
+      <anchor>aec3ff7abd3123d1263ed6310cfe3bbef</anchor>
       <arglist>(unsigned int position, std::string const name)</arglist>
     </member>
     <member kind="friend" protection="private">
       <type>friend class</type>
       <name>InitialClause&lt; Dependency &gt;</name>
-      <anchorfile>classsauce_1_1internal_1_1_final_clause.html</anchorfile>
+      <anchorfile>classsauce_1_1internal_1_1_providing_clause.html</anchorfile>
+      <anchor>adea48932e50d3b60ec49586c85dcdf32</anchor>
+      <arglist></arglist>
+    </member>
+  </compound>
+  <compound kind="class">
+    <name>sauce::internal::ModifyingClause</name>
+    <filename>classsauce_1_1internal_1_1_modifying_clause.html</filename>
+    <templarg></templarg>
+    <member kind="function">
+      <type>ModifyingClause&lt; Dependency &gt; &amp;</type>
+      <name>naming</name>
+      <anchorfile>classsauce_1_1internal_1_1_modifying_clause.html</anchorfile>
+      <anchor>a9da75d4af89602fb77dabc8e1f5f1392</anchor>
+      <arglist>(unsigned int position, std::string const name)</arglist>
+    </member>
+    <member kind="function">
+      <type>void</type>
+      <name>setState</name>
+      <anchorfile>classsauce_1_1internal_1_1_modifying_clause.html</anchorfile>
+      <anchor>a1710ab4840506c657e9fbc81070ac272</anchor>
+      <arglist>(ClauseStatePtr state)</arglist>
+    </member>
+    <member kind="function" protection="protected">
+      <type></type>
+      <name>ModifyingClause</name>
+      <anchorfile>classsauce_1_1internal_1_1_modifying_clause.html</anchorfile>
+      <anchor>a4e2b6a42e9d8c05036b2181c12e5ace1</anchor>
+      <arglist>(ClauseStatePtr state)</arglist>
+    </member>
+    <member kind="function" protection="protected">
+      <type>ClauseStatePtr</type>
+      <name>getState</name>
+      <anchorfile>classsauce_1_1internal_1_1_modifying_clause.html</anchorfile>
+      <anchor>a155a0d38d9ab3c67828bdfe8dbbc45dc</anchor>
+      <arglist>()</arglist>
+    </member>
+    <member kind="function" protection="protected">
+      <type>Next</type>
+      <name>pass</name>
+      <anchorfile>classsauce_1_1internal_1_1_modifying_clause.html</anchorfile>
+      <anchor>a582d3c536d6eec1eed4f0f1b6e197865</anchor>
+      <arglist>(Next next)</arglist>
+    </member>
+    <member kind="function" protection="protected">
+      <type>void</type>
+      <name>bindDynamicDependencyName</name>
+      <anchorfile>classsauce_1_1internal_1_1_modifying_clause.html</anchorfile>
+      <anchor>a710566d122272d8baaaa39713b80d25c</anchor>
+      <arglist>(unsigned int position, std::string const name)</arglist>
+    </member>
+    <member kind="friend" protection="private">
+      <type>friend class</type>
+      <name>InitialClause&lt; Dependency &gt;</name>
+      <anchorfile>classsauce_1_1internal_1_1_modifying_clause.html</anchorfile>
       <anchor>adea48932e50d3b60ec49586c85dcdf32</anchor>
       <arglist></arglist>
     </member>
@@ -3206,8 +3891,8 @@
       <type>static BindingPtr</type>
       <name>get</name>
       <anchorfile>classsauce_1_1internal_1_1_implicit_binding.html</anchorfile>
-      <anchor>ace9c9f0d406d3427b0351bdcc3da4176</anchor>
-      <arglist>(ConcreteBindings const &amp;, std::string const name)</arglist>
+      <anchor>a9b6799845f4b1fdc24d6ee79beb4af8d</anchor>
+      <arglist>(Concrete const &amp;, std::string const name)</arglist>
     </member>
   </compound>
   <compound kind="class">
@@ -3215,10 +3900,17 @@
     <filename>classsauce_1_1internal_1_1_implicit_bindings.html</filename>
     <member kind="function">
       <type>sauce::shared_ptr&lt; ResolvedBinding&lt; Dependency &gt; &gt;</type>
-      <name>get</name>
+      <name>getProviding</name>
       <anchorfile>classsauce_1_1internal_1_1_implicit_bindings.html</anchorfile>
-      <anchor>a2ab32c0258b8150fa3f769869f17a9b1</anchor>
-      <arglist>(ConcreteBindings const &amp;bindings, std::string const name) const </arglist>
+      <anchor>a46e55cd798c49996bde784099fd5ced2</anchor>
+      <arglist>(Concrete const &amp;bindings, std::string const name) const </arglist>
+    </member>
+    <member kind="function">
+      <type>std::vector&lt; sauce::shared_ptr&lt; ResolvedBinding&lt; Dependency &gt; &gt; &gt;</type>
+      <name>getModifyings</name>
+      <anchorfile>classsauce_1_1internal_1_1_implicit_bindings.html</anchorfile>
+      <anchor>ae5616ce33c58192b087bc9ed0742832c</anchor>
+      <arglist>(Concrete const &amp;, std::string const) const </arglist>
     </member>
   </compound>
   <compound kind="class">
@@ -3229,8 +3921,8 @@
       <type>static BindingPtr</type>
       <name>get</name>
       <anchorfile>classsauce_1_1internal_1_1_implicit_binding_3_01_named_3_01_injector_00_01_unnamed_01_4_01_4.html</anchorfile>
-      <anchor>adc49a93de1c667c98afd8f038cc40545</anchor>
-      <arglist>(ConcreteBindings const &amp;, std::string const name)</arglist>
+      <anchor>a4ab7f2cc08d5f094350eb35e6a260b72</anchor>
+      <arglist>(Concrete const &amp;, std::string const name)</arglist>
     </member>
     <member kind="typedef">
       <type>i::InjectorBinding</type>
@@ -3291,8 +3983,8 @@
       <type>static BindingPtr</type>
       <name>get</name>
       <anchorfile>classsauce_1_1internal_1_1_implicit_binding_3_01_named_3_01_provider_3_01_provided_dependency_01_4_00_01_name_01_4_01_4.html</anchorfile>
-      <anchor>a272b5b01e1e47ee1423d0183b270ee0a</anchor>
-      <arglist>(ConcreteBindings const &amp;bindings, std::string const name)</arglist>
+      <anchor>ac17887882424b98cf10cab0223aaac0a</anchor>
+      <arglist>(Concrete const &amp;bindings, std::string const name)</arglist>
     </member>
   </compound>
   <compound kind="class">
@@ -3348,6 +4040,27 @@
       <name>IfacePtr</name>
       <anchorfile>classsauce_1_1internal_1_1_binding.html</anchorfile>
       <anchor>a56cb8368cf105084b69ef4e490d8a93b</anchor>
+      <arglist></arglist>
+    </member>
+    <member kind="typedef">
+      <type>ResolvedBinding&lt; Dependency &gt;::BindingPtr</type>
+      <name>BindingPtr</name>
+      <anchorfile>classsauce_1_1internal_1_1_binding.html</anchorfile>
+      <anchor>a6f9598e25939f6925c61ce354b33db9a</anchor>
+      <arglist></arglist>
+    </member>
+    <member kind="typedef">
+      <type>Key&lt; Named&lt; Provider&lt; Dependency &gt;, Name &gt; &gt;::Ptr</type>
+      <name>IfacePtr</name>
+      <anchorfile>classsauce_1_1internal_1_1_resolved_binding.html</anchorfile>
+      <anchor>a2a0f836c59d54bed1a9a61820dc42bd5</anchor>
+      <arglist></arglist>
+    </member>
+    <member kind="typedef">
+      <type>sauce::shared_ptr&lt; ResolvedBinding&lt; Named&lt; Provider&lt; Dependency &gt;, Name &gt; &gt; &gt;</type>
+      <name>BindingPtr</name>
+      <anchorfile>classsauce_1_1internal_1_1_resolved_binding.html</anchorfile>
+      <anchor>a8da57e5d6d2367e6d9c22603582550f0</anchor>
       <arglist></arglist>
     </member>
     <member kind="function">
@@ -3407,11 +4120,53 @@
       <arglist>() const </arglist>
     </member>
     <member kind="function" virtualness="pure">
+      <type>virtual TypeId</type>
+      <name>getScopeKey</name>
+      <anchorfile>classsauce_1_1internal_1_1_opaque_binding.html</anchorfile>
+      <anchor>afcab860863e3fdec961ff24704c45217</anchor>
+      <arglist>() const =0</arglist>
+    </member>
+    <member kind="function" virtualness="pure">
       <type>virtual void</type>
       <name>eagerlyInject</name>
       <anchorfile>classsauce_1_1internal_1_1_opaque_binding.html</anchorfile>
       <anchor>a7f2819936b99c569cc29e3114d216328</anchor>
       <arglist>(OpaqueBindingPtr, sauce::shared_ptr&lt; Injector &gt;) const =0</arglist>
+    </member>
+    <member kind="function" virtualness="pure">
+      <type>virtual void</type>
+      <name>setDynamicDependencyNames</name>
+      <anchorfile>classsauce_1_1internal_1_1_opaque_binding.html</anchorfile>
+      <anchor>a0d34b0bb5be2e0d0546200d480f3ae30</anchor>
+      <arglist>(std::vector&lt; std::string &gt; const &amp;)=0</arglist>
+    </member>
+    <member kind="function" protection="protected">
+      <type>void</type>
+      <name>validateAcyclicHelper</name>
+      <anchorfile>classsauce_1_1internal_1_1_injector_friend.html</anchorfile>
+      <anchor>a4a2343d76ae48ae8b6bdda2494e9f9a9</anchor>
+      <arglist>(InjectorPtr injector, TypeIds &amp;ids, std::string const name) const </arglist>
+    </member>
+    <member kind="function" protection="protected">
+      <type>void</type>
+      <name>injectHelper</name>
+      <anchorfile>classsauce_1_1internal_1_1_injector_friend.html</anchorfile>
+      <anchor>ad4e574164c05c602f782cfb13f2de721</anchor>
+      <arglist>(typename Key&lt; Dependency &gt;::Ptr &amp;injected, InjectorPtr injector, std::string const name) const </arglist>
+    </member>
+    <member kind="function" protection="protected">
+      <type>void</type>
+      <name>cache</name>
+      <anchorfile>classsauce_1_1internal_1_1_injector_friend.html</anchorfile>
+      <anchor>a0e1e832cfd7315fb4bc004566cf57755</anchor>
+      <arglist>(InjectorPtr injector, typename Key&lt; Dependency &gt;::Ptr injected, i::TypeId scope) const </arglist>
+    </member>
+    <member kind="function" protection="protected">
+      <type>bool</type>
+      <name>probe</name>
+      <anchorfile>classsauce_1_1internal_1_1_injector_friend.html</anchorfile>
+      <anchor>ab6020f7d9d9832ff7bc155c95ed89425</anchor>
+      <arglist>(InjectorPtr injector, typename Key&lt; Dependency &gt;::Ptr &amp;injected, i::TypeId scope) const </arglist>
     </member>
   </compound>
   <compound kind="class">
@@ -3468,11 +4223,25 @@
       <arglist>() const </arglist>
     </member>
     <member kind="function" virtualness="pure">
+      <type>virtual TypeId</type>
+      <name>getScopeKey</name>
+      <anchorfile>classsauce_1_1internal_1_1_opaque_binding.html</anchorfile>
+      <anchor>afcab860863e3fdec961ff24704c45217</anchor>
+      <arglist>() const =0</arglist>
+    </member>
+    <member kind="function" virtualness="pure">
       <type>virtual void</type>
       <name>eagerlyInject</name>
       <anchorfile>classsauce_1_1internal_1_1_opaque_binding.html</anchorfile>
       <anchor>a7f2819936b99c569cc29e3114d216328</anchor>
       <arglist>(OpaqueBindingPtr, sauce::shared_ptr&lt; Injector &gt;) const =0</arglist>
+    </member>
+    <member kind="function" virtualness="pure">
+      <type>virtual void</type>
+      <name>setDynamicDependencyNames</name>
+      <anchorfile>classsauce_1_1internal_1_1_opaque_binding.html</anchorfile>
+      <anchor>a0d34b0bb5be2e0d0546200d480f3ae30</anchor>
+      <arglist>(std::vector&lt; std::string &gt; const &amp;)=0</arglist>
     </member>
     <member kind="typedef">
       <type>Key&lt; Key&lt; Injector &gt;::Normalized &gt;::Normalized</type>
@@ -3494,6 +4263,34 @@
       <anchorfile>classsauce_1_1internal_1_1_binding.html</anchorfile>
       <anchor>a6f9598e25939f6925c61ce354b33db9a</anchor>
       <arglist></arglist>
+    </member>
+    <member kind="function" protection="protected">
+      <type>void</type>
+      <name>validateAcyclicHelper</name>
+      <anchorfile>classsauce_1_1internal_1_1_injector_friend.html</anchorfile>
+      <anchor>a4a2343d76ae48ae8b6bdda2494e9f9a9</anchor>
+      <arglist>(InjectorPtr injector, TypeIds &amp;ids, std::string const name) const </arglist>
+    </member>
+    <member kind="function" protection="protected">
+      <type>void</type>
+      <name>injectHelper</name>
+      <anchorfile>classsauce_1_1internal_1_1_injector_friend.html</anchorfile>
+      <anchor>ad4e574164c05c602f782cfb13f2de721</anchor>
+      <arglist>(typename Key&lt; Dependency &gt;::Ptr &amp;injected, InjectorPtr injector, std::string const name) const </arglist>
+    </member>
+    <member kind="function" protection="protected">
+      <type>void</type>
+      <name>cache</name>
+      <anchorfile>classsauce_1_1internal_1_1_injector_friend.html</anchorfile>
+      <anchor>a0e1e832cfd7315fb4bc004566cf57755</anchor>
+      <arglist>(InjectorPtr injector, typename Key&lt; Dependency &gt;::Ptr injected, i::TypeId scope) const </arglist>
+    </member>
+    <member kind="function" protection="protected">
+      <type>bool</type>
+      <name>probe</name>
+      <anchorfile>classsauce_1_1internal_1_1_injector_friend.html</anchorfile>
+      <anchor>ab6020f7d9d9832ff7bc155c95ed89425</anchor>
+      <arglist>(InjectorPtr injector, typename Key&lt; Dependency &gt;::Ptr &amp;injected, i::TypeId scope) const </arglist>
     </member>
   </compound>
   <compound kind="class">
@@ -3534,31 +4331,64 @@
     <filename>classsauce_1_1internal_1_1_key_3_01_iface___01_6_01_4.html</filename>
     <templarg></templarg>
     <member kind="typedef">
-      <type>Iface_</type>
+      <type>Key&lt; Iface_ &gt;::Iface</type>
       <name>Iface</name>
       <anchorfile>classsauce_1_1internal_1_1_key_3_01_iface___01_6_01_4.html</anchorfile>
-      <anchor>a4a857c4b0714a9439cad6a6d7597c1ad</anchor>
+      <anchor>aa493d2b55e5d81fe14bdc1eafae59cc6</anchor>
       <arglist></arglist>
     </member>
     <member kind="typedef">
-      <type>sauce::shared_ptr&lt; Iface_ &gt;</type>
+      <type>Key&lt; Iface_ &gt;::Ptr</type>
       <name>Ptr</name>
       <anchorfile>classsauce_1_1internal_1_1_key_3_01_iface___01_6_01_4.html</anchorfile>
-      <anchor>a5a55eb364d9e0350e7bfa400f602d2b2</anchor>
+      <anchor>ac611cc5ae2947c56495885dac5bafeec</anchor>
       <arglist></arglist>
     </member>
     <member kind="typedef">
-      <type>Unnamed</type>
+      <type>Key&lt; Iface_ &gt;::Name</type>
       <name>Name</name>
       <anchorfile>classsauce_1_1internal_1_1_key_3_01_iface___01_6_01_4.html</anchorfile>
-      <anchor>ae9edb1888931c2a38b936b5a5b152e8a</anchor>
+      <anchor>a2537e0c3e699bebda9b86b5983b82767</anchor>
       <arglist></arglist>
     </member>
     <member kind="typedef">
-      <type>Named&lt; Iface_, Unnamed &gt;</type>
+      <type>Key&lt; Iface_ &gt;::Normalized</type>
       <name>Normalized</name>
       <anchorfile>classsauce_1_1internal_1_1_key_3_01_iface___01_6_01_4.html</anchorfile>
-      <anchor>a3b265b5f116961bc3408a8071efdaae6</anchor>
+      <anchor>a60509d945fa45660ceac946e9c8a2a13</anchor>
+      <arglist></arglist>
+    </member>
+  </compound>
+  <compound kind="class">
+    <name>sauce::internal::Key&lt; sauce::shared_ptr&lt; Iface_ &gt; &gt;</name>
+    <filename>classsauce_1_1internal_1_1_key_3_01sauce_1_1shared__ptr_3_01_iface___01_4_01_4.html</filename>
+    <templarg></templarg>
+    <member kind="typedef">
+      <type>Key&lt; Iface_ &gt;::Iface</type>
+      <name>Iface</name>
+      <anchorfile>classsauce_1_1internal_1_1_key_3_01sauce_1_1shared__ptr_3_01_iface___01_4_01_4.html</anchorfile>
+      <anchor>afa9fd0d46742b12cbfc157c9992b6b60</anchor>
+      <arglist></arglist>
+    </member>
+    <member kind="typedef">
+      <type>Key&lt; Iface_ &gt;::Ptr</type>
+      <name>Ptr</name>
+      <anchorfile>classsauce_1_1internal_1_1_key_3_01sauce_1_1shared__ptr_3_01_iface___01_4_01_4.html</anchorfile>
+      <anchor>ae7296fb3c9bfe1b4ae28fb82dbba3e2e</anchor>
+      <arglist></arglist>
+    </member>
+    <member kind="typedef">
+      <type>Key&lt; Iface_ &gt;::Name</type>
+      <name>Name</name>
+      <anchorfile>classsauce_1_1internal_1_1_key_3_01sauce_1_1shared__ptr_3_01_iface___01_4_01_4.html</anchorfile>
+      <anchor>a00275beec8a294195ebf136cd398b28c</anchor>
+      <arglist></arglist>
+    </member>
+    <member kind="typedef">
+      <type>Key&lt; Iface_ &gt;::Normalized</type>
+      <name>Normalized</name>
+      <anchorfile>classsauce_1_1internal_1_1_key_3_01sauce_1_1shared__ptr_3_01_iface___01_4_01_4.html</anchorfile>
+      <anchor>a8a0f92bdd6f899e80453f3fd67319e08</anchor>
       <arglist></arglist>
     </member>
   </compound>
@@ -3663,6 +4493,302 @@
     </member>
   </compound>
   <compound kind="class">
+    <name>sauce::internal::MethodBinding</name>
+    <filename>classsauce_1_1internal_1_1_method_binding.html</filename>
+    <templarg></templarg>
+    <templarg></templarg>
+    <base>Binding&lt; Dependency, NoScope &gt;</base>
+    <class kind="struct">sauce::internal::MethodBinding::InjectParameters</class>
+    <class kind="struct">sauce::internal::MethodBinding::MethodBindingFriend</class>
+    <class kind="struct">sauce::internal::MethodBinding::ValidateAcyclicParameters</class>
+    <member kind="typedef">
+      <type>Inject::Method</type>
+      <name>Method</name>
+      <anchorfile>classsauce_1_1internal_1_1_method_binding.html</anchorfile>
+      <anchor>aa3d8ebcae8c07303d63ca839a2a46318</anchor>
+      <arglist></arglist>
+    </member>
+    <member kind="typedef">
+      <type>ResolvedBinding&lt; Dependency &gt;::BindingPtr</type>
+      <name>BindingPtr</name>
+      <anchorfile>classsauce_1_1internal_1_1_method_binding.html</anchorfile>
+      <anchor>a444ef26560ee4b3f0bc4ef7bb91866b1</anchor>
+      <arglist></arglist>
+    </member>
+    <member kind="typedef">
+      <type>Key&lt; Dependency &gt;::Normalized</type>
+      <name>Dependency</name>
+      <anchorfile>classsauce_1_1internal_1_1_binding.html</anchorfile>
+      <anchor>ac8e6ca9c0a0ee029f1cef2f3dc701d3f</anchor>
+      <arglist></arglist>
+    </member>
+    <member kind="typedef">
+      <type>Key&lt; Dependency &gt;::Ptr</type>
+      <name>IfacePtr</name>
+      <anchorfile>classsauce_1_1internal_1_1_binding.html</anchorfile>
+      <anchor>a56cb8368cf105084b69ef4e490d8a93b</anchor>
+      <arglist></arglist>
+    </member>
+    <member kind="typedef">
+      <type>ResolvedBinding&lt; Dependency &gt;::BindingPtr</type>
+      <name>BindingPtr</name>
+      <anchorfile>classsauce_1_1internal_1_1_binding.html</anchorfile>
+      <anchor>a6f9598e25939f6925c61ce354b33db9a</anchor>
+      <arglist></arglist>
+    </member>
+    <member kind="typedef">
+      <type>Key&lt; Dependency &gt;::Ptr</type>
+      <name>IfacePtr</name>
+      <anchorfile>classsauce_1_1internal_1_1_resolved_binding.html</anchorfile>
+      <anchor>a2a0f836c59d54bed1a9a61820dc42bd5</anchor>
+      <arglist></arglist>
+    </member>
+    <member kind="typedef">
+      <type>sauce::shared_ptr&lt; ResolvedBinding&lt; Dependency &gt; &gt;</type>
+      <name>BindingPtr</name>
+      <anchorfile>classsauce_1_1internal_1_1_resolved_binding.html</anchorfile>
+      <anchor>a8da57e5d6d2367e6d9c22603582550f0</anchor>
+      <arglist></arglist>
+    </member>
+    <member kind="function">
+      <type></type>
+      <name>MethodBinding</name>
+      <anchorfile>classsauce_1_1internal_1_1_method_binding.html</anchorfile>
+      <anchor>a5528d0b54e94e1c0cf710ff8071c44d9</anchor>
+      <arglist>(Method method)</arglist>
+    </member>
+    <member kind="function">
+      <type>void</type>
+      <name>inject</name>
+      <anchorfile>classsauce_1_1internal_1_1_method_binding.html</anchorfile>
+      <anchor>aae1876b16ce144b5372d4442432712a9</anchor>
+      <arglist>(IfacePtr &amp;injected, BindingPtr, InjectorPtr injector) const </arglist>
+    </member>
+    <member kind="function">
+      <type>std::string</type>
+      <name>getName</name>
+      <anchorfile>classsauce_1_1internal_1_1_binding.html</anchorfile>
+      <anchor>ae7bf0f08a99b2346aca54988a13bad99</anchor>
+      <arglist>() const</arglist>
+    </member>
+    <member kind="function">
+      <type>void</type>
+      <name>setName</name>
+      <anchorfile>classsauce_1_1internal_1_1_binding.html</anchorfile>
+      <anchor>a195b6fc17905a087a72fb6c515736254</anchor>
+      <arglist>(std::string const name)</arglist>
+    </member>
+    <member kind="function">
+      <type>NamedTypeId</type>
+      <name>getKey</name>
+      <anchorfile>classsauce_1_1internal_1_1_resolved_binding.html</anchorfile>
+      <anchor>a7ff0341fe08ae52a0f03a35ad6dd3c79</anchor>
+      <arglist>() const </arglist>
+    </member>
+    <member kind="function" virtualness="pure">
+      <type>virtual void</type>
+      <name>validateAcyclic</name>
+      <anchorfile>classsauce_1_1internal_1_1_resolved_binding.html</anchorfile>
+      <anchor>a503de5fe9cb4996db536f6f6d6d486be</anchor>
+      <arglist>(sauce::shared_ptr&lt; Injector &gt;, TypeIds &amp;) const =0</arglist>
+    </member>
+    <member kind="function" virtualness="pure">
+      <type>virtual void</type>
+      <name>get</name>
+      <anchorfile>classsauce_1_1internal_1_1_resolved_binding.html</anchorfile>
+      <anchor>a052b701d112012a04c93d7c76ffac334</anchor>
+      <arglist>(IfacePtr &amp;, BindingPtr, sauce::shared_ptr&lt; Injector &gt;) const =0</arglist>
+    </member>
+    <member kind="function" virtualness="virtual">
+      <type>virtual bool</type>
+      <name>isModifier</name>
+      <anchorfile>classsauce_1_1internal_1_1_opaque_binding.html</anchorfile>
+      <anchor>a08d286d2d97f34d3c5104b4ed95527bc</anchor>
+      <arglist>() const </arglist>
+    </member>
+    <member kind="function" virtualness="pure">
+      <type>virtual TypeId</type>
+      <name>getScopeKey</name>
+      <anchorfile>classsauce_1_1internal_1_1_opaque_binding.html</anchorfile>
+      <anchor>afcab860863e3fdec961ff24704c45217</anchor>
+      <arglist>() const =0</arglist>
+    </member>
+    <member kind="function" virtualness="pure">
+      <type>virtual void</type>
+      <name>eagerlyInject</name>
+      <anchorfile>classsauce_1_1internal_1_1_opaque_binding.html</anchorfile>
+      <anchor>a7f2819936b99c569cc29e3114d216328</anchor>
+      <arglist>(OpaqueBindingPtr, sauce::shared_ptr&lt; Injector &gt;) const =0</arglist>
+    </member>
+    <member kind="function" virtualness="pure">
+      <type>virtual void</type>
+      <name>setDynamicDependencyNames</name>
+      <anchorfile>classsauce_1_1internal_1_1_opaque_binding.html</anchorfile>
+      <anchor>a0d34b0bb5be2e0d0546200d480f3ae30</anchor>
+      <arglist>(std::vector&lt; std::string &gt; const &amp;)=0</arglist>
+    </member>
+    <member kind="friend" protection="private">
+      <type>friend class</type>
+      <name>MethodBindingFriend</name>
+      <anchorfile>classsauce_1_1internal_1_1_method_binding.html</anchorfile>
+      <anchor>a3abcc66ae8556d57a6b799ece2d1f4e1</anchor>
+      <arglist></arglist>
+    </member>
+    <member kind="function" protection="protected">
+      <type>void</type>
+      <name>validateAcyclicHelper</name>
+      <anchorfile>classsauce_1_1internal_1_1_injector_friend.html</anchorfile>
+      <anchor>a4a2343d76ae48ae8b6bdda2494e9f9a9</anchor>
+      <arglist>(InjectorPtr injector, TypeIds &amp;ids, std::string const name) const </arglist>
+    </member>
+    <member kind="function" protection="protected">
+      <type>void</type>
+      <name>injectHelper</name>
+      <anchorfile>classsauce_1_1internal_1_1_injector_friend.html</anchorfile>
+      <anchor>ad4e574164c05c602f782cfb13f2de721</anchor>
+      <arglist>(typename Key&lt; Dependency &gt;::Ptr &amp;injected, InjectorPtr injector, std::string const name) const </arglist>
+    </member>
+    <member kind="function" protection="protected">
+      <type>void</type>
+      <name>cache</name>
+      <anchorfile>classsauce_1_1internal_1_1_injector_friend.html</anchorfile>
+      <anchor>a0e1e832cfd7315fb4bc004566cf57755</anchor>
+      <arglist>(InjectorPtr injector, typename Key&lt; Dependency &gt;::Ptr injected, i::TypeId scope) const </arglist>
+    </member>
+    <member kind="function" protection="protected">
+      <type>bool</type>
+      <name>probe</name>
+      <anchorfile>classsauce_1_1internal_1_1_injector_friend.html</anchorfile>
+      <anchor>ab6020f7d9d9832ff7bc155c95ed89425</anchor>
+      <arglist>(InjectorPtr injector, typename Key&lt; Dependency &gt;::Ptr &amp;injected, i::TypeId scope) const </arglist>
+    </member>
+  </compound>
+  <compound kind="struct">
+    <name>sauce::internal::MethodBinding::InjectParameters::Parameter</name>
+    <filename>structsauce_1_1internal_1_1_method_binding_1_1_inject_parameters_1_1_parameter.html</filename>
+    <templarg></templarg>
+    <templarg>i</templarg>
+    <member kind="typedef">
+      <type>Key&lt; T &gt;::Ptr</type>
+      <name>Type</name>
+      <anchorfile>structsauce_1_1internal_1_1_method_binding_1_1_inject_parameters_1_1_parameter.html</anchorfile>
+      <anchor>ac71695af4202b4f6df1bf0065e37aa86</anchor>
+      <arglist></arglist>
+    </member>
+    <member kind="function">
+      <type>Type</type>
+      <name>yield</name>
+      <anchorfile>structsauce_1_1internal_1_1_method_binding_1_1_inject_parameters_1_1_parameter.html</anchorfile>
+      <anchor>a93ff80e95d72f61da1612c75f8681fe1</anchor>
+      <arglist>(Passed passed)</arglist>
+    </member>
+    <member kind="function">
+      <type>void</type>
+      <name>validateAcyclicHelper</name>
+      <anchorfile>structsauce_1_1internal_1_1_method_binding_1_1_method_binding_friend.html</anchorfile>
+      <anchor>a2f34a9e8905340c48572e299c8d9f204</anchor>
+      <arglist>(MethodBinding_ const &amp;binding, InjectorPtr injector, TypeIds &amp;ids, std::string name)</arglist>
+    </member>
+    <member kind="function">
+      <type>Key&lt; T &gt;::Ptr</type>
+      <name>injectHelper</name>
+      <anchorfile>structsauce_1_1internal_1_1_method_binding_1_1_method_binding_friend.html</anchorfile>
+      <anchor>af0e63fc6bff3f06821c4d15ba1cb97c8</anchor>
+      <arglist>(MethodBinding_ const &amp;binding, InjectorPtr injector, std::string name)</arglist>
+    </member>
+  </compound>
+  <compound kind="struct">
+    <name>sauce::internal::MethodBinding::InjectParameters::Passed</name>
+    <filename>structsauce_1_1internal_1_1_method_binding_1_1_inject_parameters_1_1_passed.html</filename>
+    <member kind="function">
+      <type></type>
+      <name>Passed</name>
+      <anchorfile>structsauce_1_1internal_1_1_method_binding_1_1_inject_parameters_1_1_passed.html</anchorfile>
+      <anchor>a9aa8522a6dc82f3e8e1f06eb83d03894</anchor>
+      <arglist>(MethodBinding_ const &amp;binding, InjectorPtr &amp;injector)</arglist>
+    </member>
+    <member kind="variable">
+      <type>MethodBinding_ const &amp;</type>
+      <name>binding</name>
+      <anchorfile>structsauce_1_1internal_1_1_method_binding_1_1_inject_parameters_1_1_passed.html</anchorfile>
+      <anchor>a73a95d40f3fe0914ee9286f29b77337e</anchor>
+      <arglist></arglist>
+    </member>
+    <member kind="variable">
+      <type>InjectorPtr &amp;</type>
+      <name>injector</name>
+      <anchorfile>structsauce_1_1internal_1_1_method_binding_1_1_inject_parameters_1_1_passed.html</anchorfile>
+      <anchor>add19bda26c92eff75c1017366ac21648</anchor>
+      <arglist></arglist>
+    </member>
+  </compound>
+  <compound kind="struct">
+    <name>sauce::internal::MethodBinding::ValidateAcyclicParameters::Parameter</name>
+    <filename>structsauce_1_1internal_1_1_method_binding_1_1_validate_acyclic_parameters_1_1_parameter.html</filename>
+    <templarg></templarg>
+    <templarg>i</templarg>
+    <member kind="typedef">
+      <type>Key&lt; T &gt;::Ptr</type>
+      <name>Type</name>
+      <anchorfile>structsauce_1_1internal_1_1_method_binding_1_1_validate_acyclic_parameters_1_1_parameter.html</anchorfile>
+      <anchor>ab3f7e43278b2a49af58f5f73d6166f16</anchor>
+      <arglist></arglist>
+    </member>
+    <member kind="function">
+      <type>void</type>
+      <name>observe</name>
+      <anchorfile>structsauce_1_1internal_1_1_method_binding_1_1_validate_acyclic_parameters_1_1_parameter.html</anchorfile>
+      <anchor>a046d66d24eb71294b6232eba2ab0e17d</anchor>
+      <arglist>(Passed passed)</arglist>
+    </member>
+    <member kind="function">
+      <type>void</type>
+      <name>validateAcyclicHelper</name>
+      <anchorfile>structsauce_1_1internal_1_1_method_binding_1_1_method_binding_friend.html</anchorfile>
+      <anchor>a2f34a9e8905340c48572e299c8d9f204</anchor>
+      <arglist>(MethodBinding_ const &amp;binding, InjectorPtr injector, TypeIds &amp;ids, std::string name)</arglist>
+    </member>
+    <member kind="function">
+      <type>Key&lt; T &gt;::Ptr</type>
+      <name>injectHelper</name>
+      <anchorfile>structsauce_1_1internal_1_1_method_binding_1_1_method_binding_friend.html</anchorfile>
+      <anchor>af0e63fc6bff3f06821c4d15ba1cb97c8</anchor>
+      <arglist>(MethodBinding_ const &amp;binding, InjectorPtr injector, std::string name)</arglist>
+    </member>
+  </compound>
+  <compound kind="struct">
+    <name>sauce::internal::MethodBinding::ValidateAcyclicParameters::Passed</name>
+    <filename>structsauce_1_1internal_1_1_method_binding_1_1_validate_acyclic_parameters_1_1_passed.html</filename>
+    <member kind="function">
+      <type></type>
+      <name>Passed</name>
+      <anchorfile>structsauce_1_1internal_1_1_method_binding_1_1_validate_acyclic_parameters_1_1_passed.html</anchorfile>
+      <anchor>ad880c52a96d5b4a9580cba094616e926</anchor>
+      <arglist>(MethodBinding_ const &amp;binding, InjectorPtr &amp;injector, TypeIds &amp;ids)</arglist>
+    </member>
+    <member kind="variable">
+      <type>MethodBinding_ const &amp;</type>
+      <name>binding</name>
+      <anchorfile>structsauce_1_1internal_1_1_method_binding_1_1_validate_acyclic_parameters_1_1_passed.html</anchorfile>
+      <anchor>a1c743ca65591555c53626706c5d7dd7b</anchor>
+      <arglist></arglist>
+    </member>
+    <member kind="variable">
+      <type>InjectorPtr &amp;</type>
+      <name>injector</name>
+      <anchorfile>structsauce_1_1internal_1_1_method_binding_1_1_validate_acyclic_parameters_1_1_passed.html</anchorfile>
+      <anchor>a487d673b0a3a9f085085fc4c0939aa17</anchor>
+      <arglist></arglist>
+    </member>
+    <member kind="variable">
+      <type>TypeIds &amp;</type>
+      <name>ids</name>
+      <anchorfile>structsauce_1_1internal_1_1_method_binding_1_1_validate_acyclic_parameters_1_1_passed.html</anchorfile>
+      <anchor>a34507cf52b73efc6a703d8dfe1f0e690</anchor>
+      <arglist></arglist>
+    </member>
+  </compound>
+  <compound kind="class">
     <name>sauce::internal::NewBinding</name>
     <filename>classsauce_1_1internal_1_1_new_binding.html</filename>
     <templarg></templarg>
@@ -3685,6 +4811,34 @@
       <name>Dependency</name>
       <anchorfile>classsauce_1_1internal_1_1_binding.html</anchorfile>
       <anchor>ac8e6ca9c0a0ee029f1cef2f3dc701d3f</anchor>
+      <arglist></arglist>
+    </member>
+    <member kind="typedef">
+      <type>Key&lt; Dependency &gt;::Ptr</type>
+      <name>IfacePtr</name>
+      <anchorfile>classsauce_1_1internal_1_1_binding.html</anchorfile>
+      <anchor>a56cb8368cf105084b69ef4e490d8a93b</anchor>
+      <arglist></arglist>
+    </member>
+    <member kind="typedef">
+      <type>ResolvedBinding&lt; Dependency &gt;::BindingPtr</type>
+      <name>BindingPtr</name>
+      <anchorfile>classsauce_1_1internal_1_1_binding.html</anchorfile>
+      <anchor>a6f9598e25939f6925c61ce354b33db9a</anchor>
+      <arglist></arglist>
+    </member>
+    <member kind="typedef">
+      <type>Key&lt; Dependency &gt;::Ptr</type>
+      <name>IfacePtr</name>
+      <anchorfile>classsauce_1_1internal_1_1_resolved_binding.html</anchorfile>
+      <anchor>a2a0f836c59d54bed1a9a61820dc42bd5</anchor>
+      <arglist></arglist>
+    </member>
+    <member kind="typedef">
+      <type>sauce::shared_ptr&lt; ResolvedBinding&lt; Dependency &gt; &gt;</type>
+      <name>BindingPtr</name>
+      <anchorfile>classsauce_1_1internal_1_1_resolved_binding.html</anchorfile>
+      <anchor>a8da57e5d6d2367e6d9c22603582550f0</anchor>
       <arglist></arglist>
     </member>
     <member kind="function">
@@ -3744,11 +4898,25 @@
       <arglist>() const </arglist>
     </member>
     <member kind="function" virtualness="pure">
+      <type>virtual TypeId</type>
+      <name>getScopeKey</name>
+      <anchorfile>classsauce_1_1internal_1_1_opaque_binding.html</anchorfile>
+      <anchor>afcab860863e3fdec961ff24704c45217</anchor>
+      <arglist>() const =0</arglist>
+    </member>
+    <member kind="function" virtualness="pure">
       <type>virtual void</type>
       <name>eagerlyInject</name>
       <anchorfile>classsauce_1_1internal_1_1_opaque_binding.html</anchorfile>
       <anchor>a7f2819936b99c569cc29e3114d216328</anchor>
       <arglist>(OpaqueBindingPtr, sauce::shared_ptr&lt; Injector &gt;) const =0</arglist>
+    </member>
+    <member kind="function" virtualness="pure">
+      <type>virtual void</type>
+      <name>setDynamicDependencyNames</name>
+      <anchorfile>classsauce_1_1internal_1_1_opaque_binding.html</anchorfile>
+      <anchor>a0d34b0bb5be2e0d0546200d480f3ae30</anchor>
+      <arglist>(std::vector&lt; std::string &gt; const &amp;)=0</arglist>
     </member>
     <member kind="friend" protection="private">
       <type>friend class</type>
@@ -3757,40 +4925,67 @@
       <anchor>a517991278d42eeb0637d541b5224d762</anchor>
       <arglist></arglist>
     </member>
+    <member kind="function" protection="protected">
+      <type>void</type>
+      <name>validateAcyclicHelper</name>
+      <anchorfile>classsauce_1_1internal_1_1_injector_friend.html</anchorfile>
+      <anchor>a4a2343d76ae48ae8b6bdda2494e9f9a9</anchor>
+      <arglist>(InjectorPtr injector, TypeIds &amp;ids, std::string const name) const </arglist>
+    </member>
+    <member kind="function" protection="protected">
+      <type>void</type>
+      <name>injectHelper</name>
+      <anchorfile>classsauce_1_1internal_1_1_injector_friend.html</anchorfile>
+      <anchor>ad4e574164c05c602f782cfb13f2de721</anchor>
+      <arglist>(typename Key&lt; Dependency &gt;::Ptr &amp;injected, InjectorPtr injector, std::string const name) const </arglist>
+    </member>
+    <member kind="function" protection="protected">
+      <type>void</type>
+      <name>cache</name>
+      <anchorfile>classsauce_1_1internal_1_1_injector_friend.html</anchorfile>
+      <anchor>a0e1e832cfd7315fb4bc004566cf57755</anchor>
+      <arglist>(InjectorPtr injector, typename Key&lt; Dependency &gt;::Ptr injected, i::TypeId scope) const </arglist>
+    </member>
+    <member kind="function" protection="protected">
+      <type>bool</type>
+      <name>probe</name>
+      <anchorfile>classsauce_1_1internal_1_1_injector_friend.html</anchorfile>
+      <anchor>ab6020f7d9d9832ff7bc155c95ed89425</anchor>
+      <arglist>(InjectorPtr injector, typename Key&lt; Dependency &gt;::Ptr &amp;injected, i::TypeId scope) const </arglist>
+    </member>
   </compound>
   <compound kind="struct">
     <name>sauce::internal::NewBinding::InjectParameters::Parameter</name>
     <filename>structsauce_1_1internal_1_1_new_binding_1_1_inject_parameters_1_1_parameter.html</filename>
     <templarg></templarg>
     <templarg>i</templarg>
-    <templarg></templarg>
     <member kind="typedef">
       <type>Key&lt; T &gt;::Ptr</type>
-      <name>Ptr</name>
+      <name>Type</name>
       <anchorfile>structsauce_1_1internal_1_1_new_binding_1_1_inject_parameters_1_1_parameter.html</anchorfile>
-      <anchor>a0418aa586ae719943609d06c6158c48c</anchor>
+      <anchor>af1a5f2320d7c537f665e45aa7ad1e886</anchor>
       <arglist></arglist>
     </member>
     <member kind="function">
-      <type>Ptr</type>
+      <type>Type</type>
       <name>yield</name>
       <anchorfile>structsauce_1_1internal_1_1_new_binding_1_1_inject_parameters_1_1_parameter.html</anchorfile>
-      <anchor>a59898039982106f507aaabc33ffef098</anchor>
+      <anchor>a7fea163dc832fa0ee41b75dd3dd527db</anchor>
       <arglist>(Passed passed)</arglist>
     </member>
     <member kind="function">
       <type>void</type>
       <name>validateAcyclicHelper</name>
       <anchorfile>structsauce_1_1internal_1_1_new_binding_1_1_new_binding_friend.html</anchorfile>
-      <anchor>a9abed61f08d9d330639d9a9d3fe8d206</anchor>
-      <arglist>(New const &amp;binding, InjectorPtr injector, TypeIds &amp;ids, std::string dependencyName)</arglist>
+      <anchor>ab148ce8dcf47c569f15327fd48512573</anchor>
+      <arglist>(NewBinding_ const &amp;binding, InjectorPtr injector, TypeIds &amp;ids, std::string name)</arglist>
     </member>
     <member kind="function">
       <type>Key&lt; T &gt;::Ptr</type>
-      <name>getHelper</name>
+      <name>injectHelper</name>
       <anchorfile>structsauce_1_1internal_1_1_new_binding_1_1_new_binding_friend.html</anchorfile>
-      <anchor>acf4673a811a4e187de7e18bc09402fb5</anchor>
-      <arglist>(New const &amp;binding, InjectorPtr injector, std::string dependencyName)</arglist>
+      <anchor>a67d85e751f18442e641c8b43053c7cf5</anchor>
+      <arglist>(NewBinding_ const &amp;binding, InjectorPtr injector, std::string name)</arglist>
     </member>
   </compound>
   <compound kind="struct">
@@ -3800,14 +4995,14 @@
       <type></type>
       <name>Passed</name>
       <anchorfile>structsauce_1_1internal_1_1_new_binding_1_1_inject_parameters_1_1_passed.html</anchorfile>
-      <anchor>a3ce8f102c3f8d6e772382747340ba31d</anchor>
-      <arglist>(New const &amp;binding, InjectorPtr &amp;injector)</arglist>
+      <anchor>ae4ec541060ff01160fca64e4f302ab01</anchor>
+      <arglist>(NewBinding_ const &amp;binding, InjectorPtr &amp;injector)</arglist>
     </member>
     <member kind="variable">
-      <type>New const &amp;</type>
+      <type>NewBinding_ const &amp;</type>
       <name>binding</name>
       <anchorfile>structsauce_1_1internal_1_1_new_binding_1_1_inject_parameters_1_1_passed.html</anchorfile>
-      <anchor>a3af66f95b2faa767a361489349457d1f</anchor>
+      <anchor>a2efd8d0eb1c0e72a014d11fde3e4a07b</anchor>
       <arglist></arglist>
     </member>
     <member kind="variable">
@@ -3823,27 +5018,26 @@
     <filename>structsauce_1_1internal_1_1_new_binding_1_1_validate_acyclic_parameters_1_1_parameter.html</filename>
     <templarg></templarg>
     <templarg>i</templarg>
-    <templarg></templarg>
     <member kind="function">
       <type>void</type>
       <name>observe</name>
       <anchorfile>structsauce_1_1internal_1_1_new_binding_1_1_validate_acyclic_parameters_1_1_parameter.html</anchorfile>
-      <anchor>a58be7cf2afd359fd1d20f980f568adf0</anchor>
+      <anchor>a753664e2ca46f50c35eb905d448a995b</anchor>
       <arglist>(Passed passed)</arglist>
     </member>
     <member kind="function">
       <type>void</type>
       <name>validateAcyclicHelper</name>
       <anchorfile>structsauce_1_1internal_1_1_new_binding_1_1_new_binding_friend.html</anchorfile>
-      <anchor>a9abed61f08d9d330639d9a9d3fe8d206</anchor>
-      <arglist>(New const &amp;binding, InjectorPtr injector, TypeIds &amp;ids, std::string dependencyName)</arglist>
+      <anchor>ab148ce8dcf47c569f15327fd48512573</anchor>
+      <arglist>(NewBinding_ const &amp;binding, InjectorPtr injector, TypeIds &amp;ids, std::string name)</arglist>
     </member>
     <member kind="function">
       <type>Key&lt; T &gt;::Ptr</type>
-      <name>getHelper</name>
+      <name>injectHelper</name>
       <anchorfile>structsauce_1_1internal_1_1_new_binding_1_1_new_binding_friend.html</anchorfile>
-      <anchor>acf4673a811a4e187de7e18bc09402fb5</anchor>
-      <arglist>(New const &amp;binding, InjectorPtr injector, std::string dependencyName)</arglist>
+      <anchor>a67d85e751f18442e641c8b43053c7cf5</anchor>
+      <arglist>(NewBinding_ const &amp;binding, InjectorPtr injector, std::string name)</arglist>
     </member>
   </compound>
   <compound kind="struct">
@@ -3853,14 +5047,14 @@
       <type></type>
       <name>Passed</name>
       <anchorfile>structsauce_1_1internal_1_1_new_binding_1_1_validate_acyclic_parameters_1_1_passed.html</anchorfile>
-      <anchor>a7089c7f3fd3638ec1d78e59158c34415</anchor>
-      <arglist>(New const &amp;binding, InjectorPtr &amp;injector, TypeIds &amp;ids)</arglist>
+      <anchor>aa9b2d7ee27031d349fc00ef28d90b4cd</anchor>
+      <arglist>(NewBinding_ const &amp;binding, InjectorPtr &amp;injector, TypeIds &amp;ids)</arglist>
     </member>
     <member kind="variable">
-      <type>New const &amp;</type>
+      <type>NewBinding_ const &amp;</type>
       <name>binding</name>
       <anchorfile>structsauce_1_1internal_1_1_new_binding_1_1_validate_acyclic_parameters_1_1_passed.html</anchorfile>
-      <anchor>a6063ee69d88638c8c5bbe445d0a7cf80</anchor>
+      <anchor>a89327acb650f043b74e50d5b75382466</anchor>
       <arglist></arglist>
     </member>
     <member kind="variable">
@@ -3984,6 +5178,27 @@
       <anchor>a56cb8368cf105084b69ef4e490d8a93b</anchor>
       <arglist></arglist>
     </member>
+    <member kind="typedef">
+      <type>ResolvedBinding&lt; Dependency &gt;::BindingPtr</type>
+      <name>BindingPtr</name>
+      <anchorfile>classsauce_1_1internal_1_1_binding.html</anchorfile>
+      <anchor>a6f9598e25939f6925c61ce354b33db9a</anchor>
+      <arglist></arglist>
+    </member>
+    <member kind="typedef">
+      <type>Key&lt; Dependency &gt;::Ptr</type>
+      <name>IfacePtr</name>
+      <anchorfile>classsauce_1_1internal_1_1_resolved_binding.html</anchorfile>
+      <anchor>a2a0f836c59d54bed1a9a61820dc42bd5</anchor>
+      <arglist></arglist>
+    </member>
+    <member kind="typedef">
+      <type>sauce::shared_ptr&lt; ResolvedBinding&lt; Dependency &gt; &gt;</type>
+      <name>BindingPtr</name>
+      <anchorfile>classsauce_1_1internal_1_1_resolved_binding.html</anchorfile>
+      <anchor>a8da57e5d6d2367e6d9c22603582550f0</anchor>
+      <arglist></arglist>
+    </member>
     <member kind="function">
       <type>void</type>
       <name>validateAcyclic</name>
@@ -4041,11 +5256,53 @@
       <arglist>() const </arglist>
     </member>
     <member kind="function" virtualness="pure">
+      <type>virtual TypeId</type>
+      <name>getScopeKey</name>
+      <anchorfile>classsauce_1_1internal_1_1_opaque_binding.html</anchorfile>
+      <anchor>afcab860863e3fdec961ff24704c45217</anchor>
+      <arglist>() const =0</arglist>
+    </member>
+    <member kind="function" virtualness="pure">
       <type>virtual void</type>
       <name>eagerlyInject</name>
       <anchorfile>classsauce_1_1internal_1_1_opaque_binding.html</anchorfile>
       <anchor>a7f2819936b99c569cc29e3114d216328</anchor>
       <arglist>(OpaqueBindingPtr, sauce::shared_ptr&lt; Injector &gt;) const =0</arglist>
+    </member>
+    <member kind="function" virtualness="pure">
+      <type>virtual void</type>
+      <name>setDynamicDependencyNames</name>
+      <anchorfile>classsauce_1_1internal_1_1_opaque_binding.html</anchorfile>
+      <anchor>a0d34b0bb5be2e0d0546200d480f3ae30</anchor>
+      <arglist>(std::vector&lt; std::string &gt; const &amp;)=0</arglist>
+    </member>
+    <member kind="function" protection="protected">
+      <type>void</type>
+      <name>validateAcyclicHelper</name>
+      <anchorfile>classsauce_1_1internal_1_1_injector_friend.html</anchorfile>
+      <anchor>a4a2343d76ae48ae8b6bdda2494e9f9a9</anchor>
+      <arglist>(InjectorPtr injector, TypeIds &amp;ids, std::string const name) const </arglist>
+    </member>
+    <member kind="function" protection="protected">
+      <type>void</type>
+      <name>injectHelper</name>
+      <anchorfile>classsauce_1_1internal_1_1_injector_friend.html</anchorfile>
+      <anchor>ad4e574164c05c602f782cfb13f2de721</anchor>
+      <arglist>(typename Key&lt; Dependency &gt;::Ptr &amp;injected, InjectorPtr injector, std::string const name) const </arglist>
+    </member>
+    <member kind="function" protection="protected">
+      <type>void</type>
+      <name>cache</name>
+      <anchorfile>classsauce_1_1internal_1_1_injector_friend.html</anchorfile>
+      <anchor>a0e1e832cfd7315fb4bc004566cf57755</anchor>
+      <arglist>(InjectorPtr injector, typename Key&lt; Dependency &gt;::Ptr injected, i::TypeId scope) const </arglist>
+    </member>
+    <member kind="function" protection="protected">
+      <type>bool</type>
+      <name>probe</name>
+      <anchorfile>classsauce_1_1internal_1_1_injector_friend.html</anchorfile>
+      <anchor>ab6020f7d9d9832ff7bc155c95ed89425</anchor>
+      <arglist>(InjectorPtr injector, typename Key&lt; Dependency &gt;::Ptr &amp;injected, i::TypeId scope) const </arglist>
     </member>
   </compound>
   <compound kind="class">
@@ -4283,6 +5540,7 @@
     <file>injector_binding.h</file>
     <file>key.h</file>
     <file>locker_factory.h</file>
+    <file>method_binding.h</file>
     <file>new_binding.h</file>
     <file>opaque_binding.h</file>
     <file>pending_thrower.h</file>

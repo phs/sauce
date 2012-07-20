@@ -1,4 +1,4 @@
-<map id="G" name="G">
+<map id="sauce::Exception" name="sauce::Exception">
 <area shape="rect" id="node7" href="$classsauce_1_1_already_in_scope_exception.html" title="Thrown when re&#45;entering a scope that is already open." alt="" coords="505,14,722,42"/>
 <area shape="rect" id="node11" href="$classsauce_1_1_circular_dependency_exception.html" title="Thrown when a dependency cycle is found." alt="" coords="521,70,706,114"/>
 <area shape="rect" id="node15" href="$classsauce_1_1_exiting_singleton_scope_exception.html" title="Thrown when exiting the singleton scope." alt="" coords="514,138,712,182"/>

@@ -1,3 +1,4 @@
-<map id="G" name="G">
-<area shape="rect" id="node1" href="$classsauce_1_1internal_1_1_self_injector.html" title="If a type requests injection of its own smart pointer, do so." alt="" coords="6,5,218,33"/>
+<map id="Graphical Class Hierarchy" name="Graphical Class Hierarchy">
+<area shape="rect" id="node1" href="$classsauce_1_1internal_1_1_providing_clause.html" title="Base class for final parts of the fluent binding API that result in providing bindings." alt="" coords="5,5,203,65"/>
+<area shape="rect" id="node3" href="$classsauce_1_1_allocate_from_clause.html" title="Binds to a specific constructor and allocator." alt="" coords="252,5,439,65"/>
 </map>

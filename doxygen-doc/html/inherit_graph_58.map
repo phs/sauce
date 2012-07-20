@@ -1,3 +1,5 @@
-<map id="G" name="G">
-<area shape="rect" id="node1" href="$classsauce_1_1internal_1_1_implicit_bindings.html" title="Attempts to supply a Binding when none is found for a dependency." alt="" coords="6,5,162,49"/>
+<map id="Graphical Class Hierarchy" name="Graphical Class Hierarchy">
+<area shape="rect" id="node1" href="$classsauce_1_1internal_1_1_initial_clause.html" title="Base class for initial parts of the fluent binding API." alt="" coords="6,39,167,83"/>
+<area shape="rect" id="node3" href="$classsauce_1_1_in_clause.html" title="Scopes the binding." alt="" coords="217,5,423,49"/>
+<area shape="rect" id="node5" href="$classsauce_1_1_named_clause.html" title="Names the binding." alt="" coords="246,73,394,117"/>
 </map>

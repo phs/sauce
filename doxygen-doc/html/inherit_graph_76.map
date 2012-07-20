@@ -1,3 +1,4 @@
-<map id="G" name="G">
-<area shape="rect" id="node1" href="$classsauce_1_1internal_1_1_scope_cache_line_deleter.html" title="sauce::internal::ScopeCache\lLineDeleter\&lt; Dependency \&gt;" alt="" coords="5,5,197,49"/>
+<map id="Graphical Class Hierarchy" name="Graphical Class Hierarchy">
+<area shape="rect" id="node1" href="$classsauce_1_1internal_1_1_pending_thrower.html" title="A mixin to defer and throw pending exceptions." alt="" coords="6,5,170,49"/>
+<area shape="rect" id="node3" href="$classsauce_1_1_binder.html" title="Passed to modules to create bindings." alt="" coords="219,13,322,41"/>
 </map>

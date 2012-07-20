@@ -1,4 +1,4 @@
-<map id="G" name="G">
+<map id="Graphical Class Hierarchy" name="Graphical Class Hierarchy">
 <area shape="rect" id="node1" href="$classsauce_1_1_exception.html" title="Base class for all sauce exceptions." alt="" coords="5,177,128,205"/>
 <area shape="rect" id="node3" href="$classsauce_1_1_already_in_scope_exception.html" title="Thrown when re&#45;entering a scope that is already open." alt="" coords="177,14,394,42"/>
 <area shape="rect" id="node7" href="$classsauce_1_1_circular_dependency_exception.html" title="Thrown when a dependency cycle is found." alt="" coords="193,70,378,114"/>

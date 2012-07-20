@@ -1,4 +1,4 @@
-<map id="G" name="G">
+<map id="sauce::OutOfScopeException" name="sauce::OutOfScopeException">
 <area shape="rect" id="node9" href="$classsauce_1_1_out_of_scope_exception_for.html" title="Thrown when a provision is requested outside of its given, bound scope." alt="" coords="5,315,200,359"/>
 <area shape="rect" id="node2" href="$classsauce_1_1_exception.html" title="Base class for all sauce exceptions." alt="" coords="41,161,164,189"/>
 <area shape="rect" id="node4" title="STL class." alt="" coords="39,83,165,111"/>

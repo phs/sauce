@@ -1,3 +1,4 @@
-<map id="G" name="G">
-<area shape="rect" id="node1" href="$classsauce_1_1_modules.html" title="A factory that accepts Modules and creates Injectors." alt="" coords="5,5,120,33"/>
+<map id="Graphical Class Hierarchy" name="Graphical Class Hierarchy">
+<area shape="rect" id="node1" href="$classsauce_1_1internal_1_1_providing_clause.html" title="sauce::internal::Providing\lClause\&lt; ProviderDependency,\l Scope, ProviderCtor, std\l::allocator\&lt; int \&gt; \&gt;" alt="" coords="6,5,207,81"/>
+<area shape="rect" id="node3" href="$classsauce_1_1_to_provider_clause.html" title="Binds to a provider with a specific constructor, allocating from the heap." alt="" coords="257,13,426,73"/>
 </map>

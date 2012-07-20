@@ -1,6 +1,8 @@
-<map id="G" name="G">
-<area shape="rect" id="node5" href="$classsauce_1_1internal_1_1_binding.html" title="Binding\&lt; Dependency,\l Scope \&gt;" alt="" coords="480,55,635,99"/>
-<area shape="rect" id="node2" href="$classsauce_1_1internal_1_1_opaque_binding.html" title="An opaque binding." alt="" coords="6,63,213,91"/>
-<area shape="rect" id="node7" href="$classsauce_1_1internal_1_1_new_binding.html" title="sauce::internal::NewBinding\l\&lt; Dependency, Scope, Constructor,\l Allocator \&gt;" alt="" coords="683,5,914,65"/>
-<area shape="rect" id="node9" href="$classsauce_1_1internal_1_1_provider_binding.html" title="An injection that provides from the configured provider." alt="" coords="699,89,899,149"/>
+<map id="sauce::internal::ResolvedBinding&lt; Dependency &gt;" name="sauce::internal::ResolvedBinding&lt; Dependency &gt;">
+<area shape="rect" id="node5" href="$classsauce_1_1internal_1_1_binding.html" title="Binding\&lt; Dependency,\l NoScope \&gt;" alt="" coords="480,9,635,53"/>
+<area shape="rect" id="node9" href="$classsauce_1_1internal_1_1_binding.html" title="Binding\&lt; Dependency,\l Scope \&gt;" alt="" coords="480,81,635,125"/>
+<area shape="rect" id="node2" href="$classsauce_1_1internal_1_1_opaque_binding.html" title="An opaque binding." alt="" coords="6,55,213,83"/>
+<area shape="rect" id="node7" href="$classsauce_1_1internal_1_1_method_binding.html" title="sauce::internal::MethodBinding\l\&lt; Dependency, Signature \&gt;" alt="" coords="696,5,901,49"/>
+<area shape="rect" id="node11" href="$classsauce_1_1internal_1_1_new_binding.html" title="sauce::internal::NewBinding\l\&lt; Dependency, Scope, Constructor,\l Allocator \&gt;" alt="" coords="683,73,914,133"/>
+<area shape="rect" id="node13" href="$classsauce_1_1internal_1_1_provider_binding.html" title="An injection that provides from the configured provider." alt="" coords="699,157,899,217"/>
 </map>
