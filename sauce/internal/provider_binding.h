@@ -16,6 +16,7 @@ namespace internal {
  */
 template<typename Dependency, typename Scope, typename Provider>
 class ProviderBinding: public Binding<Dependency, Scope> {
+public:
   typedef typename ResolvedBinding<Dependency>::BindingPtr BindingPtr;
 
   void validateAcyclic(InjectorPtr injector, TypeIds & ids) const {
@@ -27,11 +28,6 @@ class ProviderBinding: public Binding<Dependency, Scope> {
     this->template injectHelper<Provider>(provider, injector, binding->getName());
     injected = provider->get();
   }
-
-public:
-
-  ProviderBinding():
-    Binding<Dependency, Scope>() {}
 };
 
 }

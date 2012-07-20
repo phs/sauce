@@ -110,18 +110,19 @@ private:
     this->dynamicDependencyNames.resize(Inject::arity(), unnamed());
   }
 
+public:
+
   typedef typename ResolvedBinding<Dependency>::BindingPtr BindingPtr;
+
+  explicit MethodBinding(Method method):
+    dynamicDependencyNames(Inject::arity(), unnamed()),
+    method(method) {}
 
   void inject(IfacePtr & injected, BindingPtr, InjectorPtr injector) const {
     typename InjectParameters::Passed passed(*this, injector);
     applyMethod<InjectParameters, Signature>(*injected.get(), method, passed);
   }
 
-public:
-
-  explicit MethodBinding(Method method):
-    dynamicDependencyNames(Inject::arity(), unnamed()),
-    method(method) {}
 };
 
 }

@@ -13,7 +13,6 @@
 #include <sauce/internal/opaque_binding.h>
 #include <sauce/internal/pending_thrower.h>
 #include <sauce/internal/provider_binding.h>
-#include <sauce/internal/self_binding.h>
 
 namespace sauce {
 namespace internal {
