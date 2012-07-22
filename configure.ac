@@ -66,6 +66,7 @@ AC_CONFIG_FILES([
   Doxyfile
   check-style
   check-coverage
+  sauce/sauce.pc
 ])
 
 # Actually create the requested files.  This must be the last line.

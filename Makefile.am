@@ -4,6 +4,9 @@
 AUTOMAKE_OPTIONS = subdir-objects
 ACLOCAL_AMFLAGS = -I m4 ${ACLOCAL_FLAGS}
 
+# Install location for pkg-config manifest
+pkgconfigdir = $(libdir)/pkgconfig
+
 # -- Initialize used variables --
 #
 # Since different components must share these, all are required to append (+=) to these instead of
@@ -18,6 +21,7 @@ install_data_hooks =
 MAINTAINERCLEANFILES =
 MOSTLYCLEANFILES =
 nobase_include_HEADERS =
+nodist_pkgconfig_DATA = sauce/sauce.pc
 SUBDIRS =
 TESTS =
 TESTS_ENVIRONMENT =

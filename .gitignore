@@ -18,6 +18,7 @@ libtool
 Makefile
 Makefile.in
 sauce-*
+sauce.pc
 stamp-h*
 
 # Build intermediates
