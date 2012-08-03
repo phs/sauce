@@ -95,6 +95,8 @@ public:
   Binding():
     name(unnamed()) {}
 
+  virtual ~Binding() {}
+
   /**
    * The dynamic name of this binding.
    */

@@ -26,6 +26,8 @@ public:
    */
   typedef typename i::Key<Dependency>::Iface Provides;
 
+  virtual ~Provider() {}
+
   /**
    * Provide an Iface.
    */
@@ -60,6 +62,8 @@ class AbstractProvider: public Provider<Dependency> {
 public:
 
   typedef Abstract RequestsSelfInjection;
+
+  virtual ~AbstractProvider() {}
 
   void setSelf(sauce::weak_ptr<Abstract> weak) {
     assert(weak.lock().get() == this);

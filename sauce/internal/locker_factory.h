@@ -42,6 +42,8 @@ public:
  */
 class LockFactory {
 public:
+  virtual ~LockFactory() {}
+
   virtual sauce::auto_ptr<Lock> createLock() = 0;
 };
 

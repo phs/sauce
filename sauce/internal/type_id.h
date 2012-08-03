@@ -44,6 +44,8 @@ protected:
 
 public:
 
+  virtual ~TypeId() {}
+
   bool operator==(TypeId const & id) const {
     return signature == id.signature;
   }

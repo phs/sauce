@@ -169,6 +169,8 @@ protected:
 
 public:
 
+  virtual ~ProvidingClause() {}
+
   ProvidingClause<Dependency, Scope, Ctor, Allocator> & naming(unsigned int position, std::string const name) {
     this->bindDynamicDependencyName(position, name);
     return *this;
@@ -218,6 +220,8 @@ protected:
   }
 
 public:
+
+  virtual ~ModifyingClause() {}
 
   ModifyingClause<Dependency> & naming(unsigned int position, std::string const name) {
     this->bindDynamicDependencyName(position, name);

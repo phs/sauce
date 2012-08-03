@@ -33,6 +33,8 @@ typedef sauce::shared_ptr<OpaqueBinding> OpaqueBindingPtr;
 class OpaqueBinding {
 public:
 
+  virtual ~OpaqueBinding() {}
+
   /**
    * The dynamic name of this binding.
    */

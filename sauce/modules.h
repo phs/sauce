@@ -63,11 +63,12 @@ protected:
 
 public:
 
+  virtual ~AbstractModule() {}
+
   void operator()(Binder & binder) {
     BinderGuard guard(this, &binder);
     configure();
   }
-
 };
 
 /**

@@ -23,6 +23,8 @@ public:
   typedef typename Key<Dependency>::Ptr IfacePtr;
   typedef sauce::shared_ptr<ResolvedBinding<Dependency> > BindingPtr;
 
+  virtual ~ResolvedBinding() {}
+
   /**
    * The TypeId of the Dependency template parameter.
    */
