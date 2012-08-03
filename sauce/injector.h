@@ -6,6 +6,7 @@
 
 #include <sauce/memory.h>
 #include <sauce/named.h>
+#include <sauce/scopes.h>
 #include <sauce/internal/base_injector.h>
 #include <sauce/internal/key.h>
 #include <sauce/internal/locker_factory.h>
