@@ -832,22 +832,22 @@
       <type>void</type>
       <name>operator()</name>
       <anchorfile>classsauce_1_1_abstract_module.html</anchorfile>
-      <anchor>a5127cdfa9747e9fb69a6151b35ede66a</anchor>
-      <arglist>(Binder &amp;binder)</arglist>
+      <anchor>ac4c02e6cb14a373d06e8f7dab4a3fb34</anchor>
+      <arglist>(Binder &amp;binder) const </arglist>
     </member>
     <member kind="function" protection="protected" virtualness="pure">
       <type>virtual void</type>
       <name>configure</name>
       <anchorfile>classsauce_1_1_abstract_module.html</anchorfile>
-      <anchor>aa5d102d0e040b6a50b680faaaba1bbcc</anchor>
-      <arglist>()=0</arglist>
+      <anchor>a18f164ad21374e92b4f588592d1fe72d</anchor>
+      <arglist>() const =0</arglist>
     </member>
     <member kind="function" protection="protected">
       <type>BindClause&lt; Iface &gt;</type>
       <name>bind</name>
       <anchorfile>classsauce_1_1_abstract_module.html</anchorfile>
-      <anchor>a63b203944bb26cd2f6b8007d53388d48</anchor>
-      <arglist>()</arglist>
+      <anchor>a202150b2ec690146d1300dc00d143fa3</anchor>
+      <arglist>() const </arglist>
     </member>
     <member kind="friend" protection="private">
       <type>friend class</type>

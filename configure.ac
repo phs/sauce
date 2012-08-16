@@ -1,4 +1,4 @@
-AC_INIT([Sauce],[0.9.2],[https://github.com/phs/sauce/issues],[sauce],[https://github.com/phs/sauce/])
+AC_INIT([Sauce],[0.9.3],[https://github.com/phs/sauce/issues],[sauce],[https://github.com/phs/sauce/])
 
 # Boilerplate
 AC_PREREQ(2.61)
