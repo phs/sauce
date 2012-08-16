@@ -19,18 +19,18 @@ namespace sauce {
  * explicit Binder.
  */
 class AbstractModule {
-  Binder * binder;
+  mutable Binder * binder;
 
   /**
    * RAII object to protect the state of AbtractModule::binder.
    */
   class BinderGuard {
-    AbstractModule * module;
+    AbstractModule const * module;
     Binder * previousBinder;
 
     friend class AbstractModule;
 
-    BinderGuard(AbstractModule * module, Binder * binder):
+    BinderGuard(AbstractModule const * module, Binder * binder):
       module(module),
       previousBinder(module->binder) {
       module->binder = binder;
@@ -51,13 +51,13 @@ protected:
   /**
    * Override in derived classes to declare bindings.
    */
-  virtual void configure() = 0;
+  virtual void configure() const = 0;
 
   /**
    * Begin binding the chosen interface.
    */
   template<typename Iface>
-  BindClause<Iface> bind() {
+  BindClause<Iface> bind() const {
     return binder->bind<Iface>();
   }
 
@@ -65,7 +65,7 @@ public:
 
   virtual ~AbstractModule() {}
 
-  void operator()(Binder & binder) {
+  void operator()(Binder & binder) const {
     BinderGuard guard(this, &binder);
     configure();
   }

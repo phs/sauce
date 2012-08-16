@@ -383,7 +383,7 @@ class Local {};
  * Modules can work cooperatively, and can be sourced from different compilation units (or dlsym'd libraries, etc.)
  */
 class FrameworkModule: public AbstractModule {
-  void configure() {
+  void configure() const {
     /**
      * The result of bind() (an intermediate with an annoyingly complex type) is invoked in turn.
      *
@@ -449,7 +449,7 @@ class FrameworkModule: public AbstractModule {
  * is conceptually simpler and more concrete.
  */
 class ProductionModule: public AbstractModule {
-  void configure() {
+  void configure() const {
     bind<Router>().to<MyRouter()>();
 
     /**

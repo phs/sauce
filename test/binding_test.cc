@@ -34,6 +34,32 @@ TEST(BindingTest, shouldProvideExplicitlyRequestedSmartPointers) {
   sauce::shared_ptr<Bound> bound = injector->get<sauce::shared_ptr<Bound> >();
 }
 
+class BoundModuleAsClass: public ::sauce::AbstractModule {
+  void configure() const {
+    bind<Bound>().to<Bound()>();
+  }
+
+public:
+
+  void doubleDispatch(Modules & modules) {
+    modules.add(*this);
+  }
+};
+
+TEST(BindingTest, shouldProvideConvenienceBaseClassForModules) {
+  BoundModuleAsClass moduleAsClass;
+  sauce::shared_ptr<Injector> injector(Modules().add(moduleAsClass).createInjector());
+  sauce::shared_ptr<Bound> explicitlyBound = injector->get<Bound>();
+}
+
+TEST(BindingTest, shouldLetClassModulesAddThemselvesEasily) {
+  BoundModuleAsClass moduleAsClass;
+  Modules modules;
+  moduleAsClass.doubleDispatch(modules);
+  sauce::shared_ptr<Injector> injector(modules.createInjector());
+  sauce::shared_ptr<Bound> explicitlyBound = injector->get<Bound>();
+}
+
 void ForgotTheParensModule(Binder & binder) {
   binder.bind<Bound>().to<Bound>();
 }

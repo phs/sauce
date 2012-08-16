@@ -122,7 +122,7 @@ MockAllocation * AllocateWith<MockAllocation>::Base::backing = NULL;
 
 class HerbieModule: public sauce::AbstractModule {
 public:
-  void configure() {
+  void configure() const {
     typedef AllocateWith<MockAllocation>::Allocator<int> MockAllocator;
 
     bind<Chasis>().to<CoupChasis()>().allocatedFrom<MockAllocator>();
