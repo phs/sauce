@@ -2,6 +2,7 @@
 #define SAUCE_INTERNAL_KEY_H_
 
 #include <sauce/memory.h>
+#include <sauce/named.h>
 #include <sauce/internal/type_id.h>
 
 namespace sauce {
