@@ -10,6 +10,8 @@
 namespace sauce_tutorial { // Put in a different namespace, forcing us to show off "using" statements.
 namespace test {
 
+// TODO: show off scopes!?!
+
 /**
  * This suite is intended to be a complete (if stubbed) example of how sauce might be used to manage the dependencies
  * of a typical MVC-like application.  Unlike binding_test, whose aim is coverage across all variations of binding and
