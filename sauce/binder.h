@@ -24,7 +24,7 @@ namespace sauce {
  * Binds to a specific constructor and allocator.
  */
 template<typename Dependency, typename Scope, typename Ctor, typename Allocator>
-class AllocateFromClause: public i::ProvidingClause<Dependency> {
+class AllocateFromClause: public i::Clause<Dependency> {
   virtual void onComplete() {
     i::OpaqueBindingPtr pendingBinding(new i::NewBinding<Dependency, Scope, Ctor, Allocator>());
     this->getState()->bind(pendingBinding);
@@ -35,7 +35,7 @@ class AllocateFromClause: public i::ProvidingClause<Dependency> {
  * Binds to a specific constructor, allocating from the heap.
  */
 template<typename Dependency, typename Scope, typename Ctor>
-class ToClause: public i::ProvidingClause<Dependency> {
+class ToClause: public i::Clause<Dependency> {
   typedef typename i::Key<Dependency>::Iface Iface;
 
   virtual void onComplete() {
@@ -55,7 +55,7 @@ public:
  * Binds to a provider with a specific constructor, allocating from the heap.
  */
 template<typename ProviderDependency, typename Scope, typename ProviderCtor>
-class ToProviderClause: public i::ProvidingClause<ProviderDependency> {
+class ToProviderClause: public i::Clause<ProviderDependency> {
   void onComplete() {
     typedef typename i::Key<ProviderDependency>::Iface Provider;
     typedef typename Provider::Provides Iface;
@@ -81,7 +81,7 @@ public:
  * Scopes the binding.
  */
 template<typename Dependency, typename Scope>
-class InClause: public i::InitialClause<Dependency> {
+class InClause: public i::Clause<Dependency> {
   typedef typename i::Key<Dependency>::Iface Iface;
   typedef typename i::Key<Dependency>::Name Name;
   typedef Named<Provider<Iface>, Name> ProviderDependency;
@@ -109,7 +109,7 @@ class BindClause;
  * Binds to a specific method.
  */
 template<typename Dependency, typename Signature>
-class ToMethodClause: public i::ModifyingClause<Dependency> {
+class ToMethodClause: public i::Clause<Dependency> {
   typedef typename i::MethodBinding<Dependency, Signature> MethodBinding_;
   typedef typename MethodBinding_::Method Method;
   Method method;
@@ -123,7 +123,7 @@ class ToMethodClause: public i::ModifyingClause<Dependency> {
   }
 
   ToMethodClause(Method method):
-    i::ModifyingClause<Dependency>(),
+    i::Clause<Dependency>(),
     method(method) {}
 };
 
@@ -131,7 +131,7 @@ class ToMethodClause: public i::ModifyingClause<Dependency> {
  * Binds to a specific method with possible static dependency names.
  */
 template<typename Dependency, typename Signature>
-class ToMethodNamingClause: public i::ModifyingClause<Dependency> {
+class ToMethodNamingClause: public i::Clause<Dependency> {
   typedef typename i::MethodBinding<Dependency, Signature> MethodBinding_;
   typedef typename MethodBinding_::Method Method;
   Method method;
@@ -145,7 +145,7 @@ class ToMethodNamingClause: public i::ModifyingClause<Dependency> {
   }
 
   ToMethodNamingClause(Method method):
-    i::ModifyingClause<Dependency>(),
+    i::Clause<Dependency>(),
     method(method) {}
 };
 
@@ -158,7 +158,7 @@ class ToMethodNamingClause: public i::ModifyingClause<Dependency> {
  * The constructor template parameter is unused, but a default constructor for the interface is assumed.
  */
 template<typename Dependency>
-class ToInstanceClause: public i::ProvidingClause<Dependency> {
+class ToInstanceClause: public i::Clause<Dependency> {
   typedef typename i::InstanceBinding<Dependency> InstanceBinding_;
   typedef typename i::Key<Dependency>::Ptr IfacePtr;
   IfacePtr iface;
@@ -171,7 +171,7 @@ class ToInstanceClause: public i::ProvidingClause<Dependency> {
 public:
 
   ToInstanceClause(IfacePtr iface):
-    i::ProvidingClause<Dependency>(),
+    i::Clause<Dependency>(),
     iface(iface) {}
 };
 
@@ -183,7 +183,7 @@ public:
  * using both kinds can be mixed in the same module.
  */
 template<typename Dependency>
-class NamedClause: public i::InitialClause<Dependency> {
+class NamedClause: public i::Clause<Dependency> {
   typedef typename i::Key<Dependency>::Iface Iface;
   typedef typename i::Key<Dependency>::Ptr IfacePtr;
   typedef typename i::Key<Dependency>::Name Name;
@@ -244,12 +244,12 @@ class Binder;
  * A builder that creates a single binding.
  */
 template<typename Iface>
-class BindClause: public i::InitialClause<Named<Iface, Unnamed> > {
+class BindClause: public i::Clause<Named<Iface, Unnamed> > {
   typedef typename i::Key<Iface>::Ptr IfacePtr;
   typedef Named<Provider<Iface>, Unnamed> ProviderDependency;
 
   BindClause(i::ClauseStatePtr state):
-    i::InitialClause<Named<Iface, Unnamed> >(state) {}
+    i::Clause<Named<Iface, Unnamed> >(state) {}
 
   friend class Binder;
 

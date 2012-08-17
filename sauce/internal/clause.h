@@ -92,37 +92,34 @@ public:
 typedef sauce::shared_ptr<ClauseState> ClauseStatePtr;
 
 /**
- * Base class for initial parts of the fluent binding API.
- *
- * An initial clause is what all binding sentences begin with, but do not contain enough information to yet create
- * bindings.  When they do, a transition to a ProvidingClause or ModifyingClause occurs.
+ * Base class for parts of the fluent binding API.
  */
 template<typename Dependency>
-class InitialClause {
-  friend class InitialClause<Named<typename Key<Dependency>::Iface, Unnamed> >;
-
+class Clause {
   ClauseStatePtr state;
 
 protected:
 
-  InitialClause():
+  virtual void onComplete() {
+    throwLater(PartialBindingExceptionFor<Dependency>());
+  }
+
+  Clause():
     state() {}
 
-  InitialClause(ClauseStatePtr state):
+  Clause(ClauseStatePtr state):
     state(state) {
     throwLater(PartialBindingExceptionFor<Dependency>());
+  }
+
+  ClauseStatePtr getState() {
+    return state;
   }
 
   template<typename Next>
   Next pass(Next next) {
     next.setState(state);
     return next;
-  }
-
-  void setState(ClauseStatePtr state) {
-    state->clearException();
-    this->state = state;
-    throwLater(PartialBindingExceptionFor<Dependency>());
   }
 
   void setDynamicName(std::string const name) {
@@ -133,36 +130,6 @@ protected:
   void throwLater(Exception) {
     state->template throwLater<Exception>();
   }
-};
-
-/**
- * Base class for final parts of the fluent binding API that result in providing bindings.
- */
-template<typename Dependency>
-class ProvidingClause {
-  ClauseStatePtr state;
-
-  friend class InitialClause<Dependency>;
-
-protected:
-
-  virtual void onComplete() = 0;
-
-  ProvidingClause():
-    state() {}
-
-  ProvidingClause(ClauseStatePtr state):
-    state(state) {}
-
-  ClauseStatePtr getState() {
-    return state;
-  }
-
-  template<typename Next>
-  Next pass(Next next) {
-    next.setState(state);
-    return next;
-  }
 
   void bindDynamicDependencyName(unsigned int position, std::string const name) {
     state->bindDynamicDependencyName(position, name);
@@ -170,65 +137,15 @@ protected:
 
 public:
 
-  virtual ~ProvidingClause() {}
+  virtual ~Clause() {}
 
-  ProvidingClause<Dependency> & naming(unsigned int position, std::string const name) {
+  Clause<Dependency> & naming(unsigned int position, std::string const name) {
     this->bindDynamicDependencyName(position, name);
     return *this;
   }
 
   void setState(ClauseStatePtr state) {
     this->state = state;
-    getState()->clearException();
-    onComplete();
-  }
-};
-
-/**
- * Base class for final parts of the fluent binding API that result in modifying bindings.
- */
-template<typename Dependency>
-class ModifyingClause {
-  ClauseStatePtr state;
-
-  friend class InitialClause<Dependency>;
-
-  virtual void onComplete() {}
-
-protected:
-
-  ModifyingClause():
-    state() {}
-
-  ModifyingClause(ClauseStatePtr state):
-    state(state) {}
-
-  ClauseStatePtr getState() {
-    return state;
-  }
-
-  template<typename Next>
-  Next pass(Next next) {
-    next.setState(state);
-    return next;
-  }
-
-  void bindDynamicDependencyName(unsigned int position, std::string const name) {
-    state->bindDynamicDependencyName(position, name);
-  }
-
-public:
-
-  virtual ~ModifyingClause() {}
-
-  ModifyingClause<Dependency> & naming(unsigned int position, std::string const name) {
-    this->bindDynamicDependencyName(position, name);
-    return *this;
-  }
-
-  void setState(ClauseStatePtr state) {
-    this->state = state;
-
     getState()->clearException();
     onComplete();
   }
