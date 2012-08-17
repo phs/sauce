@@ -101,7 +101,7 @@ void UnnamedPureVirtualModule(Binder & binder) {
  * Sauce uses virtually no macros.  So, the injected signatures such as
  * NeedsPureVirtual(PureVirtual &) above are actual language objects.  Specifically they are
  * function types.  However, some function types are illegal, such as those that pass by value
- * uncopyable objects (such as instances of a pure virutal interface by value.)
+ * uncopyable objects (such as instances of a pure virtual interface by value.)
  *
  * Notice this only affects unnamed dependencies, since the Named<> type wrapper otherwise
  * protects us.
@@ -111,7 +111,7 @@ void UnnamedPureVirtualModule(Binder & binder) {
  * bare types is a convenience to the user, to keep bindings as uncluttered as possible.
  *
  * Therefore, let's abuse the system a little further.  Anywhere an injected type is needed, it
- * can named either as itself, or as a reference to itself (as in PureVirtual & above).  If Sauce
+ * can be named either as itself, or as a reference to itself (as in PureVirtual & above).  If Sauce
  * sees any reference types in this way, it will simply pull the reference modifier off (via a
  * certain template specialization) and treat it as if the & was never there.
  *
@@ -554,11 +554,55 @@ TEST(BindingTest, shouldBindSingletonInstances) {
 
   SingletonInstanceModule module(expected);
   sauce::shared_ptr<Injector> injector(Modules().add(module).createInjector());
-  // sauce::shared_ptr<Bound> actual = injector->get<Bound>();
+  // sauce::shared_ptr<Bound> actual = injector->get<Bound>(); // TODO
   // ASSERT_EQ(expected.get(), actual.get());
 }
 
-// TODO test statically and dynamically named singleton instances.
+class StaticallyNamedSingletonInstanceModule: public ::sauce::AbstractModule {
+  sauce::shared_ptr<Bound> bound;
+
+public:
+
+  StaticallyNamedSingletonInstanceModule(sauce::shared_ptr<Bound> bound):
+    bound(bound) {}
+
+  void configure() const {
+    bind<Bound>().named<LieutenantShinysides>().toSingleton(bound);
+  }
+};
+
+TEST(BindingTest, shouldBindStaticallyNamedSingletonInstances) {
+  sauce::shared_ptr<Bound> expected(new Bound());
+  ASSERT_NE(static_cast<Bound *>(0), expected.get());
+
+  StaticallyNamedSingletonInstanceModule module(expected);
+  sauce::shared_ptr<Injector> injector(Modules().add(module).createInjector());
+  // sauce::shared_ptr<Bound> actual = injector->get<Bound, LieutenantShinysides>(); // TODO
+  // ASSERT_EQ(expected.get(), actual.get());
+}
+
+class DynamicallyNamedSingletonInstanceModule: public ::sauce::AbstractModule {
+  sauce::shared_ptr<Bound> bound;
+
+public:
+
+  DynamicallyNamedSingletonInstanceModule(sauce::shared_ptr<Bound> bound):
+    bound(bound) {}
+
+  void configure() const {
+    bind<Bound>().named("General Fishiness").toSingleton(bound);
+  }
+};
+
+TEST(BindingTest, shouldBindDynamicallyNamedSingletonInstances) {
+  sauce::shared_ptr<Bound> expected(new Bound());
+  ASSERT_NE(static_cast<Bound *>(0), expected.get());
+
+  DynamicallyNamedSingletonInstanceModule module(expected);
+  sauce::shared_ptr<Injector> injector(Modules().add(module).createInjector());
+  // sauce::shared_ptr<Bound> actual = injector->get<Bound>("General Fishiness"); // TODO
+  // ASSERT_EQ(expected.get(), actual.get());
+}
 
 class SelfInterested: public Bound {
 public:
