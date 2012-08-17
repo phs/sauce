@@ -535,6 +535,29 @@ TEST(BindingTest, shouldThrowExceptionOnPartialScopedBinding) {
     ::sauce::PartialBindingException);
 }
 
+class SingletonInstanceModule: public ::sauce::AbstractModule {
+  sauce::shared_ptr<Bound> bound;
+
+public:
+
+  SingletonInstanceModule(sauce::shared_ptr<Bound> bound):
+    bound(bound) {}
+
+  void configure() const {
+    // bind<Bound>().toSingleton(bound); // TODO
+  }
+};
+
+TEST(BindingTest, shouldBindSingletonInstances) {
+  sauce::shared_ptr<Bound> expected(new Bound());
+  ASSERT_NE(static_cast<Bound *>(0), expected.get());
+
+  SingletonInstanceModule module(expected);
+  sauce::shared_ptr<Injector> injector(Modules().add(module).createInjector());
+  // sauce::shared_ptr<Bound> actual = injector->get<Bound>();
+  // ASSERT_EQ(expected.get(), actual.get());
+}
+
 class SelfInterested: public Bound {
 public:
   sauce::weak_ptr<SelfInterested> self;
