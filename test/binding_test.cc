@@ -544,7 +544,7 @@ public:
     bound(bound) {}
 
   void configure() const {
-    // bind<Bound>().toSingleton(bound); // TODO
+    bind<Bound>().toSingleton(bound);
   }
 };
 
@@ -557,6 +557,8 @@ TEST(BindingTest, shouldBindSingletonInstances) {
   // sauce::shared_ptr<Bound> actual = injector->get<Bound>();
   // ASSERT_EQ(expected.get(), actual.get());
 }
+
+// TODO test statically and dynamically named singleton instances.
 
 class SelfInterested: public Bound {
 public:

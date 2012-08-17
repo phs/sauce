@@ -137,6 +137,35 @@ class ToMethodNamingClause: public i::ModifyingClause<Dependency> {
 };
 
 /**
+ * Binds to a specific single instance.
+ *
+ * By virtue of always returning the passed instance, this dependency is inheretingly singleton scoped.  It also means
+ * there is no need to use the actual singleton scope cache, and so we actually declare it as NoScope here.
+ *
+ * The constructor template parameter is unused, but a default constructor for the interface is assumed.
+ */
+template<typename Dependency>
+class ToSingletonClause:
+  public i::ProvidingClause<Dependency, NoScope, typename i::Key<Dependency>::Iface(), std::allocator<int> > {
+
+  // TODO The Ctor parameter is a nuisance, perhaps we can push it down.
+
+  typedef typename i::Key<Dependency>::Ptr IfacePtr;
+  IfacePtr iface;
+
+public:
+
+  void onComplete() {
+    // i::OpaqueBindingPtr instanceBinding(new InstanceBinding_(iface));
+    // this->getState()->bind(instanceBinding);
+  }
+
+  ToSingletonClause(IfacePtr iface):
+    i::ProvidingClause<Dependency, NoScope, typename i::Key<Dependency>::Iface(), std::allocator<int> >(),
+    iface(iface) {}
+};
+
+/**
  * Names the binding.
  *
  * There are two kinds of names: static and dynamic.  Static names are given by template parameter
@@ -146,10 +175,15 @@ class ToMethodNamingClause: public i::ModifyingClause<Dependency> {
 template<typename Dependency>
 class NamedClause: public i::InitialClause<Dependency> {
   typedef typename i::Key<Dependency>::Iface Iface;
+  typedef typename i::Key<Dependency>::Ptr IfacePtr;
   typedef typename i::Key<Dependency>::Name Name;
   typedef Named<Provider<Iface>, Name> ProviderDependency;
 
 public:
+
+  ToSingletonClause<Dependency> toSingleton(IfacePtr iface) {
+    return pass(ToSingletonClause<Dependency>(iface));
+  }
 
   template<typename Method>
   ToMethodClause<Dependency, Method> toMethod(Method method) {
@@ -201,6 +235,7 @@ class Binder;
  */
 template<typename Iface>
 class BindClause: public i::InitialClause<Named<Iface, Unnamed> > {
+  typedef typename i::Key<Iface>::Ptr IfacePtr;
   typedef Named<Provider<Iface>, Unnamed> ProviderDependency;
 
   BindClause(i::ClauseStatePtr state):
@@ -218,6 +253,10 @@ public:
   NamedClause<Named<Iface, Unnamed> > named(std::string const name) {
     this->setDynamicName(name);
     return pass(NamedClause<Named<Iface, Unnamed> >());
+  }
+
+  ToSingletonClause<Named<Iface, Unnamed> > toSingleton(IfacePtr iface) {
+    return pass(ToSingletonClause<Named<Iface, Unnamed> >(iface));
   }
 
   template<typename Method>
