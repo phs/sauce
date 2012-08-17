@@ -1,0 +1,9 @@
+<map id="sauce::internal::Clause&lt; Dependency &gt;" name="sauce::internal::Clause&lt; Dependency &gt;">
+<area shape="rect" id="node3" href="$classsauce_1_1_allocate_from_clause.html" title="Binds to a specific constructor and allocator." alt="" coords="228,5,412,49"/>
+<area shape="rect" id="node5" href="$classsauce_1_1_in_clause.html" title="Scopes the binding." alt="" coords="213,73,427,101"/>
+<area shape="rect" id="node7" href="$classsauce_1_1_named_clause.html" title="Names the binding." alt="" coords="246,125,394,169"/>
+<area shape="rect" id="node9" href="$classsauce_1_1_to_clause.html" title="Binds to a specific constructor, allocating from the heap." alt="" coords="211,193,429,221"/>
+<area shape="rect" id="node11" href="$classsauce_1_1_to_instance_clause.html" title="Binds to a specific single instance." alt="" coords="235,245,405,289"/>
+<area shape="rect" id="node13" href="$classsauce_1_1_to_method_clause.html" title="Binds to a specific method." alt="" coords="238,313,402,357"/>
+<area shape="rect" id="node15" href="$classsauce_1_1_to_method_naming_clause.html" title="Binds to a specific method with possible static dependency names." alt="" coords="215,381,425,425"/>
+</map>

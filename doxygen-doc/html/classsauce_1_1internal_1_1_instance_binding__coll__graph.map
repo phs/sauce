@@ -1,0 +1,6 @@
+<map id="sauce::internal::InstanceBinding&lt; Dependency &gt;" name="sauce::internal::InstanceBinding&lt; Dependency &gt;">
+<area shape="rect" id="node2" href="$classsauce_1_1internal_1_1_binding.html" title="sauce::internal::Binding\l\&lt; Dependency, NoScope \&gt;" alt="" coords="112,177,292,221"/>
+<area shape="rect" id="node4" href="$classsauce_1_1internal_1_1_resolved_binding.html" title="A binding for an acknowledged interface." alt="" coords="22,83,193,127"/>
+<area shape="rect" id="node6" href="$classsauce_1_1internal_1_1_opaque_binding.html" title="An opaque binding." alt="" coords="4,6,211,34"/>
+<area shape="rect" id="node8" href="$classsauce_1_1internal_1_1_injector_friend.html" title="sauce::internal::Injector\lFriend" alt="" coords="218,83,376,127"/>
+</map>

@@ -3,7 +3,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
-<title>Sauce-0.9.4: sauce/internal/base_injector.h Source File</title>
+<title>Sauce-0.9.5: sauce/internal/base_injector.h Source File</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -16,7 +16,7 @@
  <tbody>
  <tr style="height: 56px;">
   <td style="padding-left: 0.5em;">
-   <div id="projectname">Sauce-0.9.4
+   <div id="projectname">Sauce-0.9.5
    </div>
    <div id="projectbrief">A C++ Dependency Injection Framework</div>
   </td>
@@ -112,15 +112,15 @@
 <div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;</div>
 <div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;  <span class="keyword">template</span>&lt;<span class="keyword">typename</span> Dependency&gt;</div>
 <div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;  <span class="keywordtype">void</span> validateAcyclic(<span class="keywordtype">bool</span> validateProviding, InjectorPtr injector, TypeIds &amp; ids, std::string <span class="keyword">const</span> name)<span class="keyword"> const </span>{</div>
-<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;    <span class="keyword">typedef</span> <span class="keyword">typename</span> <a class="code" href="classsauce_1_1_named.html" title="Wrap dependency requests with Named to choose one of several (statically) named alternatives.">Key&lt;Dependency&gt;::Normalized</a> Normalized;</div>
+<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;    <span class="keyword">typedef</span> <span class="keyword">typename</span> <a class="code" href="classsauce_1_1internal_1_1_key.html" title="A complete specification of a dependency request.">Key&lt;Dependency&gt;::Normalized</a> Normalized;</div>
 <div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;    <a class="code" href="classsauce_1_1internal_1_1_circular_dependency_guard.html" title="Detects circular dependencies on behalf of injectors.">CircularDependencyGuard&lt;ImplicitBindings, Normalized&gt;</a> guard(ids, name);</div>
 <div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;    bindings.validateAcyclic&lt;Normalized&gt;(validateProviding, injector, ids, name);</div>
 <div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;  }</div>
 <div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;</div>
 <div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;  <span class="keyword">template</span>&lt;<span class="keyword">typename</span> Dependency&gt;</div>
-<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;  <span class="keywordtype">void</span> inject(<span class="keyword">typename</span> Key&lt;Dependency&gt;::Ptr &amp; injected, InjectorPtr injector, std::string <span class="keyword">const</span> name)<span class="keyword"> const </span>{</div>
-<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;    <span class="keyword">typedef</span> <span class="keyword">typename</span> <a class="code" href="classsauce_1_1_named.html" title="Wrap dependency requests with Named to choose one of several (statically) named alternatives.">Key&lt;Dependency&gt;::Normalized</a> Normalized;</div>
-<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;    <span class="keyword">typedef</span> <span class="keyword">typename</span> Key&lt;Dependency&gt;::Iface Iface;</div>
+<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;  <span class="keywordtype">void</span> inject(<span class="keyword">typename</span> <a class="code" href="classsauce_1_1internal_1_1_key.html" title="A complete specification of a dependency request.">Key&lt;Dependency&gt;::Ptr</a> &amp; injected, InjectorPtr injector, std::string <span class="keyword">const</span> name)<span class="keyword"> const </span>{</div>
+<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;    <span class="keyword">typedef</span> <span class="keyword">typename</span> <a class="code" href="classsauce_1_1internal_1_1_key.html" title="A complete specification of a dependency request.">Key&lt;Dependency&gt;::Normalized</a> Normalized;</div>
+<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;    <span class="keyword">typedef</span> <span class="keyword">typename</span> <a class="code" href="classsauce_1_1internal_1_1_key.html" title="A complete specification of a dependency request.">Key&lt;Dependency&gt;::Iface</a> Iface;</div>
 <div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;    bindings.template get&lt;Normalized&gt;(injected, injector, name);</div>
 <div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;    <a class="code" href="classsauce_1_1internal_1_1_self_injector.html" title="If a type requests injection of its own smart pointer, do so.">SelfInjector&lt;Iface&gt;</a> selfInjector;</div>
 <div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;    selfInjector.setSelf(injected);</div>

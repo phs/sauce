@@ -7,47 +7,68 @@
     <templarg></templarg>
     <templarg></templarg>
     <templarg></templarg>
-    <base>sauce::internal::ProvidingClause</base>
+    <base>sauce::internal::Clause</base>
     <member kind="function">
-      <type>ProvidingClause&lt; Dependency, Scope, Ctor, Allocator &gt; &amp;</type>
+      <type>Clause&lt; Dependency &gt; &amp;</type>
       <name>naming</name>
-      <anchorfile>classsauce_1_1internal_1_1_providing_clause.html</anchorfile>
-      <anchor>a2dfc7df377fa585cae843fa2edff7369</anchor>
+      <anchorfile>classsauce_1_1internal_1_1_clause.html</anchorfile>
+      <anchor>a008f6c517e3fb4b47c9efaf902e156d0</anchor>
       <arglist>(unsigned int position, std::string const name)</arglist>
     </member>
     <member kind="function">
       <type>void</type>
       <name>setState</name>
-      <anchorfile>classsauce_1_1internal_1_1_providing_clause.html</anchorfile>
-      <anchor>a410a3fd00778c18d8edb940f862fea86</anchor>
+      <anchorfile>classsauce_1_1internal_1_1_clause.html</anchorfile>
+      <anchor>a48e91466cca5294f269bcd37468c270f</anchor>
       <arglist>(ClauseStatePtr state)</arglist>
+    </member>
+    <member kind="function" protection="protected" virtualness="virtual">
+      <type>virtual void</type>
+      <name>onComplete</name>
+      <anchorfile>classsauce_1_1internal_1_1_clause.html</anchorfile>
+      <anchor>aaaf09d64116f7c157c8ab9d0b4f83343</anchor>
+      <arglist>()</arglist>
     </member>
     <member kind="function" protection="protected">
       <type></type>
-      <name>ProvidingClause</name>
-      <anchorfile>classsauce_1_1internal_1_1_providing_clause.html</anchorfile>
-      <anchor>aa1ff165e9bbfab1f8b25e5ce09329351</anchor>
+      <name>Clause</name>
+      <anchorfile>classsauce_1_1internal_1_1_clause.html</anchorfile>
+      <anchor>a1ad3cd5536bba32ed880e820a0ea1a73</anchor>
       <arglist>(ClauseStatePtr state)</arglist>
     </member>
     <member kind="function" protection="protected">
       <type>ClauseStatePtr</type>
       <name>getState</name>
-      <anchorfile>classsauce_1_1internal_1_1_providing_clause.html</anchorfile>
-      <anchor>a0014fbe999e74d2f05f1d05eb891af7f</anchor>
+      <anchorfile>classsauce_1_1internal_1_1_clause.html</anchorfile>
+      <anchor>abf6a18181417095ceb1bf5769a8400a7</anchor>
       <arglist>()</arglist>
     </member>
     <member kind="function" protection="protected">
       <type>Next</type>
       <name>pass</name>
-      <anchorfile>classsauce_1_1internal_1_1_providing_clause.html</anchorfile>
-      <anchor>abb38ce313b0a46c4af6c2213dce088cb</anchor>
+      <anchorfile>classsauce_1_1internal_1_1_clause.html</anchorfile>
+      <anchor>ac0cd451ebf596ae435942687631f7774</anchor>
       <arglist>(Next next)</arglist>
     </member>
     <member kind="function" protection="protected">
       <type>void</type>
+      <name>setDynamicName</name>
+      <anchorfile>classsauce_1_1internal_1_1_clause.html</anchorfile>
+      <anchor>a144740cf6b3d8c6bc7c20e2a010ee48c</anchor>
+      <arglist>(std::string const name)</arglist>
+    </member>
+    <member kind="function" protection="protected">
+      <type>void</type>
+      <name>throwLater</name>
+      <anchorfile>classsauce_1_1internal_1_1_clause.html</anchorfile>
+      <anchor>ad3543b2df08023b7e362f4dc8ca5d9d4</anchor>
+      <arglist>(Exception)</arglist>
+    </member>
+    <member kind="function" protection="protected">
+      <type>void</type>
       <name>bindDynamicDependencyName</name>
-      <anchorfile>classsauce_1_1internal_1_1_providing_clause.html</anchorfile>
-      <anchor>aec3ff7abd3123d1263ed6310cfe3bbef</anchor>
+      <anchorfile>classsauce_1_1internal_1_1_clause.html</anchorfile>
+      <anchor>ae4ca0b8450f8d4bd43bb009f9230a4ed</anchor>
       <arglist>(unsigned int position, std::string const name)</arglist>
     </member>
   </compound>
@@ -57,7 +78,7 @@
     <templarg></templarg>
     <templarg></templarg>
     <templarg></templarg>
-    <base>ProvidingClause&lt; Dependency, Scope, Ctor, std::allocator&lt; int &gt; &gt;</base>
+    <base>sauce::internal::Clause</base>
     <member kind="function">
       <type>AllocateFromClause&lt; Dependency, Scope, Ctor, Allocator &gt;</type>
       <name>allocatedFrom</name>
@@ -66,45 +87,66 @@
       <arglist>()</arglist>
     </member>
     <member kind="function">
-      <type>ProvidingClause&lt; Dependency, Scope, Ctor, std::allocator&lt; int &gt; &gt; &amp;</type>
+      <type>Clause&lt; Dependency &gt; &amp;</type>
       <name>naming</name>
-      <anchorfile>classsauce_1_1internal_1_1_providing_clause.html</anchorfile>
-      <anchor>a2dfc7df377fa585cae843fa2edff7369</anchor>
+      <anchorfile>classsauce_1_1internal_1_1_clause.html</anchorfile>
+      <anchor>a008f6c517e3fb4b47c9efaf902e156d0</anchor>
       <arglist>(unsigned int position, std::string const name)</arglist>
     </member>
     <member kind="function">
       <type>void</type>
       <name>setState</name>
-      <anchorfile>classsauce_1_1internal_1_1_providing_clause.html</anchorfile>
-      <anchor>a410a3fd00778c18d8edb940f862fea86</anchor>
+      <anchorfile>classsauce_1_1internal_1_1_clause.html</anchorfile>
+      <anchor>a48e91466cca5294f269bcd37468c270f</anchor>
       <arglist>(ClauseStatePtr state)</arglist>
+    </member>
+    <member kind="function" protection="protected" virtualness="virtual">
+      <type>virtual void</type>
+      <name>onComplete</name>
+      <anchorfile>classsauce_1_1internal_1_1_clause.html</anchorfile>
+      <anchor>aaaf09d64116f7c157c8ab9d0b4f83343</anchor>
+      <arglist>()</arglist>
     </member>
     <member kind="function" protection="protected">
       <type></type>
-      <name>ProvidingClause</name>
-      <anchorfile>classsauce_1_1internal_1_1_providing_clause.html</anchorfile>
-      <anchor>aa1ff165e9bbfab1f8b25e5ce09329351</anchor>
+      <name>Clause</name>
+      <anchorfile>classsauce_1_1internal_1_1_clause.html</anchorfile>
+      <anchor>a1ad3cd5536bba32ed880e820a0ea1a73</anchor>
       <arglist>(ClauseStatePtr state)</arglist>
     </member>
     <member kind="function" protection="protected">
       <type>ClauseStatePtr</type>
       <name>getState</name>
-      <anchorfile>classsauce_1_1internal_1_1_providing_clause.html</anchorfile>
-      <anchor>a0014fbe999e74d2f05f1d05eb891af7f</anchor>
+      <anchorfile>classsauce_1_1internal_1_1_clause.html</anchorfile>
+      <anchor>abf6a18181417095ceb1bf5769a8400a7</anchor>
       <arglist>()</arglist>
     </member>
     <member kind="function" protection="protected">
       <type>Next</type>
       <name>pass</name>
-      <anchorfile>classsauce_1_1internal_1_1_providing_clause.html</anchorfile>
-      <anchor>abb38ce313b0a46c4af6c2213dce088cb</anchor>
+      <anchorfile>classsauce_1_1internal_1_1_clause.html</anchorfile>
+      <anchor>ac0cd451ebf596ae435942687631f7774</anchor>
       <arglist>(Next next)</arglist>
     </member>
     <member kind="function" protection="protected">
       <type>void</type>
+      <name>setDynamicName</name>
+      <anchorfile>classsauce_1_1internal_1_1_clause.html</anchorfile>
+      <anchor>a144740cf6b3d8c6bc7c20e2a010ee48c</anchor>
+      <arglist>(std::string const name)</arglist>
+    </member>
+    <member kind="function" protection="protected">
+      <type>void</type>
+      <name>throwLater</name>
+      <anchorfile>classsauce_1_1internal_1_1_clause.html</anchorfile>
+      <anchor>ad3543b2df08023b7e362f4dc8ca5d9d4</anchor>
+      <arglist>(Exception)</arglist>
+    </member>
+    <member kind="function" protection="protected">
+      <type>void</type>
       <name>bindDynamicDependencyName</name>
-      <anchorfile>classsauce_1_1internal_1_1_providing_clause.html</anchorfile>
-      <anchor>aec3ff7abd3123d1263ed6310cfe3bbef</anchor>
+      <anchorfile>classsauce_1_1internal_1_1_clause.html</anchorfile>
+      <anchor>ae4ca0b8450f8d4bd43bb009f9230a4ed</anchor>
       <arglist>(unsigned int position, std::string const name)</arglist>
     </member>
   </compound>
@@ -114,7 +156,7 @@
     <templarg></templarg>
     <templarg></templarg>
     <templarg></templarg>
-    <base>ProvidingClause&lt; ProviderDependency, Scope, ProviderCtor, std::allocator&lt; int &gt; &gt;</base>
+    <base>Clause&lt; ProviderDependency &gt;</base>
     <member kind="function">
       <type>AllocateFromClause&lt; ProviderDependency, Scope, ProviderCtor, Allocator &gt;</type>
       <name>allocatedFrom</name>
@@ -123,45 +165,66 @@
       <arglist>()</arglist>
     </member>
     <member kind="function">
-      <type>ProvidingClause&lt; ProviderDependency, Scope, ProviderCtor, std::allocator&lt; int &gt; &gt; &amp;</type>
+      <type>Clause&lt; ProviderDependency &gt; &amp;</type>
       <name>naming</name>
-      <anchorfile>classsauce_1_1internal_1_1_providing_clause.html</anchorfile>
-      <anchor>a2dfc7df377fa585cae843fa2edff7369</anchor>
+      <anchorfile>classsauce_1_1internal_1_1_clause.html</anchorfile>
+      <anchor>a008f6c517e3fb4b47c9efaf902e156d0</anchor>
       <arglist>(unsigned int position, std::string const name)</arglist>
     </member>
     <member kind="function">
       <type>void</type>
       <name>setState</name>
-      <anchorfile>classsauce_1_1internal_1_1_providing_clause.html</anchorfile>
-      <anchor>a410a3fd00778c18d8edb940f862fea86</anchor>
+      <anchorfile>classsauce_1_1internal_1_1_clause.html</anchorfile>
+      <anchor>a48e91466cca5294f269bcd37468c270f</anchor>
       <arglist>(ClauseStatePtr state)</arglist>
+    </member>
+    <member kind="function" protection="protected" virtualness="virtual">
+      <type>virtual void</type>
+      <name>onComplete</name>
+      <anchorfile>classsauce_1_1internal_1_1_clause.html</anchorfile>
+      <anchor>aaaf09d64116f7c157c8ab9d0b4f83343</anchor>
+      <arglist>()</arglist>
     </member>
     <member kind="function" protection="protected">
       <type></type>
-      <name>ProvidingClause</name>
-      <anchorfile>classsauce_1_1internal_1_1_providing_clause.html</anchorfile>
-      <anchor>aa1ff165e9bbfab1f8b25e5ce09329351</anchor>
+      <name>Clause</name>
+      <anchorfile>classsauce_1_1internal_1_1_clause.html</anchorfile>
+      <anchor>a1ad3cd5536bba32ed880e820a0ea1a73</anchor>
       <arglist>(ClauseStatePtr state)</arglist>
     </member>
     <member kind="function" protection="protected">
       <type>ClauseStatePtr</type>
       <name>getState</name>
-      <anchorfile>classsauce_1_1internal_1_1_providing_clause.html</anchorfile>
-      <anchor>a0014fbe999e74d2f05f1d05eb891af7f</anchor>
+      <anchorfile>classsauce_1_1internal_1_1_clause.html</anchorfile>
+      <anchor>abf6a18181417095ceb1bf5769a8400a7</anchor>
       <arglist>()</arglist>
     </member>
     <member kind="function" protection="protected">
       <type>Next</type>
       <name>pass</name>
-      <anchorfile>classsauce_1_1internal_1_1_providing_clause.html</anchorfile>
-      <anchor>abb38ce313b0a46c4af6c2213dce088cb</anchor>
+      <anchorfile>classsauce_1_1internal_1_1_clause.html</anchorfile>
+      <anchor>ac0cd451ebf596ae435942687631f7774</anchor>
       <arglist>(Next next)</arglist>
     </member>
     <member kind="function" protection="protected">
       <type>void</type>
+      <name>setDynamicName</name>
+      <anchorfile>classsauce_1_1internal_1_1_clause.html</anchorfile>
+      <anchor>a144740cf6b3d8c6bc7c20e2a010ee48c</anchor>
+      <arglist>(std::string const name)</arglist>
+    </member>
+    <member kind="function" protection="protected">
+      <type>void</type>
+      <name>throwLater</name>
+      <anchorfile>classsauce_1_1internal_1_1_clause.html</anchorfile>
+      <anchor>ad3543b2df08023b7e362f4dc8ca5d9d4</anchor>
+      <arglist>(Exception)</arglist>
+    </member>
+    <member kind="function" protection="protected">
+      <type>void</type>
       <name>bindDynamicDependencyName</name>
-      <anchorfile>classsauce_1_1internal_1_1_providing_clause.html</anchorfile>
-      <anchor>aec3ff7abd3123d1263ed6310cfe3bbef</anchor>
+      <anchorfile>classsauce_1_1internal_1_1_clause.html</anchorfile>
+      <anchor>ae4ca0b8450f8d4bd43bb009f9230a4ed</anchor>
       <arglist>(unsigned int position, std::string const name)</arglist>
     </member>
   </compound>
@@ -170,7 +233,7 @@
     <filename>classsauce_1_1_in_clause.html</filename>
     <templarg></templarg>
     <templarg></templarg>
-    <base>sauce::internal::InitialClause</base>
+    <base>sauce::internal::Clause</base>
     <member kind="function">
       <type>ToClause&lt; Dependency, Scope, Ctor &gt;</type>
       <name>to</name>
@@ -185,40 +248,68 @@
       <anchor>a45a06d51c604a6f70692adc88ed45c74</anchor>
       <arglist>()</arglist>
     </member>
+    <member kind="function">
+      <type>Clause&lt; Dependency &gt; &amp;</type>
+      <name>naming</name>
+      <anchorfile>classsauce_1_1internal_1_1_clause.html</anchorfile>
+      <anchor>a008f6c517e3fb4b47c9efaf902e156d0</anchor>
+      <arglist>(unsigned int position, std::string const name)</arglist>
+    </member>
+    <member kind="function">
+      <type>void</type>
+      <name>setState</name>
+      <anchorfile>classsauce_1_1internal_1_1_clause.html</anchorfile>
+      <anchor>a48e91466cca5294f269bcd37468c270f</anchor>
+      <arglist>(ClauseStatePtr state)</arglist>
+    </member>
+    <member kind="function" protection="protected" virtualness="virtual">
+      <type>virtual void</type>
+      <name>onComplete</name>
+      <anchorfile>classsauce_1_1internal_1_1_clause.html</anchorfile>
+      <anchor>aaaf09d64116f7c157c8ab9d0b4f83343</anchor>
+      <arglist>()</arglist>
+    </member>
     <member kind="function" protection="protected">
       <type></type>
-      <name>InitialClause</name>
-      <anchorfile>classsauce_1_1internal_1_1_initial_clause.html</anchorfile>
-      <anchor>a5cae840144147095ceeff8f49b7515d1</anchor>
+      <name>Clause</name>
+      <anchorfile>classsauce_1_1internal_1_1_clause.html</anchorfile>
+      <anchor>a1ad3cd5536bba32ed880e820a0ea1a73</anchor>
       <arglist>(ClauseStatePtr state)</arglist>
+    </member>
+    <member kind="function" protection="protected">
+      <type>ClauseStatePtr</type>
+      <name>getState</name>
+      <anchorfile>classsauce_1_1internal_1_1_clause.html</anchorfile>
+      <anchor>abf6a18181417095ceb1bf5769a8400a7</anchor>
+      <arglist>()</arglist>
     </member>
     <member kind="function" protection="protected">
       <type>Next</type>
       <name>pass</name>
-      <anchorfile>classsauce_1_1internal_1_1_initial_clause.html</anchorfile>
-      <anchor>a6a4ad776123bc291eb5e8e72c3b61739</anchor>
+      <anchorfile>classsauce_1_1internal_1_1_clause.html</anchorfile>
+      <anchor>ac0cd451ebf596ae435942687631f7774</anchor>
       <arglist>(Next next)</arglist>
     </member>
     <member kind="function" protection="protected">
       <type>void</type>
-      <name>setState</name>
-      <anchorfile>classsauce_1_1internal_1_1_initial_clause.html</anchorfile>
-      <anchor>a6048e78c295403821660bc9451a6e610</anchor>
-      <arglist>(ClauseStatePtr state)</arglist>
-    </member>
-    <member kind="function" protection="protected">
-      <type>void</type>
       <name>setDynamicName</name>
-      <anchorfile>classsauce_1_1internal_1_1_initial_clause.html</anchorfile>
-      <anchor>ac08c8231534df2fa0a0f88a28e4252cb</anchor>
+      <anchorfile>classsauce_1_1internal_1_1_clause.html</anchorfile>
+      <anchor>a144740cf6b3d8c6bc7c20e2a010ee48c</anchor>
       <arglist>(std::string const name)</arglist>
     </member>
     <member kind="function" protection="protected">
       <type>void</type>
       <name>throwLater</name>
-      <anchorfile>classsauce_1_1internal_1_1_initial_clause.html</anchorfile>
-      <anchor>a3cd79bae3d17ea057478443e7bb16eb5</anchor>
+      <anchorfile>classsauce_1_1internal_1_1_clause.html</anchorfile>
+      <anchor>ad3543b2df08023b7e362f4dc8ca5d9d4</anchor>
       <arglist>(Exception)</arglist>
+    </member>
+    <member kind="function" protection="protected">
+      <type>void</type>
+      <name>bindDynamicDependencyName</name>
+      <anchorfile>classsauce_1_1internal_1_1_clause.html</anchorfile>
+      <anchor>ae4ca0b8450f8d4bd43bb009f9230a4ed</anchor>
+      <arglist>(unsigned int position, std::string const name)</arglist>
     </member>
   </compound>
   <compound kind="class">
@@ -226,7 +317,7 @@
     <filename>classsauce_1_1_to_method_clause.html</filename>
     <templarg></templarg>
     <templarg></templarg>
-    <base>sauce::internal::ModifyingClause</base>
+    <base>sauce::internal::Clause</base>
     <member kind="friend" protection="private">
       <type>friend class</type>
       <name>NamedClause&lt; Dependency &gt;</name>
@@ -242,45 +333,66 @@
       <arglist></arglist>
     </member>
     <member kind="function">
-      <type>ModifyingClause&lt; Dependency &gt; &amp;</type>
+      <type>Clause&lt; Dependency &gt; &amp;</type>
       <name>naming</name>
-      <anchorfile>classsauce_1_1internal_1_1_modifying_clause.html</anchorfile>
-      <anchor>a9da75d4af89602fb77dabc8e1f5f1392</anchor>
+      <anchorfile>classsauce_1_1internal_1_1_clause.html</anchorfile>
+      <anchor>a008f6c517e3fb4b47c9efaf902e156d0</anchor>
       <arglist>(unsigned int position, std::string const name)</arglist>
     </member>
     <member kind="function">
       <type>void</type>
       <name>setState</name>
-      <anchorfile>classsauce_1_1internal_1_1_modifying_clause.html</anchorfile>
-      <anchor>a1710ab4840506c657e9fbc81070ac272</anchor>
+      <anchorfile>classsauce_1_1internal_1_1_clause.html</anchorfile>
+      <anchor>a48e91466cca5294f269bcd37468c270f</anchor>
       <arglist>(ClauseStatePtr state)</arglist>
+    </member>
+    <member kind="function" protection="protected" virtualness="virtual">
+      <type>virtual void</type>
+      <name>onComplete</name>
+      <anchorfile>classsauce_1_1internal_1_1_clause.html</anchorfile>
+      <anchor>aaaf09d64116f7c157c8ab9d0b4f83343</anchor>
+      <arglist>()</arglist>
     </member>
     <member kind="function" protection="protected">
       <type></type>
-      <name>ModifyingClause</name>
-      <anchorfile>classsauce_1_1internal_1_1_modifying_clause.html</anchorfile>
-      <anchor>a4e2b6a42e9d8c05036b2181c12e5ace1</anchor>
+      <name>Clause</name>
+      <anchorfile>classsauce_1_1internal_1_1_clause.html</anchorfile>
+      <anchor>a1ad3cd5536bba32ed880e820a0ea1a73</anchor>
       <arglist>(ClauseStatePtr state)</arglist>
     </member>
     <member kind="function" protection="protected">
       <type>ClauseStatePtr</type>
       <name>getState</name>
-      <anchorfile>classsauce_1_1internal_1_1_modifying_clause.html</anchorfile>
-      <anchor>a155a0d38d9ab3c67828bdfe8dbbc45dc</anchor>
+      <anchorfile>classsauce_1_1internal_1_1_clause.html</anchorfile>
+      <anchor>abf6a18181417095ceb1bf5769a8400a7</anchor>
       <arglist>()</arglist>
     </member>
     <member kind="function" protection="protected">
       <type>Next</type>
       <name>pass</name>
-      <anchorfile>classsauce_1_1internal_1_1_modifying_clause.html</anchorfile>
-      <anchor>a582d3c536d6eec1eed4f0f1b6e197865</anchor>
+      <anchorfile>classsauce_1_1internal_1_1_clause.html</anchorfile>
+      <anchor>ac0cd451ebf596ae435942687631f7774</anchor>
       <arglist>(Next next)</arglist>
     </member>
     <member kind="function" protection="protected">
       <type>void</type>
+      <name>setDynamicName</name>
+      <anchorfile>classsauce_1_1internal_1_1_clause.html</anchorfile>
+      <anchor>a144740cf6b3d8c6bc7c20e2a010ee48c</anchor>
+      <arglist>(std::string const name)</arglist>
+    </member>
+    <member kind="function" protection="protected">
+      <type>void</type>
+      <name>throwLater</name>
+      <anchorfile>classsauce_1_1internal_1_1_clause.html</anchorfile>
+      <anchor>ad3543b2df08023b7e362f4dc8ca5d9d4</anchor>
+      <arglist>(Exception)</arglist>
+    </member>
+    <member kind="function" protection="protected">
+      <type>void</type>
       <name>bindDynamicDependencyName</name>
-      <anchorfile>classsauce_1_1internal_1_1_modifying_clause.html</anchorfile>
-      <anchor>a710566d122272d8baaaa39713b80d25c</anchor>
+      <anchorfile>classsauce_1_1internal_1_1_clause.html</anchorfile>
+      <anchor>ae4ca0b8450f8d4bd43bb009f9230a4ed</anchor>
       <arglist>(unsigned int position, std::string const name)</arglist>
     </member>
   </compound>
@@ -289,7 +401,7 @@
     <filename>classsauce_1_1_to_method_naming_clause.html</filename>
     <templarg>Dependency</templarg>
     <templarg>Signature</templarg>
-    <base>sauce::internal::ModifyingClause</base>
+    <base>sauce::internal::Clause</base>
     <member kind="friend" protection="private">
       <type>friend class</type>
       <name>NamedClause&lt; Dependency &gt;</name>
@@ -305,45 +417,142 @@
       <arglist></arglist>
     </member>
     <member kind="function">
-      <type>ModifyingClause&lt; Dependency &gt; &amp;</type>
+      <type>Clause&lt; Dependency &gt; &amp;</type>
       <name>naming</name>
-      <anchorfile>classsauce_1_1internal_1_1_modifying_clause.html</anchorfile>
-      <anchor>a9da75d4af89602fb77dabc8e1f5f1392</anchor>
+      <anchorfile>classsauce_1_1internal_1_1_clause.html</anchorfile>
+      <anchor>a008f6c517e3fb4b47c9efaf902e156d0</anchor>
       <arglist>(unsigned int position, std::string const name)</arglist>
     </member>
     <member kind="function">
       <type>void</type>
       <name>setState</name>
-      <anchorfile>classsauce_1_1internal_1_1_modifying_clause.html</anchorfile>
-      <anchor>a1710ab4840506c657e9fbc81070ac272</anchor>
+      <anchorfile>classsauce_1_1internal_1_1_clause.html</anchorfile>
+      <anchor>a48e91466cca5294f269bcd37468c270f</anchor>
       <arglist>(ClauseStatePtr state)</arglist>
+    </member>
+    <member kind="function" protection="protected" virtualness="virtual">
+      <type>virtual void</type>
+      <name>onComplete</name>
+      <anchorfile>classsauce_1_1internal_1_1_clause.html</anchorfile>
+      <anchor>aaaf09d64116f7c157c8ab9d0b4f83343</anchor>
+      <arglist>()</arglist>
     </member>
     <member kind="function" protection="protected">
       <type></type>
-      <name>ModifyingClause</name>
-      <anchorfile>classsauce_1_1internal_1_1_modifying_clause.html</anchorfile>
-      <anchor>a4e2b6a42e9d8c05036b2181c12e5ace1</anchor>
+      <name>Clause</name>
+      <anchorfile>classsauce_1_1internal_1_1_clause.html</anchorfile>
+      <anchor>a1ad3cd5536bba32ed880e820a0ea1a73</anchor>
       <arglist>(ClauseStatePtr state)</arglist>
     </member>
     <member kind="function" protection="protected">
       <type>ClauseStatePtr</type>
       <name>getState</name>
-      <anchorfile>classsauce_1_1internal_1_1_modifying_clause.html</anchorfile>
-      <anchor>a155a0d38d9ab3c67828bdfe8dbbc45dc</anchor>
+      <anchorfile>classsauce_1_1internal_1_1_clause.html</anchorfile>
+      <anchor>abf6a18181417095ceb1bf5769a8400a7</anchor>
       <arglist>()</arglist>
     </member>
     <member kind="function" protection="protected">
       <type>Next</type>
       <name>pass</name>
-      <anchorfile>classsauce_1_1internal_1_1_modifying_clause.html</anchorfile>
-      <anchor>a582d3c536d6eec1eed4f0f1b6e197865</anchor>
+      <anchorfile>classsauce_1_1internal_1_1_clause.html</anchorfile>
+      <anchor>ac0cd451ebf596ae435942687631f7774</anchor>
       <arglist>(Next next)</arglist>
     </member>
     <member kind="function" protection="protected">
       <type>void</type>
+      <name>setDynamicName</name>
+      <anchorfile>classsauce_1_1internal_1_1_clause.html</anchorfile>
+      <anchor>a144740cf6b3d8c6bc7c20e2a010ee48c</anchor>
+      <arglist>(std::string const name)</arglist>
+    </member>
+    <member kind="function" protection="protected">
+      <type>void</type>
+      <name>throwLater</name>
+      <anchorfile>classsauce_1_1internal_1_1_clause.html</anchorfile>
+      <anchor>ad3543b2df08023b7e362f4dc8ca5d9d4</anchor>
+      <arglist>(Exception)</arglist>
+    </member>
+    <member kind="function" protection="protected">
+      <type>void</type>
       <name>bindDynamicDependencyName</name>
-      <anchorfile>classsauce_1_1internal_1_1_modifying_clause.html</anchorfile>
-      <anchor>a710566d122272d8baaaa39713b80d25c</anchor>
+      <anchorfile>classsauce_1_1internal_1_1_clause.html</anchorfile>
+      <anchor>ae4ca0b8450f8d4bd43bb009f9230a4ed</anchor>
+      <arglist>(unsigned int position, std::string const name)</arglist>
+    </member>
+  </compound>
+  <compound kind="class">
+    <name>sauce::ToInstanceClause</name>
+    <filename>classsauce_1_1_to_instance_clause.html</filename>
+    <templarg></templarg>
+    <base>sauce::internal::Clause</base>
+    <member kind="function">
+      <type></type>
+      <name>ToInstanceClause</name>
+      <anchorfile>classsauce_1_1_to_instance_clause.html</anchorfile>
+      <anchor>a92df97e66b4ba2296ba5c7a6ca62511a</anchor>
+      <arglist>(IfacePtr iface)</arglist>
+    </member>
+    <member kind="function">
+      <type>Clause&lt; Dependency &gt; &amp;</type>
+      <name>naming</name>
+      <anchorfile>classsauce_1_1internal_1_1_clause.html</anchorfile>
+      <anchor>a008f6c517e3fb4b47c9efaf902e156d0</anchor>
+      <arglist>(unsigned int position, std::string const name)</arglist>
+    </member>
+    <member kind="function">
+      <type>void</type>
+      <name>setState</name>
+      <anchorfile>classsauce_1_1internal_1_1_clause.html</anchorfile>
+      <anchor>a48e91466cca5294f269bcd37468c270f</anchor>
+      <arglist>(ClauseStatePtr state)</arglist>
+    </member>
+    <member kind="function" protection="protected" virtualness="virtual">
+      <type>virtual void</type>
+      <name>onComplete</name>
+      <anchorfile>classsauce_1_1internal_1_1_clause.html</anchorfile>
+      <anchor>aaaf09d64116f7c157c8ab9d0b4f83343</anchor>
+      <arglist>()</arglist>
+    </member>
+    <member kind="function" protection="protected">
+      <type></type>
+      <name>Clause</name>
+      <anchorfile>classsauce_1_1internal_1_1_clause.html</anchorfile>
+      <anchor>a1ad3cd5536bba32ed880e820a0ea1a73</anchor>
+      <arglist>(ClauseStatePtr state)</arglist>
+    </member>
+    <member kind="function" protection="protected">
+      <type>ClauseStatePtr</type>
+      <name>getState</name>
+      <anchorfile>classsauce_1_1internal_1_1_clause.html</anchorfile>
+      <anchor>abf6a18181417095ceb1bf5769a8400a7</anchor>
+      <arglist>()</arglist>
+    </member>
+    <member kind="function" protection="protected">
+      <type>Next</type>
+      <name>pass</name>
+      <anchorfile>classsauce_1_1internal_1_1_clause.html</anchorfile>
+      <anchor>ac0cd451ebf596ae435942687631f7774</anchor>
+      <arglist>(Next next)</arglist>
+    </member>
+    <member kind="function" protection="protected">
+      <type>void</type>
+      <name>setDynamicName</name>
+      <anchorfile>classsauce_1_1internal_1_1_clause.html</anchorfile>
+      <anchor>a144740cf6b3d8c6bc7c20e2a010ee48c</anchor>
+      <arglist>(std::string const name)</arglist>
+    </member>
+    <member kind="function" protection="protected">
+      <type>void</type>
+      <name>throwLater</name>
+      <anchorfile>classsauce_1_1internal_1_1_clause.html</anchorfile>
+      <anchor>ad3543b2df08023b7e362f4dc8ca5d9d4</anchor>
+      <arglist>(Exception)</arglist>
+    </member>
+    <member kind="function" protection="protected">
+      <type>void</type>
+      <name>bindDynamicDependencyName</name>
+      <anchorfile>classsauce_1_1internal_1_1_clause.html</anchorfile>
+      <anchor>ae4ca0b8450f8d4bd43bb009f9230a4ed</anchor>
       <arglist>(unsigned int position, std::string const name)</arglist>
     </member>
   </compound>
@@ -351,7 +560,14 @@
     <name>sauce::NamedClause</name>
     <filename>classsauce_1_1_named_clause.html</filename>
     <templarg></templarg>
-    <base>sauce::internal::InitialClause</base>
+    <base>sauce::internal::Clause</base>
+    <member kind="function">
+      <type>ToInstanceClause&lt; Dependency &gt;</type>
+      <name>toInstance</name>
+      <anchorfile>classsauce_1_1_named_clause.html</anchorfile>
+      <anchor>a4b40a1540a0f7376b9002858d72b74ea</anchor>
+      <arglist>(IfacePtr iface)</arglist>
+    </member>
     <member kind="function">
       <type>ToMethodClause&lt; Dependency, Method &gt;</type>
       <name>toMethod</name>
@@ -401,47 +617,75 @@
       <anchor>a534b20a8726ef96b69249290f56759fd</anchor>
       <arglist>()</arglist>
     </member>
+    <member kind="function">
+      <type>Clause&lt; Dependency &gt; &amp;</type>
+      <name>naming</name>
+      <anchorfile>classsauce_1_1internal_1_1_clause.html</anchorfile>
+      <anchor>a008f6c517e3fb4b47c9efaf902e156d0</anchor>
+      <arglist>(unsigned int position, std::string const name)</arglist>
+    </member>
+    <member kind="function">
+      <type>void</type>
+      <name>setState</name>
+      <anchorfile>classsauce_1_1internal_1_1_clause.html</anchorfile>
+      <anchor>a48e91466cca5294f269bcd37468c270f</anchor>
+      <arglist>(ClauseStatePtr state)</arglist>
+    </member>
+    <member kind="function" protection="protected" virtualness="virtual">
+      <type>virtual void</type>
+      <name>onComplete</name>
+      <anchorfile>classsauce_1_1internal_1_1_clause.html</anchorfile>
+      <anchor>aaaf09d64116f7c157c8ab9d0b4f83343</anchor>
+      <arglist>()</arglist>
+    </member>
     <member kind="function" protection="protected">
       <type></type>
-      <name>InitialClause</name>
-      <anchorfile>classsauce_1_1internal_1_1_initial_clause.html</anchorfile>
-      <anchor>a5cae840144147095ceeff8f49b7515d1</anchor>
+      <name>Clause</name>
+      <anchorfile>classsauce_1_1internal_1_1_clause.html</anchorfile>
+      <anchor>a1ad3cd5536bba32ed880e820a0ea1a73</anchor>
       <arglist>(ClauseStatePtr state)</arglist>
+    </member>
+    <member kind="function" protection="protected">
+      <type>ClauseStatePtr</type>
+      <name>getState</name>
+      <anchorfile>classsauce_1_1internal_1_1_clause.html</anchorfile>
+      <anchor>abf6a18181417095ceb1bf5769a8400a7</anchor>
+      <arglist>()</arglist>
     </member>
     <member kind="function" protection="protected">
       <type>Next</type>
       <name>pass</name>
-      <anchorfile>classsauce_1_1internal_1_1_initial_clause.html</anchorfile>
-      <anchor>a6a4ad776123bc291eb5e8e72c3b61739</anchor>
+      <anchorfile>classsauce_1_1internal_1_1_clause.html</anchorfile>
+      <anchor>ac0cd451ebf596ae435942687631f7774</anchor>
       <arglist>(Next next)</arglist>
     </member>
     <member kind="function" protection="protected">
       <type>void</type>
-      <name>setState</name>
-      <anchorfile>classsauce_1_1internal_1_1_initial_clause.html</anchorfile>
-      <anchor>a6048e78c295403821660bc9451a6e610</anchor>
-      <arglist>(ClauseStatePtr state)</arglist>
-    </member>
-    <member kind="function" protection="protected">
-      <type>void</type>
       <name>setDynamicName</name>
-      <anchorfile>classsauce_1_1internal_1_1_initial_clause.html</anchorfile>
-      <anchor>ac08c8231534df2fa0a0f88a28e4252cb</anchor>
+      <anchorfile>classsauce_1_1internal_1_1_clause.html</anchorfile>
+      <anchor>a144740cf6b3d8c6bc7c20e2a010ee48c</anchor>
       <arglist>(std::string const name)</arglist>
     </member>
     <member kind="function" protection="protected">
       <type>void</type>
       <name>throwLater</name>
-      <anchorfile>classsauce_1_1internal_1_1_initial_clause.html</anchorfile>
-      <anchor>a3cd79bae3d17ea057478443e7bb16eb5</anchor>
+      <anchorfile>classsauce_1_1internal_1_1_clause.html</anchorfile>
+      <anchor>ad3543b2df08023b7e362f4dc8ca5d9d4</anchor>
       <arglist>(Exception)</arglist>
+    </member>
+    <member kind="function" protection="protected">
+      <type>void</type>
+      <name>bindDynamicDependencyName</name>
+      <anchorfile>classsauce_1_1internal_1_1_clause.html</anchorfile>
+      <anchor>ae4ca0b8450f8d4bd43bb009f9230a4ed</anchor>
+      <arglist>(unsigned int position, std::string const name)</arglist>
     </member>
   </compound>
   <compound kind="class">
     <name>sauce::BindClause</name>
     <filename>classsauce_1_1_bind_clause.html</filename>
     <templarg>Iface</templarg>
-    <base>InitialClause&lt; Named&lt; Iface, Unnamed &gt; &gt;</base>
+    <base>Clause&lt; Named&lt; Iface, Unnamed &gt; &gt;</base>
     <member kind="function">
       <type>NamedClause&lt; Named&lt; Iface, Name &gt; &gt;</type>
       <name>named</name>
@@ -455,6 +699,13 @@
       <anchorfile>classsauce_1_1_bind_clause.html</anchorfile>
       <anchor>afcf44385460b5c8801c6b5e5e629137d</anchor>
       <arglist>(std::string const name)</arglist>
+    </member>
+    <member kind="function">
+      <type>ToInstanceClause&lt; Named&lt; Iface, Unnamed &gt; &gt;</type>
+      <name>toInstance</name>
+      <anchorfile>classsauce_1_1_bind_clause.html</anchorfile>
+      <anchor>aefc13bb9ddce9f287d28239baf96c7e9</anchor>
+      <arglist>(IfacePtr iface)</arglist>
     </member>
     <member kind="function">
       <type>ToMethodClause&lt; Named&lt; Iface, Unnamed &gt;, Method &gt;</type>
@@ -505,6 +756,20 @@
       <anchor>a06611da6fb02fdb9ddd0db14ae11ce48</anchor>
       <arglist>()</arglist>
     </member>
+    <member kind="function">
+      <type>Clause&lt; Named&lt; Iface, Unnamed &gt; &gt; &amp;</type>
+      <name>naming</name>
+      <anchorfile>classsauce_1_1internal_1_1_clause.html</anchorfile>
+      <anchor>a008f6c517e3fb4b47c9efaf902e156d0</anchor>
+      <arglist>(unsigned int position, std::string const name)</arglist>
+    </member>
+    <member kind="function">
+      <type>void</type>
+      <name>setState</name>
+      <anchorfile>classsauce_1_1internal_1_1_clause.html</anchorfile>
+      <anchor>a48e91466cca5294f269bcd37468c270f</anchor>
+      <arglist>(ClauseStatePtr state)</arglist>
+    </member>
     <member kind="friend" protection="private">
       <type>friend class</type>
       <name>Binder</name>
@@ -512,40 +777,54 @@
       <anchor>ac1477f45573f7be56ec13bb35c0041b9</anchor>
       <arglist></arglist>
     </member>
+    <member kind="function" protection="protected" virtualness="virtual">
+      <type>virtual void</type>
+      <name>onComplete</name>
+      <anchorfile>classsauce_1_1internal_1_1_clause.html</anchorfile>
+      <anchor>aaaf09d64116f7c157c8ab9d0b4f83343</anchor>
+      <arglist>()</arglist>
+    </member>
     <member kind="function" protection="protected">
       <type></type>
-      <name>InitialClause</name>
-      <anchorfile>classsauce_1_1internal_1_1_initial_clause.html</anchorfile>
-      <anchor>a5cae840144147095ceeff8f49b7515d1</anchor>
+      <name>Clause</name>
+      <anchorfile>classsauce_1_1internal_1_1_clause.html</anchorfile>
+      <anchor>a1ad3cd5536bba32ed880e820a0ea1a73</anchor>
       <arglist>(ClauseStatePtr state)</arglist>
+    </member>
+    <member kind="function" protection="protected">
+      <type>ClauseStatePtr</type>
+      <name>getState</name>
+      <anchorfile>classsauce_1_1internal_1_1_clause.html</anchorfile>
+      <anchor>abf6a18181417095ceb1bf5769a8400a7</anchor>
+      <arglist>()</arglist>
     </member>
     <member kind="function" protection="protected">
       <type>Next</type>
       <name>pass</name>
-      <anchorfile>classsauce_1_1internal_1_1_initial_clause.html</anchorfile>
-      <anchor>a6a4ad776123bc291eb5e8e72c3b61739</anchor>
+      <anchorfile>classsauce_1_1internal_1_1_clause.html</anchorfile>
+      <anchor>ac0cd451ebf596ae435942687631f7774</anchor>
       <arglist>(Next next)</arglist>
     </member>
     <member kind="function" protection="protected">
       <type>void</type>
-      <name>setState</name>
-      <anchorfile>classsauce_1_1internal_1_1_initial_clause.html</anchorfile>
-      <anchor>a6048e78c295403821660bc9451a6e610</anchor>
-      <arglist>(ClauseStatePtr state)</arglist>
-    </member>
-    <member kind="function" protection="protected">
-      <type>void</type>
       <name>setDynamicName</name>
-      <anchorfile>classsauce_1_1internal_1_1_initial_clause.html</anchorfile>
-      <anchor>ac08c8231534df2fa0a0f88a28e4252cb</anchor>
+      <anchorfile>classsauce_1_1internal_1_1_clause.html</anchorfile>
+      <anchor>a144740cf6b3d8c6bc7c20e2a010ee48c</anchor>
       <arglist>(std::string const name)</arglist>
     </member>
     <member kind="function" protection="protected">
       <type>void</type>
       <name>throwLater</name>
-      <anchorfile>classsauce_1_1internal_1_1_initial_clause.html</anchorfile>
-      <anchor>a3cd79bae3d17ea057478443e7bb16eb5</anchor>
+      <anchorfile>classsauce_1_1internal_1_1_clause.html</anchorfile>
+      <anchor>ad3543b2df08023b7e362f4dc8ca5d9d4</anchor>
       <arglist>(Exception)</arglist>
+    </member>
+    <member kind="function" protection="protected">
+      <type>void</type>
+      <name>bindDynamicDependencyName</name>
+      <anchorfile>classsauce_1_1internal_1_1_clause.html</anchorfile>
+      <anchor>ae4ca0b8450f8d4bd43bb009f9230a4ed</anchor>
+      <arglist>(unsigned int position, std::string const name)</arglist>
     </member>
   </compound>
   <compound kind="class">
@@ -3673,161 +3952,71 @@
     </member>
   </compound>
   <compound kind="class">
-    <name>sauce::internal::InitialClause</name>
-    <filename>classsauce_1_1internal_1_1_initial_clause.html</filename>
+    <name>sauce::internal::Clause</name>
+    <filename>classsauce_1_1internal_1_1_clause.html</filename>
     <templarg>Dependency</templarg>
+    <member kind="function">
+      <type>Clause&lt; Dependency &gt; &amp;</type>
+      <name>naming</name>
+      <anchorfile>classsauce_1_1internal_1_1_clause.html</anchorfile>
+      <anchor>a008f6c517e3fb4b47c9efaf902e156d0</anchor>
+      <arglist>(unsigned int position, std::string const name)</arglist>
+    </member>
+    <member kind="function">
+      <type>void</type>
+      <name>setState</name>
+      <anchorfile>classsauce_1_1internal_1_1_clause.html</anchorfile>
+      <anchor>a48e91466cca5294f269bcd37468c270f</anchor>
+      <arglist>(ClauseStatePtr state)</arglist>
+    </member>
+    <member kind="function" protection="protected" virtualness="virtual">
+      <type>virtual void</type>
+      <name>onComplete</name>
+      <anchorfile>classsauce_1_1internal_1_1_clause.html</anchorfile>
+      <anchor>aaaf09d64116f7c157c8ab9d0b4f83343</anchor>
+      <arglist>()</arglist>
+    </member>
     <member kind="function" protection="protected">
       <type></type>
-      <name>InitialClause</name>
-      <anchorfile>classsauce_1_1internal_1_1_initial_clause.html</anchorfile>
-      <anchor>a5cae840144147095ceeff8f49b7515d1</anchor>
+      <name>Clause</name>
+      <anchorfile>classsauce_1_1internal_1_1_clause.html</anchorfile>
+      <anchor>a1ad3cd5536bba32ed880e820a0ea1a73</anchor>
       <arglist>(ClauseStatePtr state)</arglist>
+    </member>
+    <member kind="function" protection="protected">
+      <type>ClauseStatePtr</type>
+      <name>getState</name>
+      <anchorfile>classsauce_1_1internal_1_1_clause.html</anchorfile>
+      <anchor>abf6a18181417095ceb1bf5769a8400a7</anchor>
+      <arglist>()</arglist>
     </member>
     <member kind="function" protection="protected">
       <type>Next</type>
       <name>pass</name>
-      <anchorfile>classsauce_1_1internal_1_1_initial_clause.html</anchorfile>
-      <anchor>a6a4ad776123bc291eb5e8e72c3b61739</anchor>
+      <anchorfile>classsauce_1_1internal_1_1_clause.html</anchorfile>
+      <anchor>ac0cd451ebf596ae435942687631f7774</anchor>
       <arglist>(Next next)</arglist>
     </member>
     <member kind="function" protection="protected">
       <type>void</type>
-      <name>setState</name>
-      <anchorfile>classsauce_1_1internal_1_1_initial_clause.html</anchorfile>
-      <anchor>a6048e78c295403821660bc9451a6e610</anchor>
-      <arglist>(ClauseStatePtr state)</arglist>
-    </member>
-    <member kind="function" protection="protected">
-      <type>void</type>
       <name>setDynamicName</name>
-      <anchorfile>classsauce_1_1internal_1_1_initial_clause.html</anchorfile>
-      <anchor>ac08c8231534df2fa0a0f88a28e4252cb</anchor>
+      <anchorfile>classsauce_1_1internal_1_1_clause.html</anchorfile>
+      <anchor>a144740cf6b3d8c6bc7c20e2a010ee48c</anchor>
       <arglist>(std::string const name)</arglist>
     </member>
     <member kind="function" protection="protected">
       <type>void</type>
       <name>throwLater</name>
-      <anchorfile>classsauce_1_1internal_1_1_initial_clause.html</anchorfile>
-      <anchor>a3cd79bae3d17ea057478443e7bb16eb5</anchor>
+      <anchorfile>classsauce_1_1internal_1_1_clause.html</anchorfile>
+      <anchor>ad3543b2df08023b7e362f4dc8ca5d9d4</anchor>
       <arglist>(Exception)</arglist>
     </member>
-    <member kind="friend">
-      <type>friend class</type>
-      <name>InitialClause&lt; Named&lt; typename Key&lt; Dependency &gt;::Iface, Unnamed &gt; &gt;</name>
-      <anchorfile>classsauce_1_1internal_1_1_initial_clause.html</anchorfile>
-      <anchor>a8ab28e65ffe6ae2e976aee124c58c877</anchor>
-      <arglist></arglist>
-    </member>
-  </compound>
-  <compound kind="class">
-    <name>sauce::internal::ProvidingClause</name>
-    <filename>classsauce_1_1internal_1_1_providing_clause.html</filename>
-    <templarg>Dependency</templarg>
-    <templarg>Scope</templarg>
-    <templarg>Ctor</templarg>
-    <templarg>Allocator</templarg>
-    <member kind="function">
-      <type>ProvidingClause&lt; Dependency, Scope, Ctor, Allocator &gt; &amp;</type>
-      <name>naming</name>
-      <anchorfile>classsauce_1_1internal_1_1_providing_clause.html</anchorfile>
-      <anchor>a2dfc7df377fa585cae843fa2edff7369</anchor>
-      <arglist>(unsigned int position, std::string const name)</arglist>
-    </member>
-    <member kind="function">
-      <type>void</type>
-      <name>setState</name>
-      <anchorfile>classsauce_1_1internal_1_1_providing_clause.html</anchorfile>
-      <anchor>a410a3fd00778c18d8edb940f862fea86</anchor>
-      <arglist>(ClauseStatePtr state)</arglist>
-    </member>
-    <member kind="function" protection="protected">
-      <type></type>
-      <name>ProvidingClause</name>
-      <anchorfile>classsauce_1_1internal_1_1_providing_clause.html</anchorfile>
-      <anchor>aa1ff165e9bbfab1f8b25e5ce09329351</anchor>
-      <arglist>(ClauseStatePtr state)</arglist>
-    </member>
-    <member kind="function" protection="protected">
-      <type>ClauseStatePtr</type>
-      <name>getState</name>
-      <anchorfile>classsauce_1_1internal_1_1_providing_clause.html</anchorfile>
-      <anchor>a0014fbe999e74d2f05f1d05eb891af7f</anchor>
-      <arglist>()</arglist>
-    </member>
-    <member kind="function" protection="protected">
-      <type>Next</type>
-      <name>pass</name>
-      <anchorfile>classsauce_1_1internal_1_1_providing_clause.html</anchorfile>
-      <anchor>abb38ce313b0a46c4af6c2213dce088cb</anchor>
-      <arglist>(Next next)</arglist>
-    </member>
     <member kind="function" protection="protected">
       <type>void</type>
       <name>bindDynamicDependencyName</name>
-      <anchorfile>classsauce_1_1internal_1_1_providing_clause.html</anchorfile>
-      <anchor>aec3ff7abd3123d1263ed6310cfe3bbef</anchor>
+      <anchorfile>classsauce_1_1internal_1_1_clause.html</anchorfile>
+      <anchor>ae4ca0b8450f8d4bd43bb009f9230a4ed</anchor>
       <arglist>(unsigned int position, std::string const name)</arglist>
-    </member>
-    <member kind="friend" protection="private">
-      <type>friend class</type>
-      <name>InitialClause&lt; Dependency &gt;</name>
-      <anchorfile>classsauce_1_1internal_1_1_providing_clause.html</anchorfile>
-      <anchor>adea48932e50d3b60ec49586c85dcdf32</anchor>
-      <arglist></arglist>
-    </member>
-  </compound>
-  <compound kind="class">
-    <name>sauce::internal::ModifyingClause</name>
-    <filename>classsauce_1_1internal_1_1_modifying_clause.html</filename>
-    <templarg></templarg>
-    <member kind="function">
-      <type>ModifyingClause&lt; Dependency &gt; &amp;</type>
-      <name>naming</name>
-      <anchorfile>classsauce_1_1internal_1_1_modifying_clause.html</anchorfile>
-      <anchor>a9da75d4af89602fb77dabc8e1f5f1392</anchor>
-      <arglist>(unsigned int position, std::string const name)</arglist>
-    </member>
-    <member kind="function">
-      <type>void</type>
-      <name>setState</name>
-      <anchorfile>classsauce_1_1internal_1_1_modifying_clause.html</anchorfile>
-      <anchor>a1710ab4840506c657e9fbc81070ac272</anchor>
-      <arglist>(ClauseStatePtr state)</arglist>
-    </member>
-    <member kind="function" protection="protected">
-      <type></type>
-      <name>ModifyingClause</name>
-      <anchorfile>classsauce_1_1internal_1_1_modifying_clause.html</anchorfile>
-      <anchor>a4e2b6a42e9d8c05036b2181c12e5ace1</anchor>
-      <arglist>(ClauseStatePtr state)</arglist>
-    </member>
-    <member kind="function" protection="protected">
-      <type>ClauseStatePtr</type>
-      <name>getState</name>
-      <anchorfile>classsauce_1_1internal_1_1_modifying_clause.html</anchorfile>
-      <anchor>a155a0d38d9ab3c67828bdfe8dbbc45dc</anchor>
-      <arglist>()</arglist>
-    </member>
-    <member kind="function" protection="protected">
-      <type>Next</type>
-      <name>pass</name>
-      <anchorfile>classsauce_1_1internal_1_1_modifying_clause.html</anchorfile>
-      <anchor>a582d3c536d6eec1eed4f0f1b6e197865</anchor>
-      <arglist>(Next next)</arglist>
-    </member>
-    <member kind="function" protection="protected">
-      <type>void</type>
-      <name>bindDynamicDependencyName</name>
-      <anchorfile>classsauce_1_1internal_1_1_modifying_clause.html</anchorfile>
-      <anchor>a710566d122272d8baaaa39713b80d25c</anchor>
-      <arglist>(unsigned int position, std::string const name)</arglist>
-    </member>
-    <member kind="friend" protection="private">
-      <type>friend class</type>
-      <name>InitialClause&lt; Dependency &gt;</name>
-      <anchorfile>classsauce_1_1internal_1_1_modifying_clause.html</anchorfile>
-      <anchor>adea48932e50d3b60ec49586c85dcdf32</anchor>
-      <arglist></arglist>
     </member>
   </compound>
   <compound kind="class">
@@ -4263,6 +4452,159 @@
       <anchorfile>classsauce_1_1internal_1_1_binding.html</anchorfile>
       <anchor>a6f9598e25939f6925c61ce354b33db9a</anchor>
       <arglist></arglist>
+    </member>
+    <member kind="function" protection="protected">
+      <type>void</type>
+      <name>validateAcyclicHelper</name>
+      <anchorfile>classsauce_1_1internal_1_1_injector_friend.html</anchorfile>
+      <anchor>a4a2343d76ae48ae8b6bdda2494e9f9a9</anchor>
+      <arglist>(InjectorPtr injector, TypeIds &amp;ids, std::string const name) const </arglist>
+    </member>
+    <member kind="function" protection="protected">
+      <type>void</type>
+      <name>injectHelper</name>
+      <anchorfile>classsauce_1_1internal_1_1_injector_friend.html</anchorfile>
+      <anchor>ad4e574164c05c602f782cfb13f2de721</anchor>
+      <arglist>(typename Key&lt; Dependency &gt;::Ptr &amp;injected, InjectorPtr injector, std::string const name) const </arglist>
+    </member>
+    <member kind="function" protection="protected">
+      <type>void</type>
+      <name>cache</name>
+      <anchorfile>classsauce_1_1internal_1_1_injector_friend.html</anchorfile>
+      <anchor>a0e1e832cfd7315fb4bc004566cf57755</anchor>
+      <arglist>(InjectorPtr injector, typename Key&lt; Dependency &gt;::Ptr injected, i::TypeId scope) const </arglist>
+    </member>
+    <member kind="function" protection="protected">
+      <type>bool</type>
+      <name>probe</name>
+      <anchorfile>classsauce_1_1internal_1_1_injector_friend.html</anchorfile>
+      <anchor>ab6020f7d9d9832ff7bc155c95ed89425</anchor>
+      <arglist>(InjectorPtr injector, typename Key&lt; Dependency &gt;::Ptr &amp;injected, i::TypeId scope) const </arglist>
+    </member>
+  </compound>
+  <compound kind="class">
+    <name>sauce::internal::InstanceBinding</name>
+    <filename>classsauce_1_1internal_1_1_instance_binding.html</filename>
+    <templarg></templarg>
+    <base>Binding&lt; Dependency, NoScope &gt;</base>
+    <member kind="typedef">
+      <type>ResolvedBinding&lt; Dependency &gt;::BindingPtr</type>
+      <name>BindingPtr</name>
+      <anchorfile>classsauce_1_1internal_1_1_instance_binding.html</anchorfile>
+      <anchor>a999889a44ec8c0f3dd7f370708fa1414</anchor>
+      <arglist></arglist>
+    </member>
+    <member kind="typedef">
+      <type>Key&lt; Dependency &gt;::Normalized</type>
+      <name>Dependency</name>
+      <anchorfile>classsauce_1_1internal_1_1_binding.html</anchorfile>
+      <anchor>ac8e6ca9c0a0ee029f1cef2f3dc701d3f</anchor>
+      <arglist></arglist>
+    </member>
+    <member kind="typedef">
+      <type>Key&lt; Dependency &gt;::Ptr</type>
+      <name>IfacePtr</name>
+      <anchorfile>classsauce_1_1internal_1_1_binding.html</anchorfile>
+      <anchor>a56cb8368cf105084b69ef4e490d8a93b</anchor>
+      <arglist></arglist>
+    </member>
+    <member kind="typedef">
+      <type>ResolvedBinding&lt; Dependency &gt;::BindingPtr</type>
+      <name>BindingPtr</name>
+      <anchorfile>classsauce_1_1internal_1_1_binding.html</anchorfile>
+      <anchor>a6f9598e25939f6925c61ce354b33db9a</anchor>
+      <arglist></arglist>
+    </member>
+    <member kind="typedef">
+      <type>Key&lt; Dependency &gt;::Ptr</type>
+      <name>IfacePtr</name>
+      <anchorfile>classsauce_1_1internal_1_1_resolved_binding.html</anchorfile>
+      <anchor>a2a0f836c59d54bed1a9a61820dc42bd5</anchor>
+      <arglist></arglist>
+    </member>
+    <member kind="typedef">
+      <type>sauce::shared_ptr&lt; ResolvedBinding&lt; Dependency &gt; &gt;</type>
+      <name>BindingPtr</name>
+      <anchorfile>classsauce_1_1internal_1_1_resolved_binding.html</anchorfile>
+      <anchor>a8da57e5d6d2367e6d9c22603582550f0</anchor>
+      <arglist></arglist>
+    </member>
+    <member kind="function">
+      <type></type>
+      <name>InstanceBinding</name>
+      <anchorfile>classsauce_1_1internal_1_1_instance_binding.html</anchorfile>
+      <anchor>a6e11cd491616a6ce12c823cbd60c6ecf</anchor>
+      <arglist>(IfacePtr iface)</arglist>
+    </member>
+    <member kind="function">
+      <type>void</type>
+      <name>inject</name>
+      <anchorfile>classsauce_1_1internal_1_1_instance_binding.html</anchorfile>
+      <anchor>aa12cb8a1f0b19a908464063b023bfa7a</anchor>
+      <arglist>(IfacePtr &amp;injected, BindingPtr, InjectorPtr) const </arglist>
+    </member>
+    <member kind="function">
+      <type>std::string</type>
+      <name>getName</name>
+      <anchorfile>classsauce_1_1internal_1_1_binding.html</anchorfile>
+      <anchor>ae7bf0f08a99b2346aca54988a13bad99</anchor>
+      <arglist>() const</arglist>
+    </member>
+    <member kind="function">
+      <type>void</type>
+      <name>setName</name>
+      <anchorfile>classsauce_1_1internal_1_1_binding.html</anchorfile>
+      <anchor>a195b6fc17905a087a72fb6c515736254</anchor>
+      <arglist>(std::string const name)</arglist>
+    </member>
+    <member kind="function">
+      <type>NamedTypeId</type>
+      <name>getKey</name>
+      <anchorfile>classsauce_1_1internal_1_1_resolved_binding.html</anchorfile>
+      <anchor>a7ff0341fe08ae52a0f03a35ad6dd3c79</anchor>
+      <arglist>() const </arglist>
+    </member>
+    <member kind="function" virtualness="pure">
+      <type>virtual void</type>
+      <name>validateAcyclic</name>
+      <anchorfile>classsauce_1_1internal_1_1_resolved_binding.html</anchorfile>
+      <anchor>a503de5fe9cb4996db536f6f6d6d486be</anchor>
+      <arglist>(sauce::shared_ptr&lt; Injector &gt;, TypeIds &amp;) const =0</arglist>
+    </member>
+    <member kind="function" virtualness="pure">
+      <type>virtual void</type>
+      <name>get</name>
+      <anchorfile>classsauce_1_1internal_1_1_resolved_binding.html</anchorfile>
+      <anchor>a052b701d112012a04c93d7c76ffac334</anchor>
+      <arglist>(IfacePtr &amp;, BindingPtr, sauce::shared_ptr&lt; Injector &gt;) const =0</arglist>
+    </member>
+    <member kind="function" virtualness="virtual">
+      <type>virtual bool</type>
+      <name>isModifier</name>
+      <anchorfile>classsauce_1_1internal_1_1_opaque_binding.html</anchorfile>
+      <anchor>a08d286d2d97f34d3c5104b4ed95527bc</anchor>
+      <arglist>() const </arglist>
+    </member>
+    <member kind="function" virtualness="pure">
+      <type>virtual TypeId</type>
+      <name>getScopeKey</name>
+      <anchorfile>classsauce_1_1internal_1_1_opaque_binding.html</anchorfile>
+      <anchor>afcab860863e3fdec961ff24704c45217</anchor>
+      <arglist>() const =0</arglist>
+    </member>
+    <member kind="function" virtualness="pure">
+      <type>virtual void</type>
+      <name>eagerlyInject</name>
+      <anchorfile>classsauce_1_1internal_1_1_opaque_binding.html</anchorfile>
+      <anchor>a7f2819936b99c569cc29e3114d216328</anchor>
+      <arglist>(OpaqueBindingPtr, sauce::shared_ptr&lt; Injector &gt;) const =0</arglist>
+    </member>
+    <member kind="function" virtualness="pure">
+      <type>virtual void</type>
+      <name>setDynamicDependencyNames</name>
+      <anchorfile>classsauce_1_1internal_1_1_opaque_binding.html</anchorfile>
+      <anchor>a0d34b0bb5be2e0d0546200d480f3ae30</anchor>
+      <arglist>(std::vector&lt; std::string &gt; const &amp;)=0</arglist>
     </member>
     <member kind="function" protection="protected">
       <type>void</type>
@@ -5538,6 +5880,7 @@
     <file>implicit_bindings.h</file>
     <file>implicit_provider_binding.h</file>
     <file>injector_binding.h</file>
+    <file>instance_binding.h</file>
     <file>key.h</file>
     <file>locker_factory.h</file>
     <file>method_binding.h</file>

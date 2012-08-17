@@ -3,7 +3,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
-<title>Sauce-0.9.4: sauce/internal/provider_binding.h Source File</title>
+<title>Sauce-0.9.5: sauce/internal/provider_binding.h Source File</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -16,7 +16,7 @@
  <tbody>
  <tr style="height: 56px;">
   <td style="padding-left: 0.5em;">
-   <div id="projectname">Sauce-0.9.4
+   <div id="projectname">Sauce-0.9.5
    </div>
    <div id="projectbrief">A C++ Dependency Injection Framework</div>
   </td>
@@ -70,7 +70,7 @@
 <div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;    this-&gt;<span class="keyword">template</span> validateAcyclicHelper&lt;Provider&gt;(injector, ids, this-&gt;<a class="code" href="classsauce_1_1internal_1_1_binding.html#ae7bf0f08a99b2346aca54988a13bad99" title="The dynamic name of this binding.">getName</a>());</div>
 <div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;  }</div>
 <div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;</div>
-<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;  <span class="keywordtype">void</span> inject(<span class="keyword">typename</span> Key&lt;Dependency&gt;::Ptr &amp; injected, BindingPtr binding, InjectorPtr injector)<span class="keyword"> const </span>{</div>
+<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;  <span class="keywordtype">void</span> inject(<span class="keyword">typename</span> <a class="code" href="classsauce_1_1internal_1_1_key.html" title="A complete specification of a dependency request.">Key&lt;Dependency&gt;::Ptr</a> &amp; injected, BindingPtr binding, InjectorPtr injector)<span class="keyword"> const </span>{</div>
 <div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;    <span class="keyword">typename</span> Key&lt;Provider&gt;::Ptr provider;</div>
 <div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;    this-&gt;<span class="keyword">template</span> injectHelper&lt;Provider&gt;(provider, injector, binding-&gt;getName());</div>
 <div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;    injected = provider-&gt;get();</div>

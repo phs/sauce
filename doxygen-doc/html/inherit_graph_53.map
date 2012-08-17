@@ -1,3 +1,4 @@
 <map id="Graphical Class Hierarchy" name="Graphical Class Hierarchy">
-<area shape="rect" id="node1" href="$classsauce_1_1internal_1_1_implicit_binding.html" title="Attempts to supply a Binding when the given Dependency is not found." alt="" coords="6,5,170,49"/>
+<area shape="rect" id="node1" href="$classsauce_1_1internal_1_1_clause.html" title="sauce::internal::Clause\l\&lt; ProviderDependency \&gt;" alt="" coords="6,13,175,57"/>
+<area shape="rect" id="node3" href="$classsauce_1_1_to_provider_clause.html" title="Binds to a provider with a specific constructor, allocating from the heap." alt="" coords="225,5,394,65"/>
 </map>

@@ -9,9 +9,10 @@
 <area shape="rect" id="node11" href="$classsauce_1_1internal_1_1_injector_binding.html" title="An injection that provides the injector itself." alt="" coords="804,81,964,125"/>
 <area shape="rect" id="node15" href="$classsauce_1_1internal_1_1_binding.html" title="sauce::internal::Binding\l\&lt; Named\&lt; Provider\&lt; Dependency\l \&gt;, Name \&gt;, NoScope \&gt;" alt="" coords="496,157,720,217"/>
 <area shape="rect" id="node17" href="$classsauce_1_1internal_1_1_implicit_provider_binding.html" title="An injection that provides Providers for an already&#45;bound dependency." alt="" coords="782,157,986,217"/>
-<area shape="rect" id="node23" href="$classsauce_1_1internal_1_1_binding.html" title="Binding\&lt; Dependency,\l NoScope \&gt;" alt="" coords="531,278,685,322"/>
-<area shape="rect" id="node27" href="$classsauce_1_1internal_1_1_binding.html" title="Binding\&lt; Dependency,\l Scope \&gt;" alt="" coords="531,350,685,394"/>
-<area shape="rect" id="node25" href="$classsauce_1_1internal_1_1_method_binding.html" title="sauce::internal::MethodBinding\l\&lt; Dependency, Signature \&gt;" alt="" coords="782,274,986,318"/>
-<area shape="rect" id="node29" href="$classsauce_1_1internal_1_1_new_binding.html" title="sauce::internal::NewBinding\l\&lt; Dependency, Scope, Constructor,\l Allocator \&gt;" alt="" coords="768,342,1000,402"/>
-<area shape="rect" id="node31" href="$classsauce_1_1internal_1_1_provider_binding.html" title="An injection that provides from the configured provider." alt="" coords="784,426,984,486"/>
+<area shape="rect" id="node23" href="$classsauce_1_1internal_1_1_binding.html" title="Binding\&lt; Dependency,\l NoScope \&gt;" alt="" coords="531,309,685,353"/>
+<area shape="rect" id="node29" href="$classsauce_1_1internal_1_1_binding.html" title="Binding\&lt; Dependency,\l Scope \&gt;" alt="" coords="531,385,685,429"/>
+<area shape="rect" id="node25" href="$classsauce_1_1internal_1_1_instance_binding.html" title="An injection that provides the value passed at construction." alt="" coords="801,241,967,285"/>
+<area shape="rect" id="node27" href="$classsauce_1_1internal_1_1_method_binding.html" title="sauce::internal::MethodBinding\l\&lt; Dependency, Signature \&gt;" alt="" coords="782,309,986,353"/>
+<area shape="rect" id="node31" href="$classsauce_1_1internal_1_1_new_binding.html" title="sauce::internal::NewBinding\l\&lt; Dependency, Scope, Constructor,\l Allocator \&gt;" alt="" coords="768,377,1000,437"/>
+<area shape="rect" id="node33" href="$classsauce_1_1internal_1_1_provider_binding.html" title="An injection that provides from the configured provider." alt="" coords="784,461,984,521"/>
 </map>

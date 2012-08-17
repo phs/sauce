@@ -1,5 +1,3 @@
 <map id="Graphical Class Hierarchy" name="Graphical Class Hierarchy">
-<area shape="rect" id="node1" href="$classsauce_1_1internal_1_1_modifying_clause.html" title="Base class for final parts of the fluent binding API that result in modifying bindings." alt="" coords="6,39,178,83"/>
-<area shape="rect" id="node3" href="$classsauce_1_1_to_method_clause.html" title="Binds to a specific method." alt="" coords="241,5,423,49"/>
-<area shape="rect" id="node5" href="$classsauce_1_1_to_method_naming_clause.html" title="Binds to a specific method with possible static dependency names." alt="" coords="227,73,437,117"/>
+<area shape="rect" id="node1" href="$structsauce_1_1internal_1_1_method_binding_1_1_validate_acyclic_parameters_1_1_passed.html" title="sauce::internal::MethodBinding\l\&lt; Dependency, Signature \&gt;\l::ValidateAcyclicParameters::Passed" alt="" coords="6,5,244,65"/>
 </map>
