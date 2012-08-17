@@ -544,7 +544,7 @@ public:
     bound(bound) {}
 
   void configure() const {
-    bind<Bound>().toSingleton(bound);
+    bind<Bound>().toInstance(bound);
   }
 };
 
@@ -554,8 +554,8 @@ TEST(BindingTest, shouldBindSingletonInstances) {
 
   SingletonInstanceModule module(expected);
   sauce::shared_ptr<Injector> injector(Modules().add(module).createInjector());
-  // sauce::shared_ptr<Bound> actual = injector->get<Bound>(); // TODO
-  // ASSERT_EQ(expected.get(), actual.get());
+  sauce::shared_ptr<Bound> actual = injector->get<Bound>();
+  ASSERT_EQ(expected.get(), actual.get());
 }
 
 class StaticallyNamedSingletonInstanceModule: public ::sauce::AbstractModule {
@@ -567,7 +567,7 @@ public:
     bound(bound) {}
 
   void configure() const {
-    bind<Bound>().named<LieutenantShinysides>().toSingleton(bound);
+    bind<Bound>().named<LieutenantShinysides>().toInstance(bound);
   }
 };
 
@@ -577,8 +577,8 @@ TEST(BindingTest, shouldBindStaticallyNamedSingletonInstances) {
 
   StaticallyNamedSingletonInstanceModule module(expected);
   sauce::shared_ptr<Injector> injector(Modules().add(module).createInjector());
-  // sauce::shared_ptr<Bound> actual = injector->get<Bound, LieutenantShinysides>(); // TODO
-  // ASSERT_EQ(expected.get(), actual.get());
+  sauce::shared_ptr<Bound> actual = injector->get<Bound, LieutenantShinysides>();
+  ASSERT_EQ(expected.get(), actual.get());
 }
 
 class DynamicallyNamedSingletonInstanceModule: public ::sauce::AbstractModule {
@@ -590,7 +590,7 @@ public:
     bound(bound) {}
 
   void configure() const {
-    bind<Bound>().named("General Fishiness").toSingleton(bound);
+    bind<Bound>().named("General Fishiness").toInstance(bound);
   }
 };
 
@@ -600,8 +600,8 @@ TEST(BindingTest, shouldBindDynamicallyNamedSingletonInstances) {
 
   DynamicallyNamedSingletonInstanceModule module(expected);
   sauce::shared_ptr<Injector> injector(Modules().add(module).createInjector());
-  // sauce::shared_ptr<Bound> actual = injector->get<Bound>("General Fishiness"); // TODO
-  // ASSERT_EQ(expected.get(), actual.get());
+  sauce::shared_ptr<Bound> actual = injector->get<Bound>("General Fishiness");
+  ASSERT_EQ(expected.get(), actual.get());
 }
 
 class SelfInterested: public Bound {

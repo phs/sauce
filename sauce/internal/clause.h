@@ -8,6 +8,7 @@
 #include <sauce/memory.h>
 #include <sauce/named.h>
 #include <sauce/internal/bindings.h>
+#include <sauce/internal/instance_binding.h>
 #include <sauce/internal/method_binding.h>
 #include <sauce/internal/new_binding.h>
 #include <sauce/internal/opaque_binding.h>

@@ -145,22 +145,22 @@ class ToMethodNamingClause: public i::ModifyingClause<Dependency> {
  * The constructor template parameter is unused, but a default constructor for the interface is assumed.
  */
 template<typename Dependency>
-class ToSingletonClause:
+class ToInstanceClause:
   public i::ProvidingClause<Dependency, NoScope, typename i::Key<Dependency>::Iface(), std::allocator<int> > {
-
   // TODO The Ctor parameter is a nuisance, perhaps we can push it down.
 
+  typedef typename i::InstanceBinding<Dependency> InstanceBinding_;
   typedef typename i::Key<Dependency>::Ptr IfacePtr;
   IfacePtr iface;
 
 public:
 
   void onComplete() {
-    // i::OpaqueBindingPtr instanceBinding(new InstanceBinding_(iface));
-    // this->getState()->bind(instanceBinding);
+    i::OpaqueBindingPtr instanceBinding(new InstanceBinding_(iface));
+    this->getState()->bind(instanceBinding);
   }
 
-  ToSingletonClause(IfacePtr iface):
+  ToInstanceClause(IfacePtr iface):
     i::ProvidingClause<Dependency, NoScope, typename i::Key<Dependency>::Iface(), std::allocator<int> >(),
     iface(iface) {}
 };
@@ -181,8 +181,8 @@ class NamedClause: public i::InitialClause<Dependency> {
 
 public:
 
-  ToSingletonClause<Dependency> toSingleton(IfacePtr iface) {
-    return pass(ToSingletonClause<Dependency>(iface));
+  ToInstanceClause<Dependency> toInstance(IfacePtr iface) {
+    return pass(ToInstanceClause<Dependency>(iface));
   }
 
   template<typename Method>
@@ -255,8 +255,8 @@ public:
     return pass(NamedClause<Named<Iface, Unnamed> >());
   }
 
-  ToSingletonClause<Named<Iface, Unnamed> > toSingleton(IfacePtr iface) {
-    return pass(ToSingletonClause<Named<Iface, Unnamed> >(iface));
+  ToInstanceClause<Named<Iface, Unnamed> > toInstance(IfacePtr iface) {
+    return pass(ToInstanceClause<Named<Iface, Unnamed> >(iface));
   }
 
   template<typename Method>
