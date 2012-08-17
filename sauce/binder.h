@@ -24,14 +24,24 @@ namespace sauce {
  * Binds to a specific constructor and allocator.
  */
 template<typename Dependency, typename Scope, typename Ctor, typename Allocator>
-class AllocateFromClause: public i::ProvidingClause<Dependency, Scope, Ctor, Allocator> {};
+class AllocateFromClause: public i::ProvidingClause<Dependency> {
+  virtual void onComplete() {
+    i::OpaqueBindingPtr pendingBinding(new i::NewBinding<Dependency, Scope, Ctor, Allocator>());
+    this->getState()->bind(pendingBinding);
+  }
+};
 
 /**
  * Binds to a specific constructor, allocating from the heap.
  */
 template<typename Dependency, typename Scope, typename Ctor>
-class ToClause: public i::ProvidingClause<Dependency, Scope, Ctor, std::allocator<int> > {
+class ToClause: public i::ProvidingClause<Dependency> {
   typedef typename i::Key<Dependency>::Iface Iface;
+
+  virtual void onComplete() {
+    i::OpaqueBindingPtr pendingBinding(new i::NewBinding<Dependency, Scope, Ctor, std::allocator<int> >());
+    this->getState()->bind(pendingBinding);
+  }
 
 public:
 
@@ -45,12 +55,15 @@ public:
  * Binds to a provider with a specific constructor, allocating from the heap.
  */
 template<typename ProviderDependency, typename Scope, typename ProviderCtor>
-class ToProviderClause: public i::ProvidingClause<ProviderDependency, Scope, ProviderCtor, std::allocator<int> > {
+class ToProviderClause: public i::ProvidingClause<ProviderDependency> {
   void onComplete() {
     typedef typename i::Key<ProviderDependency>::Iface Provider;
     typedef typename Provider::Provides Iface;
     typedef typename i::Key<ProviderDependency>::Name Name;
     typedef Named<Iface, Name> ProvidedDependency;
+
+    i::OpaqueBindingPtr pendingBinding(new i::NewBinding<ProviderDependency, Scope, ProviderCtor, std::allocator<int> >());
+    this->getState()->bind(pendingBinding);
 
     i::OpaqueBindingPtr providerBinding(new i::ProviderBinding<ProvidedDependency, Scope, ProviderDependency>());
     this->getState()->bindProvider(providerBinding);
@@ -145,23 +158,20 @@ class ToMethodNamingClause: public i::ModifyingClause<Dependency> {
  * The constructor template parameter is unused, but a default constructor for the interface is assumed.
  */
 template<typename Dependency>
-class ToInstanceClause:
-  public i::ProvidingClause<Dependency, NoScope, typename i::Key<Dependency>::Iface(), std::allocator<int> > {
-  // TODO The Ctor parameter is a nuisance, perhaps we can push it down.
-
+class ToInstanceClause: public i::ProvidingClause<Dependency> {
   typedef typename i::InstanceBinding<Dependency> InstanceBinding_;
   typedef typename i::Key<Dependency>::Ptr IfacePtr;
   IfacePtr iface;
-
-public:
 
   void onComplete() {
     i::OpaqueBindingPtr instanceBinding(new InstanceBinding_(iface));
     this->getState()->bind(instanceBinding);
   }
 
+public:
+
   ToInstanceClause(IfacePtr iface):
-    i::ProvidingClause<Dependency, NoScope, typename i::Key<Dependency>::Iface(), std::allocator<int> >(),
+    i::ProvidingClause<Dependency>(),
     iface(iface) {}
 };
 

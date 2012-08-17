@@ -138,15 +138,15 @@ protected:
 /**
  * Base class for final parts of the fluent binding API that result in providing bindings.
  */
-template<typename Dependency, typename Scope, typename Ctor, typename Allocator>
+template<typename Dependency>
 class ProvidingClause {
   ClauseStatePtr state;
 
   friend class InitialClause<Dependency>;
 
-  virtual void onComplete() {}
-
 protected:
+
+  virtual void onComplete() = 0;
 
   ProvidingClause():
     state() {}
@@ -172,17 +172,14 @@ public:
 
   virtual ~ProvidingClause() {}
 
-  ProvidingClause<Dependency, Scope, Ctor, Allocator> & naming(unsigned int position, std::string const name) {
+  ProvidingClause<Dependency> & naming(unsigned int position, std::string const name) {
     this->bindDynamicDependencyName(position, name);
     return *this;
   }
 
   void setState(ClauseStatePtr state) {
-    OpaqueBindingPtr pendingBinding(new i::NewBinding<Dependency, Scope, Ctor, Allocator>());
     this->state = state;
-
     getState()->clearException();
-    getState()->bind(pendingBinding);
     onComplete();
   }
 };
