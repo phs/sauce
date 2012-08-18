@@ -74,6 +74,7 @@ nobase_include_HEADERS += \
   sauce/internal/implicit_bindings.h \
   sauce/internal/implicit_provider_binding.h \
   sauce/internal/injector_binding.h \
+  sauce/internal/instance_binding.h \
   sauce/internal/key.h \
   sauce/internal/locker_factory.h \
   sauce/internal/memory/boost.h \
@@ -109,6 +110,7 @@ EXTRA_DIST += \
   sauce/internal/implicit_bindings.h \
   sauce/internal/implicit_provider_binding.h \
   sauce/internal/injector_binding.h \
+  sauce/internal/instance_binding.h \
   sauce/internal/key.h \
   sauce/internal/locker_factory.h \
   sauce/internal/memory/boost.h \
