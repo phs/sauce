@@ -37,14 +37,24 @@ Unlike Guice, Sauce expects the developer to enter and eagerly inject scopes exp
 ## Wishlist ##
 
 * ~~Circular dependency detection~~
-* Setter injection
+* ~~Setter injection~~
 * ~~Named, overloaded bindings~~
 * ~~Eager-loaded singletons~~
 * ~~Injectable Providers for lazy resolution~~
 * Implicit bindings implied by integration within interfaces or implementations
-* On-demand injection for provided instances
+* ~~On-demand injection for provided instances~~
 * Member field injection (meh)
 * Static injection (meh)
+
+## Thanks ##
+
+These peeps are amaze for helping make Sauce better!  Buy them all the drink of their choice!
+
+* Casey B.
+* Jakub S.
+* Markus E.
+
+(If you're up here and want me to tweak/link, make a ticket & prod me)
 
 ## Copyright ##
 
