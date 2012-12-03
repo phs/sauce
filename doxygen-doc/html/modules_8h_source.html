@@ -3,7 +3,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
-<title>Sauce-0.9.5: sauce/modules.h Source File</title>
+<title>Sauce-0.10.0: sauce/modules.h Source File</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -16,7 +16,7 @@
  <tbody>
  <tr style="height: 56px;">
   <td style="padding-left: 0.5em;">
-   <div id="projectname">Sauce-0.9.5
+   <div id="projectname">Sauce-0.10.0
    </div>
    <div id="projectbrief">A C++ Dependency Injection Framework</div>
   </td>
@@ -124,29 +124,43 @@
 <div class="line"><a name="l00095"></a><span class="lineno">   95</span>&#160;    bindings(),</div>
 <div class="line"><a name="l00096"></a><span class="lineno">   96</span>&#160;    binder(bindings) {}</div>
 <div class="line"><a name="l00097"></a><span class="lineno">   97</span>&#160;</div>
-<div class="line"><a name="l00106"></a><span class="lineno">  106</span>&#160;  <span class="keyword">template</span>&lt;<span class="keyword">typename</span> Module&gt;</div>
-<div class="line"><a name="l00107"></a><span class="lineno"><a class="code" href="classsauce_1_1_modules.html#a3426dc2443556d594ea44bd06687c89b">  107</a></span>&#160;  <a class="code" href="classsauce_1_1_modules.html" title="A factory that accepts Modules and creates Injectors.">Modules</a> &amp; <a class="code" href="classsauce_1_1_modules.html#a3426dc2443556d594ea44bd06687c89b" title="Add the bindings defined by the given Module instance.">add</a>(Module module) {</div>
-<div class="line"><a name="l00108"></a><span class="lineno">  108</span>&#160;    module(binder);</div>
-<div class="line"><a name="l00109"></a><span class="lineno">  109</span>&#160;    binder.<a class="code" href="classsauce_1_1internal_1_1_pending_thrower.html#a80772a6475085b37319d9b1902d35cdf" title="Throw and clear any saved exception.">throwAnyPending</a>();</div>
-<div class="line"><a name="l00110"></a><span class="lineno">  110</span>&#160;    <span class="keywordflow">return</span> *<span class="keyword">this</span>;</div>
-<div class="line"><a name="l00111"></a><span class="lineno">  111</span>&#160;  }</div>
-<div class="line"><a name="l00112"></a><span class="lineno">  112</span>&#160;</div>
-<div class="line"><a name="l00119"></a><span class="lineno"><a class="code" href="classsauce_1_1_modules.html#a260dc95bac47b875b0daefe8892559d3">  119</a></span>&#160;  sauce::shared_ptr&lt;Injector&gt; <a class="code" href="classsauce_1_1_modules.html#a260dc95bac47b875b0daefe8892559d3" title="Create an Injector that can provide dependencies specified by all added Modules.">createInjector</a>()<span class="keyword"> const </span>{</div>
-<div class="line"><a name="l00120"></a><span class="lineno">  120</span>&#160;    sauce::auto_ptr&lt;i::LockFactory&gt; lockFactory(<span class="keyword">new</span> <a class="code" href="classsauce_1_1internal_1_1_null_lock_factory.html">i::NullLockFactory</a>());</div>
-<div class="line"><a name="l00121"></a><span class="lineno">  121</span>&#160;    <span class="keywordflow">return</span> <a class="code" href="classsauce_1_1_modules.html#a260dc95bac47b875b0daefe8892559d3" title="Create an Injector that can provide dependencies specified by all added Modules.">createInjector</a>(lockFactory);</div>
-<div class="line"><a name="l00122"></a><span class="lineno">  122</span>&#160;  }</div>
-<div class="line"><a name="l00123"></a><span class="lineno">  123</span>&#160;</div>
-<div class="line"><a name="l00130"></a><span class="lineno">  130</span>&#160;  <span class="keyword">template</span>&lt;<span class="keyword">typename</span> Locker, <span class="keyword">typename</span> Lockable&gt;</div>
-<div class="line"><a name="l00131"></a><span class="lineno"><a class="code" href="classsauce_1_1_modules.html#a4f27e08fffc49543c506e51b72477b35">  131</a></span>&#160;  sauce::shared_ptr&lt;Injector&gt; <a class="code" href="classsauce_1_1_modules.html#a4f27e08fffc49543c506e51b72477b35" title="Create an Injector that can provide dependencies specified by all added Modules.">createInjector</a>(Lockable &amp; lockable)<span class="keyword"> const </span>{</div>
-<div class="line"><a name="l00132"></a><span class="lineno">  132</span>&#160;    sauce::auto_ptr&lt;i::LockFactory&gt; lockFactory(<span class="keyword">new</span> <a class="code" href="classsauce_1_1internal_1_1_locker_lock_factory.html">i::LockerLockFactory&lt;Locker, Lockable&gt;</a>(lockable));</div>
-<div class="line"><a name="l00133"></a><span class="lineno">  133</span>&#160;    <span class="keywordflow">return</span> <a class="code" href="classsauce_1_1_modules.html#a260dc95bac47b875b0daefe8892559d3" title="Create an Injector that can provide dependencies specified by all added Modules.">createInjector</a>(lockFactory);</div>
-<div class="line"><a name="l00134"></a><span class="lineno">  134</span>&#160;  }</div>
-<div class="line"><a name="l00135"></a><span class="lineno">  135</span>&#160;</div>
-<div class="line"><a name="l00136"></a><span class="lineno">  136</span>&#160;};</div>
-<div class="line"><a name="l00137"></a><span class="lineno">  137</span>&#160;</div>
-<div class="line"><a name="l00138"></a><span class="lineno">  138</span>&#160;}</div>
-<div class="line"><a name="l00139"></a><span class="lineno">  139</span>&#160;</div>
-<div class="line"><a name="l00140"></a><span class="lineno">  140</span>&#160;<span class="preprocessor">#endif // SAUCE_MODULES_H_</span></div>
+<div class="line"><a name="l00104"></a><span class="lineno"><a class="code" href="classsauce_1_1_modules.html#a165e661ea0142a5896a0f0aade0ead5f">  104</a></span>&#160;  <a class="code" href="classsauce_1_1_modules.html" title="A factory that accepts Modules and creates Injectors.">Modules</a> &amp; <a class="code" href="classsauce_1_1_modules.html#a165e661ea0142a5896a0f0aade0ead5f" title="Add the bindings defined by the given module function.">add</a>(<span class="keywordtype">void</span> (* module)(<a class="code" href="classsauce_1_1_binder.html" title="Passed to modules to create bindings.">Binder</a> &amp;)) {</div>
+<div class="line"><a name="l00105"></a><span class="lineno">  105</span>&#160;    module(binder);</div>
+<div class="line"><a name="l00106"></a><span class="lineno">  106</span>&#160;    binder.<a class="code" href="classsauce_1_1internal_1_1_pending_thrower.html#a80772a6475085b37319d9b1902d35cdf" title="Throw and clear any saved exception.">throwAnyPending</a>();</div>
+<div class="line"><a name="l00107"></a><span class="lineno">  107</span>&#160;    <span class="keywordflow">return</span> *<span class="keyword">this</span>;</div>
+<div class="line"><a name="l00108"></a><span class="lineno">  108</span>&#160;  }</div>
+<div class="line"><a name="l00109"></a><span class="lineno">  109</span>&#160;</div>
+<div class="line"><a name="l00118"></a><span class="lineno">  118</span>&#160;  <span class="keyword">template</span>&lt;<span class="keyword">typename</span> Module&gt;</div>
+<div class="line"><a name="l00119"></a><span class="lineno"><a class="code" href="classsauce_1_1_modules.html#ac7ba2a1277dfa04e8f626fe651c36bbb">  119</a></span>&#160;  <a class="code" href="classsauce_1_1_modules.html" title="A factory that accepts Modules and creates Injectors.">Modules</a> &amp; <a class="code" href="classsauce_1_1_modules.html#ac7ba2a1277dfa04e8f626fe651c36bbb" title="Add the bindings defined by the given Module type.">add</a>() {</div>
+<div class="line"><a name="l00120"></a><span class="lineno">  120</span>&#160;    Module module;</div>
+<div class="line"><a name="l00121"></a><span class="lineno">  121</span>&#160;    module(binder);</div>
+<div class="line"><a name="l00122"></a><span class="lineno">  122</span>&#160;    binder.<a class="code" href="classsauce_1_1internal_1_1_pending_thrower.html#a80772a6475085b37319d9b1902d35cdf" title="Throw and clear any saved exception.">throwAnyPending</a>();</div>
+<div class="line"><a name="l00123"></a><span class="lineno">  123</span>&#160;    <span class="keywordflow">return</span> *<span class="keyword">this</span>;</div>
+<div class="line"><a name="l00124"></a><span class="lineno">  124</span>&#160;  }</div>
+<div class="line"><a name="l00125"></a><span class="lineno">  125</span>&#160;</div>
+<div class="line"><a name="l00134"></a><span class="lineno">  134</span>&#160;  <span class="keyword">template</span>&lt;<span class="keyword">typename</span> Module&gt;</div>
+<div class="line"><a name="l00135"></a><span class="lineno"><a class="code" href="classsauce_1_1_modules.html#a1723e61f40f480cae555efb32640d956">  135</a></span>&#160;  <a class="code" href="classsauce_1_1_modules.html" title="A factory that accepts Modules and creates Injectors.">Modules</a> &amp; <a class="code" href="classsauce_1_1_modules.html#a1723e61f40f480cae555efb32640d956" title="Add the bindings defined by the given Module instance.">add</a>(Module &amp; module) {</div>
+<div class="line"><a name="l00136"></a><span class="lineno">  136</span>&#160;    module(binder);</div>
+<div class="line"><a name="l00137"></a><span class="lineno">  137</span>&#160;    binder.<a class="code" href="classsauce_1_1internal_1_1_pending_thrower.html#a80772a6475085b37319d9b1902d35cdf" title="Throw and clear any saved exception.">throwAnyPending</a>();</div>
+<div class="line"><a name="l00138"></a><span class="lineno">  138</span>&#160;    <span class="keywordflow">return</span> *<span class="keyword">this</span>;</div>
+<div class="line"><a name="l00139"></a><span class="lineno">  139</span>&#160;  }</div>
+<div class="line"><a name="l00140"></a><span class="lineno">  140</span>&#160;</div>
+<div class="line"><a name="l00147"></a><span class="lineno"><a class="code" href="classsauce_1_1_modules.html#a260dc95bac47b875b0daefe8892559d3">  147</a></span>&#160;  sauce::shared_ptr&lt;Injector&gt; <a class="code" href="classsauce_1_1_modules.html#a260dc95bac47b875b0daefe8892559d3" title="Create an Injector that can provide dependencies specified by all added Modules.">createInjector</a>()<span class="keyword"> const </span>{</div>
+<div class="line"><a name="l00148"></a><span class="lineno">  148</span>&#160;    sauce::auto_ptr&lt;i::LockFactory&gt; lockFactory(<span class="keyword">new</span> <a class="code" href="classsauce_1_1internal_1_1_null_lock_factory.html">i::NullLockFactory</a>());</div>
+<div class="line"><a name="l00149"></a><span class="lineno">  149</span>&#160;    <span class="keywordflow">return</span> <a class="code" href="classsauce_1_1_modules.html#a260dc95bac47b875b0daefe8892559d3" title="Create an Injector that can provide dependencies specified by all added Modules.">createInjector</a>(lockFactory);</div>
+<div class="line"><a name="l00150"></a><span class="lineno">  150</span>&#160;  }</div>
+<div class="line"><a name="l00151"></a><span class="lineno">  151</span>&#160;</div>
+<div class="line"><a name="l00158"></a><span class="lineno">  158</span>&#160;  <span class="keyword">template</span>&lt;<span class="keyword">typename</span> Locker, <span class="keyword">typename</span> Lockable&gt;</div>
+<div class="line"><a name="l00159"></a><span class="lineno"><a class="code" href="classsauce_1_1_modules.html#a4f27e08fffc49543c506e51b72477b35">  159</a></span>&#160;  sauce::shared_ptr&lt;Injector&gt; <a class="code" href="classsauce_1_1_modules.html#a4f27e08fffc49543c506e51b72477b35" title="Create an Injector that can provide dependencies specified by all added Modules.">createInjector</a>(Lockable &amp; lockable)<span class="keyword"> const </span>{</div>
+<div class="line"><a name="l00160"></a><span class="lineno">  160</span>&#160;    sauce::auto_ptr&lt;i::LockFactory&gt; lockFactory(<span class="keyword">new</span> <a class="code" href="classsauce_1_1internal_1_1_locker_lock_factory.html">i::LockerLockFactory&lt;Locker, Lockable&gt;</a>(lockable));</div>
+<div class="line"><a name="l00161"></a><span class="lineno">  161</span>&#160;    <span class="keywordflow">return</span> <a class="code" href="classsauce_1_1_modules.html#a260dc95bac47b875b0daefe8892559d3" title="Create an Injector that can provide dependencies specified by all added Modules.">createInjector</a>(lockFactory);</div>
+<div class="line"><a name="l00162"></a><span class="lineno">  162</span>&#160;  }</div>
+<div class="line"><a name="l00163"></a><span class="lineno">  163</span>&#160;</div>
+<div class="line"><a name="l00164"></a><span class="lineno">  164</span>&#160;};</div>
+<div class="line"><a name="l00165"></a><span class="lineno">  165</span>&#160;</div>
+<div class="line"><a name="l00166"></a><span class="lineno">  166</span>&#160;}</div>
+<div class="line"><a name="l00167"></a><span class="lineno">  167</span>&#160;</div>
+<div class="line"><a name="l00168"></a><span class="lineno">  168</span>&#160;<span class="preprocessor">#endif // SAUCE_MODULES_H_</span></div>
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>

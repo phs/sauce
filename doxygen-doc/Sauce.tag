@@ -1151,8 +1151,22 @@
       <type>Modules &amp;</type>
       <name>add</name>
       <anchorfile>classsauce_1_1_modules.html</anchorfile>
-      <anchor>a3426dc2443556d594ea44bd06687c89b</anchor>
-      <arglist>(Module module)</arglist>
+      <anchor>a165e661ea0142a5896a0f0aade0ead5f</anchor>
+      <arglist>(void(*module)(Binder &amp;))</arglist>
+    </member>
+    <member kind="function">
+      <type>Modules &amp;</type>
+      <name>add</name>
+      <anchorfile>classsauce_1_1_modules.html</anchorfile>
+      <anchor>ac7ba2a1277dfa04e8f626fe651c36bbb</anchor>
+      <arglist>()</arglist>
+    </member>
+    <member kind="function">
+      <type>Modules &amp;</type>
+      <name>add</name>
+      <anchorfile>classsauce_1_1_modules.html</anchorfile>
+      <anchor>a1723e61f40f480cae555efb32640d956</anchor>
+      <arglist>(Module &amp;module)</arglist>
     </member>
     <member kind="function">
       <type>sauce::shared_ptr&lt; Injector &gt;</type>
