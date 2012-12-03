@@ -52,11 +52,23 @@ TEST(BindingTest, shouldProvideConvenienceBaseClassForModules) {
   sauce::shared_ptr<Bound> explicitlyBound = injector->get<Bound>();
 }
 
+TEST(BindingTest, shouldAddReferencesToAbstractModules) {
+  BoundModuleAsClass moduleAsClass;
+  sauce::AbstractModule & base = moduleAsClass;
+  sauce::shared_ptr<Injector> injector(Modules().add(base).createInjector());
+  sauce::shared_ptr<Bound> bound = injector->get<Bound>();
+}
+
 TEST(BindingTest, shouldLetClassModulesAddThemselvesEasily) {
   BoundModuleAsClass moduleAsClass;
   Modules modules;
   moduleAsClass.doubleDispatch(modules);
   sauce::shared_ptr<Injector> injector(modules.createInjector());
+  sauce::shared_ptr<Bound> explicitlyBound = injector->get<Bound>();
+}
+
+TEST(BindingTest, shouldPassDefaultConstructableClassModulesAsTemplateParameters) {
+  sauce::shared_ptr<Injector> injector(Modules().add<BoundModuleAsClass>().createInjector());
   sauce::shared_ptr<Bound> explicitlyBound = injector->get<Bound>();
 }
 

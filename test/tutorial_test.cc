@@ -513,8 +513,8 @@ TEST(TutorialTest, main) { // Let's pretend this is main()
    * More than one module can be selected, allowing the application developer to mix and match.
    */
   Modules modules;
-  modules.add(ProductionModule());
-  modules.add(FrameworkModule());
+  modules.add<ProductionModule>();
+  modules.add<FrameworkModule>();
 
   /**
    * After desired modules are added, use createInjector() to get an injector itself.
