@@ -1,8 +1,8 @@
 # Sauce #
 
-A would-be C++ dependency injection framework, written by an old java dev finally getting around to learning real C++.  You have been warned.
+A C++ dependency injection framework.
 
-The design and name are inspired by Google's excellent Guice framework.
+The design and name are inspired by Google's excellent [Guice framework](http://code.google.com/p/google-guice/), but neither Google nor Guice is otherwise affiliated in any way.
 
 ## The Jist ##
 
@@ -12,7 +12,9 @@ In Sauce, one defines _bindings_ that map interface types to implementation type
 
 At runtime, one collects desired modules into a _modules_ object, which produces _injectors_.  One can then ask an injector to _provide_ a value (instance) of a desired type (again supplied as a template parameter.)  When providing a value, implicit transitive dependencies are provided as well.  All values are exchanged with shared pointers (`(std|std::tr1|boost)::shared_ptr`s are supported) and the injector takes care of _disposing_ the value when the smart pointer deletes itself.
 
-Requesting the injector for an unbound type results in a runtime exception.
+Requesting the injector for an unbound type results in a runtime exception.  No RTTI is used (but we use a portable, homebrew version of same.)
+
+Sauce is available with a liberal, BSD-ish [license](https://github.com/phs/sauce/blob/master/LICENSE).
 
 ## Scopes ##
 
@@ -54,7 +56,7 @@ These peeps are amaze for helping make Sauce better!  Buy them all the drink of 
 * Jakub S.
 * Markus E.
 
-(If you're up here and want me to tweak/link, make a ticket & prod me)
+(If you're up here and want me to tweak/link, make a ticket or otherwise prod me.)
 
 ## Copyright ##
 
