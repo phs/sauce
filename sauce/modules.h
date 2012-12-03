@@ -96,6 +96,34 @@ public:
     binder(bindings) {}
 
   /**
+   * Add the bindings defined by the given module function.
+   *
+   * An Injector created after adding a module will understand how to provide dependencies
+   * specified by that module.
+   */
+  Modules & add(void (* module)(Binder &)) {
+    module(binder);
+    binder.throwAnyPending();
+    return *this;
+  }
+
+  /**
+   * Add the bindings defined by the given Module type.
+   *
+   * The module here is any default constructable type providing operator()(Binding & bindings).
+   *
+   * An Injector created after adding a module will understand how to provide dependencies
+   * specified by that module.
+   */
+  template<typename Module>
+  Modules & add() {
+    Module module;
+    module(binder);
+    binder.throwAnyPending();
+    return *this;
+  }
+
+  /**
    * Add the bindings defined by the given Module instance.
    *
    * The module here is any value providing operator()(Binding & bindings).
@@ -104,7 +132,7 @@ public:
    * specified by that module.
    */
   template<typename Module>
-  Modules & add(Module module) {
+  Modules & add(Module & module) {
     module(binder);
     binder.throwAnyPending();
     return *this;

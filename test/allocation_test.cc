@@ -155,7 +155,7 @@ public:
     engine(),
     vehicle(),
     allocator(),
-    injector(Modules().add(HerbieModule()).createInjector()) {}
+    injector(Modules().add<HerbieModule>().createInjector()) {}
 
   virtual void SetUp() {
     // Clear the static counters
