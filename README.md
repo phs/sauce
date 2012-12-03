@@ -34,6 +34,7 @@ Unlike Guice, Sauce expects the developer to enter and eagerly inject scopes exp
 
 ## Further Reading ##
 
+* [The "Tutorial" Test Suite](https://github.com/phs/sauce/blob/master/test/tutorial_test.cc)
 * [API Reference](http://phs.github.com/sauce/doxygen-doc/html/)
 
 ## Wishlist ##
