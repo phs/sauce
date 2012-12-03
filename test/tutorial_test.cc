@@ -51,6 +51,7 @@ class Database {
 public:
   virtual ResultSet query(std::string) = 0;
   virtual bool mutate(std::string) = 0;
+  virtual ~Database() {}
 };
 
 /**

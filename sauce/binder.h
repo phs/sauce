@@ -47,7 +47,7 @@ public:
 
   template<typename Allocator>
   AllocateFromClause<Dependency, Scope, Ctor, Allocator> allocatedFrom() {
-    return pass(AllocateFromClause<Dependency, Scope, Ctor, Allocator>());
+    return this->pass(AllocateFromClause<Dependency, Scope, Ctor, Allocator>());
   }
 };
 
@@ -73,7 +73,7 @@ public:
 
   template<typename Allocator>
   AllocateFromClause<ProviderDependency, Scope, ProviderCtor, Allocator> allocatedFrom() {
-    return pass(AllocateFromClause<ProviderDependency, Scope, ProviderCtor, Allocator>());
+    return this->pass(AllocateFromClause<ProviderDependency, Scope, ProviderCtor, Allocator>());
   }
 };
 
@@ -90,12 +90,12 @@ public:
 
   template<typename Ctor>
   ToClause<Dependency, Scope, Ctor> to() {
-    return pass(ToClause<Dependency, Scope, Ctor>());
+    return this->pass(ToClause<Dependency, Scope, Ctor>());
   }
 
   template<typename ProviderCtor>
   ToProviderClause<ProviderDependency, Scope, ProviderCtor> toProvider() {
-    return pass(ToProviderClause<ProviderDependency, Scope, ProviderCtor>());
+    return this->pass(ToProviderClause<ProviderDependency, Scope, ProviderCtor>());
   }
 };
 
@@ -192,18 +192,18 @@ class NamedClause: public i::Clause<Dependency> {
 public:
 
   ToInstanceClause<Dependency> toInstance(IfacePtr iface) {
-    return pass(ToInstanceClause<Dependency>(iface));
+    return this->pass(ToInstanceClause<Dependency>(iface));
   }
 
   template<typename Method>
   ToMethodClause<Dependency, Method> toMethod(Method method) {
-    return pass(ToMethodClause<Dependency, Method>(method));
+    return this->pass(ToMethodClause<Dependency, Method>(method));
   }
 
   template<typename Signature>
   ToMethodNamingClause<Dependency, Signature> toMethodNaming(
     typename ToMethodNamingClause<Dependency, Signature>::Method method) {
-    return pass(ToMethodNamingClause<Dependency, Signature>(method));
+    return this->pass(ToMethodNamingClause<Dependency, Signature>(method));
   }
 
   template<typename SetDependency>
@@ -211,7 +211,7 @@ public:
     typename ToMethodNamingClause<Dependency, void(Iface::*) (SetDependency)>::Method method,
     std::string name = unnamed()) {
     ToMethodNamingClause<Dependency, void(Iface::*) (SetDependency)> toMethodNamingClause(method);
-    toMethodNamingClause = pass(toMethodNamingClause);
+    toMethodNamingClause = this->pass(toMethodNamingClause);
     toMethodNamingClause.bindDynamicDependencyName(0, name);
     return toMethodNamingClause;
   }
@@ -219,22 +219,22 @@ public:
   template<typename Iface, typename Name>
   ToMethodNamingClause<Dependency, void(Iface::*) (Named<Iface, Name>)> setting(
     typename ToMethodNamingClause<Dependency, void(Iface::*) (Named<Iface, Name>)>::Method method) {
-    return pass(ToMethodNamingClause<Dependency, void(Iface::*) (Named<Iface, Name>)>(method));
+    return this->pass(ToMethodNamingClause<Dependency, void(Iface::*) (Named<Iface, Name>)>(method));
   }
 
   template<typename Scope>
   InClause<Dependency, Scope> in() {
-    return pass(InClause<Dependency, Scope>());
+    return this->pass(InClause<Dependency, Scope>());
   }
 
   template<typename Ctor>
   ToClause<Dependency, NoScope, Ctor> to() {
-    return pass(ToClause<Dependency, NoScope, Ctor>());
+    return this->pass(ToClause<Dependency, NoScope, Ctor>());
   }
 
   template<typename ProviderCtor>
   ToProviderClause<ProviderDependency, NoScope, ProviderCtor> toProvider() {
-    return pass(ToProviderClause<ProviderDependency, NoScope, ProviderCtor>());
+    return this->pass(ToProviderClause<ProviderDependency, NoScope, ProviderCtor>());
   }
 };
 
@@ -257,27 +257,27 @@ public:
 
   template<typename Name>
   NamedClause<Named<Iface, Name> > named() {
-    return pass(NamedClause<Named<Iface, Name> >());
+    return this->pass(NamedClause<Named<Iface, Name> >());
   }
 
   NamedClause<Named<Iface, Unnamed> > named(std::string const name) {
     this->setDynamicName(name);
-    return pass(NamedClause<Named<Iface, Unnamed> >());
+    return this->pass(NamedClause<Named<Iface, Unnamed> >());
   }
 
   ToInstanceClause<Named<Iface, Unnamed> > toInstance(IfacePtr iface) {
-    return pass(ToInstanceClause<Named<Iface, Unnamed> >(iface));
+    return this->pass(ToInstanceClause<Named<Iface, Unnamed> >(iface));
   }
 
   template<typename Method>
   ToMethodClause<Named<Iface, Unnamed>, Method> toMethod(Method method) {
-    return pass(ToMethodClause<Named<Iface, Unnamed>, Method>(method));
+    return this->pass(ToMethodClause<Named<Iface, Unnamed>, Method>(method));
   }
 
   template<typename Signature>
   ToMethodNamingClause<Named<Iface, Unnamed>, Signature> toMethodNaming(
     typename ToMethodNamingClause<Named<Iface, Unnamed>, Signature>::Method method) {
-    return pass(ToMethodNamingClause<Named<Iface, Unnamed>, Signature>(method));
+    return this->pass(ToMethodNamingClause<Named<Iface, Unnamed>, Signature>(method));
   }
 
   template<typename SetDependency>
@@ -285,7 +285,7 @@ public:
     typename ToMethodNamingClause<Named<Iface, Unnamed>, void(Iface::*) (SetDependency)>::Method method,
     std::string name = unnamed()) {
     ToMethodNamingClause<Named<Iface, Unnamed>, void(Iface::*) (SetDependency)> toMethodNamingClause(method);
-    toMethodNamingClause = pass(toMethodNamingClause);
+    toMethodNamingClause = this->pass(toMethodNamingClause);
     toMethodNamingClause.bindDynamicDependencyName(0, name);
     return toMethodNamingClause;
   }
@@ -293,22 +293,22 @@ public:
   template<typename SetIface, typename Name>
   ToMethodNamingClause<Named<Iface, Unnamed>, void(Iface::*) (Named<SetIface, Name>)> setting(
     typename ToMethodNamingClause<Named<Iface, Unnamed>, void(Iface::*) (Named<SetIface, Name>)>::Method method) {
-    return pass(ToMethodNamingClause<Named<Iface, Unnamed>, void(Iface::*) (Named<SetIface, Name>)>(method));
+    return this->pass(ToMethodNamingClause<Named<Iface, Unnamed>, void(Iface::*) (Named<SetIface, Name>)>(method));
   }
 
   template<typename Scope>
   InClause<Named<Iface, Unnamed>, Scope> in() {
-    return pass(InClause<Named<Iface, Unnamed>, Scope>());
+    return this->pass(InClause<Named<Iface, Unnamed>, Scope>());
   }
 
   template<typename Ctor>
   ToClause<Named<Iface, Unnamed>, NoScope, Ctor> to() {
-    return pass(ToClause<Named<Iface, Unnamed>, NoScope, Ctor>());
+    return this->pass(ToClause<Named<Iface, Unnamed>, NoScope, Ctor>());
   }
 
   template<typename ProviderCtor>
   ToProviderClause<ProviderDependency, NoScope, ProviderCtor> toProvider() {
-    return pass(ToProviderClause<ProviderDependency, NoScope, ProviderCtor>());
+    return this->pass(ToProviderClause<ProviderDependency, NoScope, ProviderCtor>());
   }
 };
 

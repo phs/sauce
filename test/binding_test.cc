@@ -176,6 +176,7 @@ TEST(BindingTest, shouldImplicitlyBindTheInjectorItself) {
 class HasSetterIface {
 public:
   virtual sauce::shared_ptr<Bound> getBound() = 0;
+  virtual ~HasSetterIface() {}
 };
 
 class HasSetter: public HasSetterIface {
@@ -309,6 +310,7 @@ TEST(BindingTest, shouldThrowExceptionOnPartialBinding) {
 class Animal {
 public:
   virtual std::string says() = 0;
+  virtual ~Animal() {}
 };
 
 class Cat: public Animal {
