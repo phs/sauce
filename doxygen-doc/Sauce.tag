@@ -1,6 +1,50 @@
 <?xml version='1.0' encoding='UTF-8' standalone='yes' ?>
 <tagfile>
   <compound kind="class">
+    <name>ApplyFunction</name>
+    <filename>class_apply_function.html</filename>
+    <templarg></templarg>
+    <templarg></templarg>
+  </compound>
+  <compound kind="class">
+    <name>ApplyMethod</name>
+    <filename>class_apply_method.html</filename>
+    <templarg></templarg>
+    <templarg></templarg>
+  </compound>
+  <compound kind="class">
+    <name>ApplyVoidFunction</name>
+    <filename>class_apply_void_function.html</filename>
+    <templarg></templarg>
+    <templarg></templarg>
+  </compound>
+  <compound kind="class">
+    <name>BaseInjector</name>
+    <filename>class_base_injector.html</filename>
+    <templarg></templarg>
+  </compound>
+  <compound kind="class">
+    <name>BindClause</name>
+    <filename>class_bind_clause.html</filename>
+    <templarg></templarg>
+  </compound>
+  <compound kind="class">
+    <name>ImplicitProviderBinding</name>
+    <filename>class_implicit_provider_binding.html</filename>
+    <templarg></templarg>
+    <templarg></templarg>
+  </compound>
+  <compound kind="class">
+    <name>NamedClause</name>
+    <filename>class_named_clause.html</filename>
+    <templarg></templarg>
+  </compound>
+  <compound kind="class">
+    <name>Provider</name>
+    <filename>class_provider.html</filename>
+    <templarg></templarg>
+  </compound>
+  <compound kind="class">
     <name>sauce::AllocateFromClause</name>
     <filename>classsauce_1_1_allocate_from_clause.html</filename>
     <templarg></templarg>
@@ -21,13 +65,6 @@
       <anchorfile>classsauce_1_1internal_1_1_clause.html</anchorfile>
       <anchor>a48e91466cca5294f269bcd37468c270f</anchor>
       <arglist>(ClauseStatePtr state)</arglist>
-    </member>
-    <member kind="function" protection="protected" virtualness="virtual">
-      <type>virtual void</type>
-      <name>onComplete</name>
-      <anchorfile>classsauce_1_1internal_1_1_clause.html</anchorfile>
-      <anchor>aaaf09d64116f7c157c8ab9d0b4f83343</anchor>
-      <arglist>()</arglist>
     </member>
     <member kind="function" protection="protected">
       <type></type>
@@ -100,13 +137,6 @@
       <anchor>a48e91466cca5294f269bcd37468c270f</anchor>
       <arglist>(ClauseStatePtr state)</arglist>
     </member>
-    <member kind="function" protection="protected" virtualness="virtual">
-      <type>virtual void</type>
-      <name>onComplete</name>
-      <anchorfile>classsauce_1_1internal_1_1_clause.html</anchorfile>
-      <anchor>aaaf09d64116f7c157c8ab9d0b4f83343</anchor>
-      <arglist>()</arglist>
-    </member>
     <member kind="function" protection="protected">
       <type></type>
       <name>Clause</name>
@@ -177,13 +207,6 @@
       <anchorfile>classsauce_1_1internal_1_1_clause.html</anchorfile>
       <anchor>a48e91466cca5294f269bcd37468c270f</anchor>
       <arglist>(ClauseStatePtr state)</arglist>
-    </member>
-    <member kind="function" protection="protected" virtualness="virtual">
-      <type>virtual void</type>
-      <name>onComplete</name>
-      <anchorfile>classsauce_1_1internal_1_1_clause.html</anchorfile>
-      <anchor>aaaf09d64116f7c157c8ab9d0b4f83343</anchor>
-      <arglist>()</arglist>
     </member>
     <member kind="function" protection="protected">
       <type></type>
@@ -346,13 +369,6 @@
       <anchor>a48e91466cca5294f269bcd37468c270f</anchor>
       <arglist>(ClauseStatePtr state)</arglist>
     </member>
-    <member kind="function" protection="protected" virtualness="virtual">
-      <type>virtual void</type>
-      <name>onComplete</name>
-      <anchorfile>classsauce_1_1internal_1_1_clause.html</anchorfile>
-      <anchor>aaaf09d64116f7c157c8ab9d0b4f83343</anchor>
-      <arglist>()</arglist>
-    </member>
     <member kind="function" protection="protected">
       <type></type>
       <name>Clause</name>
@@ -430,13 +446,6 @@
       <anchor>a48e91466cca5294f269bcd37468c270f</anchor>
       <arglist>(ClauseStatePtr state)</arglist>
     </member>
-    <member kind="function" protection="protected" virtualness="virtual">
-      <type>virtual void</type>
-      <name>onComplete</name>
-      <anchorfile>classsauce_1_1internal_1_1_clause.html</anchorfile>
-      <anchor>aaaf09d64116f7c157c8ab9d0b4f83343</anchor>
-      <arglist>()</arglist>
-    </member>
     <member kind="function" protection="protected">
       <type></type>
       <name>Clause</name>
@@ -505,13 +514,6 @@
       <anchorfile>classsauce_1_1internal_1_1_clause.html</anchorfile>
       <anchor>a48e91466cca5294f269bcd37468c270f</anchor>
       <arglist>(ClauseStatePtr state)</arglist>
-    </member>
-    <member kind="function" protection="protected" virtualness="virtual">
-      <type>virtual void</type>
-      <name>onComplete</name>
-      <anchorfile>classsauce_1_1internal_1_1_clause.html</anchorfile>
-      <anchor>aaaf09d64116f7c157c8ab9d0b4f83343</anchor>
-      <arglist>()</arglist>
     </member>
     <member kind="function" protection="protected">
       <type></type>
@@ -1106,7 +1108,6 @@
   <compound kind="class">
     <name>sauce::AbstractModule</name>
     <filename>classsauce_1_1_abstract_module.html</filename>
-    <class kind="class">sauce::AbstractModule::BinderGuard</class>
     <member kind="function">
       <type>void</type>
       <name>operator()</name>
@@ -3802,25 +3803,11 @@
       <arglist>() const </arglist>
     </member>
     <member kind="function" virtualness="pure">
-      <type>virtual TypeId</type>
-      <name>getScopeKey</name>
-      <anchorfile>classsauce_1_1internal_1_1_opaque_binding.html</anchorfile>
-      <anchor>afcab860863e3fdec961ff24704c45217</anchor>
-      <arglist>() const =0</arglist>
-    </member>
-    <member kind="function" virtualness="pure">
       <type>virtual void</type>
       <name>eagerlyInject</name>
       <anchorfile>classsauce_1_1internal_1_1_opaque_binding.html</anchorfile>
       <anchor>a7f2819936b99c569cc29e3114d216328</anchor>
       <arglist>(OpaqueBindingPtr, sauce::shared_ptr&lt; Injector &gt;) const =0</arglist>
-    </member>
-    <member kind="function" virtualness="pure">
-      <type>virtual void</type>
-      <name>setDynamicDependencyNames</name>
-      <anchorfile>classsauce_1_1internal_1_1_opaque_binding.html</anchorfile>
-      <anchor>a0d34b0bb5be2e0d0546200d480f3ae30</anchor>
-      <arglist>(std::vector&lt; std::string &gt; const &amp;)=0</arglist>
     </member>
     <member kind="function" protection="protected">
       <type>void</type>
@@ -4309,25 +4296,11 @@
       <arglist>() const </arglist>
     </member>
     <member kind="function" virtualness="pure">
-      <type>virtual TypeId</type>
-      <name>getScopeKey</name>
-      <anchorfile>classsauce_1_1internal_1_1_opaque_binding.html</anchorfile>
-      <anchor>afcab860863e3fdec961ff24704c45217</anchor>
-      <arglist>() const =0</arglist>
-    </member>
-    <member kind="function" virtualness="pure">
       <type>virtual void</type>
       <name>eagerlyInject</name>
       <anchorfile>classsauce_1_1internal_1_1_opaque_binding.html</anchorfile>
       <anchor>a7f2819936b99c569cc29e3114d216328</anchor>
       <arglist>(OpaqueBindingPtr, sauce::shared_ptr&lt; Injector &gt;) const =0</arglist>
-    </member>
-    <member kind="function" virtualness="pure">
-      <type>virtual void</type>
-      <name>setDynamicDependencyNames</name>
-      <anchorfile>classsauce_1_1internal_1_1_opaque_binding.html</anchorfile>
-      <anchor>a0d34b0bb5be2e0d0546200d480f3ae30</anchor>
-      <arglist>(std::vector&lt; std::string &gt; const &amp;)=0</arglist>
     </member>
     <member kind="function" protection="protected">
       <type>void</type>
@@ -4412,25 +4385,11 @@
       <arglist>() const </arglist>
     </member>
     <member kind="function" virtualness="pure">
-      <type>virtual TypeId</type>
-      <name>getScopeKey</name>
-      <anchorfile>classsauce_1_1internal_1_1_opaque_binding.html</anchorfile>
-      <anchor>afcab860863e3fdec961ff24704c45217</anchor>
-      <arglist>() const =0</arglist>
-    </member>
-    <member kind="function" virtualness="pure">
       <type>virtual void</type>
       <name>eagerlyInject</name>
       <anchorfile>classsauce_1_1internal_1_1_opaque_binding.html</anchorfile>
       <anchor>a7f2819936b99c569cc29e3114d216328</anchor>
       <arglist>(OpaqueBindingPtr, sauce::shared_ptr&lt; Injector &gt;) const =0</arglist>
-    </member>
-    <member kind="function" virtualness="pure">
-      <type>virtual void</type>
-      <name>setDynamicDependencyNames</name>
-      <anchorfile>classsauce_1_1internal_1_1_opaque_binding.html</anchorfile>
-      <anchor>a0d34b0bb5be2e0d0546200d480f3ae30</anchor>
-      <arglist>(std::vector&lt; std::string &gt; const &amp;)=0</arglist>
     </member>
     <member kind="typedef">
       <type>Key&lt; Key&lt; Injector &gt;::Normalized &gt;::Normalized</type>
@@ -4586,25 +4545,11 @@
       <arglist>() const </arglist>
     </member>
     <member kind="function" virtualness="pure">
-      <type>virtual TypeId</type>
-      <name>getScopeKey</name>
-      <anchorfile>classsauce_1_1internal_1_1_opaque_binding.html</anchorfile>
-      <anchor>afcab860863e3fdec961ff24704c45217</anchor>
-      <arglist>() const =0</arglist>
-    </member>
-    <member kind="function" virtualness="pure">
       <type>virtual void</type>
       <name>eagerlyInject</name>
       <anchorfile>classsauce_1_1internal_1_1_opaque_binding.html</anchorfile>
       <anchor>a7f2819936b99c569cc29e3114d216328</anchor>
       <arglist>(OpaqueBindingPtr, sauce::shared_ptr&lt; Injector &gt;) const =0</arglist>
-    </member>
-    <member kind="function" virtualness="pure">
-      <type>virtual void</type>
-      <name>setDynamicDependencyNames</name>
-      <anchorfile>classsauce_1_1internal_1_1_opaque_binding.html</anchorfile>
-      <anchor>a0d34b0bb5be2e0d0546200d480f3ae30</anchor>
-      <arglist>(std::vector&lt; std::string &gt; const &amp;)=0</arglist>
     </member>
     <member kind="function" protection="protected">
       <type>void</type>
@@ -4840,9 +4785,6 @@
     <templarg></templarg>
     <templarg></templarg>
     <base>Binding&lt; Dependency, NoScope &gt;</base>
-    <class kind="struct">sauce::internal::MethodBinding::InjectParameters</class>
-    <class kind="struct">sauce::internal::MethodBinding::MethodBindingFriend</class>
-    <class kind="struct">sauce::internal::MethodBinding::ValidateAcyclicParameters</class>
     <member kind="typedef">
       <type>Inject::Method</type>
       <name>Method</name>
@@ -4941,33 +4883,12 @@
       <anchor>a052b701d112012a04c93d7c76ffac334</anchor>
       <arglist>(IfacePtr &amp;, BindingPtr, sauce::shared_ptr&lt; Injector &gt;) const =0</arglist>
     </member>
-    <member kind="function" virtualness="virtual">
-      <type>virtual bool</type>
-      <name>isModifier</name>
-      <anchorfile>classsauce_1_1internal_1_1_opaque_binding.html</anchorfile>
-      <anchor>a08d286d2d97f34d3c5104b4ed95527bc</anchor>
-      <arglist>() const </arglist>
-    </member>
-    <member kind="function" virtualness="pure">
-      <type>virtual TypeId</type>
-      <name>getScopeKey</name>
-      <anchorfile>classsauce_1_1internal_1_1_opaque_binding.html</anchorfile>
-      <anchor>afcab860863e3fdec961ff24704c45217</anchor>
-      <arglist>() const =0</arglist>
-    </member>
     <member kind="function" virtualness="pure">
       <type>virtual void</type>
       <name>eagerlyInject</name>
       <anchorfile>classsauce_1_1internal_1_1_opaque_binding.html</anchorfile>
       <anchor>a7f2819936b99c569cc29e3114d216328</anchor>
       <arglist>(OpaqueBindingPtr, sauce::shared_ptr&lt; Injector &gt;) const =0</arglist>
-    </member>
-    <member kind="function" virtualness="pure">
-      <type>virtual void</type>
-      <name>setDynamicDependencyNames</name>
-      <anchorfile>classsauce_1_1internal_1_1_opaque_binding.html</anchorfile>
-      <anchor>a0d34b0bb5be2e0d0546200d480f3ae30</anchor>
-      <arglist>(std::vector&lt; std::string &gt; const &amp;)=0</arglist>
     </member>
     <member kind="friend" protection="private">
       <type>friend class</type>
@@ -5138,9 +5059,6 @@
     <templarg></templarg>
     <templarg></templarg>
     <base>Binding&lt; Dependency, Scope &gt;</base>
-    <class kind="struct">sauce::internal::NewBinding::InjectParameters</class>
-    <class kind="struct">sauce::internal::NewBinding::NewBindingFriend</class>
-    <class kind="struct">sauce::internal::NewBinding::ValidateAcyclicParameters</class>
     <member kind="typedef">
       <type>ResolvedBinding&lt; Dependency &gt;::BindingPtr</type>
       <name>BindingPtr</name>
@@ -5240,25 +5158,11 @@
       <arglist>() const </arglist>
     </member>
     <member kind="function" virtualness="pure">
-      <type>virtual TypeId</type>
-      <name>getScopeKey</name>
-      <anchorfile>classsauce_1_1internal_1_1_opaque_binding.html</anchorfile>
-      <anchor>afcab860863e3fdec961ff24704c45217</anchor>
-      <arglist>() const =0</arglist>
-    </member>
-    <member kind="function" virtualness="pure">
       <type>virtual void</type>
       <name>eagerlyInject</name>
       <anchorfile>classsauce_1_1internal_1_1_opaque_binding.html</anchorfile>
       <anchor>a7f2819936b99c569cc29e3114d216328</anchor>
       <arglist>(OpaqueBindingPtr, sauce::shared_ptr&lt; Injector &gt;) const =0</arglist>
-    </member>
-    <member kind="function" virtualness="pure">
-      <type>virtual void</type>
-      <name>setDynamicDependencyNames</name>
-      <anchorfile>classsauce_1_1internal_1_1_opaque_binding.html</anchorfile>
-      <anchor>a0d34b0bb5be2e0d0546200d480f3ae30</anchor>
-      <arglist>(std::vector&lt; std::string &gt; const &amp;)=0</arglist>
     </member>
     <member kind="friend" protection="private">
       <type>friend class</type>
@@ -5598,25 +5502,11 @@
       <arglist>() const </arglist>
     </member>
     <member kind="function" virtualness="pure">
-      <type>virtual TypeId</type>
-      <name>getScopeKey</name>
-      <anchorfile>classsauce_1_1internal_1_1_opaque_binding.html</anchorfile>
-      <anchor>afcab860863e3fdec961ff24704c45217</anchor>
-      <arglist>() const =0</arglist>
-    </member>
-    <member kind="function" virtualness="pure">
       <type>virtual void</type>
       <name>eagerlyInject</name>
       <anchorfile>classsauce_1_1internal_1_1_opaque_binding.html</anchorfile>
       <anchor>a7f2819936b99c569cc29e3114d216328</anchor>
       <arglist>(OpaqueBindingPtr, sauce::shared_ptr&lt; Injector &gt;) const =0</arglist>
-    </member>
-    <member kind="function" virtualness="pure">
-      <type>virtual void</type>
-      <name>setDynamicDependencyNames</name>
-      <anchorfile>classsauce_1_1internal_1_1_opaque_binding.html</anchorfile>
-      <anchor>a0d34b0bb5be2e0d0546200d480f3ae30</anchor>
-      <arglist>(std::vector&lt; std::string &gt; const &amp;)=0</arglist>
     </member>
     <member kind="function" protection="protected">
       <type>void</type>
@@ -5867,10 +5757,10 @@
     </member>
   </compound>
   <compound kind="dir">
-    <name>sauce/internal/</name>
+    <name>sauce/internal</name>
     <path>/Users/phil/code/sauce/sauce/internal/</path>
     <filename>dir_be47d98664d676f0a5d32321a98a37c8.html</filename>
-    <dir>sauce/internal/memory/</dir>
+    <dir>sauce/internal/memory</dir>
     <file>apply_variadic.h</file>
     <file>base_injector.h</file>
     <file>binding.h</file>
@@ -5894,7 +5784,7 @@
     <file>type_id.h</file>
   </compound>
   <compound kind="dir">
-    <name>sauce/internal/memory/</name>
+    <name>sauce/internal/memory</name>
     <path>/Users/phil/code/sauce/sauce/internal/memory/</path>
     <filename>dir_f48b53205fbf9ae3fabc86d7cfc44a7a.html</filename>
     <file>boost.h</file>
@@ -5902,10 +5792,10 @@
     <file>tr1.h</file>
   </compound>
   <compound kind="dir">
-    <name>sauce/</name>
+    <name>sauce</name>
     <path>/Users/phil/code/sauce/sauce/</path>
     <filename>dir_fbd01e54bcee7d521bf3ffbb4e509f79.html</filename>
-    <dir>sauce/internal/</dir>
+    <dir>sauce/internal</dir>
     <file>binder.h</file>
     <file>config.h</file>
     <file>exceptions.h</file>
