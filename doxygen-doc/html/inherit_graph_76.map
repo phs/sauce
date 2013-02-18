@@ -1,5 +1,5 @@
 <map id="Graphical Class Hierarchy" name="Graphical Class Hierarchy">
-<area shape="rect" id="node1" href="$classsauce_1_1internal_1_1_lock_factory.html" title="Facility to create opaque RAII guards, intended to be synchronization lockers." alt="" coords="6,47,194,75"/>
-<area shape="rect" id="node3" href="$classsauce_1_1internal_1_1_locker_lock_factory.html" title="sauce::internal::LockerLock\lFactory\&lt; Locker, Lockable \&gt;" alt="" coords="243,5,432,49"/>
-<area shape="rect" id="node5" href="$classsauce_1_1internal_1_1_null_lock_factory.html" title="sauce::internal::NullLock\lFactory" alt="" coords="254,73,421,117"/>
+<area shape="rect" id="node1" href="$classsauce_1_1internal_1_1_lock.html" title="An RAII wrapper to hide locker details." alt="" coords="6,43,149,71"/>
+<area shape="rect" id="node3" href="$classsauce_1_1internal_1_1_locker_lock.html" title="An adapter to hide the type of the given Locker." alt="" coords="198,5,381,49"/>
+<area shape="rect" id="node5" href="$classsauce_1_1internal_1_1_null_lock.html" title="Not a lock at all, but used when no synchronization is configured." alt="" coords="206,73,373,101"/>
 </map>
