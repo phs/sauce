@@ -58,7 +58,7 @@ class NewBinding: public Binding<Dependency, Scope> {
         InjectorPtr & injector = passed.injector;
         std::string dependencyName = binding.dynamicDependencyNames[i];
 
-        return this->template injectHelper<T>(binding, injector, dependencyName);
+        return this->NewBindingFriend::template injectHelper<T>(binding, injector, dependencyName);
       }
     };
   };
@@ -91,7 +91,7 @@ class NewBinding: public Binding<Dependency, Scope> {
         TypeIds & ids = passed.ids;
         std::string dependencyName = binding.dynamicDependencyNames[i];
 
-        this->template validateAcyclicHelper<T>(binding, injector, ids, dependencyName);
+        this->NewBindingFriend::template validateAcyclicHelper<T>(binding, injector, ids, dependencyName);
       }
     };
   };

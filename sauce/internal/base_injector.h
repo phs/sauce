@@ -67,7 +67,7 @@ public:
   void validateAcyclic(bool validateProviding, InjectorPtr injector, TypeIds & ids, std::string const name) const {
     typedef typename Key<Dependency>::Normalized Normalized;
     CircularDependencyGuard<ImplicitBindings, Normalized> guard(ids, name);
-    bindings.validateAcyclic<Normalized>(validateProviding, injector, ids, name);
+    bindings.template validateAcyclic<Normalized>(validateProviding, injector, ids, name);
   }
 
   template<typename Dependency>
@@ -81,7 +81,7 @@ public:
 
   template<typename Scope>
   void eagerlyInject(InjectorPtr injector) const {
-    bindings.eagerlyInject<Scope>(injector);
+    bindings.template eagerlyInject<Scope>(injector);
   }
 
   /**
