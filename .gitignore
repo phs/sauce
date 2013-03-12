@@ -33,7 +33,14 @@ stamp-h*
 .dirstamp
 .libs
 ansi_compilation_test
+ansi_compilation_test.log
+ansi_compilation_test.trs
+check-style.log
+check-style.trs
+test-suite.log
 unittests
+unittests.log
+unittests.trs
 
 # m4 stuff
 codeset.m4
