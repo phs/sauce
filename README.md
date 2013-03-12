@@ -16,6 +16,14 @@ Requesting the injector for an unbound type results in a runtime exception.  No 
 
 Sauce is available with a liberal, BSD-ish [license](https://github.com/phs/sauce/blob/master/LICENSE).
 
+## Hacking ##
+
+You'll need a compiler and the GNU autotools.  Once you have a check-out:
+
+    $ ./bootstrap  # uses autoreconf to create ./configure
+    $ ./configure  # create make files
+    $ make check   # compile and run unit tests
+
 ## Scopes ##
 
 A side-effect of using an injector to hide implementation choices from dependents is the discouraged use of stack allocation and the `new` operator for dependencies.  The `new` operator (et. al.) has an additional guarantee past the ensuring the instance's concrete type: the instance received is unique, and not shared.  This raises the question: will the injector always provide new, successive instances, or will it ever reuse some?
