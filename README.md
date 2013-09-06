@@ -4,7 +4,7 @@ A C++ dependency injection framework.
 
 The design and name are inspired by Google's excellent [Guice framework](http://code.google.com/p/google-guice/), but neither Google nor Guice is otherwise affiliated in any way.
 
-## The Jist ##
+## The Gist ##
 
 I refer the reader to [Guice's documentation](http://code.google.com/docreader/#p=google-guice&s=google-guice&t=Motivation) for an introduction to dependency injection as a concept, and why they might be interested in using it.
 
