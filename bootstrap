@@ -1,3 +1,0 @@
-#! /bin/sh
-# Fresh source code checkouts should run this to get up and running.
-autoreconf -vi

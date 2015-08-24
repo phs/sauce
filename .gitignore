@@ -1,5 +1,7 @@
-.DS_Store
+.vagrant/*
+!.vagrant/.keep
 *.sublime-workspace
+.DS_Store
 
 # autotools outputs
 .deps
