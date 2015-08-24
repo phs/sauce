@@ -1,0 +1,44 @@
+#! /bin/bash
+
+# Provision a vagrant instance.
+
+set -e
+
+# Remove some vagrant cruft
+rm -f /home/vagrant/postinstall.sh
+
+# Update the repo
+apt-get update -y
+
+# Install packages
+apt-get install -y    \
+  apache2             \
+  autoconf            \
+  automake            \
+  curl                \
+  doxygen             \
+  dstat               \
+  g++                 \
+  graphviz            \
+  libtool             \
+  man-db              \
+  mlocate             \
+  rsync               \
+  wget
+
+# Enables sudo'd commands to take advantage of forwarded keys.
+echo 'Defaults env_keep += "SSH_AUTH_SOCK"' > /etc/sudoers.d/ssh-auth-sock
+chmod 0440 /etc/sudoers.d/ssh-auth-sock
+
+ln -s /vagrant /home/vagrant/sauce
+
+# Color prompts, please.  What am I, a farmer?
+sed -i 's|#force_color|force_color|' ~vagrant/.bashrc
+
+# Expose the doxygen docs in the default virtual host
+ln -s /vagrant/doxygen-doc/html /var/www/sauce
+
+pushd /home/vagrant/sauce
+# Regenerate autotools state
+autoreconf -vi
+popd

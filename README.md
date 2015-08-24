@@ -18,11 +18,17 @@ Sauce is available with a liberal, BSD-ish [license](https://github.com/phs/sauc
 
 ## Hacking ##
 
-You'll need a compiler and the GNU autotools.  Once you have a check-out:
+Development that is not environment-specific is done with [vagrant](
+http://www.vagrantup.com/) over [virtualbox](
+https://www.virtualbox.org/) or [vmware](http://www.vagrantup.com/vmware):
 
-    $ ./bootstrap  # uses autoreconf to create ./configure
-    $ ./configure  # create make files
-    $ make check   # compile and run unit tests
+```bash
+$ vagrant up
+$ vagrant ssh
+vagrant@sauce:~$ cd sauce
+vagrant@sauce:~/sauce$ ./configure  # create make files
+vagrant@sauce:~/sauce$ make check   # compile and run unit tests
+```
 
 ## Scopes ##
 
