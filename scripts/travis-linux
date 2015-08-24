@@ -1,0 +1,19 @@
+#! /bin/bash
+
+set -e
+set -x
+
+date
+uname -a
+
+# Install packages
+sudo apt-get install -y \
+  autoconf              \
+  automake              \
+  g++                   \
+  libtool
+
+# Regenerate autotools state
+autoreconf -vi
+./configure
+make check

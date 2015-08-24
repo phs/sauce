@@ -1,0 +1,6 @@
+language: c
+script: ./scripts/travis
+
+os:
+  - linux
+  - osx

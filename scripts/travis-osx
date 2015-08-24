@@ -1,0 +1,16 @@
+#! /bin/bash
+
+set -e
+set -x
+
+date
+uname -a
+
+# Install packages
+brew update
+# autoconf and automake should already be present
+brew install libtool
+
+autoreconf -vi
+./configure
+make check
