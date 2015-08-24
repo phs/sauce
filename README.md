@@ -1,5 +1,8 @@
 # Sauce #
 
+[![Linux and OS X Build Status](https://travis-ci.org/phs/sauce.png?branch=master
+"Linux and OS X Build Status")](https://travis-ci.org/phs/sauce)
+
 A C++ dependency injection framework.
 
 The design and name are inspired by Google's excellent [Guice framework](http://code.google.com/p/google-guice/), but neither Google nor Guice is otherwise affiliated in any way.

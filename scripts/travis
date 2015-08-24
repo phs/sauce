@@ -1,0 +1,19 @@
+#! /bin/bash
+
+set -e
+set -x
+
+ROOT="$( cd $(dirname $0)/..; pwd -P )"
+OS="$(uname -s)"
+
+case "$OS" in
+Linux)
+  exec $ROOT/scripts/travis-linux
+  ;;
+Darwin)
+  exec $ROOT/scripts/travis-osx
+  ;;
+*)
+  echo "Don't know OS '$OS'"
+  false
+esac
