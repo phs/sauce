@@ -13,7 +13,6 @@ sudo apt-get install -y \
   g++                   \
   libtool
 
-# Regenerate autotools state
 autoreconf -vi
 ./configure
 make check
