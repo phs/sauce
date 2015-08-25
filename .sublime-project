@@ -25,6 +25,7 @@
         "Makefile",
         "Makefile.in",
         "aclocal.m4",
+        "ansi_compilation_test",
         "ar-lib",
         "check-coverage",
         "check-style",
@@ -55,6 +56,7 @@
       "folder_exclude_patterns": [
         ".deps",
         ".libs",
+        ".vagrant",
         "autom4te.cache",
         "build-aux",
         "doxygen-doc",
