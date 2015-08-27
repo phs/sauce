@@ -83,18 +83,18 @@ wint_t.m4
 xsize.m4
 
 # vendor
-vendor/gmock-1.6.0/gtest/lib/
-vendor/gmock-1.6.0/gtest/samples/sample10_unittest
-vendor/gmock-1.6.0/gtest/samples/sample1_unittest
-vendor/gmock-1.6.0/gtest/scripts/fuse_gtest_files.pyc
-vendor/gmock-1.6.0/gtest/scripts/gtest-config
-vendor/gmock-1.6.0/gtest/test/fused_gtest_test
-vendor/gmock-1.6.0/gtest/test/gtest_all_test
-vendor/gmock-1.6.0/lib/
-vendor/gmock-1.6.0/scripts/gmock-config
-vendor/gmock-1.6.0/test/gmock-spec-builders_test
-vendor/gmock-1.6.0/test/gmock_fused_test
-vendor/gmock-1.6.0/test/gmock_link_test
+vendor/gmock-1.7.0/gtest/lib/
+vendor/gmock-1.7.0/gtest/samples/sample10_unittest
+vendor/gmock-1.7.0/gtest/samples/sample1_unittest
+vendor/gmock-1.7.0/gtest/scripts/fuse_gtest_files.pyc
+vendor/gmock-1.7.0/gtest/scripts/gtest-config
+vendor/gmock-1.7.0/gtest/test/fused_gtest_test
+vendor/gmock-1.7.0/gtest/test/gtest_all_test
+vendor/gmock-1.7.0/lib/
+vendor/gmock-1.7.0/scripts/gmock-config
+vendor/gmock-1.7.0/test/gmock-spec-builders_test
+vendor/gmock-1.7.0/test/gmock_fused_test
+vendor/gmock-1.7.0/test/gmock_link_test
 
 !vendor/uncrustify-0.59/Makefile.in
 !vendor/uncrustify-0.59/aclocal.m4
