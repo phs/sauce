@@ -5,8 +5,8 @@
 /**
  * The purpose of this test is to enforce ansi c++ compatibility within the source.
  *
- * It does so by first pulling in all desired includes, instantiating templates and then asserting
- * that it was compiled with -ansi.
+ * It does so by first pulling in all desired includes, instantiating templates and then
+ * asserting that it was compiled with -ansi.
  */
 
 using ::sauce::AbstractProvider;
@@ -19,6 +19,7 @@ using ::sauce::Provider;
 class Animal {
 public:
   virtual std::string says() = 0;
+  virtual ~Animal() {}
 };
 
 class Cat: public Animal {

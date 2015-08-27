@@ -79,7 +79,7 @@ public:
   Table(sauce::shared_ptr<Database> database):
     database(database) {}
 
-  bool create(Key & key, ModelType const & model) {
+  bool create(Key & key, ModelType const &) {
     if (database->mutate("INSERT ...")) {
       key = 17; // = fetchPrimaryKey(); /* etc */
       return true;
