@@ -142,7 +142,7 @@ TESTS += unittests
 check_PROGRAMS += unittests
 
 unittests_CPPFLAGS = \
-  -DSAUCE_STD_TR1_SMART_PTR \
+  -D$(SAUCE_UNIT_TEST_SHARED_PTR) \
   -I$(srcdir) \
   -I$(gtest)/include \
   -I$(gmock)/include
@@ -241,7 +241,7 @@ TESTS += ansi_compilation_test
 check_PROGRAMS += ansi_compilation_test
 
 ansi_compilation_test_CPPFLAGS = \
-  -DSAUCE_STD_TR1_SMART_PTR \
+  -D$(SAUCE_UNIT_TEST_SHARED_PTR) \
   -I$(builddir) \
   -I$(srcdir)
 

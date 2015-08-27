@@ -21,6 +21,36 @@ ACX_PTHREAD     # only needed to run the unit tests
 
 # Optional features
 
+# Detect default shared pointer presence, only for unit tests.
+AC_LANG_PUSH([C++])
+
+AC_MSG_CHECKING([for std::shared_ptr])
+AC_COMPILE_IFELSE([AC_LANG_PROGRAM(
+  [[#include <memory>]]
+  [[std::shared_ptr<int> have_shared_ptr;]])
+], [
+  AC_MSG_RESULT([yes])
+  SAUCE_UNIT_TEST_SHARED_PTR=SAUCE_STD_SMART_PTR
+], [
+  AC_MSG_RESULT([no])
+
+  AC_MSG_CHECKING([for std::tr1::shared_ptr])
+  AC_COMPILE_IFELSE([AC_LANG_PROGRAM(
+    [[#include <memory>]]
+    [[#include <tr1/memory>]]
+    [[std::tr1::shared_ptr<int> have_shared_ptr;]])
+  ], [
+    AC_MSG_RESULT([yes])
+    SAUCE_UNIT_TEST_SHARED_PTR=SAUCE_STD_TR1_SMART_PTR
+  ], [
+    AC_MSG_RESULT([no])
+  ])
+])
+
+AC_SUBST([SAUCE_UNIT_TEST_SHARED_PTR])
+
+AC_LANG_POP([C++])
+
 AC_CHECK_PROG([DIFF],[git],[git diff --exit-code --no-index],[diff])
 AC_ARG_VAR([DIFF],[Diff command to display style violations])
 
