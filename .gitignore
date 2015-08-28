@@ -34,11 +34,14 @@ stamp-h*
 *.uncrustify
 .dirstamp
 .libs
-ansi_compilation_test
-ansi_compilation_test.log
-ansi_compilation_test.trs
 check-style.log
 check-style.trs
+cxx11_pedantic_compilation_test
+cxx11_pedantic_compilation_test.log
+cxx11_pedantic_compilation_test.trs
+cxx98_pedantic_compilation_test
+cxx98_pedantic_compilation_test.log
+cxx98_pedantic_compilation_test.trs
 test-suite.log
 unittests
 unittests.log

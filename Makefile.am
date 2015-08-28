@@ -236,17 +236,46 @@ EXTRA_libunittest_la_SOURCES = \
   vendor/gmock-1.7.0/src/gmock-spec-builders.cc \
   vendor/gmock-1.7.0/src/gmock.cc
 
-# Prove we're ansi compatible, even if gmock/gtest is not.
-TESTS += ansi_compilation_test
-check_PROGRAMS += ansi_compilation_test
+# Prove we're strictly standards compatible, even if gmock/gtest is not.
+TESTS += cxx98_pedantic_compilation_test
+check_PROGRAMS += cxx98_pedantic_compilation_test
 
-ansi_compilation_test_CPPFLAGS = \
+cxx98_pedantic_compilation_test_CPPFLAGS = \
   -D$(SAUCE_UNIT_TEST_SHARED_PTR) \
   -I$(builddir) \
   -I$(srcdir)
 
-ansi_compilation_test_SOURCES = \
-  test/ansi_compilation_test.cc
+cxx98_pedantic_compilation_test_CXXFLAGS = \
+  -Wall \
+  -Wextra \
+  -Werror \
+  -pedantic-errors \
+  -std=c++98
+
+cxx98_pedantic_compilation_test_SOURCES = \
+  test/pedantic_compilation_test.cc
+
+if HAVE_CXX11
+
+TESTS += cxx11_pedantic_compilation_test
+check_PROGRAMS += cxx11_pedantic_compilation_test
+
+cxx11_pedantic_compilation_test_CPPFLAGS = \
+  -D$(SAUCE_UNIT_TEST_SHARED_PTR) \
+  -I$(builddir) \
+  -I$(srcdir)
+
+cxx11_pedantic_compilation_test_CXXFLAGS = \
+  -Wall \
+  -Wextra \
+  -Werror \
+  -pedantic-errors \
+  $(ENABLE_CXX11_FLAGS)
+
+cxx11_pedantic_compilation_test_SOURCES = \
+  test/pedantic_compilation_test.cc
+
+endif
 
 # This must be the last test, to pick up all unittest coverage statistics
 TESTS += check-style

@@ -51,6 +51,10 @@ AC_SUBST([SAUCE_UNIT_TEST_SHARED_PTR])
 
 AC_LANG_POP([C++])
 
+# Detect strict C++11, only for pedantic compilation tests
+AX_CXX_COMPILE_STDCXX_11(noext,optional)
+AM_CONDITIONAL(HAVE_CXX11, test "x$HAVE_CXX11" = "x1")
+
 AC_CHECK_PROG([DIFF],[git],[git diff --exit-code --no-index],[diff])
 AC_ARG_VAR([DIFF],[Diff command to display style violations])
 
@@ -77,7 +81,7 @@ AC_MSG_RESULT([$enable_gcov])
 AM_CONDITIONAL(GCOV_ENABLED, test "x$enable_gcov" = "xyes")
 
 # Set default compilation and linking flags
-AC_SUBST([AM_CXXFLAGS],"-Wall -Wextra -Werror -ansi")
+AC_SUBST([AM_CXXFLAGS],"-Wall -Wextra -Werror -pedantic-errors")
 
 # The list of all authored c++ source and header files in the project
 AC_SUBST([CC_FILES],[`( cd "$srcdir" && find sauce test -type f -name "*.cc" | tr '\n' ' ' )`])
