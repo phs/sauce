@@ -55,30 +55,10 @@ AC_LANG_POP([C++])
 AX_CXX_COMPILE_STDCXX_11(noext,optional)
 AM_CONDITIONAL(HAVE_CXX11, test "x$HAVE_CXX11" = "x1")
 
-AC_CHECK_PROG([DIFF],[git],[git diff --exit-code --no-index],[diff])
-AC_ARG_VAR([DIFF],[Diff command to display style violations])
-
 DX_DOT_FEATURE(ON)
 DX_PDF_FEATURE(OFF)
 DX_PS_FEATURE(OFF)
 DX_INIT_DOXYGEN(AC_PACKAGE_NAME)
-
-# Code testing coverage with gcov
-AC_ARG_ENABLE([gcov],AS_HELP_STRING([--enable-gcov], [measure coverage with gcov]))
-AC_MSG_CHECKING([for gcov])
-if test "x$enable_gcov" = "xyes"
-then
-  if test ! "x$GXX" = "xyes"
-  then
-    AC_MSG_RESULT([no])
-    AC_MSG_ERROR([gcov requires compiling with gcc])
-  fi
-  enable_gcov=yes
-else
-  enable_gcov=no
-fi
-AC_MSG_RESULT([$enable_gcov])
-AM_CONDITIONAL(GCOV_ENABLED, test "x$enable_gcov" = "xyes")
 
 # Set default compilation and linking flags
 AC_SUBST([AM_CXXFLAGS],"-Wall -Wextra -Werror -pedantic-errors")
@@ -87,19 +67,11 @@ AC_SUBST([AM_CXXFLAGS],"-Wall -Wextra -Werror -pedantic-errors")
 AC_SUBST([CC_FILES],[`( cd "$srcdir" && find sauce test -type f -name "*.cc" | tr '\n' ' ' )`])
 AC_SUBST([H_FILES],[`( cd "$srcdir" && find sauce test -type f -name "*.h" | tr '\n' ' ' )`])
 
-# Mark generated scripts as executable
-AC_CONFIG_COMMANDS([permission],[
-  chmod +x check-style;
-  chmod +x check-coverage;
-])
-
 # Create the generated files
 AC_CONFIG_HEADERS([sauce/config.h])
 AC_CONFIG_FILES([
   Makefile
   Doxyfile
-  check-style
-  check-coverage
   sauce/sauce.pc
 ])
 

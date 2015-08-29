@@ -1,1 +1,1 @@
-exclude: [Doxyfile, Makefile, _config.yml, build, include, test, uncrustify.cfg, vendor]
+exclude: [Doxyfile, Makefile, _config.yml, build, include, test, vendor]

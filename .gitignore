@@ -8,8 +8,6 @@
 ABOUT-NLS
 aclocal.m4
 autom4te.cache
-check-coverage
-check-style
 config.h
 config.h.in~
 config.log
@@ -31,11 +29,8 @@ stamp-h*
 *.la
 *.lo
 *.o
-*.uncrustify
 .dirstamp
 .libs
-check-style.log
-check-style.trs
 cxx11_pedantic_compilation_test
 cxx11_pedantic_compilation_test.log
 cxx11_pedantic_compilation_test.trs
@@ -98,12 +93,3 @@ vendor/gmock-1.7.0/scripts/gmock-config
 vendor/gmock-1.7.0/test/gmock-spec-builders_test
 vendor/gmock-1.7.0/test/gmock_fused_test
 vendor/gmock-1.7.0/test/gmock_link_test
-
-!vendor/uncrustify-0.59/Makefile.in
-!vendor/uncrustify-0.59/aclocal.m4
-!vendor/uncrustify-0.59/configure
-!vendor/uncrustify-0.59/man/Makefile.in
-!vendor/uncrustify-0.59/src/Makefile.in
-vendor/uncrustify-0.59/man/uncrustify.1
-vendor/uncrustify-0.59/src/uncrustify
-vendor/uncrustify-0.59/src/uncrustify_version.h
