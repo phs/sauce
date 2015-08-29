@@ -150,12 +150,6 @@ unittests_CPPFLAGS = \
 # Drop -ansi as gtest/gmock break it (as caught by cygwin)
 unittests_CXXFLAGS = -Wall -Wextra -Werror $(PTHREAD_CFLAGS)
 
-# Enable gcov if requested
-if GCOV_ENABLED
-unittests_CXXFLAGS += -fprofile-arcs -ftest-coverage
-unittests_LDFLAGS = -fprofile-arcs -ftest-coverage
-endif GCOV_ENABLED
-
 unittests_SOURCES = \
   test/allocation_test.cc \
   test/apply_variadic_test.cc \
@@ -276,35 +270,6 @@ cxx11_pedantic_compilation_test_SOURCES = \
   test/pedantic_compilation_test.cc
 
 endif
-
-# This must be the last test, to pick up all unittest coverage statistics
-TESTS += check-style
-EXTRA_DIST += check-style
-
-uncrustify = $(abs_top_srcdir)/vendor/uncrustify-0.59
-
-TESTS_ENVIRONMENT += \
-  top_srcdir="$(top_srcdir)" \
-  uncrustify="$(uncrustify)"
-
-mostlyclean_locals += clean-uncrustify
-clean-uncrustify:
-	find $(builddir) -type f -name "*.uncrustify" -exec rm "{}" \;
-
-distclean_locals += distclean-uncrustify
-distclean-uncrustify:
-	cd $(uncrustify) && test -e Makefile && make distclean || true
-
-if GCOV_ENABLED
-
-TESTS += check-coverage
-EXTRA_DIST += check-coverage
-
-clean_locals += clean-coverage
-clean-coverage:
-	find $(builddir) -type f -name "*.gcda" -o -name "*.gcno" -o -name "*.gcov" -exec rm "{}" \;
-
-endif GCOV_ENABLED
 
 # -- Doxygen --
 #
