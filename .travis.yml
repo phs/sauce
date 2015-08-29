@@ -1,5 +1,6 @@
 language: c
 script: ./scripts/travis
+after_failure: cat  ./test-suite.log
 
 os:
   - linux
