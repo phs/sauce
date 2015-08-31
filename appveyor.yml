@@ -1,0 +1,22 @@
+# See:
+#   http://www.appveyor.com/docs/appveyor-yml
+#   https://github.com/JuliaLang/julia/pull/6028
+#   https://github.com/khaledhosny/ots/commit/3226dc7
+
+init:
+  - git config --global core.autocrlf input
+
+platform:
+  - x86
+  - x64
+
+install:
+  - set PATH=C:\cygwin\bin;%PATH%
+  - appveyor DownloadFile "http://raw.githubusercontent.com/swig/cccl/master/cccl"
+  - call "%VS120COMNTOOLS%\..\..\VC\vcvarsall.bat" %PLATFORM%
+
+build_script:
+  - sh --login /cygdrive/c/projects/sauce/scripts/appveyor
+
+test: off
+deploy: off
