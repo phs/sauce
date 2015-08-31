@@ -1,0 +1,19 @@
+#! /bin/bash
+
+set -e
+set -x
+
+date
+uname -a
+
+export CC="./cccl"
+export CXX="./cccl"
+
+cd /cygdrive/c/projects/sauce
+
+# Appveyor (insanely?) doesn't give us a stdin here, so fake one.
+exec 0</dev/null
+
+autoreconf -vi
+./configure
+make check
