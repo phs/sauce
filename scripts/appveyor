@@ -8,6 +8,8 @@ uname -a
 
 export CC="./cccl"
 export CXX="./cccl"
+export CXXFLAGS="/EHsc"
+export LINK="/entry:mainCRTStartup"
 
 cd /cygdrive/c/projects/sauce
 
