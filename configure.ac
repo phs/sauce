@@ -8,13 +8,12 @@ AM_INIT_AUTOMAKE([1.9 -Wall -Werror foreign])
 
 # Needed programs
 m4_ifdef([AM_PROG_AR], [AM_PROG_AR])
-LT_INIT
 AC_PROG_AWK
+AM_PROG_CC_C_O
 AC_PROG_CXX
 AC_PROG_EGREP
-AC_PROG_LIBTOOL
 AC_PROG_LN_S
-AM_PROG_CC_C_O
+AC_PROG_RANLIB
 
 # Needed libraries
 ACX_PTHREAD     # only needed to run the unit tests

@@ -20,7 +20,6 @@ apt-get install -y    \
   dstat               \
   g++                 \
   graphviz            \
-  libtool             \
   man-db              \
   mlocate             \
   rsync               \
