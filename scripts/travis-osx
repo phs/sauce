@@ -8,7 +8,7 @@ uname -a
 
 # Install packages
 brew update
-# autoconf, automake and libtool should already be present
+# autoconf andautomake should already be present
 
 autoreconf -vi
 ./configure
