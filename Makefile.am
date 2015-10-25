@@ -11,7 +11,7 @@ pkgconfigdir = $(libdir)/pkgconfig
 #
 # Since different components must share these, all are required to append (+=) to these instead of
 # assigning.  Therefore each needs an empty initialization.
-check_LTLIBRARIES =
+check_LIBRARIES =
 check_PROGRAMS =
 CLEANFILES =
 DISTCLEANFILES =
@@ -158,14 +158,14 @@ unittests_SOURCES = \
   test/tutorial_test.cc
 
 unittests_LDADD = \
-  $(builddir)/libunittest.la
+  $(builddir)/libunittest.a
 
 gmock = $(srcdir)/vendor/gmock-1.7.0
 gtest = $(gmock)/gtest
 
-check_LTLIBRARIES += libunittest.la
+check_LIBRARIES += libunittest.a
 
-libunittest_la_CPPFLAGS = \
+libunittest_a_CPPFLAGS = \
   -I$(gtest)/include \
   -I$(gmock)/include \
   -I$(gtest) \
@@ -173,11 +173,10 @@ libunittest_la_CPPFLAGS = \
 
 # Override default compiler and linker flags
 # Forgive gtest/gmock's warnings
-libunittest_la_CXXFLAGS = -w
-libunittest_la_LDFLAGS =
+libunittest_a_CXXFLAGS = -w
 
 # You can't extract these paths without breaking distcheck.
-libunittest_la_SOURCES = \
+libunittest_a_SOURCES = \
   vendor/gmock-1.7.0/gtest/include/gtest/gtest-death-test.h \
   vendor/gmock-1.7.0/gtest/include/gtest/gtest-message.h \
   vendor/gmock-1.7.0/gtest/include/gtest/gtest-param-test.h \
@@ -216,7 +215,7 @@ libunittest_la_SOURCES = \
   vendor/gmock-1.7.0/src/gmock-all.cc \
   vendor/gmock-1.7.0/src/gmock_main.cc
 
-EXTRA_libunittest_la_SOURCES = \
+EXTRA_libunittest_a_SOURCES = \
   vendor/gmock-1.7.0/gtest/src/gtest.cc \
   vendor/gmock-1.7.0/gtest/src/gtest-death-test.cc \
   vendor/gmock-1.7.0/gtest/src/gtest-filepath.cc \

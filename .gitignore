@@ -23,6 +23,7 @@ sauce.pc
 stamp-h*
 
 # Build intermediates
+*.a
 *.gcda
 *.gcno
 *.gcov
