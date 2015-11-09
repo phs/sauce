@@ -6,9 +6,7 @@ set -x
 date
 uname -a
 
-# Install packages
-brew update
-# autoconf andautomake should already be present
+g++ --version
 
 autoreconf -vi
 ./configure

@@ -6,6 +6,9 @@ set -x
 date
 uname -a
 
+# Get the compiler version
+cl
+
 export CC="./cccl"
 export CXX="./cccl"
 export CXXFLAGS="/EHsc"
