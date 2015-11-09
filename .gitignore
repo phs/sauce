@@ -23,12 +23,16 @@ stamp-h*
 
 # Build intermediates
 *.a
+*.exe
 *.gcda
 *.gcno
 *.gcov
+*.ilk
 *.la
 *.lo
 *.o
+*.obj
+*.pdb
 .dirstamp
 .libs
 cxx11_pedantic_compilation_test
