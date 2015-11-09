@@ -11,8 +11,10 @@ cl
 
 export CC="./cccl"
 export CXX="./cccl"
-export CXXFLAGS="/EHsc"
-export LINK="/entry:mainCRTStartup"
+export LD="./cccl"
+
+export CXXFLAGS="--cccl-verbose /EHsc"
+export LDFLAGS="--cccl-verbose --cccl-link /entry:mainCRTStartup"
 
 cd /cygdrive/c/projects/sauce
 
