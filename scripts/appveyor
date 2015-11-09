@@ -18,4 +18,4 @@ exec 0</dev/null
 
 autoreconf -vi
 ./configure
-make check
+make check || (cat test-suite.log; false)
