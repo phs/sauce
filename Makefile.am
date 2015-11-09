@@ -131,7 +131,8 @@ EXTRA_DIST += \
   test/apply_variadic_test.cc \
   test/binding_test.cc \
   test/scope_test.cc \
-  test/tutorial_test.cc
+  test/tutorial_test.cc \
+  test/type_id_test.cc
 
 TESTS += unittests
 check_PROGRAMS += unittests
@@ -150,7 +151,8 @@ unittests_SOURCES = \
   test/apply_variadic_test.cc \
   test/binding_test.cc \
   test/scope_test.cc \
-  test/tutorial_test.cc
+  test/tutorial_test.cc \
+  test/type_id_test.cc
 
 unittests_LDADD = \
   $(builddir)/libunittest.a
