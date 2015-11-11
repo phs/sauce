@@ -1,8 +1,8 @@
-<map id="sauce::internal::NewBinding&lt; Dependency, Scope, Constructor, Allocator &gt;::ValidateAcyclicParameters::Passed" name="sauce::internal::NewBinding&lt; Dependency, Scope, Constructor, Allocator &gt;::ValidateAcyclicParameters::Passed">
-<area shape="rect" id="node2" href="$classsauce_1_1internal_1_1_new_binding.html" title="sauce::internal::NewBinding\l\&lt; Dependency, Scope, Constructor,\l Allocator \&gt;" alt="" coords="731,30,962,90"/>
-<area shape="rect" id="node4" href="$classsauce_1_1internal_1_1_binding.html" title="sauce::internal::Binding\l\&lt; Dependency, Scope \&gt;" alt="" coords="486,38,650,82"/>
-<area shape="rect" id="node6" href="$classsauce_1_1internal_1_1_resolved_binding.html" title="A binding for an acknowledged interface." alt="" coords="264,5,435,49"/>
-<area shape="rect" id="node8" href="$classsauce_1_1internal_1_1_opaque_binding.html" title="An opaque binding." alt="" coords="6,13,213,41"/>
-<area shape="rect" id="node10" href="$classsauce_1_1internal_1_1_injector_friend.html" title="sauce::internal::Injector\lFriend" alt="" coords="270,73,429,117"/>
-<area shape="rect" id="node14" title="STL class." alt="" coords="799,166,895,194"/>
+<map id="G" name="G">
+<area shape="rect" id="node2" href="$classsauce_1_1internal_1_1_new_binding.html" title="sauce::internal::NewBinding\&lt; Dependency, Scope, Constructor, Allocator \&gt;" alt="" coords="1007,32,1468,61"/>
+<area shape="rect" id="node4" href="$classsauce_1_1internal_1_1_binding.html" title="sauce::internal::Binding\&lt; Dependency, Scope \&gt;" alt="" coords="623,32,921,61"/>
+<area shape="rect" id="node6" href="$classsauce_1_1internal_1_1_resolved_binding.html" title="A binding for an acknowledged interface." alt="" coords="260,5,569,35"/>
+<area shape="rect" id="node8" href="$classsauce_1_1internal_1_1_opaque_binding.html" title="An opaque binding." alt="" coords="5,5,208,35"/>
+<area shape="rect" id="node10" href="$classsauce_1_1internal_1_1_injector_friend.html" title="sauce::internal::InjectorFriend" alt="" coords="317,59,512,88"/>
+<area shape="rect" id="node14" title="STL class." alt="" coords="1188,139,1287,168"/>
 </map>

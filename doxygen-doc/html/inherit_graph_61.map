@@ -1,10 +1,3 @@
-<map id="Graphical Class Hierarchy" name="Graphical Class Hierarchy">
-<area shape="rect" id="node1" href="$classsauce_1_1internal_1_1_clause.html" title="Base class for parts of the fluent binding API." alt="" coords="6,225,162,269"/>
-<area shape="rect" id="node3" href="$classsauce_1_1_allocate_from_clause.html" title="Binds to a specific constructor and allocator." alt="" coords="222,5,410,65"/>
-<area shape="rect" id="node5" href="$classsauce_1_1_in_clause.html" title="Scopes the binding." alt="" coords="213,89,419,133"/>
-<area shape="rect" id="node7" href="$classsauce_1_1_named_clause.html" title="Names the binding." alt="" coords="242,157,390,201"/>
-<area shape="rect" id="node9" href="$classsauce_1_1_to_clause.html" title="Binds to a specific constructor, allocating from the heap." alt="" coords="212,225,420,269"/>
-<area shape="rect" id="node11" href="$classsauce_1_1_to_instance_clause.html" title="Binds to a specific single instance." alt="" coords="231,293,401,337"/>
-<area shape="rect" id="node13" href="$classsauce_1_1_to_method_clause.html" title="Binds to a specific method." alt="" coords="225,361,407,405"/>
-<area shape="rect" id="node15" href="$classsauce_1_1_to_method_naming_clause.html" title="Binds to a specific method with possible static dependency names." alt="" coords="211,429,421,473"/>
+<map id="G" name="G">
+<area shape="rect" id="node1" href="$classsauce_1_1internal_1_1_key_3_01_iface___01_6_01_4.html" title="Template specialization when a reference is used." alt="" coords="5,5,216,35"/>
 </map>

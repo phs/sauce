@@ -1,3 +1,4 @@
-<map id="Graphical Class Hierarchy" name="Graphical Class Hierarchy">
-<area shape="rect" id="node1" href="$structsauce_1_1internal_1_1_method_binding_1_1_validate_acyclic_parameters_1_1_parameter.html" title="sauce::internal::MethodBinding\l\&lt; Dependency, Signature \&gt;\l::ValidateAcyclicParameters\l::Parameter\&lt; T, i \&gt;" alt="" coords="6,5,210,81"/>
+<map id="G" name="G">
+<area shape="rect" id="node1" href="$classsauce_1_1internal_1_1_type_id.html" title="An opaque, reflective value representing an arbitrary type." alt="" coords="5,5,160,35"/>
+<area shape="rect" id="node3" href="$classsauce_1_1internal_1_1_resolved_type_id.html" title="The TypeId derived class that acknowledges the hidden type." alt="" coords="209,5,471,35"/>
 </map>

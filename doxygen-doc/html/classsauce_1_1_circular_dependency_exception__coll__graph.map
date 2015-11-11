@@ -1,5 +1,5 @@
-<map id="sauce::CircularDependencyException" name="sauce::CircularDependencyException">
-<area shape="rect" id="node2" href="$classsauce_1_1_exception.html" title="Base class for all sauce exceptions." alt="" coords="36,161,159,189"/>
-<area shape="rect" id="node4" title="STL class." alt="" coords="34,83,160,111"/>
-<area shape="rect" id="node6" title="STL class." alt="" coords="46,6,148,34"/>
+<map id="G" name="G">
+<area shape="rect" id="node2" href="$classsauce_1_1_exception.html" title="Base class for all sauce exceptions." alt="" coords="64,160,187,189"/>
+<area shape="rect" id="node4" title="STL class." alt="" coords="64,83,187,112"/>
+<area shape="rect" id="node6" title="STL class." alt="" coords="73,5,177,35"/>
 </map>

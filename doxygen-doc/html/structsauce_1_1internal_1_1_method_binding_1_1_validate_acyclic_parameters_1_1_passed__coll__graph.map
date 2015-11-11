@@ -1,8 +1,8 @@
-<map id="sauce::internal::MethodBinding&lt; Dependency, Signature &gt;::ValidateAcyclicParameters::Passed" name="sauce::internal::MethodBinding&lt; Dependency, Signature &gt;::ValidateAcyclicParameters::Passed">
-<area shape="rect" id="node4" title="STL class." alt="" coords="113,299,209,327"/>
-<area shape="rect" id="node8" href="$classsauce_1_1internal_1_1_method_binding.html" title="sauce::internal::MethodBinding\l\&lt; Dependency, Signature \&gt;" alt="" coords="234,291,437,335"/>
-<area shape="rect" id="node10" href="$classsauce_1_1internal_1_1_binding.html" title="sauce::internal::Binding\l\&lt; Dependency, NoScope \&gt;" alt="" coords="246,182,425,226"/>
-<area shape="rect" id="node12" href="$classsauce_1_1internal_1_1_resolved_binding.html" title="A binding for an acknowledged interface." alt="" coords="117,86,288,130"/>
-<area shape="rect" id="node14" href="$classsauce_1_1internal_1_1_opaque_binding.html" title="An opaque binding." alt="" coords="99,6,305,34"/>
-<area shape="rect" id="node16" href="$classsauce_1_1internal_1_1_injector_friend.html" title="sauce::internal::Injector\lFriend" alt="" coords="312,86,471,130"/>
+<map id="G" name="G">
+<area shape="rect" id="node4" title="STL class." alt="" coords="245,261,344,291"/>
+<area shape="rect" id="node8" href="$classsauce_1_1internal_1_1_method_binding.html" title="sauce::internal::MethodBinding\&lt; Dependency, Signature \&gt;" alt="" coords="368,261,728,291"/>
+<area shape="rect" id="node10" href="$classsauce_1_1internal_1_1_binding.html" title="sauce::internal::Binding\&lt; Dependency, NoScope \&gt;" alt="" coords="389,165,707,195"/>
+<area shape="rect" id="node12" href="$classsauce_1_1internal_1_1_resolved_binding.html" title="A binding for an acknowledged interface." alt="" coords="195,85,504,115"/>
+<area shape="rect" id="node14" href="$classsauce_1_1internal_1_1_opaque_binding.html" title="An opaque binding." alt="" coords="248,5,451,35"/>
+<area shape="rect" id="node16" href="$classsauce_1_1internal_1_1_injector_friend.html" title="sauce::internal::InjectorFriend" alt="" coords="528,85,723,115"/>
 </map>

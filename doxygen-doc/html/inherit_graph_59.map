@@ -1,3 +1,4 @@
-<map id="Graphical Class Hierarchy" name="Graphical Class Hierarchy">
-<area shape="rect" id="node1" href="$classsauce_1_1internal_1_1_bindings.html" title="sauce::internal::Bindings\l\&lt; sauce::internal::ImplicitBindings \&gt;" alt="" coords="6,5,237,49"/>
+<map id="G" name="G">
+<area shape="rect" id="node1" href="$classsauce_1_1internal_1_1_implicit_binding_traits.html" title="sauce::internal::ImplicitBindingTraits\&lt; i::InjectorBinding \&gt;" alt="" coords="5,5,360,35"/>
+<area shape="rect" id="node3" href="$classsauce_1_1internal_1_1_implicit_binding_3_01_named_3_01_injector_00_01_unnamed_01_4_01_4.html" title="The implicit Injector binding." alt="" coords="408,5,805,35"/>
 </map>

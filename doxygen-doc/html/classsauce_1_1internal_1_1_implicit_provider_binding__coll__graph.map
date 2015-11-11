@@ -1,6 +1,6 @@
-<map id="sauce::internal::ImplicitProviderBinding&lt; Dependency, Name &gt;" name="sauce::internal::ImplicitProviderBinding&lt; Dependency, Name &gt;">
-<area shape="rect" id="node2" href="$classsauce_1_1internal_1_1_binding.html" title="sauce::internal::Binding\l\&lt; Named\&lt; Provider\&lt; Dependency\l \&gt;, Name \&gt;, NoScope \&gt;" alt="" coords="496,43,720,103"/>
-<area shape="rect" id="node4" href="$classsauce_1_1internal_1_1_resolved_binding.html" title="sauce::internal::Resolved\lBinding\&lt; Named\&lt; Provider\l\&lt; Dependency \&gt;, Name \&gt; \&gt;" alt="" coords="262,5,447,65"/>
-<area shape="rect" id="node6" href="$classsauce_1_1internal_1_1_opaque_binding.html" title="An opaque binding." alt="" coords="6,21,213,49"/>
-<area shape="rect" id="node8" href="$classsauce_1_1internal_1_1_injector_friend.html" title="sauce::internal::Injector\lFriend" alt="" coords="275,89,434,133"/>
+<map id="G" name="G">
+<area shape="rect" id="node2" href="$classsauce_1_1internal_1_1_binding.html" title="sauce::internal::Binding\&lt; Named\&lt; Provider\&lt; BoundDependency \&gt;, Name \&gt;, NoScope \&gt;" alt="" coords="833,32,1367,61"/>
+<area shape="rect" id="node4" href="$classsauce_1_1internal_1_1_resolved_binding.html" title="sauce::internal::ResolvedBinding\&lt; Named\&lt; Provider\&lt; BoundDependency \&gt;, Name \&gt; \&gt;" alt="" coords="256,5,784,35"/>
+<area shape="rect" id="node6" href="$classsauce_1_1internal_1_1_opaque_binding.html" title="An opaque binding." alt="" coords="5,5,208,35"/>
+<area shape="rect" id="node8" href="$classsauce_1_1internal_1_1_injector_friend.html" title="sauce::internal::InjectorFriend" alt="" coords="423,59,617,88"/>
 </map>

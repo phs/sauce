@@ -1,3 +1,19 @@
-<map id="Graphical Class Hierarchy" name="Graphical Class Hierarchy">
-<area shape="rect" id="node1" href="$classsauce_1_1internal_1_1_key_3_01sauce_1_1shared__ptr_3_01_iface___01_4_01_4.html" title="Template specialization when a smart pointer is used." alt="" coords="6,5,154,65"/>
+<map id="G" name="G">
+<area shape="rect" id="node1" href="$classsauce_1_1internal_1_1_injector_friend.html" title="sauce::internal::InjectorFriend" alt="" coords="423,165,617,195"/>
+<area shape="rect" id="node3" href="$classsauce_1_1internal_1_1_binding.html" title="sauce::internal::Binding\&lt; Dependency, NoScope \&gt;" alt="" coords="941,192,1259,221"/>
+<area shape="rect" id="node9" href="$classsauce_1_1internal_1_1_binding.html" title="sauce::internal::Binding\&lt; Dependency, Scope \&gt;" alt="" coords="951,252,1249,281"/>
+<area shape="rect" id="node15" href="$classsauce_1_1internal_1_1_binding.html" title="sauce::internal::Binding\&lt; Key\&lt; Injector \&gt;::Normalized, NoScope \&gt;" alt="" coords="896,59,1304,88"/>
+<area shape="rect" id="node19" href="$classsauce_1_1internal_1_1_binding.html" title="sauce::internal::Binding\&lt; Named\&lt; Provider\&lt; BoundDependency \&gt;, Name \&gt;, NoScope \&gt;" alt="" coords="833,112,1367,141"/>
+<area shape="rect" id="node23" href="$classsauce_1_1internal_1_1_binding.html" title="The base class of all actual binding implementations." alt="" coords="947,5,1253,35"/>
+<area shape="rect" id="node5" href="$classsauce_1_1internal_1_1_instance_binding.html" title="An injection that provides the value passed at construction." alt="" coords="1496,152,1800,181"/>
+<area shape="rect" id="node7" href="$classsauce_1_1internal_1_1_method_binding.html" title="sauce::internal::MethodBinding\&lt; Dependency, Signature \&gt;" alt="" coords="1468,205,1828,235"/>
+<area shape="rect" id="node11" href="$classsauce_1_1internal_1_1_new_binding.html" title="sauce::internal::NewBinding\&lt; Dependency, Scope, Constructor, Allocator \&gt;" alt="" coords="1417,259,1879,288"/>
+<area shape="rect" id="node13" href="$classsauce_1_1internal_1_1_provider_binding.html" title="An injection that provides from the configured provider." alt="" coords="1447,312,1849,341"/>
+<area shape="rect" id="node17" href="$classsauce_1_1internal_1_1_injector_binding.html" title="An injection that provides the injector itself." alt="" coords="1548,45,1748,75"/>
+<area shape="rect" id="node21" href="$classsauce_1_1internal_1_1_implicit_provider_binding.html" title="An injection that provides Providers for an already&#45;bound dependency." alt="" coords="1436,99,1860,128"/>
+<area shape="rect" id="node24" href="$classsauce_1_1internal_1_1_opaque_binding.html" title="An opaque binding." alt="" coords="5,85,208,115"/>
+<area shape="rect" id="node26" href="$classsauce_1_1internal_1_1_resolved_binding.html" title="sauce::internal::ResolvedBinding\&lt; Dependency_ \&gt;" alt="" coords="361,5,679,35"/>
+<area shape="rect" id="node29" href="$classsauce_1_1internal_1_1_resolved_binding.html" title="sauce::internal::ResolvedBinding\&lt; Key\&lt; Injector \&gt;::Normalized \&gt;" alt="" coords="320,59,720,88"/>
+<area shape="rect" id="node32" href="$classsauce_1_1internal_1_1_resolved_binding.html" title="sauce::internal::ResolvedBinding\&lt; Named\&lt; Provider\&lt; BoundDependency \&gt;, Name \&gt; \&gt;" alt="" coords="256,112,784,141"/>
+<area shape="rect" id="node35" href="$classsauce_1_1internal_1_1_resolved_binding.html" title="A binding for an acknowledged interface." alt="" coords="365,219,675,248"/>
 </map>

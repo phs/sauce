@@ -1,6 +1,6 @@
-<map id="sauce::internal::InjectorBinding" name="sauce::internal::InjectorBinding">
-<area shape="rect" id="node2" href="$classsauce_1_1internal_1_1_binding.html" title="sauce::internal::Binding\l\&lt; Key\&lt; Injector \&gt;::Normalized,\l NoScope \&gt;" alt="" coords="481,43,682,103"/>
-<area shape="rect" id="node4" href="$classsauce_1_1internal_1_1_resolved_binding.html" title="sauce::internal::Resolved\lBinding\&lt; Key\&lt; Injector\l \&gt;::Normalized \&gt;" alt="" coords="261,5,432,65"/>
-<area shape="rect" id="node6" href="$classsauce_1_1internal_1_1_opaque_binding.html" title="An opaque binding." alt="" coords="6,21,213,49"/>
-<area shape="rect" id="node8" href="$classsauce_1_1internal_1_1_injector_friend.html" title="sauce::internal::Injector\lFriend" alt="" coords="267,89,426,133"/>
+<map id="G" name="G">
+<area shape="rect" id="node2" href="$classsauce_1_1internal_1_1_binding.html" title="sauce::internal::Binding\&lt; Key\&lt; Injector \&gt;::Normalized, NoScope \&gt;" alt="" coords="707,32,1115,61"/>
+<area shape="rect" id="node4" href="$classsauce_1_1internal_1_1_resolved_binding.html" title="sauce::internal::ResolvedBinding\&lt; Key\&lt; Injector \&gt;::Normalized \&gt;" alt="" coords="257,5,657,35"/>
+<area shape="rect" id="node6" href="$classsauce_1_1internal_1_1_opaque_binding.html" title="An opaque binding." alt="" coords="5,5,208,35"/>
+<area shape="rect" id="node8" href="$classsauce_1_1internal_1_1_injector_friend.html" title="sauce::internal::InjectorFriend" alt="" coords="360,59,555,88"/>
 </map>
