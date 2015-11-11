@@ -5,7 +5,6 @@ os: Visual Studio 2015
 
 platform:
   - x86
-  - x64
 
 install:
   - set PATH=C:\cygwin\bin;%PATH%
