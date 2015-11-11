@@ -6,10 +6,15 @@ set -x
 date
 uname -a
 
+# Get the compiler version
+cl
+
 export CC="./cccl"
 export CXX="./cccl"
-export CXXFLAGS="/EHsc"
-export LINK="/entry:mainCRTStartup"
+export LD="./cccl"
+
+export CXXFLAGS="--cccl-verbose /EHsc"
+export LDFLAGS="--cccl-verbose --cccl-link /entry:mainCRTStartup"
 
 cd /cygdrive/c/projects/sauce
 
@@ -18,4 +23,4 @@ exec 0</dev/null
 
 autoreconf -vi
 ./configure
-make check
+make check || (cat test-suite.log; false)

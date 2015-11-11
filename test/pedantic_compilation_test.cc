@@ -77,7 +77,7 @@ int main() {
   sauce::shared_ptr<Provider<Named<Animal, Meatloaf> > > namedExplicitProvider =
     injector->get<Provider<Named<Animal, Meatloaf> > >();
 
-  #ifdef __STRICT_ANSI__
+  #if defined(_MSC_VER) || defined(__STRICT_ANSI__)
   return 0;
   #else
   std::cerr << "This file was not compiled with a strict standard." << std::endl;
