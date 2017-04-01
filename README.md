@@ -8,12 +8,16 @@
 [appveyor-badge]: https://ci.appveyor.com/api/projects/status/wu0r3i4llt3jyc62
 [appveyor]: https://ci.appveyor.com/project/phs/sauce
 
-A C++ dependency injection framework.
+A *C++98* dependency injection framework.
+
+If you do not need strict C++98 compatibility, I suggest you look at Google's
+[fruit][google-fruit] instead.
 
 The design and name are inspired by Google's excellent [Guice framework][google-guice],
 but neither Google nor Guice is otherwise affiliated in any way.
 
 [google-guice]: https://github.com/google/guice
+[google-fruit]: https://github.com/google/fruit
 
 ## The Gist ##
 
