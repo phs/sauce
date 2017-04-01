@@ -144,4 +144,4 @@ choice!
 
 ## Copyright ##
 
-Copyright (c) 2011-2015 Phil Smith. See LICENSE for details.
+Copyright (c) 2011-2017 Phil Smith. See LICENSE for details.
