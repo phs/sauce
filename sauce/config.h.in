@@ -1,8 +1,5 @@
 /* sauce/config.h.in.  Generated from configure.ac by autoheader.  */
 
-/* define if the compiler supports basic C++11 syntax */
-#undef HAVE_CXX11
-
 /* Define if you have POSIX threads libraries and header files. */
 #undef HAVE_PTHREAD
 

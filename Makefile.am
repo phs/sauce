@@ -245,28 +245,6 @@ cxx98_pedantic_compilation_test_CXXFLAGS = \
 cxx98_pedantic_compilation_test_SOURCES = \
   test/pedantic_compilation_test.cc
 
-if HAVE_CXX11
-
-TESTS += cxx11_pedantic_compilation_test
-check_PROGRAMS += cxx11_pedantic_compilation_test
-
-cxx11_pedantic_compilation_test_CPPFLAGS = \
-  -D$(SAUCE_UNIT_TEST_SHARED_PTR) \
-  -I$(builddir) \
-  -I$(srcdir)
-
-cxx11_pedantic_compilation_test_CXXFLAGS = \
-  -Wall \
-  -Wextra \
-  -Werror \
-  -pedantic-errors \
-  $(ENABLE_CXX11_FLAGS)
-
-cxx11_pedantic_compilation_test_SOURCES = \
-  test/pedantic_compilation_test.cc
-
-endif
-
 # -- Doxygen --
 #
 

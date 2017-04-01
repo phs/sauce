@@ -50,10 +50,6 @@ AC_SUBST([SAUCE_UNIT_TEST_SHARED_PTR])
 
 AC_LANG_POP([C++])
 
-# Detect strict C++11, only for pedantic compilation tests
-AX_CXX_COMPILE_STDCXX_11(noext,optional)
-AM_CONDITIONAL(HAVE_CXX11, test "x$HAVE_CXX11" = "x1")
-
 DX_DOT_FEATURE(ON)
 DX_PDF_FEATURE(OFF)
 DX_PS_FEATURE(OFF)
