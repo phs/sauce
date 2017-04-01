@@ -44,7 +44,7 @@ Sauce is available with a liberal, BSD-ish [license][sauce-license].
 ## Hacking ##
 
 Development that is not environment-specific is done with [vagrant][vagrant] over
-[virtualbox][virtualbox] or [vmware][vmware]:
+[virtualbox][virtualbox]:
 
 ```bash
 $ vagrant up
@@ -56,7 +56,6 @@ vagrant@sauce:~/sauce$ make check   # compile and run unit tests
 
 [vagrant]: http://www.vagrantup.com/
 [virtualbox]: https://www.virtualbox.org/
-[vmware]: http://www.vagrantup.com/vmware
 
 ## Scopes ##
 
