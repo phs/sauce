@@ -1,6 +1,7 @@
 .vagrant/*
 !.vagrant/.keep
 *.sublime-workspace
+*.swp
 .DS_Store
 
 # autotools outputs
