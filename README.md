@@ -1,12 +1,9 @@
 # Sauce #
 
 [![Linux and OS X Build Status][travis-badge]][travis]
-[![Windows Build Status][appveyor-badge]][appveyor]
 
 [travis-badge]: https://travis-ci.org/phs/sauce.png?branch=master
 [travis]: https://travis-ci.org/phs/sauce
-[appveyor-badge]: https://ci.appveyor.com/api/projects/status/wu0r3i4llt3jyc62
-[appveyor]: https://ci.appveyor.com/project/phs/sauce
 
 A *C++98* dependency injection framework.
 
