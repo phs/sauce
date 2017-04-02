@@ -4,9 +4,6 @@
 
 set -e
 
-# Remove some vagrant cruft
-rm -f /home/vagrant/postinstall.sh
-
 # Update the repo
 apt-get update -y
 
@@ -20,6 +17,7 @@ apt-get install -y    \
   dstat               \
   g++                 \
   graphviz            \
+  make                \
   man-db              \
   mlocate             \
   rsync               \
@@ -29,15 +27,15 @@ apt-get install -y    \
 echo 'Defaults env_keep += "SSH_AUTH_SOCK"' > /etc/sudoers.d/ssh-auth-sock
 chmod 0440 /etc/sudoers.d/ssh-auth-sock
 
-ln -s /vagrant /home/vagrant/sauce
+ln -s /vagrant /home/ubuntu/sauce
 
 # Color prompts, please.  What am I, a farmer?
-sed -i 's|#force_color|force_color|' ~vagrant/.bashrc
+sed -i 's|#force_color|force_color|' ~ubuntu/.bashrc
 
 # Expose the doxygen docs in the default virtual host
 ln -s /vagrant/doxygen-doc/html /var/www/sauce
 
-pushd /home/vagrant/sauce
+pushd /home/ubuntu/sauce
 # Regenerate autotools state
 autoreconf -vi
 popd

@@ -1,19 +1,20 @@
 # Sauce #
 
 [![Linux and OS X Build Status][travis-badge]][travis]
-[![Windows Build Status][appveyor-badge]][appveyor]
 
 [travis-badge]: https://travis-ci.org/phs/sauce.png?branch=master
 [travis]: https://travis-ci.org/phs/sauce
-[appveyor-badge]: https://ci.appveyor.com/api/projects/status/wu0r3i4llt3jyc62
-[appveyor]: https://ci.appveyor.com/project/phs/sauce
 
-A C++ dependency injection framework.
+A *C++98* dependency injection framework.
+
+If you do not need strict C++98 compatibility, I suggest you look at Google's
+[fruit][google-fruit] instead.
 
 The design and name are inspired by Google's excellent [Guice framework][google-guice],
 but neither Google nor Guice is otherwise affiliated in any way.
 
 [google-guice]: https://github.com/google/guice
+[google-fruit]: https://github.com/google/fruit
 
 ## The Gist ##
 
@@ -44,7 +45,7 @@ Sauce is available with a liberal, BSD-ish [license][sauce-license].
 ## Hacking ##
 
 Development that is not environment-specific is done with [vagrant][vagrant] over
-[virtualbox][virtualbox] or [vmware][vmware]:
+[virtualbox][virtualbox]:
 
 ```bash
 $ vagrant up
@@ -56,7 +57,6 @@ vagrant@sauce:~/sauce$ make check   # compile and run unit tests
 
 [vagrant]: http://www.vagrantup.com/
 [virtualbox]: https://www.virtualbox.org/
-[vmware]: http://www.vagrantup.com/vmware
 
 ## Scopes ##
 
@@ -141,4 +141,4 @@ choice!
 
 ## Copyright ##
 
-Copyright (c) 2011-2015 Phil Smith. See LICENSE for details.
+Copyright (c) 2011-2017 Phil Smith. See LICENSE for details.
